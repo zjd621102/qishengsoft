@@ -75,11 +75,11 @@
 			<version>1.2_04</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- SQLITE -->
+		<!-- MYSQL -->
 		<dependency>
-			<groupId>org.xerial</groupId>
-			<artifactId>sqlite-jdbc</artifactId>
-			<version>3.7.2</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.21</version>
 		</dependency>
 		<!-- 其它 -->
 		<dependency>

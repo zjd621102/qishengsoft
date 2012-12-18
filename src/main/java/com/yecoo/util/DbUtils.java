@@ -28,7 +28,7 @@ import com.yecoo.model.CodeTableForm;
  */
 public class DbUtils {
 	
-	private String sqliteUrl;
+	private String dbUrl;
 	
 	public DbUtils() {
 		String url = this.getClass().getResource("/").getPath() + "message.properties";
@@ -37,10 +37,10 @@ public class DbUtils {
 			in = new BufferedInputStream(new FileInputStream(url));
 			Properties p = new Properties();
 			p.load(in);
-			sqliteUrl = p.getProperty("sqliteUrl");
+			dbUrl = p.getProperty("dbUrl");
 			in.close();
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".getSqliteUrl()", e);
+			StrUtils.WriteLog(this.getClass().getName() + ".DbUtils()", e);
 		}
 	}
 	/**
@@ -50,8 +50,8 @@ public class DbUtils {
 	public Connection dbConnection() {
 		Connection myConn = null;
 		try {
-			Class.forName("org.sqlite.JDBC");
-			myConn = DriverManager.getConnection(sqliteUrl);
+			Class.forName("com.mysql.jdbc.Driver");
+			myConn = DriverManager .getConnection(dbUrl);// 访问的数据库的帐号密码
 		} catch (Exception e) {
 			StrUtils.WriteLog(this.getClass().getName() + ".dbConnection()", e);
 			this.closeConnection(null, null, myConn);
@@ -345,6 +345,32 @@ public class DbUtils {
 		ResultSet rs = null;
 		PreparedStatement pStmt = null;
 		Connection myConn = null;
+		String rstStr = "";
+		try {
+			myConn = this.dbConnection();
+			pStmt = myConn.prepareStatement(sql);
+			rs = this.getResult(pStmt);
+			if (rs.next()) {
+				rstStr = StrUtils.nullToStr(rs.getString(1));
+			}
+		} catch (Exception e) {
+			StrUtils.WriteLog(this.getClass().getName() + ".execQuerySQL()", "ERROR sql=" + sql);
+			StrUtils.WriteLog(this.getClass().getName() + ".execQuerySQL()", e);
+		} finally {
+			this.closeConnection(rs, pStmt, myConn);
+		}
+		return rstStr;
+	}
+	/**
+	 * 执行一条SELECT语句,获取第一条记录的第一个字段值
+	 * @param myConn
+	 * @param sql
+	 * @return String
+	 * @creadate 2012-3-9
+	 */
+	public String execQuerySQL(Connection myConn, String sql) {
+		ResultSet rs = null;
+		PreparedStatement pStmt = null;
 		String rstStr = "";
 		try {
 			myConn = this.dbConnection();
@@ -675,10 +701,11 @@ public class DbUtils {
 	 */
 	public int setInsert(CodeTableForm form, String tabName, String num) {
 		Connection myConn = this.dbConnection();
-		String sql = "pragma table_info('" + tabName + "')";
-		PreparedStatement pStmt = null;
+		String sql="select COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')";
+		PreparedStatement pStmt=null;
 		ResultSet rs = null;
-		String[] str = new String[getListBySql(sql).size() + 5];
+		String count = this.execQuerySQL(myConn, "select count(*) from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')");
+		String[] str = new String[Integer.parseInt(count)+5];
 		str[0] = "";
 		str[1] = "";
 		int iReturn = -1;
@@ -748,10 +775,11 @@ public class DbUtils {
 	 * @return 返回 >=0 表示有操作成功，-1 表示操作失败
 	 */
 	public int setInsert(Connection myConn, CodeTableForm form, String tabName, String num) {
-		String sql = "pragma table_info('" + tabName + "')";
-		PreparedStatement pStmt = null;
-		ResultSet rs = null;
-		String[] str = new String[getListBySql(sql).size() + 5];
+		String sql="select COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')";
+		PreparedStatement pStmt=null;
+		ResultSet rs    = null;
+		String count = this.execQuerySQL(myConn, "select count(*) from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')");
+		String[] str = new String[Integer.parseInt(count)+5];
 		str[0] = "";
 		str[1] = "";
 		int iReturn = -1;
@@ -833,10 +861,11 @@ public class DbUtils {
 	 */
 	public int setUpdate(CodeTableForm form, String strEdit, String tabName, String key, String num) {
 		Connection myConn = this.dbConnection();
-		String sql = "pragma table_info('" + tabName + "')";
-		PreparedStatement pStmt = null;
+		String sql="select COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')";
+		PreparedStatement pStmt=null;
 		ResultSet rs = null;
-		String[] str = new String[getListBySql(sql).size() + 5];
+		String count = this.execQuerySQL(myConn, "select count(*) from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')");
+		String[] str = new String[Integer.parseInt(count)+5];
 		str[0] = "";
 		int iReturn = 1;
 		strEdit = "";// 目前先不控制更改的编辑
@@ -900,10 +929,11 @@ public class DbUtils {
 	 * @return 返回 >=0 表示有操作成功，-1 表示操作失败
 	 */
 	public int setUpdate(Connection myConn, CodeTableForm form, String strEdit, String tabName, String key, String num) {
-		String sql = "PRAGMA table_info('" + tabName + "')";
-		PreparedStatement pStmt = null;
-		ResultSet rs = null;
-		String[] str = new String[getListBySql(sql).size() + 5];
+		String sql="select COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')";
+		PreparedStatement pStmt=null;
+		ResultSet rs    = null;
+		String count = this.execQuerySQL(myConn, "select count(*) from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')");
+		String[] str = new String[Integer.parseInt(count)+5];
 		str[0] = "";
 		int iReturn = 1;
 		strEdit = "";// 目前先不控制更改的编辑
@@ -968,10 +998,11 @@ public class DbUtils {
 	 */
 	public int setUpdate(CodeTableForm form, String strEdit, String tabName, String[] keys, String num) {
 		Connection myConn = this.dbConnection();
-		String sql = "pragma table_info('" + tabName + "')";
-		PreparedStatement pStmt = null;
-		ResultSet rs = null;
-		String[] str = new String[getListBySql(sql).size() + 5];
+		String sql="select COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')";
+		PreparedStatement pStmt=null;
+		ResultSet rs    = null;
+		String count = this.execQuerySQL(myConn, "select count(*) from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')");
+		String[] str = new String[Integer.parseInt(count)+5];
 		str[0] = "";
 		int iReturn = 1;
 		strEdit = "";// 目前先不控制更改的编辑
@@ -1083,8 +1114,8 @@ public class DbUtils {
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
 		HashMap<String,String[]> map = new HashMap<String,String[]>();
-		String sql = "pragma table_info('" + tabName + "')";
-		String[] str = new String[getListBySql(sql).size()];
+		String sql = "select count(*) from information_schema.COLUMNS where TABLE_NAME = upper('" + tabName + "')";
+		String[] str = new String[this.getIntBySql(sql)];
 		int iReturn = 0;
 
 		try {
