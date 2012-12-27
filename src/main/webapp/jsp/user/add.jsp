@@ -3,35 +3,43 @@
 <%
 String path = request.getContextPath();
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<title>增加用户</title>
-		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="cache-control" content="no-cache">
-		<meta http-equiv="expires" content="0">
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="This is my page">
-		<script type="text/javascript" src="<%=path%>/js/calendar.js">
-		</script>
-	</head>
-	<body>
-		<form action="<%=path%>/user/add" method="post">
-			用户编号：<input type="text" name="map[userid]"><br />
-			用户姓名：<input type="text" name="map[username]"><br />
-			用户密码：<input type="password" name="map[passwd]"><br />
-			手机号码：<input type="text" name="map[tele]"><br />
-			出生日期：<input type="text" name="map[birthday]" onClick="calendar()"><br />
-			用户部门：
-			<select name="map[deptid]">
-				<option value=""></option>
-				<c:forEach items="${deptList}" var="dept">
-					<option value="${dept.map.deptid}">
-						${dept.map.deptname}
-					</option>
-				</c:forEach>
-			</select>
-			<input type="submit" value="提交">
-		</form>
-	</body>
-</html>
+<div class="pageContent">
+	<form method="post" action="<%=path%>/user/add" class="pageForm required-validate"
+	 onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<label>用户账号：</label>
+				<input type="text" class="required alphanumeric" minlength="4" maxlength="32" size="30" name="map[userid]"
+				 remote="<%=path%>/user/validUserid" alt="请输入用户账号" />
+			</p>
+			<p>
+				<label>用户姓名：</label>
+				<input type="text" class="required" size="30" name="map[username]" alt="请输入用户姓名" />
+			</p>
+			<p>
+				<label>用户密码：</label>
+				<input type="text" class="required" minlength="4" maxlength="32" size="30" name="map[passwd]"
+				 alt="请输入用户密码" />
+			</p>
+			<p>
+				<label>手机号码：</label>
+				<input type="text" class="phone" size="30" name="map[tele]" />
+			</p>
+			<p>
+				<label>出生日期：</label>
+				<input type="text" class="date" size="30" name="map[birthday]" />
+				<a class="inputDateButton" href="javascript:;">选择</a>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div>
+				</li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

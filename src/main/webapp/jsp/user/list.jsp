@@ -32,21 +32,6 @@
 							用户姓名：<input type="text" name="map[username]" value="${form.map.username}"/>
 						</td>
 						<td>
-							用户角色：
-							<select name="map[roleid]" value="${form.map.roleid}" style="width: 130px;">
-								<option value=""></option>
-						   		<c:forEach items="${roleList}" var="bean">
-						   			<option value="${bean.map.roleid}"
-						   				<c:if test="${bean.map.roleid==form.map.roleid}">
-						   					selected="selected"
-						   				</c:if>
-						   			>
-						   				${bean.map.rolename}
-						   			</option>
-							   </c:forEach>
-							</select>
-						</td>
-						<td>
 							出生日期从：<input type="text" class="date" readonly="true" name="map[fromBirthday]" value="${form.map.fromBirthday}" />
 						</td>
 						<td>
@@ -71,38 +56,38 @@
 </c:if>
 <div class="pageContent">
 	<c:if test="${act!='excel'}">
-	<div class="panelBar">
-		<ul class="toolBar">
-			<li>
-				<a class="add" href="<%=path%>/user/edi/0" target="dialog" rel="user_add">
-					<span>新增用户</span>
-				</a>
-			</li>
-			<li>
-				<a class="edit" href="<%=path%>/user/edi/{s_userid}" target="dialog" rel="user_update">
-					<span>修改用户</span>
-				</a>
-			</li>
-			<li>
-				<a class="delete" href="<%=path%>/user/delete/{s_userid}" target="ajaxTodo" title="确定要删除吗?">
-					<span>删除用户</span>
-				</a>
-			</li>
-			<li>
-				<a class="delete" href="<%=path%>/user/delete/0" target="selectedTodo" rel="ids"
-			 	 title="确实要删除这些记录吗?">
-			 		<span>批量删除用户</span>
-			 	</a>
-			</li>
-			<li class="line">line</li>
-			<li>
-				<a class="icon" href="<%=path%>/user/list_excel" target="dwzExport" targetType="navTab"
-			 	 title="确实要导出这些记录吗?">
-			 		<span>导出EXCEL</span>
-			 	</a>
-			</li>
-		</ul>
-	</div>
+		<div class="panelBar">
+			<ul class="toolBar">
+				<li>
+					<a class="add" href="<%=path%>/user/add" target="dialog" rel="user_add">
+						<span>新增用户</span>
+					</a>
+				</li>
+				<li>
+					<a class="edit" href="<%=path%>/user/edi/{s_userid}" target="dialog" rel="user_edi">
+						<span>修改用户</span>
+					</a>
+				</li>
+				<li>
+					<a class="delete" href="<%=path%>/user/delete/{s_userid}" target="ajaxTodo" title="确定要删除吗?">
+						<span>删除用户</span>
+					</a>
+				</li>
+				<li>
+					<a class="delete" href="<%=path%>/user/delete/0" target="selectedTodo" rel="ids"
+				 	 title="确实要删除这些记录吗?">
+				 		<span>批量删除用户</span>
+				 	</a>
+				</li>
+				<li class="line">line</li>
+				<li>
+					<a class="icon" href="<%=path%>/user/list_excel" target="dwzExport" targetType="navTab"
+				 	 title="确实要导出这些记录吗?">
+				 		<span>导出EXCEL</span>
+				 	</a>
+				</li>
+			</ul>
+		</div>
 	</c:if>
 	<table class="table" width="100%" layoutH="138">
 		<thead>
@@ -112,11 +97,10 @@
 						<input type="checkbox" group="ids" class="checkboxCtrl">
 					</th>
 				</c:if>
-				<th width="5%">序号</th>
+				<th width="22%">序号</th>
 				<th width="25%">用户名</th>
-				<th width="22%">手机号码</th>
-				<th width="20%">出生日期</th>
-				<th width="25%">用户角色</th>
+				<th width="25%">手机号码</th>
+				<th width="25%">出生日期</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -131,7 +115,6 @@
 			   		<td>${bean.map.username}</td>
 			   		<td>${bean.map.tele}</td> 
 			   		<td>${bean.map.birthday}</td>
-			   		<td>${bean.map.rolename}</td>
 			   	</tr>
 		   	</c:forEach>
 	   	</tbody>

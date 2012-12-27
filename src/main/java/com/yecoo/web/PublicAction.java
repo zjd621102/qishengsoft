@@ -14,7 +14,7 @@ import com.yecoo.util.StrUtils;
  * 不需要实现任何接口，也不需要继承任何的类
  */
 @Controller
-public class LoginAction {
+public class PublicAction {
 	
 	private UserDaoImpl daoImpl = new UserDaoImpl();
 
@@ -30,7 +30,7 @@ public class LoginAction {
 	 * Model，任意其它任意类型的对象（默认放入model中，名称即类型的首字母改成小写），视图名默认是请求路径
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView toLogin(CodeTableForm form, HttpServletRequest request, Model model) throws Exception {
+	public ModelAndView toLogin(CodeTableForm form, HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("login");
 		return mav;
@@ -39,7 +39,7 @@ public class LoginAction {
 	 * 用户登录
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(CodeTableForm form, HttpServletRequest request, Model model) throws Exception {
+	public String login(CodeTableForm form, HttpServletRequest request, Model model) {
 		CodeTableForm user1 = daoImpl.getUserById(StrUtils.nullToStr(form.getValue("userid")).toUpperCase());
 		request.setAttribute("user", form);
 		if (user1 == null) {
@@ -52,5 +52,13 @@ public class LoginAction {
 			request.getSession().setAttribute(Constants.USER_INFO_SESSION, user1);
 			return "index";
 		}
+	}
+	/**
+	 * 进入首页
+	 */
+	@RequestMapping(value = "/index")
+	public String index(CodeTableForm form, HttpServletRequest request, Model model) {
+
+		return "index";
 	}
 }

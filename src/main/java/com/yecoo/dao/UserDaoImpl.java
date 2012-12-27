@@ -10,22 +10,7 @@ public class UserDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
 
-	public CodeTableForm getUserById(String userid) throws Exception {
-		String sql = "SELECT a.*,(SELECT b.rolename FROM srole b WHERE a.roleid = b.roleid) rolename FROM suser a WHERE a.userid = upper('" + userid + "')";
-		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
-		return codeTableForm;
-	}
-
-	public int updateUser(CodeTableForm form) throws Exception {
-		return dbUtils.setInsertOrUpdate(form, "suser", "userid");
-	}
-
-	public int deleteUsers(String userids) throws Exception {
-		String sql = "DELETE FROM suser WHERE userid IN (" + userids + ")";
-		return dbUtils.executeSQL(sql);
-	}
-
-	public int getUserCount(CodeTableForm form) throws Exception {
+	public int getUserCount(CodeTableForm form) {
 		String sql = "SELECT COUNT(t.userid) FROM suser t WHERE 1 = 1";
 		String cond = getUserListCondition(form);
 		sql  += cond;
@@ -33,8 +18,8 @@ public class UserDaoImpl {
 		return count;
 	}
 
-	public List<CodeTableForm> getUserList(CodeTableForm form, int pageNum, int numPerPage) throws Exception {
-		String sql = "SELECT * FROM vuser t WHERE 1 = 1";
+	public List<CodeTableForm> getUserList(CodeTableForm form, int pageNum, int numPerPage) {
+		String sql = "SELECT * FROM suser t WHERE 1 = 1";
 		String cond = getUserListCondition(form);
 		sql  += cond;
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
@@ -63,5 +48,24 @@ public class UserDaoImpl {
 		}
 		
 		return cond.toString();
+	}
+
+	public CodeTableForm getUserById(String userid) {
+		String sql = "SELECT a.* FROM suser a WHERE a.userid = upper('" + userid + "')";
+		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
+		return codeTableForm;
+	}
+
+	public int addUser(CodeTableForm form) {
+		return dbUtils.setInsert(form, "suser");
+	}
+
+	public int updateUser(CodeTableForm form) {
+		return dbUtils.setUpdate(form, "suser", "userid");
+	}
+
+	public int deleteUsers(String userids) {
+		String sql = "DELETE FROM suser WHERE userid IN (" + userids + ")";
+		return dbUtils.executeSQL(sql);
 	}
 }

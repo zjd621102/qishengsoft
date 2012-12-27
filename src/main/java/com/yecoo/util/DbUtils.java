@@ -239,10 +239,10 @@ public class DbUtils {
 	}
 	/**
 	 * 执行多条SQL语句
-	 * @param strSQL 多条SQL语句
+	 * @param sqls 多条SQL语句
 	 * @return int 语句执行影响的记录数，失败返回-1
 	 */
-	public int executeSQLs(String[] strSQL) {
+	public int executeSQLs(String[] sqls) {
 		Connection myConn = null;
 		PreparedStatement pStmt = null;
 		int rstval = 0;
@@ -250,7 +250,7 @@ public class DbUtils {
 		try {
 			myConn = this.dbConnection();
 			myConn.setAutoCommit(false);
-			for (i = 0; i < strSQL.length; i++) {
+			for (i = 0; i < sqls.length; i++) {
 				if (pStmt != null) {
 					try {
 						pStmt.close();
@@ -258,8 +258,8 @@ public class DbUtils {
 						
 					}
 				}
-				if ((strSQL[i] != null) && (!strSQL[i].equals(""))) {
-					pStmt = myConn.prepareStatement(strSQL[i]);
+				if ((sqls[i] != null) && (!sqls[i].equals(""))) {
+					pStmt = myConn.prepareStatement(sqls[i]);
 					rstval = pStmt.executeUpdate();
 				}
 			}
@@ -474,6 +474,25 @@ public class DbUtils {
 		}
 		return form;
 	}
+	public CodeTableForm setFormRecord(CodeTableForm form, ResultSet rs) {
+		try {
+			ResultSetMetaData rmeta = rs.getMetaData();
+			for (int icol = 1; icol <= rmeta.getColumnCount(); ++icol) {
+				String cloumn = rmeta.getColumnName(icol).toLowerCase();
+				if (rmeta.getColumnTypeName(icol).equals("DATE")) {
+					form.setValue(cloumn, StrUtils.nullToStr(rs.getDate(cloumn)));
+				} else {
+					form.setValue(cloumn, StrUtils.nullToStr(rs.getString(cloumn)));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			StrUtils.WriteLog(this.getClass().getName() + ".setFormRecord()", e);
+		} finally {
+			
+		}
+		return form;
+	}
 	/**
 	 * 根据sql语句获取一条记录
 	 * @param sql
@@ -516,7 +535,7 @@ public class DbUtils {
 		StringBuffer sql = null;
 		try {
 			myConn = this.dbConnection();
-			sql = new StringBuffer("select * from ").append(tabName).append(" where ")
+			sql = new StringBuffer("SELECT * FROM ").append(tabName).append(" WHERE ")
 				.append(key).append(" = '").append(value).append("'");
 			pStmt = myConn.prepareStatement(sql.toString());
 			rs = pStmt.executeQuery();
@@ -701,10 +720,10 @@ public class DbUtils {
 	 */
 	public int setInsert(CodeTableForm form, String tabName, String num) {
 		Connection myConn = this.dbConnection();
-		String sql="select COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')";
+		String sql="SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')";
 		PreparedStatement pStmt=null;
 		ResultSet rs = null;
-		String count = this.execQuerySQL(myConn, "select count(*) from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')");
+		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')");
 		String[] str = new String[Integer.parseInt(count)+5];
 		str[0] = "";
 		str[1] = "";
@@ -775,10 +794,10 @@ public class DbUtils {
 	 * @return 返回 >=0 表示有操作成功，-1 表示操作失败
 	 */
 	public int setInsert(Connection myConn, CodeTableForm form, String tabName, String num) {
-		String sql="select COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')";
+		String sql="SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')";
 		PreparedStatement pStmt=null;
 		ResultSet rs    = null;
-		String count = this.execQuerySQL(myConn, "select count(*) from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')");
+		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')");
 		String[] str = new String[Integer.parseInt(count)+5];
 		str[0] = "";
 		str[1] = "";
@@ -861,10 +880,10 @@ public class DbUtils {
 	 */
 	public int setUpdate(CodeTableForm form, String strEdit, String tabName, String key, String num) {
 		Connection myConn = this.dbConnection();
-		String sql="select COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')";
+		String sql="SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')";
 		PreparedStatement pStmt=null;
 		ResultSet rs = null;
-		String count = this.execQuerySQL(myConn, "select count(*) from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')");
+		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')");
 		String[] str = new String[Integer.parseInt(count)+5];
 		str[0] = "";
 		int iReturn = 1;
@@ -900,8 +919,8 @@ public class DbUtils {
 			pStmt.close();
 			// 更新表记录
 			if (!str[0].equals("")) {
-				String sql2 = "update " + tabName + " set " + str[0] + " where " + key + "='" + form.getValue(key + num) + "'";
-				sGeneSQL = "update " + tabName + " set " + sGeneSQL + " where " + key + "='" + form.getValue(key + num) + "'";
+				String sql2 = "update " + tabName + " set " + str[0] + " WHERE " + key + "='" + form.getValue(key + num) + "'";
+				sGeneSQL = "update " + tabName + " set " + sGeneSQL + " WHERE " + key + "='" + form.getValue(key + num) + "'";
 				pStmt = myConn.prepareStatement(sql2);
 				for (i = 1; i < str.length; i++) {
 					pStmt.setString(i, str[i]);
@@ -929,10 +948,10 @@ public class DbUtils {
 	 * @return 返回 >=0 表示有操作成功，-1 表示操作失败
 	 */
 	public int setUpdate(Connection myConn, CodeTableForm form, String strEdit, String tabName, String key, String num) {
-		String sql="select COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')";
+		String sql="SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')";
 		PreparedStatement pStmt=null;
 		ResultSet rs    = null;
-		String count = this.execQuerySQL(myConn, "select count(*) from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')");
+		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')");
 		String[] str = new String[Integer.parseInt(count)+5];
 		str[0] = "";
 		int iReturn = 1;
@@ -968,8 +987,8 @@ public class DbUtils {
 			pStmt.close();
 			// 更新表记录
 			if (!str[0].equals("")) {
-				String sql2 = "update " + tabName + " set " + str[0] + " where " + key + "='" + form.getValue(key + num) + "'";
-				sGeneSQL = "update " + tabName + " set " + sGeneSQL + " where " + key + "='" + form.getValue(key + num) + "'";
+				String sql2 = "update " + tabName + " set " + str[0] + " WHERE " + key + "='" + form.getValue(key + num) + "'";
+				sGeneSQL = "update " + tabName + " set " + sGeneSQL + " WHERE " + key + "='" + form.getValue(key + num) + "'";
 				pStmt = myConn.prepareStatement(sql2);
 				for (i = 1; i < str.length; i++) {
 					pStmt.setString(i, str[i]);
@@ -998,10 +1017,10 @@ public class DbUtils {
 	 */
 	public int setUpdate(CodeTableForm form, String strEdit, String tabName, String[] keys, String num) {
 		Connection myConn = this.dbConnection();
-		String sql="select COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')";
+		String sql="SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')";
 		PreparedStatement pStmt=null;
 		ResultSet rs    = null;
-		String count = this.execQuerySQL(myConn, "select count(*) from information_schema.COLUMNS where TABLE_NAME = upper('"+tabName+"')");
+		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')");
 		String[] str = new String[Integer.parseInt(count)+5];
 		str[0] = "";
 		int iReturn = 1;
@@ -1035,7 +1054,7 @@ public class DbUtils {
 			pStmt.close();
 			// 更新表记录
 			if (!str[0].equals("")) {
-				String sql2 = "update " + tabName + " set " + str[0] + " where 1=1";
+				String sql2 = "update " + tabName + " set " + str[0] + " WHERE 1=1";
 				for (i = 0; i < keys.length; i++) {
 					sql2 += " and " + keys[i] + "='" + form.getValue(keys[i] + num) + "'";
 				}
@@ -1085,7 +1104,7 @@ public class DbUtils {
 		StringBuffer sql = null;
 		int iReturn = 0;
 		try {
-			sql = new StringBuffer("delete from ").append(tabName).append(" where ")
+			sql = new StringBuffer("DELETE FROM ").append(tabName).append(" WHERE ")
 				.append(key).append(" = '").append(id).append("'");
 			iReturn = this.executeSQL(sql.toString());
 		} catch (Exception e) {
@@ -1114,7 +1133,7 @@ public class DbUtils {
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
 		HashMap<String,String[]> map = new HashMap<String,String[]>();
-		String sql = "select count(*) from information_schema.COLUMNS where TABLE_NAME = upper('" + tabName + "')";
+		String sql = "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('" + tabName + "')";
 		String[] str = new String[this.getIntBySql(sql)];
 		int iReturn = 0;
 
@@ -1169,11 +1188,11 @@ public class DbUtils {
 						}
 					}
 				}
-				sql = "select count(*) as icount from " + tabName + " where "
+				sql = "SELECT COUNT(*) as icount FROM " + tabName + " WHERE "
 						+ key + "='" + subform.getValue(key) + "'";
 				String sCount = this.execQuerySQL(sql);
 				if ("0".equals(sCount)) {
-					String keyvalue = this.execQuerySQL("select " + seq + ".nextval from dual");
+					String keyvalue = this.execQuerySQL("SELECT " + seq + ".nextval FROM dual");
 					subform.setValue(key, keyvalue);
 					subform.setValue(fKey, (String) form.getValue(fKey));
 					iReturn = this.setInsert(myConn, subform, tabName, "");

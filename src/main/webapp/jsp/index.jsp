@@ -24,9 +24,8 @@
 <script type="text/javascript">
 	$(function() {
 		DWZ.init("<%=path%>/resources/dwz.frag.xml", {
-			loginUrl : "login_dialog.html",
 			loginTitle : "登录", // 弹出登录对话框
-			//		loginUrl:"login.html",	// 跳到登录页面
+			loginUrl:"<%=path%>/login",	// 跳到登录页面
 			statusCode : {
 				ok : 200,
 				error : 300,
@@ -98,7 +97,7 @@
 								<a href="<%=path%>/user/list" target="navTab" rel="user_list">用户管理</a>
 								<ul>
 									<li><a href="<%=path%>/user/list" target="navTab" rel="user_list">用户列表</a></li>
-									<li><a href="<%=path%>/user/edi/0" target="dialog" rel="user_add">新增用户</a></li>
+									<li><a href="<%=path%>/role/list" target="navTab" rel="role_list">角色列表</a></li>
 								</ul>
 							</li>
 							<li>
@@ -172,7 +171,7 @@
 	<div id="footer">
 		Copyright &copy; 2012
 		也棵呀小柏杨
-		Tel：010-52897073
+		Tel：15060066759
 	</div>
 </body>
 </html>

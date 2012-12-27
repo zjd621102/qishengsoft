@@ -1,0 +1,68 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ include file="/jsp/pub/include.jsp"%>
+
+<div class="pageHeader">
+	<form onsubmit="return navTabSearch(this);" action="<%=path%>/role/list" method="post" rel="pagerForm" id="fid">
+		<input type="hidden" name="act" id="act" />
+		<div class="searchBar">
+			<table class="searchContent" style="width: 80%">
+				<tr>
+					<td>
+						角色名称：<input type="text" name="map[rolename]" value="${form.map.rolename}"/>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<a class="add" href="<%=path%>/role/add" target="dialog" rel="role_add">
+					<span>新增角色</span>
+				</a>
+			</li>
+			<li>
+				<a class="edit" href="<%=path%>/role/edi/{s_roleid}" target="dialog" rel="role_edi">
+					<span>修改角色</span>
+				</a>
+			</li>
+			<li>
+				<a class="delete" href="<%=path%>/user/delete/{s_roleid}" target="ajaxTodo" title="确定要删除吗?">
+					<span>删除角色</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+				<th width="22%">序号</th>
+				<th width="25%">角色编号</th>
+				<th width="25%">角色名称</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${roleList}" var="bean" varStatus="vs">
+			   	<tr target="s_roleid" rel="${bean.map.roleid}">
+			   		<td>${vs.index+1}</td>
+			   		<td>${bean.map.roleid}</td>
+			   		<td>${bean.map.rolename}</td> 
+			   	</tr>
+		   	</c:forEach>
+	   	</tbody>
+	</table>
+	<jsp:include page="../pub/paged.jsp"></jsp:include>
+</div>
