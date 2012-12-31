@@ -12,16 +12,6 @@
 <link rel="stylesheet" href="<%=path%>/css/excel.css" type="text/css"></link>
 </c:if>
 <c:if test="${act!='excel'}">
-	<script>
-	//Excel导出
-	function expExcel() {
-		$("#act").val("excel");
-	  	$("#fid").attr("target","_blank");	//新建一个窗口,不然原来的页面会被替换成打开Excel
-		$("#fid").submit();
-		$("#act").val("");
-		$("#fid").attr("target","_self");//还原链接，不然上一页，下一页的时候会变成导出Excel
-	}
-	</script>
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);" action="<%=path%>/user/list" method="post" rel="pagerForm" id="fid">
 			<input type="hidden" name="act" id="act" />

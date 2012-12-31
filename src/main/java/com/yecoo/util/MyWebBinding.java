@@ -16,5 +16,4 @@ public class MyWebBinding implements WebBindingInitializer {
 		//2. 自定义的PropertyEditorSupport
 		binder.registerCustomEditor(Date.class, new DateConvertEditor());
 	}
-
 }

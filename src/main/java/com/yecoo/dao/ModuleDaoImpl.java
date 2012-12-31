@@ -19,17 +19,16 @@ public class ModuleDaoImpl {
 	    ResultSet rs = null;
 	    List<CodeTableForm> moduleList = new ArrayList<CodeTableForm>();
 	    CodeTableForm codeTableForm = null;
-		String sql = "SELECT t.* FROM module t WHERE t.parentid = '1' ORDER BY t.priority, t.moduleid ASC";
+		String sql = "SELECT t.*, func_getModuleName(t.parentid) parentname FROM smodule t WHERE t.parentid = '1' ORDER BY t.priority, t.moduleid";
 	    try {
 	    	myConn = dbUtils.dbConnection();
 	    	pStmt = myConn.prepareStatement(sql);
 	    	rs = pStmt.executeQuery();
 	    	
 	    	while(rs.next()) {
+	    		codeTableForm = new CodeTableForm();
 	    		codeTableForm = dbUtils.setFormRecord(codeTableForm, rs);
-	    		sql = "SELECT t.* FROM module t WHERE t.parentid = '" + rs.getString("moduleid")
-	    			+ "' ORDER BY t.priority, t.moduleid ASC";
-	    		codeTableForm.setValue("childrenList", dbUtils.getListBySql(sql));
+	    		codeTableForm.setValue("childrenList", getChildrenList(codeTableForm));
 	    		moduleList.add(codeTableForm);
 	    	}
 	    } catch (Exception e) {
@@ -39,5 +38,87 @@ public class ModuleDaoImpl {
 	    }
 		
 		return moduleList;
+	}
+	
+	private List<CodeTableForm> getChildrenList(CodeTableForm form) {
+	    Connection myConn = null;
+	    PreparedStatement pStmt = null;
+	    ResultSet rs = null;
+	    List<CodeTableForm> moduleList = new ArrayList<CodeTableForm>();
+	    CodeTableForm codeTableForm = null;
+		String sql = "SELECT t.*, func_getModuleName(t.parentid) parentname FROM smodule t WHERE t.parentid = '" + form.getValue("moduleid")
+			+ "' ORDER BY t.priority, t.moduleid";
+	    try {
+	    	myConn = dbUtils.dbConnection();
+	    	pStmt = myConn.prepareStatement(sql);
+	    	rs = pStmt.executeQuery();
+	    	
+	    	while(rs.next()) {
+	    		codeTableForm = new CodeTableForm();
+	    		codeTableForm = dbUtils.setFormRecord(codeTableForm, rs);
+	    		codeTableForm.setValue("childrenList", getChildrenList(codeTableForm));
+	    		moduleList.add(codeTableForm);
+	    	}
+	    } catch (Exception e) {
+	    	StrUtils.WriteLog(this.getClass().getName() + ".getModuleList()", e);
+	    } finally {
+	    	dbUtils.closeConnection(rs, pStmt, myConn);
+	    }
+		
+		return moduleList;
+	}
+	
+	public int getModuleCount(CodeTableForm form) {
+		String sql = "SELECT COUNT(1) FROM smodule t WHERE 1 = 1";
+		String cond = getModuleListCondition(form);
+		sql  += cond;
+		int count = dbUtils.getIntBySql(sql);
+		return count;
+	}
+
+	public List<CodeTableForm> getModuleList(CodeTableForm form, int pageNum, int numPerPage) {
+		String sql = "SELECT t.*, func_getModuleName(t.parentid) parentname FROM smodule t WHERE 1 = 1";
+		String cond = getModuleListCondition(form);
+		sql  += cond;
+		sql += " ORDER BY priority, t.moduleid";
+		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
+		List<CodeTableForm> list = dbUtils.getListBySql(sql);
+		return list;
+	}
+	
+	public String getModuleListCondition(CodeTableForm form) {
+		StringBuffer cond = new StringBuffer("");
+		String modulename = StrUtils.nullToStr(form.getValue("modulename"));
+		String parentid = StrUtils.nullToStr(form.getValue("parentid"));
+		
+		if(!modulename.equals("")) {
+			cond.append(" AND t.modulename like '%").append(modulename).append("%'");
+		}
+		if(!parentid.equals("")) {
+			cond.append(" AND t.parentid = '").append(parentid).append("'");
+		}
+		
+		return cond.toString();
+	}
+	
+	public CodeTableForm getModuleById(int moduleid) {
+		String sql = "SELECT t.*, func_getModuleName(t.parentid) parentname FROM smodule t WHERE t.moduleid = '"
+				+ moduleid + "'";
+		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
+		codeTableForm.setValue("childrenList", getChildrenList(codeTableForm));
+		return codeTableForm;
+	}
+	
+	public int addModule(CodeTableForm form) {
+		return dbUtils.setInsert(form, "smodule");
+	}
+	
+	public int ediModule(CodeTableForm form) {
+		return dbUtils.setUpdate(form, "smodule", "moduleid");
+	}
+	
+	public int deleteModule(String moduleid) {
+		String sql = "DELETE FROM smodule WHERE moduleid = " + moduleid + "";
+		return dbUtils.executeSQL(sql);
 	}
 }

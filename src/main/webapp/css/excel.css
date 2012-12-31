@@ -1,6 +1,7 @@
 td {
 	border-right: thin solid #DADCDD;
 	border-bottom: thin solid #DADCDD;
+	mso-number-format:'\@';
 }
 
 table {

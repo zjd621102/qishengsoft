@@ -1,83 +1,83 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ include file="/WEB-INF/views/include.inc.jsp"%>
-<form id="pagerForm" onsubmit="return divSearch(this, 'jbsxBox2module');" action="<%=basePath %>/management/security/module/list/${parentModule.id}" method="post">
-	<input type="hidden" name="pageNum" value="${page.pageNum}" />
-	<input type="hidden" name="numPerPage" value="${page.numPerPage}" /> 
-	<input type="hidden" name="orderField" value="${page.orderField}" />
-	<input type="hidden" name="orderDirection" value="${page.orderDirection}" />
-	 
-	<input type="hidden" name="keywords" value="${keywords}"/>
-</form>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ include file="/jsp/pub/include.jsp"%>
 
-<form method="post" action="<%=basePath %>/management/security/module/list/${parentModule.id}" onsubmit="return divSearch(this, 'jbsxBox2module');">
-	<div class="pageHeader">
+<div class="pageHeader">
+	<form onsubmit="return divSearch(this, 'jbsxBox2module');"
+		action="<%=path%>/module/list/${form.map.parentid}" method="post"
+		rel="pagerForm" id="fid">
 		<div class="searchBar">
-			<ul class="searchContent">
-				<li>
-					<label>模块名称：</label>
-					<input type="text" name="keywords" value="${keywords}"/>
-				</li>
-			</ul>
+			<table class="searchContent" style="width: 80%">
+				<tr>
+					<td>
+						模块名称：
+						<input type="text" name="map[modulename]" value="${form.map.modulename}" />
+					</td>
+				</tr>
+			</table>
 			<div class="subBar">
-				<ul>						
-					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">搜索</button></div></div></li>
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>
-	</div>
-</form>
-
+	</form>
+</div>
 <div class="pageContent">
-
 	<div class="panelBar">
 		<ul class="toolBar">
-		<shiro:hasPermission name="Module:save">
-			<li><a class="add" target="dialog" width="550" height="350" mask="true" href="<%=basePath %>/management/security/module/create" ><span>添加</span></a></li>
-		</shiro:hasPermission>
-		<shiro:hasPermission name="Module:edit">
-			<li><a class="edit" target="dialog" width="550" height="350" mask="true" href="<%=basePath %>/management/security/module/update/{slt_uid}" ><span>编辑</span></a></li>
-		</shiro:hasPermission>
-		<shiro:hasPermission name="Module:delete">
-			<li><a class="delete" target="ajaxTodo" href="<%=basePath %>/management/security/module/delete/{slt_uid}" title="确认要删除该模块?"><span>删除</span></a></li>
-		</shiro:hasPermission>
+			<li>
+				<a class="add"
+					href="<%=path%>/module/add/${form.map.parentid}" target="dialog"
+					rel="module_add" mask="true" width="500" height="500">
+					<span>新增模块</span>
+				</a>
+			</li>
+			<li>
+				<a class="edit" href="<%=path%>/module/edi/{s_moduleid}"
+					target="dialog" rel="module_edi" mask="true" width="500"
+					height="500">
+					<span>修改模块</span>
+				</a>
+			</li>
+			<li>
+				<a class="delete" href="<%=path%>/module/delete/{s_moduleid}"
+					target="ajaxTodo" title="确定要删除吗?">
+					<span>删除模块</span>
+				</a>
+			</li>
 		</ul>
 	</div>
-	<table class="table" layoutH="138" width="100%" rel="jbsxBox2module" >
+	<table class="table" width="100%" layoutH="138">
 		<thead>
 			<tr>
-				<th width="150" >名称</th>
-				<th width="60" orderField="priority" class="${page.orderField eq 'priority' ? page.orderDirection : ''}">优先级</th>
-				<th width="150" >父模块</th>
-				<th>模块地址</th>
+				<th width="10%">序号</th>
+				<th width="15%">模块名称</th>
+				<th width="10%">优先级</th>
+				<th width="20%">模块地址</th>
+				<th width="15%">授权名称</th>
+				<th width="15%">父模块名称</th>
+				<th width="15%">描述</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="item" items="${modules}">
-			<tr target="slt_uid" rel="${item.id}">
-				<td>${item.name}</td>
-				<td>${item.priority}</td>
-				<td>${parentModule.name}</td>
-				<td>${item.url}</td>
-			</tr>
+			<c:forEach items="${moduleList}" var="bean" varStatus="vs">
+				<tr target="s_moduleid" rel="${bean.map.moduleid}">
+					<td>${vs.index+1}</td>
+					<td>${bean.map.modulename}</td>
+					<td>${bean.map.priority}</td>
+					<td>${bean.map.modulename}</td>
+					<td>${bean.map.sn}</td>
+					<td>${bean.map.parentname}</td>
+					<td>${bean.map.description}</td>
+				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
-	<!-- 分页 -->
-	<div class="panelBar">
-		<div class="pages">
-			<span>每页显示</span>
-			<select name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value}, 'jbsxBox2module')">
-				<c:forEach begin="10" end="50" step="10" varStatus="s">
-					<option value="${s.index}" ${page.numPerPage eq s.index ? 'selected="selected"' : ''}>${s.index}</option>
-				</c:forEach>
-			</select>
-			<span>总条数: ${page.totalCount}</span>
-		</div>
-	
-		<div class="pagination" rel="jbsxBox2module" totalCount="${page.totalCount}" numPerPage="${page.numPerPage}" pageNumShown="10" currentPage="${page.pageNum}"></div>
-	</div>
-	
+	<jsp:include page="../pub/paged.jsp"></jsp:include>
 </div>
-
-

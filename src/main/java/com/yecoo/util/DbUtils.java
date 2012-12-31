@@ -277,6 +277,40 @@ public class DbUtils {
 		return rstval;
 	}
 	/**
+	 * 执行多条SQL语句
+	 * @param sqls 多条SQL语句
+	 * @return int 语句执行影响的记录数，失败返回-1
+	 */
+	public int executeSQLs(Connection myConn, String[] sqls) {
+		PreparedStatement pStmt = null;
+		int rstval = 0;
+		int i = 0;
+		try {
+			for (i = 0; i < sqls.length; i++) {
+				if (pStmt != null) {
+					try {
+						pStmt.close();
+					} catch (Exception ignore) {
+						
+					}
+				}
+				if ((sqls[i] != null) && (!sqls[i].equals(""))) {
+					pStmt = myConn.prepareStatement(sqls[i]);
+					rstval = pStmt.executeUpdate();
+				}
+			}
+		} catch (Exception e) {
+			try {
+				rstval = -1;
+			} catch (Exception re) {
+				
+			}
+		} finally {
+			this.closeConnection(null, pStmt, null);
+		}
+		return rstval;
+	}
+	/**
 	 * 取年度列表（从2005年起到sYear2年度）
 	 * @param sYear1 开始年度，""值则默认为2005年
 	 * @param sYear2 截至年度，""值则默认为本年

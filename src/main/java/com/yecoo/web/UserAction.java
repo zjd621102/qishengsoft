@@ -143,7 +143,7 @@ public class UserAction {
 	public String doEdi(CodeTableForm form) {
 		
 		AjaxObject ajaxObject = null;
-		int iReturn = userDaoImpl.updateUser(form);
+		int iReturn = userDaoImpl.ediUser(form);
 		if (iReturn >= 1) {
 			ajaxObject = new AjaxObject("修改成功！", "user_list", "closeCurrent");
 		} else {

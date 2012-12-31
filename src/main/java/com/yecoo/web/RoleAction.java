@@ -96,7 +96,7 @@ public class RoleAction {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = roleDaoImpl.ediRole(form);
-		if (iReturn >= 1) {
+		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "role_list", "closeCurrent");
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
@@ -105,14 +105,14 @@ public class RoleAction {
 	}
 
 	@RequiresPermissions("Role:delete")
-	@RequestMapping(value="/delete/{roleid}", method=RequestMethod.POST)
+	@RequestMapping(value="/delete/{roleid}")
 	public @ResponseBody String delete(@PathVariable int roleid) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
 		iReturn = roleDaoImpl.deleteRole(roleid);
-		if (iReturn >= 1) {
-			ajaxObject = new AjaxObject("删除成功！", "", "");
+		if (iReturn >= 0) {
+			ajaxObject = new AjaxObject("删除成功！", "role_list", "");
 		} else {
 			ajaxObject = new AjaxObject("删除失败");
 		}

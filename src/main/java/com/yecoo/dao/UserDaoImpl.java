@@ -60,7 +60,7 @@ public class UserDaoImpl {
 		return dbUtils.setInsert(form, "suser");
 	}
 
-	public int updateUser(CodeTableForm form) {
+	public int ediUser(CodeTableForm form) {
 		return dbUtils.setUpdate(form, "suser", "userid");
 	}
 

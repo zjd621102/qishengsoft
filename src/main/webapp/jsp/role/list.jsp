@@ -3,7 +3,6 @@
 
 <div class="pageHeader">
 	<form onsubmit="return navTabSearch(this);" action="<%=path%>/role/list" method="post" rel="pagerForm" id="fid">
-		<input type="hidden" name="act" id="act" />
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">
 				<tr>
@@ -30,17 +29,19 @@
 	<div class="panelBar">
 		<ul class="toolBar">
 			<li>
-				<a class="add" href="<%=path%>/role/add" target="dialog" rel="role_add">
+				<a class="add" href="<%=path%>/role/add" target="dialog" rel="role_add" mask="true"
+				 width="500" height="500">
 					<span>新增角色</span>
 				</a>
 			</li>
 			<li>
-				<a class="edit" href="<%=path%>/role/edi/{s_roleid}" target="dialog" rel="role_edi">
+				<a class="edit" href="<%=path%>/role/edi/{s_roleid}" target="dialog" rel="role_edi" mask="true"
+				 width="500" height="500">
 					<span>修改角色</span>
 				</a>
 			</li>
 			<li>
-				<a class="delete" href="<%=path%>/user/delete/{s_roleid}" target="ajaxTodo" title="确定要删除吗?">
+				<a class="delete" href="<%=path%>/role/delete/{s_roleid}" target="ajaxTodo" title="确定要删除吗?">
 					<span>删除角色</span>
 				</a>
 			</li>

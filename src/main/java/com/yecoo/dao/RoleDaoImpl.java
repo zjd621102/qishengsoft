@@ -1,5 +1,7 @@
 package com.yecoo.dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.yecoo.model.CodeTableForm;
@@ -15,7 +17,7 @@ public class RoleDaoImpl {
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
 	}
-	
+
 	public int getRoleCount(CodeTableForm form) {
 		String sql = "SELECT COUNT(t.roleid) FROM srole t WHERE 1 = 1";
 		String cond = getRoleListCondition(form);
@@ -46,13 +48,51 @@ public class RoleDaoImpl {
 	}
 	
 	public int addRole(CodeTableForm form) {
-		int iReturn = 0;
-		iReturn = dbUtils.setInsert(form, "srole");
-		
-		//插入角色资源表
-		if(iReturn > 0) {
-			String[] permission = (String[])form.getValue("permission");
-			System.out.println(permission.length);
+		int iReturn = -1;
+		int roleid = 0;
+		String sql = null;
+		Connection conn = null;
+		try {
+			conn = dbUtils.dbConnection();
+			conn.setAutoCommit(false);//事务开启
+			
+			iReturn = dbUtils.setInsert(form, "srole", "");
+			sql = "SELECT IFNULL(MAX(t.roleid),1) FROM srole t";
+			roleid = Integer.parseInt(dbUtils.execQuerySQL(sql));
+			
+			//插入角色资源表
+			if(iReturn > 0 && form.getValue("permission")!=null) {
+				if(form.getValue("permission").toString().indexOf(":") > -1) {//只有一个资源
+					sql = "INSERT INTO spermission(roleid,permission) VALUES ('"
+							+ form.getValue("roleid") + "','" + form.getValue("permission") + "')";
+					dbUtils.executeSQL(conn, sql);
+				} else {//多个资源
+					String[] permission = (String[])form.getValue("permission");
+					String[] sqls  = new String[permission.length];
+					for(int i = 0; i< sqls.length; i++) {
+						sqls[i] = "INSERT INTO spermission(roleid,permission) VALUES ('"
+								+ roleid + "','" + permission[i] + "')";
+					}
+					iReturn = dbUtils.executeSQLs(conn, sqls);
+				}
+			}
+			
+			conn.commit();
+		} catch(Exception e) {
+			try {
+				sql = "DELETE FROM spermission WHERE roleid = '" + roleid + "'";
+				dbUtils.executeSQL(conn, sql);
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			StrUtils.WriteLog(this.getClass().getName() + ".addRole()", e);
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return iReturn;
 	}
@@ -60,19 +100,57 @@ public class RoleDaoImpl {
 	public CodeTableForm getRoleById(int roleid) {
 		String sql = "SELECT a.* FROM srole a WHERE a.roleid = '" + roleid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
+		sql = "SELECT t.permission FROM spermission t WHERE t.roleid = '" + roleid + "'";
+		String permission = ";" + dbUtils.execQuerySQLReturnMulti(sql, ";") + ";";
+		codeTableForm.setValue("permission", permission);
 		return codeTableForm;
 	}
 	
 	public int ediRole(CodeTableForm form) {
-		int iReturn = 0;
-		iReturn = dbUtils.setUpdate(form, "srole", "roleid");
-		
-		//插入角色资源表
-		if(iReturn > 0) {
-			String sql = "DELETE FROM spermission t WHERE t.roleid = '" + form.getValue("roleid") + "'";
-			dbUtils.execQuerySQL(sql);
-			String[] permission = (String[])form.getValue("permission");
-			System.out.println(permission.length);
+		int iReturn = -1;
+		Connection conn = null;
+		try {
+			conn = dbUtils.dbConnection();
+			conn.setAutoCommit(false);//事务开启
+			
+			iReturn = dbUtils.setUpdate(conn, form, "", "srole", "roleid", "");
+			
+			if(iReturn >0) {
+				String sql = "DELETE FROM spermission WHERE roleid = '" + form.getValue("roleid") + "'";
+				iReturn = dbUtils.executeSQL(conn, sql);
+				//插入角色资源表
+				if(iReturn >= 0 && form.getValue("permission")!=null) {
+					if(form.getValue("permission").toString().indexOf(":") > -1) {//只有一个资源
+						sql = "INSERT INTO spermission(roleid,permission) VALUES ('"
+								+ form.getValue("roleid") + "','" + form.getValue("permission") + "')";
+						dbUtils.executeSQL(conn, sql);
+					} else {//多个资源
+						String[] permission = (String[])form.getValue("permission");
+						String[] sqls  = new String[permission.length];
+						for(int i = 0; i< sqls.length; i++) {
+							sqls[i] = "INSERT INTO spermission(roleid,permission) VALUES ('"
+									+ form.getValue("roleid") + "','" + permission[i] + "')";
+						}
+						dbUtils.executeSQLs(conn, sqls);
+					}
+				}
+			}
+			
+			conn.commit();
+		} catch(Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			iReturn = -1;
+			StrUtils.WriteLog(this.getClass().getName() + ".ediRole()", e);
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return iReturn;
 	}

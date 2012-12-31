@@ -124,7 +124,7 @@
 								</td>
 								<td width="1%">&nbsp;</td>
 								<td width="50%" valign="bottom">
-									<table width="100%" height="59" border="0" align="center" cellpadding="0" cellspacing="0">
+									<table width="100%" height="59" border="0" style="text-align: center" cellpadding="0" cellspacing="0">
 										<tr>
 											<td width="4%">&nbsp;</td>
 											<td width="96%" height="38">

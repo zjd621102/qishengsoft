@@ -10,6 +10,7 @@
 <link href="<%=path%>/themes/default/style.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<%=path%>/themes/css/core.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<%=path%>/themes/css/print.css" rel="stylesheet" type="text/css" media="print" />
+<link href="<%=path%>/themes/css/custom.css" rel="stylesheet" type="text/css" media="screen" />
 <!--[if IE]>
 <link href="<%=path%>/themes/css/ieHack.css" rel="stylesheet" type="text/css" media="screen"/>
 <![endif]-->
@@ -53,7 +54,7 @@
 	<div id="layout">
 		<div id="header">
 			<div class="headerNav">
-				<a class="logo" href="http://j-ui.com">标志</a>
+				<a class="logo" href="#">标志</a>
 				<ul class="nav">
 					<li>
 						<a href="<%=path%>/user/toChangePasswd" target="dialog" width="600">修改密码</a>
@@ -98,6 +99,7 @@
 								<ul>
 									<li><a href="<%=path%>/user/list" target="navTab" rel="user_list">用户列表</a></li>
 									<li><a href="<%=path%>/role/list" target="navTab" rel="role_list">角色列表</a></li>
+									<li><a href="<%=path%>/module/tree" target="navTab" rel="module_tree">模块列表</a></li>
 								</ul>
 							</li>
 							<li>
