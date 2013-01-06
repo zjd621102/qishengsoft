@@ -966,6 +966,7 @@ public class DbUtils {
 			}
 		} catch (Exception e) {
 			StrUtils.WriteLog(this.getClass().getName() + ".setUpdate()", e);
+			iReturn = -1;
 		} finally {
 			this.closeConnection(rs, pStmt, myConn);
 		}

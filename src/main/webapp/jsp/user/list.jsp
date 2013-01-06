@@ -79,7 +79,7 @@
 			</ul>
 		</div>
 	</c:if>
-	<table class="table" width="100%" layoutH="138">
+	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
 				<c:if test="${act!='excel'}">

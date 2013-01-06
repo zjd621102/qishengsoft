@@ -7,17 +7,22 @@
 	<title>网站管理员登陆</title>
 	<link href="<%=path%>/images/skin.css" rel="stylesheet" type="text/css" />
 	<style type="text/css">
-	<!--
-	body {
-		margin-left: 0px;
-		margin-top: 0px;
-		margin-right: 0px;
-		margin-bottom: 0px;
-		background-color: #1D3647;
-	}
-	-->
+		body {
+			margin-left: 0px;
+			margin-top: 0px;
+			margin-right: 0px;
+			margin-bottom: 0px;
+			background-color: #1D3647;
+		}
+		
+		table {
+			border-collapse: collapse;
+		}
+		th, td {
+			padding: 0;
+		}
 	</style>
-	<script language="JavaScript">
+	<script>
 		function correctPNG() {
 			var arVersion = navigator.appVersion.split("MSIE")
 			var version = parseFloat(arVersion[1])
@@ -64,11 +69,10 @@
 	</head>
 	<body>
 		<form action="<%=path%>/login" method="post">
-			<table width="100%" height="166" border="0" cellpadding="0"
-				cellspacing="0">
+			<table style="width: 100%;height: 166px;border: 0">
 				<tr>
-					<td height="42" valign="top"><table width="100%" height="42"
-							border="0" cellpadding="0" cellspacing="0" class="login_top_bg">
+					<td height="42" valign="top">
+						<table style="width: 100%;height: 42px;border: 0" class="login_top_bg">
 							<tr>
 								<td width="1%" height="21">&nbsp;</td>
 								<td height="42">&nbsp;</td>
@@ -77,14 +81,14 @@
 						</table></td>
 				</tr>
 				<tr>
-					<td valign="top"><table width="100%" height="532" border="0"
-							cellpadding="0" cellspacing="0" class="login_bg">
+					<td valign="top">
+						<table style="width: 100%;height: 532px;border: 0" class="login_bg">
 							<tr>
-								<td width="49%" align="right"><table width="91%" height="532"
-										border="0" cellpadding="0" cellspacing="0" class="login_bg2">
+								<td width="49%" align="right">
+									<table style="width: 91%;height: 532px;border: 0" class="login_bg2">
 										<tr>
-											<td height="138" valign="top"><table width="89%"
-													height="427" border="0" cellpadding="0" cellspacing="0">
+											<td height="138" valign="top">
+												<table style="width: 89%;height: 427px;border: 0">
 													<tr>
 														<td height="149">&nbsp;</td>
 													</tr>
@@ -94,8 +98,8 @@
 														</td>
 													</tr>
 													<tr>
-														<td height="198" align="right" valign="top"><table
-																width="100%" border="0" cellpadding="0" cellspacing="0">
+														<td height="198" align="right" valign="top">
+															<table style="width: 100%;border: 0">
 																<tr>
 																	<td width="35%">&nbsp;</td>
 																	<td height="25" colspan="2" class="left_txt">
@@ -124,7 +128,7 @@
 								</td>
 								<td width="1%">&nbsp;</td>
 								<td width="50%" valign="bottom">
-									<table width="100%" height="59" border="0" style="text-align: center" cellpadding="0" cellspacing="0">
+									<table style="width: 100%;height: 59px;border: 0;">
 										<tr>
 											<td width="4%">&nbsp;</td>
 											<td width="96%" height="38">
@@ -134,50 +138,48 @@
 										<tr>
 											<td>&nbsp;</td>
 											<td height="21">
-												<table cellSpacing="0" cellPadding="0" width="100%" border="0" id="table211" height="328">
+												<table style="width: 100%;height: 328px;border: 0;" id="table211">
 													<tr>
-														<td height="164" colspan="2" align="middle">
-															<form name="myform" action="index.html" method="post">
-																<table cellSpacing="0" cellPadding="0" width="100%" border="0" height="143" id="table212">
-																	<tr>
-																		<td width="13%" height="38" class="top_hui_text">
-																			<span class="login_txt">管理员：&nbsp;&nbsp; </span>
-																		</td>
-																		<td height="38" colspan="2" class="top_hui_text">
-																			<input id="userid" name="map[userid]" type="text" class="editbox4" value="zhoujd" size="20" />
-																		</td>
-																	</tr>
-																	<tr>
-																		<td width="13%" height="35" class="top_hui_text">
-																			<span class="login_txt"> 密 码： &nbsp;&nbsp; </span>
-																		</td>
-																		<td height="35" colspan="2" class="top_hui_text">
-																			<input class="editbox4" type="password" size="20" id="passwd" name="map[passwd]" value="888888" />
-																			<img src="<%=path%>/images/luck.gif" width="19" height="18"></img>
-																		</td>
-																	</tr>
-																	<!-- 
-																	<tr>
-																		<td width="13%" height="35">
-																			<span class="login_txt">验证码：</span>
-																		</td>
-																		<td height="35" colspan="2" class="top_hui_text">
-																			<input class="wenbenkuang" name="verifycode" type="text" value="" maxLength=4 size=10>
-																		</td>
-																	</tr>
-																	-->
-																	<tr>
-																		<td height="35">&nbsp;</td>
-																		<td width="20%" height="35">
-																			<input name="Submit" type="submit" class="button" id="Submit" value="登 陆">
-																		</td>
-																		<td width="67%" class="top_hui_text">
-																			<input name="cs" type="button" class="button" id="cs" value="取 消" onClick="showConfirmMsg1()">
-																		</td>
-																	</tr>
-																</table>
-																<br>
-															</form>
+														<td colspan="2" style="height: 164px;">
+															<table style="width: 100%;height: 143px;border: 0;" id="table212">
+																<tr>
+																	<td width="13%" height="38" class="top_hui_text">
+																		<span class="login_txt">管理员：&nbsp;&nbsp; </span>
+																	</td>
+																	<td height="38" colspan="2" class="top_hui_text">
+																		<input id="userid" name="map[userid]" type="text" class="editbox4" value="zhoujd" size="20" />
+																	</td>
+																</tr>
+																<tr>
+																	<td width="13%" height="35" class="top_hui_text">
+																		<span class="login_txt"> 密&nbsp;&nbsp;&nbsp;&nbsp;码： &nbsp;&nbsp; </span>
+																	</td>
+																	<td height="35" colspan="2" class="top_hui_text">
+																		<input class="editbox4" type="password" size="21" id="passwd" name="map[passwd]" value="888888" />
+																		<img src="<%=path%>/images/luck.gif" width="19" height="18"></img>
+																	</td>
+																</tr>
+																<!-- 
+																<tr>
+																	<td width="13%" height="35">
+																		<span class="login_txt">验证码：</span>
+																	</td>
+																	<td height="35" colspan="2" class="top_hui_text">
+																		<input class="wenbenkuang" name="verifycode" type="text" value="" maxLength=4 size=10>
+																	</td>
+																</tr>
+																-->
+																<tr>
+																	<td height="35">&nbsp;</td>
+																	<td width="20%" height="35">
+																		<input name="Submit" type="submit" class="button" id="Submit" value="登 陆">
+																	</td>
+																	<td width="67%" class="top_hui_text">
+																		<input name="cs" type="button" class="button" id="cs" value="取 消" onClick="showConfirmMsg1()">
+																	</td>
+																</tr>
+															</table>
+															<br>
 														</td>
 													</tr>
 													<tr>
@@ -197,7 +199,7 @@
 				</tr>
 				<tr>
 					<td height="20">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="login-buttom-bg">
+						<table style="width: 100%;border: 0;" class="login-buttom-bg">
 							<tr>
 								<td align="center">
 									<span class="login-buttom-txt">Copyright&copy;2012-2012 www.yecoo.com</span>

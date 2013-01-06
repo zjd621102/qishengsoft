@@ -4,7 +4,7 @@
 
 <%!
 public String tree(CodeTableForm form, String path) {
-	if (form.getValue("childrenList")==null || ((List) form.getValue("childrenList")).isEmpty()) {
+	if (form.getValue("childrenList")==null || ((List<CodeTableForm>) form.getValue("childrenList")).isEmpty()) {
 		return "";
 	}
 	StringBuffer buffer = new StringBuffer();

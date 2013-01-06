@@ -47,7 +47,7 @@
 			</li>
 		</ul>
 	</div>
-	<table class="table" width="100%" layoutH="138">
+	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
 				<th width="22%">序号</th>

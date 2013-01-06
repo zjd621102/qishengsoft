@@ -9,7 +9,7 @@
 	
 	<div class="pageFormContent" layoutH="97">
 		<dl>
-			<dt>模块名称${form.map.parentid}：</dt>
+			<dt>模块名称：</dt>
 			<dd>
 				<input type="text" name="map[modulename]" class="required" size="30"
 					maxlength="32" alt="请输入模块名称" />
