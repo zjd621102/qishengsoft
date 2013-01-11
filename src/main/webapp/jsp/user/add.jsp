@@ -1,8 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%
-String path = request.getContextPath();
-%>
+<%@ include file="/jsp/pub/include.jsp"%>
 <div class="pageContent">
 	<form method="post" action="<%=path%>/user/add" class="pageForm required-validate"
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">

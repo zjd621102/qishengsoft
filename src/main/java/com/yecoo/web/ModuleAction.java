@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yecoo.dao.ModuleDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
+import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 
@@ -111,13 +112,20 @@ public class ModuleAction {
 	public String delete(@PathVariable("moduleid") String moduleid,
 			HttpServletRequest request) {
 		
+		DbUtils dbUtils = new DbUtils();
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
-		iReturn = moduleDaoImpl.deleteModule(moduleid);
-		if (iReturn >= 1) {
-			ajaxObject = new AjaxObject("删除成功！", "module_tree", "");
+		String sql = "SELECT COUNT(1) FROM smodule t WHERE t.parentid = '" + moduleid + "'";
+		int icount = dbUtils.getIntBySql(sql);
+		if(icount >= 1) {
+			ajaxObject = new AjaxObject("删除失败（此节点下还有子节点）");
 		} else {
-			ajaxObject = new AjaxObject("删除失败");
+			iReturn = moduleDaoImpl.deleteModule(moduleid);
+			if (iReturn >= 1) {
+				ajaxObject = new AjaxObject("删除成功！", "module_tree", "");
+			} else {
+				ajaxObject = new AjaxObject("删除失败");
+			}
 		}
 		return ajaxObject.toString();
 	}

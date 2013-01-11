@@ -1,8 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	String path = request.getContextPath();
-%>
+<%@ include file="/jsp/pub/include.jsp"%>
 <c:if test="${act=='excel'}">
 <%
 	response.setContentType("application/vnd.ms-excel;charset=UTF-8");
@@ -48,16 +45,21 @@
 	<c:if test="${act!='excel'}">
 		<div class="panelBar">
 			<ul class="toolBar">
+				<shiro:hasPermission name="User:save">
 				<li>
 					<a class="add" href="<%=path%>/user/add" target="dialog" rel="user_add">
 						<span>新增用户</span>
 					</a>
 				</li>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="User:edit">
 				<li>
 					<a class="edit" href="<%=path%>/user/edi/{s_userid}" target="dialog" rel="user_edi">
 						<span>修改用户</span>
 					</a>
 				</li>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="User:delete">
 				<li>
 					<a class="delete" href="<%=path%>/user/delete/{s_userid}" target="ajaxTodo" title="确定要删除吗?">
 						<span>删除用户</span>
@@ -69,6 +71,7 @@
 				 		<span>批量删除用户</span>
 				 	</a>
 				</li>
+				</shiro:hasPermission>
 				<li class="line">line</li>
 				<li>
 					<a class="icon" href="<%=path%>/user/list_excel" target="dwzExport" targetType="navTab"

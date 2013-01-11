@@ -28,23 +28,29 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
+			<shiro:hasPermission name="Role:save">
 			<li>
 				<a class="add" href="<%=path%>/role/add" target="dialog" rel="role_add" mask="true"
 				 width="500" height="500">
 					<span>新增角色</span>
 				</a>
 			</li>
+			</shiro:hasPermission>
+			<shiro:hasPermission name="Role:edit">
 			<li>
 				<a class="edit" href="<%=path%>/role/edi/{s_roleid}" target="dialog" rel="role_edi" mask="true"
 				 width="500" height="500">
 					<span>修改角色</span>
 				</a>
 			</li>
+			</shiro:hasPermission>
+			<shiro:hasPermission name="Role:delete">
 			<li>
 				<a class="delete" href="<%=path%>/role/delete/{s_roleid}" target="ajaxTodo" title="确定要删除吗?">
 					<span>删除角色</span>
 				</a>
 			</li>
+			</shiro:hasPermission>
 		</ul>
 	</div>
 	<table class="table" style="width: 100%;" layoutH="138">

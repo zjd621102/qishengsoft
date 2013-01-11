@@ -31,6 +31,7 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
+			<shiro:hasPermission name="Module:save">
 			<li>
 				<a class="add"
 					href="<%=path%>/module/add/${form.map.parentid}" target="dialog"
@@ -38,6 +39,8 @@
 					<span>新增模块</span>
 				</a>
 			</li>
+			</shiro:hasPermission>
+			<shiro:hasPermission name="Module:edit">
 			<li>
 				<a class="edit" href="<%=path%>/module/edi/{s_moduleid}"
 					target="dialog" rel="module_edi" mask="true" width="500"
@@ -45,12 +48,15 @@
 					<span>修改模块</span>
 				</a>
 			</li>
+			</shiro:hasPermission>
+			<shiro:hasPermission name="Module:delete">
 			<li>
 				<a class="delete" href="<%=path%>/module/delete/{s_moduleid}"
 					target="ajaxTodo" title="确定要删除吗?">
 					<span>删除模块</span>
 				</a>
 			</li>
+			</shiro:hasPermission>
 		</ul>
 	</div>
 	<table class="table" style="width: 100%;" layoutH="138">

@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
 %>
@@ -26,11 +27,12 @@
 	$(function() {
 		DWZ.init("<%=path%>/resources/dwz.frag.xml", {
 			loginTitle : "登录", // 弹出登录对话框
-			loginUrl:"<%=path%>/login",	// 跳到登录页面
+			loginUrl:"<%=path%>/loginDialog",	// 跳到登录页面
 			statusCode : {
 				ok : 200,
 				error : 300,
-				timeout : 301
+				timeout : 301,
+				forbidden: 403
 			}, //【可选】
 			pageInfo : {
 				pageNum : "pageNum",
@@ -54,13 +56,16 @@
 	<div id="layout">
 		<div id="header">
 			<div class="headerNav">
-				<a class="logo" href="#">标志</a>
+				<a class="logo" href="<%=path%>/index">标志</a>
 				<ul class="nav">
+					<li>
+						<a href="<%=path%>/index">主页</a>
+					</li>
 					<li>
 						<a href="<%=path%>/user/toChangePasswd" target="dialog" width="600">修改密码</a>
 					</li>
 					<li>
-						<a href="<%=path%>/login">退出</a>
+						<a href="<%=path%>/logout">退出</a>
 					</li>
 				</ul>
 				<ul class="themeList" id="themeList">
@@ -87,54 +92,28 @@
 					<div>收缩</div>
 				</div>
 				<div class="accordion" fillSpace="sidebar">
-					<div class="accordionHeader">
-						<h2>
-							<span>Folder</span>系统管理
-						</h2>
-					</div>
-					<div class="accordionContent">
-						<ul class="tree treeFolder">
-							<li>
-								<a href="<%=path%>/user/list" target="navTab" rel="user_list">用户管理</a>
-								<ul>
-									<li><a href="<%=path%>/user/list" target="navTab" rel="user_list">用户列表</a></li>
-									<li><a href="<%=path%>/role/list" target="navTab" rel="role_list">角色列表</a></li>
-									<li><a href="<%=path%>/module/tree" target="navTab" rel="module_tree">模块列表</a></li>
+					<c:forEach var="level1" items="${menuList}">
+						<c:if test="${level1.map.parentid==1}">
+							<div class="accordionHeader">
+								<h2>
+									<span>Folder</span>${level1.map.modulename}
+								</h2>
+							</div>
+							<div class="accordionContent">
+								<ul class="tree treeFolder">
+									<c:forEach var="level2" items="${menuList}">
+										<c:if test="${level2.map.parentid==level1.map.moduleid}">
+											<li>
+												<a href="<%=path%>${level2.map.url}" target="navTab" rel="${level2.map.rel}">
+													${level2.map.modulename}
+												</a>
+											</li>
+										</c:if>
+									</c:forEach>
 								</ul>
-							</li>
-							<li>
-								<a>常用组件</a>
-								<ul>
-									<li><a href="w_panel.html" target="navTab" rel="w_panel">面板</a></li>
-									<li><a href="w_tabs.html" target="navTab" rel="w_tabs">选项卡面板</a></li>
-								</ul></li>
-						</ul>
-					</div>
-					<div class="accordionHeader">
-						<h2>
-							<span>Folder</span>典型页面
-						</h2>
-					</div>
-					<div class="accordionContent">
-						<ul class="tree treeFolder treeCheck">
-							<li><a href="demo_page1.html" target="navTab" rel="demo_page1">查询我的客户</a></li>
-							<li><a href="demo_page1.html" target="navTab" rel="demo_page2">表单查询页面</a></li>
-							<li>
-								<a href="javascript:;">有提示的表单输入页面</a>
-								<ul>
-									<li><a href="javascript:;">页面一</a></li>
-									<li><a href="javascript:;">页面二</a></li>
-								</ul></li>
-							<li>
-								<a href="javascript:;">选项卡和图形的页面</a>
-								<ul>
-									<li><a href="javascript:;">页面一</a></li>
-									<li><a href="javascript:;">页面二</a></li>
-								</ul></li>
-							<li><a href="javascript:;">选项卡和图形切换的页面</a></li>
-							<li><a href="javascript:;">左右两个互动的页面</a></li>
-						</ul>
-					</div>
+							</div>
+						</c:if>
+					</c:forEach>
 				</div>
 			</div>
 		</div>

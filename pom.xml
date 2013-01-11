@@ -44,6 +44,11 @@
 			<version>1.6.4</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>1.6.4</version>
+		</dependency>
 		<!-- J2EE -->
 		<dependency>
 			<groupId>org.apache.openejb</groupId>
@@ -106,6 +111,12 @@
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-core</artifactId>
 			<version>2.5.3</version>
+		</dependency>	
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2.2</version>
+			<scope>runtime</scope>
 		</dependency>
 		<!-- json -->
         <dependency>
@@ -118,18 +129,6 @@
             <artifactId>jackson-mapper-lgpl</artifactId>
             <version>1.8.1</version>
         </dependency>
-		<!-- GENERAL UTILS begin -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>13.0.1</version>
-		</dependency>
-		<!-- GENERAL UTILS end -->
 		<!-- 其它 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

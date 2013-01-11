@@ -6,20 +6,41 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath*:/applicationContext.xml<!-- ,
-			classpath*:/applicationContext-shiro.xml -->
+			classpath*:/applicationContext.xml
 		</param-value>
 	</context-param>
 	<context-param>
 		<param-name>spring.profiles.default</param-name>
 		<param-value>production</param-value>
 	</context-param>
+	<!-- 编码过滤器 -->
+	<filter>
+		<filter-name>EncodingFilter</filter-name>
+		<filter-class>com.yecoo.filter.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>EncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- 会话超时校验过滤器 -->
+	<filter>
+		<filter-name>sessionValidateFilter</filter-name>
+		<filter-class>com.yecoo.filter.SessionValidateFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sessionValidateFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 	<!-- 默认的spring配置文件是在WEB-INF下的applicationContext.xml -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+	<!-- Spring编码过滤器 -->
 	<filter>
 		<filter-name>Set Character Encoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -32,9 +53,20 @@
 			<param-value>true</param-value><!-- 强制进行转码 -->
 		</init-param>
 	</filter>
-
 	<filter-mapping>
 		<filter-name>Set Character Encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Shiro过滤器-->
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.DelegatingFilterProxy
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
@@ -56,6 +88,12 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
+	<!-- SESSION超时时间设置 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	
+	<!-- 异常跳转设置 -->
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/jsp/pub/500.jsp</location>
@@ -71,5 +109,5 @@
 	<error-page>
 		<error-code>403</error-code>
 		<location>/jsp/pub/403.jsp</location>
-	</error-page>	
+	</error-page>
 </web-app>

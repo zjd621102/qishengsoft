@@ -38,6 +38,13 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>页面标识：</dt>
+			<dd>
+				<input type="text" name="map[rel]" size="30"
+					maxlength="32" alt="页面标识" value="${form.map.rel}" />
+			</dd>
+		</dl>
+		<dl>
 			<dt>描述：</dt>
 			<dd>
 				<textarea name="map[description]" cols="30" rows="3" maxlength="255">${form.map.description}</textarea>
