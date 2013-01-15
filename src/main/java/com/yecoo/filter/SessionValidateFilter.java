@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import com.yecoo.util.Constants;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
-
+/**
+ * 超时过滤
+ * @author zhoujd
+ */
 public class SessionValidateFilter implements Filter {
 
 	@Override

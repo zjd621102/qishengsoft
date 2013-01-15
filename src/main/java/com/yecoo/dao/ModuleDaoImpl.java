@@ -12,8 +12,12 @@ import com.yecoo.util.StrUtils;
 public class ModuleDaoImpl {
 
 	DbUtils dbUtils = new DbUtils();
-	
+	/**
+	 * 获取所有模块
+	 * @return
+	 */
 	public List<CodeTableForm> getModuleList() {
+		
 	    Connection myConn = null;
 	    PreparedStatement pStmt = null;
 	    ResultSet rs = null;
@@ -39,8 +43,13 @@ public class ModuleDaoImpl {
 		
 		return moduleList;
 	}
-	
+	/**
+	 * 获取子模块列表
+	 * @param form
+	 * @return
+	 */
 	private List<CodeTableForm> getChildrenList(CodeTableForm form) {
+		
 	    Connection myConn = null;
 	    PreparedStatement pStmt = null;
 	    ResultSet rs = null;
@@ -60,23 +69,35 @@ public class ModuleDaoImpl {
 	    		moduleList.add(codeTableForm);
 	    	}
 	    } catch (Exception e) {
-	    	StrUtils.WriteLog(this.getClass().getName() + ".getModuleList()", e);
+	    	StrUtils.WriteLog(this.getClass().getName() + ".getChildrenList()", e);
 	    } finally {
 	    	dbUtils.closeConnection(rs, pStmt, myConn);
 	    }
 		
 		return moduleList;
 	}
-	
+	/**
+	 * 获取模块数量
+	 * @param form
+	 * @return
+	 */
 	public int getModuleCount(CodeTableForm form) {
+		
 		String sql = "SELECT COUNT(1) FROM smodule t WHERE 1 = 1";
 		String cond = getModuleListCondition(form);
 		sql  += cond;
 		int count = dbUtils.getIntBySql(sql);
 		return count;
 	}
-
+	/**
+	 * 获取模块列表
+	 * @param form
+	 * @param pageNum
+	 * @param numPerPage
+	 * @return
+	 */
 	public List<CodeTableForm> getModuleList(CodeTableForm form, int pageNum, int numPerPage) {
+		
 		String sql = "SELECT t.*, func_getModuleName(t.parentid) parentname FROM smodule t WHERE 1 = 1";
 		String cond = getModuleListCondition(form);
 		sql  += cond;
@@ -85,8 +106,13 @@ public class ModuleDaoImpl {
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
 	}
-	
+	/**
+	 * 获取模块列表-条件
+	 * @param form
+	 * @return
+	 */
 	public String getModuleListCondition(CodeTableForm form) {
+		
 		StringBuffer cond = new StringBuffer("");
 		String modulename = StrUtils.nullToStr(form.getValue("modulename"));
 		String parentid = StrUtils.nullToStr(form.getValue("parentid"));
@@ -100,24 +126,44 @@ public class ModuleDaoImpl {
 		
 		return cond.toString();
 	}
-	
+	/**
+	 * 通过ID获取模块
+	 * @param moduleid
+	 * @return
+	 */
 	public CodeTableForm getModuleById(int moduleid) {
+		
 		String sql = "SELECT t.*, func_getModuleName(t.parentid) parentname FROM smodule t WHERE t.moduleid = '"
 				+ moduleid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		codeTableForm.setValue("childrenList", getChildrenList(codeTableForm));
 		return codeTableForm;
 	}
-	
+	/**
+	 * 新增模块
+	 * @param form
+	 * @return
+	 */
 	public int addModule(CodeTableForm form) {
+		
 		return dbUtils.setInsert(form, "smodule");
 	}
-	
+	/**
+	 * 修改模块
+	 * @param form
+	 * @return
+	 */
 	public int ediModule(CodeTableForm form) {
+		
 		return dbUtils.setUpdate(form, "smodule", "moduleid");
 	}
-	
+	/**
+	 * 删除模块
+	 * @param moduleid
+	 * @return
+	 */
 	public int deleteModule(String moduleid) {
+		
 		String sql = "DELETE FROM smodule WHERE moduleid = " + moduleid + "";
 		return dbUtils.executeSQL(sql);
 	}

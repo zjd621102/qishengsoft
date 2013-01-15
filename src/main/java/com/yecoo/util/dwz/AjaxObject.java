@@ -1,20 +1,5 @@
-/**
- * <pre>
- * Copyright:		Copyright(C) 2011-2012, ketayao.com
- * Filename:		com.ygsoft.util.dwz.AjaxObject.java
- * Class:			AjaxObject
- * Date:			2012-6-8
- * Author:			<a href="mailto:ketayao@gmail.com">ketayao</a>
- * Version          1.1.0
- * Description:		
- *
- * </pre>
- **/
-
 package com.yecoo.util.dwz;
-
 /**
- * 
  * navTabAjaxDone是DWZ框架中预定义的表单提交回调函数． 服务器转回navTabId可以把那个navTab标记为reloadFlag=1,
  * 下次切换到那个navTab时会重新载入内容. callbackType如果是closeCurrent就会关闭当前tab
  * 只有callbackType="forward"时需要forwardUrl值
@@ -31,7 +16,6 @@ package com.yecoo.util.dwz;
  * @author <a href="mailto:ketayao@gmail.com">ketayao</a> Version 1.1.0
  * @since 2012-6-8 下午6:46:53
  */
-
 public class AjaxObject {
 	// 状态码
 	public final static int STATUS_CODE_SUCCESS = 200;
@@ -86,6 +70,7 @@ public class AjaxObject {
 	 * @param callbackType
 	 */
 	public AjaxObject(int statusCode, String message, String callbackType) {
+		
 		this.statusCode = statusCode;
 		this.message = message;
 		this.callbackType = callbackType;
@@ -102,6 +87,7 @@ public class AjaxObject {
 	 */
 	public AjaxObject(int statusCode, String message, String navTabId,
 			String forwardUrl, String rel, String callbackType) {
+		
 		this.statusCode = statusCode;
 		this.message = message;
 		this.navTabId = navTabId;
@@ -224,6 +210,7 @@ public class AjaxObject {
 	 */
 	@Override
 	public String toString() {
+		
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{").append("\"statusCode\":\"" + statusCode + "\",")
 				.append("\"message\":\"" + message + "\",")
@@ -233,5 +220,4 @@ public class AjaxObject {
 				.append("\"forwardUrl\":\"" + forwardUrl + "\"").append("}");
 		return buffer.toString();
 	}
-
 }

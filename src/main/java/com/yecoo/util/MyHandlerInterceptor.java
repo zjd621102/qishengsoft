@@ -6,7 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
+/**
+ * 简单超时过滤，已被SHIRO替代，此文件没用
+ * @author zhoujd
+ */
 public class MyHandlerInterceptor extends HandlerInterceptorAdapter {
 
 	@Override

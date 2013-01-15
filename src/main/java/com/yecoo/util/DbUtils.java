@@ -31,7 +31,7 @@ public class DbUtils {
 	private String dbUrl;
 	
 	public DbUtils() {
-		String url = this.getClass().getResource("/").getPath() + "message.properties";
+		String url = this.getClass().getResource("/").getPath() + "application.properties";
 		InputStream in;
 		try {
 			in = new BufferedInputStream(new FileInputStream(url));
@@ -1247,5 +1247,4 @@ public class DbUtils {
 		}
 		return iReturn;
 	}
-	
 }

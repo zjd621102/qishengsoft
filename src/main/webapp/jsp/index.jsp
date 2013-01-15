@@ -62,7 +62,7 @@
 						<a href="<%=path%>/index">主页</a>
 					</li>
 					<li>
-						<a href="<%=path%>/user/toChangePasswd" target="dialog" width="600">修改密码</a>
+						<a href="<%=path%>/user/changePasswd" target="dialog" width="600">修改密码</a>
 					</li>
 					<li>
 						<a href="<%=path%>/logout">退出</a>
@@ -92,7 +92,7 @@
 					<div>收缩</div>
 				</div>
 				<div class="accordion" fillSpace="sidebar">
-					<c:forEach var="level1" items="${menuList}">
+					<c:forEach var="level1" items="${menuSessionInfo}">
 						<c:if test="${level1.map.parentid==1}">
 							<div class="accordionHeader">
 								<h2>
@@ -101,7 +101,7 @@
 							</div>
 							<div class="accordionContent">
 								<ul class="tree treeFolder">
-									<c:forEach var="level2" items="${menuList}">
+									<c:forEach var="level2" items="${menuSessionInfo}">
 										<c:if test="${level2.map.parentid==level1.map.moduleid}">
 											<li>
 												<a href="<%=path%>${level2.map.url}" target="navTab" rel="${level2.map.rel}">

@@ -14,7 +14,10 @@ import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
-
+/**
+ * 角色管理
+ * @author zhoujd
+ */
 @Controller
 @RequestMapping("/role")
 public class RoleAction {
@@ -69,7 +72,7 @@ public class RoleAction {
 	public @ResponseBody String add(CodeTableForm form) {
 		AjaxObject ajaxObject = null;
 		int iReturn = roleDaoImpl.addRole(form);
-		if (iReturn >= 1) {
+		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "role_list", "closeCurrent");
 		} else {
 			ajaxObject = new AjaxObject("新增失败");

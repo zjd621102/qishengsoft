@@ -14,7 +14,10 @@ import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
-
+/**
+ * 模块管理
+ * @author zhoujd
+ */
 @Controller
 @RequestMapping("/module")
 public class ModuleAction {
@@ -75,7 +78,7 @@ public class ModuleAction {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = moduleDaoImpl.addModule(form);
-		if (iReturn >= 1) {
+		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "module_tree", "closeCurrent");
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
@@ -99,7 +102,7 @@ public class ModuleAction {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = moduleDaoImpl.ediModule(form);
-		if (iReturn >= 1) {
+		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "module_tree", "closeCurrent");
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
@@ -121,7 +124,7 @@ public class ModuleAction {
 			ajaxObject = new AjaxObject("删除失败（此节点下还有子节点）");
 		} else {
 			iReturn = moduleDaoImpl.deleteModule(moduleid);
-			if (iReturn >= 1) {
+			if (iReturn >= 0) {
 				ajaxObject = new AjaxObject("删除成功！", "module_tree", "");
 			} else {
 				ajaxObject = new AjaxObject("删除失败");

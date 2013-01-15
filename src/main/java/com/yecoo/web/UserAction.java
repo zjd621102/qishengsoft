@@ -13,7 +13,10 @@ import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
-
+/**
+ * 用户管理
+ * @author zhoujd
+ */
 @Controller
 @RequestMapping("/user")
 public class UserAction {
@@ -94,12 +97,17 @@ public class UserAction {
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String doAdd(CodeTableForm form) {
+		
 		AjaxObject ajaxObject = null;
-		int iReturn = userDaoImpl.addUser(form);
-		if (iReturn >= 1) {
-			ajaxObject = new AjaxObject("新增成功！", "user_list", "closeCurrent");
+		if(validUserid(form).equals("false")) {
+			ajaxObject = new AjaxObject("用户账号已存在");
 		} else {
-			ajaxObject = new AjaxObject("新增失败");
+			int iReturn = userDaoImpl.addUser(form);
+			if (iReturn >= 0) {
+				ajaxObject = new AjaxObject("新增成功！", "user_list", "closeCurrent");
+			} else {
+				ajaxObject = new AjaxObject("新增失败");
+			}
 		}
 		return ajaxObject.toString();
 	}
@@ -136,6 +144,7 @@ public class UserAction {
 	 * @param form
 	 * @param model
 	 * @return
+	 * @throws Exception 
 	 * @throws Exception
 	 */
 	@ResponseBody
@@ -144,7 +153,7 @@ public class UserAction {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = userDaoImpl.ediUser(form);
-		if (iReturn >= 1) {
+		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "user_list", "closeCurrent");
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
@@ -162,7 +171,7 @@ public class UserAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/validUserid")
-	public String validUserid(CodeTableForm form, HttpServletRequest request) {
+	public String validUserid(CodeTableForm form) {
 		
 		String result = "false";
 		String userid = StrUtils.nullToStr(form.getValue("userid"));
@@ -193,7 +202,7 @@ public class UserAction {
 			userid = StrUtils.ArrayToStr(ids, "','");
 		}
 		iReturn = userDaoImpl.deleteUsers("'" + userid + "'");
-		if (iReturn >= 1) {
+		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("删除成功！", "", "");
 		} else {
 			ajaxObject = new AjaxObject("删除失败");
@@ -207,10 +216,28 @@ public class UserAction {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/toChangePasswd")
+	@RequestMapping(value = "/changePasswd", method = RequestMethod.GET)
 	public String toChangePasswd() {
 
 		return "user/changePasswd";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/changePasswd", method = RequestMethod.POST)
+	public String changePasswd(CodeTableForm form, HttpServletRequest request) {
+		
+		AjaxObject ajaxObject = null;
+		if(checkPasswd(form, request).equals("false")) {
+			ajaxObject = new AjaxObject("原密码错误");
+		} else {
+			int iReturn = userDaoImpl.changePassword(form);
+			if (iReturn >= 0) {
+				ajaxObject = new AjaxObject("修改成功！", "", "closeCurrent");
+			} else {
+				ajaxObject = new AjaxObject("修改失败");
+			}
+		}
+		return ajaxObject.toString();
 	}
 
 	/**

@@ -28,6 +28,14 @@
 				<input type="text" class="date" size="30" name="map[birthday]" value="${form.map.birthday}"  />
 				<a class="inputDateButton" href="javascript:;">选择</a>
 			</p>
+			<p>
+				<label>角&nbsp;&nbsp;&nbsp;&nbsp;色：</label>
+				<c:forEach items="${roleList}" var="role">
+						<input type="checkbox" name="map[roleid]" value="${role.map.roleid}"
+							 ${fn:contains(form.map.roleid,role.map.roleid) ? "checked=\"checked\"" : ""} />
+						${role.map.rolename}
+				</c:forEach>
+			</p>
 		</div>
 		<div class="formBar">
 			<ul>

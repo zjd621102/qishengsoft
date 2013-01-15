@@ -7,7 +7,7 @@
 			<p>
 				<label>用户账号：</label>
 				<input type="text" class="required alphanumeric" minlength="4" maxlength="32" size="30" name="map[userid]"
-				 remote="<%=path%>/user/validUserid" alt="请输入用户账号" />
+					alt="请输入用户账号" />
 			</p>
 			<p>
 				<label>用户姓名：</label>
@@ -16,7 +16,7 @@
 			<p>
 				<label>用户密码：</label>
 				<input type="text" class="required" minlength="4" maxlength="32" size="30" name="map[passwd]"
-				 alt="请输入用户密码" />
+					alt="请输入用户密码" />
 			</p>
 			<p>
 				<label>手机号码：</label>
@@ -27,6 +27,14 @@
 				<input type="text" class="date" size="30" name="map[birthday]" />
 				<a class="inputDateButton" href="javascript:;">选择</a>
 			</p>
+			<p>
+				<label>角&nbsp;&nbsp;&nbsp;&nbsp;色：</label>
+				<c:forEach items="${roleList}" var="role">
+						<input type="checkbox" name="map[roleid]" value="${role.map.roleid}"
+							 ${fn:contains(form.map.roleid,role.map.roleid) ? "checked=\"checked\"" : ""} />
+						${role.map.rolename}
+				</c:forEach>
+			</p>
 		</div>
 		<div class="formBar">
 			<ul>
@@ -34,7 +42,11 @@
 					<div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div>
 				</li>
 				<li>
-					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
 				</li>
 			</ul>
 		</div>

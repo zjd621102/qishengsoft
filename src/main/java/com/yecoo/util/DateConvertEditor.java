@@ -5,7 +5,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import org.springframework.util.StringUtils;
-
+/**
+ * SPRINGMVC日期转换过滤
+ * @author zhoujd
+ */
 public class DateConvertEditor extends PropertyEditorSupport {
 	private SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

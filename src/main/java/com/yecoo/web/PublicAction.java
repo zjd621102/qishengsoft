@@ -19,7 +19,10 @@ import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
-
+/**
+ * 公共管理
+ * @author zhoujd
+ */
 @Controller
 public class PublicAction {
 
@@ -64,7 +67,7 @@ public class PublicAction {
 					+ username +"') ORDER BY a.parentid, a.moduleid";
 			DbUtils dbUtils = new DbUtils();
 			List<CodeTableForm> menuList = dbUtils.getListBySql(sql);
-			request.setAttribute("menuList", menuList);
+			request.getSession().setAttribute(Constants.MENU_INFO_SESSION, menuList);
 			
 			return "index";
 		}
@@ -79,6 +82,7 @@ public class PublicAction {
 		Subject subject = SecurityUtils.getSubject();
 		subject.logout();
 		request.getSession().removeAttribute(Constants.USER_INFO_SESSION);
+		request.getSession().removeAttribute(Constants.MENU_INFO_SESSION);
 		return "login";
 	}
 

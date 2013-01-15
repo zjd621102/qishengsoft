@@ -13,7 +13,10 @@ import java.util.Random;
 import java.util.StringTokenizer;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
-
+/**
+ * 公用方法
+ * @author zhoujd
+ */
 public class StrUtils {
 	/**
 	 * 写入日志

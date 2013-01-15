@@ -2,9 +2,9 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 <c:if test="${act=='excel'}">
 <%
-	response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+	//response.setContentType("application/vnd.ms-excel;charset=UTF-8");
 	String excelname=new String("用户列表.xls".getBytes(),"UTF-8");
-	response.setHeader("Content-disposition","inline; filename="+excelname);
+	//response.setHeader("Content-disposition","inline; filename="+excelname);
 %>
 <link rel="stylesheet" href="<%=path%>/css/excel.css" type="text/css"></link>
 </c:if>

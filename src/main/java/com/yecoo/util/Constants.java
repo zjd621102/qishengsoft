@@ -1,8 +1,12 @@
 package com.yecoo.util;
-
+/**
+ * 静态变量
+ * @author zhoujd
+ */
 public class Constants {
 
 	public final static String USER_INFO_SESSION = "userSessionInfo";// 保存在session的用户信息名称
+	public final static String MENU_INFO_SESSION = "menuSessionInfo";// 保存在session的用户信息名称
 
 	/**
 	 * 分页信息

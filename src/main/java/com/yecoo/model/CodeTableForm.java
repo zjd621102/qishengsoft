@@ -1,7 +1,10 @@
 package com.yecoo.model;
 
 import java.util.HashMap;
-
+/**
+ * 公用BEAN
+ * @author zhoujd
+ */
 public class CodeTableForm {
 
 	public HashMap<String, Object> map = new HashMap<String, Object>();
