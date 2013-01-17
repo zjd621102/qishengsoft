@@ -112,7 +112,7 @@ public class UserDaoImpl {
 			iReturn = dbUtils.setInsert(conn, form, "suser", "");
 			//插入用户角色表
 			if(iReturn >= 0 && form.getValue("roleid")!=null) {
-				if(form.getValue("roleid").toString().indexOf("@") == -1) {//只有一个角色
+				if(form.getValue("roleid").toString().indexOf("@") == -1) { //只有一个角色
 					String sql = "INSERT INTO suser_role(userid,roleid) VALUES ('"
 							+ form.getValue("userid") + "','" + form.getValue("roleid") + "')";
 					iReturn = dbUtils.executeSQL(conn, sql);
