@@ -3,9 +3,9 @@ package com.yecoo.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
+import com.yecoo.util.Md5;
 import com.yecoo.util.StrUtils;
 /**
  * 用户管理
@@ -101,6 +101,14 @@ public class UserDaoImpl {
 		try {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false);
+			
+			//密码加密
+			String password = StrUtils.nullToStr(form.getValue("passwd"));
+			if(!password.equals("")) {
+				Md5 md5 = new Md5();
+				form.setValue("passwd", md5.md5(password));
+			}
+			
 			iReturn = dbUtils.setInsert(conn, form, "suser", "");
 			//插入用户角色表
 			if(iReturn >= 0 && form.getValue("roleid")!=null) {
@@ -149,6 +157,14 @@ public class UserDaoImpl {
 		try {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false);
+			
+			//密码加密
+			String password = StrUtils.nullToStr(form.getValue("passwd"));
+			if(!password.equals("")) {
+				Md5 md5 = new Md5();
+				form.setValue("passwd", md5.md5(password));
+			}
+			
 			iReturn = dbUtils.setUpdate(conn, form, "", "suser", "userid", "");
 			if(iReturn >= 0) {
 				String sql = "DELETE FROM suser_role WHERE userid = '" + form.getValue("userid") + "'";
@@ -203,6 +219,13 @@ public class UserDaoImpl {
 	}
 	
 	public int changePassword(CodeTableForm form) {
+		
+		//密码加密
+		String password = StrUtils.nullToStr(form.getValue("passwd"));
+		if(!password.equals("")) {
+			Md5 md5 = new Md5();
+			form.setValue("passwd", md5.md5(password));
+		}
 		
 		int iReturn = dbUtils.setUpdate(form, "suser", "userid");
 		return iReturn;

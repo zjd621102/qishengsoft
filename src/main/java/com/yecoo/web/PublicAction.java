@@ -50,27 +50,32 @@ public class PublicAction {
 
 		String username = StrUtils.nullToStr(request.getParameter("username")).toUpperCase();
 		String password = StrUtils.nullToStr(request.getParameter("password")).toUpperCase();
-		CodeTableForm user1 = daoImpl.getUserById(username);
-		if (user1 == null) {
-			request.setAttribute("message", "用户不存在");
-			return "login";
-		} else if (!password.equals(user1.getValue("passwd"))) {
-			request.setAttribute("message", "密码错误");
-			return "login";
-		} else {
-			request.getSession().setAttribute(Constants.USER_INFO_SESSION, user1);
+		String msg = "";
+		
+		try {
 			UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 			SecurityUtils.getSubject().login(token);
+			CodeTableForm user1 = daoImpl.getUserById(username);
+			request.getSession().setAttribute(Constants.USER_INFO_SESSION, user1); //用户信息
 			
 			String sql = "SELECT * FROM smodule a WHERE EXISTS (SELECT 1 FROM spermission b, suser_role c"
 					+ " WHERE b.roleid = c.roleid and b.permission = concat(a.sn ,':view') and c.userid = '"
 					+ username +"') ORDER BY a.parentid, a.moduleid";
 			DbUtils dbUtils = new DbUtils();
-			List<CodeTableForm> menuList = dbUtils.getListBySql(sql);
+			List<CodeTableForm> menuList = dbUtils.getListBySql(sql); //菜单信息
 			request.getSession().setAttribute(Constants.MENU_INFO_SESSION, menuList);
-			
 			return "index";
+		} catch (UnknownAccountException ex) {
+			msg = "（用户不存在）";
+		} catch (IncorrectCredentialsException ex) {
+			msg = "（密码错误）";
+		}catch (AuthenticationException e) {
+			e.printStackTrace();
+			msg = "（其他的登录错误）";
 		}
+		
+		request.setAttribute("msg", msg);
+		return "login";
 	}
 
 	/**
@@ -118,13 +123,13 @@ public class PublicAction {
 			request.getSession().setAttribute(Constants.USER_INFO_SESSION, user1);
 			AjaxObject ajaxObject = new AjaxObject("登录成功", "", "closeCurrent");
 			return ajaxObject.toString();
-		} catch (UnknownAccountException ex) {//用户名没有找到。
+		} catch (UnknownAccountException ex) {
 			AjaxObject ajaxObject = new AjaxObject("用户不存在");
 			return ajaxObject.toString();
-		} catch (IncorrectCredentialsException ex) {//用户名密码不匹配。
+		} catch (IncorrectCredentialsException ex) {
 			AjaxObject ajaxObject = new AjaxObject("密码错误");
 			return ajaxObject.toString();
-		}catch (AuthenticationException e) {//其他的登录错误
+		}catch (AuthenticationException e) {
 			AjaxObject ajaxObject = new AjaxObject("其他的登录错误");
 			return ajaxObject.toString();
 		}

@@ -61,7 +61,7 @@ public class ModuleAction {
 		return "module/tree";
 	}
 	
-	@RequiresPermissions("Module:save")
+	@RequiresPermissions("Module:add")
 	@RequestMapping(value="/add/{parentid}", method=RequestMethod.GET)
 	public String toAdd(@PathVariable("parentid") int parentid, HttpServletRequest request) {
 		
@@ -72,7 +72,7 @@ public class ModuleAction {
 	}
 	
 	@ResponseBody
-	@RequiresPermissions("Module:save")
+	@RequiresPermissions("Module:add")
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String add(CodeTableForm form, HttpServletRequest request) {
 		
@@ -85,7 +85,8 @@ public class ModuleAction {
 		}
 		return ajaxObject.toString();
 	}
-	
+
+	@RequiresPermissions("Module:edi")
 	@RequestMapping(value = "/edi/{moduleid}", method = RequestMethod.GET)
 	public String toEdi(@PathVariable("moduleid") int moduleid,
 			HttpServletRequest request) {
@@ -95,7 +96,8 @@ public class ModuleAction {
 		request.setAttribute("form", form);
 		return "module/edi";
 	}
-	
+
+	@RequiresPermissions("Module:edi")
 	@ResponseBody
 	@RequestMapping(value = "/edi", method = RequestMethod.POST)
 	public String doEdi(CodeTableForm form) {
@@ -109,7 +111,8 @@ public class ModuleAction {
 		}
 		return ajaxObject.toString();
 	}
-	
+
+	@RequiresPermissions("Module:delete")
 	@ResponseBody
 	@RequestMapping(value = "/delete/{moduleid}")
 	public String delete(@PathVariable("moduleid") String moduleid,

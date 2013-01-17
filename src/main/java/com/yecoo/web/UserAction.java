@@ -2,6 +2,10 @@ package com.yecoo.web;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.shiro.authc.credential.DefaultPasswordService;
+import org.apache.shiro.authc.credential.PasswordService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,13 +37,13 @@ public class UserAction {
 	 * @return
 	 * @throws Exception
 	 */
+	@RequiresPermissions("User:view")
 	@RequestMapping(value = "/list")
 	public String list(CodeTableForm form, HttpServletRequest request) {
 
 		String act = StrUtils.nullToStr(request.getAttribute("act"));
 		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request
-				.getParameter("numPerPage"));
+		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
 		int pageNum = 1;
 		int numPerPage = Constants.NUMPERPAGE;
 		if (!act.equals("excel") && !sPageNum.equals("")) {
@@ -55,8 +59,7 @@ public class UserAction {
 
 		int totalCount = userDaoImpl.getUserCount(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> userList = userDaoImpl.getUserList(form, pageNum,
-				numPerPage);
+		List<CodeTableForm> userList = userDaoImpl.getUserList(form, pageNum, numPerPage);
 		request.setAttribute("userList", userList); // 用户列表
 
 		List<CodeTableForm> roleList = roleDaoImpl.getRoleList();
@@ -76,13 +79,15 @@ public class UserAction {
 	 * @return
 	 * @throws Exception
 	 */
+	@RequiresPermissions("User:view")
 	@RequestMapping(value = "/list_excel")
 	public String list_excel(CodeTableForm form, HttpServletRequest request) {
-
+		
 		request.setAttribute("act", "excel");
 		return this.list(form, request);
 	}
 
+	@RequiresPermissions("User:add")
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String toAdd(HttpServletRequest request) {
 
@@ -93,7 +98,8 @@ public class UserAction {
 		request.setAttribute("roleList", roleList);
 		return "user/add";
 	}
-	
+
+	@RequiresPermissions("User:add")
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String doAdd(CodeTableForm form) {
@@ -125,6 +131,7 @@ public class UserAction {
 	 * @return
 	 * @throws Exception
 	 */
+	@RequiresPermissions("User:edi")
 	@RequestMapping(value = "/edi/{userid}", method = RequestMethod.GET)
 	public String toEdi(@PathVariable("userid") String userid,
 			HttpServletRequest request) {
@@ -147,6 +154,7 @@ public class UserAction {
 	 * @throws Exception 
 	 * @throws Exception
 	 */
+	@RequiresPermissions("User:edi")
 	@ResponseBody
 	@RequestMapping(value = "/edi", method = RequestMethod.POST)
 	public String doEdi(CodeTableForm form) {
@@ -190,10 +198,10 @@ public class UserAction {
 	 * @return
 	 * @throws Exception
 	 */
+	@RequiresPermissions("User:delete")
 	@ResponseBody
 	@RequestMapping(value = "/delete/{userid}")
-	public String delete(@PathVariable("userid") String userid,
-			HttpServletRequest request) {
+	public String delete(@PathVariable("userid") String userid, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
@@ -254,12 +262,12 @@ public class UserAction {
 
 		String result = "false";
 		String oldPasswd = StrUtils.nullToStr(form.getValue("oldPasswd"));
-		String userid = StrUtils.nullToStr(((CodeTableForm) request
-				.getSession().getAttribute("userSessionInfo"))
-				.getValue("userid"));
+		PasswordService svc = new DefaultPasswordService();   
+		String passwd = svc.encryptPassword(oldPasswd); //加密密码
+		String userid = StrUtils.nullToStr(((CodeTableForm)request.getSession().getAttribute("userSessionInfo"))
+			.getValue("userid"));
 		CodeTableForm codeTableForm = userDaoImpl.getUserById(userid);
-		if (codeTableForm != null
-				&& oldPasswd.equals(codeTableForm.getValue("passwd"))) {
+		if (codeTableForm != null && passwd.equals(codeTableForm.getValue("passwd"))) {
 			result =  "true";
 		}
 		return result;

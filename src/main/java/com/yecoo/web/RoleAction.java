@@ -55,7 +55,7 @@ public class RoleAction {
 		return "role/list";
 	}
 
-	@RequiresPermissions("Role:save")
+	@RequiresPermissions("Role:add")
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String toAdd(HttpServletRequest request) {
 
@@ -67,7 +67,7 @@ public class RoleAction {
 		return "role/add";
 	}
 
-	@RequiresPermissions("Role:save")
+	@RequiresPermissions("Role:add")
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public @ResponseBody String add(CodeTableForm form) {
 		AjaxObject ajaxObject = null;
@@ -80,7 +80,7 @@ public class RoleAction {
 		return ajaxObject.toString();
 	}
 
-	@RequiresPermissions("Role:edit")
+	@RequiresPermissions("Role:edi")
 	@RequestMapping(value="/edi/{roleid}", method=RequestMethod.GET)
 	public String toEdi(@PathVariable("roleid") int roleid, HttpServletRequest request) {
 		
@@ -93,7 +93,7 @@ public class RoleAction {
 		return "role/edi";
 	}
 
-	@RequiresPermissions("Role:edit")
+	@RequiresPermissions("Role:edi")
 	@RequestMapping(value="/edi", method=RequestMethod.POST)
 	public @ResponseBody String edi(CodeTableForm form) {
 		

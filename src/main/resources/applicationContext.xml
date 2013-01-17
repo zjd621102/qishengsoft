@@ -13,7 +13,6 @@
           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 	<context:property-placeholder ignore-unresolvable="true" location="classpath*:/application.properties" />
-
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName">
@@ -29,36 +28,12 @@
 			<value>${jdbc.password}</value>
 		</property>
 	</bean>
+	
 	<!-- 自动扫描组件，这里要把web下面的 controller去除，他们是在spring3-servlet.xml中配置的，如果不去除会影响事务管理的。 -->
 	<context:component-scan base-package="com.yecoo">
 		<context:exclude-filter type="regex" expression="com.yecoo.web.*" />
 	</context:component-scan>
-
-	<!-- 下面是配置声明式事务管理的，个人感觉比用注解管理事务要简单方便 
-	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
-	-->
-	<!-- 
-	第一个 * —— 通配 任意返回值类型
-	第二个 * —— 通配 包com.evan.crm.service下的任意class
-	第三个 * —— 通配 包com.evan.crm.service下的任意class的任意方法
-	第四个 .. —— 通配 方法可以有0个或多个参数
 	
-	<aop:config>
-		<aop:advisor pointcut="execution(* com.yecoo.service.*Service.*(..))" advice-ref="txAdvice" />
-	</aop:config>
-
-	<tx:advice id="txAdvice" transaction-manager="txManager">
-		<tx:attributes>
-			<tx:method name="get*" read-only="true" />
-			<tx:method name="query*" read-only="true" />
-			<tx:method name="find*" read-only="true" />
-			<tx:method name="load*" read-only="true" />
-			<tx:method name="*" rollback-for="Exception" />
-		</tx:attributes>
-	</tx:advice>
-	-->
 	<!-- SHIRO配置 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
@@ -76,12 +51,15 @@
 			</value>
 		</property>
 	</bean>
+	
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- 单realm应用。如果有多个realm，使用‘realms’属性代替 -->
 		<property name="realm" ref="sampleRealm" />
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
+	
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+	
 	<!--
 	dataSource 数据源
 	authenticationQuery 登录认证用户的查询SQL，需要用登录用户名作为条件，查询密码字段。
@@ -98,11 +76,11 @@
 		<property name="permissionsQuery" value="SELECT t.permission FROM spermission t WHERE t.roleid = ?" />
 		<property name="permissionsLookupEnabled" value="true" />
 		<property name="saltStyle" value="NO_SALT" />
-		<!-- 
 		<property name="credentialsMatcher" ref="hashedCredentialsMatcher" />
-		-->
 	</bean>
+	
 	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager" />
+	
 	<!-- 
 	hashAlgorithmName 必须的，没有默认值。可以有MD5或者SHA-1，如果对密码安全有更高要求可以用SHA-256或者更高。这里使用MD5
 	storedCredentialsHexEncoded 默认是true，此时用的是密码加密用的是Hex编码；false时用Base64编码

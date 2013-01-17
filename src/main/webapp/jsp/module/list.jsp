@@ -31,7 +31,7 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<shiro:hasPermission name="Module:save">
+			<shiro:hasPermission name="Module:add">
 			<li>
 				<a class="add"
 					href="<%=path%>/module/add/${form.map.parentid}" target="dialog"
@@ -40,7 +40,7 @@
 				</a>
 			</li>
 			</shiro:hasPermission>
-			<shiro:hasPermission name="Module:edit">
+			<shiro:hasPermission name="Module:edi">
 			<li>
 				<a class="edit" href="<%=path%>/module/edi/{s_moduleid}"
 					target="dialog" rel="module_edi" mask="true" width="500"

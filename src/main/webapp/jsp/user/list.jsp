@@ -2,11 +2,22 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 <c:if test="${act=='excel'}">
 <%
-	//response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+	response.setContentType("application/vnd.ms-excel;charset=UTF-8");
 	String excelname=new String("用户列表.xls".getBytes(),"UTF-8");
-	//response.setHeader("Content-disposition","inline; filename="+excelname);
+	response.setHeader("Content-disposition","inline; filename="+excelname);
 %>
-<link rel="stylesheet" href="<%=path%>/css/excel.css" type="text/css"></link>
+<style type="text/css">
+	td {
+		border-right: thin solid #DADCDD;
+		border-bottom: thin solid #DADCDD;
+		mso-number-format:'\@';
+	}
+	
+	table {
+		border: thin hidden #DADCDD;
+		text-align: center;
+	}
+</style>
 </c:if>
 <c:if test="${act!='excel'}">
 	<div class="pageHeader">
@@ -45,14 +56,14 @@
 	<c:if test="${act!='excel'}">
 		<div class="panelBar">
 			<ul class="toolBar">
-				<shiro:hasPermission name="User:save">
+				<shiro:hasPermission name="User:add">
 				<li>
 					<a class="add" href="<%=path%>/user/add" target="dialog" rel="user_add">
 						<span>新增用户</span>
 					</a>
 				</li>
 				</shiro:hasPermission>
-				<shiro:hasPermission name="User:edit">
+				<shiro:hasPermission name="User:edi">
 				<li>
 					<a class="edit" href="<%=path%>/user/edi/{s_userid}" target="dialog" rel="user_edi">
 						<span>修改用户</span>
@@ -75,7 +86,7 @@
 				<li class="line">line</li>
 				<li>
 					<a class="icon" href="<%=path%>/user/list_excel" target="dwzExport" targetType="navTab"
-				 	 title="确实要导出这些记录吗?">
+				 		title="确实要导出这些记录吗?">
 				 		<span>导出EXCEL</span>
 				 	</a>
 				</li>

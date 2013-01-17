@@ -88,7 +88,10 @@
 										<tr>
 											<td width="4%">&nbsp;</td>
 											<td width="96%" height="38">
-												<span class="login_txt_bt">登陆信息网后台管理</span>
+												<span class="login_txt_bt" style="width: 40%;">登陆信息网后台管理</span>
+												<span style="color: red; font-size: 15px; font-weight: bolder;">
+													${msg}
+												</span>
 											</td>
 										</tr>
 										<tr>

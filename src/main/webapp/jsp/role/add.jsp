@@ -43,8 +43,8 @@
 									<span class="module_name">${m1.map.modulename}</span>
 									<span class="inputValue">
 										<input type="checkbox" name="map[permission]" value="${m1.map.sn}:view"/>
-										<input type="checkbox" name="map[permission]" value="${m1.map.sn}:save"/>
-										<input type="checkbox" name="map[permission]" value="${m1.map.sn}:edit"/>
+										<input type="checkbox" name="map[permission]" value="${m1.map.sn}:add"/>
+										<input type="checkbox" name="map[permission]" value="${m1.map.sn}:edi"/>
 										<input type="checkbox" name="map[permission]" value="${m1.map.sn}:delete"/>
 									</span>
 								</a>
@@ -60,8 +60,8 @@
 												<span class="module_name">${m2.map.modulename}</span>
 												<span class="inputValue">
 													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:view"/>
-													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:save"/>
-													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:edit"/>
+													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:add"/>
+													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:edi"/>
 													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:delete"/>
 												</span>
 											</a>

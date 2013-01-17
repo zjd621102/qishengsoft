@@ -47,11 +47,11 @@
 									<c:set var="str" value="${m1.map.sn}:view"></c:set>
 									<input type="checkbox" name="map[permission]" value="${m1.map.sn}:view"
 									 ${fn:contains(form.map.permission,str) ? "checked=\"checked\"" : ""} />
-									<c:set var="str" value="${m1.map.sn}:save"></c:set>
-									<input type="checkbox" name="map[permission]" value="${m1.map.sn}:save"
+									<c:set var="str" value="${m1.map.sn}:add"></c:set>
+									<input type="checkbox" name="map[permission]" value="${m1.map.sn}:add"
 									 ${fn:contains(form.map.permission,str) ? "checked=\"checked\"" : ""} />
-									<c:set var="str" value="${m1.map.sn}:edit"></c:set>
-									<input type="checkbox" name="map[permission]" value="${m1.map.sn}:edit"
+									<c:set var="str" value="${m1.map.sn}:edi"></c:set>
+									<input type="checkbox" name="map[permission]" value="${m1.map.sn}:edi"
 									 ${fn:contains(form.map.permission,str) ? "checked=\"checked\"" : ""} />
 									<c:set var="str" value="${m1.map.sn}:delete"></c:set>
 									<input type="checkbox" name="map[permission]" value="${m1.map.sn}:delete"
@@ -72,11 +72,11 @@
 													<c:set var="str" value="${m2.map.sn}:view"></c:set>
 													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:view"
 													 ${fn:contains(form.map.permission,str) ? "checked=\"checked\"" : ""} />
-													<c:set var="str" value="${m2.map.sn}:save"></c:set>
-													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:save"
+													<c:set var="str" value="${m2.map.sn}:add"></c:set>
+													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:add"
 													 ${fn:contains(form.map.permission,str) ? "checked=\"checked\"" : ""} />
-													<c:set var="str" value="${m2.map.sn}:edit"></c:set>
-													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:edit"
+													<c:set var="str" value="${m2.map.sn}:edi"></c:set>
+													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:edi"
 													 ${fn:contains(form.map.permission,str) ? "checked=\"checked\"" : ""} />
 													<c:set var="str" value="${m2.map.sn}:delete"></c:set>
 													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:delete"

@@ -28,7 +28,7 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<shiro:hasPermission name="Role:save">
+			<shiro:hasPermission name="Role:add">
 			<li>
 				<a class="add" href="<%=path%>/role/add" target="dialog" rel="role_add" mask="true"
 				 width="500" height="500">
@@ -36,7 +36,7 @@
 				</a>
 			</li>
 			</shiro:hasPermission>
-			<shiro:hasPermission name="Role:edit">
+			<shiro:hasPermission name="Role:edi">
 			<li>
 				<a class="edit" href="<%=path%>/role/edi/{s_roleid}" target="dialog" rel="role_edi" mask="true"
 				 width="500" height="500">
