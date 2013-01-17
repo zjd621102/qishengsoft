@@ -15,6 +15,7 @@ import com.yecoo.dao.RoleDaoImpl;
 import com.yecoo.dao.UserDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
+import com.yecoo.util.Md5;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
@@ -262,12 +263,12 @@ public class UserAction {
 
 		String result = "false";
 		String oldPasswd = StrUtils.nullToStr(form.getValue("oldPasswd"));
-		PasswordService svc = new DefaultPasswordService();   
-		String passwd = svc.encryptPassword(oldPasswd); //加密密码
+		Md5 md5 = new Md5();
+		oldPasswd = md5.md5(oldPasswd); //加密密码
 		String userid = StrUtils.nullToStr(((CodeTableForm)request.getSession().getAttribute("userSessionInfo"))
 			.getValue("userid"));
 		CodeTableForm codeTableForm = userDaoImpl.getUserById(userid);
-		if (codeTableForm != null && passwd.equals(codeTableForm.getValue("passwd"))) {
+		if (codeTableForm != null && oldPasswd.equals(codeTableForm.getValue("passwd"))) {
 			result =  "true";
 		}
 		return result;

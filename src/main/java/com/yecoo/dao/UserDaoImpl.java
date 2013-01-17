@@ -103,10 +103,10 @@ public class UserDaoImpl {
 			conn.setAutoCommit(false);
 			
 			//密码加密
-			String password = StrUtils.nullToStr(form.getValue("passwd"));
-			if(!password.equals("")) {
+			String passwd = StrUtils.nullToStr(form.getValue("passwd"));
+			if(!passwd.equals("")) {
 				Md5 md5 = new Md5();
-				form.setValue("passwd", md5.md5(password));
+				form.setValue("passwd", md5.md5(passwd));
 			}
 			
 			iReturn = dbUtils.setInsert(conn, form, "suser", "");
@@ -159,10 +159,10 @@ public class UserDaoImpl {
 			conn.setAutoCommit(false);
 			
 			//密码加密
-			String password = StrUtils.nullToStr(form.getValue("passwd"));
-			if(!password.equals("")) {
+			String passwd = StrUtils.nullToStr(form.getValue("passwd"));
+			if(!passwd.equals("")) {
 				Md5 md5 = new Md5();
-				form.setValue("passwd", md5.md5(password));
+				form.setValue("passwd", md5.md5(passwd));
 			}
 			
 			iReturn = dbUtils.setUpdate(conn, form, "", "suser", "userid", "");
@@ -221,10 +221,10 @@ public class UserDaoImpl {
 	public int changePassword(CodeTableForm form) {
 		
 		//密码加密
-		String password = StrUtils.nullToStr(form.getValue("passwd"));
-		if(!password.equals("")) {
+		String passwd = StrUtils.nullToStr(form.getValue("passwd"));
+		if(!passwd.equals("")) {
 			Md5 md5 = new Md5();
-			form.setValue("passwd", md5.md5(password));
+			form.setValue("passwd", md5.md5(passwd));
 		}
 		
 		int iReturn = dbUtils.setUpdate(form, "suser", "userid");
