@@ -15,11 +15,6 @@
 				 alt="请输入用户姓名"/>
 			</p>
 			<p>
-				<label>用户密码：</label>
-				<input type="text" class="required" minlength="4" maxlength="32" size="30" name="map[passwd]"
-				 value="${form.map.passwd}" alt="请输入用户密码"/>
-			</p>
-			<p>
 				<label>手机号码：</label>
 				<input type="text" class="phone" size="30" name="map[tele]" value="${form.map.tele}" />
 			</p>
