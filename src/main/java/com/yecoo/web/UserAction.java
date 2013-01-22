@@ -2,9 +2,6 @@ package com.yecoo.web;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.shiro.authc.credential.DefaultPasswordService;
-import org.apache.shiro.authc.credential.PasswordService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
