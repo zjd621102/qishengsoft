@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h2 class="contentTitle">修改角色</h2>
+<h1 class="margin10px">修改角色</h1>
 <form method="post" action="<%=path%>/role/edi" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
 	<input type="hidden" name="map[roleid]" value="${form.map.roleid}"/>

@@ -56,16 +56,14 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="22%">序号</th>
-				<th width="25%">角色编号</th>
-				<th width="25%">角色名称</th>
+				<th width="50%">序号</th>
+				<th width="50%">角色名称</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${roleList}" var="bean" varStatus="vs">
 			   	<tr target="s_roleid" rel="${bean.map.roleid}">
 			   		<td>${vs.index+1}</td>
-			   		<td>${bean.map.roleid}</td>
 			   		<td>${bean.map.rolename}</td> 
 			   	</tr>
 		   	</c:forEach>

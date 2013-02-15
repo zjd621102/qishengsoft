@@ -3,7 +3,7 @@ package com.yecoo.util;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.math.BigDecimal;
+//import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,17 +21,17 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import com.yecoo.model.CodeTableForm;
+
 /**
- * 公用数据库操作 
- * author zhoujd 
- * creadate 2012-3-2
+ * 公用数据库操作 author zhoujd creadate 2012-3-2
  */
 public class DbUtils {
-	
+
 	private String dbUrl;
-	
+
 	public DbUtils() {
-		String url = this.getClass().getResource("/").getPath() + "application.properties";
+		String url = this.getClass().getResource("/").getPath()
+				+ "application.properties";
 		InputStream in;
 		try {
 			in = new BufferedInputStream(new FileInputStream(url));
@@ -43,15 +43,17 @@ public class DbUtils {
 			StrUtils.WriteLog(this.getClass().getName() + ".DbUtils()", e);
 		}
 	}
+
 	/**
 	 * 从数据库连接池中获取一个数据库连接
+	 * 
 	 * @return Connection
 	 */
 	public Connection dbConnection() {
 		Connection myConn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			myConn = DriverManager .getConnection(dbUrl);// 访问的数据库的帐号密码
+			myConn = DriverManager.getConnection(dbUrl);// 访问的数据库的帐号密码
 		} catch (Exception e) {
 			StrUtils.WriteLog(this.getClass().getName() + ".dbConnection()", e);
 			this.closeConnection(null, null, myConn);
@@ -59,10 +61,14 @@ public class DbUtils {
 		}
 		return myConn;
 	}
+
 	/**
 	 * 从数据库连接池中获取一个数据库连接
-	 * @param sWebLogicDS 指定WebLogic数据源
-	 * @param sCatDS 指定TomCat数据源
+	 * 
+	 * @param sWebLogicDS
+	 *            指定WebLogic数据源
+	 * @param sCatDS
+	 *            指定TomCat数据源
 	 * @return 数据库连接
 	 */
 	public Connection dbConnection(String sWebLogicDS, String sCatDS) {
@@ -71,13 +77,15 @@ public class DbUtils {
 			Context ctx = new InitialContext();
 			if (ctx.getEnvironment().toString().indexOf("weblogic") > -1) {
 				// 当前服务是weblogic
-				javax.sql.DataSource ds = (javax.sql.DataSource) ctx.lookup(sWebLogicDS);
+				javax.sql.DataSource ds = (javax.sql.DataSource) ctx
+						.lookup(sWebLogicDS);
 				myConn = ds.getConnection();
 			} else {
 				// 当前服务是Tomcat
 				InitialContext jndiCntx = new InitialContext();
 				ctx = (Context) jndiCntx.lookup("java:comp/env");
-				javax.sql.DataSource ds = (javax.sql.DataSource) ctx.lookup(sWebLogicDS);
+				javax.sql.DataSource ds = (javax.sql.DataSource) ctx
+						.lookup(sWebLogicDS);
 				myConn = ds.getConnection();
 			}
 
@@ -87,12 +95,13 @@ public class DbUtils {
 		}
 		return myConn;
 	}
+
 	/**
 	 * 返回一个ResultSet结果集
+	 * 
 	 * @param myConn
 	 * @param Stmt
-	 * @return
-	 * creadate 2012-3-9
+	 * @return creadate 2012-3-9
 	 */
 	public ResultSet getResult(PreparedStatement Stmt) {
 		ResultSet rs;
@@ -103,14 +112,17 @@ public class DbUtils {
 		}
 		return rs;
 	}
+
 	/**
 	 * 关闭连接
+	 * 
 	 * @param rs
 	 * @param pStmt
 	 * @param myConn
-	 * creadate 2012-3-9
+	 *            creadate 2012-3-9
 	 */
-	public void closeConnection(ResultSet rs, PreparedStatement pStmt, Connection myConn) {
+	public void closeConnection(ResultSet rs, PreparedStatement pStmt,
+			Connection myConn) {
 		try {
 			if (rs != null) {
 				rs.close();
@@ -122,15 +134,18 @@ public class DbUtils {
 				myConn.close();
 			}
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".closeConnection()", e);
+			StrUtils.WriteLog(this.getClass().getName() + ".closeConnection()",
+					e);
 		}
 	}
+
 	/**
 	 * 关闭连接
+	 * 
 	 * @param rs
 	 * @param stmt
 	 * @param myConn
-	 * creadate 2012-3-9
+	 *            creadate 2012-3-9
 	 */
 	public void closeConnection(ResultSet rs, Statement stmt, Connection myConn) {
 		try {
@@ -144,15 +159,17 @@ public class DbUtils {
 				myConn.close();
 			}
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".closeConnection()", e);
+			StrUtils.WriteLog(this.getClass().getName() + ".closeConnection()",
+					e);
 		}
 	}
+
 	/**
 	 * 执行一条SQL语句
+	 * 
 	 * @param myConn
 	 * @param sql
-	 * @return
-	 * creadate 2012-3-9
+	 * @return creadate 2012-3-9
 	 */
 	public int executeSQL(String sql) {
 		int rstval = 0;
@@ -169,12 +186,13 @@ public class DbUtils {
 		}
 		return rstval;
 	}
+
 	/**
 	 * 执行一条SQL语句
+	 * 
 	 * @param myConn
 	 * @param strSQL
-	 * @return
-	 * creadate 2012-3-9
+	 * @return creadate 2012-3-9
 	 */
 	public int executeSQL(Connection myConn, String strSQL) {
 		int rstval = 0;
@@ -190,10 +208,14 @@ public class DbUtils {
 		}
 		return rstval;
 	}
+
 	/**
 	 * 执行带多个参数值的动态sql语句
-	 * @param sql 执行语句
-	 * @param paramValue 参数值
+	 * 
+	 * @param sql
+	 *            执行语句
+	 * @param paramValue
+	 *            参数值
 	 * @creadate 2007-12-20
 	 * @return int (rstval==-1?操作失败:操作成功)
 	 */
@@ -210,15 +232,20 @@ public class DbUtils {
 		}
 		return rstval;
 	}
+
 	/**
 	 * 执行带多个参数值的动态sql语句
+	 * 
 	 * @param myConn
-	 * @param sql 执行语句
-	 * @param paramValue 参数值
+	 * @param sql
+	 *            执行语句
+	 * @param paramValue
+	 *            参数值
 	 * @return int (rstval==-1?操作失败:操作成功)
 	 * @creadate 2007-12-20
 	 */
-	public int executeSQLByArrayParam(Connection myConn, String sql, String[] paramValues) {
+	public int executeSQLByArrayParam(Connection myConn, String sql,
+			String[] paramValues) {
 		int rstval = 0;
 		PreparedStatement pStmt = null;
 		try {
@@ -230,16 +257,21 @@ public class DbUtils {
 			rstval = pStmt.executeUpdate();
 		} catch (Exception e) {
 			rstval = -1;
-			StrUtils.WriteLog(this.getClass().getName() + ".executeSQLByArrayParam()","ERROR sql=" + sql);
-			StrUtils.WriteLog(this.getClass().getName() + ".executeSQLByArrayParam()",e);
+			StrUtils.WriteLog(this.getClass().getName()
+					+ ".executeSQLByArrayParam()", "ERROR sql=" + sql);
+			StrUtils.WriteLog(this.getClass().getName()
+					+ ".executeSQLByArrayParam()", e);
 		} finally {
 			this.closeConnection(null, pStmt, null);
 		}
 		return rstval;
 	}
+
 	/**
 	 * 执行多条SQL语句
-	 * @param sqls 多条SQL语句
+	 * 
+	 * @param sqls
+	 *            多条SQL语句
 	 * @return int 语句执行影响的记录数，失败返回-1
 	 */
 	public int executeSQLs(String[] sqls) {
@@ -255,7 +287,7 @@ public class DbUtils {
 					try {
 						pStmt.close();
 					} catch (Exception ignore) {
-						
+
 					}
 				}
 				if ((sqls[i] != null) && (!sqls[i].equals(""))) {
@@ -269,16 +301,19 @@ public class DbUtils {
 				myConn.rollback();
 				rstval = -1;
 			} catch (Exception re) {
-				
+
 			}
 		} finally {
 			this.closeConnection(null, pStmt, myConn);
 		}
 		return rstval;
 	}
+
 	/**
 	 * 执行多条SQL语句
-	 * @param sqls 多条SQL语句
+	 * 
+	 * @param sqls
+	 *            多条SQL语句
 	 * @return int 语句执行影响的记录数，失败返回-1
 	 */
 	public int executeSQLs(Connection myConn, String[] sqls) {
@@ -291,7 +326,7 @@ public class DbUtils {
 					try {
 						pStmt.close();
 					} catch (Exception ignore) {
-						
+
 					}
 				}
 				if ((sqls[i] != null) && (!sqls[i].equals(""))) {
@@ -303,17 +338,21 @@ public class DbUtils {
 			try {
 				rstval = -1;
 			} catch (Exception re) {
-				
+
 			}
 		} finally {
 			this.closeConnection(null, pStmt, null);
 		}
 		return rstval;
 	}
+
 	/**
 	 * 取年度列表（从2005年起到sYear2年度）
-	 * @param sYear1 开始年度，""值则默认为2005年
-	 * @param sYear2 截至年度，""值则默认为本年
+	 * 
+	 * @param sYear1
+	 *            开始年度，""值则默认为2005年
+	 * @param sYear2
+	 *            截至年度，""值则默认为本年
 	 * @return List<SelectOptionForm>
 	 * @creadate 2012-3-9
 	 */
@@ -342,10 +381,13 @@ public class DbUtils {
 		}
 		return list;
 	}
+
 	/**
 	 * 获取第一个列值的接接串
+	 * 
 	 * @param sql
-	 * @param separator 拼接时的分隔符
+	 * @param separator
+	 *            拼接时的分隔符
 	 * @return 格式：123,223,333,334
 	 */
 	public String getStrJoinBySql(String sql, String separator) {
@@ -363,14 +405,17 @@ public class DbUtils {
 				str += separator + rs.getString(1);
 			}
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".getStrJoinBySql()", e);
+			StrUtils.WriteLog(this.getClass().getName() + ".getStrJoinBySql()",
+					e);
 		} finally {
 			this.closeConnection(rs, stmt, myConn);
 		}
 		return str.replaceFirst(separator, "");
 	}
+
 	/**
 	 * 执行一条SELECT语句,获取第一条记录的第一个字段值
+	 * 
 	 * @param sql
 	 * @return String
 	 * @creadate 2012-3-9
@@ -388,15 +433,18 @@ public class DbUtils {
 				rstStr = StrUtils.nullToStr(rs.getString(1));
 			}
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".execQuerySQL()", "ERROR sql=" + sql);
+			StrUtils.WriteLog(this.getClass().getName() + ".execQuerySQL()",
+					"ERROR sql=" + sql);
 			StrUtils.WriteLog(this.getClass().getName() + ".execQuerySQL()", e);
 		} finally {
 			this.closeConnection(rs, pStmt, myConn);
 		}
 		return rstStr;
 	}
+
 	/**
 	 * 执行一条SELECT语句,获取第一条记录的第一个字段值
+	 * 
 	 * @param myConn
 	 * @param sql
 	 * @return String
@@ -414,15 +462,18 @@ public class DbUtils {
 				rstStr = StrUtils.nullToStr(rs.getString(1));
 			}
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".execQuerySQL()", "ERROR sql=" + sql);
+			StrUtils.WriteLog(this.getClass().getName() + ".execQuerySQL()",
+					"ERROR sql=" + sql);
 			StrUtils.WriteLog(this.getClass().getName() + ".execQuerySQL()", e);
 		} finally {
 			this.closeConnection(rs, pStmt, myConn);
 		}
 		return rstStr;
 	}
+
 	/**
 	 * 执行一条SELECT语句，返回所有记录的第一个字段值（多值以splitStr分隔）
+	 * 
 	 * @param sql
 	 * @param splitStr
 	 * @return String
@@ -447,14 +498,17 @@ public class DbUtils {
 				}
 			}
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".execQuerySQLReturnMulti()", e);
+			StrUtils.WriteLog(this.getClass().getName()
+					+ ".execQuerySQLReturnMulti()", e);
 		} finally {
 			this.closeConnection(rs, pStmt, myConn);
 		}
 		return sReturn;
 	}
+
 	/**
 	 * 获取列表
+	 * 
 	 * @param sql
 	 * @return List<Object>
 	 * @creadate 2012-3-9
@@ -475,60 +529,71 @@ public class DbUtils {
 				list.add(form);
 			}
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".getListBySql()", "ERROR sql=" + sql);
+			StrUtils.WriteLog(this.getClass().getName() + ".getListBySql()",
+					"ERROR sql=" + sql);
 			StrUtils.WriteLog(this.getClass().getName() + ".getListBySql()", e);
 		} finally {
 			this.closeConnection(rs, stmt, myConn);
 		}
 		return list;
 	}
+
 	/**
 	 * 设置form对象数据
+	 * 
 	 * @param form
 	 * @param rs
 	 * @param myConn
 	 * @param rmeta
 	 * @return CodeTableForm
 	 */
-	public CodeTableForm setFormRecord(CodeTableForm form, ResultSet rs, Connection myConn, ResultSetMetaData rmeta) {
+	public CodeTableForm setFormRecord(CodeTableForm form, ResultSet rs,
+			Connection myConn, ResultSetMetaData rmeta) {
 		try {
 			for (int icol = 1; icol <= rmeta.getColumnCount(); ++icol) {
 				String cloumn = rmeta.getColumnName(icol).toLowerCase();
 				if (rmeta.getColumnTypeName(icol).equals("DATE")) {
-					form.setValue(cloumn, StrUtils.nullToStr(rs.getDate(cloumn)));
+					form.setValue(cloumn,
+							StrUtils.nullToStr(rs.getDate(cloumn)));
 				} else {
-					form.setValue(cloumn, StrUtils.nullToStr(rs.getString(cloumn)));
+					form.setValue(cloumn,
+							StrUtils.nullToStr(rs.getString(cloumn)));
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			StrUtils.WriteLog(this.getClass().getName() + ".setFormRecord()", e);
 		} finally {
-			
+
 		}
 		return form;
 	}
+
 	public CodeTableForm setFormRecord(CodeTableForm form, ResultSet rs) {
 		try {
 			ResultSetMetaData rmeta = rs.getMetaData();
 			for (int icol = 1; icol <= rmeta.getColumnCount(); ++icol) {
 				String cloumn = rmeta.getColumnName(icol).toLowerCase();
 				if (rmeta.getColumnTypeName(icol).equals("DATE")) {
-					form.setValue(cloumn, StrUtils.nullToStr(rs.getDate(cloumn)));
+					form.setValue(cloumn,
+							StrUtils.nullToStr(rs.getDate(cloumn)));
 				} else {
-					form.setValue(cloumn, StrUtils.nullToStr(rs.getString(cloumn)));
+					form.setValue(cloumn,
+							StrUtils.nullToStr(rs.getString(cloumn)));
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			StrUtils.WriteLog(this.getClass().getName() + ".setFormRecord()", e);
 		} finally {
-			
+
 		}
 		return form;
 	}
+
 	/**
 	 * 根据sql语句获取一条记录
+	 * 
 	 * @param sql
 	 * @return CodeTableForm
 	 * @creadate 2012-3-9
@@ -548,20 +613,24 @@ public class DbUtils {
 				this.setFormRecord(form, rs, myConn, rmeta);
 			}
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".getFormBySql()", "ERROR sql=" + sql);
+			StrUtils.WriteLog(this.getClass().getName() + ".getFormBySql()",
+					"ERROR sql=" + sql);
 			StrUtils.WriteLog(this.getClass().getName() + ".getFormBySql()", e);
 		} finally {
 			this.closeConnection(rs, stmt, myConn);
 		}
 		return form;
 	}
+
 	/**
 	 * 根据某一字段语句获取一条记录
+	 * 
 	 * @param sql
 	 * @return CodeTableForm
 	 * @creadate 2012-3-9
 	 */
-	public CodeTableForm getFormByColumn (String tabName, String key, String value) {
+	public CodeTableForm getFormByColumn(String tabName, String key,
+			String value) {
 		CodeTableForm codeTableForm = null;
 		Connection myConn = null;
 		PreparedStatement pStmt = null;
@@ -569,8 +638,9 @@ public class DbUtils {
 		StringBuffer sql = null;
 		try {
 			myConn = this.dbConnection();
-			sql = new StringBuffer("SELECT * FROM ").append(tabName).append(" WHERE ")
-				.append(key).append(" = '").append(value).append("'");
+			sql = new StringBuffer("SELECT * FROM ").append(tabName)
+					.append(" WHERE ").append(key).append(" = '").append(value)
+					.append("'");
 			pStmt = myConn.prepareStatement(sql.toString());
 			rs = pStmt.executeQuery();
 			ResultSetMetaData rmeta = rs.getMetaData();
@@ -579,15 +649,19 @@ public class DbUtils {
 				this.setFormRecord(codeTableForm, rs, myConn, rmeta);
 			}
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".getFormByColumn()", "ERROR sql=" + sql);
-			StrUtils.WriteLog(this.getClass().getName() + ".getFormByColumn()", e);
+			StrUtils.WriteLog(this.getClass().getName() + ".getFormByColumn()",
+					"ERROR sql=" + sql);
+			StrUtils.WriteLog(this.getClass().getName() + ".getFormByColumn()",
+					e);
 		} finally {
 			this.closeConnection(rs, pStmt, myConn);
 		}
 		return codeTableForm;
 	}
+
 	/**
 	 * 获取第一列的整形的值(一般获取记录数)
+	 * 
 	 * @param sql
 	 * @return int
 	 * @creadate 2012-3-9
@@ -613,8 +687,10 @@ public class DbUtils {
 		}
 		return count;
 	}
+
 	/**
 	 * 插入或者修改一条记录
+	 * 
 	 * @param sql
 	 * @param param
 	 * @return int
@@ -625,7 +701,8 @@ public class DbUtils {
 		PreparedStatement pStmt = null;
 		try {
 			myConn = this.dbConnection();
-			pStmt = myConn.prepareStatement(sql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+			pStmt = myConn.prepareStatement(sql, ResultSet.TYPE_FORWARD_ONLY,
+					ResultSet.CONCUR_READ_ONLY);
 			if (param != null) {
 				for (int i = 0; i < param.length; i++) {
 					pStmt.setObject(i + 1, param[i]);
@@ -639,8 +716,10 @@ public class DbUtils {
 			this.closeConnection(null, pStmt, myConn);
 		}
 	}
+
 	/**
 	 * 批量插入或者修改记录（事务回滚）
+	 * 
 	 * @param sqls
 	 * @param params
 	 * @return int
@@ -684,8 +763,10 @@ public class DbUtils {
 			}
 		}
 	}
+
 	/**
 	 * 批量插入或者修改记录（事务回滚）
+	 * 
 	 * @param sql
 	 * @param params
 	 * @return int
@@ -697,7 +778,7 @@ public class DbUtils {
 		boolean isRollBack = false;
 		try {
 			conn = this.dbConnection();
-			conn.setAutoCommit(false);//事务开启
+			conn.setAutoCommit(false);// 事务开启
 			ps = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
 			for (int i = 0, len = params.size(); i < len; i++) {
@@ -706,7 +787,7 @@ public class DbUtils {
 					for (int pi = 0, plen = param.length; pi < plen; pi++) {
 						ps.setObject(pi + 1, param[pi]);
 					}
-					ps.addBatch();//加入batch
+					ps.addBatch();// 加入batch
 				}
 			}
 			int[] resultArray = ps.executeBatch();
@@ -734,31 +815,45 @@ public class DbUtils {
 			}
 		}
 	}
+
 	/**
 	 * 插入表数据函数
-	 * @param myConn 传进的连接对象
-	 * @param form 保存的表单
-	 * @param tabName 要保存的表名
+	 * 
+	 * @param myConn
+	 *            传进的连接对象
+	 * @param form
+	 *            保存的表单
+	 * @param tabName
+	 *            要保存的表名
 	 * @return 返回 >=0 表示有操作成功，-1 表示操作失败
 	 */
 	public int setInsert(CodeTableForm form, String tabName) {
 		return this.setInsert(form, tabName, "");
 	}
+
 	/**
 	 * 插入表数据函数
-	 * @param myConn 传进的连接对象
-	 * @param form 保存的表单
-	 * @param tabName 要保存的表名
-	 * @param num 要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
+	 * 
+	 * @param myConn
+	 *            传进的连接对象
+	 * @param form
+	 *            保存的表单
+	 * @param tabName
+	 *            要保存的表名
+	 * @param num
+	 *            要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
 	 * @return 返回 >=0 表示有操作成功，-1 表示操作失败
 	 */
 	public int setInsert(CodeTableForm form, String tabName, String num) {
 		Connection myConn = this.dbConnection();
-		String sql="SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')";
-		PreparedStatement pStmt=null;
+		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
+				+ " WHERE TABLE_NAME = UPPER('" + tabName + "')";
+		PreparedStatement pStmt = null;
 		ResultSet rs = null;
-		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')");
-		String[] str = new String[Integer.parseInt(count)+5];
+		String count = this.execQuerySQL(myConn,
+				"SELECT COUNT(*) FROM information_schema.COLUMNS"
+						+ " WHERE TABLE_NAME = UPPER('" + tabName + "')");
+		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		str[1] = "";
 		int iReturn = -1;
@@ -774,20 +869,26 @@ public class DbUtils {
 				if (form.getValue(columnname + num) != null) {
 					str[0] = str[0] + columnname + ",";
 					fieldname = fieldname + columnname + ",";
-					String sColVal = StrUtils.nullToStr((String) form.getValue(columnname + num));
+					String sColVal = StrUtils.nullToStr((String) form
+							.getValue(columnname + num));
 					if (rs.getString("type").equals("DATE")) {
 						if (sColVal.length() == 19) {
-							str[1] = str[1] + "to_date(trim(?),'yyyy-mm-dd hh24:mi:ss'),";
-							fieldvalue = fieldvalue + "to_date('" + sColVal + "','yyyy-mm-dd hh24:mi:ss'),";
+							str[1] = str[1]
+									+ "to_date(trim(?),'yyyy-mm-dd hh24:mi:ss'),";
+							fieldvalue = fieldvalue + "to_date('" + sColVal
+									+ "','yyyy-mm-dd hh24:mi:ss'),";
 						} else {
 							str[1] = str[1] + "to_date(trim(?),'yyyy-mm-dd'),";
-							fieldvalue = fieldvalue + "to_date('" + sColVal + "','yyyy-mm-dd'),";
+							fieldvalue = fieldvalue + "to_date('" + sColVal
+									+ "','yyyy-mm-dd'),";
 						}
 					} else {
 						// str[0]=str[0]+columnname+",";
 						str[1] = str[1] + "?,";
-						fieldvalue = fieldvalue + "'"
-								+ StrUtils.nullToStr((String) form.getValue(columnname + num)) + "',";
+						fieldvalue = fieldvalue
+								+ "'"
+								+ StrUtils.nullToStr((String) form
+										.getValue(columnname + num)) + "',";
 					}
 					str[i] = (String) form.getValue(columnname + num);
 					i = i + 1;
@@ -803,11 +904,13 @@ public class DbUtils {
 			}
 			pStmt.close();
 			// 更新表记录
-			String sql2 = "insert into  " + tabName + "(" + str[0] + ") values(" + str[1] + ")";
+			String sql2 = "insert into  " + tabName + "(" + str[0]
+					+ ") values(" + str[1] + ")";
 			pStmt = myConn.prepareStatement(sql2);
 			for (i = 2; i < str.length; i++) {
 				pStmt.setString(i - 1, str[i]);
-				if (i < str.length - 1 && StrUtils.nullToStr(str[i + 1]).equals("#")) {
+				if (i < str.length - 1
+						&& StrUtils.nullToStr(str[i + 1]).equals("#")) {
 					break;
 				}
 			}
@@ -819,20 +922,30 @@ public class DbUtils {
 		}
 		return iReturn;
 	}
+
 	/**
 	 * 插入表数据函数
-	 * @param myConn 传进的连接对象
-	 * @param form 保存的表单
-	 * @param tabName 要保存的表名
-	 * @param num 要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
+	 * 
+	 * @param myConn
+	 *            传进的连接对象
+	 * @param form
+	 *            保存的表单
+	 * @param tabName
+	 *            要保存的表名
+	 * @param num
+	 *            要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
 	 * @return 返回 >=0 表示有操作成功，-1 表示操作失败
 	 */
-	public int setInsert(Connection myConn, CodeTableForm form, String tabName, String num) {
-		String sql="SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')";
-		PreparedStatement pStmt=null;
-		ResultSet rs    = null;
-		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')");
-		String[] str = new String[Integer.parseInt(count)+5];
+	public int setInsert(Connection myConn, CodeTableForm form, String tabName,
+			String num) {
+		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
+				+ " WHERE TABLE_NAME = UPPER('" + tabName + "')";
+		PreparedStatement pStmt = null;
+		ResultSet rs = null;
+		String count = this.execQuerySQL(myConn,
+				"SELECT COUNT(*) FROM information_schema.COLUMNS"
+						+ " WHERE TABLE_NAME = UPPER('" + tabName + "')");
+		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		str[1] = "";
 		int iReturn = -1;
@@ -846,22 +959,31 @@ public class DbUtils {
 			while (rs.next()) {
 				String columnname = rs.getString("name").toLowerCase();
 				if (form.getValue(columnname + num) != null) {
+					if(form.getValue(columnname + num).equals("")) {
+						form.setValue(columnname + num, null);
+					}
 					str[0] = str[0] + columnname + ",";
 					fieldname = fieldname + columnname + ",";
-					String sColVal = StrUtils.nullToStr((String) form.getValue(columnname + num));
+					String sColVal = StrUtils.nullToStr((String) form
+							.getValue(columnname + num));
 					if (rs.getString("type").equals("DATE")) {
 						if (sColVal.length() == 19) {
-							str[1] = str[1] + "to_date(trim(?),'yyyy-mm-dd hh24:mi:ss'),";
-							fieldvalue = fieldvalue + "to_date('" + sColVal + "','yyyy-mm-dd hh24:mi:ss'),";
+							str[1] = str[1]
+									+ "to_date(trim(?),'yyyy-mm-dd hh24:mi:ss'),";
+							fieldvalue = fieldvalue + "to_date('" + sColVal
+									+ "','yyyy-mm-dd hh24:mi:ss'),";
 						} else {
 							str[1] = str[1] + "to_date(trim(?),'yyyy-mm-dd'),";
-							fieldvalue = fieldvalue + "to_date('" + sColVal + "','yyyy-mm-dd'),";
+							fieldvalue = fieldvalue + "to_date('" + sColVal
+									+ "','yyyy-mm-dd'),";
 						}
 					} else {
 						// str[0]=str[0]+columnname+",";
 						str[1] = str[1] + "?,";
-						fieldvalue = fieldvalue + "'"
-								+ StrUtils.nullToStr((String) form.getValue(columnname + num)) + "',";
+						fieldvalue = fieldvalue
+								+ "'"
+								+ StrUtils.nullToStr((String) form
+										.getValue(columnname + num)) + "',";
 					}
 					str[i] = (String) form.getValue(columnname + num);
 					i = i + 1;
@@ -877,48 +999,67 @@ public class DbUtils {
 			}
 			pStmt.close();
 			// 更新表记录
-			String sql2 = "insert into  " + tabName + "(" + str[0] + ") values(" + str[1] + ")";
+			String sql2 = "insert into  " + tabName + "(" + str[0]
+					+ ") values(" + str[1] + ")";
 			pStmt = myConn.prepareStatement(sql2);
 			for (i = 2; i < str.length; i++) {
 				pStmt.setString(i - 1, str[i]);
-				if (i < str.length - 1 && StrUtils.nullToStr(str[i + 1]).equals("#")) {
+				if (i < str.length - 1
+						&& StrUtils.nullToStr(str[i + 1]).equals("#")) {
 					break;
 				}
 			}
 			iReturn = pStmt.executeUpdate();
 		} catch (Exception e) {
+			iReturn = -1;
 			StrUtils.WriteLog(this.getClass().getName() + ".setInsert()", e);
 		} finally {
 			this.closeConnection(rs, pStmt, null);
 		}
 		return iReturn;
 	}
+
 	/**
 	 * 更新表数据
-	 * @param form 保存的表单
-	 * @param tabName 要保存的表名
-	 * @param num 要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
+	 * 
+	 * @param form
+	 *            保存的表单
+	 * @param tabName
+	 *            要保存的表名
+	 * @param num
+	 *            要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
 	 * @return 返回 >=0 表示有操作成功，-1 表示操作失败
 	 */
 	public int setUpdate(CodeTableForm form, String tabName, String key) {
 		return this.setUpdate(form, "", tabName, key, "");
 	}
+
 	/**
 	 * 更新表数据
-	 * @param form 保存的表单
-	 * @param strEdit 编辑域 strEdit=1表示更新所有记录，否则，根据编辑域来更新记录
-	 * @param tabName 要保存的表名
-	 * @param key 要保存的主键
-	 * @param num 要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
+	 * 
+	 * @param form
+	 *            保存的表单
+	 * @param strEdit
+	 *            编辑域 strEdit=1表示更新所有记录，否则，根据编辑域来更新记录
+	 * @param tabName
+	 *            要保存的表名
+	 * @param key
+	 *            要保存的主键
+	 * @param num
+	 *            要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
 	 * @return 返回 >=0 表示有操作成功，-1 表示操作失败
 	 */
-	public int setUpdate(CodeTableForm form, String strEdit, String tabName, String key, String num) {
+	public int setUpdate(CodeTableForm form, String strEdit, String tabName,
+			String key, String num) {
 		Connection myConn = this.dbConnection();
-		String sql="SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')";
-		PreparedStatement pStmt=null;
+		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
+				+ " WHERE TABLE_NAME = UPPER('" + tabName + "')";
+		PreparedStatement pStmt = null;
 		ResultSet rs = null;
-		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')");
-		String[] str = new String[Integer.parseInt(count)+5];
+		String count = this.execQuerySQL(myConn,
+				"SELECT COUNT(*) FROM information_schema.COLUMNS"
+						+ " WHERE TABLE_NAME = UPPER('" + tabName + "')");
+		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		int iReturn = 1;
 		strEdit = "";// 目前先不控制更改的编辑
@@ -931,17 +1072,30 @@ public class DbUtils {
 				String columnname = rs.getString("name").toLowerCase();
 				if (form.getValue(columnname + num) != null
 						&& !form.getValue(columnname + num).equals("undefined")
-						&& ((strEdit.indexOf(";" + columnname + ";") > -1) || strEdit.equals("") || strEdit.equals("1"))) {
+						&& ((strEdit.indexOf(";" + columnname + ";") > -1)
+								|| strEdit.equals("") || strEdit.equals("1"))) {
+					if(form.getValue(columnname + num).equals("")) {
+						form.setValue(columnname + num, null);
+					}
 					if (rs.getString("type").equals("DATE")) {
-						str[0] = str[0] + columnname + "=to_date(?,'yyyy-mm-dd'),";
-						sGeneSQL = sGeneSQL + columnname + "=to_date('"
-								+ StrUtils.nullToStr((String) form.getValue(columnname + num)) + "','yyyy-mm-dd'),";
+						str[0] = str[0] + columnname
+								+ "=to_date(?,'yyyy-mm-dd'),";
+						sGeneSQL = sGeneSQL
+								+ columnname
+								+ "=to_date('"
+								+ StrUtils.nullToStr((String) form
+										.getValue(columnname + num))
+								+ "','yyyy-mm-dd'),";
 					} else {
 						str[0] = str[0] + columnname + "=?,";
-						sGeneSQL = sGeneSQL + columnname + "='"
-							+ StrUtils.nullToStr((String) form.getValue(columnname + num)) + "',";
+						sGeneSQL = sGeneSQL
+								+ columnname
+								+ "='"
+								+ StrUtils.nullToStr((String) form
+										.getValue(columnname + num)) + "',";
 					}
-					str[i] = StrUtils.nullToStr((String) form.getValue(columnname + num));
+					str[i] = StrUtils.nullToStr((String) form
+							.getValue(columnname + num));
 					i = i + 1;
 					str[i] = "#";
 				}
@@ -953,12 +1107,16 @@ public class DbUtils {
 			pStmt.close();
 			// 更新表记录
 			if (!str[0].equals("")) {
-				String sql2 = "update " + tabName + " set " + str[0] + " WHERE " + key + "='" + form.getValue(key + num) + "'";
-				sGeneSQL = "update " + tabName + " set " + sGeneSQL + " WHERE " + key + "='" + form.getValue(key + num) + "'";
+				String sql2 = "update " + tabName + " set " + str[0]
+						+ " WHERE " + key + "='" + form.getValue(key + num)
+						+ "'";
+				sGeneSQL = "update " + tabName + " set " + sGeneSQL + " WHERE "
+						+ key + "='" + form.getValue(key + num) + "'";
 				pStmt = myConn.prepareStatement(sql2);
 				for (i = 1; i < str.length; i++) {
 					pStmt.setString(i, str[i]);
-					if (i < str.length - 1 && StrUtils.nullToStr(str[i + 1]).equals("#")) {
+					if (i < str.length - 1
+							&& StrUtils.nullToStr(str[i + 1]).equals("#")) {
 						break;
 					}
 				}
@@ -972,22 +1130,34 @@ public class DbUtils {
 		}
 		return iReturn;
 	}
+
 	/**
 	 * 更新表数据函数
-	 * @param myConn 传进的连接对象
-	 * @param form 保存的表单
-	 * @param strEdit 编辑域 strEdit=1表示更新所有记录，否则，根据编辑域来更新记录
-	 * @param tabName 要保存的表名
-	 * @param key 要保存的主键
-	 * @param num 要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
+	 * 
+	 * @param myConn
+	 *            传进的连接对象
+	 * @param form
+	 *            保存的表单
+	 * @param strEdit
+	 *            编辑域 strEdit=1表示更新所有记录，否则，根据编辑域来更新记录
+	 * @param tabName
+	 *            要保存的表名
+	 * @param key
+	 *            要保存的主键
+	 * @param num
+	 *            要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
 	 * @return 返回 >=0 表示有操作成功，-1 表示操作失败
 	 */
-	public int setUpdate(Connection myConn, CodeTableForm form, String strEdit, String tabName, String key, String num) {
-		String sql="SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')";
-		PreparedStatement pStmt=null;
-		ResultSet rs    = null;
-		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')");
-		String[] str = new String[Integer.parseInt(count)+5];
+	public int setUpdate(Connection myConn, CodeTableForm form, String strEdit,
+			String tabName, String key, String num) {
+		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
+				+ " WHERE TABLE_NAME = UPPER('" + tabName + "')";
+		PreparedStatement pStmt = null;
+		ResultSet rs = null;
+		String count = this.execQuerySQL(myConn,
+				"SELECT COUNT(*) FROM information_schema.COLUMNS"
+						+ " WHERE TABLE_NAME = UPPER('" + tabName + "')");
+		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		int iReturn = 1;
 		strEdit = "";// 目前先不控制更改的编辑
@@ -1000,17 +1170,30 @@ public class DbUtils {
 				String columnname = rs.getString("name").toLowerCase();
 				if (form.getValue(columnname + num) != null
 						&& !form.getValue(columnname + num).equals("undefined")
-						&& ((strEdit.indexOf(";" + columnname + ";") > -1) || strEdit.equals("") || strEdit.equals("1"))) {
+						&& ((strEdit.indexOf(";" + columnname + ";") > -1)
+								|| strEdit.equals("") || strEdit.equals("1"))) {
+					if(form.getValue(columnname + num).equals("")) {
+						form.setValue(columnname + num, null);
+					}
 					if (rs.getString("type").equals("DATE")) {
-						str[0] = str[0] + columnname + "=to_date(?,'yyyy-mm-dd'),";
-						sGeneSQL = sGeneSQL + columnname + "=to_date('"
-								+ StrUtils.nullToStr((String) form.getValue(columnname + num)) + "','yyyy-mm-dd'),";
+						str[0] = str[0] + columnname
+								+ "=to_date(?,'yyyy-mm-dd'),";
+						sGeneSQL = sGeneSQL
+								+ columnname
+								+ "=to_date('"
+								+ StrUtils.nullToStr((String) form
+										.getValue(columnname + num))
+								+ "','yyyy-mm-dd'),";
 					} else {
 						str[0] = str[0] + columnname + "=?,";
-						sGeneSQL = sGeneSQL + columnname + "='"
-							+ StrUtils.nullToStr((String) form.getValue(columnname + num)) + "',";
+						sGeneSQL = sGeneSQL
+								+ columnname
+								+ "='"
+								+ StrUtils.nullToStr((String) form
+										.getValue(columnname + num)) + "',";
 					}
-					str[i] = StrUtils.nullToStr((String) form.getValue(columnname + num));
+					str[i] = StrUtils.nullToStr((String) form
+							.getValue(columnname + num));
 					i = i + 1;
 					str[i] = "#";
 				}
@@ -1022,12 +1205,16 @@ public class DbUtils {
 			pStmt.close();
 			// 更新表记录
 			if (!str[0].equals("")) {
-				String sql2 = "update " + tabName + " set " + str[0] + " WHERE " + key + "='" + form.getValue(key + num) + "'";
-				sGeneSQL = "update " + tabName + " set " + sGeneSQL + " WHERE " + key + "='" + form.getValue(key + num) + "'";
+				String sql2 = "update " + tabName + " set " + str[0]
+						+ " WHERE " + key + "='" + form.getValue(key + num)
+						+ "'";
+				sGeneSQL = "update " + tabName + " set " + sGeneSQL + " WHERE "
+						+ key + "='" + form.getValue(key + num) + "'";
 				pStmt = myConn.prepareStatement(sql2);
 				for (i = 1; i < str.length; i++) {
 					pStmt.setString(i, str[i]);
-					if (i < str.length - 1 && StrUtils.nullToStr(str[i + 1]).equals("#")) {
+					if (i < str.length - 1
+							&& StrUtils.nullToStr(str[i + 1]).equals("#")) {
 						break;
 					}
 				}
@@ -1040,8 +1227,10 @@ public class DbUtils {
 		}
 		return iReturn;
 	}
+
 	/**
 	 * 通过多个字段来更新数据表
+	 * 
 	 * @param form
 	 * @param strEdit
 	 * @param tabName
@@ -1050,13 +1239,17 @@ public class DbUtils {
 	 * @return int
 	 * @creadate 2012-3-22
 	 */
-	public int setUpdate(CodeTableForm form, String strEdit, String tabName, String[] keys, String num) {
+	public int setUpdate(CodeTableForm form, String strEdit, String tabName,
+			String[] keys, String num) {
 		Connection myConn = this.dbConnection();
-		String sql="SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')";
-		PreparedStatement pStmt=null;
-		ResultSet rs    = null;
-		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"+tabName+"')");
-		String[] str = new String[Integer.parseInt(count)+5];
+		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
+				+ " WHERE TABLE_NAME = UPPER('" + tabName + "')";
+		PreparedStatement pStmt = null;
+		ResultSet rs = null;
+		String count = this.execQuerySQL(myConn,
+				"SELECT COUNT(*) FROM information_schema.COLUMNS"
+						+ " WHERE TABLE_NAME = UPPER('" + tabName + "')");
+		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		int iReturn = 1;
 		strEdit = "";// 目前先不控制更改的编辑
@@ -1067,18 +1260,32 @@ public class DbUtils {
 			int i = 1;
 			while (rs.next()) {
 				String columnname = rs.getString("name").toLowerCase();
-				if (form.getValue(columnname + num) != null && ((strEdit.indexOf(";" + columnname + ";") > -1) || strEdit.equals("") || strEdit.equals("1"))) {
+				if (form.getValue(columnname + num) != null
+						&& ((strEdit.indexOf(";" + columnname + ";") > -1)
+								|| strEdit.equals("") || strEdit.equals("1"))) {
+					if(form.getValue(columnname + num).equals("")) {
+						form.setValue(columnname + num, null);
+					}
 					if (rs.getString("type").equals("DATE")) {
-						str[0] = str[0] + columnname + "=to_date(?,'yyyy-mm-dd'),";
-						sGeneSQL = sGeneSQL + columnname + "=to_date('"
-								+ StrUtils.nullToStr((String) form.getValue(columnname + num)) + "','yyyy-mm-dd'),";
+						str[0] = str[0] + columnname
+								+ "=to_date(?,'yyyy-mm-dd'),";
+						sGeneSQL = sGeneSQL
+								+ columnname
+								+ "=to_date('"
+								+ StrUtils.nullToStr((String) form
+										.getValue(columnname + num))
+								+ "','yyyy-mm-dd'),";
 
 					} else {
 						str[0] = str[0] + columnname + "=?,";
-						sGeneSQL = sGeneSQL + columnname + "='"
-							+ StrUtils.nullToStr((String) form .getValue(columnname + num)) + "',";
+						sGeneSQL = sGeneSQL
+								+ columnname
+								+ "='"
+								+ StrUtils.nullToStr((String) form
+										.getValue(columnname + num)) + "',";
 					}
-					str[i] = StrUtils.nullToStr((String) form.getValue(columnname + num));
+					str[i] = StrUtils.nullToStr((String) form
+							.getValue(columnname + num));
 					i = i + 1;
 					str[i] = "#";
 				}
@@ -1089,14 +1296,17 @@ public class DbUtils {
 			pStmt.close();
 			// 更新表记录
 			if (!str[0].equals("")) {
-				String sql2 = "update " + tabName + " set " + str[0] + " WHERE 1=1";
+				String sql2 = "update " + tabName + " set " + str[0]
+						+ " WHERE 1=1";
 				for (i = 0; i < keys.length; i++) {
-					sql2 += " and " + keys[i] + "='" + form.getValue(keys[i] + num) + "'";
+					sql2 += " and " + keys[i] + "='"
+							+ form.getValue(keys[i] + num) + "'";
 				}
 				pStmt = myConn.prepareStatement(sql2);
 				for (i = 1; i < str.length; i++) {
 					pStmt.setString(i, str[i]);
-					if (i < str.length - 1 && StrUtils.nullToStr(str[i + 1]).equals("#")) {
+					if (i < str.length - 1
+							&& StrUtils.nullToStr(str[i + 1]).equals("#")) {
 						break;
 					}
 				}
@@ -1111,24 +1321,31 @@ public class DbUtils {
 		}
 		return iReturn;
 	}
+
 	/**
 	 * 更新表数据
-	 * @param form 保存的表单
-	 * @param tabName 要保存的表名
-	 * @param num 要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
+	 * 
+	 * @param form
+	 *            保存的表单
+	 * @param tabName
+	 *            要保存的表名
+	 * @param num
+	 *            要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
 	 * @return 返回 >=0 表示有操作成功，-1 表示操作失败
 	 */
 	public int setInsertOrUpdate(CodeTableForm form, String tabName, String key) {
 		int icount = this.getIntBySql("SELECT COUNT(1) FROM " + tabName
-			+ " WHERE " + key + " = '" + form.getValue(key) + "'");
-		if(icount==0) {
+				+ " WHERE " + key + " = '" + form.getValue(key) + "'");
+		if (icount == 0) {
 			return this.setInsert(form, tabName);
 		} else {
 			return this.setUpdate(form, "", tabName, key, "");
 		}
 	}
+
 	/**
 	 * 删除数据
+	 * 
 	 * @param form
 	 * @param tabName
 	 * @param key
@@ -1139,43 +1356,58 @@ public class DbUtils {
 		StringBuffer sql = null;
 		int iReturn = 0;
 		try {
-			sql = new StringBuffer("DELETE FROM ").append(tabName).append(" WHERE ")
-				.append(key).append(" = '").append(id).append("'");
+			sql = new StringBuffer("DELETE FROM ").append(tabName)
+					.append(" WHERE ").append(key).append(" = '").append(id)
+					.append("'");
 			iReturn = this.executeSQL(sql.toString());
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".setDelete()", "ERROR sql=" + sql);
+			StrUtils.WriteLog(this.getClass().getName() + ".setDelete()",
+					"ERROR sql=" + sql);
 			StrUtils.WriteLog(this.getClass().getName() + ".setDelete()", e);
 		}
 		return iReturn;
 	}
-	
+
 	/**
 	 * 保存行项表数据
+	 * 
 	 * @param request
 	 * @param myConn
 	 * @param form
-	 * @param tabName 表名
-	 * @param key 主键
-	 * @param fKey 外键
-	 * @param seq 序列器
-	 * @param beginrow 开始行，一般为0
+	 * @param tabName
+	 *            表名
+	 * @param key
+	 *            主键
+	 * @param fKey
+	 *            外键
+	 * @param seq
+	 *            序列器
+	 * @param beginrow
+	 *            开始行，一般为0
 	 * @return
 	 * @creadate 2012-3-31
 	 */
 	@SuppressWarnings("resource")
 	public int saveRowTable(HttpServletRequest request, Connection myConn,
-			CodeTableForm form, String tabName, String key, String fKey, String seq, int beginrow) {
+			CodeTableForm form, String tabName, String key, String fKey,
+			String seq, int beginrow) {
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
-		HashMap<String,String[]> map = new HashMap<String,String[]>();
-		String sql = "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('" + tabName + "')";
+		HashMap<String, String[]> map = new HashMap<String, String[]>();
+		String sql = "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"
+				+ tabName + "')";
 		String[] str = new String[this.getIntBySql(sql)];
 		int iReturn = 0;
 
 		try {
-			String[] record = request.getParameterValues("value(" + key + ")");
+			String[] record = request.getParameterValues("map[" + key + "]");
+			if (record == null) { // 无行项
+				return 1;
+			}
 			int recordcount = record.length;
 			// 取出要保存的表结构
+			sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
+					+ " WHERE TABLE_NAME = UPPER('" + tabName + "')";
 			pStmt = myConn.prepareStatement(sql);
 			rs = pStmt.executeQuery();
 			int i = 0;
@@ -1185,32 +1417,20 @@ public class DbUtils {
 			}
 			// 通过map对接收到的对象分别赋给表结构字段做映射
 			for (i = 0; i < str.length; i++) {
-				map.put(str[i], request.getParameterValues("value(" + str[i] + ")"));
+				map.put(str[i],
+						request.getParameterValues("map[" + str[i] + "]"));
 			}
 			Integer c = 3;
 			Integer c_1 = 1;
 			String[] serialnos = new String[recordcount];
-			String[] cif = request.getParameterValues("value(cif)");
 			for (i = 1; i < recordcount; i++) {
 				serialnos[i] = c + "." + c_1++;
 			}
 			map.put("serialno", serialnos);
-			if (cif != null && cif.length > 0) {
-				for (int k = 1; k < cif.length; k++) {
-					if (!cif[k].equals("")) {
-						try {
-							BigDecimal ts = new BigDecimal(cif[k]);
-							BigDecimal ts1 = new BigDecimal("100");
-							// 6:保留小数位数, BigDecimal.ROUND_HALF_EVEN：四舍五入模式
-							cif[k] = (ts.divide(ts1, 6, BigDecimal.ROUND_HALF_EVEN).toString());
-						} catch (Exception e) {
-							iReturn = -1;
-							StrUtils.WriteLog(this.getClass().getName() + ".saveRowTable()", e);
-						}
-					}
-				}
-				map.put("cif", cif);
-			}
+			
+			sql = "DELETE FROM " + tabName + " WHERE " + fKey + " = '" + form.getValue(fKey) + "'";
+			iReturn = this.executeSQL(myConn, sql);
+			
 			for (i = beginrow; i < recordcount; i++) {
 				CodeTableForm subform = new CodeTableForm();
 				Iterator<String> iter = map.keySet().iterator();
@@ -1223,17 +1443,22 @@ public class DbUtils {
 						}
 					}
 				}
-				sql = "SELECT COUNT(*) as icount FROM " + tabName + " WHERE "
-						+ key + "='" + subform.getValue(key) + "'";
-				String sCount = this.execQuerySQL(sql);
-				if ("0".equals(sCount)) {
-					String keyvalue = this.execQuerySQL("SELECT " + seq + ".nextval FROM dual");
-					subform.setValue(key, keyvalue);
-					subform.setValue(fKey, (String) form.getValue(fKey));
+//				sql = "SELECT COUNT(*) as icount FROM " + tabName + " WHERE "
+//						+ key + "='" + subform.getValue(key) + "'";
+//				String sCount = this.execQuerySQL(sql);
+//				if ("0".equals(sCount)) {
+//					if (!"".equals(seq)) {
+//						String keyvalue = this.execQuerySQL("SELECT " + seq
+//								+ ".nextval FROM dual");
+//						subform.setValue(key, keyvalue);
+//					}
+					subform.setValue(fKey, StrUtils.nullToStr(form.getValue(fKey)));
+					subform.setValue(key, null);
 					iReturn = this.setInsert(myConn, subform, tabName, "");
-				} else {
-					iReturn = this.setUpdate(myConn, subform, "1", tabName, key, "");
-				}
+//				} else {
+//					iReturn = this.setUpdate(myConn, subform, "1", tabName,
+//							key, "");
+//				}
 				if (iReturn == -1) {
 					throw new Exception();
 				}

@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h2 class="contentTitle">新增模块</h2>
+<h1 class="margin10px">新增模块</h1>
 <form method="post" action="<%=path%>/module/add"
 	class="required-validate pageForm"
 	onsubmit="return validateCallback(this, dialogAjaxDone);">
@@ -46,7 +46,7 @@
 		<dl>
 			<dt>描述：</dt>
 			<dd>
-				<textarea name="map[description]" cols="30" rows="3" maxlength="255"></textarea>
+				<textarea name="map[description]" cols="30" rows="3" maxlength="127"></textarea>
 			</dd>
 		</dl>
 	</div>

@@ -6,12 +6,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title></title>
+<title>首页</title>
 
 <link href="<%=path%>/themes/default/style.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<%=path%>/themes/css/core.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<%=path%>/themes/css/print.css" rel="stylesheet" type="text/css" media="print" />
 <link href="<%=path%>/themes/css/custom.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="<%=path%>/css/public.css" rel="stylesheet" type="text/css" media="screen" />
 <!--[if IE]>
 <link href="<%=path%>/themes/css/ieHack.css" rel="stylesheet" type="text/css" media="screen"/>
 <![endif]-->

@@ -60,7 +60,7 @@ public class PublicAction {
 			
 			String sql = "SELECT * FROM smodule a WHERE EXISTS (SELECT 1 FROM spermission b, suser_role c"
 					+ " WHERE b.roleid = c.roleid and b.permission = concat(a.sn ,':view') and c.userid = '"
-					+ username +"') ORDER BY a.parentid, a.moduleid";
+					+ username +"') ORDER BY a.priority, a.parentid, a.moduleid";
 			DbUtils dbUtils = new DbUtils();
 			List<CodeTableForm> menuList = dbUtils.getListBySql(sql); //菜单信息
 			request.getSession().setAttribute(Constants.MENU_INFO_SESSION, menuList);
