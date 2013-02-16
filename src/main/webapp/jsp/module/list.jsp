@@ -85,5 +85,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<jsp:include page="../pub/paged.jsp"></jsp:include>
+	<form id="pagerForm" method="post" action="<%=path%>/module/list/${form.map.parentid}"></form>
 </div>

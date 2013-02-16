@@ -33,7 +33,7 @@ public class ModuleAction {
 		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
 		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
 		int pageNum = 1;
-		int numPerPage = Constants.NUMPERPAGE;
+		int numPerPage = 100;
 		if (!sPageNum.equals("")) {
 			pageNum = Integer.parseInt(sPageNum);
 		}
@@ -49,6 +49,7 @@ public class ModuleAction {
 		request.setAttribute("moduleList", moduleList); // 列表
 
 		request.setAttribute("form", form);
+		request.setAttribute("sn", "module"); //授权名称
 		return "module/list";
 	}
 	

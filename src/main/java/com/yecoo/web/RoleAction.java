@@ -52,6 +52,7 @@ public class RoleAction {
 
 		request.setAttribute("form", form);
 		request.setAttribute("act", act);
+		request.setAttribute("sn", "role"); //授权名称
 		return "role/list";
 	}
 

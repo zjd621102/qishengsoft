@@ -50,6 +50,7 @@ public class UnitAction {
 
 		request.setAttribute("form", form);
 		request.setAttribute("act", act);
+		request.setAttribute("sn", "unit"); //授权名称
 		return "unit/list";
 	}
 

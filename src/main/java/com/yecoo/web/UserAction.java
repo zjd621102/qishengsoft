@@ -65,6 +65,7 @@ public class UserAction {
 
 		request.setAttribute("form", form);
 		request.setAttribute("act", act);
+		request.setAttribute("sn", "user"); //授权名称
 		return "user/list";
 	}
 

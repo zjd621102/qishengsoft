@@ -33,7 +33,7 @@
 		numPerPage="${numPerPage}" pageNumShown="10" currentPage="${pageNum}">
 	</div>
 </div>
-<form id="pagerForm" method="post" action="<%=path%>/user/list">
+<form id="pagerForm" method="post" action="<%=path%>/${sn}/list">
 	<input type="hidden" name="pageNum" value="${pageNum}" />
 	<!--【必须】value="1"可以写死-->
 	<input type="hidden" name="numPerPage" value="${numPerPage}" />

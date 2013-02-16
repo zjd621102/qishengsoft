@@ -51,6 +51,7 @@ public class ManuAction {
 
 		request.setAttribute("form", form);
 		request.setAttribute("act", act);
+		request.setAttribute("sn", "manu"); //授权名称
 		return "manu/list";
 	}
 

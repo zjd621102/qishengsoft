@@ -41,7 +41,7 @@
 			<dt>页面标识：</dt>
 			<dd>
 				<input type="text" name="map[rel]" size="30"
-					maxlength="32" alt="页面标识" value="${form.map.rel}" />
+					maxlength="32" value="${form.map.rel}" />
 			</dd>
 		</dl>
 		<dl>
