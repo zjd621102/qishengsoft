@@ -31,8 +31,7 @@ public class RoleAction {
 
 		String act = StrUtils.nullToStr(request.getAttribute("act"));
 		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request
-				.getParameter("numPerPage"));
+		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
 		int pageNum = 1;
 		int numPerPage = Constants.NUMPERPAGE;
 		if (!sPageNum.equals("")) {
@@ -46,8 +45,7 @@ public class RoleAction {
 
 		int totalCount = roleDaoImpl.getRoleCount(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> roleList = roleDaoImpl.getRoleList(form, pageNum,
-				numPerPage);
+		List<CodeTableForm> roleList = roleDaoImpl.getRoleList(form, pageNum, numPerPage);
 		request.setAttribute("roleList", roleList); // 角色列表
 
 		request.setAttribute("form", form);

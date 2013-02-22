@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
-<script src="<%=path%>/js/public.js" type="text/javascript"></script>
 
 <h1 class="margin10px">新增供应商</h1>
 <form method="post" action="<%=path%>/manu/add" class="required-validate pageForm"
@@ -60,7 +59,7 @@
 		<dl>
 			<dt>EMAIL：</dt>
 			<dd>
-				<input type="text" name="map[email]" class="required" size="30" maxlength="64" value="${form.map.email}"/>
+				<input type="text" name="map[email]" size="30" maxlength="64" value="${form.map.email}"/>
 			</dd>
 		</dl>
 		<dl>

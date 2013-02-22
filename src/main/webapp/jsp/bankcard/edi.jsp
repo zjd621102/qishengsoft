@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
-<script src="<%=path%>/js/public.js" type="text/javascript"></script>
 
 <h1 class="margin10px">修改银行卡</h1>
 <form method="post" action="<%=path%>/bankcard/edi" class="required-validate pageForm"
@@ -47,7 +46,7 @@
 			<dt>金额：</dt>
 			<dd>
 				<input type="text" name="map[money]" class="required number" size="30" maxlength="12" alt="金额"
-					 value="${form.map.money}"/>
+					 value="${form.map.money}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>

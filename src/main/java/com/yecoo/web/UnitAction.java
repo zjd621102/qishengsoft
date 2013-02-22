@@ -29,8 +29,7 @@ public class UnitAction {
 
 		String act = StrUtils.nullToStr(request.getAttribute("act"));
 		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request
-			.getParameter("numPerPage"));
+		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
 		int pageNum = 1;
 		int numPerPage = Constants.NUMPERPAGE;
 		if (!sPageNum.equals("")) {
@@ -44,8 +43,7 @@ public class UnitAction {
 
 		int totalCount = unitDaoImpl.getUnitCount(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> unitList = unitDaoImpl.getUnitList(form, pageNum,
-			numPerPage);
+		List<CodeTableForm> unitList = unitDaoImpl.getUnitList(form, pageNum, numPerPage);
 		request.setAttribute("unitList", unitList); // 单位列表
 
 		request.setAttribute("form", form);

@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
-<script src="<%=path%>/js/public.js" type="text/javascript"></script>
 
 <h1 class="margin10px">新增银行卡</h1>
 <form method="post" action="<%=path%>/bankcard/add" class="required-validate pageForm"

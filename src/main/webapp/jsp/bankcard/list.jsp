@@ -51,6 +51,34 @@
 				</a>
 			</li>
 			</shiro:hasPermission>
+			<li class="line">line</li>
+			<shiro:hasPermission name="bankcard:other">
+			<li>
+				<a class="edit" href="<%=path%>/bankcard/transferAccount/{s_bankcardid}" target="dialog"
+					rel="bankcard_transferAccount" mask="true" width="500" height="500">
+					<span>内部转账</span>
+				</a>
+			</li>
+			<li>
+				<a class="edit" href="<%=path%>/bankcard/transferAccount_list" target="navTab"
+					rel="bankcard_transferAccount_list">
+					<span>转账列表</span>
+				</a>
+			</li>
+			<li class="line">line</li>
+			<li>
+				<a class="edit" href="<%=path%>/bankcard/receandpay/{s_bankcardid}" target="dialog"
+					rel="bankcard_receandpay" mask="true" width="500" height="500">
+					<span>其它收支</span>
+				</a>
+			</li>
+			<li>
+				<a class="edit" href="<%=path%>/bankcard/receandpay_list" target="navTab"
+					rel="bankcard_receandpay_list">
+					<span>其它收支列表</span>
+				</a>
+			</li>
+			</shiro:hasPermission>
 		</ul>
 	</div>
 	<table class="table" style="width: 100%;" layoutH="138">

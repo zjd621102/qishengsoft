@@ -30,8 +30,7 @@ public class StaffAction {
 
 		String act = StrUtils.nullToStr(request.getAttribute("act"));
 		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request
-			.getParameter("numPerPage"));
+		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
 		int pageNum = 1;
 		int numPerPage = Constants.NUMPERPAGE;
 		if (!sPageNum.equals("")) {
@@ -45,8 +44,7 @@ public class StaffAction {
 
 		int totalCount = staffDaoImpl.getStaffCount(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> staffList = staffDaoImpl.getStaffList(form, pageNum,
-			numPerPage);
+		List<CodeTableForm> staffList = staffDaoImpl.getStaffList(form, pageNum, numPerPage);
 		request.setAttribute("staffList", staffList); // 员工列表
 
 		request.setAttribute("form", form);

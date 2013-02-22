@@ -23,6 +23,7 @@
 <script src="<%=path%>/js/jquery.bgiframe.js" type="text/javascript"></script>
 <script src="<%=path%>/js/dwz.min.js" type="text/javascript"></script>
 <script src="<%=path%>/js/dwz.regional.zh.js" type="text/javascript"></script>
+<script src="<%=path%>/js/public.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 	$(function() {

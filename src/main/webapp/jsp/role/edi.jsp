@@ -32,6 +32,7 @@
 							<span class="crud">创建</span>
 							<span class="crud">修改</span>
 							<span class="crud">删除</span>
+							<span class="crud">其它</span>
 						</span>
 					</a>
 				</div>
@@ -55,6 +56,9 @@
 									 ${fn:contains(form.map.permission,str) ? "checked=\"checked\"" : ""} />
 									<c:set var="str" value="${m1.map.sn}:delete"></c:set>
 									<input type="checkbox" name="map[permission]" value="${m1.map.sn}:delete"
+									 ${fn:contains(form.map.permission,str) ? "checked=\"checked\"" : ""} />
+									<c:set var="str" value="${m1.map.sn}:other"></c:set>
+									<input type="checkbox" name="map[permission]" value="${m1.map.sn}:other"
 									 ${fn:contains(form.map.permission,str) ? "checked=\"checked\"" : ""} />
 									</span>
 								</a>
@@ -80,6 +84,9 @@
 													 ${fn:contains(form.map.permission,str) ? "checked=\"checked\"" : ""} />
 													<c:set var="str" value="${m2.map.sn}:delete"></c:set>
 													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:delete"
+													 ${fn:contains(form.map.permission,str) ? "checked=\"checked\"" : ""} />
+													<c:set var="str" value="${m2.map.sn}:other"></c:set>
+													<input type="checkbox" name="map[permission]" value="${m2.map.sn}:other"
 													 ${fn:contains(form.map.permission,str) ? "checked=\"checked\"" : ""} />
 												</span>
 											</a>
