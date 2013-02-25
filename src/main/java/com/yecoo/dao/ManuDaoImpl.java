@@ -64,9 +64,13 @@ public class ManuDaoImpl {
 		
 		StringBuffer cond = new StringBuffer("");
 		String manuname = StrUtils.nullToStr(form.getValue("manuname"));
+		String manutypeid = StrUtils.nullToStr(form.getValue("manutypeid"));
 		
 		if(!manuname.equals("")) {
 			cond.append(" AND t.manuname like '%").append(manuname).append("%'");
+		}
+		if(!manutypeid.equals("")) {
+			cond.append(" AND t.manutypeid like '%").append(manutypeid).append("%'");
 		}
 		
 		return cond.toString();

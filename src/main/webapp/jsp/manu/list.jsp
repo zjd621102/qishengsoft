@@ -7,7 +7,22 @@
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						供应商名称：<input type="text" name="map[manuname]" value="${form.map.manuname}"/>
+						供应商名称：
+						<input type="text" name="map[manuname]" size="30" maxlength="32"
+							value="${form.map.manuname}"/>
+					</td>
+					<td>
+						供应商类别：
+						<select name="map[manutypeid]" style="width: 184px;" class="required">
+							<option value=""></option>
+							<c:forEach items="${manuTypeList}" var="manuType">
+								<option value="${manuType.map.manutypeid}"
+									${manuType.map.manutypeid==form.map.manutypeid?"selected":""}
+								>
+									${manuType.map.manutypename}
+								</option>
+							</c:forEach>
+						</select>
 					</td>
 				</tr>
 			</table>

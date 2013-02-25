@@ -59,7 +59,7 @@
 			</shiro:hasPermission>
 		</ul>
 	</div>
-	<table class="table" style="width: 100%;" layoutH="138">
+	<table class="table" style="width: 100%;" layoutH="144">
 		<thead>
 			<tr>
 				<th width="10%">序号</th>
@@ -77,7 +77,7 @@
 					<td>${vs.index+1}</td>
 					<td>${bean.map.modulename}</td>
 					<td>${bean.map.priority}</td>
-					<td>${bean.map.modulename}</td>
+					<td>${bean.map.url}</td>
 					<td>${bean.map.sn}</td>
 					<td>${bean.map.parentname}</td>
 					<td>${bean.map.description}</td>

@@ -2,7 +2,7 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="<%=path%>/backselect/bankcard" method="post" rel="pagerForm" id="fid">
+	<form onsubmit="return dwzSearch(this, 'dialog');" action="<%=path%>/backselect/bankcard" method="post" rel="pagerForm" id="fid">
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">
 				<tr>

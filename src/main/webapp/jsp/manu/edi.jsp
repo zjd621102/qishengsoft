@@ -9,7 +9,7 @@
 		<dl>
 			<dt>供应商名称：</dt>
 			<dd>
-				<input type="text" name="map[manuname]" class="required" size="30" maxlength="32" alt="请输入供应商名称"
+				<input type="text" name="map[manuname]" class="required" size="30" maxlength="32"
 					 value="${form.map.manuname}"/>
 			</dd>
 		</dl>

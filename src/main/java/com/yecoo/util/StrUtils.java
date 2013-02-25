@@ -12,6 +12,8 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.StringTokenizer;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 /**
  * 公用方法
@@ -401,5 +403,23 @@ public class StrUtils {
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		return sdf.format(new Date());
+	}
+	/**
+	 * 获取单据编码
+	 * @param btype 单据类型
+	 * @param noclumn 编码字段
+	 * @param tabname 表名
+	 * @return
+	 */
+	public static String getNewNO(String btype, String noclumn, String tabname) {
+		DbUtils dbUtils = new DbUtils();
+		String sysdate = StrUtils.getSysdate("yyyy");
+		String no = btype + "-" + sysdate + "-";
+		StringBuffer sql = new StringBuffer("");
+		sql.append("SELECT IFNULL(MAX(SUBSTR(").append(noclumn).append(", -4)), 0) + 1 FROM ").append(tabname)
+			.append(" WHERE ").append(noclumn).append(" like '" + no + "%'");
+		no += StringUtils.leftPad(dbUtils.execQuerySQL(sql.toString()), 4,"0");
+		
+		return no;
 	}
 }

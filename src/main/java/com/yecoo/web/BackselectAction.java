@@ -9,6 +9,7 @@ import com.yecoo.dao.BankcardDaoImpl;
 import com.yecoo.dao.ManuDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
+import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 /**
  * 供应商管理
@@ -44,6 +45,12 @@ public class BackselectAction {
 		request.setAttribute("form", form);
 		request.setAttribute("act", act);
 		request.setAttribute("sn", "backselect"); //授权名称
+		
+		DbUtils dbUtils = new DbUtils();
+		String sql = "select * from cmanutype order by manutypeid";
+		List<CodeTableForm> manuTypeList = dbUtils.getListBySql(sql); //供应商类型
+		request.setAttribute("manuTypeList", manuTypeList);
+		
 		return "backselect/manu";
 	}
 	
