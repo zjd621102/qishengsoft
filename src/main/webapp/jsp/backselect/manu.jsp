@@ -53,13 +53,19 @@
 				<th width="10%">创建日期</th>
 				<th width="10%">联系人</th>
 				<th width="10%">联系电话</th>
-				<th width="15%">EMAIL</th>
-				<th width="5%">查找带回</th>
+				<th width="10%">EMAIL</th>
+				<th width="10%">查找带回</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${manuList}" var="bean" varStatus="vs">
-			   	<tr target="s_manuid" rel="${bean.map.manuid}">
+			   	<tr target="s_manuid" rel="${bean.map.manuid}"
+			   		ondblclick="$.bringBack({
+			   		manuid:'${bean.map.manuid}',
+					manuname:'${bean.map.manuname}',
+					contact:'${bean.map.contact}',
+					tel:'${bean.map.tel}'})"
+			   	>
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.manuname}</td>
 			   		<td>${bean.map.manutypename}</td>
@@ -70,7 +76,8 @@
 			   		<td>${bean.map.email}</td>
 					<td>
 						<a class="btnSelect" href="javascript:$.bringBack({manuid:'${bean.map.manuid}',
-							manuname:'${bean.map.manuname}'})"
+							manuname:'${bean.map.manuname}',contact:'${bean.map.contact}',
+							tel:'${bean.map.tel}',rowindex:'${rowindex}'})"
 							title="查找带回">选择</a>
 					</td>
 			   	</tr>

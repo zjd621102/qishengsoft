@@ -1,18 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<script type="text/javascript">
-	function checkForSubmit(){
-		var manuid = $("input[name='manuLookup.manuid']").val();
-		$("input[name='map[manuid]']").val(manuid); //供应商ID
-
-		return true;
-	}
-</script>
-
 <h2 class="contentTitle">修改物资</h2>
 <form method="post" action="<%=path%>/material/edi" class="required-validate pageForm"
- onsubmit="return checkForSubmit() && validateCallback(this, dialogAjaxDone);">
+ onsubmit="return validateCallback(this, dialogAjaxDone);">
 	<input type="hidden" name="map[materialid]" value="${form.map.materialid}"/>
 	<div class="pageFormContent" layoutH="97">
 		<dl>
@@ -63,10 +54,10 @@
 			<dt>供应商：</dt>
 			<dd>
 				<input type="hidden" name="map[manuid]" value="${form.map.manuid}"/>
-				<input type="hidden" name="manuLookup.manuid" value="${form.map.manuid}"/>
-				<input type="text" class="required" name="manuLookup.manuname" value="${form.map.manuname}"
-					style="width: 178px;" suggestFields="manuid,manuname"  readonly="readonly"/>
+				<input type="text" class="required" name="map[manuname]" value="${form.map.manuname}"
+					size="30" suggestFields="manuid,manuname" readonly="readonly"/>
 				<a class="btnLook" href="<%=path%>/backselect/manu" lookupGroup="manuLookup">查找带回</a>
+				<a href="javascript:void(0);" class="btnClear" suggestFields="manuid,manuname"/>
 			</dd>
 		</dl>
 		<dl>

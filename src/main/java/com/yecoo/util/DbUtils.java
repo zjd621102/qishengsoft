@@ -1430,7 +1430,7 @@ public class DbUtils {
 			
 			sql = "DELETE FROM " + tabName + " WHERE " + fKey + " = '" + form.getValue(fKey) + "'";
 			iReturn = this.executeSQL(myConn, sql);
-			
+
 			for (i = beginrow; i < recordcount; i++) {
 				CodeTableForm subform = new CodeTableForm();
 				Iterator<String> iter = map.keySet().iterator();

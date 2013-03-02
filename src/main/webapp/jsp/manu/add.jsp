@@ -76,26 +76,22 @@
 		<table class="table" style="width: 100%;">
 			<thead>
 				<tr style="text-align: center;">
-					<th width="5%">
-						<a href="#" onclick="addRow();">
-							<img src="<%=path%>/images/bt_plus.gif" border="0" />
-						</a>
+					<th width="2%">
+						<a href="#" class="btnAdd addRow"/>
 					</th>
-					<th width="5%">序号</th>
+					<th width="3%">序号</th>
 					<th width="20%">开户银行</th>
 					<th width="20%">公司银行账号</th>
 					<th width="20%">帐户名称</th>
 					<th width="10%">优先级</th>
-					<th width="20%">备注</th>
+					<th width="25%">备注</th>
 				</tr>
 			</thead>
 			<tbody>
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>
-						<input type="hidden" name="map[manurowid]" value="${bean.map.manurowid}"/>
-						<a href="#" onclick="delRow();">
-							<img src="<%=path%>/images/bt_minus.gif" border="0" />
-						</a>
+						<input type="hidden" name="map[manurowid]"/>
+						<a href="#" class="btnDel delRow"/>
 					</td>
 			   		<td></td>
 			   		<td>
@@ -115,37 +111,6 @@
 						<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="255"/>
 			   		</td>
 			   	</tr>
-				<c:forEach items="${manurowList}" var="bean" varStatus="vs">
-				   	<tr>
-						<td>
-							<input type="hidden" name="map[manurowid]" value="${bean.map.manurowid}"/>
-							<a href="#" onclick="delRow();">
-								<img src="<%=path%>/images/bt_minus.gif" border="0" />
-							</a>
-						</td>
-				   		<td>${vs.index+1}</td>
-				   		<td>
-							<input type="text" name="map[bankrow]" maxlength="32" style="width: 100%"
-								value="${bean.map.bankrow}"/>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[accountnorow]" maxlength="32" style="width: 100%"
-								value="${bean.map.accountnorow}"/>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[accountnamerow]" maxlength="32" style="width: 100%"
-								value="${bean.map.accountnamerow}"/>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[priorityrow]" class="digits" maxlength="2" style="width: 100%"
-								value="${bean.map.priorityrow}"/>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[remarkrow]" maxlength="255" style="width: 100%"
-								value="${bean.map.remarkrow}"/>
-				   		</td>
-				   	</tr>
-			   	</c:forEach>
 			   	<tr id="IDEndRow"></tr>
 		   	</tbody>
 		</table>

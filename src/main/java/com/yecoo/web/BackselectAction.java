@@ -12,13 +12,18 @@ import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 /**
- * 供应商管理
+ * 查找带回管理
  * @author zhoujd
  */
 @Controller
 @RequestMapping("/backselect")
 public class BackselectAction {
-
+	/**
+	 * 供应商
+	 * @param form
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/manu", method={RequestMethod.GET, RequestMethod.POST})
 	public String manu(CodeTableForm form, HttpServletRequest request) {
 		

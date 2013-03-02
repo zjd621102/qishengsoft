@@ -5,3 +5,12 @@
 .pointer {
 	cursor: pointer;
 }
+
+a.btnClear {
+	background: url(../images/bt_clear.gif) no-repeat;
+	display: block;
+	width: 10px;
+	height: 10px;
+	margin-top: 3px;
+	overflow:hidden;
+}

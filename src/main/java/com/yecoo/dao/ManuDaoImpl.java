@@ -20,7 +20,7 @@ public class ManuDaoImpl {
 	public List<CodeTableForm> getManuList() {
 		
 		String sql = "SELECT t.*, func_getManutypeName(manutypeid) manutypename ,"
-				+ " func_getStatusName(statusid) statusname FROM smanu t ORDER BY manuid";
+				+ " func_getStatusName(statusid) statusname FROM smanu t ORDER BY manuid DESC";
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
 	}
@@ -50,7 +50,7 @@ public class ManuDaoImpl {
 				+ " func_getStatusName(statusid) statusname FROM smanu t WHERE 1 = 1";
 		String cond = getManuListCondition(form);
 		sql  += cond;
-		sql += " ORDER BY manuid";
+		sql += " ORDER BY manuid DESC";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
@@ -91,7 +91,7 @@ public class ManuDaoImpl {
 			iReturn = dbUtils.setInsert(conn, form, "smanu", ""); //保存主表
 			conn.commit();
 			
-			String sql = "SELECT MAX(manuid) FROM smanu";
+			String sql = "SELECT IFNULL(MAX(manuid), 1) FROM smanu";
 			int manuid = dbUtils.getIntBySql(sql);
 			form.setValue("manuid", manuid);
 			

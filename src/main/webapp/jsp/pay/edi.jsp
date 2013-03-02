@@ -1,18 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<script type="text/javascript">
-	function checkForSubmit(){
-		var manuid = $("input[name='manuLookup.manuid']").val();
-		$("input[name='map[manuid]']").val(manuid); //供应商ID
-
-		return true;
-	}
-</script>
-
 <h2 class="contentTitle">修改收付款单</h2>
 <form method="post" action="<%=path%>/pay/edi" class="required-validate pageForm"
-	onsubmit="return checkForSubmit() && validateCallback(this, dialogAjaxDone);">
+	onsubmit="return validateCallback(this, dialogAjaxDone);">
 	<input type="hidden" name="map[payid]" value="${form.map.payid}" />
 	<div class="pageFormContent" layoutH="97">
 		<dl>
@@ -33,7 +24,7 @@
 		<dl>
 			<dt>付款日期/收款日期：</dt>
 			<dd>
-				<input type="text" name="map[paydate]" class="required date" style="width: 178px;"
+				<input type="text" name="map[paydate]" class="required date" size="30"
 					value="${form.map.paydate}" readonly="true"/>
 				<a class="inputDateButton" href="javascript:;">选择</a>
 			</dd>
@@ -42,9 +33,8 @@
 			<dt>供应商/客户：</dt>
 			<dd>
 				<input type="hidden" name="map[manuid]" value="${form.map.manuid}"/>
-				<input type="hidden" name="manuLookup.manuid" value="${form.map.manuid}"/>
-				<input type="text" class="required" name="manuLookup.manuname" value="${form.map.manuname}"
-					style="width: 178px;" suggestFields="manuid,manuname"  readonly="readonly"/>
+				<input type="text" class="required" name="map[manuname]" value="${form.map.manuname}"
+					size="30" suggestFields="manuid,manuname"  readonly="readonly"/>
 				<a class="btnLook" href="<%=path%>/backselect/manu" lookupGroup="manuLookup">查找带回</a>
 			</dd>
 		</dl>
