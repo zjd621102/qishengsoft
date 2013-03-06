@@ -130,8 +130,7 @@ public class MaterialAction {
 	public @ResponseBody String delete(@PathVariable int materialid) {
 		
 		AjaxObject ajaxObject = null;
-		int iReturn = 0;
-		iReturn = 1;
+		int iReturn = materialDaoImpl.deleteMaterial(materialid);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject(200, "删除成功！", "", "", "jbsxBox2material", "");
 		} else {

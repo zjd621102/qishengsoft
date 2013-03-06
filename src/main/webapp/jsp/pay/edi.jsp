@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h2 class="contentTitle">修改收付款单</h2>
+<h2 class="contentTitle">修改发票</h2>
 <form method="post" action="<%=path%>/pay/edi" class="required-validate pageForm"
 	onsubmit="return validateCallback(this, dialogAjaxDone);">
 	<input type="hidden" name="map[payid]" value="${form.map.payid}" />
@@ -22,7 +22,7 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>付款日期/收款日期：</dt>
+			<dt>发票日期：</dt>
 			<dd>
 				<input type="text" name="map[paydate]" class="required date" size="30"
 					value="${form.map.paydate}" readonly="true"/>
@@ -30,48 +30,17 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>供应商/客户：</dt>
+			<dt>关联单号：</dt>
 			<dd>
-				<input type="hidden" name="map[manuid]" value="${form.map.manuid}"/>
-				<input type="text" class="required" name="map[manuname]" value="${form.map.manuname}"
-					size="30" suggestFields="manuid,manuname"  readonly="readonly"/>
-				<a class="btnLook" href="<%=path%>/backselect/manu" lookupGroup="manuLookup">查找带回</a>
+				<input type="text" name="map[relateno]" size="30" maxlength="17"
+					value="${form.map.relateno}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
-			<dt>银行卡卡号：</dt>
+			<dt>关联金额：</dt>
 			<dd>
-				<select name="map[bankcardno]" style="width: 184px;" class="required">
-					<option value=""></option>
-					<c:forEach items="${bankcardList}" var="bankcard">
-						<option value="${bankcard.map.bankcardno}"
-							${bankcard.map.bankcardno==form.map.bankcardno?"selected":""}
-						>
-							${bankcard.map.bankcardno}|${bankcard.map.bankname}
-						</option>
-					</c:forEach>
-				</select>
-			</dd>
-		</dl>
-		<dl>
-			<dt>采购单号/销售单号：</dt>
-			<dd>
-				<input type="text" name="map[relateid]" class="required digits" size="30" maxlength="9"
-					value="${form.map.relateid}"/>
-			</dd>
-		</dl>
-		<dl>
-			<dt>应付金额：</dt>
-			<dd>
-				<input type="text" name="map[planmoney]" class="required number" size="30" maxlength="12"
-					value="${form.map.planmoney}"/>
-			</dd>
-		</dl>
-		<dl>
-			<dt>实付金额：</dt>
-			<dd>
-				<input type="text" name="map[realmoney]" class="required number" size="30" maxlength="12"
-					value="${form.map.realmoney}"/>
+				<input type="text" name="map[relatemoney]" class="double" size="30" maxlength="12"
+					value="${form.map.relatemoney}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
@@ -103,6 +72,156 @@
 					value="${form.map.remark}"/>
 			</dd>
 		</dl>
+	
+		<div class="divider"></div>
+
+		<h1 class="margin10px">发票清单</h1>
+
+		<table class="table" style="width: 100%;">
+			<thead>
+				<tr>
+					<th width="3%">
+						<a href="#" class="btnAdd addRow"/>
+					</th>
+					<th width="3%">序号</th>
+					<th width="19%">银行卡卡号</th>
+					<th width="15%">供应商</th>
+					<th width="13%">供应商开户银行</th>
+					<th width="13%">供应商银行卡卡号</th>
+					<th width="10%">供应商账户名称</th>
+					<th width="7%">应付金额</th>
+					<th width="7%">实付金额</th>
+					<th width="10%">备注</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td style="font-size: 13px; font-weight: bold; color: red;">
+						小计：
+					</td>
+					<td>
+						<input type="text" name="map[allplansum]" style="width: 100%" class="double"
+							value="${form.map.allplansum}" readonly="readonly"/>
+					</td>
+					<td>
+						<input type="text" name="map[allrealsum]" style="width: 100%" class="double"
+							value="${form.map.allrealsum}" readonly="readonly"/>
+					</td>
+					<td></td>
+				</tr>
+			   	<tr id="IDCopyRow" style="display:none">
+					<td>
+						<input type="hidden" name="map[payrowid]"/>
+						<a href="#" class="btnDel delRow" />
+					</td>
+			   		<td>${vs.index+1}</td>
+					<td>
+						<select name="map[bankcardno]" style="width: 95%;">
+							<option value=""></option>
+							<c:forEach items="${bankcardList}" var="bankcard">
+								<option value="${bankcard.map.bankcardno}">
+									${bankcard.map.bankcardno}|${bankcard.map.bankname}
+								</option>
+							</c:forEach>
+						</select>
+					</td>
+			   		<td>
+						<input type="hidden" name="map[manuid]"/>
+						<input type="text" name="map[manuname]"
+							suggestFields="manuid,manuname,manubankname,manubankcardno,manuaccountname"
+							style="width: 75%" readonly="readonly"/>
+						<a class="btnLook" href="<%=path%>/manu/list" lookupGroup="manuLookup"/>
+						<a href="javascript:void(0);" class="btnClear"
+							suggestFields="manuid,manuname,manubankname,manubankcardno,manuaccountname"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[manubankname]" style="width: 100%" maxlength="32"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[manubankcardno]" style="width: 100%" maxlength="32"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[manuaccountname]" style="width: 100%" maxlength="32"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[plansum]" style="width: 100%" maxlength="12"
+							class="double" value="0.00"
+							onchange="setAllSum('plansum', 'allplansum');"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[realsum]" style="width: 100%" maxlength="12"
+							class="double" value="0.00"
+							onchange="setAllSum('realsum', 'allrealsum');"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"/>
+			   		</td>
+			   	</tr>
+				<c:forEach items="${payrowList}" var="bean" varStatus="vs">
+				   	<tr>
+						<td>
+							<input type="hidden" name="map[payrowid]" value="${bean.map.payrowid}"/>
+							<a href="#" class="btnDel delRow" />
+						</td>
+				   		<td>${vs.index+1}</td>
+						<td>
+							<select name="map[bankcardno]" style="width: 95%;">
+								<option value=""></option>
+								<c:forEach items="${bankcardList}" var="bankcard">
+									<option value="${bankcard.map.bankcardno}"
+										${bankcard.map.bankcardno==bean.map.bankcardno?"selected":""}
+									>
+										${bankcard.map.bankcardno}|${bankcard.map.bankname}
+									</option>
+								</c:forEach>
+							</select>
+						</td>
+				   		<td>
+							<input type="hidden" name="map[manuid]" value="${bean.map.manuid}"/>
+							<input type="text" name="map[manuname]" value="${bean.map.manuname}"
+								suggestFields="manuid,manuname,manubankname,manubankcardno,manuaccountname"
+								style="width: 75%" readonly="readonly"/>
+							<a class="btnLook" href="<%=path%>/manu/list" lookupGroup="manuLookup"/>
+							<a href="javascript:void(0);" class="btnClear"
+								suggestFields="manuid,manuname,manubankname,manubankcardno,manuaccountname"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[manubankname]" style="width: 100%" maxlength="32"
+								value="${bean.map.manubankname}"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[manubankcardno]" style="width: 100%" maxlength="32"
+								value="${bean.map.manubankcardno}"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[manuaccountname]" style="width: 100%" maxlength="32"
+								value="${bean.map.manuaccountname}"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[plansum]" style="width: 100%" maxlength="12"
+								class="double" value="${bean.map.plansum}"
+								onchange="setAllSum('plansum', 'allplansum');"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[realsum]" style="width: 100%" maxlength="12"
+								class="double" value="${bean.map.realsum}"
+								onchange="setAllSum('realsum', 'allrealsum');"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"
+								value="${bean.map.remarkrow}"/>
+				   		</td>
+				   	</tr>
+			   	</c:forEach>
+			   	<tr id="IDEndRow"></tr>
+		   	</tbody>
+		</table>
 	</div>
 	
 	<div class="formBar">

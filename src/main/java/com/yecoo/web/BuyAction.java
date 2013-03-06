@@ -22,6 +22,7 @@ import com.yecoo.util.dwz.AjaxObject;
 @RequestMapping("/buy")
 public class BuyAction {
 
+	DbUtils dbUtils = new DbUtils();
 	private BuyDaoImpl buyDaoImpl = new BuyDaoImpl();
 
 	@RequiresPermissions("Buy:view")
@@ -98,6 +99,11 @@ public class BuyAction {
 		
 		CodeTableForm form = null;
 		form = buyDaoImpl.getBuyById(buyid, request);
+		
+		String sql = "SELECT IFNULL(SUM(t.sum), 0) FROM bbuyrow t WHERE t.buyid = '" + buyid + "'";
+		double allrealsum = Double.parseDouble(dbUtils.execQuerySQL(sql));
+		form.setValue("allsum", allrealsum); //小计：总价
+		
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);
@@ -125,11 +131,17 @@ public class BuyAction {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
-		iReturn = buyDaoImpl.deleteBuy(buyid);
-		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("删除成功！", "buy_list", "");
+		String sql = "SELECT COUNT(1) FROM bbuy t WHERE t.buyid = '" + buyid + "'";
+		int icount = dbUtils.getIntBySql(sql);
+		if(icount >= 1) {
+			ajaxObject = new AjaxObject("删除失败（单据不在申请流程）");
 		} else {
-			ajaxObject = new AjaxObject("删除失败");
+			iReturn = buyDaoImpl.deleteBuy(buyid);
+			if (iReturn >= 0) {
+				ajaxObject = new AjaxObject("删除成功！", "buy_list", "");
+			} else {
+				ajaxObject = new AjaxObject("删除失败");
+			}
 		}
 		return ajaxObject.toString();
 	}
@@ -140,7 +152,6 @@ public class BuyAction {
 	 */
 	private void getSelects(HttpServletRequest request) {
 
-		DbUtils dbUtils = new DbUtils();
 		String sql = "SELECT * FROM cunit ORDER BY priority";
 		List<CodeTableForm> unitList = dbUtils.getListBySql(sql); //采购单类型
 		request.setAttribute("unitList", unitList);

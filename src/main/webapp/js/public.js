@@ -26,20 +26,35 @@ $(function(){
  * @returns {Number}
  */
 function multiply(dou1, dou2) {
-	alert(dou1 * dou2);
 	return Math.round(dou1 * dou2 * 100) / 100;
 }
 /**
  * 赋值相乘的值
  * @param obj
- * @param name1 参数1
- * @param name2 参数2
- * @param name3 赋值参数
+ * @param name1 相乘字段
+ * @param name2 相乘字段
+ * @param name3 赋值字段
  */
-function getMultiplySum(obj, name1, name2, name3) {
+function setMultiply(obj, name1, name2, name3) {
 	var row = $(obj).parent().parent().parent();
 	var realprice = row.find("input[name*='map[" + name1 + "]']").val();
 	var num = row.find("input[name*='map[" + name2 + "]']").val();
 	var realsum = multiply(realprice, num);
 	row.find("input[name*='map[" + name3 + "]']").val(realsum);
+}
+/**
+ * 相加所有值
+ * @param name1 相加的字段
+ * @param name2 赋值字段
+ */
+function setAllSum(name1, name2) {
+	var allsum = 0.00;
+	$("input[name*='map[" + name1 + "]']").each(function(){
+		allsum += $(this).val()*1;
+	});
+	allsum = Math.round(allsum * 100) / 100;
+	if(name2) {
+		$("input[name*='map[" + name2 + "]']").val(allsum);
+	}
+	return allsum;
 }

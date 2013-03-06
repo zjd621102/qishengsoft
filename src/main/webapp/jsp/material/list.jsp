@@ -71,7 +71,19 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${materialList}" var="bean" varStatus="vs">
-			   	<tr target="s_materialid" rel="${bean.map.materialid}">
+			   	<tr target="s_materialid" rel="${bean.map.materialid}"
+			   		ondblclick="$.bringBack({
+			   		materialid:'${bean.map.materialid}',
+					materialno:'${bean.map.materialno}',
+					materialname:'${bean.map.materialname}',
+					unit:'${bean.map.unit}',
+					price:'${bean.map.price}',
+					manuid:'${bean.map.manuid}',
+					manuname:'${bean.map.manuname}',
+					manucontact:'${bean.map.manucontact}',
+					manutel:'${bean.map.manutel}',
+					materialprice:'${bean.map.price}'})"
+			   	>
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.materialno}</td>
 			   		<td>${bean.map.materialname}</td>

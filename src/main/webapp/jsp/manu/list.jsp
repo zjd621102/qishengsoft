@@ -83,15 +83,22 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${manuList}" var="bean" varStatus="vs">
-			   	<tr target="s_manuid" rel="${bean.map.manuid}">
+			   	<tr target="s_manuid" rel="${bean.map.manuid}"
+			   		ondblclick="$.bringBack({
+			   		manuid:'${bean.map.manuid}',
+					manuname:'${bean.map.manuname}',
+					manubankname:'${bean.map.manubankname}',
+					manubankcardno:'${bean.map.manubankcardno}',
+					manuaccountname:'${bean.map.manuaccountname}'})"
+			   	>
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.manuname}</td>
 			   		<td>${bean.map.manutypename}</td>
 			   		<td>${bean.map.statusname}</td>
 			   		<td>${bean.map.createdate}</td>
-			   		<td>${bean.map.contact}</td>
-			   		<td>${bean.map.tel}</td>
-			   		<td>${bean.map.email}</td>
+			   		<td>${bean.map.manucontact}</td>
+			   		<td>${bean.map.manutel}</td>
+			   		<td>${bean.map.manuemail}</td>
 			   	</tr>
 		   	</c:forEach>
 	   	</tbody>

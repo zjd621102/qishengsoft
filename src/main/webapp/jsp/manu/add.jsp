@@ -45,21 +45,21 @@
 		<dl>
 			<dt>联系人：</dt>
 			<dd>
-				<input type="text" name="map[contact]" class="required" size="30" maxlength="32" alt="请输入联系人"
-					 value="${form.map.contact}"/>
+				<input type="text" name="map[manucontact]" class="required" size="30" maxlength="32" alt="请输入联系人"
+					 value="${form.map.manucontact}"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>联系电话：</dt>
 			<dd>
-				<input type="text" name="map[tel]" class="required" size="30" maxlength="32" alt="请输入联系电话"
-					 value="${form.map.tel}"/>
+				<input type="text" name="map[manutel]" class="required" size="30" maxlength="32" alt="请输入联系电话"
+					 value="${form.map.manutel}"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>EMAIL：</dt>
 			<dd>
-				<input type="text" name="map[email]" size="30" maxlength="64" value="${form.map.email}"/>
+				<input type="text" name="map[manuemail]" size="30" maxlength="64" value="${form.map.manuemail}"/>
 			</dd>
 		</dl>
 		<dl>
@@ -76,15 +76,15 @@
 		<table class="table" style="width: 100%;">
 			<thead>
 				<tr style="text-align: center;">
-					<th width="2%">
+					<th width="4%">
 						<a href="#" class="btnAdd addRow"/>
 					</th>
-					<th width="3%">序号</th>
+					<th width="4%">序号</th>
 					<th width="20%">开户银行</th>
 					<th width="20%">公司银行账号</th>
 					<th width="20%">帐户名称</th>
 					<th width="10%">优先级</th>
-					<th width="25%">备注</th>
+					<th width="22%">备注</th>
 				</tr>
 			</thead>
 			<tbody>

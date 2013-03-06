@@ -41,7 +41,8 @@ public class MaterialDaoImpl {
 	public List<CodeTableForm> getMaterialList(CodeTableForm form, int pageNum, int numPerPage) {
 		
 		String sql = "SELECT t.*, func_getMaterialtypeName(t.materialtype) materialtypename,"
-				+ " func_getUnitName(t.unit) unitname, func_getManuName(t.manuid) manuname FROM smaterial t WHERE 1 = 1";
+				+ " func_getUnitName(t.unit) unitname, sm.manuname, sm.manucontact, sm.manutel"
+				+" FROM smaterial t LEFT JOIN smanu sm on t.manuid = sm.manuid WHERE 1 = 1";
 		String cond = getMaterialListCondition(form);
 		sql  += cond;
 		sql += " ORDER BY materialid";

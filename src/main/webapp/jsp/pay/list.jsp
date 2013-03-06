@@ -7,10 +7,6 @@
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						银行卡卡号：<input type="text" name="map[bankcardno]" size="30" maxlength="16"
-							value="${form.map.bankcardno}"/>
-					</td>
-					<td>
 						当前流程：
 						<select name="map[currflow]" style="width: 184px;">
 							<option value=""></option>
@@ -45,23 +41,23 @@
 			<shiro:hasPermission name="Pay:add">
 			<li>
 				<a class="add" href="<%=path%>/pay/add" target="dialog" rel="pay_add" mask="true"
-					width="500" height="500">
-					<span>新增收付款单</span>
+					width="1300" height="500">
+					<span>新增发票</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="Pay:edi">
 			<li>
 				<a class="edit" href="<%=path%>/pay/edi/{s_payid}" target="dialog" rel="pay_edi" mask="true"
-					width="500" height="500">
-					<span>修改收付款单</span>
+					width="1300" height="500">
+					<span>修改发票</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="Pay:delete">
 			<li>
 				<a class="delete" href="<%=path%>/pay/delete/{s_payid}" target="ajaxTodo" title="确定要删除吗?">
-					<span>删除收付款单</span>
+					<span>删除发票</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
@@ -71,14 +67,11 @@
 		<thead>
 			<tr>
 				<th width="5%">序号</th>
-				<th width="10%">单据类型</th>
-				<th width="10%">报账日期</th>
-				<th width="10%">供应商/客户</th>
-				<th width="10%">银行卡卡号</th>
-				<th width="10%">关联单号</th>
-				<th width="10%">应付金额</th>
-				<th width="10%">实付金额</th>
+				<th width="20%">单据类型</th>
+				<th width="20%">发票日期</th>
+				<th width="20%">关联单号</th>
 				<th width="10%">当前流程</th>
+				<th width="10%">实付金额</th>
 				<th width="15%">创建时间</th>
 			</tr>
 		</thead>
@@ -88,12 +81,9 @@
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.btypename}</td>
 			   		<td>${bean.map.paydate}</td>
-			   		<td>${bean.map.manuname}</td>
-			   		<td>${bean.map.bankcardno}</td>
-			   		<td>${bean.map.relateid}</td>
-			   		<td>${bean.map.planmoney}</td>
-			   		<td>${bean.map.realmoney}</td>
+			   		<td>${bean.map.relateno}</td>
 			   		<td>${bean.map.currflow}</td>
+			   		<td>${bean.map.allrealsum}</td>
 			   		<td>${bean.map.createtime}</td>
 			   	</tr>
 		   	</c:forEach>

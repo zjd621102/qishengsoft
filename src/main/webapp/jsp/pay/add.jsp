@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h2 class="contentTitle">新增收付款单</h2>
+<h2 class="contentTitle">新增发票</h2>
 <form method="post" action="<%=path%>/pay/add" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
 	<div class="pageFormContent" layoutH="97">
@@ -21,56 +21,11 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>付款日期/收款日期：</dt>
+			<dt>发票日期：</dt>
 			<dd>
 				<input type="text" name="map[paydate]" class="required date" size="30"
 					value="${form.map.paydate}" readonly="readonly"/>
 				<a class="inputDateButton" href="javascript:;">选择</a>
-			</dd>
-		</dl>
-		<dl>
-			<dt>供应商/客户：</dt>
-			<dd>
-				<input type="hidden" name="map[manuid]" value="${form.map.manuid}"/>
-				<input type="text" class="required" name="map[manuname]" value="${form.map.manuname}"
-					size="30" suggestFields="manuid,manuname"  readonly="readonly"/>
-				<a class="btnLook" href="<%=path%>/backselect/manu" lookupGroup="manuLookup">查找带回</a>
-			</dd>
-		</dl>
-		<dl>
-			<dt>银行卡卡号：</dt>
-			<dd>
-				<select name="map[bankcardno]" style="width: 184px;" class="required">
-					<option value=""></option>
-					<c:forEach items="${bankcardList}" var="bankcard">
-						<option value="${bankcard.map.bankcardno}"
-							${bankcard.map.bankcardno==form.map.bankcardno?"selected":""}
-						>
-							${bankcard.map.bankcardno}|${bankcard.map.bankname}
-						</option>
-					</c:forEach>
-				</select>
-			</dd>
-		</dl>
-		<dl>
-			<dt>采购单号/销售单号：</dt>
-			<dd>
-				<input type="text" name="map[relateid]" class="required digits" size="30" maxlength="9"
-					value="${form.map.planmoney}"/>
-			</dd>
-		</dl>
-		<dl>
-			<dt>应付金额：</dt>
-			<dd>
-				<input type="text" name="map[planmoney]" class="required number" size="30" maxlength="12"
-					value="${form.map.planmoney}"/>
-			</dd>
-		</dl>
-		<dl>
-			<dt>实付金额：</dt>
-			<dd>
-				<input type="text" name="map[realmoney]" class="required number" size="30" maxlength="12"
-					value="${form.map.realmoney}"/>
 			</dd>
 		</dl>
 		<dl>

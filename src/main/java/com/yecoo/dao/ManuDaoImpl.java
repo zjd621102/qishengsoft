@@ -14,17 +14,6 @@ public class ManuDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
 	/**
-	 * 获取所有供应商
-	 * @return
-	 */
-	public List<CodeTableForm> getManuList() {
-		
-		String sql = "SELECT t.*, func_getManutypeName(manutypeid) manutypename ,"
-				+ " func_getStatusName(statusid) statusname FROM smanu t ORDER BY manuid DESC";
-		List<CodeTableForm> list = dbUtils.getListBySql(sql);
-		return list;
-	}
-	/**
 	 * 获取供应商数量
 	 * @param form
 	 * @return
@@ -47,7 +36,14 @@ public class ManuDaoImpl {
 	public List<CodeTableForm> getManuList(CodeTableForm form, int pageNum, int numPerPage) {
 		
 		String sql = "SELECT t.*, func_getManutypeName(manutypeid) manutypename ,"
-				+ " func_getStatusName(statusid) statusname FROM smanu t WHERE 1 = 1";
+				+ " func_getStatusName(statusid) statusname,"
+				+ " (SELECT sm.bankrow FROM smanurow sm"
+				+ " WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1) manubankname,"
+				+ " (SELECT sm.accountnorow FROM smanurow sm"
+				+ " WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1) manubankcardno,"
+				+ " (SELECT sm.accountnamerow FROM smanurow sm"
+				+ " WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1) manuaccountname"
+				+ " FROM smanu t WHERE 1 = 1";
 		String cond = getManuListCondition(form);
 		sql  += cond;
 		sql += " ORDER BY manuid DESC";
@@ -103,7 +99,11 @@ public class ManuDaoImpl {
 				dbUtils.setDelete(String.valueOf(manuid), "smanu", "manuid");
 			}
 			
-			conn.commit();
+			if(iReturn >= 0) {
+				conn.commit();
+			} else {
+				conn.rollback();
+			}
 		} catch(Exception e) {
 			iReturn = -1;
 			try {

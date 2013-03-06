@@ -55,7 +55,7 @@
 					<option value=""></option>
 					<c:forEach items="${allBankcardList}" var="bankcard">
 						<option value="${bankcard.map.bankcardid}">
-							${bankcard.map.bankcardno}
+							${bankcard.map.bankcardno}|${bankcard.map.bankname}
 						</option>
 					</c:forEach>
 				</select>

@@ -83,36 +83,55 @@
 						<a href="#" class="btnAdd addRow"/>
 					</th>
 					<th width="3%">序号</th>
-					<th width="9%">物资编码</th>
-					<th width="10%">物资名称</th>
-					<th width="10%">物资类型</th>
+					<th width="15%">物资编码</th>
+					<th width="15%">物资名称</th>
 					<th width="5%">计量单位</th>
-					<th width="7%">预算单价</th>
-					<th width="7%">实际单价</th>
-					<th width="5%">采购数量</th>
-					<th width="10%">实际总价</th>
-					<th width="10%">供应商名称</th>
+					<th width="7%">单价</th>
+					<th width="5%">数量</th>
+					<th width="10%">总价</th>
+					<th width="15%">供应商名称</th>
 					<th width="7%">联系人</th>
-					<th width="7%">联系电话</th>
+					<th width="8%">联系电话</th>
 					<th width="7%">备注</th>
 				</tr>
 			</thead>
 			<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td style="font-size: 13px; font-weight: bold; color: red;">
+						小计：
+					</td>
+					<td>
+						<input type="text" name="map[allsum]" style="width: 100%" class="double"
+							value="${form.map.allsum}" readonly="readonly"/>
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>
 						<input type="hidden" name="map[buyrowid]"/>
-						<input type="hidden" name="map[materialid]"/>
 						<a href="#" class="btnDel delRow"/>
 					</td>
 			   		<td></td>
 			   		<td>
-						<input type="text" name="map[materialno]" style="width: 100%" maxlength="13"/>
+						<input type="hidden" name="map[materialid]"/>
+						<input type="text" name="map[materialno]" style="width: 70%" maxlength="13"
+							suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel"
+							readonly="readonly"/>
+						<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"/>
+						<a href="javascript:void(0);" class="btnClear"
+							suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[materialname]" style="width: 100%" maxlength="32"/>
-			   		</td>
-			   		<td>
-						<input type="text" name="map[materialtype]" style="width: 100%" maxlength="5"/>
 			   		</td>
 			   		<td>
 						<select name="map[unit]" style="width: 90%;">
@@ -126,34 +145,27 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[price]" style="width: 100%" maxlength="12"
-							class="double" value="0.00"/>
-			   		</td>
-			   		<td>
-						<input type="text" name="map[realprice]" style="width: 100%" maxlength="12"
-							class="double" value="0.00" onchange="getMultiplySum(this, 'realprice', 'num', 'realsum')"/>
+							class="double" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
+							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[num]" style="width: 100%" maxlength="12"
-							class="double" value="0.00" onchange="getMultiplySum(this, 'realprice', 'num', 'realsum')"/>
+							class="double" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
+							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[realsum]" style="width: 100%" maxlength="12"
+						<input type="text" name="map[sum]" style="width: 100%" maxlength="12"
 							class="double" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
 						<input type="hidden" name="map[manuid]"/>
-						<input type="text" name="map[manuname]"
-							suggestFields="manuid,manuname,contact,tel" style="width: 60%" readonly="readonly"/>
-						<a class="btnLook" href="<%=path%>/backselect/manu" lookupGroup="manuLookup">
-							查找带回
-						</a>
-						<a href="javascript:void(0);" class="btnClear" suggestFields="manuid,manuname,contact,tel"/>
+						<input type="text" name="map[manuname]" style="width: 100%" readonly="readonly"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[contact]" style="width: 100%" maxlength="32"/>
+						<input type="text" name="map[manucontact]" style="width: 100%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[tel]" style="width: 100%" maxlength="32"/>
+						<input type="text" name="map[manutel]" style="width: 100%" maxlength="32"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"/>
@@ -163,21 +175,21 @@
 				   	<tr>
 						<td>
 							<input type="hidden" name="map[buyrowid]" value="${bean.map.buyrowid}"/>
-							<input type="hidden" name="map[materialid]" value="${bean.map.materialid}"/>
 							<a href="#" class="btnDel delRow" />
 						</td>
 				   		<td>${vs.index+1}</td>
 				   		<td>
-							<input type="text" name="map[materialno]" style="width: 100%" maxlength="13"
-								value="${bean.map.materialno}"/>
+							<input type="hidden" name="map[materialid]" value="${bean.map.materialid}"/>
+							<input type="text" name="map[materialno]" style="width: 70%" maxlength="13"
+								suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel"
+								value="${bean.map.materialno}" readonly="readonly"/>
+							<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"/>
+							<a href="javascript:void(0);" class="btnClear"
+								suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[materialname]" style="width: 100%" maxlength="32"
 								value="${bean.map.materialname}"/>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[materialtype]" style="width: 100%" maxlength="5"
-								value="${bean.map.materialtype}"/>
 				   		</td>
 				   		<td>
 							<select name="map[unit]" style="width: 90%;">
@@ -193,38 +205,32 @@
 				   		</td>
 				   		<td>
 							<input type="text" name="map[price]" style="width: 100%" maxlength="12"
-								class="double" value="${bean.map.price}"/>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[realprice]" style="width: 100%" maxlength="12"
-								class="double" value="${bean.map.realprice}"
-								onchange="getMultiplySum(this, 'realprice', 'num', 'realsum')"/>
+								class="double" value="${bean.map.price}"
+								onchange="setMultiply(this, 'price', 'num', 'sum');
+								setAllSum('sum', 'allsum');"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[num]" style="width: 100%" maxlength="12"
 								class="double" value="${bean.map.num}"
-								onchange="getMultiplySum(this, 'realprice', 'num', 'realsum')"/>
+								onchange="setMultiply(this, 'price', 'num', 'sum');
+								setAllSum('sum', 'allsum');"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[realsum]" style="width: 100%" maxlength="12"
-								class="double" value="${bean.map.realsum}" readonly="readonly"/>
+							<input type="text" name="map[sum]" style="width: 100%" maxlength="12"
+								class="double" value="${bean.map.sum}" readonly="readonly"/>
 				   		</td>
 				   		<td>
 							<input type="hidden" name="map[manuid]" value="${bean.map.manuid}"/>
 							<input type="text" name="map[manuname]" value="${bean.map.manuname}"
-								suggestFields="manuid,manuname,contact,tel" style="width: 60%" readonly="readonly"/>
-							<a class="btnLook" href="<%=path%>/backselect/manu" lookupGroup="manuLookup">
-								查找带回
-							</a>
-							<a href="javascript:void(0);" class="btnClear" suggestFields="manuid,manuname,contact,tel"/>
+								style="width: 100%" readonly="readonly"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[contact]" style="width: 100%" maxlength="32"
-								value="${bean.map.contact}"/>
+							<input type="text" name="map[manucontact]" style="width: 100%" maxlength="32"
+								value="${bean.map.manucontact}"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[tel]" style="width: 100%" maxlength="32"
-								value="${bean.map.tel}"/>
+							<input type="text" name="map[manutel]" style="width: 100%" maxlength="32"
+								value="${bean.map.manutel}"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"

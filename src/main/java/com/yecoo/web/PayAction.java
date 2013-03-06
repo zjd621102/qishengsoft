@@ -15,13 +15,14 @@ import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
- * 收付款单管理
+ * 发票管理
  * @author zhoujd
  */
 @Controller
 @RequestMapping("/pay")
 public class PayAction {
 
+	DbUtils dbUtils = new DbUtils();
 	private PayDaoImpl payDaoImpl = new PayDaoImpl();
 
 	@RequiresPermissions("Pay:view")
@@ -45,7 +46,7 @@ public class PayAction {
 		int totalCount = payDaoImpl.getPayCount(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
 		List<CodeTableForm> payList = payDaoImpl.getPayList(form, pageNum, numPerPage);
-		request.setAttribute("payList", payList); // 收付款单列表
+		request.setAttribute("payList", payList); // 发票列表
 
 		request.setAttribute("form", form);
 		request.setAttribute("act", act);
@@ -77,7 +78,7 @@ public class PayAction {
 		CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
 		String maker = StrUtils.nullToStr(user.getValue("userid"));
 		form.setValue("maker", maker);
-		int iReturn = payDaoImpl.addPay(form);
+		int iReturn = payDaoImpl.addPay(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "pay_list", "closeCurrent");
 		} else {
@@ -91,7 +92,15 @@ public class PayAction {
 	public String toEdi(@PathVariable("payid") int payid, HttpServletRequest request) {
 		
 		CodeTableForm form = null;
-		form = payDaoImpl.getPayById(payid);
+		form = payDaoImpl.getPayById(payid, request);
+
+		String sql = "SELECT IFNULL(SUM(t.plansum), 0) FROM bpayrow t WHERE t.payid = '" + payid + "'";
+		double allplansum = Double.parseDouble(dbUtils.execQuerySQL(sql));
+		form.setValue("allplansum", allplansum); //小计：应付金额
+		sql = "SELECT IFNULL(SUM(t.realsum), 0) FROM bpayrow t WHERE t.payid = '" + payid + "'";
+		double allrealsum = Double.parseDouble(dbUtils.execQuerySQL(sql));
+		form.setValue("allrealsum", allrealsum); //小计：实付金额
+
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);
@@ -101,10 +110,10 @@ public class PayAction {
 
 	@RequiresPermissions("Pay:edi")
 	@RequestMapping(value="/edi", method=RequestMethod.POST)
-	public @ResponseBody String edi(CodeTableForm form) {
+	public @ResponseBody String edi(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
-		int iReturn = payDaoImpl.ediPay(form);
+		int iReturn = payDaoImpl.ediPay(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "pay_list", "closeCurrent");
 		} else {
@@ -115,15 +124,17 @@ public class PayAction {
 
 	@RequiresPermissions("Pay:delete")
 	@RequestMapping(value="/delete/{payid}")
-	public @ResponseBody String delete(@PathVariable int payid) {
+	public @ResponseBody String delete(@PathVariable int payid, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
 		
-		CodeTableForm form = payDaoImpl.getPayById(payid);
+		CodeTableForm form = payDaoImpl.getPayById(payid, request);
 		String currflow = StrUtils.nullToStr(form.getValue("currflow"));
 		if(currflow.equals("结束")) {
 			ajaxObject = new AjaxObject("单据已结束，不能删除");
+		} else if(!"".equals(StrUtils.nullToStr(form.getValue("relateno")))) {
+			ajaxObject = new AjaxObject("单据已关联其它单据，不能删除");
 		} else {
 			iReturn = payDaoImpl.deletePay(payid);
 			if (iReturn >= 0) {
@@ -141,7 +152,6 @@ public class PayAction {
 	 */
 	private void getSelects(HttpServletRequest request) {
 
-		DbUtils dbUtils = new DbUtils();
 		String sql = "SELECT * FROM sbtype WHERE btype in ('FKD','SKD','YFD')";
 		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); //单据类型
 		sql = "SELECT * FROM sbankcard WHERE status = '1'";
