@@ -10,7 +10,7 @@ import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 
-public class ProductDaoImpl {
+public class ProductDaoImpl extends BaseDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
 	/**
@@ -43,7 +43,7 @@ public class ProductDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getProductList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getProductList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getProducttypeName(t.producttype) producttypename,"
 				+ " func_getUnitName(t.unit) unitname, func_getSum(t.productid, 'CPD') planprice"

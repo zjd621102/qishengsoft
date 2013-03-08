@@ -3,7 +3,7 @@
 
 <h2 class="contentTitle">修改发票</h2>
 <form method="post" action="<%=path%>/pay/edi" class="required-validate pageForm"
-	onsubmit="return validateCallback(this, dialogAjaxDone);">
+	onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
 	<input type="hidden" name="map[payid]" value="${form.map.payid}" />
 	<div class="pageFormContent" layoutH="97">
 		<dl>
@@ -39,7 +39,7 @@
 		<dl>
 			<dt>关联金额：</dt>
 			<dd>
-				<input type="text" name="map[relatemoney]" class="double" size="30" maxlength="12"
+				<input type="text" name="map[relatemoney]" class="number" size="30" maxlength="12"
 					value="${form.map.relatemoney}" readonly="readonly"/>
 			</dd>
 		</dl>
@@ -106,11 +106,11 @@
 						小计：
 					</td>
 					<td>
-						<input type="text" name="map[allplansum]" style="width: 100%" class="double"
+						<input type="text" name="map[allplansum]" style="width: 100%" class="number"
 							value="${form.map.allplansum}" readonly="readonly"/>
 					</td>
 					<td>
-						<input type="text" name="map[allrealsum]" style="width: 100%" class="double"
+						<input type="text" name="map[allrealsum]" style="width: 100%" class="number"
 							value="${form.map.allrealsum}" readonly="readonly"/>
 					</td>
 					<td></td>
@@ -122,7 +122,7 @@
 					</td>
 			   		<td>${vs.index+1}</td>
 					<td>
-						<select name="map[bankcardno]" style="width: 95%;">
+						<select name="map[bankcardno]" style="width: 95%;" class="notnull" alt="银行卡卡号">
 							<option value=""></option>
 							<c:forEach items="${bankcardList}" var="bankcard">
 								<option value="${bankcard.map.bankcardno}">
@@ -151,12 +151,12 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[plansum]" style="width: 100%" maxlength="12"
-							class="double" value="0.00"
+							class="number" value="0.00"
 							onchange="setAllSum('plansum', 'allplansum');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realsum]" style="width: 100%" maxlength="12"
-							class="double" value="0.00"
+							class="number" value="0.00"
 							onchange="setAllSum('realsum', 'allrealsum');"/>
 			   		</td>
 			   		<td>
@@ -171,7 +171,7 @@
 						</td>
 				   		<td>${vs.index+1}</td>
 						<td>
-							<select name="map[bankcardno]" style="width: 95%;">
+							<select name="map[bankcardno]" style="width: 95%;" class="notnull" alt="银行卡卡号">
 								<option value=""></option>
 								<c:forEach items="${bankcardList}" var="bankcard">
 									<option value="${bankcard.map.bankcardno}"
@@ -205,12 +205,12 @@
 				   		</td>
 				   		<td>
 							<input type="text" name="map[plansum]" style="width: 100%" maxlength="12"
-								class="double" value="${bean.map.plansum}"
+								class="number" value="${bean.map.plansum}"
 								onchange="setAllSum('plansum', 'allplansum');"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[realsum]" style="width: 100%" maxlength="12"
-								class="double" value="${bean.map.realsum}"
+								class="number" value="${bean.map.realsum}"
 								onchange="setAllSum('realsum', 'allrealsum');"/>
 				   		</td>
 				   		<td>
@@ -230,6 +230,8 @@
 			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
 			</c:if>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			<li><div class="button"><div class="buttonContent"><button type="button"
+				onclick="window.open('<%=path%>/pay/edi/${form.map.payid}?act=print');">打印</button></div></div></li>
 		</ul>
 	</div>
 </form>

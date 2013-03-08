@@ -9,7 +9,7 @@ import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 
-public class ModuleDaoImpl {
+public class ModuleDaoImpl extends BaseDaoImpl {
 
 	DbUtils dbUtils = new DbUtils();
 	/**
@@ -96,7 +96,7 @@ public class ModuleDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getModuleList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getModuleList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getModuleName(t.parentid) parentname FROM smodule t WHERE 1 = 1";
 		String cond = getModuleListCondition(form);

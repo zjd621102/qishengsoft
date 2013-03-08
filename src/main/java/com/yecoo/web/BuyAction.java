@@ -29,28 +29,19 @@ public class BuyAction {
 	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
 	public String list(CodeTableForm form, HttpServletRequest request) {
 
-		String act = StrUtils.nullToStr(request.getAttribute("act"));
-		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
-		int pageNum = 1;
-		int numPerPage = Constants.NUMPERPAGE;
-		if (!sPageNum.equals("")) {
-			pageNum = Integer.parseInt(sPageNum);
+		String first = StrUtils.nullToStr(request.getParameter("first")); // 查询初始化
+		if(first.equals("true")) {
+			form.setValue("currflow", "申请");
 		}
-		if (!sNumPerPage.equals("")) {
-			numPerPage = Integer.parseInt(sNumPerPage);
-		}
-		request.setAttribute("pageNum", pageNum); // 当前页
-		request.setAttribute("numPerPage", numPerPage); // 每页数量
+		
+		buyDaoImpl.initAction(request);
 
 		int totalCount = buyDaoImpl.getBuyCount(form);
+		List<CodeTableForm> buyList = buyDaoImpl.getBuyList(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> buyList = buyDaoImpl.getBuyList(form, pageNum, numPerPage);
 		request.setAttribute("buyList", buyList); // 采购单列表
-
+		request.setAttribute("sn", "buy"); // 授权名称
 		request.setAttribute("form", form);
-		request.setAttribute("act", act);
-		request.setAttribute("sn", "buy"); //授权名称
 		
 		this.getSelects(request);
 		
@@ -74,12 +65,12 @@ public class BuyAction {
 	public @ResponseBody String add(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
-		String createtime = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss"); //当前日期
+		String createtime = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss"); // 当前日期
 		form.setValue("createtime", createtime);
 		
 		String btype = StrUtils.nullToStr(form.getValue("btype"));				
 		String buyno = StrUtils.getNewNO(btype,"buyno","bbuy");
-		form.setValue("buyno", buyno); //初始化单据号
+		form.setValue("buyno", buyno); // 初始化单据号
 		
 		CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
 		String maker = StrUtils.nullToStr(user.getValue("userid"));
@@ -102,11 +93,16 @@ public class BuyAction {
 		
 		String sql = "SELECT IFNULL(SUM(t.sum), 0) FROM bbuyrow t WHERE t.buyid = '" + buyid + "'";
 		double allrealsum = Double.parseDouble(dbUtils.execQuerySQL(sql));
-		form.setValue("allsum", allrealsum); //小计：总价
+		form.setValue("allsum", allrealsum); // 小计：总价
 		
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);
+		
+		String act = StrUtils.nullToStr(request.getParameter("act"));
+		if(act.equals("print")) {
+			return "buy/print"; // 打印
+		}
 		
 		return "buy/edi";
 	}
@@ -131,7 +127,7 @@ public class BuyAction {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
-		String sql = "SELECT COUNT(1) FROM bbuy t WHERE t.buyid = '" + buyid + "'";
+		String sql = "SELECT COUNT(1) FROM bbuy t WHERE t.currflow <> '申请' AND t.buyid = '" + buyid + "'";
 		int icount = dbUtils.getIntBySql(sql);
 		if(icount >= 1) {
 			ajaxObject = new AjaxObject("删除失败（单据不在申请流程）");
@@ -153,15 +149,15 @@ public class BuyAction {
 	private void getSelects(HttpServletRequest request) {
 
 		String sql = "SELECT * FROM cunit ORDER BY priority";
-		List<CodeTableForm> unitList = dbUtils.getListBySql(sql); //采购单类型
+		List<CodeTableForm> unitList = dbUtils.getListBySql(sql); // 计量单位
 		request.setAttribute("unitList", unitList);
 
-		sql = "SELECT * FROM sflow WHERE btype = 'CGD'";
-		List<CodeTableForm> currflowList = dbUtils.getListBySql(sql); //当前流程
+		sql = "SELECT * FROM sflow WHERE btype = 'XXX'";
+		List<CodeTableForm> currflowList = dbUtils.getListBySql(sql); // 当前流程
 		request.setAttribute("currflowList", currflowList);
 
 		sql = "SELECT * FROM sbtype WHERE btype in ('CGD','JYD')";
-		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); //当前流程
+		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); // 单据类型
 		request.setAttribute("btypeList", btypeList);
 	}
 }

@@ -10,7 +10,7 @@ import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 
-public class ManuDaoImpl {
+public class ManuDaoImpl extends BaseDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
 	/**
@@ -33,7 +33,7 @@ public class ManuDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getManuList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getManuList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getManutypeName(manutypeid) manutypename ,"
 				+ " func_getStatusName(statusid) statusname,"
@@ -46,7 +46,7 @@ public class ManuDaoImpl {
 				+ " FROM smanu t WHERE 1 = 1";
 		String cond = getManuListCondition(form);
 		sql  += cond;
-		sql += " ORDER BY manuid DESC";
+		sql += " ORDER BY manuid";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
@@ -61,12 +61,16 @@ public class ManuDaoImpl {
 		StringBuffer cond = new StringBuffer("");
 		String manuname = StrUtils.nullToStr(form.getValue("manuname"));
 		String manutypeid = StrUtils.nullToStr(form.getValue("manutypeid"));
+		String statusid = StrUtils.nullToStr(form.getValue("statusid"));
 		
 		if(!manuname.equals("")) {
 			cond.append(" AND t.manuname like '%").append(manuname).append("%'");
 		}
 		if(!manutypeid.equals("")) {
-			cond.append(" AND t.manutypeid like '%").append(manutypeid).append("%'");
+			cond.append(" AND t.manutypeid = '").append(manutypeid).append("'");
+		}
+		if(!statusid.equals("")) {
+			cond.append(" AND t.statusid = '").append(statusid).append("'");
 		}
 		
 		return cond.toString();

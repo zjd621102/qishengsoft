@@ -2,19 +2,19 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="<%=path%>/buy/list" method="post" rel="pagerForm" id="fid">
+	<form onsubmit="return navTabSearch(this);" action="<%=path%>/sell/list" method="post" rel="pagerForm" id="fid">
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						采购单名称：
-						<input type="text" name="map[buyname]" size="30" maxlength="32"
-							value="${form.map.buyname}"/>
+						销售单名称：
+						<input type="text" name="map[sellname]" size="30" maxlength="32"
+							value="${form.map.sellname}"/>
 					</td>
 					<td>
-						采购单编号：
-						<input type="text" name="map[buyno]" size="30" maxlength="13"
-							value="${form.map.buyno}"/>
+						销售单编号：
+						<input type="text" name="map[sellno]" size="30" maxlength="13"
+							value="${form.map.sellno}"/>
 					</td>
 					<td>
 						当前流程：
@@ -48,26 +48,26 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<shiro:hasPermission name="Buy:add">
+			<shiro:hasPermission name="Sell:add">
 			<li>
-				<a class="add" href="<%=path%>/buy/add" target="dialog" rel="buy_add" mask="true"
+				<a class="add" href="<%=path%>/sell/add" target="dialog" rel="sell_add" mask="true"
 					width="1300" height="500">
-					<span>新增采购单</span>
+					<span>新增销售单</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
-			<shiro:hasPermission name="Buy:edi">
+			<shiro:hasPermission name="Sell:edi">
 			<li>
-				<a class="edit" href="<%=path%>/buy/edi/{s_buyid}" target="dialog" rel="buy_edi" mask="true"
+				<a class="edit" href="<%=path%>/sell/edi/{s_sellid}" target="dialog" rel="sell_edi" mask="true"
 					width="1300" height="500">
-					<span>修改采购单</span>
+					<span>修改销售单</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
-			<shiro:hasPermission name="Buy:delete">
+			<shiro:hasPermission name="Sell:delete">
 			<li>
-				<a class="delete" href="<%=path%>/buy/delete/{s_buyid}" target="ajaxTodo" title="确定要删除吗?">
-					<span>删除采购单</span>
+				<a class="delete" href="<%=path%>/sell/delete/{s_sellid}" target="ajaxTodo" title="确定要删除吗?">
+					<span>删除销售单</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
@@ -77,25 +77,25 @@
 		<thead>
 			<tr>
 				<th width="10%">序号</th>
-				<th width="10%">单据类型</th>
-				<th width="20%">采购单名称</th>
-				<th width="10%">采购编号</th>
-				<th width="10%">采购日期</th>
-				<th width="10%">当前流程</th>
+				<th width="15%">销售编号</th>
+				<th width="10%">销售日期</th>
+				<th width="15%">客户名称</th>
+				<th width="15%">当前流程</th>
 				<th width="10%">制单人</th>
-				<th width="20%">创建时间</th>
+				<th width="10%">销售金额</th>
+				<th width="15%">创建时间</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${buyList}" var="bean" varStatus="vs">
-			   	<tr target="s_buyid" rel="${bean.map.buyid}">
+			<c:forEach items="${sellList}" var="bean" varStatus="vs">
+			   	<tr target="s_sellid" rel="${bean.map.sellid}">
 			   		<td>${vs.index+1}</td>
-			   		<td>${bean.map.btypename}</td>
-			   		<td>${bean.map.buyname}</td>
-			   		<td>${bean.map.buyno}</td>
-			   		<td>${bean.map.buydate}</td>
+			   		<td>${bean.map.sellno}</td>
+			   		<td>${bean.map.selldate}</td>
+			   		<td>${bean.map.manuname}</td>
 			   		<td>${bean.map.currflow}</td>
 			   		<td>${bean.map.makername}</td>
+			   		<td>${bean.map.allrealsum}</td>
 			   		<td>${bean.map.createtime}</td>
 			   	</tr>
 		   	</c:forEach>

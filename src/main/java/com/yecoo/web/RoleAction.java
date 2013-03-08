@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yecoo.dao.ModuleDaoImpl;
 import com.yecoo.dao.RoleDaoImpl;
 import com.yecoo.model.CodeTableForm;
-import com.yecoo.util.Constants;
-import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
  * 角色管理
@@ -29,28 +27,15 @@ public class RoleAction {
 	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
 	public String list(CodeTableForm form, HttpServletRequest request) {
 
-		String act = StrUtils.nullToStr(request.getAttribute("act"));
-		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
-		int pageNum = 1;
-		int numPerPage = Constants.NUMPERPAGE;
-		if (!sPageNum.equals("")) {
-			pageNum = Integer.parseInt(sPageNum);
-		}
-		if (!sNumPerPage.equals("")) {
-			numPerPage = Integer.parseInt(sNumPerPage);
-		}
-		request.setAttribute("pageNum", pageNum); // 当前页
-		request.setAttribute("numPerPage", numPerPage); // 每页数量
+		roleDaoImpl.initAction(request);
 
 		int totalCount = roleDaoImpl.getRoleCount(form);
+		List<CodeTableForm> roleList = roleDaoImpl.getRoleList(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> roleList = roleDaoImpl.getRoleList(form, pageNum, numPerPage);
 		request.setAttribute("roleList", roleList); // 角色列表
-
-		request.setAttribute("form", form);
-		request.setAttribute("act", act);
 		request.setAttribute("sn", "role"); //授权名称
+		request.setAttribute("form", form);
+
 		return "role/list";
 	}
 

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yecoo.dao.RoleDaoImpl;
 import com.yecoo.dao.UserDaoImpl;
 import com.yecoo.model.CodeTableForm;
-import com.yecoo.util.Constants;
 import com.yecoo.util.Md5;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
@@ -39,53 +38,20 @@ public class UserAction {
 	@RequestMapping(value = "/list")
 	public String list(CodeTableForm form, HttpServletRequest request) {
 
-		String act = StrUtils.nullToStr(request.getAttribute("act"));
-		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
-		int pageNum = 1;
-		int numPerPage = Constants.NUMPERPAGE;
-		if (!act.equals("excel") && !sPageNum.equals("")) {
-			pageNum = Integer.parseInt(sPageNum);
-		}
-		if (act.equals("excel")) {
-			numPerPage = Constants.NUMPERPAGE_EXCEL;
-		} else if (!sNumPerPage.equals("")) {
-			numPerPage = Integer.parseInt(sNumPerPage);
-		}
-		request.setAttribute("pageNum", pageNum); // 当前页
-		request.setAttribute("numPerPage", numPerPage); // 每页数量
+		userDaoImpl.initAction(request);
 
 		int totalCount = userDaoImpl.getUserCount(form);
-		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> userList = userDaoImpl.getUserList(form, pageNum, numPerPage);
-		request.setAttribute("userList", userList); // 用户列表
-
+		List<CodeTableForm> userList = userDaoImpl.getUserList(form);
 		List<CodeTableForm> roleList = roleDaoImpl.getRoleList();
+		request.setAttribute("totalCount", totalCount); // 列表总数量
+		request.setAttribute("userList", userList); // 用户列表
 		request.setAttribute("roleList", roleList); //角色列表
-
-		request.setAttribute("form", form);
-		request.setAttribute("act", act);
 		request.setAttribute("sn", "user"); //授权名称
+		request.setAttribute("form", form);
+
 		return "user/list";
 	}
-
-	/**
-	 * 用户列表导出
-	 * 
-	 * @param form
-	 * @param request
-	 * @param model
-	 * @return
-	 * @throws Exception
-	 */
-	@RequiresPermissions("User:view")
-	@RequestMapping(value = "/list_excel")
-	public String list_excel(CodeTableForm form, HttpServletRequest request) {
-		
-		request.setAttribute("act", "excel");
-		return this.list(form, request);
-	}
-
+	
 	@RequiresPermissions("User:add")
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String toAdd(HttpServletRequest request) {

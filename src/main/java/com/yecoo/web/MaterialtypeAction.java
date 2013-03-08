@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yecoo.dao.MaterialtypeDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
-import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
  * 物资类型管理
@@ -28,27 +27,15 @@ public class MaterialtypeAction {
 	public String list(@PathVariable("parent") int parent, CodeTableForm form, HttpServletRequest request) {
 
 		form.setValue("parent", parent);
-		
-		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
-		int pageNum = 1;
-		int numPerPage = 100;
-		if (!sPageNum.equals("")) {
-			pageNum = Integer.parseInt(sPageNum);
-		}
-		if (!sNumPerPage.equals("")) {
-			numPerPage = Integer.parseInt(sNumPerPage);
-		}
-		request.setAttribute("pageNum", pageNum); // 当前页
-		request.setAttribute("numPerPage", numPerPage); // 每页数量
+		materialtypeDaoImpl.initAction(request);
 
 		int totalCount = materialtypeDaoImpl.getMaterialtypeCount(form);
+		List<CodeTableForm> materialtypeList = materialtypeDaoImpl.getMaterialtypeList(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> materialtypeList = materialtypeDaoImpl.getMaterialtypeList(form, pageNum, numPerPage);
 		request.setAttribute("materialtypeList", materialtypeList); // 列表
-
-		request.setAttribute("form", form);
 		request.setAttribute("sn", "materialtype"); //授权名称
+		request.setAttribute("form", form);
+
 		return "materialtype/list";
 	}
 	

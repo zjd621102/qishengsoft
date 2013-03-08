@@ -7,7 +7,7 @@ import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 
-public class BankcardDaoImpl {
+public class BankcardDaoImpl extends BaseDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
 
@@ -20,7 +20,7 @@ public class BankcardDaoImpl {
 	 */
 	public List<CodeTableForm> getAllBankcardList(CodeTableForm form) {
 		
-		String sql = "SELECT t.* FROM sbankcard t WHERE 1 = 1";
+		String sql = "SELECT t.* FROM sbankcard t WHERE t.status = 1";
 		String bankcardid = StrUtils.nullToStr(form.getValue("bankcardid"));
 		if(!bankcardid.equals("")) {
 			sql += " AND t.bankcardid <> '" + bankcardid + "'";
@@ -48,12 +48,13 @@ public class BankcardDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getBankcardList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getBankcardList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getBanktypeName(t.banktype) banktypename,"
 				+ " func_getStatusName(t.status) statusname FROM sbankcard t WHERE 1 = 1";
 		String cond = getBankcardListCondition(form);
 		sql  += cond;
+		sql += " ORDER BY bankcardid";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
@@ -67,9 +68,13 @@ public class BankcardDaoImpl {
 		
 		StringBuffer cond = new StringBuffer("");
 		String bankcardno = StrUtils.nullToStr(form.getValue("bankcardno"));
+		String status = StrUtils.nullToStr(form.getValue("status"));
 		
 		if(!bankcardno.equals("")) {
 			cond.append(" AND t.bankcardno like '%").append(bankcardno).append("%'");
+		}
+		if(!status.equals("")) {
+			cond.append(" AND t.status = '").append(status).append("'");
 		}
 		
 		return cond.toString();
@@ -185,7 +190,7 @@ public class BankcardDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getTransferaccountList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getTransferaccountList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getBankcardno(t.bankcardid) bankcardno,"
 				+ " func_getBankcardno(t.transferbankcardid) transferbankcardno FROM btransferaccount t WHERE 1 = 1";
@@ -292,7 +297,7 @@ public class BankcardDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getReceandpayList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getReceandpayList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getBankcardno(t.bankcardid) bankcardno,"
 				+ " func_getReceandpaytypeName(t.receandpaytype) receandpaytypename FROM breceandpay t WHERE 1 = 1";

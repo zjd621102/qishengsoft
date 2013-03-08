@@ -41,7 +41,7 @@
 				<select name="map[currflow]" style="width: 184px;" class="required">
 					<option value=""></option>
 					<c:forEach items="${currflowList}" var="currflow">
-						<c:if test="${currflow.map.flowname!='结束'}">
+						<c:if test="${currflow.map.flowname=='申请'}">
 							<option value="${currflow.map.flowname}"
 								${currflow.map.flowname=="申请"?"selected":""}
 							>
@@ -91,10 +91,10 @@
 					<td></td>
 					<td></td>
 					<td style="font-size: 13px; font-weight: bold; color: red;">
-						小计：
+						合计：
 					</td>
 					<td>
-						<input type="text" name="map[allsum]" style="width: 100%" class="double"
+						<input type="text" name="map[allsum]" style="width: 100%" class="number"
 							value="${form.map.allsum}" readonly="readonly"/>
 					</td>
 					<td></td>
@@ -132,17 +132,17 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[price]" style="width: 100%" maxlength="12"
-							class="double" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
+							class="number" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[num]" style="width: 100%" maxlength="12"
-							class="double" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
+							class="number" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[sum]" style="width: 100%" maxlength="12"
-							class="double" value="0.00" readonly="readonly"/>
+							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
 						<input type="hidden" name="map[manuid]"/>

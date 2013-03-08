@@ -58,3 +58,27 @@ function setAllSum(name1, name2) {
 	}
 	return allsum;
 }
+/**
+ * 校验必填
+ * @returns {Boolean}
+ */
+function checkRequiredField() {
+	var b = true;
+	$(".notnull").each(function(){
+		if($(this).is(":visible") && $(this).val()=="") {
+			alertMsg.error($(this).attr("alt") + "不能为空");
+			b = false;;
+		}
+	});
+	return b;
+}
+/**
+ * 提交校验
+ * @returns {Boolean}
+ */
+function checkFormSubmit() {
+	var bool = true;
+	
+	bool = checkRequiredField();
+	return bool;
+}

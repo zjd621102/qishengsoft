@@ -6,10 +6,10 @@
  onsubmit="return validateCallback(this, dialogAjaxDone);">
  	<input type="hidden" name="map[bankcardid]" value="${form.map.bankcardid}" />
 	<div class="pageFormContent" layoutH="97">
-		<dl>
+		<dl style="width: 100%;">
 			<dt>发生日期：</dt>
-			<dd>
-				<input type="text" name="map[happendate]" class="required date" readonly="true"/>
+			<dd style="width: 60%;">
+				<input type="text" name="map[happendate]" size="30" class="required date" readonly="true"/>
 				<a class="inputDateButton" href="javascript:;">选择</a>
 				<span class="info">yyyy-MM-dd</span>
 			</dd>

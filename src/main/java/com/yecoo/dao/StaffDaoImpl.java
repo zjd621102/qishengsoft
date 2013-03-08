@@ -5,7 +5,7 @@ import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 
-public class StaffDaoImpl {
+public class StaffDaoImpl extends BaseDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
 	/**
@@ -28,7 +28,7 @@ public class StaffDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getStaffList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getStaffList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getStaffstatusName(t.staffstatus) staffstatusname,"
 				+ " func_getStafftypeName(t.stafftype) stafftypename FROM sstaff t WHERE 1 = 1";
@@ -47,9 +47,13 @@ public class StaffDaoImpl {
 		
 		StringBuffer cond = new StringBuffer("");
 		String staffname = StrUtils.nullToStr(form.getValue("staffname"));
+		String staffstatus = StrUtils.nullToStr(form.getValue("staffstatus"));
 		
 		if(!staffname.equals("")) {
 			cond.append(" AND t.staffname like '%").append(staffname).append("%'");
+		}
+		if(!staffstatus.equals("")) {
+			cond.append(" AND t.staffstatus = '").append(staffstatus).append("'");
 		}
 		
 		return cond.toString();

@@ -68,13 +68,21 @@
 				<input type="text" name="map[accountname]" size="30" maxlength="32" value="${form.map.accountname}"/>
 			</dd>
 		</dl>
+		<dl style="width: 100%;">
+			<dt>工资：</dt>
+			<dd style="width: 70%;">
+				<input type="text" name="map[salary]" class="required number" size="30" maxlength="12"
+					value="${form.map.salary}"/>
+				<span style="color: red;">（单位：元/天）</span>
+			</dd>
+		</dl>
 		<dl>
 			<dt>备注：</dt>
 			<dd>
 				<input type="text" name="map[remark]" size="30" maxlength="512" value="${form.map.remark}"/>
 			</dd>
 		</dl>
-	</div>	
+	</div>
 	
 	<div class="formBar">
 		<ul>

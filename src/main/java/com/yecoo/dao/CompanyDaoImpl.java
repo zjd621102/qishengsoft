@@ -3,7 +3,7 @@ package com.yecoo.dao;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 
-public class CompanyDaoImpl {
+public class CompanyDaoImpl extends BaseDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
 	/**

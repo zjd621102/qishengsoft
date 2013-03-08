@@ -2,13 +2,13 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="<%=path%>/bankcard/receandpay_list" method="post"
+	<form onsubmit="return dwzSearch(this, 'dialog');" action="<%=path%>/bankcard/receandpay_list" method="post"
 		rel="pagerForm" id="fid">
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						银行卡卡号：<input type="text" name="map[bankcardno]" value="${form.map.bankcardno}"/>
+						银行卡卡号：<input type="text" name="map[bankcardno]" size="30" value="${form.map.bankcardno}"/>
 					</td>
 					<td>
 						收支类型：

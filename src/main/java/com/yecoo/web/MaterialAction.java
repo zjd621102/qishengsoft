@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yecoo.dao.MaterialDaoImpl;
 import com.yecoo.dao.MaterialtypeDaoImpl;
 import com.yecoo.model.CodeTableForm;
-import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
@@ -39,28 +38,16 @@ public class MaterialAction {
 	@RequestMapping(value="/list/{materialtype}")
 	public String list(@PathVariable("materialtype") int materialtype, CodeTableForm form, HttpServletRequest request) {
 
-		form.setValue("materialtype", materialtype);
-		
-		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
-		int pageNum = 1;
-		int numPerPage = Constants.NUMPERPAGE;
-		if (!sPageNum.equals("")) {
-			pageNum = Integer.parseInt(sPageNum);
-		}
-		if (!sNumPerPage.equals("")) {
-			numPerPage = Integer.parseInt(sNumPerPage);
-		}
-		request.setAttribute("pageNum", pageNum); // 当前页
-		request.setAttribute("numPerPage", numPerPage); // 每页数量
+		form.setValue("materialtype", materialtype); //物资类型
+		materialDaoImpl.initAction(request);
 
 		int totalCount = materialDaoImpl.getMaterialCount(form);
-		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> materialList = materialDaoImpl.getMaterialList(form, pageNum, numPerPage);
-		request.setAttribute("materialList", materialList); // 列表
-
-		request.setAttribute("form", form);
+		List<CodeTableForm> materialList = materialDaoImpl.getMaterialList(form);
+		request.setAttribute("totalCount", totalCount); //列表总数量
+		request.setAttribute("materialList", materialList); //列表
 		request.setAttribute("sn", "material"); //授权名称
+		request.setAttribute("form", form);
+		
 		return "material/list";
 	}
 

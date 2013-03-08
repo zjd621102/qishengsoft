@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.yecoo.dao.BankcardDaoImpl;
 import com.yecoo.model.CodeTableForm;
-import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
@@ -28,28 +27,21 @@ public class BankcardAction {
 	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
 	public String list(CodeTableForm form, HttpServletRequest request) {
 
-		String act = StrUtils.nullToStr(request.getAttribute("act"));
-		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
-		int pageNum = 1;
-		int numPerPage = Constants.NUMPERPAGE;
-		if (!sPageNum.equals("")) {
-			pageNum = Integer.parseInt(sPageNum);
+		String first = StrUtils.nullToStr(request.getParameter("first")); //查询初始化
+		if(first.equals("true")) {
+			form.setValue("status", "1");
 		}
-		if (!sNumPerPage.equals("")) {
-			numPerPage = Integer.parseInt(sNumPerPage);
-		}
-		request.setAttribute("pageNum", pageNum); // 当前页
-		request.setAttribute("numPerPage", numPerPage); // 每页数量
+		bankcardDaoImpl.initAction(request);
 
 		int totalCount = bankcardDaoImpl.getBankcardCount(form);
+		List<CodeTableForm> bankcardList = bankcardDaoImpl.getBankcardList(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> bankcardList = bankcardDaoImpl.getBankcardList(form, pageNum, numPerPage);
 		request.setAttribute("bankcardList", bankcardList); // 银行卡列表
-
-		request.setAttribute("form", form);
-		request.setAttribute("act", act);
 		request.setAttribute("sn", "bankcard"); //授权名称
+		request.setAttribute("form", form);
+		
+		this.getSelects(request);
+		
 		return "bankcard/list";
 	}
 
@@ -189,28 +181,15 @@ public class BankcardAction {
 	@RequestMapping(value="/transferAccount_list", method={RequestMethod.GET, RequestMethod.POST})
 	public String transferAccount_list(CodeTableForm form, HttpServletRequest request) {
 
-		String act = StrUtils.nullToStr(request.getAttribute("act"));
-		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
-		int pageNum = 1;
-		int numPerPage = Constants.NUMPERPAGE;
-		if (!sPageNum.equals("")) {
-			pageNum = Integer.parseInt(sPageNum);
-		}
-		if (!sNumPerPage.equals("")) {
-			numPerPage = Integer.parseInt(sNumPerPage);
-		}
-		request.setAttribute("pageNum", pageNum); // 当前页
-		request.setAttribute("numPerPage", numPerPage); // 每页数量
+		bankcardDaoImpl.initAction(request);
 
 		int totalCount = bankcardDaoImpl.getTransferaccountCount(form);
-		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> transferaccountList = bankcardDaoImpl.getTransferaccountList(form, pageNum, numPerPage);
-		request.setAttribute("transferaccountList", transferaccountList); // 转账列表
-
-		request.setAttribute("form", form);
-		request.setAttribute("act", act);
+		List<CodeTableForm> transferaccountList = bankcardDaoImpl.getTransferaccountList(form);
+		request.setAttribute("totalCount", totalCount); //列表总数量
+		request.setAttribute("transferaccountList", transferaccountList); //转账列表
 		request.setAttribute("sn", "bankcard"); //授权名称
+		request.setAttribute("form", form);
+
 		return "bankcard/transferAccount_list";
 	}
 	
@@ -266,33 +245,20 @@ public class BankcardAction {
 	@RequestMapping(value="/receandpay_list", method={RequestMethod.GET, RequestMethod.POST})
 	public String receandpay_list(CodeTableForm form, HttpServletRequest request) {
 
-		String act = StrUtils.nullToStr(request.getAttribute("act"));
-		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
-		int pageNum = 1;
-		int numPerPage = Constants.NUMPERPAGE;
-		if (!sPageNum.equals("")) {
-			pageNum = Integer.parseInt(sPageNum);
-		}
-		if (!sNumPerPage.equals("")) {
-			numPerPage = Integer.parseInt(sNumPerPage);
-		}
-		request.setAttribute("pageNum", pageNum); // 当前页
-		request.setAttribute("numPerPage", numPerPage); // 每页数量
+		bankcardDaoImpl.initAction(request);
 
 		int totalCount = bankcardDaoImpl.getReceandpayCount(form);
-		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> receandpayList = bankcardDaoImpl.getReceandpayList(form, pageNum, numPerPage);
-		request.setAttribute("receandpayList", receandpayList); // 转账列表
+		List<CodeTableForm> receandpayList = bankcardDaoImpl.getReceandpayList(form);
+		request.setAttribute("totalCount", totalCount); //列表总数量
+		request.setAttribute("receandpayList", receandpayList); //转账列表
+		request.setAttribute("sn", "bankcard"); //授权名称
+		request.setAttribute("form", form);
 
 		String sql = "select * from creceandpaytype order by receandpaytypeid";
 		DbUtils dbUtils = new DbUtils();
 		List<CodeTableForm> receandpaytypeList = dbUtils.getListBySql(sql); //收支类型
 		request.setAttribute("receandpaytypeList", receandpaytypeList);
 		
-		request.setAttribute("form", form);
-		request.setAttribute("act", act);
-		request.setAttribute("sn", "bankcard"); //授权名称
 		return "bankcard/receandpay_list";
 	}
 }

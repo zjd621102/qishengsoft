@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.yecoo.dao.UnitDaoImpl;
 import com.yecoo.model.CodeTableForm;
-import com.yecoo.util.Constants;
-import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
  * 单位管理
@@ -27,28 +25,15 @@ public class UnitAction {
 	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
 	public String list(CodeTableForm form, HttpServletRequest request) {
 
-		String act = StrUtils.nullToStr(request.getAttribute("act"));
-		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
-		int pageNum = 1;
-		int numPerPage = Constants.NUMPERPAGE;
-		if (!sPageNum.equals("")) {
-			pageNum = Integer.parseInt(sPageNum);
-		}
-		if (!sNumPerPage.equals("")) {
-			numPerPage = Integer.parseInt(sNumPerPage);
-		}
-		request.setAttribute("pageNum", pageNum); // 当前页
-		request.setAttribute("numPerPage", numPerPage); // 每页数量
+		unitDaoImpl.initAction(request);
 
 		int totalCount = unitDaoImpl.getUnitCount(form);
+		List<CodeTableForm> unitList = unitDaoImpl.getUnitList(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> unitList = unitDaoImpl.getUnitList(form, pageNum, numPerPage);
 		request.setAttribute("unitList", unitList); // 单位列表
-
-		request.setAttribute("form", form);
-		request.setAttribute("act", act);
 		request.setAttribute("sn", "unit"); //授权名称
+		request.setAttribute("form", form);
+
 		return "unit/list";
 	}
 

@@ -7,7 +7,20 @@
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						银行卡卡号：<input type="text" name="map[bankcardno]" value="${form.map.bankcardno}"/>
+						银行卡卡号：<input type="text" name="map[bankcardno]" size="30" value="${form.map.bankcardno}"/>
+					</td>
+					<td>
+						是否可用：
+						<select name="map[status]" style="width: 184px;">
+							<option value=""></option>
+							<c:forEach items="${statusList}" var="status">
+								<option value="${status.map.statusid}"
+									${status.map.statusid==form.map.status?"selected":""}
+								>
+									${status.map.statusname}
+								</option>
+							</c:forEach>
+						</select>
 					</td>
 				</tr>
 			</table>
@@ -60,8 +73,8 @@
 				</a>
 			</li>
 			<li>
-				<a class="edit" href="<%=path%>/bankcard/transferAccount_list" target="navTab"
-					rel="bankcard_transferAccount_list">
+				<a class="edit" href="<%=path%>/bankcard/transferAccount_list" target="dialog"
+					rel="bankcard_transferAccount_list" mask="true" width="1000" height="500">
 					<span>转账列表</span>
 				</a>
 			</li>
@@ -73,8 +86,8 @@
 				</a>
 			</li>
 			<li>
-				<a class="edit" href="<%=path%>/bankcard/receandpay_list" target="navTab"
-					rel="bankcard_receandpay_list">
+				<a class="edit" href="<%=path%>/bankcard/receandpay_list" target="dialog"
+					rel="bankcard_receandpay_list" mask="true" width="1000" height="500">
 					<span>其它收支列表</span>
 				</a>
 			</li>

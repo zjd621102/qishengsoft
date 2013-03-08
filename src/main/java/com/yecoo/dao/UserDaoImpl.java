@@ -11,7 +11,7 @@ import com.yecoo.util.StrUtils;
  * 用户管理
  * @author zhoujd
  */
-public class UserDaoImpl {
+public class UserDaoImpl extends BaseDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
 	/**
@@ -34,7 +34,7 @@ public class UserDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getUserList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getUserList(CodeTableForm form) {
 		
 		String sql = "SELECT * FROM suser t WHERE 1 = 1";
 		String cond = getUserListCondition(form);

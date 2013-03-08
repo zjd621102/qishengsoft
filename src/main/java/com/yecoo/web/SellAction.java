@@ -8,46 +8,46 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.yecoo.dao.PayDaoImpl;
+import com.yecoo.dao.SellDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
- * 发票管理
+ * 销售单管理
  * @author zhoujd
  */
 @Controller
-@RequestMapping("/pay")
-public class PayAction {
+@RequestMapping("/sell")
+public class SellAction {
 
 	DbUtils dbUtils = new DbUtils();
-	private PayDaoImpl payDaoImpl = new PayDaoImpl();
+	private SellDaoImpl sellDaoImpl = new SellDaoImpl();
 
-	@RequiresPermissions("Pay:view")
+	@RequiresPermissions("Sell:view")
 	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
 	public String list(CodeTableForm form, HttpServletRequest request) {
-		
+
 		String first = StrUtils.nullToStr(request.getParameter("first")); //查询初始化
 		if(first.equals("true")) {
 			form.setValue("currflow", "申请");
 		}
-		payDaoImpl.initAction(request);
+		sellDaoImpl.initAction(request);
 
-		int totalCount = payDaoImpl.getPayCount(form);
-		List<CodeTableForm> payList = payDaoImpl.getPayList(form);
+		int totalCount = sellDaoImpl.getSellCount(form);
+		List<CodeTableForm> sellList = sellDaoImpl.getSellList(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		request.setAttribute("payList", payList); // 发票列表
-		request.setAttribute("sn", "pay"); //授权名称
+		request.setAttribute("sellList", sellList); // 销售单列表
+		request.setAttribute("sn", "sell"); //授权名称
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);
 		
-		return "pay/list";
+		return "sell/list";
 	}
 
-	@RequiresPermissions("Pay:add")
+	@RequiresPermissions("Sell:add")
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String toAdd(HttpServletRequest request) {
 
@@ -56,84 +56,83 @@ public class PayAction {
 		
 		this.getSelects(request);
 		
-		return "pay/add";
+		return "sell/add";
 	}
 
-	@RequiresPermissions("Pay:add")
+	@RequiresPermissions("Sell:add")
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public @ResponseBody String add(CodeTableForm form, HttpServletRequest request) {
+		
 		AjaxObject ajaxObject = null;
 		String createtime = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss"); //当前日期
 		form.setValue("createtime", createtime);
+		
+		String sellno = StrUtils.getNewNO("XSD","sellno","bsell");
+		form.setValue("sellno", sellno); //初始化单据号
+		
 		CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
 		String maker = StrUtils.nullToStr(user.getValue("userid"));
 		form.setValue("maker", maker);
-		int iReturn = payDaoImpl.addPay(form, request);
+		int iReturn = sellDaoImpl.addSell(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("新增成功！", "pay_list", "closeCurrent");
+			ajaxObject = new AjaxObject("新增成功！", "sell_list", "closeCurrent");
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
 		return ajaxObject.toString();
 	}
 
-	@RequiresPermissions("Pay:edi")
-	@RequestMapping(value="/edi/{payid}", method=RequestMethod.GET)
-	public String toEdi(@PathVariable("payid") int payid, HttpServletRequest request) {
+	@RequiresPermissions("Sell:edi")
+	@RequestMapping(value="/edi/{sellid}", method=RequestMethod.GET)
+	public String toEdi(@PathVariable("sellid") int sellid, HttpServletRequest request) {
 		
 		CodeTableForm form = null;
-		form = payDaoImpl.getPayById(payid, request);
-
-		String sql = "SELECT IFNULL(SUM(t.plansum), 0) FROM bpayrow t WHERE t.payid = '" + payid + "'";
-		double allplansum = Double.parseDouble(dbUtils.execQuerySQL(sql));
-		form.setValue("allplansum", allplansum); //小计：应付金额
-		sql = "SELECT IFNULL(SUM(t.realsum), 0) FROM bpayrow t WHERE t.payid = '" + payid + "'";
+		form = sellDaoImpl.getSellById(sellid, request);
+		
+		String sql = "SELECT IFNULL(SUM(t.realsum), 0) FROM bsellrow t WHERE t.sellid = '" + sellid + "'";
 		double allrealsum = Double.parseDouble(dbUtils.execQuerySQL(sql));
-		form.setValue("allrealsum", allrealsum); //小计：实付金额
-
+		form.setValue("allrealsum", allrealsum); //总价合计
+		
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);
 		
 		String act = StrUtils.nullToStr(request.getParameter("act"));
 		if(act.equals("print")) {
-			return "pay/print"; // 打印
+			return "sell/print"; // 打印
 		}
 		
-		return "pay/edi";
+		return "sell/edi";
 	}
 
-	@RequiresPermissions("Pay:edi")
+	@RequiresPermissions("Sell:edi")
 	@RequestMapping(value="/edi", method=RequestMethod.POST)
 	public @ResponseBody String edi(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
-		int iReturn = payDaoImpl.ediPay(form, request);
+		int iReturn = sellDaoImpl.ediSell(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("修改成功！", "pay_list", "closeCurrent");
+			ajaxObject = new AjaxObject("修改成功！", "sell_list", "closeCurrent");
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
 		return ajaxObject.toString();
 	}
 
-	@RequiresPermissions("Pay:delete")
-	@RequestMapping(value="/delete/{payid}")
-	public @ResponseBody String delete(@PathVariable int payid, HttpServletRequest request) {
+	@RequiresPermissions("Sell:delete")
+	@RequestMapping(value="/delete/{sellid}")
+	public @ResponseBody String delete(@PathVariable int sellid) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
-		
-		CodeTableForm form = payDaoImpl.getPayById(payid, request);
-		String currflow = StrUtils.nullToStr(form.getValue("currflow"));
-		if(currflow.equals("结束")) {
-			ajaxObject = new AjaxObject("单据已结束，不能删除");
-		} else if(!"".equals(StrUtils.nullToStr(form.getValue("relateno")))) {
-			ajaxObject = new AjaxObject("单据已关联其它单据，不能删除");
+		String sql = "SELECT COUNT(1) FROM bsell t WHERE t.currflow <> '申请' AND t.sellid = '" + sellid + "'";
+		int icount = dbUtils.getIntBySql(sql);
+		if(icount >= 1) {
+			ajaxObject = new AjaxObject("删除失败（单据不在申请流程）");
 		} else {
-			iReturn = payDaoImpl.deletePay(payid);
+			iReturn = sellDaoImpl.deleteSell(sellid);
 			if (iReturn >= 0) {
-				ajaxObject = new AjaxObject("删除成功！", "pay_list", "");
+				ajaxObject = new AjaxObject("删除成功！", "sell_list", "");
 			} else {
 				ajaxObject = new AjaxObject("删除失败");
 			}
@@ -147,14 +146,12 @@ public class PayAction {
 	 */
 	private void getSelects(HttpServletRequest request) {
 
-		String sql = "SELECT * FROM sbtype WHERE btype in ('FKD','SKD','YFD')";
-		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); //单据类型
-		sql = "SELECT * FROM sbankcard WHERE status = '1'";
-		List<CodeTableForm> bankcardList = dbUtils.getListBySql(sql); //银行卡
+		String sql = "SELECT * FROM cunit ORDER BY priority";
+		List<CodeTableForm> unitList = dbUtils.getListBySql(sql); //计量单位
+		request.setAttribute("unitList", unitList);
+
 		sql = "SELECT * FROM sflow WHERE btype = 'XXX'";
 		List<CodeTableForm> currflowList = dbUtils.getListBySql(sql); //当前流程
-		request.setAttribute("btypeList", btypeList);
-		request.setAttribute("bankcardList", bankcardList);
 		request.setAttribute("currflowList", currflowList);
 	}
 }

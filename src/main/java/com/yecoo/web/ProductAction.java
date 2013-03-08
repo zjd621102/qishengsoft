@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yecoo.dao.ProductDaoImpl;
 import com.yecoo.dao.ProducttypeDaoImpl;
 import com.yecoo.model.CodeTableForm;
-import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
@@ -41,27 +40,15 @@ public class ProductAction {
 	public String list(@PathVariable("producttype") int producttype, CodeTableForm form, HttpServletRequest request) {
 
 		form.setValue("producttype", producttype);
-		
-		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
-		int pageNum = 1;
-		int numPerPage = Constants.NUMPERPAGE;
-		if (!sPageNum.equals("")) {
-			pageNum = Integer.parseInt(sPageNum);
-		}
-		if (!sNumPerPage.equals("")) {
-			numPerPage = Integer.parseInt(sNumPerPage);
-		}
-		request.setAttribute("pageNum", pageNum); // 当前页
-		request.setAttribute("numPerPage", numPerPage); // 每页数量
+		productDaoImpl.initAction(request);
 
 		int totalCount = productDaoImpl.getProductCount(form);
+		List<CodeTableForm> productList = productDaoImpl.getProductList(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> productList = productDaoImpl.getProductList(form, pageNum, numPerPage);
 		request.setAttribute("productList", productList); // 列表
-
-		request.setAttribute("form", form);
 		request.setAttribute("sn", "product"); //授权名称
+		request.setAttribute("form", form);
+
 		return "product/list";
 	}
 

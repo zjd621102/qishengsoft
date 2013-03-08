@@ -5,7 +5,7 @@ import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 
-public class MaterialDaoImpl {
+public class MaterialDaoImpl extends BaseDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
 	/**
@@ -38,7 +38,7 @@ public class MaterialDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getMaterialList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getMaterialList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getMaterialtypeName(t.materialtype) materialtypename,"
 				+ " func_getUnitName(t.unit) unitname, sm.manuname, sm.manucontact, sm.manutel"

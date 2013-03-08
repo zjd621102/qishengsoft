@@ -2,16 +2,17 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="<%=path%>/bankcard/transferAccount_list" method="post"
+	<form onsubmit="return dwzSearch(this, 'dialog');" action="<%=path%>/bankcard/transferAccount_list" method="post"
 		rel="pagerForm" id="fid">
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						转出银行卡卡号：<input type="text" name="map[bankcardno]" value="${form.map.bankcardno}"/>
+						转出银行卡卡号：<input type="text" name="map[bankcardno]" size="30" value="${form.map.bankcardno}"/>
 					</td>
 					<td>
-						转入银行卡卡号：<input type="text" name="map[transferbankcardno]" value="${form.map.transferbankcardno}"/>
+						转入银行卡卡号：<input type="text" name="map[transferbankcardno]" size="30"
+							value="${form.map.transferbankcardno}"/>
 					</td>
 				</tr>
 			</table>

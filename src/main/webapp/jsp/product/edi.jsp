@@ -91,7 +91,7 @@
 						预计单价：
 					</td>
 					<td>
-						<input type="text" name="map[planprice]" style="width: 100%" class="double"
+						<input type="text" name="map[planprice]" style="width: 100%" class="number"
 							value="${form.map.planprice}" readonly="readonly"/>
 					</td>
 					<td></td>
@@ -114,7 +114,7 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[materialprice]" style="width: 100%" maxlength="12"
-							class="double" value="0.00" onchange="setAllSum('materialprice', 'planprice');"/>
+							class="number" value="0.00" onchange="setAllSum('materialprice', 'planprice');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"/>
@@ -141,7 +141,7 @@
 				   		</td>
 				   		<td>
 							<input type="text" name="map[materialprice]" style="width: 100%" maxlength="12"
-								class="double" value="${bean.map.materialprice}"
+								class="number" value="${bean.map.materialprice}"
 								onchange="setAllSum('materialprice', 'planprice');"/>
 				   		</td>
 				   		<td>

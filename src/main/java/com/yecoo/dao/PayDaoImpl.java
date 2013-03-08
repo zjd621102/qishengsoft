@@ -10,7 +10,7 @@ import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 
-public class PayDaoImpl {
+public class PayDaoImpl extends BaseDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
 	/**
@@ -33,7 +33,7 @@ public class PayDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getPayList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getPayList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getBtypeName(t.btype) btypename, func_getUserName(t.maker) makername,"
 				+ " (SELECT IFNULL(SUM(bp.realsum), 0) FROM bpayrow bp WHERE bp.payid = t.payid) allrealsum"
@@ -91,9 +91,10 @@ public class PayDaoImpl {
 			
 			if(iReturn == -1) {
 				dbUtils.setDelete(String.valueOf(payid), "bpay", "payid");
+				conn.rollback();
+			} else {
+				conn.commit();
 			}
-			
-			conn.commit();
 		} catch(Exception e) {
 			iReturn = -1;
 			try {
@@ -198,8 +199,10 @@ public class PayDaoImpl {
 	 */
 	public int deletePay(int payid) {
 		
-		String sql = "DELETE FROM bpay WHERE payid = '" + payid + "'";
-		int iReturn = dbUtils.executeSQL(sql);
+		String[] sqls = new String[2];
+		sqls[0] = "DELETE FROM bpay WHERE payid = '" + payid + "'";
+		sqls[1] = "DELETE FROM bpayrow WHERE payid = '" + payid + "'";
+		int iReturn = dbUtils.executeSQLs(sqls);
 		return iReturn;
 	}
 }

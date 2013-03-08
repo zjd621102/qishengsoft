@@ -104,10 +104,10 @@
 					<td></td>
 					<td></td>
 					<td style="font-size: 13px; font-weight: bold; color: red;">
-						小计：
+						合计：
 					</td>
 					<td>
-						<input type="text" name="map[allsum]" style="width: 100%" class="double"
+						<input type="text" name="map[allsum]" style="width: 100%" class="number"
 							value="${form.map.allsum}" readonly="readonly"/>
 					</td>
 					<td></td>
@@ -145,17 +145,17 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[price]" style="width: 100%" maxlength="12"
-							class="double" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
+							class="number" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[num]" style="width: 100%" maxlength="12"
-							class="double" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
+							class="number" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[sum]" style="width: 100%" maxlength="12"
-							class="double" value="0.00" readonly="readonly"/>
+							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
 						<input type="hidden" name="map[manuid]"/>
@@ -205,19 +205,19 @@
 				   		</td>
 				   		<td>
 							<input type="text" name="map[price]" style="width: 100%" maxlength="12"
-								class="double" value="${bean.map.price}"
+								class="number" value="${bean.map.price}"
 								onchange="setMultiply(this, 'price', 'num', 'sum');
 								setAllSum('sum', 'allsum');"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[num]" style="width: 100%" maxlength="12"
-								class="double" value="${bean.map.num}"
+								class="number" value="${bean.map.num}"
 								onchange="setMultiply(this, 'price', 'num', 'sum');
 								setAllSum('sum', 'allsum');"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[sum]" style="width: 100%" maxlength="12"
-								class="double" value="${bean.map.sum}" readonly="readonly"/>
+								class="number" value="${bean.map.sum}" readonly="readonly"/>
 				   		</td>
 				   		<td>
 							<input type="hidden" name="map[manuid]" value="${bean.map.manuid}"/>
@@ -249,6 +249,8 @@
 			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
 			</c:if>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			<li><div class="button"><div class="buttonContent"><button type="button"
+				onclick="window.open('<%=path%>/buy/edi/${form.map.buyid}?act=print');">打印</button></div></div></li>
 		</ul>
 	</div>
 </form>

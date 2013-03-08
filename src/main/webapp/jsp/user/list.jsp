@@ -3,7 +3,7 @@
 <c:if test="${act=='excel'}">
 <%
 	response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-	String excelname=new String("用户列表.xls".getBytes(),"UTF-8");
+	String excelname=new String("用户列表.xls".getBytes("UTF-8"),"iso8859-1");
 	response.setHeader("Content-disposition","inline; filename="+excelname);
 %>
 <style type="text/css">
@@ -85,7 +85,7 @@
 				</shiro:hasPermission>
 				<li class="line">line</li>
 				<li>
-					<a class="icon" href="<%=path%>/user/list_excel" target="dwzExport" targetType="navTab"
+					<a class="icon" href="<%=path%>/user/list?act=excel" target="dwzExport" targetType="navTab"
 				 		title="确实要导出这些记录吗?">
 				 		<span>导出EXCEL</span>
 				 	</a>
@@ -95,7 +95,7 @@
 	</c:if>
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
-			<tr>
+			<tr style="width: 1000px;">
 				<c:if test="${act!='excel'}">
 					<th width="3%">
 						<input type="checkbox" group="ids" class="checkboxCtrl">

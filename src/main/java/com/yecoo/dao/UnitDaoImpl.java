@@ -5,7 +5,7 @@ import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 
-public class UnitDaoImpl {
+public class UnitDaoImpl extends BaseDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
 	/**
@@ -38,7 +38,7 @@ public class UnitDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getUnitList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getUnitList(CodeTableForm form) {
 		
 		String sql = "SELECT t.* FROM cunit t WHERE 1 = 1";
 		String cond = getUnitListCondition(form);

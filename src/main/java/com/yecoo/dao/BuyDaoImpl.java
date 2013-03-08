@@ -11,7 +11,7 @@ import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 
-public class BuyDaoImpl {
+public class BuyDaoImpl extends BaseDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
 	/**
@@ -34,7 +34,7 @@ public class BuyDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getBuyList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getBuyList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getUserName(t.maker) makername, func_getBtypeName(t.btype) btypename,"
 				+ " func_getSum(t.buyid, 'CGD') allsum FROM bbuy t WHERE 1 = 1";

@@ -8,7 +8,7 @@ import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 
-public class RoleDaoImpl {
+public class RoleDaoImpl extends BaseDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
 	/**
@@ -41,7 +41,7 @@ public class RoleDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getRoleList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getRoleList(CodeTableForm form) {
 		
 		String sql = "SELECT t.* FROM srole t WHERE 1 = 1";
 		String cond = getRoleListCondition(form);

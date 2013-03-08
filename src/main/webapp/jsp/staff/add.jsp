@@ -8,8 +8,7 @@
 		<dl>
 			<dt>员工名称：</dt>
 			<dd>
-				<input type="text" name="map[staffname]" class="required" size="30" maxlength="64" alt="请输入员工名称"
-					value="${form.map.staffname}"/>
+				<input type="text" name="map[staffname]" class="required" size="30" maxlength="64"/>
 			</dd>
 		</dl>
 		<dl>
@@ -45,32 +44,39 @@
 		<dl>
 			<dt>联系电话：</dt>
 			<dd>
-				<input type="text" name="map[tel]" class="required" size="30" maxlength="32" alt="联系电话"
-					value="${form.map.tel}"/>
+				<input type="text" name="map[tel]" class="required" size="30" maxlength="32"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>工资开户银行：</dt>
 			<dd>
-				<input type="text" name="map[bank]" size="30" maxlength="32" value="${form.map.bank}"/>
+				<input type="text" name="map[bank]" size="30" maxlength="32"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>工资银行账号：</dt>
 			<dd>
-				<input type="text" name="map[accountno]" size="30" maxlength="32" value="${form.map.accountno}"/>
+				<input type="text" name="map[accountno]" size="30" maxlength="32"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>工资帐户名称：</dt>
 			<dd>
-				<input type="text" name="map[accountname]" size="30" maxlength="32" value="${form.map.accountname}"/>
+				<input type="text" name="map[accountname]" size="30" maxlength="32"/>
+			</dd>
+		</dl>
+		<dl style="width: 100%;">
+			<dt>工资：</dt>
+			<dd style="width: 70%;">
+				<input type="text" name="map[salary]" class="required number" size="30" maxlength="12"
+					value="0.00"/>
+				<span style="color: red;">（单位：元/天）</span>
 			</dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="30" maxlength="512" value="${form.map.remark}"/>
+				<input type="text" name="map[remark]" size="30" maxlength="512"/>
 			</dd>
 		</dl>
 	</div>	

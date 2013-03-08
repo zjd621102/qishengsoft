@@ -26,8 +26,7 @@
 		<dl>
 			<dt>URL：</dt>
 			<dd>
-				<input type="text" name="map[url]" class="required" size="30"
-					maxlength="255" alt="请输入访问地址" value="${form.map.url}" />
+				<input type="text" name="map[url]" size="30" maxlength="255" value="${form.map.url}" />
 			</dd>
 		</dl>
 		<dl>

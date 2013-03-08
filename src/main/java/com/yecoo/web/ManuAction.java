@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.yecoo.dao.ManuDaoImpl;
 import com.yecoo.model.CodeTableForm;
-import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
@@ -28,28 +27,18 @@ public class ManuAction {
 	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
 	public String list(CodeTableForm form, HttpServletRequest request) {
 
-		String act = StrUtils.nullToStr(request.getAttribute("act"));
-		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
-		int pageNum = 1;
-		int numPerPage = Constants.NUMPERPAGE;
-		if (!sPageNum.equals("")) {
-			pageNum = Integer.parseInt(sPageNum);
+		String first = StrUtils.nullToStr(request.getParameter("first")); //查询初始化
+		if(first.equals("true")) {
+			form.setValue("statusid", "1");
 		}
-		if (!sNumPerPage.equals("")) {
-			numPerPage = Integer.parseInt(sNumPerPage);
-		}
-		request.setAttribute("pageNum", pageNum); // 当前页
-		request.setAttribute("numPerPage", numPerPage); // 每页数量
+		manuDaoImpl.initAction(request);
 
 		int totalCount = manuDaoImpl.getManuCount(form);
-		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> manuList = manuDaoImpl.getManuList(form, pageNum, numPerPage);
-		request.setAttribute("manuList", manuList); // 供应商列表
-
-		request.setAttribute("form", form);
-		request.setAttribute("act", act);
+		List<CodeTableForm> manuList = manuDaoImpl.getManuList(form);
+		request.setAttribute("totalCount", totalCount); //列表总数量
+		request.setAttribute("manuList", manuList); //供应商列表
 		request.setAttribute("sn", "manu"); //授权名称
+		request.setAttribute("form", form);
 		
 		this.getSelects(request);
 		
@@ -136,7 +125,7 @@ public class ManuAction {
 		String sql = "select * from cmanutype order by manutypeid";
 		List<CodeTableForm> manuTypeList = dbUtils.getListBySql(sql); //供应商类型
 		sql = "select * from cstatus order by statusid";
-		List<CodeTableForm> statusList = dbUtils.getListBySql(sql); //状态
+		List<CodeTableForm> statusList = dbUtils.getListBySql(sql); //供应商状态
 		request.setAttribute("manuTypeList", manuTypeList);
 		request.setAttribute("statusList", statusList);
 	}

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.yecoo.dao.StaffDaoImpl;
 import com.yecoo.model.CodeTableForm;
-import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
@@ -28,28 +27,22 @@ public class StaffAction {
 	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
 	public String list(CodeTableForm form, HttpServletRequest request) {
 
-		String act = StrUtils.nullToStr(request.getAttribute("act"));
-		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
-		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
-		int pageNum = 1;
-		int numPerPage = Constants.NUMPERPAGE;
-		if (!sPageNum.equals("")) {
-			pageNum = Integer.parseInt(sPageNum);
+		String first = StrUtils.nullToStr(request.getParameter("first")); //查询初始化
+		if(first.equals("true")) {
+			form.setValue("staffstatus", "1");
 		}
-		if (!sNumPerPage.equals("")) {
-			numPerPage = Integer.parseInt(sNumPerPage);
-		}
-		request.setAttribute("pageNum", pageNum); // 当前页
-		request.setAttribute("numPerPage", numPerPage); // 每页数量
+		staffDaoImpl.initAction(request);
 
 		int totalCount = staffDaoImpl.getStaffCount(form);
+		List<CodeTableForm> staffList = staffDaoImpl.getStaffList(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		List<CodeTableForm> staffList = staffDaoImpl.getStaffList(form, pageNum, numPerPage);
 		request.setAttribute("staffList", staffList); // 员工列表
-
-		request.setAttribute("form", form);
-		request.setAttribute("act", act);
 		request.setAttribute("sn", "staff"); //授权名称
+		request.setAttribute("form", form);
+
+		
+		this.getSelects(request);
+		
 		return "staff/list";
 	}
 

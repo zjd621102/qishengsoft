@@ -9,7 +9,7 @@ import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 
-public class MaterialtypeDaoImpl {
+public class MaterialtypeDaoImpl extends BaseDaoImpl {
 
 	DbUtils dbUtils = new DbUtils();
 	/**
@@ -97,7 +97,7 @@ public class MaterialtypeDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getMaterialtypeList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getMaterialtypeList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getMaterialtypeName(t.parent) parentname FROM smaterialtype t WHERE 1 = 1";
 		String cond = getMaterialtypeListCondition(form);

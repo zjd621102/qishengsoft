@@ -2,7 +2,15 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="<%=path%>/manu/list" method="post" rel="pagerForm" id="fid">
+	<form
+		<c:if test="${act=='backselect'}">
+			onsubmit="return dwzSearch(this, 'dialog');"
+		</c:if>
+		<c:if test="${act!='backselect'}">
+			onsubmit="return navTabSearch(this);"
+		</c:if>
+		action="<%=path%>/manu/list" method="post" rel="pagerForm" id="fid">
+		<input type="hidden" name="act" value="${act}" />
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">
 				<tr>
@@ -13,13 +21,26 @@
 					</td>
 					<td>
 						供应商类别：
-						<select name="map[manutypeid]" style="width: 184px;" class="required">
+						<select name="map[manutypeid]" style="width: 184px;">
 							<option value=""></option>
 							<c:forEach items="${manuTypeList}" var="manuType">
 								<option value="${manuType.map.manutypeid}"
 									${manuType.map.manutypeid==form.map.manutypeid?"selected":""}
 								>
 									${manuType.map.manutypename}
+								</option>
+							</c:forEach>
+						</select>
+					</td>
+					<td>
+						供应商状态：
+						<select name="map[statusid]" style="width: 184px;">
+							<option value=""></option>
+							<c:forEach items="${statusList}" var="status">
+								<option value="${status.map.statusid}"
+									${status.map.statusid==form.map.statusid?"selected":""}
+								>
+									${status.map.statusname}
 								</option>
 							</c:forEach>
 						</select>

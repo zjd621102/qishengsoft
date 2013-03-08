@@ -9,7 +9,7 @@ import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 
-public class ProducttypeDaoImpl {
+public class ProducttypeDaoImpl extends BaseDaoImpl {
 
 	DbUtils dbUtils = new DbUtils();
 	/**
@@ -97,7 +97,7 @@ public class ProducttypeDaoImpl {
 	 * @param numPerPage
 	 * @return
 	 */
-	public List<CodeTableForm> getProducttypeList(CodeTableForm form, int pageNum, int numPerPage) {
+	public List<CodeTableForm> getProducttypeList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getProducttypeName(t.parent) parentname FROM sproducttype t WHERE 1 = 1";
 		String cond = getProducttypeListCondition(form);

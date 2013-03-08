@@ -7,7 +7,20 @@
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						员工名称：<input type="text" name="map[staffname]" value="${form.map.staffname}"/>
+						员工名称：<input type="text" name="map[staffname]" size="30" value="${form.map.staffname}"/>
+					</td>
+					<td>
+						员工状态：
+						<select name="map[staffstatus]" style="width: 184px;">
+							<option value=""></option>
+							<c:forEach items="${staffstatusList}" var="staffstatus">
+								<option value="${staffstatus.map.staffstatusid}"
+									${staffstatus.map.staffstatusid==form.map.staffstatus?"selected":""}
+								>
+									${staffstatus.map.staffstatusname}
+								</option>
+							</c:forEach>
+						</select>
 					</td>
 				</tr>
 			</table>
