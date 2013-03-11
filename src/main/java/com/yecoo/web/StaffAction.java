@@ -112,6 +112,60 @@ public class StaffAction {
 		}
 		return ajaxObject.toString();
 	}
+	/**
+	 * 考勤情况
+	 * @param staffid
+	 * @param form
+	 * @param request
+	 * @return
+	 */
+	@RequiresPermissions("Staff:view")
+	@RequestMapping(value="/edi_work/{staffid}")
+	public String intoEdi_work(@PathVariable("staffid") int staffid, CodeTableForm form, HttpServletRequest request) {
+
+		form.setValue("staffid", staffid);
+		
+		String month = StrUtils.nullToStr(form.getValue("month"));
+		if(month.equals("")) {
+			month = StrUtils.getSysdate("yyyy-MM");
+			form.setValue("month", month); // 初始化考勤月份
+		}
+		staffDaoImpl.initWork(month);
+		
+		CodeTableForm staff = staffDaoImpl.getWork(form, request);
+		form.setValue("staffname", staff.getValue("staffname")); // 员工姓名
+		form.setValue("salary", staff.getValue("salary")); // 工资
+		String sql = "SELECT IFNULL(SUM(t.salary), 0) FROM bwork t WHERE t.staffid = '" + staffid
+				+ "' AND t.workdate like '" + form.getValue("month") + "%'";
+		double allsalary = Double.parseDouble(new DbUtils().execQuerySQL(sql));
+		form.setValue("allsalary", allsalary); // 合计
+		request.setAttribute("form", form);
+		
+		this.getSelects(request);
+		
+		return "staff/work";
+	}
+
+	/**
+	 * 修改考勤情况
+	 * @param staffid
+	 * @param form
+	 * @param request
+	 * @return
+	 */
+	@RequiresPermissions("Staff:view")
+	@RequestMapping(value="/edi_work")
+	public @ResponseBody String edi_work(CodeTableForm form, HttpServletRequest request) {
+		
+		AjaxObject ajaxObject = null;
+		int iReturn = staffDaoImpl.ediWork(form, request);
+		if (iReturn >= 0) {
+			ajaxObject = new AjaxObject("修改成功！", "", "");
+		} else {
+			ajaxObject = new AjaxObject("修改失败");
+		}
+		return ajaxObject.toString();
+	}
 	
 	/**
 	 * 获取下拉列表
@@ -124,7 +178,10 @@ public class StaffAction {
 		List<CodeTableForm> staffstatusList = dbUtils.getListBySql(sql); //员工状态
 		sql = "select * from cstafftype order by stafftypeid";
 		List<CodeTableForm> stafftypeList = dbUtils.getListBySql(sql); //员工类型
+		sql = "select * from cworkstatus order by workstatus";
+		List<CodeTableForm> workstatusList = dbUtils.getListBySql(sql); //考勤状态
 		request.setAttribute("staffstatusList", staffstatusList);
 		request.setAttribute("stafftypeList", stafftypeList);
+		request.setAttribute("workstatusList", workstatusList);
 	}
 }

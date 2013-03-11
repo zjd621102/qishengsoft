@@ -2,7 +2,15 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="<%=path%>/staff/list" method="post" rel="pagerForm" id="fid">
+	<form
+		<c:if test="${act=='backselect'}">
+			onsubmit="return dwzSearch(this, 'dialog');"
+		</c:if>
+		<c:if test="${act!='backselect'}">
+			onsubmit="return navTabSearch(this);"
+		</c:if>
+		onsubmit="return navTabSearch(this);" action="<%=path%>/staff/list" method="post" rel="pagerForm" id="fid">
+		<input type="hidden" name="act" value="${act}" />
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">
 				<tr>
@@ -64,6 +72,12 @@
 				</a>
 			</li>
 			</shiro:hasPermission>
+			<li>
+				<a class="edit" href="<%=path%>/staff/edi_work/{s_staffid}" target="dialog" rel="staff_work" mask="true"
+					width="1200" height="500">
+					<span>考勤情况</span>
+				</a>
+			</li>
 		</ul>
 	</div>
 	<table class="table" style="width: 100%;" layoutH="138">
@@ -81,7 +95,11 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${staffList}" var="bean" varStatus="vs">
-			   	<tr target="s_staffid" rel="${bean.map.staffid}">
+			   	<tr target="s_staffid" rel="${bean.map.staffid}"
+			   		ondblclick="$.bringBack({
+			   		staffid:'${bean.map.staffid}',
+					staffname:'${bean.map.staffname}'})"
+			   	>
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.staffname}</td>
 			   		<td>${bean.map.stafftypename}</td>

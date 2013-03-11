@@ -151,7 +151,7 @@ public class PayAction {
 		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); //单据类型
 		sql = "SELECT * FROM sbankcard WHERE status = '1'";
 		List<CodeTableForm> bankcardList = dbUtils.getListBySql(sql); //银行卡
-		sql = "SELECT * FROM sflow WHERE btype = 'XXX'";
+		sql = "SELECT * FROM sflow WHERE btype = 'XXX' ORDER BY priority,flowid";
 		List<CodeTableForm> currflowList = dbUtils.getListBySql(sql); //当前流程
 		request.setAttribute("btypeList", btypeList);
 		request.setAttribute("bankcardList", bankcardList);

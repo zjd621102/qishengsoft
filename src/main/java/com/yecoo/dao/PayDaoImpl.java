@@ -159,7 +159,7 @@ public class PayDaoImpl extends BaseDaoImpl {
 				String btype = StrUtils.nullToStr(form.getValue("btype"));
 				String sql = null;
 				String payid = StrUtils.nullToStr(form.getValue("payid"));
-				if(btype.equals("FKD") || btype.equals("YFD")) {
+				if(btype.equals("FKD") || btype.equals("YFD") || btype.equals("GZD")) {
 					sql = "UPDATE sbankcard t SET t.money = t.money - "
 							+ "(SELECT IFNULL(SUM(a.realsum), 0) FROM bpayrow a WHERE a.payid = '" + payid + "'"
 							+ " AND a.bankcardno = t.bankcardno)"

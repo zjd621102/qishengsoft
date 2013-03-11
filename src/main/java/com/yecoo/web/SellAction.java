@@ -150,7 +150,7 @@ public class SellAction {
 		List<CodeTableForm> unitList = dbUtils.getListBySql(sql); //计量单位
 		request.setAttribute("unitList", unitList);
 
-		sql = "SELECT * FROM sflow WHERE btype = 'XXX'";
+		sql = "SELECT * FROM sflow WHERE btype = 'XXX' ORDER BY priority,flowid";
 		List<CodeTableForm> currflowList = dbUtils.getListBySql(sql); //当前流程
 		request.setAttribute("currflowList", currflowList);
 	}

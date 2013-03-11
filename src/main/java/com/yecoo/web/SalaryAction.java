@@ -8,24 +8,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.yecoo.dao.BuyDaoImpl;
+import com.yecoo.dao.SalaryDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
- * 采购单管理
+ * 工资单管理
  * @author zhoujd
  */
 @Controller
-@RequestMapping("/buy")
-public class BuyAction {
+@RequestMapping("/salary")
+public class SalaryAction {
 
 	DbUtils dbUtils = new DbUtils();
-	private BuyDaoImpl buyDaoImpl = new BuyDaoImpl();
+	private SalaryDaoImpl salaryDaoImpl = new SalaryDaoImpl();
 
-	@RequiresPermissions("Buy:view")
+	@RequiresPermissions("Salary:view")
 	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
 	public String list(CodeTableForm form, HttpServletRequest request) {
 
@@ -34,21 +34,21 @@ public class BuyAction {
 			form.setValue("currflow", "申请");
 		}
 		
-		buyDaoImpl.initAction(request);
+		salaryDaoImpl.initAction(request);
 
-		int totalCount = buyDaoImpl.getBuyCount(form);
-		List<CodeTableForm> buyList = buyDaoImpl.getBuyList(form);
+		int totalCount = salaryDaoImpl.getSalaryCount(form);
+		List<CodeTableForm> salaryList = salaryDaoImpl.getSalaryList(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		request.setAttribute("buyList", buyList); // 采购单列表
-		request.setAttribute("sn", "buy"); // 授权名称
+		request.setAttribute("salaryList", salaryList); // 工资单列表
+		request.setAttribute("sn", "salary"); // 授权名称
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);
 		
-		return "buy/list";
+		return "salary/list";
 	}
 
-	@RequiresPermissions("Buy:add")
+	@RequiresPermissions("Salary:add")
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String toAdd(HttpServletRequest request) {
 
@@ -57,43 +57,42 @@ public class BuyAction {
 		
 		this.getSelects(request);
 		
-		return "buy/add";
+		return "salary/add";
 	}
 
-	@RequiresPermissions("Buy:add")
+	@RequiresPermissions("Salary:add")
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public @ResponseBody String add(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		String createtime = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss"); // 当前日期
 		form.setValue("createtime", createtime);
-		
-		String btype = StrUtils.nullToStr(form.getValue("btype"));				
-		String buyno = StrUtils.getNewNO(btype,"buyno","bbuy");
-		form.setValue("buyno", buyno); // 初始化单据号
+					
+		String salaryno = StrUtils.getNewNO("GZD","salaryno","bsalary");
+		form.setValue("salaryno", salaryno); // 初始化单据号
 		
 		CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
 		String maker = StrUtils.nullToStr(user.getValue("userid"));
 		form.setValue("maker", maker);
-		int iReturn = buyDaoImpl.addBuy(form, request);
+		int iReturn = salaryDaoImpl.addSalary(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("新增成功！", "buy_list", "closeCurrent");
+			ajaxObject = new AjaxObject("新增成功！", "salary_list", "closeCurrent");
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
 		return ajaxObject.toString();
 	}
 
-	@RequiresPermissions("Buy:edi")
-	@RequestMapping(value="/edi/{buyid}", method=RequestMethod.GET)
-	public String toEdi(@PathVariable("buyid") int buyid, HttpServletRequest request) {
+	@RequiresPermissions("Salary:edi")
+	@RequestMapping(value="/edi/{salaryid}", method=RequestMethod.GET)
+	public String toEdi(@PathVariable("salaryid") int salaryid, HttpServletRequest request) {
 		
 		CodeTableForm form = null;
-		form = buyDaoImpl.getBuyById(buyid, request);
+		form = salaryDaoImpl.getSalaryById(salaryid, request);
 		
-		String sql = "SELECT IFNULL(SUM(t.sum), 0) FROM bbuyrow t WHERE t.buyid = '" + buyid + "'";
-		double allrealsum = Double.parseDouble(dbUtils.execQuerySQL(sql));
-		form.setValue("allsum", allrealsum); // 小计：总价
+		String sql = "SELECT IFNULL(SUM(t.planmoney), 0) FROM bsalaryrow t WHERE t.salaryid = '" + salaryid + "'";
+		double allplanmoney = Double.parseDouble(dbUtils.execQuerySQL(sql));
+		form.setValue("allplanmoney", allplanmoney); // 合计
 		
 		request.setAttribute("form", form);
 		
@@ -101,40 +100,40 @@ public class BuyAction {
 		
 		String act = StrUtils.nullToStr(request.getParameter("act"));
 		if(act.equals("print")) {
-			return "buy/print"; // 打印
+			return "salary/print"; // 打印
 		}
 		
-		return "buy/edi";
+		return "salary/edi";
 	}
 
-	@RequiresPermissions("Buy:edi")
+	@RequiresPermissions("Salary:edi")
 	@RequestMapping(value="/edi", method=RequestMethod.POST)
 	public @ResponseBody String edi(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
-		int iReturn = buyDaoImpl.ediBuy(form, request);
+		int iReturn = salaryDaoImpl.ediSalary(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("修改成功！", "buy_list", "closeCurrent");
+			ajaxObject = new AjaxObject("修改成功！", "salary_list", "closeCurrent");
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
 		return ajaxObject.toString();
 	}
 
-	@RequiresPermissions("Buy:delete")
-	@RequestMapping(value="/delete/{buyid}")
-	public @ResponseBody String delete(@PathVariable int buyid) {
+	@RequiresPermissions("Salary:delete")
+	@RequestMapping(value="/delete/{salaryid}")
+	public @ResponseBody String delete(@PathVariable int salaryid) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
-		String sql = "SELECT COUNT(1) FROM bbuy t WHERE t.currflow <> '申请' AND t.buyid = '" + buyid + "'";
+		String sql = "SELECT COUNT(1) FROM bsalary t WHERE t.currflow <> '申请' AND t.salaryid = '" + salaryid + "'";
 		int icount = dbUtils.getIntBySql(sql);
 		if(icount >= 1) {
 			ajaxObject = new AjaxObject("删除失败（单据不在申请流程）");
 		} else {
-			iReturn = buyDaoImpl.deleteBuy(buyid);
+			iReturn = salaryDaoImpl.deleteSalary(salaryid);
 			if (iReturn >= 0) {
-				ajaxObject = new AjaxObject("删除成功！", "buy_list", "");
+				ajaxObject = new AjaxObject("删除成功！", "salary_list", "");
 			} else {
 				ajaxObject = new AjaxObject("删除失败");
 			}
@@ -148,16 +147,12 @@ public class BuyAction {
 	 */
 	private void getSelects(HttpServletRequest request) {
 
-		String sql = "SELECT * FROM cunit ORDER BY priority";
-		List<CodeTableForm> unitList = dbUtils.getListBySql(sql); // 计量单位
-		request.setAttribute("unitList", unitList);
-
-		sql = "SELECT * FROM sflow WHERE btype = 'XXX' ORDER BY priority,flowid";
+		String sql = "SELECT * FROM sflow WHERE btype = 'XXX' ORDER BY priority,flowid";
 		List<CodeTableForm> currflowList = dbUtils.getListBySql(sql); // 当前流程
 		request.setAttribute("currflowList", currflowList);
 
-		sql = "SELECT * FROM sbtype WHERE btype in ('CGD','JYD')";
-		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); // 单据类型
-		request.setAttribute("btypeList", btypeList);
+		sql = "SELECT * FROM csalarytype";
+		List<CodeTableForm> salarytypeList = dbUtils.getListBySql(sql); // 单据类型
+		request.setAttribute("salarytypeList", salarytypeList);
 	}
 }

@@ -97,7 +97,11 @@ public class BuyDaoImpl extends BaseDaoImpl {
 				dbUtils.setDelete(String.valueOf(buyid), "bbuy", "buyid");
 			}
 			
-			conn.commit();
+			if(iReturn == -1) {
+				conn.rollback();
+			} else {
+				conn.commit();
+			}
 		} catch(Exception e) {
 			iReturn = -1;
 			try {
@@ -182,6 +186,8 @@ public class BuyDaoImpl extends BaseDaoImpl {
 					if(iReturn == -1) { //行项保存失败，删除主表
 						sql.delete(0,sql.length());
 						sql.append("DELETE FROM bpay WHERE payid = '").append(payid).append("'");
+						dbUtils.executeSQL(sql.toString());
+						sql.append("UPDATE bbuy SET currflow = '申请' WHERE buyid = '").append(buyid).append("'");
 						dbUtils.executeSQL(sql.toString());
 					}
 				}

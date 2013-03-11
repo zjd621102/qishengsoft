@@ -1,6 +1,11 @@
 package com.yecoo.dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
@@ -33,7 +38,7 @@ public class StaffDaoImpl extends BaseDaoImpl {
 		String sql = "SELECT t.*, func_getStaffstatusName(t.staffstatus) staffstatusname,"
 				+ " func_getStafftypeName(t.stafftype) stafftypename FROM sstaff t WHERE 1 = 1";
 		String cond = getStaffListCondition(form);
-		sql  += cond;
+		sql += cond;
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
@@ -100,5 +105,95 @@ public class StaffDaoImpl extends BaseDaoImpl {
 		String sql = "DELETE FROM sstaff WHERE staffid = '" + staffid + "'";
 		int iReturn = dbUtils.executeSQL(sql);
 		return iReturn;
+	}
+	/**
+	 * 获取员工考勤信息
+	 * @param form
+	 * @param request
+	 * @return
+	 */
+	public CodeTableForm getWork(CodeTableForm form, HttpServletRequest request) {
+		
+		int staffid = Integer.parseInt(StrUtils.nullToStr(form.getValue("staffid")));
+		CodeTableForm codeTableForm = this.getStaffById(staffid);
+		
+		String sql = "SELECT t.* FROM bwork t WHERE t.staffid = '" + staffid + "'";
+		String cond = getWorkCondition(form);
+		sql += cond;
+		sql += " ORDER BY t.workdate";
+		List<CodeTableForm> workList = dbUtils.getListBySql(sql);
+		request.setAttribute("workList", workList);
+		return codeTableForm;
+	}
+	/**
+	 * 获取员工考勤信息-条件
+	 * @param form
+	 * @return
+	 */
+	public String getWorkCondition(CodeTableForm form) {
+		
+		StringBuffer cond = new StringBuffer("");
+		String staffid = StrUtils.nullToStr(form.getValue("staffid"));
+		String month = StrUtils.nullToStr(form.getValue("month"));
+
+		if(!staffid.equals("")) {
+			cond.append(" AND t.staffid = '").append(staffid).append("'");
+		}
+		if(!month.equals("")) {
+			cond.append(" AND t.workdate like '").append(month).append("%'");
+		}
+		
+		return cond.toString();
+	}
+	/**
+	 * 修改员工考勤
+	 * @param form
+	 * @return
+	 */
+	public int ediWork(CodeTableForm form, HttpServletRequest request) {
+
+		Connection conn = null;
+		int iReturn = -1;
+		try {
+			conn = dbUtils.dbConnection();
+			conn.setAutoCommit(false); //事务开启
+			iReturn = dbUtils.saveRowTable(request, conn, form, "bwork", "workid", "staffid", "", 0);
+			if(iReturn == -1) {
+				conn.rollback();
+			} else {
+				conn.commit();
+			}
+		} catch(Exception e) {
+			iReturn = -1;
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			StrUtils.WriteLog(this.getClass().getName() + ".ediWork()", e);
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				
+			}
+		}
+		
+		return iReturn;
+	}
+	/**
+	 * 初始化月份考勤
+	 * @param month
+	 */
+	public void initWork(String month) {
+		
+		if(!"".equals(month)) {
+			String sql = "SELECT COUNT(1) FROM bwork WHERE workdate like '" + month + "%'";
+			int worknum = dbUtils.getIntBySql(sql);
+			if(worknum==0) {
+				sql = "call proc_initWork('" + month + "')";
+				dbUtils.executeSQL(sql);
+			}
+		}
 	}
 }

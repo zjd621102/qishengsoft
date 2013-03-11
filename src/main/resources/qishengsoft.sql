@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2013-03-08 15:11:02
+Date: 2013-03-11 16:59:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -86,13 +86,14 @@ CREATE TABLE `bpay` (
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`payid`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='付款单/收款单';
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COMMENT='付款单/收款单';
 
 -- ----------------------------
 -- Records of bpay
 -- ----------------------------
 INSERT INTO `bpay` VALUES ('24', 'SKD', 'ZHOUJD', '2013-03-06', 'XSD-2013-0001', '36.60', '申请', '2013-03-06 19:41:56', '');
 INSERT INTO `bpay` VALUES ('25', 'YFD', 'ZHOUJD', '2013-03-06', 'XSD-2013-0001', '36.60', '申请', '2013-03-06 19:41:56', '');
+INSERT INTO `bpay` VALUES ('30', 'GZD', 'ZHOUJD', '2013-03-07', 'GZD-2013-0001', '5300.34', '结束', '2013-03-11 16:29:47', '');
 
 -- ----------------------------
 -- Table structure for `bpayrow`
@@ -110,7 +111,7 @@ CREATE TABLE `bpayrow` (
   `realsum` double(12,2) DEFAULT '0.00' COMMENT '实付金额',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`payrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bpayrow
@@ -122,7 +123,10 @@ INSERT INTO `bpayrow` VALUES ('16', '11', '6227001823550093014', '8', '中国农
 INSERT INTO `bpayrow` VALUES ('20', '15', '00000', '5', '中国银行泉州分行', '22222222', '刘星', '36.60', '36.60', null);
 INSERT INTO `bpayrow` VALUES ('28', '20', '00000', null, null, null, null, '0.00', '30.60', '运费');
 INSERT INTO `bpayrow` VALUES ('53', '25', null, null, null, null, null, '0.00', '0.00', null);
-INSERT INTO `bpayrow` VALUES ('60', '24', '00000', '5', '中国银行泉州分行', '22222222', '刘星', '36.60', '36.60', null);
+INSERT INTO `bpayrow` VALUES ('62', '24', '00000', '5', '中国银行泉州分行', '22222222', '刘星', '36.60', '36.60', null);
+INSERT INTO `bpayrow` VALUES ('72', '30', '00000', null, '建设银行南安支行', '11111111', '员工一', '2100.12', '2100.12', null);
+INSERT INTO `bpayrow` VALUES ('73', '30', '00000', null, '建设银行南安支行', '22222222', '员工二', '2200.22', '2200.22', null);
+INSERT INTO `bpayrow` VALUES ('74', '30', '00000', null, '建设银行南安支行', '33333333', '员工三', '1000.00', '1000.00', null);
 
 -- ----------------------------
 -- Table structure for `breceandpay`
@@ -145,6 +149,51 @@ CREATE TABLE `breceandpay` (
 INSERT INTO `breceandpay` VALUES ('1', '2013-02-18', '2', '1', '50.50', '今天收入50.5元', '2013-02-18 16:28:40');
 INSERT INTO `breceandpay` VALUES ('2', '2013-02-18', '1', '2', '10.50', '钱包支出10.5', '2013-02-18 16:31:01');
 INSERT INTO `breceandpay` VALUES ('3', '2013-02-18', '2', '2', '50.50', '支出50.5', '2013-02-18 16:44:32');
+
+-- ----------------------------
+-- Table structure for `bsalary`
+-- ----------------------------
+DROP TABLE IF EXISTS `bsalary`;
+CREATE TABLE `bsalary` (
+  `salaryid` int(9) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `salarytype` int(1) DEFAULT NULL COMMENT '单据类型',
+  `salaryname` varchar(64) DEFAULT NULL COMMENT '工资单名称',
+  `salaryno` varchar(13) NOT NULL COMMENT '工资编号',
+  `salarydate` varchar(10) DEFAULT NULL COMMENT '日期',
+  `currflow` varchar(32) DEFAULT NULL COMMENT '当前流程',
+  `maker` varchar(32) DEFAULT NULL COMMENT '制单人',
+  `createtime` varchar(19) DEFAULT NULL COMMENT '创建日期',
+  `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`salaryid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bsalary
+-- ----------------------------
+INSERT INTO `bsalary` VALUES ('1', '1', '2013.02工资', 'GZD-2013-0001', '2013-03-07', '结束', 'ZHOUJD', '2013-03-11 16:04:32', '无');
+INSERT INTO `bsalary` VALUES ('2', '3', '2012年终奖', 'GZD-2013-0002', '2013-02-28', '申请', 'ZHOUJD', '2013-03-11 16:41:27', '');
+
+-- ----------------------------
+-- Table structure for `bsalaryrow`
+-- ----------------------------
+DROP TABLE IF EXISTS `bsalaryrow`;
+CREATE TABLE `bsalaryrow` (
+  `salaryrowid` int(9) NOT NULL AUTO_INCREMENT COMMENT '行项ID',
+  `salaryid` int(9) DEFAULT NULL COMMENT '主表ID',
+  `staffid` int(9) DEFAULT NULL COMMENT '员工',
+  `planmoney` double(12,2) DEFAULT NULL COMMENT '应付款',
+  `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`salaryrowid`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bsalaryrow
+-- ----------------------------
+INSERT INTO `bsalaryrow` VALUES ('28', '1', '2', '2100.12', '员工一工资');
+INSERT INTO `bsalaryrow` VALUES ('29', '1', '3', '2200.22', '员工二工资');
+INSERT INTO `bsalaryrow` VALUES ('30', '1', '4', '1000.00', '员工三工资');
+INSERT INTO `bsalaryrow` VALUES ('38', '2', '2', '3000.10', null);
+INSERT INTO `bsalaryrow` VALUES ('39', '2', '3', '4000.20', null);
 
 -- ----------------------------
 -- Table structure for `bsell`
@@ -214,6 +263,88 @@ INSERT INTO `btransferaccount` VALUES ('7', '2', '1', '21.50', null, '2013-02-17
 INSERT INTO `btransferaccount` VALUES ('8', '2', '1', '8.00', '转入钱包', '2013-02-17 17:02:56');
 
 -- ----------------------------
+-- Table structure for `bwork`
+-- ----------------------------
+DROP TABLE IF EXISTS `bwork`;
+CREATE TABLE `bwork` (
+  `workid` int(9) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `staffid` int(9) NOT NULL COMMENT '员工ID',
+  `workdate` varchar(10) NOT NULL COMMENT '考勤日期',
+  `starttime` varchar(19) DEFAULT NULL COMMENT '上班时间',
+  `endtime` varchar(19) DEFAULT NULL COMMENT '下班时间',
+  `workstatus` int(2) DEFAULT NULL COMMENT '考勤状态',
+  `salary` double(12,2) DEFAULT NULL COMMENT '增减工资',
+  `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`workid`)
+) ENGINE=InnoDB AUTO_INCREMENT=73353 DEFAULT CHARSET=utf8 COMMENT='考勤表';
+
+-- ----------------------------
+-- Records of bwork
+-- ----------------------------
+INSERT INTO `bwork` VALUES ('73291', '3', '2013-03-01', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73292', '3', '2013-03-02', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73293', '3', '2013-03-03', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73294', '3', '2013-03-04', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73295', '3', '2013-03-05', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73296', '3', '2013-03-06', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73297', '3', '2013-03-07', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73298', '3', '2013-03-08', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73299', '3', '2013-03-09', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73300', '3', '2013-03-10', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73301', '3', '2013-03-11', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73302', '3', '2013-03-12', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73303', '3', '2013-03-13', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73304', '3', '2013-03-14', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73305', '3', '2013-03-15', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73306', '3', '2013-03-16', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73307', '3', '2013-03-17', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73308', '3', '2013-03-18', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73309', '3', '2013-03-19', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73310', '3', '2013-03-20', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73311', '3', '2013-03-21', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73312', '3', '2013-03-22', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73313', '3', '2013-03-23', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73314', '3', '2013-03-24', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73315', '3', '2013-03-25', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73316', '3', '2013-03-26', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73317', '3', '2013-03-27', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73318', '3', '2013-03-28', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73319', '3', '2013-03-29', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73320', '3', '2013-03-30', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73321', '3', '2013-03-31', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73322', '2', '2013-03-01', null, null, '1', '1.00', null);
+INSERT INTO `bwork` VALUES ('73323', '2', '2013-03-02', null, null, '1', '2.00', null);
+INSERT INTO `bwork` VALUES ('73324', '2', '2013-03-03', null, null, '1', '3.00', null);
+INSERT INTO `bwork` VALUES ('73325', '2', '2013-03-04', null, null, '2', '-2.00', null);
+INSERT INTO `bwork` VALUES ('73326', '2', '2013-03-05', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73327', '2', '2013-03-06', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73328', '2', '2013-03-07', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73329', '2', '2013-03-08', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73330', '2', '2013-03-09', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73331', '2', '2013-03-10', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73332', '2', '2013-03-11', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73333', '2', '2013-03-12', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73334', '2', '2013-03-13', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73335', '2', '2013-03-14', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73336', '2', '2013-03-15', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73337', '2', '2013-03-16', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73338', '2', '2013-03-17', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73339', '2', '2013-03-18', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73340', '2', '2013-03-19', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73341', '2', '2013-03-20', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73342', '2', '2013-03-21', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73343', '2', '2013-03-22', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73344', '2', '2013-03-23', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73345', '2', '2013-03-24', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73346', '2', '2013-03-25', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73347', '2', '2013-03-26', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73348', '2', '2013-03-27', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73349', '2', '2013-03-28', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73350', '2', '2013-03-29', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73351', '2', '2013-03-30', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73352', '2', '2013-03-31', null, null, null, null, null);
+
+-- ----------------------------
 -- Table structure for `cbanktype`
 -- ----------------------------
 DROP TABLE IF EXISTS `cbanktype`;
@@ -266,6 +397,23 @@ CREATE TABLE `creceandpaytype` (
 -- ----------------------------
 INSERT INTO `creceandpaytype` VALUES ('1', '收入');
 INSERT INTO `creceandpaytype` VALUES ('2', '支出');
+
+-- ----------------------------
+-- Table structure for `csalarytype`
+-- ----------------------------
+DROP TABLE IF EXISTS `csalarytype`;
+CREATE TABLE `csalarytype` (
+  `salarytype` int(1) NOT NULL AUTO_INCREMENT COMMENT '类型编号',
+  `salarytypename` varchar(32) DEFAULT NULL COMMENT '类型名称',
+  PRIMARY KEY (`salarytype`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='员工工资类型表';
+
+-- ----------------------------
+-- Records of csalarytype
+-- ----------------------------
+INSERT INTO `csalarytype` VALUES ('1', '工资');
+INSERT INTO `csalarytype` VALUES ('2', '过节费');
+INSERT INTO `csalarytype` VALUES ('3', '年终奖');
 
 -- ----------------------------
 -- Table structure for `cstaffstatus`
@@ -336,6 +484,26 @@ INSERT INTO `cunit` VALUES ('4', '箱', '4');
 INSERT INTO `cunit` VALUES ('5', '件', '5');
 
 -- ----------------------------
+-- Table structure for `cworkstatus`
+-- ----------------------------
+DROP TABLE IF EXISTS `cworkstatus`;
+CREATE TABLE `cworkstatus` (
+  `workstatus` int(9) NOT NULL AUTO_INCREMENT COMMENT '考勤状态ID',
+  `workstatusname` varchar(16) DEFAULT NULL COMMENT '考勤状态名称',
+  PRIMARY KEY (`workstatus`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cworkstatus
+-- ----------------------------
+INSERT INTO `cworkstatus` VALUES ('1', '正常');
+INSERT INTO `cworkstatus` VALUES ('2', '迟到');
+INSERT INTO `cworkstatus` VALUES ('3', '早退');
+INSERT INTO `cworkstatus` VALUES ('4', '旷工');
+INSERT INTO `cworkstatus` VALUES ('5', '请假');
+INSERT INTO `cworkstatus` VALUES ('6', '放假');
+
+-- ----------------------------
 -- Table structure for `cyesorno`
 -- ----------------------------
 DROP TABLE IF EXISTS `cyesorno`;
@@ -370,9 +538,9 @@ CREATE TABLE `sbankcard` (
 -- ----------------------------
 -- Records of sbankcard
 -- ----------------------------
-INSERT INTO `sbankcard` VALUES ('1', '00000', '无', '99', '钱包', '200.00', '1', '此为钱包');
-INSERT INTO `sbankcard` VALUES ('2', '6227001823550093014', '建设银行福州支行', '2', '周坚定', '131.74', '1', '');
-INSERT INTO `sbankcard` VALUES ('3', '622909116836671310', '兴业银行福州支行', '6', '周坚定', '200.00', '1', '');
+INSERT INTO `sbankcard` VALUES ('1', '00000', '无', '99', '钱包', '5100.34', '1', '此为钱包');
+INSERT INTO `sbankcard` VALUES ('2', '6227001823550092014', '建设银行福州支行', '2', '林珊珊', '131.74', '1', '');
+INSERT INTO `sbankcard` VALUES ('3', '622909116836651310', '兴业银行福州支行', '6', '王建辉', '200.00', '1', '');
 
 -- ----------------------------
 -- Table structure for `sbtype`
@@ -391,6 +559,7 @@ CREATE TABLE `sbtype` (
 INSERT INTO `sbtype` VALUES ('CGD', '采购单', 'bbuy,bbuyrow');
 INSERT INTO `sbtype` VALUES ('CPD', '产品单', 'sproduct,sproductrow');
 INSERT INTO `sbtype` VALUES ('FKD', '付款单', 'bpay,bpayrow');
+INSERT INTO `sbtype` VALUES ('GZD', '工资单', 'bsalary,bsalaryrow');
 INSERT INTO `sbtype` VALUES ('JYD', '简易采购单', 'bbuy,bbuyrow');
 INSERT INTO `sbtype` VALUES ('SKD', '收款单', 'bpay,bpayrow');
 INSERT INTO `sbtype` VALUES ('WZD', '物资单', 'smaterial,smaterialrow');
@@ -424,16 +593,18 @@ INSERT INTO `scompany` VALUES ('1', '岐盛', '周坚定', '福建南安', '0595
 -- ----------------------------
 DROP TABLE IF EXISTS `sflow`;
 CREATE TABLE `sflow` (
+  `flowid` int(9) NOT NULL AUTO_INCREMENT,
   `flowname` varchar(64) NOT NULL DEFAULT '',
   `btype` varchar(16) NOT NULL DEFAULT '',
-  PRIMARY KEY (`flowname`,`btype`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `priority` int(3) DEFAULT NULL,
+  PRIMARY KEY (`flowid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sflow
 -- ----------------------------
-INSERT INTO `sflow` VALUES ('申请', 'XXX');
-INSERT INTO `sflow` VALUES ('结束', 'XXX');
+INSERT INTO `sflow` VALUES ('1', '申请', 'XXX', null);
+INSERT INTO `sflow` VALUES ('2', '结束', 'XXX', null);
 
 -- ----------------------------
 -- Table structure for `smanu`
@@ -475,16 +646,16 @@ CREATE TABLE `smanurow` (
   `priorityrow` int(2) DEFAULT NULL COMMENT '优先级',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`manurowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8 COMMENT='供应商账号表';
+) ENGINE=InnoDB AUTO_INCREMENT=187 DEFAULT CHARSET=utf8 COMMENT='供应商账号表';
 
 -- ----------------------------
 -- Records of smanurow
 -- ----------------------------
-INSERT INTO `smanurow` VALUES ('177', '4', '建设银行泉州分行', '1111111111', '周少华', '1', null);
 INSERT INTO `smanurow` VALUES ('181', '5', '中国银行泉州分行', '22222222', '刘星', '9', null);
 INSERT INTO `smanurow` VALUES ('182', '7', '工商银行泉州分行', '33333333', '林长城', '9', null);
 INSERT INTO `smanurow` VALUES ('184', '8', '中国农业银行福建支行', '444444', '供应商B账户名称', '9', null);
 INSERT INTO `smanurow` VALUES ('185', '10', '建设银行南安支行', '66666666', '物流B', '9', null);
+INSERT INTO `smanurow` VALUES ('186', '4', '建设银行泉州分行', '1111111111', '周少华', '1', null);
 
 -- ----------------------------
 -- Table structure for `smaterial`
@@ -553,7 +724,7 @@ CREATE TABLE `smodule` (
   `sn` varchar(32) DEFAULT NULL COMMENT '授权名称',
   `rel` varchar(32) DEFAULT NULL COMMENT '页面标识',
   PRIMARY KEY (`moduleid`)
-) ENGINE=InnoDB AUTO_INCREMENT=10122 DEFAULT CHARSET=utf8 COMMENT='模块表';
+) ENGINE=InnoDB AUTO_INCREMENT=10123 DEFAULT CHARSET=utf8 COMMENT='模块表';
 
 -- ----------------------------
 -- Records of smodule
@@ -580,6 +751,7 @@ INSERT INTO `smodule` VALUES ('10118', '产品管理', '', '6', '', '1', 'Produc
 INSERT INTO `smodule` VALUES ('10119', '产品类别管理', '', '1', '/producttype/tree', '10118', 'Producttype', 'producttype_tree');
 INSERT INTO `smodule` VALUES ('10120', '产品管理', '', '2', '/product/tree', '10118', 'Product', 'product_tree');
 INSERT INTO `smodule` VALUES ('10121', '销售管理', '', '3', '/sell/list?first=true', '10118', 'Sell', 'sell_list');
+INSERT INTO `smodule` VALUES ('10122', '工资管理', '', '99', '/salary/list?first=true', '10111', 'Salary', 'salary_list');
 
 -- ----------------------------
 -- Table structure for `spermission`
@@ -593,6 +765,8 @@ CREATE TABLE `spermission` (
 -- ----------------------------
 -- Records of spermission
 -- ----------------------------
+INSERT INTO `spermission` VALUES ('2', 'Others:view');
+INSERT INTO `spermission` VALUES ('3', 'Others:view');
 INSERT INTO `spermission` VALUES ('1', 'Configs:view');
 INSERT INTO `spermission` VALUES ('1', 'User:view');
 INSERT INTO `spermission` VALUES ('1', 'User:add');
@@ -633,6 +807,10 @@ INSERT INTO `spermission` VALUES ('1', 'Pay:add');
 INSERT INTO `spermission` VALUES ('1', 'Pay:edi');
 INSERT INTO `spermission` VALUES ('1', 'Pay:delete');
 INSERT INTO `spermission` VALUES ('1', 'Pay:other');
+INSERT INTO `spermission` VALUES ('1', 'Salary:view');
+INSERT INTO `spermission` VALUES ('1', 'Salary:add');
+INSERT INTO `spermission` VALUES ('1', 'Salary:edi');
+INSERT INTO `spermission` VALUES ('1', 'Salary:delete');
 INSERT INTO `spermission` VALUES ('1', 'Materials:view');
 INSERT INTO `spermission` VALUES ('1', 'Materialtype:view');
 INSERT INTO `spermission` VALUES ('1', 'Materialtype:add');
@@ -660,8 +838,6 @@ INSERT INTO `spermission` VALUES ('1', 'Sell:add');
 INSERT INTO `spermission` VALUES ('1', 'Sell:edi');
 INSERT INTO `spermission` VALUES ('1', 'Sell:delete');
 INSERT INTO `spermission` VALUES ('1', 'Others:view');
-INSERT INTO `spermission` VALUES ('2', 'Others:view');
-INSERT INTO `spermission` VALUES ('3', 'Others:view');
 
 -- ----------------------------
 -- Table structure for `sproduct`
@@ -772,7 +948,7 @@ CREATE TABLE `sstaff` (
 -- ----------------------------
 -- Records of sstaff
 -- ----------------------------
-INSERT INTO `sstaff` VALUES ('2', '员工一', '1', '1', '11111111', '建设银行南安支行', '22222222', '员工一', '备注1', '53.00', null);
+INSERT INTO `sstaff` VALUES ('2', '员工一', '1', '1', '11111111', '建设银行南安支行', '11111111', '员工一', '备注1', '53.00', null);
 INSERT INTO `sstaff` VALUES ('3', '员工二', '1', '1', '22222222', '建设银行南安支行', '22222222', '员工二', '备注2', '63.00', null);
 INSERT INTO `sstaff` VALUES ('4', '员工三', '1', '2', '33333333', '建设银行南安支行', '33333333', '员工三', '', null, null);
 
@@ -796,7 +972,7 @@ CREATE TABLE `suser` (
 INSERT INTO `suser` VALUES ('LINCC', '林长城', '21218cca77804d2ba1922c33e0151105', '18979578121', '1', '2013-01-01');
 INSERT INTO `suser` VALUES ('ZH112014', '张红', '21218cca77804d2ba1922c33e0151105', '18979172171', '1', '2013-01-01');
 INSERT INTO `suser` VALUES ('ZH112208', '张宏', '21218cca77804d2ba1922c33e0151105', '18979576017', '1', '2012-12-06');
-INSERT INTO `suser` VALUES ('ZHD103272', '朱宏东', '21218cca77804d2ba1922c33e0151105', '18979372566', '1', null);
+INSERT INTO `suser` VALUES ('ZHD103272', '朱宏东', '21218cca77804d2ba1922c33e0151105', '18979372566', '0', null);
 INSERT INTO `suser` VALUES ('ZHD105069', '邹海东', '21218cca77804d2ba1922c33e0151105', '18979275921', '1', '');
 INSERT INTO `suser` VALUES ('ZHF103099', '章海峰', '21218cca77804d2ba1922c33e0151105', '18979376001', '1', null);
 INSERT INTO `suser` VALUES ('ZHJ301206', '邹惠娟', '21218cca77804d2ba1922c33e0151105', '18979172594', '1', null);
@@ -833,6 +1009,35 @@ CREATE TABLE `suser_role` (
 INSERT INTO `suser_role` VALUES ('ZHOUJD', '1');
 INSERT INTO `suser_role` VALUES ('LINCC', '2');
 INSERT INTO `suser_role` VALUES ('LINCC', '3');
+
+-- ----------------------------
+-- Procedure structure for `proc_initWork`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `proc_initWork`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_initWork`(vmonth varchar(7))
+BEGIN
+		DECLARE imonthNum INT;
+		DECLARE istaffid INT;
+		DECLARE stop int default 0;
+		DECLARE cursor_name CURSOR FOR SELECT staffid FROM sstaff WHERE staffstatus = '1';
+		DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET stop = 1;
+		SET imonthNum = 0;
+		
+		SELECT DAY(DATE_ADD(DATE_ADD(CONCAT(vmonth,'-01'),INTERVAL 1 MONTH), INTERVAL -1 DAY)) INTO imonthNum;
+
+		OPEN cursor_name;
+		FETCH cursor_name INTO istaffid;
+			WHILE stop <> 1 DO
+				SET @mycnt = -1;
+				INSERT INTO bwork(staffid, workdate)
+					(SELECT istaffid, DATE_ADD(CONCAT(vmonth,'-01'),INTERVAL @mycnt :=@mycnt + 1 DAY) AS DAY FROM spermission LIMIT imonthNum);
+				FETCH cursor_name INTO istaffid; 
+			END WHILE;
+		CLOSE cursor_name ;
+END
+;;
+DELIMITER ;
 
 -- ----------------------------
 -- Function structure for `func_getBankcardno`
@@ -979,6 +1184,39 @@ END
 DELIMITER ;
 
 -- ----------------------------
+-- Function structure for `func_getSalarytypeName`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getSalarytypeName`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getSalarytypeName`(isalarytype int(1)) RETURNS varchar(255) CHARSET utf8
+BEGIN
+    DECLARE vsalarytypename VARCHAR(255);
+
+    SELECT salarytypename INTO vsalarytypename FROM csalarytype
+			WHERE salarytype = isalarytype;
+
+		return vsalarytypename;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `func_getStaffName`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getStaffName`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getStaffName`(istaffid int) RETURNS varchar(255) CHARSET utf8
+BEGIN
+    DECLARE vstaffname VARCHAR(255);
+
+    SELECT staffname INTO vstaffname FROM sstaff WHERE staffid = istaffid;
+
+		return vstaffname;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
 -- Function structure for `func_getStaffstatusName`
 -- ----------------------------
 DROP FUNCTION IF EXISTS `func_getStaffstatusName`;
@@ -1043,6 +1281,8 @@ BEGIN
 				SELECT SUM(materialprice) INTO isum FROM sproductrow WHERE productid = iid;
 			WHEN(SELECT 'XSD' LIKE vbtype)=1 THEN
 				SELECT SUM(realsum) INTO isum FROM bsellrow WHERE sellid = iid;
+			WHEN(SELECT 'GZD' LIKE vbtype)=1 THEN
+				SELECT SUM(planmoney) INTO isum FROM bsalaryrow WHERE salaryid = iid;
 	
 		END CASE;
 

@@ -202,6 +202,8 @@ public class SellDaoImpl extends BaseDaoImpl {
 						sql.delete(0,sql.length());
 						sql.append("DELETE FROM bpay WHERE payid = '").append(payid2).append("'");
 						dbUtils.executeSQL(sql.toString());
+						sql.append("UPDATE bsell SET currflow = '申请' WHERE sellid = '").append(sellid).append("'");
+						dbUtils.executeSQL(sql.toString());
 					}
 				}
 			}
