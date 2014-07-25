@@ -57,13 +57,16 @@ public class ProductAction {
 	public String toAdd(@PathVariable("producttype") int producttype, HttpServletRequest request) {
 
 		CodeTableForm form = new CodeTableForm();
-		form.setValue("producttype", producttype);
-		String sql = "SELECT producttypename FROM sproducttype WHERE producttype = '" + producttype + "'";
-		String producttypename = dbUtils.execQuerySQL(sql);
-		form.setValue("producttypename", producttypename);
 		
-		String productno = StrUtils.getNewNO("CPD","productno","sproduct");
-		form.setValue("productno", productno); //初始化单据号
+		CodeTableForm parentForm = dbUtils.getFormByColumn("sproducttype", "producttype",
+				String.valueOf(producttype));
+		
+		String productno = StrUtils.getNO(StrUtils.nullToStr(parentForm.getValue("producttypeno")),
+				"productno", "sproduct");
+		
+		form.setValue("producttype", producttype);
+		form.setValue("productno", productno); //产品类型编码
+		form.setValue("producttypename", StrUtils.nullToStr(parentForm.getValue("producttypename")));
 		
 		request.setAttribute("form", form);
 		this.getSelects(request);
@@ -136,4 +139,18 @@ public class ProductAction {
 		List<CodeTableForm> unitList = dbUtils.getListBySql(sql); //计量单位
 		request.setAttribute("unitList", unitList);
 	}
+	
+	/**
+	 * 查询产品
+	 * @param keyword
+	 * @return
+	 */
+    @RequestMapping(value = "/getSelectByKeyword")
+    @ResponseBody
+    public List<CodeTableForm> getSelectByKeyword(String keyword) {
+		String sql = "SELECT * FROM sproduct t WHERE (t.productno LIKE '%"
+				+ keyword + "%' OR t.productname LIKE '%" + keyword + "%')";
+		List<CodeTableForm> list = dbUtils.getListBySql(sql);
+        return list;
+    }
 }

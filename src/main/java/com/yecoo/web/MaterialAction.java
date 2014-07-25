@@ -1,13 +1,16 @@
 package com.yecoo.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.yecoo.dao.MaterialDaoImpl;
 import com.yecoo.dao.MaterialtypeDaoImpl;
 import com.yecoo.model.CodeTableForm;
@@ -22,6 +25,7 @@ import com.yecoo.util.dwz.AjaxObject;
 @RequestMapping("/material")
 public class MaterialAction {
 
+	DbUtils dbUtils = new DbUtils();
 	private MaterialDaoImpl materialDaoImpl = new MaterialDaoImpl();
 	private MaterialtypeDaoImpl materialtypeDaoImpl = new MaterialtypeDaoImpl();
 
@@ -54,18 +58,19 @@ public class MaterialAction {
 	@RequiresPermissions("Material:add")
 	@RequestMapping(value="/add/{materialtype}", method=RequestMethod.GET)
 	public String toAdd(@PathVariable("materialtype") int materialtype, HttpServletRequest request) {
-
-		DbUtils dbUtils = new DbUtils();
 		
 		CodeTableForm form = new CodeTableForm();
+		
+		CodeTableForm parentForm = dbUtils.getFormByColumn("smaterialtype", "materialtype",
+				String.valueOf(materialtype));
+		
+		String materialno = StrUtils.getNO(StrUtils.nullToStr(parentForm.getValue("materialtypeno")),
+				"materialno", "smaterial");
+
 		form.setValue("materialtype", materialtype);
-		String sql = "SELECT materialtypename FROM smaterialtype WHERE materialtype = '" + materialtype + "'";
-		String materialtypename = dbUtils.execQuerySQL(sql);
-		form.setValue("materialtypename", materialtypename);
-		
-		String materialno = StrUtils.getNewNO("WZD","materialno","smaterial");
-		form.setValue("materialno", materialno); //初始化单据号
-		
+		form.setValue("materialno", materialno); //物资类型编码
+		form.setValue("materialtypename", StrUtils.nullToStr(parentForm.getValue("materialtypename")));
+
 		request.setAttribute("form", form);
 		this.getSelects(request);
 		return "material/add";
@@ -93,6 +98,7 @@ public class MaterialAction {
 		
 		CodeTableForm form = null;
 		form = materialDaoImpl.getMaterialById(materialid);
+		
 		request.setAttribute("form", form);
 		this.getSelects(request);
 		return "material/edi";
@@ -137,4 +143,20 @@ public class MaterialAction {
 		List<CodeTableForm> unitList = dbUtils.getListBySql(sql); //计量单位
 		request.setAttribute("unitList", unitList);
 	}
+	
+	/**
+	 * 查询物资
+	 * @param keyword
+	 * @return
+	 */
+    @RequestMapping(value = "/getSelectByKeyword")
+    @ResponseBody
+    public List<CodeTableForm> getSelectByKeyword(String keyword) {
+		String sql = "SELECT t.*, b.manuid, b.manuname, b.manucontact, b.manutel"
+				+ " FROM smaterial t LEFT JOIN smanu b ON t.manuid = b.manuid"
+				+ " WHERE (t.materialno LIKE '%"
+				+ keyword + "%' OR t.materialname LIKE '%" + keyword + "%')";
+		List<CodeTableForm> list = dbUtils.getListBySql(sql);
+        return list;
+    }
 }

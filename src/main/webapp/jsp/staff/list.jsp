@@ -30,6 +30,11 @@
 							</c:forEach>
 						</select>
 					</td>
+					<td>
+						月份：
+						<input type="text" name="map[month]" size="30" value="${form.map.month}" class="date"
+							dateFmt="yyyy-MM"/>
+					</td>
 				</tr>
 			</table>
 			<div class="subBar">
@@ -83,14 +88,15 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="12.5%">序号</th>
-				<th width="12.5%">员工名称</th>
-				<th width="12.5%">员工类别</th>
-				<th width="12.5%">员工状态</th>
-				<th width="12.5%">联系电话</th>
-				<th width="12.5%">工资开户银行</th>
-				<th width="12.5%">工资银行账号</th>
-				<th width="12.5%">工资帐户名称</th>
+				<th width="11%">序号</th>
+				<th width="11%">员工名称</th>
+				<th width="11%">员工类别</th>
+				<th width="11%">员工状态</th>
+				<th width="11%">联系电话</th>
+				<th width="11%">工资开户银行</th>
+				<th width="11%">工资银行账号</th>
+				<th width="11%">工资帐户名称</th>
+				<th width="11%">当月总工资</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -98,7 +104,8 @@
 			   	<tr target="s_staffid" rel="${bean.map.staffid}"
 			   		ondblclick="$.bringBack({
 			   		staffid:'${bean.map.staffid}',
-					staffname:'${bean.map.staffname}'})"
+					staffname:'${bean.map.staffname}',
+					planmoney:'${bean.map.monthsalary}'})"
 			   	>
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.staffname}</td>
@@ -108,6 +115,7 @@
 			   		<td>${bean.map.bank}</td>
 			   		<td>${bean.map.accountno}</td>
 			   		<td>${bean.map.accountname}</td>
+			   		<td>${bean.map.monthsalary}</td>
 			   	</tr>
 		   	</c:forEach>
 	   	</tbody>

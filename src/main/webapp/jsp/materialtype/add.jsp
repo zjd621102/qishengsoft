@@ -8,6 +8,14 @@
 	<input type="hidden" name="map[parent]" value="${form.map.parent}" />
 	<div class="pageFormContent" layoutH="97">
 		<dl>
+			<dt>物资类型编码：</dt>
+			<dd>
+				<input type="text" name="map[materialtypeno]" class="required" size="30"
+					maxlength="8" value="${form.map.materialtypeno}" alt="请输入物资类型编码"
+					readonly="readonly" />
+			</dd>
+		</dl>
+		<dl>
 			<dt>物资类型名称：</dt>
 			<dd>
 				<input type="text" name="map[materialtypename]" class="required" size="30"

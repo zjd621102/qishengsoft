@@ -76,14 +76,14 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="10%">序号</th>
-				<th width="10%">工资类型</th>
+				<th width="5%">序号</th>
+				<th width="10%">工资单类型</th>
 				<th width="20%">工资单名称</th>
-				<th width="10%">工资编号</th>
-				<th width="10%">工资日期</th>
+				<th width="20%">工资单编号</th>
+				<th width="10%">工资单日期</th>
 				<th width="10%">当前流程</th>
 				<th width="10%">制单人</th>
-				<th width="20%">创建时间</th>
+				<th width="15%">创建时间</th>
 			</tr>
 		</thead>
 		<tbody>

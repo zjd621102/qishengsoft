@@ -12,6 +12,10 @@
 						物资类型名称：
 						<input type="text" name="map[materialtypename]" value="${form.map.materialtypename}" />
 					</td>
+					<td>
+						物资类型编码：
+						<input type="text" name="map[materialtypeno]" value="${form.map.materialtypeno}" />
+					</td>
 				</tr>
 			</table>
 			<div class="subBar">
@@ -63,16 +67,18 @@
 		<thead>
 			<tr>
 				<th width="10%">序号</th>
-				<th width="25%">物资类型名称</th>
+				<th width="15%">物资类型编码</th>
+				<th width="20%">物资类型名称</th>
 				<th width="10%">优先级</th>
-				<th width="25%">父物资类型名称</th>
-				<th width="30%">备注</th>
+				<th width="20%">父物资类型名称</th>
+				<th width="25%">备注</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${materialtypeList}" var="bean" varStatus="vs">
 				<tr target="s_materialtype" rel="${bean.map.materialtype}">
 					<td>${vs.index+1}</td>
+					<td>${bean.map.materialtypeno}</td>
 					<td>${bean.map.materialtypename}</td>
 					<td>${bean.map.priority}</td>
 					<td>${bean.map.parentname}</td>

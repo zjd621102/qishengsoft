@@ -30,10 +30,10 @@
 							用户姓名：<input type="text" name="map[username]" value="${form.map.username}"/>
 						</td>
 						<td>
-							出生日期从：<input type="text" class="date" readonly="true" name="map[fromBirthday]" value="${form.map.fromBirthday}" />
+							出生日期从：<input type="text" class="date" readonly="readonly" name="map[fromBirthday]" value="${form.map.fromBirthday}" />
 						</td>
 						<td>
-							至：<input type="text" class="date" readonly="true" name="map[toBirthday]" value="${form.map.toBirthday}" />
+							至：<input type="text" class="date" readonly="readonly" name="map[toBirthday]" value="${form.map.toBirthday}" />
 						</td>
 					</tr>
 				</table>

@@ -116,10 +116,14 @@ public class MaterialtypeDaoImpl extends BaseDaoImpl {
 		
 		StringBuffer cond = new StringBuffer("");
 		String materialtypename = StrUtils.nullToStr(form.getValue("materialtypename"));
+		String materialtypeno = StrUtils.nullToStr(form.getValue("materialtypeno"));
 		String parent = StrUtils.nullToStr(form.getValue("parent"));
 		
 		if(!materialtypename.equals("")) {
 			cond.append(" AND t.materialtypename like '%").append(materialtypename).append("%'");
+		}
+		if(!materialtypeno.equals("")) {
+			cond.append(" AND t.materialtypeno like '%").append(materialtypeno).append("%'");
 		}
 		if(!parent.equals("")) {
 			cond.append(" AND t.parent = '").append(parent).append("'");

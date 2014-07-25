@@ -328,4 +328,54 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 		}
 		return cond.toString();
 	}
+	/**
+	 * 交易列表
+	 * @param form
+	 * @param pageNum
+	 * @param numPerPage
+	 * @return
+	 */
+	public List<CodeTableForm> getTransactionList(CodeTableForm form) {
+		
+		String sql = "SELECT b.bankcardno, b.realsum*if(a.btype='SKD', 1, -1) realsum, a.paydate, a.payid, a.relateno,"
+				+ " func_getBtypeName(a.btype) btypename"
+				+ " FROM bpay a, bpayrow b WHERE a.payid = b.payid AND a.currflow = '结束'";
+		String cond = getTransactionListCondition(form);
+		sql += cond;
+		sql += " ORDER BY a.paydate DESC";
+		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
+		List<CodeTableForm> list = dbUtils.getListBySql(sql);
+		return list;
+	}
+	/**
+	 * 交易列表-条件
+	 * @param form
+	 * @return
+	 */
+	public String getTransactionListCondition(CodeTableForm form) {
+		
+		StringBuffer cond = new StringBuffer("");
+		String bankcardno = StrUtils.nullToStr(form.getValue("bankcardno"));
+		String btype = StrUtils.nullToStr(form.getValue("btype"));
+		String payid = StrUtils.nullToStr(form.getValue("payid"));
+		String paydateFrom = StrUtils.nullToStr(form.getValue("paydateFrom"));
+		String paydateTo = StrUtils.nullToStr(form.getValue("paydateTo"));
+		
+		if(!bankcardno.equals("")) {
+			cond.append(" AND b.bankcardno LIKE '%").append(bankcardno).append("%'");
+		}
+		if(!btype.equals("")) {
+			cond.append(" AND a.btype = '").append(btype).append("'");
+		}
+		if(!payid.equals("")) {
+			cond.append(" AND a.payid = '").append(payid).append("'");
+		}
+		if(!paydateFrom.equals("")) {
+			cond.append(" AND a.paydate >= '").append(paydateFrom).append("'");
+		}
+		if(!paydateTo.equals("")) {
+			cond.append(" AND a.paydate <= '").append(paydateTo).append("'");
+		}
+		return cond.toString();
+	}
 }

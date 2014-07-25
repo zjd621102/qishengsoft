@@ -53,11 +53,11 @@ public class PayDaoImpl extends BaseDaoImpl {
 	public String getPayListCondition(CodeTableForm form) {
 		
 		StringBuffer cond = new StringBuffer("");
-		String payname = StrUtils.nullToStr(form.getValue("payname"));
+		String payid = StrUtils.nullToStr(form.getValue("payid"));
 		String currflow = StrUtils.nullToStr(form.getValue("currflow"));
 		
-		if(!payname.equals("")) {
-			cond.append(" AND t.payname like '%").append(payname).append("%'");
+		if(!payid.equals("")) {
+			cond.append(" AND t.payid = '").append(payid).append("'");
 		}
 		if(!currflow.equals("")) {
 			cond.append(" AND t.currflow = '").append(currflow).append("'");

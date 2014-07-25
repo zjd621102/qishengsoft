@@ -73,6 +73,7 @@
 			<c:forEach items="${productList}" var="bean" varStatus="vs">
 			   	<tr target="s_productid" rel="${bean.map.productid}"
 			   		ondblclick="$.bringBack({
+			   		productid:'${bean.map.productid}',
 			   		productno:'${bean.map.productno}',
 					productname:'${bean.map.productname}',
 					unit:'${bean.map.unit}',

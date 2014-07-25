@@ -25,6 +25,13 @@
 <script src="<%=path%>/js/dwz.regional.zh.js" type="text/javascript"></script>
 <script src="<%=path%>/js/public.js" type="text/javascript"></script>
 
+<script src="<%=path%>/js/Highcharts-4.0.1/js/highcharts.js" type="text/javascript"></script>
+<script src="<%=path%>/js/Highcharts-4.0.1/js/modules/exporting.js" type="text/javascript"></script>
+<script src="<%=path%>/js/Highcharts-4.0.1/js/highcharts-3d.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="<%=path%>/js/jquery-ui-1.9.2.custom/css/ui-lightness/jquery-ui-1.9.2.custom.min.css"></link>
+<script src="<%=path%>/js/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js"></script>
+
 <script type="text/javascript">
 	$(function() {
 		DWZ.init("<%=path%>/resources/dwz.frag.xml", {
@@ -145,7 +152,67 @@
 				</ul>
 				<div class="navTab-panel tabsPageContent layoutBox">
 					<div class="page unitBox">
-						<div class="pageFormContent">欢迎登录！</div>
+						<div class="accountInfo">
+							<div class="right">
+								<p>待办工作<span style="color: red;">${toDoNum}</span>项</p>
+<!-- 									<p>07月12日，星期二</p> -->
+							</div>
+							<p>
+								<span>欢迎登录QS管理系统！</span>
+							</p>
+						</div>
+					
+						<div class="pageFormContent" layoutH="80" style="margin-right:230px">
+							<h2>采购待办列表:</h2>
+							<c:forEach var="buy" items="${buyList}">
+								<li>
+									<div class="unit">
+										<a href="<%=path%>/buy/edi/${buy.map.buyid}" target="dialog"
+											rel="buy_edi" mask="true" width="1300" height="500">
+											${buy.map.buyname}【${buy.map.buydate}】</a>
+									</div>
+								</li>
+							</c:forEach>
+							
+							<div class="divider"></div>
+							
+							<h2>销售待办列表:</h2>
+							<c:forEach var="sell" items="${sellList}">
+								<li>
+									<div class="unit">
+										<a href="<%=path%>/sell/edi/${sell.map.sellid}" target="dialog"
+											rel="sell_edi" mask="true" width="1300" height="500">
+											${sell.map.manuname}【${sell.map.selldate}】</a>
+									</div>
+								</li>
+							</c:forEach>
+							
+							<div class="divider"></div>
+							
+							<h2>工资单待办列表:</h2>
+							<c:forEach var="salary" items="${salaryList}">
+								<li>
+									<div class="unit">
+										<a href="<%=path%>/salary/edi/${salary.map.salaryid}" target="dialog"
+											rel="salary_edi" mask="true" width="1300" height="500">
+											${salary.map.salaryname}</a>
+									</div>
+								</li>
+							</c:forEach>
+							
+							<div class="divider"></div>
+							
+							<h2>单据待办列表:</h2>
+							<c:forEach var="pay" items="${payList}">
+								<li>
+									<div class="unit">
+										<a href="<%=path%>/pay/edi/${pay.map.payid}" target="dialog"
+											rel="pay_edi" mask="true" width="1300" height="500">
+											${pay.map.btypename}【${pay.map.paydate}】</a>
+									</div>
+								</li>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -12,6 +12,10 @@
 						产品类别名称：
 						<input type="text" name="map[producttypename]" value="${form.map.producttypename}" />
 					</td>
+					<td>
+						产品类别编码：
+						<input type="text" name="map[producttypeno]" value="${form.map.producttypeno}" />
+					</td>
 				</tr>
 			</table>
 			<div class="subBar">
@@ -63,16 +67,18 @@
 		<thead>
 			<tr>
 				<th width="10%">序号</th>
-				<th width="25%">产品类别名称</th>
+				<th width="15%">产品类别编码</th>
+				<th width="20%">产品类别名称</th>
 				<th width="10%">优先级</th>
-				<th width="25%">父产品类别名称</th>
-				<th width="30%">备注</th>
+				<th width="20%">父产品类别名称</th>
+				<th width="25%">备注</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${producttypeList}" var="bean" varStatus="vs">
 				<tr target="s_producttype" rel="${bean.map.producttype}">
 					<td>${vs.index+1}</td>
+					<td>${bean.map.producttypeno}</td>
 					<td>${bean.map.producttypename}</td>
 					<td>${bean.map.priority}</td>
 					<td>${bean.map.parentname}</td>

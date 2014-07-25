@@ -31,7 +31,7 @@
 		<dl>
 			<dt>计量单位：</dt>
 			<dd>
-				<select name="map[unit]" style="width: 184px;" class="required">
+				<select name="map[unit]" style="width: 193px;" class="required">
 					<option value=""></option>
 					<c:forEach items="${unitList}" var="unit">
 						<option value="${unit.map.unitid}"
@@ -55,7 +55,7 @@
 			<dd>
 				<input type="hidden" name="map[manuid]" value="${form.map.manuid}"/>
 				<input type="text" class="required" name="map[manuname]" value="${form.map.manuname}"
-					size="30" suggestFields="manuid,manuname" readonly="readonly"/>
+					size="24" suggestFields="manuid,manuname" readonly="readonly"/>
 				<a class="btnLook" href="<%=path%>/manu/list?act=backselect" lookupGroup="manuLookup"
 					width="1000" height="500">查找带回</a>
 				<a href="javascript:void(0);" class="btnClear" suggestFields="manuid,manuname"/>

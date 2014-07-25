@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.yecoo.model.CodeTableForm;
+import com.yecoo.util.DateUtils;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 
@@ -35,8 +36,17 @@ public class StaffDaoImpl extends BaseDaoImpl {
 	 */
 	public List<CodeTableForm> getStaffList(CodeTableForm form) {
 		
+		String month = StrUtils.nullToStr(form.getValue("month"));
+		if(month.equals("")) {
+			month = DateUtils.getAdjustTime(DateUtils.getNowDateTime(), "month", "", 1);// 默认为上个月
+			month = month.substring(0, 7);
+			form.setValue("month", month);
+		}
+		
 		String sql = "SELECT t.*, func_getStaffstatusName(t.staffstatus) staffstatusname,"
-				+ " func_getStafftypeName(t.stafftype) stafftypename FROM sstaff t WHERE 1 = 1";
+				+ " func_getStafftypeName(t.stafftype) stafftypename,"
+				+ " func_getSalaryByMonth(t.staffid, '" + month + "') monthsalary FROM sstaff t WHERE 1 = 1";
+		
 		String cond = getStaffListCondition(form);
 		sql += cond;
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
@@ -187,12 +197,19 @@ public class StaffDaoImpl extends BaseDaoImpl {
 	 */
 	public void initWork(String month) {
 		
+		String staffid = null;
 		if(!"".equals(month)) {
-			String sql = "SELECT COUNT(1) FROM bwork WHERE workdate like '" + month + "%'";
-			int worknum = dbUtils.getIntBySql(sql);
-			if(worknum==0) {
-				sql = "call proc_initWork('" + month + "')";
-				dbUtils.executeSQL(sql);
+			String sql = "SELECT staffid FROM sstaff WHERE staffstatus = '1'";
+			List<CodeTableForm> staffList = dbUtils.getListBySql(sql);
+			for(CodeTableForm form : staffList) {
+				staffid = StrUtils.nullToStr(form.getValue("staffid"));
+				sql = "SELECT COUNT(1) FROM bwork t WHERE t.workdate like '" + month + "%' AND t.staffid = '"
+						+ staffid + "'";
+				int worknum = dbUtils.getIntBySql(sql);
+				if(worknum==0) {
+					sql = "call proc_initWorkByStaff('" + month + "', '" + staffid + "')";
+					dbUtils.executeSQL(sql);
+				}
 			}
 		}
 	}

@@ -116,10 +116,14 @@ public class ProducttypeDaoImpl extends BaseDaoImpl {
 		
 		StringBuffer cond = new StringBuffer("");
 		String producttypename = StrUtils.nullToStr(form.getValue("producttypename"));
+		String producttypeno = StrUtils.nullToStr(form.getValue("producttypeno"));
 		String parent = StrUtils.nullToStr(form.getValue("parent"));
 		
 		if(!producttypename.equals("")) {
 			cond.append(" AND t.producttypename like '%").append(producttypename).append("%'");
+		}
+		if(!producttypeno.equals("")) {
+			cond.append(" AND t.producttypeno like '%").append(producttypeno).append("%'");
 		}
 		if(!parent.equals("")) {
 			cond.append(" AND t.parent = '").append(parent).append("'");

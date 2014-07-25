@@ -1,16 +1,20 @@
 package com.yecoo.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.yecoo.dao.MaterialtypeDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
+import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
  * 物资类型管理
@@ -53,7 +57,16 @@ public class MaterialtypeAction {
 	public String toAdd(@PathVariable("parent") int parent, HttpServletRequest request) {
 		
 		CodeTableForm form = new CodeTableForm();
+		
+		DbUtils dbUtils = new DbUtils();
+		
+		CodeTableForm parentForm = dbUtils.getFormByColumn("smaterialtype", "materialtype", String.valueOf(parent));
+		String materialtypeno = StrUtils.getNO(StrUtils.nullToStr(parentForm.getValue("materialtypeno")),
+				"materialtypeno", "smaterialtype");
+		
 		form.setValue("parent", parent);
+		form.setValue("materialtypeno", materialtypeno); //物资类型编码
+		
 		request.setAttribute("form", form);
 		return "materialtype/add";
 	}

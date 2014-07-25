@@ -7,18 +7,13 @@
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						销售单名称：
-						<input type="text" name="map[sellname]" size="30" maxlength="32"
-							value="${form.map.sellname}"/>
-					</td>
-					<td>
 						销售单编号：
-						<input type="text" name="map[sellno]" size="30" maxlength="13"
+						<input type="text" name="map[sellno]" size="15" maxlength="13"
 							value="${form.map.sellno}"/>
 					</td>
 					<td>
 						当前流程：
-						<select name="map[currflow]" style="width: 184px;">
+						<select name="map[currflow]" style="width: 100px;">
 							<option value=""></option>
 							<c:forEach items="${currflowList}" var="currflow">
 								<option value="${currflow.map.flowname}"
@@ -28,6 +23,16 @@
 								</option>
 							</c:forEach>
 						</select>
+					</td>
+					<td>
+						销售日期从：<input type="text" name="map[selldateFrom]" size="15" value="${form.map.selldateFrom}" class="date"/>
+					</td>
+					<td>
+						至：<input type="text" name="map[selldateTo]" size="15" value="${form.map.selldateTo}" class="date"/>
+					</td>
+					<td>
+						客户名称：
+						<input type="text" name="map[manuname]" size="15" value="${form.map.manuname}"/>
 					</td>
 				</tr>
 			</table>

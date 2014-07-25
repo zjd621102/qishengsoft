@@ -28,11 +28,11 @@
 				<td>
 					月份：
 					<input type="text" name="map[month]" class="required date" dateFmt="yyyy-MM" size="30"
-						value="${form.map.month}" readonly="true"/>
+						value="${form.map.month}" readonly="readonly"/>
 				</td>
 				<td>
 					工资：
-					<input type="text" name="map[salary]" size="30" value="${form.map.salary}" readonly="true"/>
+					<input type="text" size="30" value="${form.map.salary}" readonly="readonly"/>
 				</td>
 			</tr>
 		</table>
@@ -102,11 +102,11 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[starttime]" class="date" dateFmt="HH:mm" style="width: 100%"
-							value="${bean.map.starttime}" readonly="true"/>
+							value="${bean.map.starttime}" readonly="readonly"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[endtime]" class="date" dateFmt="HH:mm" style="width: 100%"
-							value="${bean.map.endtime}" readonly="true"/>
+							value="${bean.map.endtime}" readonly="readonly"/>
 			   		</td>
 			   		<td>
 						<select name="map[workstatus]" style="width: 90%;">

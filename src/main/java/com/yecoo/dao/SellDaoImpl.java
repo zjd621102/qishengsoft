@@ -40,7 +40,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 				+ " func_getSum(t.sellid, 'XSD') allrealsum FROM bsell t WHERE 1 = 1";
 		String cond = getSellListCondition(form);
 		sql  += cond;
-		sql += " ORDER BY sellid DESC";
+		sql += " ORDER BY t.selldate DESC";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
@@ -55,12 +55,25 @@ public class SellDaoImpl extends BaseDaoImpl {
 		StringBuffer cond = new StringBuffer("");
 		String sellno = StrUtils.nullToStr(form.getValue("sellno"));
 		String currflow = StrUtils.nullToStr(form.getValue("currflow"));
+		String selldateFrom = StrUtils.nullToStr(form.getValue("selldateFrom"));
+		String selldateTo = StrUtils.nullToStr(form.getValue("selldateTo"));
+		String manuname = StrUtils.nullToStr(form.getValue("manuname"));
 		
 		if(!sellno.equals("")) {
 			cond.append(" AND t.sellno like '%").append(sellno).append("%'");
 		}
 		if(!currflow.equals("")) {
 			cond.append(" AND t.currflow = '").append(currflow).append("'");
+		}
+		if(!selldateFrom.equals("")) {
+			cond.append(" AND t.selldate >= '").append(selldateFrom).append("'");
+		}
+		if(!selldateTo.equals("")) {
+			cond.append(" AND t.selldate <= '").append(selldateTo).append("'");
+		}
+		if(!manuname.equals("")) {
+			cond.append(" AND EXISTS (SELECT 1 FROM smanu m WHERE m.manuid = t.manuid AND m.manuname LIKE '%")
+				.append(manuname).append("%')");
 		}
 		
 		return cond.toString();
@@ -124,7 +137,8 @@ public class SellDaoImpl extends BaseDaoImpl {
 				+ " FROM bsell a WHERE a.sellid = '" + sellid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
-		sql = "SELECT a.*, func_getUnitName(a.unit) unitname FROM bsellrow a WHERE a.sellid = '" + sellid + "'";
+		sql = "SELECT a.*, b.productno, func_getUnitName(a.unit) unitname"
+				+ " FROM bsellrow a LEFT JOIN sproduct b ON a.productid = b.productid WHERE a.sellid = '" + sellid + "'";
 		List<CodeTableForm> sellrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("sellrowList", sellrowList);
 		

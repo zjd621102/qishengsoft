@@ -55,6 +55,13 @@ public class StrUtils {
 		}
 		return sourceStr;
 	}
+	
+	public static String nullToStr(Object sourceStr, String defaultStr) {
+		if ((sourceStr == null) || sourceStr.equals("") || sourceStr.equals("null")) {
+			sourceStr = defaultStr;
+		}
+		return sourceStr.toString();
+	}
 	/**
 	 * NULL转为""
 	 * @param sourceStr1
@@ -405,6 +412,23 @@ public class StrUtils {
 		return sdf.format(new Date());
 	}
 	/**
+	 * 获取编码
+	 * @param parentNo父级编码
+	 * @param noclumn 编码字段
+	 * @param tabname 表名
+	 * @return
+	 */
+	public static String getNO(String parentNo, String noclumn, String tabname) {
+		DbUtils dbUtils = new DbUtils();
+		String no = parentNo;
+		StringBuffer sql = new StringBuffer("");
+		sql.append("SELECT IFNULL(MAX(SUBSTR(").append(noclumn).append(", -2)), 0) + 1 FROM ").append(tabname)
+			.append(" WHERE ").append(noclumn).append(" like '" + parentNo + "__'");
+		no += StringUtils.leftPad(dbUtils.execQuerySQL(sql.toString()), 2,"0");
+		
+		return no;
+	}
+	/**
 	 * 获取单据编码
 	 * @param btype 单据类型
 	 * @param noclumn 编码字段
@@ -413,12 +437,12 @@ public class StrUtils {
 	 */
 	public static String getNewNO(String btype, String noclumn, String tabname) {
 		DbUtils dbUtils = new DbUtils();
-		String sysdate = StrUtils.getSysdate("yyyy");
+		String sysdate = StrUtils.getSysdate("yyyyMMdd");
 		String no = btype + "-" + sysdate + "-";
 		StringBuffer sql = new StringBuffer("");
-		sql.append("SELECT IFNULL(MAX(SUBSTR(").append(noclumn).append(", -4)), 0) + 1 FROM ").append(tabname)
+		sql.append("SELECT IFNULL(MAX(SUBSTR(").append(noclumn).append(", -3)), 0) + 1 FROM ").append(tabname)
 			.append(" WHERE ").append(noclumn).append(" like '" + no + "%'");
-		no += StringUtils.leftPad(dbUtils.execQuerySQL(sql.toString()), 4,"0");
+		no += StringUtils.leftPad(dbUtils.execQuerySQL(sql.toString()), 3,"0");
 		
 		return no;
 	}

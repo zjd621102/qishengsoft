@@ -1,16 +1,20 @@
 package com.yecoo.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.yecoo.dao.ProducttypeDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
+import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
  * 产品类别管理
@@ -53,7 +57,16 @@ public class ProducttypeAction {
 	public String toAdd(@PathVariable("parent") int parent, HttpServletRequest request) {
 		
 		CodeTableForm form = new CodeTableForm();
+		
+		DbUtils dbUtils = new DbUtils();
+		
+		CodeTableForm parentForm = dbUtils.getFormByColumn("sproducttype", "producttype", String.valueOf(parent));
+		String producttypeno = StrUtils.getNO(StrUtils.nullToStr(parentForm.getValue("producttypeno")),
+				"producttypeno", "sproducttype");
+		
 		form.setValue("parent", parent);
+		form.setValue("producttypeno", producttypeno); //产品类型编码
+		
 		request.setAttribute("form", form);
 		return "producttype/add";
 	}

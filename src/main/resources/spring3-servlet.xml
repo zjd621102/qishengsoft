@@ -22,22 +22,6 @@
 	<mvc:resources mapping="/themes/**" location="/themes/" />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	
-	<!-- 解决ajax返回string乱码,需要在annotation-driven之前 -->
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<bean
-					class="org.springframework.http.converter.StringHttpMessageConverter">
-					<property name="supportedMediaTypes">
-						<list>
-							<value>text/html;charset=UTF-8</value>
-						</list>
-					</property>
-				</bean>
-			</list>
-		</property>
-	</bean>
-
 	<mvc:annotation-driven/>
 		
 	<!-- 将无法mapping到Controller的path交给default servlet handler处理 -->		

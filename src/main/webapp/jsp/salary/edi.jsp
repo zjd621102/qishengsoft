@@ -1,6 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<script type="text/javascript">
+	$().ready(function() {
+		setTimeout(function() {
+			setAllSum('planmoney', 'allplanmoney');
+		}, 100);
+	});
+</script>
+
 <h1 class="margin10px">修改工资单</h1>
 <form method="post" action="<%=path%>/salary/edi" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
@@ -24,7 +32,7 @@
 		<dl>
 			<dt>工资单编号：</dt>
 			<dd>
-				<input type="text" name="map[salaryno]" class="required" size="30" maxlength="13"
+				<input type="text" name="map[salaryno]" class="required" size="30" maxlength="16"
 					 value="${form.map.salaryno}" readonly="readonly"/>
 			</dd>
 		</dl>
@@ -32,7 +40,7 @@
 			<dt>工资单日期：</dt>
 			<dd>
 				<input type="text" name="map[salarydate]" class="required date" style="width: 178px;"
-					value="${form.map.salarydate}" readonly="true"/>
+					value="${form.map.salarydate}" readonly="readonly" dateFmt="yyyy-MM"/>
 				<a class="inputDateButton" href="javascript:;">选择</a>
 			</dd>
 		</dl>
@@ -81,7 +89,7 @@
 			<thead>
 				<tr>
 					<th width="3%">
-						<a href="#" class="btnAdd addRow"/>
+						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="3%">序号</th>
 					<th width="20%">员工</th>
@@ -105,15 +113,15 @@
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>
 						<input type="hidden" name="map[salaryrowid]"/>
-						<a href="#" class="btnDel delRow"/>
+						<a href="#" class="btnDel delRow"></a>
 					</td>
 			   		<td></td>
 			   		<td>
 						<input type="hidden" name="map[staffid]"/>
 						<input type="text" name="map[staffname]" style="width: 70%" maxlength="13"
-							suggestFields="staffid,staffname" readonly="readonly"/>
-						<a class="btnLook" href="<%=path%>/staff/list?first=true" lookupGroup="lookup" width="1200"/>
-						<a href="javascript:void(0);" class="btnClear" suggestFields="staffid,staffname"/>
+							suggestFields="staffid,staffname,planmoney" readonly="readonly"/>
+						<a class="btnLook" href="<%=path%>/staff/list?first=true" lookupGroup="lookup" width="1200"></a>
+						<a href="javascript:void(0);" class="btnClear" suggestFields="staffid,staffname,planmoney"></a>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[planmoney]" style="width: 100%" maxlength="12"
@@ -133,9 +141,9 @@
 				   		<td>
 							<input type="hidden" name="map[staffid]" value="${bean.map.staffid}"/>
 							<input type="text" name="map[staffname]" style="width: 70%" maxlength="13"
-								suggestFields="staffid,staffname" value="${bean.map.staffname}" readonly="readonly"/>
-							<a class="btnLook" href="<%=path%>/staff/list?first=true" lookupGroup="lookup" width="1200"/>
-							<a href="javascript:void(0);" class="btnClear" suggestFields="staffid,staffname"/>
+								suggestFields="staffid,staffname,planmoney" value="${bean.map.staffname}" readonly="readonly"/>
+							<a class="btnLook" href="<%=path%>/staff/list?first=true" lookupGroup="lookup" width="1200"></a>
+							<a href="javascript:void(0);" class="btnClear" suggestFields="staffid,staffname,planmoney"></a>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[planmoney]" style="width: 100%" maxlength="12"
@@ -159,6 +167,8 @@
 			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
 			</c:if>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			<li><div class="button"><div class="buttonContent"><button type="button"
+				onclick="window.open('<%=path%>/salary/edi/${form.map.salaryid}?act=print');">打印</button></div></div></li>
 		</ul>
 	</div>
 </form>

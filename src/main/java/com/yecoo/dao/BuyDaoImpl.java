@@ -56,6 +56,8 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		String buyname = StrUtils.nullToStr(form.getValue("buyname"));
 		String buyno = StrUtils.nullToStr(form.getValue("buyno"));
 		String currflow = StrUtils.nullToStr(form.getValue("currflow"));
+		String buydateFrom = StrUtils.nullToStr(form.getValue("buydateFrom"));
+		String buydateTo = StrUtils.nullToStr(form.getValue("buydateTo"));
 		
 		if(!buyname.equals("")) {
 			cond.append(" AND t.buyname like '%").append(buyname).append("%'");
@@ -65,6 +67,12 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		}
 		if(!currflow.equals("")) {
 			cond.append(" AND t.currflow = '").append(currflow).append("'");
+		}
+		if(!buydateFrom.equals("")) {
+			cond.append(" AND t.buydate >= '").append(buydateFrom).append("'");
+		}
+		if(!buydateTo.equals("")) {
+			cond.append(" AND t.buydate <= '").append(buydateTo).append("'");
 		}
 		
 		return cond.toString();
@@ -131,7 +139,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 				+ " FROM bbuy a WHERE a.buyid = '" + buyid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
-		sql = "SELECT a.* FROM bbuyrow a WHERE a.buyid = '" + buyid + "'";
+		sql = "SELECT a.*, b.materialno FROM bbuyrow a LEFT JOIN smaterial b ON a.materialid = b.materialid WHERE a.buyid = '" + buyid + "'";
 		List<CodeTableForm> buyrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("buyrowList", buyrowList);
 		

@@ -14,3 +14,12 @@ a.btnClear {
 	margin-top: 3px;
 	overflow:hidden;
 }
+
+.red {
+	color: red;
+}
+
+.ui-autocomplete-loading {
+	background: white url("../images/ui-anim_basic_16x16.gif") right center
+		no-repeat;
+}

@@ -1,10 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h2 class="contentTitle">新增发票</h2>
+<h2 class="contentTitle">新增单据</h2>
 <form method="post" action="<%=path%>/pay/add" class="required-validate pageForm"
  onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
 	<div class="pageFormContent" layoutH="97">
+		<dl>
+			<dt>单据ID：</dt>
+			<dd>
+				<input type="text" name="map[payid]" size="30" value="${form.map.payid}" readonly="readonly"/>
+			</dd>
+		</dl>
 		<dl>
 			<dt>单据类型：</dt>
 			<dd>
@@ -21,7 +27,7 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>发票日期：</dt>
+			<dt>单据日期：</dt>
 			<dd>
 				<input type="text" name="map[paydate]" class="required date" size="30"
 					value="${form.map.paydate}" readonly="readonly"/>
@@ -55,7 +61,7 @@
 		
 		<div class="divider"></div>
 
-		<h1 class="margin10px">发票清单</h1>
+		<h1 class="margin10px">单据清单</h1>
 
 		<table class="table" style="width: 100%;">
 			<thead>
@@ -64,13 +70,13 @@
 						<a href="#" class="btnAdd addRow"/>
 					</th>
 					<th width="3%">序号</th>
-					<th width="19%">银行卡卡号</th>
+					<th width="19%"><span class="red">*</span>银行卡卡号</th>
 					<th width="15%">供应商</th>
 					<th width="13%">供应商开户银行</th>
 					<th width="13%">供应商银行卡卡号</th>
 					<th width="10%">供应商账户名称</th>
-					<th width="7%">应付金额</th>
-					<th width="7%">实付金额</th>
+					<th width="7%"><span class="red">*</span>应付金额</th>
+					<th width="7%"><span class="red">*</span>实付金额</th>
 					<th width="10%">备注</th>
 				</tr>
 			</thead>
@@ -100,7 +106,7 @@
 						<input type="hidden" name="map[payrowid]"/>
 						<a href="#" class="btnDel delRow" />
 					</td>
-			   		<td>${vs.index+1}</td>
+			   		<td></td>
 					<td>
 						<select name="map[bankcardno]" style="width: 95%;" class="notnull" alt="银行卡卡号">
 							<option value=""></option>
@@ -116,7 +122,8 @@
 						<input type="text" name="map[manuname]"
 							suggestFields="manuid,manuname,manubankname,manubankcardno,manuaccountname"
 							style="width: 75%" readonly="readonly"/>
-						<a class="btnLook" href="<%=path%>/manu/list" lookupGroup="manuLookup"/>
+							<a class="btnLook" href="<%=path%>/manu/list?act=backselect" lookupGroup="manuLookup"
+								width="1000" height="500">查找带回</a>
 						<a href="javascript:void(0);" class="btnClear"
 							suggestFields="manuid,manuname,manubankname,manubankcardno,manuaccountname"/>
 			   		</td>

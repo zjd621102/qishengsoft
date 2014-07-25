@@ -64,6 +64,27 @@ public class PublicAction {
 			DbUtils dbUtils = new DbUtils();
 			List<CodeTableForm> menuList = dbUtils.getListBySql(sql); //菜单信息
 			request.getSession().setAttribute(Constants.MENU_INFO_SESSION, menuList);
+			
+			sql = "SELECT t.buyid, t.buyname, t.buydate FROM bbuy t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+			List<CodeTableForm> buyList = dbUtils.getListBySql(sql); //采购待办列表
+			
+			sql = "SELECT t.sellid, func_getManuName(t.manuid) manuname, t.selldate FROM bsell t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+			List<CodeTableForm> sellList = dbUtils.getListBySql(sql); //销售待办列表
+			
+			sql = "SELECT t.salaryid, t.salaryname FROM bsalary t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+			List<CodeTableForm> salaryList = dbUtils.getListBySql(sql); //工资单待办列表
+			
+			sql = "SELECT t.payid, func_getBtypeName(t.btype) btypename, t.paydate FROM bpay t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+			List<CodeTableForm> payList = dbUtils.getListBySql(sql); //单据待办列表
+			
+			int toDoNum = buyList.size() + sellList.size() + salaryList.size() + payList.size();
+			
+			request.setAttribute("buyList", buyList);
+			request.setAttribute("sellList", sellList);
+			request.setAttribute("salaryList", salaryList);
+			request.setAttribute("payList", payList);
+			request.setAttribute("toDoNum", toDoNum);
+			
 			return "index";
 		} catch (UnknownAccountException ex) {
 			msg = "（用户不存在）";

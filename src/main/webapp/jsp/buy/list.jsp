@@ -8,17 +8,17 @@
 				<tr>
 					<td>
 						采购单名称：
-						<input type="text" name="map[buyname]" size="30" maxlength="32"
+						<input type="text" name="map[buyname]" size="20" maxlength="32"
 							value="${form.map.buyname}"/>
 					</td>
 					<td>
 						采购单编号：
-						<input type="text" name="map[buyno]" size="30" maxlength="13"
+						<input type="text" name="map[buyno]" size="15" maxlength="13"
 							value="${form.map.buyno}"/>
 					</td>
 					<td>
 						当前流程：
-						<select name="map[currflow]" style="width: 184px;">
+						<select name="map[currflow]" style="width: 100px;">
 							<option value=""></option>
 							<c:forEach items="${currflowList}" var="currflow">
 								<option value="${currflow.map.flowname}"
@@ -28,6 +28,12 @@
 								</option>
 							</c:forEach>
 						</select>
+					</td>
+					<td>
+						销售日期从：<input type="text" name="map[buydateFrom]" size="15" value="${form.map.buydateFrom}" class="date"/>
+					</td>
+					<td>
+						至：<input type="text" name="map[buydateTo]" size="15" value="${form.map.buydateTo}" class="date"/>
 					</td>
 				</tr>
 			</table>

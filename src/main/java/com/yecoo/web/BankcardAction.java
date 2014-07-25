@@ -1,13 +1,16 @@
 package com.yecoo.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.yecoo.dao.BankcardDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
@@ -260,5 +263,31 @@ public class BankcardAction {
 		request.setAttribute("receandpaytypeList", receandpaytypeList);
 		
 		return "bankcard/receandpay_list";
+	}
+	/**
+	 * 交易列表
+	 * @param form
+	 * @param request
+	 * @return
+	 */
+	@RequiresPermissions("Bankcard:other")
+	@RequestMapping(value="/transaction_list", method={RequestMethod.GET, RequestMethod.POST})
+	public String transaction_list(CodeTableForm form, HttpServletRequest request) {
+
+		bankcardDaoImpl.initAction(request);
+
+		int totalCount = bankcardDaoImpl.getReceandpayCount(form);
+		List<CodeTableForm> transactionList = bankcardDaoImpl.getTransactionList(form);
+		request.setAttribute("totalCount", totalCount); //列表总数量
+		request.setAttribute("transactionList", transactionList); //交易列表
+		request.setAttribute("sn", "bankcard"); //授权名称
+		request.setAttribute("form", form);
+
+		DbUtils dbUtils = new DbUtils();
+		String sql = "SELECT * FROM sbtype WHERE btype in ('FKD','SKD','YFD','GZD')";
+		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); //单据类型
+		request.setAttribute("btypeList", btypeList);
+		
+		return "bankcard/transaction_list";
 	}
 }

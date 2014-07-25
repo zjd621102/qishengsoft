@@ -1,15 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
-<script language="javascript" src="<%=path%>/js/jquery-1.7.2.min.js"></script>
-<script language="javascript" src="<%=path%>/js/jquery.jqprint-0.3.js"></script>
-<script language="javascript" src="<%=path%>/js/print.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=path%>/css/print.css" />
-
+<script type="text/javascript" src="<%=path%>/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="<%=path%>/js/jquery.jqprint-0.3.js"></script>
+<script type="text/javascript" src="<%=path%>/js/print.js"></script>
+<!-- 
 <br />
 <input type="button" onclick="funPrint()" value="打印"/>
 <input type="button" onclick="window.close()" value="关闭"/>
 <br /><br />
-
+ -->
 <div id="printdiv">
 	<h2>采购单</h2>
 	<table style="width: 100%;">

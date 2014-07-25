@@ -1,6 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<script type="text/javascript">
+	$().ready(function() {
+		setTimeout(function() {
+			setAllSum('planmoney', 'allplanmoney');
+		}, 100);
+	});
+</script>
+
 <h1 class="margin10px">新增工资单</h1>
 <form method="post" action="<%=path%>/salary/add" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
@@ -31,7 +39,7 @@
 			<dt>工资单日期：</dt>
 			<dd>
 				<input type="text" name="map[salarydate]" class="required date" style="width: 178px;"
-					value="${form.map.salarydate}" readonly="true"/>
+					value="${form.map.salarydate}" readonly="readonly" dateFmt="yyyy-MM"/>
 				<a class="inputDateButton" href="javascript:;">选择</a>
 			</dd>
 		</dl>
@@ -67,7 +75,7 @@
 			<thead>
 				<tr>
 					<th width="3%">
-						<a href="#" class="btnAdd addRow"/>
+						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="3%">序号</th>
 					<th width="20%">员工</th>
@@ -91,16 +99,16 @@
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>
 						<input type="hidden" name="map[salaryrowid]"/>
-						<a href="#" class="btnDel delRow"/>
+						<a href="#" class="btnDel delRow"></a>
 					</td>
 			   		<td></td>
 			   		<td>
 						<input type="hidden" name="map[staffid]"/>
 						<input type="text" name="map[staffname]" style="width: 70%" maxlength="13"
-							suggestFields="staffid,staffname" readonly="readonly"/>
+							suggestFields="staffid,staffname,planmoney" readonly="readonly"/>
 						<a class="btnLook" href="<%=path%>/staff/list?first=true&act=backselect" lookupGroup="lookup"
-							width="1200"/>
-						<a href="javascript:void(0);" class="btnClear" suggestFields="staffid,staffname"/>
+							width="1200"></a>
+						<a href="javascript:void(0);" class="btnClear" suggestFields="staffid,staffname,planmoney"></a>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[planmoney]" style="width: 100%" maxlength="12"
@@ -110,6 +118,31 @@
 						<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"/>
 			   		</td>
 			   	</tr>
+				<c:forEach items="${salaryrowList}" var="bean" varStatus="vs">
+				   	<tr>
+						<td>
+							<input type="hidden" name="map[salaryrowid]" value="${bean.map.salaryrowid}"/>
+							<a href="#" class="btnDel delRow" />
+						</td>
+				   		<td>${vs.index+1}</td>
+				   		<td>
+							<input type="hidden" name="map[staffid]" value="${bean.map.staffid}"/>
+							<input type="text" name="map[staffname]" style="width: 70%" maxlength="13"
+								suggestFields="staffid,staffname,planmoney" value="${bean.map.staffname}" readonly="readonly"/>
+							<a class="btnLook" href="<%=path%>/staff/list?first=true" lookupGroup="lookup" width="1200"></a>
+							<a href="javascript:void(0);" class="btnClear" suggestFields="staffid,staffname,planmoney"></a>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[planmoney]" style="width: 100%" maxlength="12"
+								class="number" value="${bean.map.planmoney}"
+								onchange="setAllSum('planmoney', 'allplanmoney');"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"
+								value="${bean.map.remarkrow}"/>
+				   		</td>
+				   	</tr>
+			   	</c:forEach>
 			   	<tr id="IDEndRow"></tr>
 		   	</tbody>
 		</table>

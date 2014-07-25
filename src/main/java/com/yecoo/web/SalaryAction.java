@@ -1,16 +1,20 @@
 package com.yecoo.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.yecoo.dao.SalaryDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
+import com.yecoo.util.DateUtils;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
@@ -53,7 +57,18 @@ public class SalaryAction {
 	public String toAdd(HttpServletRequest request) {
 
 		CodeTableForm form = new CodeTableForm();
+		
+		String salarydate = DateUtils.getAdjustTime(DateUtils.getNowDateTime(), "month", "", 1);// 默认为上个月
+		salarydate = salarydate.substring(0, 7);
+		
+		form.setValue("salarydate", salarydate);// 工资单日期
+		form.setValue("salaryname", salarydate.replaceAll("-", "年") + "月份工资单");// 工资单名称
 		request.setAttribute("form", form);
+		
+		String sql = "SELECT t.staffid, staffname, func_getSalaryByMonth(t.staffid, '"
+				+ salarydate + "') planmoney FROM sstaff t WHERE t.staffstatus = '1'";
+		List<CodeTableForm> salaryrowList = dbUtils.getListBySql(sql);
+		request.setAttribute("salaryrowList", salaryrowList);
 		
 		this.getSelects(request);
 		
@@ -89,10 +104,6 @@ public class SalaryAction {
 		
 		CodeTableForm form = null;
 		form = salaryDaoImpl.getSalaryById(salaryid, request);
-		
-		String sql = "SELECT IFNULL(SUM(t.planmoney), 0) FROM bsalaryrow t WHERE t.salaryid = '" + salaryid + "'";
-		double allplanmoney = Double.parseDouble(dbUtils.execQuerySQL(sql));
-		form.setValue("allplanmoney", allplanmoney); // 合计
 		
 		request.setAttribute("form", form);
 		

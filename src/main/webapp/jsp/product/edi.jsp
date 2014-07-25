@@ -31,7 +31,7 @@
 		<dl>
 			<dt>计量单位：</dt>
 			<dd>
-				<select name="map[unit]" style="width: 184px;" class="required">
+				<select name="map[unit]" style="width: 193px;" class="required">
 					<option value=""></option>
 					<c:forEach items="${unitList}" var="unit">
 						<option value="${unit.map.unitid}"
@@ -79,11 +79,15 @@
 					<th width="20%">物资编码</th>
 					<th width="20%">物资名称</th>
 					<th width="10%">物资单价</th>
-					<th width="40%">备注</th>
+					<th width="10%">物资数量</th>
+					<th width="10%">物资总价</th>
+					<th width="20%">备注</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
+					<td></td>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -99,7 +103,7 @@
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>
 						<input type="hidden" name="map[productrowid]"/>
-						<a href="#" class="btnDel delRow"/>
+						<a href="#" class="btnDel delRow" onclick="setAllSum('materialsum', 'planprice');"/>
 					</td>
 			   		<td></td>
 			   		<td>
@@ -113,8 +117,16 @@
 						<input type="text" name="map[materialname]" style="width: 100%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[materialprice]" style="width: 100%" maxlength="12"
-							class="number" value="0.00" onchange="setAllSum('materialprice', 'planprice');"/>
+						<input type="text" name="map[materialprice]" style="width: 100%" maxlength="12" class="number"
+							value="0.00" onblur="setMultiply(this, 'materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[materialnum]" style="width: 100%" maxlength="9" class="number"
+							value="1" onblur="setMultiply(this, 'materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[materialsum]" style="width: 100%" maxlength="12" class="number"
+							value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"/>
@@ -124,7 +136,7 @@
 				   	<tr>
 						<td>
 							<input type="hidden" name="map[productrowid]" value="${bean.map.productrowid}"/>
-							<a href="#" class="btnDel delRow" />
+							<a href="#" class="btnDel delRow" onclick="setAllSum('materialsum', 'planprice');"/>
 						</td>
 				   		<td>${vs.index+1}</td>
 				   		<td>
@@ -142,7 +154,16 @@
 				   		<td>
 							<input type="text" name="map[materialprice]" style="width: 100%" maxlength="12"
 								class="number" value="${bean.map.materialprice}"
-								onchange="setAllSum('materialprice', 'planprice');"/>
+								onblur="setMultiply(this, 'materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[materialnum]" style="width: 100%" maxlength="9"
+								class="number" value="${bean.map.materialnum}"
+								onblur="setMultiply(this, 'materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[materialsum]" style="width: 100%" maxlength="12"
+								class="number" value="${bean.map.materialsum}" readonly="readonly"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"

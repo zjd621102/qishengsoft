@@ -5,20 +5,28 @@ $(function(){
 		var row_temp = row_copy.clone(true,true);
 		row_temp.show();
 		row_temp.insertBefore(row_end);
+		
+		addRowOther(); //其他操作
 	});
 	$(".delRow").live("click",function(event){ //删除行
-		var row = $(event.target).parent().parent().parent();
+		var row = $(event.target).parents("tr:first");
 		$(row).remove();
 	});
 	$(".btnClear").live("click",function(event){ //清除字段
 		var field = $(event.target).attr("suggestFields");
 		var fields = field.split(",");
-		var obj = $(event.target).parent().parent().parent();
+		var row = $(event.target).parents("tr:first");
+		if(row.length == 0) {// 主表单清除
+			row = $(event.target).parent().parent();
+		}
 		for(var i = 0; i < fields.length; i++){
-			obj.find("input[name*='map["+fields[i]+"]']").val("");
+			row.find("[name*='map["+fields[i]+"]']").val("");
 		}
 	});
 });
+function addRowOther() {
+	
+}
 /**
  * 乘
  * @param dou1
@@ -36,11 +44,13 @@ function multiply(dou1, dou2) {
  * @param name3 赋值字段
  */
 function setMultiply(obj, name1, name2, name3) {
-	var row = $(obj).parent().parent().parent();
-	var realprice = row.find("input[name*='map[" + name1 + "]']").val();
-	var num = row.find("input[name*='map[" + name2 + "]']").val();
-	var realsum = multiply(realprice, num);
-	row.find("input[name*='map[" + name3 + "]']").val(realsum);
+	$("input[name*='map[" + name1 + "]']").each(function() {
+		var row = $(this).parents("tr:first");
+		var realprice = row.find("[name*='map[" + name1 + "]']").val();
+		var num = row.find("[name*='map[" + name2 + "]']").val();
+		var realsum = multiply(realprice, num);
+		row.find("[name*='map[" + name3 + "]']").val(realsum);
+	});
 }
 /**
  * 相加所有值

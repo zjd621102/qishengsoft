@@ -1,15 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
-<script language="javascript" src="<%=path%>/js/jquery-1.7.2.min.js"></script>
-<script language="javascript" src="<%=path%>/js/jquery.jqprint-0.3.js"></script>
-<script language="javascript" src="<%=path%>/js/print.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=path%>/css/print.css" />
-
+<script type="text/javascript" src="<%=path%>/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="<%=path%>/js/jquery.jqprint-0.3.js"></script>
+<script type="text/javascript" src="<%=path%>/js/print.js"></script>
+<!-- 
 <br />
 <input type="button" onclick="funPrint()" value="打印"/>
 <input type="button" onclick="window.close()" value="关闭"/>
 <br /><br />
-
+ -->
 <div id="printdiv">
 	<h2>销售单</h2>
 	<table style="width: 100%;">
@@ -44,18 +44,18 @@
 
 	<h2>销售清单</h2>
 
-	<table class="table" style="width: 100%;">
+	<table style="width: 100%;">
 		<thead>
 			<tr>
-				<td width="6%">序号</<td>
-				<td width="15%">产品编码</td>
+				<td width="3%">序号</td>
+				<td width="8%">产品编码</td>
 				<td width="15%">产品名称</td>
-				<td width="10%">计量单位</td>
-				<td width="10%">应付单价</td>
-				<td width="10%">实付单价</td>
-				<td width="10%">数量</td>
-				<td width="10%">实付总价</td>
-				<td width="14%">备注</td>
+				<td width="8%">计量单位</td>
+				<td width="8%">应付单价</td>
+				<td width="8%">实付单价</td>
+				<td width="8%">数量</td>
+				<td width="8%">实付总价</td>
+				<td>备注</td>
 			</tr>
 		</thead>
 		<tbody>

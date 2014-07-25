@@ -9,7 +9,7 @@
 		<dl style="width: 100%;">
 			<dt>发生日期：</dt>
 			<dd style="width: 60%;">
-				<input type="text" name="map[happendate]" size="30" class="required date" readonly="true"/>
+				<input type="text" name="map[happendate]" size="30" class="required date" readonly="readonly"/>
 				<a class="inputDateButton" href="javascript:;">选择</a>
 				<span class="info">yyyy-MM-dd</span>
 			</dd>

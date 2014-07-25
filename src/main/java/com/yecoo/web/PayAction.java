@@ -15,7 +15,7 @@ import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
- * 发票管理
+ * 单据管理
  * @author zhoujd
  */
 @Controller
@@ -38,7 +38,7 @@ public class PayAction {
 		int totalCount = payDaoImpl.getPayCount(form);
 		List<CodeTableForm> payList = payDaoImpl.getPayList(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		request.setAttribute("payList", payList); // 发票列表
+		request.setAttribute("payList", payList); // 单据列表
 		request.setAttribute("sn", "pay"); //授权名称
 		request.setAttribute("form", form);
 		

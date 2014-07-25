@@ -2,10 +2,14 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="<%=path%>/pay/list" method="post" rel="pagerForm" id="fid">
+	<form onsubmit="return navTabSearch(this);" action="<%=path%>/pay/list" method="post" rel="pagerForm" id="fid"
+		 class="required-validate">
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">
 				<tr>
+					<td>
+						单据ID：<input type="text" name="map[payid]" size="10" value="${form.map.payid}" class="number"/>
+					</td>
 					<td>
 						当前流程：
 						<select name="map[currflow]" style="width: 184px;">
@@ -42,7 +46,7 @@
 			<li>
 				<a class="add" href="<%=path%>/pay/add" target="dialog" rel="pay_add" mask="true"
 					width="1300" height="500">
-					<span>新增发票</span>
+					<span>新增单据</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
@@ -50,14 +54,14 @@
 			<li>
 				<a class="edit" href="<%=path%>/pay/edi/{s_payid}" target="dialog" rel="pay_edi" mask="true"
 					width="1300" height="500">
-					<span>修改发票</span>
+					<span>修改单据</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="Pay:delete">
 			<li>
 				<a class="delete" href="<%=path%>/pay/delete/{s_payid}" target="ajaxTodo" title="确定要删除吗?">
-					<span>删除发票</span>
+					<span>删除单据</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
@@ -67,8 +71,9 @@
 		<thead>
 			<tr>
 				<th width="5%">序号</th>
-				<th width="20%">单据类型</th>
-				<th width="20%">发票日期</th>
+				<th width="10%">单据ID</th>
+				<th width="15%">单据类型</th>
+				<th width="15%">单据日期</th>
 				<th width="20%">关联单号</th>
 				<th width="10%">当前流程</th>
 				<th width="10%">实付金额</th>
@@ -79,6 +84,7 @@
 			<c:forEach items="${payList}" var="bean" varStatus="vs">
 			   	<tr target="s_payid" rel="${bean.map.payid}">
 			   		<td>${vs.index+1}</td>
+			   		<td>${bean.map.payid}</td>
 			   		<td>${bean.map.btypename}</td>
 			   		<td>${bean.map.paydate}</td>
 			   		<td>${bean.map.relateno}</td>
