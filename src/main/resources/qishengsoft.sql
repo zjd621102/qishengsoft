@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql
+Source Server         : localhost
 Source Server Version : 50528
 Source Host           : localhost:3306
 Source Database       : qishengsoft
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2013-03-11 16:59:48
+Date: 2014-07-25 09:45:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,21 +23,25 @@ CREATE TABLE `bbuy` (
   `buyid` int(7) NOT NULL AUTO_INCREMENT COMMENT '采购ID',
   `btype` varchar(3) NOT NULL COMMENT '单据类型',
   `buyname` varchar(64) DEFAULT NULL COMMENT '采购名称',
-  `buyno` varchar(13) NOT NULL COMMENT '采购编号',
+  `buyno` varchar(16) NOT NULL COMMENT '采购编号',
   `buydate` varchar(10) DEFAULT NULL COMMENT '采购日期',
   `currflow` varchar(32) DEFAULT NULL COMMENT '当前流程',
   `maker` varchar(32) DEFAULT NULL COMMENT '制单人',
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`buyid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='采购表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='采购表';
 
 -- ----------------------------
 -- Records of bbuy
 -- ----------------------------
 INSERT INTO `bbuy` VALUES ('2', 'CGD', '采购单名称一', 'CGD-2013-0002', '2013-03-01', '结束', 'ZHOUJD', '2013-03-01 17:03:37', '备注二');
-INSERT INTO `bbuy` VALUES ('3', 'JYD', '采购单名称二', 'JYD-2013-0001', '2013-03-01', '申请', 'ZHOUJD', '2013-03-01 17:05:32', '');
+INSERT INTO `bbuy` VALUES ('3', 'JYD', '简易采购单1', 'JYD-2013-0001', '2014-05-01', '结束', 'ZHOUJD', '2013-03-01 17:05:32', '');
 INSERT INTO `bbuy` VALUES ('4', 'CGD', '采购单名称三', 'CGD-2013-0003', '2013-03-01', '结束', 'ZHOUJD', '2013-03-02 20:44:21', '备注三');
+INSERT INTO `bbuy` VALUES ('5', 'CGD', '采购单2', 'CGD-2014-0001', '2014-07-04', '结束', 'ZHOUJD', '2014-07-04 11:16:49', '');
+INSERT INTO `bbuy` VALUES ('6', 'CGD', '采购单3', 'CGD-2014-0002', '2014-07-04', '结束', 'ZHOUJD', '2014-07-04 11:20:29', '');
+INSERT INTO `bbuy` VALUES ('7', 'CGD', '采购单4', 'CGD-2014-0003', '2014-06-01', '结束', 'ZHOUJD', '2014-07-04 11:31:38', '');
+INSERT INTO `bbuy` VALUES ('8', 'CGD', '111', 'CGD-2014-0004', '2014-07-19', '申请', 'ZHOUJD', '2014-07-19 14:16:29', '');
 
 -- ----------------------------
 -- Table structure for `bbuyrow`
@@ -45,31 +49,43 @@ INSERT INTO `bbuy` VALUES ('4', 'CGD', '采购单名称三', 'CGD-2013-0003', '2
 DROP TABLE IF EXISTS `bbuyrow`;
 CREATE TABLE `bbuyrow` (
   `buyrowid` int(7) NOT NULL AUTO_INCREMENT COMMENT '采购行项ID',
-  `buyid` int(7) DEFAULT NULL COMMENT '采购单ID',
+  `buyid` int(7) NOT NULL COMMENT '采购单ID',
   `materialid` int(5) DEFAULT NULL COMMENT '物资ID',
-  `materialno` varchar(13) DEFAULT NULL COMMENT '物资编码',
-  `materialname` varchar(64) DEFAULT NULL COMMENT '物资名称',
+  `materialname` varchar(64) NOT NULL COMMENT '物资名称',
   `unit` int(3) DEFAULT NULL COMMENT '计量单位',
-  `price` double(12,2) DEFAULT '0.00' COMMENT '预算单价',
-  `num` double(12,2) DEFAULT '0.00' COMMENT '采购数量',
-  `sum` double(12,2) DEFAULT '0.00' COMMENT '总价',
+  `price` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '预算单价',
+  `num` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '采购数量',
+  `sum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '总价',
   `manuid` int(9) DEFAULT NULL COMMENT '供应商ID',
   `manuname` varchar(64) DEFAULT NULL COMMENT '供应商名称',
   `manucontact` varchar(64) DEFAULT NULL COMMENT '联系人',
   `manutel` varchar(32) DEFAULT NULL COMMENT '联系电话',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`buyrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8 COMMENT='采购行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8 COMMENT='采购行项表';
 
 -- ----------------------------
 -- Records of bbuyrow
 -- ----------------------------
-INSERT INTO `bbuyrow` VALUES ('118', '2', '1', 'WZD-2013-0001', '物资名称一1', '1', '0.22', '1.00', '0.22', '4', '供应商A', '周少华', '11111111', null);
-INSERT INTO `bbuyrow` VALUES ('119', '3', '1', 'WZD-2013-0001', '物资名称一1', '1', '0.22', '3.00', '0.66', '4', '供应商A', '周少华', '11111111', null);
-INSERT INTO `bbuyrow` VALUES ('145', '4', '1', 'WZD-2013-0001', '物资名称一1', '1', '0.22', '3.00', '0.66', '4', '供应商A', '周少华', '11111111', '备注3');
-INSERT INTO `bbuyrow` VALUES ('146', '4', '4', 'WZD-2013-0003', '物资三', '1', '33.30', '2.00', '66.60', '4', '供应商A', '周少华', '11111111', null);
-INSERT INTO `bbuyrow` VALUES ('147', '4', '5', 'WZD-2013-0004', '物资四', '2', '4444.00', '0.00', '0.00', '8', '供应商B', '供应商B联系人', '00000', null);
-INSERT INTO `bbuyrow` VALUES ('148', '4', null, null, '物资五', '3', '3.00', '2.00', '6.00', null, null, null, null, '小卖部采购');
+INSERT INTO `bbuyrow` VALUES ('118', '2', '1', '物资名称一1', '1', '0.22', '1.00', '0.22', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('145', '4', '1', '物资名称一1', '1', '0.22', '3.00', '0.66', '4', '供应商A', '周少华', '11111111', '备注3');
+INSERT INTO `bbuyrow` VALUES ('146', '4', '4', '物资三', '1', '33.30', '2.00', '66.60', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('147', '4', '5', '物资四', '2', '4444.00', '0.00', '0.00', '8', '供应商B', '供应商B联系人', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('148', '4', null, '物资五', '3', '3.00', '2.00', '6.00', null, null, null, null, '小卖部采购');
+INSERT INTO `bbuyrow` VALUES ('179', '7', '1', '物资A11', '1', '0.22', '433.00', '95.26', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('180', '7', '6', '物资A21', '3', '43.20', '22.00', '950.40', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('181', '7', '4', '物资B11', '1', '33.30', '44.00', '1465.20', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('182', '7', '5', '物资B12', '2', '4444.00', '2.00', '8888.00', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('183', '6', '1', '物资A11', '1', '0.22', '421.00', '92.62', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('184', '6', '6', '物资A21', '3', '43.20', '22.00', '950.40', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('185', '6', '5', '物资B12', '2', '4444.00', '1.00', '4444.00', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('186', '5', '6', '物资A21', '3', '43.20', '22.00', '950.40', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('187', '5', '5', '物资B12', '2', '4444.00', '1.00', '4444.00', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('188', '3', null, '简易采购物品1', '1', '544.00', '3.00', '1632.00', null, null, null, null, null);
+INSERT INTO `bbuyrow` VALUES ('189', '3', null, '简易采购物品2', '1', '342.00', '2.00', '684.00', null, null, null, null, null);
+INSERT INTO `bbuyrow` VALUES ('190', '3', null, '简易采购物品3', '2', '12.00', '32.00', '384.00', null, null, null, null, null);
+INSERT INTO `bbuyrow` VALUES ('203', '8', '5', '物资B12', '2', '44.00', '1.00', '44.00', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('204', '8', '1', '物资A11', '1', '0.22', '22.00', '4.84', '4', '供应商A', '周少华', '11111111', null);
 
 -- ----------------------------
 -- Table structure for `bpay`
@@ -77,23 +93,40 @@ INSERT INTO `bbuyrow` VALUES ('148', '4', null, null, '物资五', '3', '3.00', 
 DROP TABLE IF EXISTS `bpay`;
 CREATE TABLE `bpay` (
   `payid` int(9) NOT NULL AUTO_INCREMENT COMMENT '单据ID',
-  `btype` varchar(16) NOT NULL,
+  `btype` varchar(16) NOT NULL COMMENT '单据类型',
   `maker` varchar(32) DEFAULT NULL COMMENT '制单人',
   `paydate` varchar(10) DEFAULT NULL COMMENT '付款日期/收款日期',
-  `relateno` varchar(17) DEFAULT NULL COMMENT '采购单号/销售单号',
-  `relatemoney` double(12,2) DEFAULT NULL,
+  `relateno` varchar(16) DEFAULT NULL COMMENT '采购单号/销售单号',
+  `relatemoney` double(12,2) DEFAULT '0.00' COMMENT '关联金额',
   `currflow` varchar(32) NOT NULL COMMENT '当前流程',
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`payid`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COMMENT='付款单/收款单';
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COMMENT='付款单/收款单';
 
 -- ----------------------------
 -- Records of bpay
 -- ----------------------------
-INSERT INTO `bpay` VALUES ('24', 'SKD', 'ZHOUJD', '2013-03-06', 'XSD-2013-0001', '36.60', '申请', '2013-03-06 19:41:56', '');
-INSERT INTO `bpay` VALUES ('25', 'YFD', 'ZHOUJD', '2013-03-06', 'XSD-2013-0001', '36.60', '申请', '2013-03-06 19:41:56', '');
+INSERT INTO `bpay` VALUES ('24', 'SKD', 'ZHOUJD', '2013-03-06', 'XSD-2013-0001', '36.60', '结束', '2013-03-06 19:41:56', '');
+INSERT INTO `bpay` VALUES ('25', 'YFD', 'ZHOUJD', '2013-03-06', 'XSD-2013-0001', '36.60', '结束', '2013-03-06 19:41:56', '');
 INSERT INTO `bpay` VALUES ('30', 'GZD', 'ZHOUJD', '2013-03-07', 'GZD-2013-0001', '5300.34', '结束', '2013-03-11 16:29:47', '');
+INSERT INTO `bpay` VALUES ('31', 'FKD', 'ZHOUJD', '2014-06-01', 'CGD-2014-0003', '11398.86', '结束', '2014-07-12 13:58:07', '');
+INSERT INTO `bpay` VALUES ('32', 'SKD', 'ZHOUJD', '2014-03-12', 'XSD-2014-0006', '8170.00', '结束', '2014-07-13 16:17:30', '');
+INSERT INTO `bpay` VALUES ('33', 'YFD', 'ZHOUJD', '2014-03-12', 'XSD-2014-0006', '8170.00', '结束', '2014-07-13 16:17:30', '');
+INSERT INTO `bpay` VALUES ('34', 'SKD', 'ZHOUJD', '2014-04-02', 'XSD-2014-0005', '10260.00', '结束', '2014-07-13 16:17:35', '');
+INSERT INTO `bpay` VALUES ('35', 'YFD', 'ZHOUJD', '2014-04-02', 'XSD-2014-0005', '10260.00', '结束', '2014-07-13 16:17:35', '');
+INSERT INTO `bpay` VALUES ('36', 'SKD', 'ZHOUJD', '2014-06-12', 'XSD-2014-0004', '8594.60', '结束', '2014-07-13 16:17:40', '');
+INSERT INTO `bpay` VALUES ('37', 'YFD', 'ZHOUJD', '2014-06-12', 'XSD-2014-0004', '8594.60', '结束', '2014-07-13 16:17:40', '');
+INSERT INTO `bpay` VALUES ('38', 'SKD', 'ZHOUJD', '2014-06-02', 'XSD-2014-0003', '9440.80', '结束', '2014-07-13 16:17:47', '');
+INSERT INTO `bpay` VALUES ('39', 'YFD', 'ZHOUJD', '2014-06-02', 'XSD-2014-0003', '9440.80', '结束', '2014-07-13 16:17:47', '');
+INSERT INTO `bpay` VALUES ('40', 'SKD', 'ZHOUJD', '2014-07-01', 'XSD-2014-0002', '24318.80', '结束', '2014-07-13 16:17:52', '');
+INSERT INTO `bpay` VALUES ('41', 'YFD', 'ZHOUJD', '2014-07-01', 'XSD-2014-0002', '24318.80', '结束', '2014-07-13 16:17:52', '');
+INSERT INTO `bpay` VALUES ('42', 'SKD', 'ZHOUJD', '2014-07-13', 'XSD-2014-0001', '12106.60', '结束', '2014-07-13 16:17:58', '');
+INSERT INTO `bpay` VALUES ('43', 'YFD', 'ZHOUJD', '2014-07-13', 'XSD-2014-0001', '12106.60', '结束', '2014-07-13 16:17:58', '');
+INSERT INTO `bpay` VALUES ('44', 'GZD', 'ZHOUJD', '2013-02-28', 'GZD-2013-0002', '7000.30', '结束', '2014-07-14 20:10:23', '');
+INSERT INTO `bpay` VALUES ('45', 'FKD', 'ZHOUJD', '2014-07-04', 'CGD-2014-0002', '5487.02', '结束', '2014-07-14 20:21:22', '');
+INSERT INTO `bpay` VALUES ('46', 'FKD', 'ZHOUJD', '2014-07-04', 'CGD-2014-0001', '5394.40', '结束', '2014-07-14 20:21:28', '');
+INSERT INTO `bpay` VALUES ('47', 'FKD', 'ZHOUJD', '2014-05-01', 'JYD-2013-0001', '4511.26', '结束', '2014-07-14 20:22:30', '');
 
 -- ----------------------------
 -- Table structure for `bpayrow`
@@ -111,7 +144,7 @@ CREATE TABLE `bpayrow` (
   `realsum` double(12,2) DEFAULT '0.00' COMMENT '实付金额',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`payrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bpayrow
@@ -122,11 +155,31 @@ INSERT INTO `bpayrow` VALUES ('15', '11', '6227001823550093014', '4', '建设银
 INSERT INTO `bpayrow` VALUES ('16', '11', '6227001823550093014', '8', '中国农业银行福建支行', '444444', '供应商B账户名称', '0.00', '1.00', null);
 INSERT INTO `bpayrow` VALUES ('20', '15', '00000', '5', '中国银行泉州分行', '22222222', '刘星', '36.60', '36.60', null);
 INSERT INTO `bpayrow` VALUES ('28', '20', '00000', null, null, null, null, '0.00', '30.60', '运费');
-INSERT INTO `bpayrow` VALUES ('53', '25', null, null, null, null, null, '0.00', '0.00', null);
-INSERT INTO `bpayrow` VALUES ('62', '24', '00000', '5', '中国银行泉州分行', '22222222', '刘星', '36.60', '36.60', null);
 INSERT INTO `bpayrow` VALUES ('72', '30', '00000', null, '建设银行南安支行', '11111111', '员工一', '2100.12', '2100.12', null);
 INSERT INTO `bpayrow` VALUES ('73', '30', '00000', null, '建设银行南安支行', '22222222', '员工二', '2200.22', '2200.22', null);
 INSERT INTO `bpayrow` VALUES ('74', '30', '00000', null, '建设银行南安支行', '33333333', '员工三', '1000.00', '1000.00', null);
+INSERT INTO `bpayrow` VALUES ('80', '31', '6227001823550092014', '4', '建设银行泉州分行', '1111111111', '周少华', '1560.46', '1560.46', null);
+INSERT INTO `bpayrow` VALUES ('81', '31', '6227001823550092014', '8', '中国农业银行福建支行', '444444', '供应商B账户名称', '9838.40', '9838.40', null);
+INSERT INTO `bpayrow` VALUES ('96', '42', '622909116836651310', '9', '中国银行泉州分行', '2222222', '客户B', '12106.60', '12106.60', null);
+INSERT INTO `bpayrow` VALUES ('97', '43', '622909116836651310', '7', '工商银行泉州分行', '33333333', '林长城', '321.00', '321.00', null);
+INSERT INTO `bpayrow` VALUES ('98', '40', '622909116836651310', '5', '中国银行泉州分行', '22222222', '刘星', '24318.80', '24318.80', null);
+INSERT INTO `bpayrow` VALUES ('100', '41', '622909116836651310', '10', '建设银行南安支行', '66666666', '物流B', '304.40', '304.40', null);
+INSERT INTO `bpayrow` VALUES ('101', '38', '622909116836651310', '5', '中国银行泉州分行', '22222222', '刘星', '9440.80', '9440.80', null);
+INSERT INTO `bpayrow` VALUES ('102', '39', '00000', '10', '建设银行南安支行', '66666666', '物流B', '322.00', '322.00', null);
+INSERT INTO `bpayrow` VALUES ('103', '36', '00000', '9', null, null, null, '8594.60', '8594.60', null);
+INSERT INTO `bpayrow` VALUES ('104', '37', '00000', '7', '工商银行泉州分行', '33333333', '林长城', '543.00', '543.00', null);
+INSERT INTO `bpayrow` VALUES ('105', '34', '622909116836651310', '5', '中国银行泉州分行', '22222222', '刘星', '10260.00', '10260.00', null);
+INSERT INTO `bpayrow` VALUES ('106', '32', '622909116836651310', '8', '中国农业银行福建支行', '444444', '供应商B账户名称', '8170.00', '8170.00', null);
+INSERT INTO `bpayrow` VALUES ('107', '24', '00000', '5', '中国银行泉州分行', '22222222', '刘星', '36.60', '36.60', null);
+INSERT INTO `bpayrow` VALUES ('108', '35', '00000', '7', '工商银行泉州分行', '33333333', '林长城', '233.00', '233.00', null);
+INSERT INTO `bpayrow` VALUES ('109', '33', '00000', '8', '中国农业银行福建支行', '444444', '供应商B账户名称', '322.00', '322.00', null);
+INSERT INTO `bpayrow` VALUES ('110', '25', '00000', '10', '建设银行南安支行', '66666666', '物流B', '32.00', '32.00', null);
+INSERT INTO `bpayrow` VALUES ('121', '44', '622909116836651310', null, '建设银行南安支行', '11111111', '员工一', '3000.10', '3000.10', null);
+INSERT INTO `bpayrow` VALUES ('122', '44', '622909116836651310', null, '建设银行南安支行', '22222222', '员工二', '4000.20', '4000.20', null);
+INSERT INTO `bpayrow` VALUES ('124', '47', '00000', null, null, null, null, '2700.00', '2700.00', null);
+INSERT INTO `bpayrow` VALUES ('125', '46', '622909116836651310', '8', '中国农业银行福建支行', '444444', '供应商B账户名称', '5394.40', '5394.40', null);
+INSERT INTO `bpayrow` VALUES ('126', '45', '622909116836651310', '4', '建设银行泉州分行', '1111111111', '周少华', '92.62', '92.62', null);
+INSERT INTO `bpayrow` VALUES ('127', '45', '622909116836651310', '8', '中国农业银行福建支行', '444444', '供应商B账户名称', '5394.40', '5394.40', null);
 
 -- ----------------------------
 -- Table structure for `breceandpay`
@@ -141,7 +194,7 @@ CREATE TABLE `breceandpay` (
   `remark` varchar(1024) DEFAULT NULL COMMENT '备注',
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`receandpay`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='其它收支表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='其它收支表';
 
 -- ----------------------------
 -- Records of breceandpay
@@ -149,6 +202,7 @@ CREATE TABLE `breceandpay` (
 INSERT INTO `breceandpay` VALUES ('1', '2013-02-18', '2', '1', '50.50', '今天收入50.5元', '2013-02-18 16:28:40');
 INSERT INTO `breceandpay` VALUES ('2', '2013-02-18', '1', '2', '10.50', '钱包支出10.5', '2013-02-18 16:31:01');
 INSERT INTO `breceandpay` VALUES ('3', '2013-02-18', '2', '2', '50.50', '支出50.5', '2013-02-18 16:44:32');
+INSERT INTO `breceandpay` VALUES ('4', '2013-07-01', '2', '1', '120000.00', '初始资金', '2014-07-12 14:01:11');
 
 -- ----------------------------
 -- Table structure for `bsalary`
@@ -158,20 +212,21 @@ CREATE TABLE `bsalary` (
   `salaryid` int(9) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `salarytype` int(1) DEFAULT NULL COMMENT '单据类型',
   `salaryname` varchar(64) DEFAULT NULL COMMENT '工资单名称',
-  `salaryno` varchar(13) NOT NULL COMMENT '工资编号',
+  `salaryno` varchar(16) NOT NULL COMMENT '工资编号',
   `salarydate` varchar(10) DEFAULT NULL COMMENT '日期',
   `currflow` varchar(32) DEFAULT NULL COMMENT '当前流程',
   `maker` varchar(32) DEFAULT NULL COMMENT '制单人',
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建日期',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`salaryid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bsalary
 -- ----------------------------
-INSERT INTO `bsalary` VALUES ('1', '1', '2013.02工资', 'GZD-2013-0001', '2013-03-07', '结束', 'ZHOUJD', '2013-03-11 16:04:32', '无');
-INSERT INTO `bsalary` VALUES ('2', '3', '2012年终奖', 'GZD-2013-0002', '2013-02-28', '申请', 'ZHOUJD', '2013-03-11 16:41:27', '');
+INSERT INTO `bsalary` VALUES ('1', '1', '2013.02工资', 'GZD-2013-0001', '2013-03', '结束', 'ZHOUJD', '2013-03-11 16:04:32', '无');
+INSERT INTO `bsalary` VALUES ('2', '3', '2012年终奖', 'GZD-2013-0002', '2013-02', '结束', 'ZHOUJD', '2013-03-11 16:41:27', '');
+INSERT INTO `bsalary` VALUES ('6', '1', '2014年06月份工资单', 'GZD-20140724-001', '2014-06', '申请', 'ZHOUJD', '2014-07-24 08:51:43', '备注');
 
 -- ----------------------------
 -- Table structure for `bsalaryrow`
@@ -184,7 +239,7 @@ CREATE TABLE `bsalaryrow` (
   `planmoney` double(12,2) DEFAULT NULL COMMENT '应付款',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`salaryrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bsalaryrow
@@ -192,8 +247,12 @@ CREATE TABLE `bsalaryrow` (
 INSERT INTO `bsalaryrow` VALUES ('28', '1', '2', '2100.12', '员工一工资');
 INSERT INTO `bsalaryrow` VALUES ('29', '1', '3', '2200.22', '员工二工资');
 INSERT INTO `bsalaryrow` VALUES ('30', '1', '4', '1000.00', '员工三工资');
-INSERT INTO `bsalaryrow` VALUES ('38', '2', '2', '3000.10', null);
-INSERT INTO `bsalaryrow` VALUES ('39', '2', '3', '4000.20', null);
+INSERT INTO `bsalaryrow` VALUES ('40', '2', '2', '3000.10', null);
+INSERT INTO `bsalaryrow` VALUES ('41', '2', '3', '4000.20', null);
+INSERT INTO `bsalaryrow` VALUES ('52', '5', '2', '0.00', null);
+INSERT INTO `bsalaryrow` VALUES ('53', '5', '3', '63.00', null);
+INSERT INTO `bsalaryrow` VALUES ('60', '6', '2', '128.22', null);
+INSERT INTO `bsalaryrow` VALUES ('61', '6', '3', '63.00', null);
 
 -- ----------------------------
 -- Table structure for `bsell`
@@ -201,7 +260,7 @@ INSERT INTO `bsalaryrow` VALUES ('39', '2', '3', '4000.20', null);
 DROP TABLE IF EXISTS `bsell`;
 CREATE TABLE `bsell` (
   `sellid` int(7) NOT NULL AUTO_INCREMENT COMMENT '销售单ID',
-  `sellno` varchar(13) NOT NULL COMMENT '销售单编号',
+  `sellno` varchar(16) NOT NULL COMMENT '销售单编号',
   `selldate` varchar(10) DEFAULT NULL COMMENT '销售日期',
   `manuid` int(9) NOT NULL COMMENT '客户ID',
   `currflow` varchar(32) DEFAULT NULL COMMENT '当前流程',
@@ -209,12 +268,19 @@ CREATE TABLE `bsell` (
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`sellid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='销售表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='销售表';
 
 -- ----------------------------
 -- Records of bsell
 -- ----------------------------
 INSERT INTO `bsell` VALUES ('2', 'XSD-2013-0001', '2013-03-06', '5', '结束', 'ZHOUJD', '2013-03-06 17:32:44', '备注');
+INSERT INTO `bsell` VALUES ('3', 'XSD-2014-0001', '2014-07-13', '9', '结束', 'ZHOUJD', '2014-07-13 16:13:58', '');
+INSERT INTO `bsell` VALUES ('4', 'XSD-2014-0002', '2014-07-01', '5', '结束', 'ZHOUJD', '2014-07-13 16:14:35', '');
+INSERT INTO `bsell` VALUES ('5', 'XSD-2014-0003', '2014-06-02', '5', '结束', 'ZHOUJD', '2014-07-13 16:15:17', '');
+INSERT INTO `bsell` VALUES ('6', 'XSD-2014-0004', '2014-06-12', '9', '结束', 'ZHOUJD', '2014-07-13 16:16:21', '');
+INSERT INTO `bsell` VALUES ('7', 'XSD-2014-0005', '2014-04-02', '5', '结束', 'ZHOUJD', '2014-07-13 16:16:52', '');
+INSERT INTO `bsell` VALUES ('8', 'XSD-2014-0006', '2014-03-12', '5', '结束', 'ZHOUJD', '2014-07-13 16:17:13', '');
+INSERT INTO `bsell` VALUES ('10', 'XSD-2014-0007', '2014-07-18', '5', '申请', 'ZHOUJD', '2014-07-18 19:08:31', '');
 
 -- ----------------------------
 -- Table structure for `bsellrow`
@@ -223,9 +289,8 @@ DROP TABLE IF EXISTS `bsellrow`;
 CREATE TABLE `bsellrow` (
   `sellrowid` int(7) NOT NULL AUTO_INCREMENT COMMENT '销售行项ID',
   `sellid` int(7) NOT NULL COMMENT '销售单ID',
-  `productno` varchar(13) NOT NULL COMMENT '产品编码',
-  `productname` varchar(64) DEFAULT NULL COMMENT '产品名称',
-  `producttype` int(5) DEFAULT NULL COMMENT '产品类型',
+  `productid` int(5) DEFAULT NULL COMMENT '产品编码',
+  `productname` varchar(64) NOT NULL COMMENT '产品名称',
   `unit` int(3) DEFAULT NULL COMMENT '计量单位',
   `planprice` double(12,2) DEFAULT '0.00' COMMENT '预算单价',
   `realprice` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '实际单价',
@@ -233,13 +298,29 @@ CREATE TABLE `bsellrow` (
   `realsum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '实际总价',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`sellrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='销售行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8 COMMENT='销售行项表';
 
 -- ----------------------------
 -- Records of bsellrow
 -- ----------------------------
-INSERT INTO `bsellrow` VALUES ('18', '2', 'CPD-2013-0001', '产品一', null, '2', '12.20', '12.20', '1.00', '12.20', null);
-INSERT INTO `bsellrow` VALUES ('19', '2', 'CPD-2013-0001', '产品一', null, '2', '12.20', '12.20', '2.00', '24.40', null);
+INSERT INTO `bsellrow` VALUES ('18', '2', '1', '产品1', '2', '12.20', '12.20', '1.00', '12.20', null);
+INSERT INTO `bsellrow` VALUES ('19', '2', '1', '产品1', '2', '12.20', '12.20', '2.00', '24.40', null);
+INSERT INTO `bsellrow` VALUES ('33', '8', '2', '产品2', '1', '190.00', '190.00', '43.00', '8170.00', null);
+INSERT INTO `bsellrow` VALUES ('34', '7', '2', '产品2', '1', '190.00', '190.00', '54.00', '10260.00', null);
+INSERT INTO `bsellrow` VALUES ('35', '6', '2', '产品2', '1', '190.00', '190.00', '21.00', '3990.00', null);
+INSERT INTO `bsellrow` VALUES ('36', '6', '3', '产品3', '1', '200.20', '200.20', '23.00', '4604.60', null);
+INSERT INTO `bsellrow` VALUES ('37', '5', '1', '产品1', '2', '120.00', '120.00', '53.00', '6360.00', null);
+INSERT INTO `bsellrow` VALUES ('38', '5', '2', '产品2', '1', '190.00', '190.00', '12.00', '2280.00', null);
+INSERT INTO `bsellrow` VALUES ('39', '5', '3', '产品3', '1', '200.20', '200.20', '4.00', '800.80', null);
+INSERT INTO `bsellrow` VALUES ('40', '4', '2', '产品2', '1', '190.00', '190.00', '33.00', '6270.00', null);
+INSERT INTO `bsellrow` VALUES ('41', '4', '3', '产品3', '1', '200.20', '200.20', '44.00', '8808.80', null);
+INSERT INTO `bsellrow` VALUES ('42', '4', '1', '产品1', '2', '120.00', '120.00', '77.00', '9240.00', null);
+INSERT INTO `bsellrow` VALUES ('43', '3', '1', '产品1', '2', '120.00', '120.00', '11.00', '1320.00', null);
+INSERT INTO `bsellrow` VALUES ('44', '3', '2', '产品2', '1', '190.00', '190.00', '22.00', '4180.00', null);
+INSERT INTO `bsellrow` VALUES ('45', '3', '3', '产品3', '1', '200.20', '200.20', '33.00', '6606.60', null);
+INSERT INTO `bsellrow` VALUES ('114', '10', '2', '产品2', '1', '190.00', '190.00', '1.00', '190.00', null);
+INSERT INTO `bsellrow` VALUES ('115', '10', '3', '产品3', '1', '200.20', '200.20', '2.00', '400.40', null);
+INSERT INTO `bsellrow` VALUES ('116', '10', '1', '产品1', '2', '120.00', '120.00', '3.00', '360.00', null);
 
 -- ----------------------------
 -- Table structure for `btransferaccount`
@@ -276,73 +357,134 @@ CREATE TABLE `bwork` (
   `salary` double(12,2) DEFAULT NULL COMMENT '增减工资',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`workid`)
-) ENGINE=InnoDB AUTO_INCREMENT=73353 DEFAULT CHARSET=utf8 COMMENT='考勤表';
+) ENGINE=InnoDB AUTO_INCREMENT=74096 DEFAULT CHARSET=utf8 COMMENT='考勤表';
 
 -- ----------------------------
 -- Records of bwork
 -- ----------------------------
-INSERT INTO `bwork` VALUES ('73291', '3', '2013-03-01', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73292', '3', '2013-03-02', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73293', '3', '2013-03-03', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73294', '3', '2013-03-04', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73295', '3', '2013-03-05', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73296', '3', '2013-03-06', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73297', '3', '2013-03-07', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73298', '3', '2013-03-08', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73299', '3', '2013-03-09', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73300', '3', '2013-03-10', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73301', '3', '2013-03-11', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73302', '3', '2013-03-12', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73303', '3', '2013-03-13', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73304', '3', '2013-03-14', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73305', '3', '2013-03-15', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73306', '3', '2013-03-16', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73307', '3', '2013-03-17', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73308', '3', '2013-03-18', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73309', '3', '2013-03-19', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73310', '3', '2013-03-20', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73311', '3', '2013-03-21', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73312', '3', '2013-03-22', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73313', '3', '2013-03-23', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73314', '3', '2013-03-24', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73315', '3', '2013-03-25', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73316', '3', '2013-03-26', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73317', '3', '2013-03-27', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73318', '3', '2013-03-28', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73319', '3', '2013-03-29', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73320', '3', '2013-03-30', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73321', '3', '2013-03-31', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73322', '2', '2013-03-01', null, null, '1', '1.00', null);
-INSERT INTO `bwork` VALUES ('73323', '2', '2013-03-02', null, null, '1', '2.00', null);
-INSERT INTO `bwork` VALUES ('73324', '2', '2013-03-03', null, null, '1', '3.00', null);
-INSERT INTO `bwork` VALUES ('73325', '2', '2013-03-04', null, null, '2', '-2.00', null);
-INSERT INTO `bwork` VALUES ('73326', '2', '2013-03-05', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73327', '2', '2013-03-06', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73328', '2', '2013-03-07', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73329', '2', '2013-03-08', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73330', '2', '2013-03-09', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73331', '2', '2013-03-10', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73332', '2', '2013-03-11', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73333', '2', '2013-03-12', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73334', '2', '2013-03-13', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73335', '2', '2013-03-14', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73336', '2', '2013-03-15', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73337', '2', '2013-03-16', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73338', '2', '2013-03-17', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73339', '2', '2013-03-18', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73340', '2', '2013-03-19', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73341', '2', '2013-03-20', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73342', '2', '2013-03-21', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73343', '2', '2013-03-22', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73344', '2', '2013-03-23', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73345', '2', '2013-03-24', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73346', '2', '2013-03-25', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73347', '2', '2013-03-26', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73348', '2', '2013-03-27', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73349', '2', '2013-03-28', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73350', '2', '2013-03-29', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73351', '2', '2013-03-30', null, null, null, null, null);
-INSERT INTO `bwork` VALUES ('73352', '2', '2013-03-31', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73477', '3', '2014-06-01', null, null, '1', '63.00', null);
+INSERT INTO `bwork` VALUES ('73478', '3', '2014-06-02', null, null, '1', null, null);
+INSERT INTO `bwork` VALUES ('73479', '3', '2014-06-03', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73480', '3', '2014-06-04', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73481', '3', '2014-06-05', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73482', '3', '2014-06-06', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73483', '3', '2014-06-07', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73484', '3', '2014-06-08', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73485', '3', '2014-06-09', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73486', '3', '2014-06-10', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73487', '3', '2014-06-11', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73488', '3', '2014-06-12', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73489', '3', '2014-06-13', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73490', '3', '2014-06-14', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73491', '3', '2014-06-15', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73492', '3', '2014-06-16', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73493', '3', '2014-06-17', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73494', '3', '2014-06-18', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73495', '3', '2014-06-19', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73496', '3', '2014-06-20', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73497', '3', '2014-06-21', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73498', '3', '2014-06-22', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73499', '3', '2014-06-23', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73500', '3', '2014-06-24', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73501', '3', '2014-06-25', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73502', '3', '2014-06-26', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73503', '3', '2014-06-27', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73504', '3', '2014-06-28', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73505', '3', '2014-06-29', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73506', '3', '2014-06-30', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73538', '3', '2014-08-01', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73539', '3', '2014-08-02', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73540', '3', '2014-08-03', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73541', '3', '2014-08-04', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73542', '3', '2014-08-05', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73543', '3', '2014-08-06', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73544', '3', '2014-08-07', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73545', '3', '2014-08-08', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73546', '3', '2014-08-09', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73547', '3', '2014-08-10', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73548', '3', '2014-08-11', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73549', '3', '2014-08-12', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73550', '3', '2014-08-13', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73551', '3', '2014-08-14', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73552', '3', '2014-08-15', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73553', '3', '2014-08-16', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73554', '3', '2014-08-17', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73555', '3', '2014-08-18', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73556', '3', '2014-08-19', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73557', '3', '2014-08-20', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73558', '3', '2014-08-21', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73559', '3', '2014-08-22', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73560', '3', '2014-08-23', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73561', '3', '2014-08-24', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73562', '3', '2014-08-25', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73563', '3', '2014-08-26', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73564', '3', '2014-08-27', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73565', '3', '2014-08-28', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73566', '3', '2014-08-29', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73567', '3', '2014-08-30', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73568', '3', '2014-08-31', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73631', '3', '2014-07-01', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73632', '3', '2014-07-02', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73633', '3', '2014-07-03', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73634', '3', '2014-07-04', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73635', '3', '2014-07-05', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73636', '3', '2014-07-06', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73637', '3', '2014-07-07', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73638', '3', '2014-07-08', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73639', '3', '2014-07-09', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73640', '3', '2014-07-10', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73641', '3', '2014-07-11', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73642', '3', '2014-07-12', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73643', '3', '2014-07-13', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73644', '3', '2014-07-14', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73645', '3', '2014-07-15', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73646', '3', '2014-07-16', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73647', '3', '2014-07-17', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73648', '3', '2014-07-18', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73649', '3', '2014-07-19', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73650', '3', '2014-07-20', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73651', '3', '2014-07-21', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73652', '3', '2014-07-22', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73653', '3', '2014-07-23', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73654', '3', '2014-07-24', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73655', '3', '2014-07-25', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73656', '3', '2014-07-26', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73657', '3', '2014-07-27', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73658', '3', '2014-07-28', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73659', '3', '2014-07-29', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73660', '3', '2014-07-30', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('73661', '3', '2014-07-31', null, null, null, null, null);
+INSERT INTO `bwork` VALUES ('74065', '2', '2014-07-01', '19:09', '19:09', '1', '53.00', '1');
+INSERT INTO `bwork` VALUES ('74066', '2', '2014-07-02', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74067', '2', '2014-07-03', null, null, null, '65.00', '加班1小时12元');
+INSERT INTO `bwork` VALUES ('74068', '2', '2014-07-04', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74069', '2', '2014-07-05', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74070', '2', '2014-07-06', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74071', '2', '2014-07-07', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74072', '2', '2014-07-08', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74073', '2', '2014-07-09', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74074', '2', '2014-07-10', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74075', '2', '2014-07-11', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74076', '2', '2014-07-12', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74077', '2', '2014-07-13', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74078', '2', '2014-07-14', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74079', '2', '2014-07-15', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74080', '2', '2014-07-16', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74081', '2', '2014-07-17', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74082', '2', '2014-07-18', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74083', '2', '2014-07-19', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74084', '2', '2014-07-20', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74085', '2', '2014-07-21', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74086', '2', '2014-07-22', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74087', '2', '2014-07-23', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74088', '2', '2014-07-24', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74089', '2', '2014-07-25', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74090', '2', '2014-07-26', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74091', '2', '2014-07-27', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74092', '2', '2014-07-28', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74093', '2', '2014-07-29', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74094', '2', '2014-07-30', null, null, null, '53.00', null);
+INSERT INTO `bwork` VALUES ('74095', '2', '2014-07-31', null, null, null, '53.00', null);
 
 -- ----------------------------
 -- Table structure for `cbanktype`
@@ -538,9 +680,9 @@ CREATE TABLE `sbankcard` (
 -- ----------------------------
 -- Records of sbankcard
 -- ----------------------------
-INSERT INTO `sbankcard` VALUES ('1', '00000', '无', '99', '钱包', '5100.34', '1', '此为钱包');
-INSERT INTO `sbankcard` VALUES ('2', '6227001823550092014', '建设银行福州支行', '2', '林珊珊', '131.74', '1', '');
-INSERT INTO `sbankcard` VALUES ('3', '622909116836651310', '兴业银行福州支行', '6', '王建辉', '200.00', '1', '');
+INSERT INTO `sbankcard` VALUES ('1', '00000', '无', '99', '钱包', '9579.54', '1', '此为钱包');
+INSERT INTO `sbankcard` VALUES ('2', '6227001823550092014', '建设银行福州支行', '2', '林珊珊', '108732.88', '1', '');
+INSERT INTO `sbankcard` VALUES ('3', '622909116836651310', '兴业银行福州支行', '6', '王建辉', '45989.08', '1', '');
 
 -- ----------------------------
 -- Table structure for `sbtype`
@@ -646,7 +788,7 @@ CREATE TABLE `smanurow` (
   `priorityrow` int(2) DEFAULT NULL COMMENT '优先级',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`manurowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=187 DEFAULT CHARSET=utf8 COMMENT='供应商账号表';
+) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=utf8 COMMENT='供应商账号表';
 
 -- ----------------------------
 -- Records of smanurow
@@ -656,6 +798,7 @@ INSERT INTO `smanurow` VALUES ('182', '7', '工商银行泉州分行', '33333333
 INSERT INTO `smanurow` VALUES ('184', '8', '中国农业银行福建支行', '444444', '供应商B账户名称', '9', null);
 INSERT INTO `smanurow` VALUES ('185', '10', '建设银行南安支行', '66666666', '物流B', '9', null);
 INSERT INTO `smanurow` VALUES ('186', '4', '建设银行泉州分行', '1111111111', '周少华', '1', null);
+INSERT INTO `smanurow` VALUES ('187', '9', '中国银行泉州分行', '2222222', '客户B', '1', null);
 
 -- ----------------------------
 -- Table structure for `smaterial`
@@ -663,7 +806,7 @@ INSERT INTO `smanurow` VALUES ('186', '4', '建设银行泉州分行', '11111111
 DROP TABLE IF EXISTS `smaterial`;
 CREATE TABLE `smaterial` (
   `materialid` int(5) NOT NULL AUTO_INCREMENT COMMENT '物资ID',
-  `materialno` varchar(13) NOT NULL COMMENT '物资编码',
+  `materialno` varchar(11) NOT NULL COMMENT '物资编码',
   `materialname` varchar(64) DEFAULT NULL COMMENT '物资名称',
   `materialtype` int(5) NOT NULL COMMENT '物资类型',
   `unit` int(3) DEFAULT NULL COMMENT '计量单位',
@@ -673,42 +816,43 @@ CREATE TABLE `smaterial` (
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`materialid`),
   UNIQUE KEY `uni_smaterial_no` (`materialno`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of smaterial
 -- ----------------------------
-INSERT INTO `smaterial` VALUES ('1', 'WZD-2013-0001', '物资名称一1', '5', '1', '0.22', '4', '2013-02-24', '物资名称一备注');
-INSERT INTO `smaterial` VALUES ('3', 'WZD-2013-0002', '111111', '1', '1', '111111.00', '4', '2013-02-24', '111111');
-INSERT INTO `smaterial` VALUES ('4', 'WZD-2013-0003', '物资三', '8', '1', '33.30', '4', '2013-03-04', '');
-INSERT INTO `smaterial` VALUES ('5', 'WZD-2013-0004', '物资四', '8', '2', '4444.00', '8', '2013-03-04', '');
+INSERT INTO `smaterial` VALUES ('1', '1010101', '物资A11', '5', '1', '0.22', '4', '2013-02-24', '物资A1一备注');
+INSERT INTO `smaterial` VALUES ('4', '1020101', '物资B11', '8', '1', '33.30', '4', '2013-03-04', '');
+INSERT INTO `smaterial` VALUES ('5', '1020102', '物资B12', '8', '2', '44.00', '8', '2013-03-04', '');
+INSERT INTO `smaterial` VALUES ('6', '1010201', '物资A21', '6', '3', '43.20', '8', '2014-07-04', '');
 
 -- ----------------------------
 -- Table structure for `smaterialtype`
 -- ----------------------------
 DROP TABLE IF EXISTS `smaterialtype`;
 CREATE TABLE `smaterialtype` (
-  `materialtype` int(5) NOT NULL AUTO_INCREMENT COMMENT '物资类型编号',
+  `materialtype` int(5) NOT NULL COMMENT '物资类型主键',
+  `materialtypeno` varchar(9) DEFAULT NULL COMMENT '物资类型编码',
   `materialtypename` varchar(64) NOT NULL COMMENT '物资类型名称',
   `priority` int(3) DEFAULT NULL COMMENT '优先级',
-  `parent` int(5) DEFAULT NULL COMMENT '父级编号',
+  `parent` varchar(8) DEFAULT NULL COMMENT '父级编号',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`materialtype`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of smaterialtype
 -- ----------------------------
-INSERT INTO `smaterialtype` VALUES ('1', '根节点', '1', null, null);
-INSERT INTO `smaterialtype` VALUES ('2', '物资类型A', '1', '1', '物资类型A备注');
-INSERT INTO `smaterialtype` VALUES ('3', '物资类型B', '2', '1', '物资类型B备注');
-INSERT INTO `smaterialtype` VALUES ('4', '物资类型C', '99', '1', '');
-INSERT INTO `smaterialtype` VALUES ('5', '物资类型A-1', '1', '2', '物资类型A-1备注');
-INSERT INTO `smaterialtype` VALUES ('6', '物资类型A-2', '2', '2', '');
-INSERT INTO `smaterialtype` VALUES ('7', '物资类型A-3', '99', '2', '');
-INSERT INTO `smaterialtype` VALUES ('8', '物资类型B-1', '1', '3', '');
-INSERT INTO `smaterialtype` VALUES ('9', '物资类型B-2', '99', '3', '');
-INSERT INTO `smaterialtype` VALUES ('10', '物资类型C-1', '99', '4', '');
+INSERT INTO `smaterialtype` VALUES ('1', '1', '根节点', '1', null, null);
+INSERT INTO `smaterialtype` VALUES ('2', '101', '物资类型A', '1', '1', '物资类型A备注');
+INSERT INTO `smaterialtype` VALUES ('3', '102', '物资类型B', '2', '1', '物资类型B备注');
+INSERT INTO `smaterialtype` VALUES ('4', '103', '物资类型C', '99', '1', '');
+INSERT INTO `smaterialtype` VALUES ('5', '10101', '物资类型A-1', '1', '2', '物资类型A-1备注');
+INSERT INTO `smaterialtype` VALUES ('6', '10102', '物资类型A-2', '2', '2', '');
+INSERT INTO `smaterialtype` VALUES ('7', '10103', '物资类型A-3', '99', '2', '');
+INSERT INTO `smaterialtype` VALUES ('8', '10201', '物资类型B-1', '1', '3', '');
+INSERT INTO `smaterialtype` VALUES ('9', '10202', '物资类型B-2', '99', '3', '');
+INSERT INTO `smaterialtype` VALUES ('10', '10301', '物资类型C-1', '99', '4', '');
 
 -- ----------------------------
 -- Table structure for `smodule`
@@ -724,7 +868,7 @@ CREATE TABLE `smodule` (
   `sn` varchar(32) DEFAULT NULL COMMENT '授权名称',
   `rel` varchar(32) DEFAULT NULL COMMENT '页面标识',
   PRIMARY KEY (`moduleid`)
-) ENGINE=InnoDB AUTO_INCREMENT=10123 DEFAULT CHARSET=utf8 COMMENT='模块表';
+) ENGINE=InnoDB AUTO_INCREMENT=10132 DEFAULT CHARSET=utf8 COMMENT='模块表';
 
 -- ----------------------------
 -- Records of smodule
@@ -732,9 +876,9 @@ CREATE TABLE `smodule` (
 INSERT INTO `smodule` VALUES ('1', '根模块', '所有模块的根节点，不能删除', '1', '#', null, null, null);
 INSERT INTO `smodule` VALUES ('101', '系统管理', '系统管理-描述', '2', '', '1', 'Configs', '');
 INSERT INTO `smodule` VALUES ('103', '其它管理', '其它管理-描述', '99', '', '1', 'Others', '');
-INSERT INTO `smodule` VALUES ('10101', '用户管理', '用户管理-描述', '99', '/user/list', '101', 'User', 'user_list');
-INSERT INTO `smodule` VALUES ('10102', '角色管理', '角色管理-描述', '99', '/role/list', '101', 'Role', 'role_list');
-INSERT INTO `smodule` VALUES ('10105', '模块管理', '模块管理-描述', '99', '/module/tree', '101', 'Module', 'module_tree');
+INSERT INTO `smodule` VALUES ('10101', '用户管理', '用户管理-描述', '1', '/user/list', '101', 'User', 'user_list');
+INSERT INTO `smodule` VALUES ('10102', '角色管理', '角色管理-描述', '2', '/role/list', '101', 'Role', 'role_list');
+INSERT INTO `smodule` VALUES ('10105', '模块管理', '模块管理-描述', '3', '/module/tree', '101', 'Module', 'module_tree');
 INSERT INTO `smodule` VALUES ('10106', '资料管理', '资料管理-描述', '3', '', '1', 'Datas', '');
 INSERT INTO `smodule` VALUES ('10107', '计量单位管理', '计量单位管理', '99', '/unit/list', '10106', 'Unit', 'unit_list');
 INSERT INTO `smodule` VALUES ('10108', '公司信息管理', '公司信息管理', '99', '/company/edi/1', '10106', 'Company', 'company_edi');
@@ -742,7 +886,7 @@ INSERT INTO `smodule` VALUES ('10109', '供应商管理', '供应商管理', '99
 INSERT INTO `smodule` VALUES ('10110', '员工管理', '员工管理', '99', '/staff/list?first=true', '10106', 'Staff', 'staff_list');
 INSERT INTO `smodule` VALUES ('10111', '财务管理', '财务管理', '4', '', '1', 'Finances', '');
 INSERT INTO `smodule` VALUES ('10112', '银行卡管理', '银行卡管理', '99', '/bankcard/list?first=true', '10111', 'Bankcard', 'bankcard_list');
-INSERT INTO `smodule` VALUES ('10113', '发票管理', '', '99', '/pay/list?first=true', '10111', 'Pay', 'pay_list');
+INSERT INTO `smodule` VALUES ('10113', '单据管理', '', '99', '/pay/list?first=true', '10111', 'Pay', 'pay_list');
 INSERT INTO `smodule` VALUES ('10114', '物资管理', '', '5', '', '1', 'Materials', '');
 INSERT INTO `smodule` VALUES ('10115', '物资类型管理', '', '1', '/materialtype/tree', '10114', 'Materialtype', 'materialtype_tree');
 INSERT INTO `smodule` VALUES ('10116', '物资管理', '', '2', '/material/tree', '10114', 'Material', 'material_tree');
@@ -752,6 +896,15 @@ INSERT INTO `smodule` VALUES ('10119', '产品类别管理', '', '1', '/productt
 INSERT INTO `smodule` VALUES ('10120', '产品管理', '', '2', '/product/tree', '10118', 'Product', 'product_tree');
 INSERT INTO `smodule` VALUES ('10121', '销售管理', '', '3', '/sell/list?first=true', '10118', 'Sell', 'sell_list');
 INSERT INTO `smodule` VALUES ('10122', '工资管理', '', '99', '/salary/list?first=true', '10111', 'Salary', 'salary_list');
+INSERT INTO `smodule` VALUES ('10123', '报表管理', '', '7', '', '1', 'Reports', '');
+INSERT INTO `smodule` VALUES ('10124', '月度供应商报表', '', '1', '/report/reportBuy', '10123', 'ReportBuy', 'buy_report');
+INSERT INTO `smodule` VALUES ('10125', '月度客户报表', '', '2', '/report/reportSell', '10123', 'ReportSell', 'sell_report');
+INSERT INTO `smodule` VALUES ('10126', '月度综合报表', '', '3', '/report/reportColligate', '10123', 'ReportColligate', 'colligate_report');
+INSERT INTO `smodule` VALUES ('10127', '综合统计报表', '', '8', '/report/reportStatistics', '10123', 'ReportStatistics', 'statistics_report');
+INSERT INTO `smodule` VALUES ('10128', '综合产品报表', '', '5', '/report/reportProduct', '10123', 'ReportProduct', 'product_report');
+INSERT INTO `smodule` VALUES ('10129', '综合物资报表', '', '4', '/report/reportMaterial', '10123', 'ReportMaterial', 'material_report');
+INSERT INTO `smodule` VALUES ('10130', '综合供应商报表', '', '6', '/report/reportManu', '10123', 'ReportManu', 'manu_report');
+INSERT INTO `smodule` VALUES ('10131', '综合客户报表', '', '7', '/report/reportClient', '10123', 'ReportClient', 'client_report');
 
 -- ----------------------------
 -- Table structure for `spermission`
@@ -837,6 +990,15 @@ INSERT INTO `spermission` VALUES ('1', 'Sell:view');
 INSERT INTO `spermission` VALUES ('1', 'Sell:add');
 INSERT INTO `spermission` VALUES ('1', 'Sell:edi');
 INSERT INTO `spermission` VALUES ('1', 'Sell:delete');
+INSERT INTO `spermission` VALUES ('1', 'Reports:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportBuy:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportSell:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportColligate:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportMaterial:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportProduct:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportManu:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportClient:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportStatistics:view');
 INSERT INTO `spermission` VALUES ('1', 'Others:view');
 
 -- ----------------------------
@@ -845,7 +1007,7 @@ INSERT INTO `spermission` VALUES ('1', 'Others:view');
 DROP TABLE IF EXISTS `sproduct`;
 CREATE TABLE `sproduct` (
   `productid` int(9) NOT NULL AUTO_INCREMENT COMMENT '产品ID',
-  `productno` varchar(13) NOT NULL COMMENT '产品编码',
+  `productno` varchar(11) NOT NULL COMMENT '产品编码',
   `productname` varchar(64) DEFAULT NULL COMMENT '产品名称',
   `producttype` int(5) DEFAULT NULL COMMENT '产品类型',
   `unit` int(3) DEFAULT NULL COMMENT '计量单位',
@@ -853,12 +1015,14 @@ CREATE TABLE `sproduct` (
   `createdate` varchar(10) DEFAULT NULL COMMENT '新增日期',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`productid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='产品表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='产品表';
 
 -- ----------------------------
 -- Records of sproduct
 -- ----------------------------
-INSERT INTO `sproduct` VALUES ('1', 'CPD-2013-0001', '产品一', '14', '2', '12.20', '2013-03-06', '产品一备注');
+INSERT INTO `sproduct` VALUES ('1', '2010101', '产品1', '14', '2', '120.00', '2013-03-06', '产品一备注');
+INSERT INTO `sproduct` VALUES ('2', '2010102', '产品2', '14', '1', '190.00', '2014-07-12', '');
+INSERT INTO `sproduct` VALUES ('3', '2010103', '产品3', '14', '1', '200.20', '2014-07-12', '');
 
 -- ----------------------------
 -- Table structure for `sproductrow`
@@ -870,28 +1034,42 @@ CREATE TABLE `sproductrow` (
   `materialno` varchar(13) DEFAULT NULL COMMENT '物资编号',
   `materialname` varchar(64) DEFAULT NULL COMMENT '物资名称',
   `materialprice` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '物资单价',
+  `materialnum` double(9,2) NOT NULL DEFAULT '0.00' COMMENT '物资数量',
+  `materialsum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '物资总价',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`productrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='产品行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COMMENT='产品行项表';
 
 -- ----------------------------
 -- Records of sproductrow
 -- ----------------------------
-INSERT INTO `sproductrow` VALUES ('21', '1', 'WZD-2013-0004', '物资四', '4444.00', '2');
-INSERT INTO `sproductrow` VALUES ('22', '1', 'WZD-2013-0003', '物资三', '33.30', '3');
-INSERT INTO `sproductrow` VALUES ('23', '1', null, '运输成本', '1.00', null);
-INSERT INTO `sproductrow` VALUES ('24', '1', null, '人力成本', '2.00', null);
-INSERT INTO `sproductrow` VALUES ('25', '1', null, '利润', '3.00', null);
+INSERT INTO `sproductrow` VALUES ('62', '2', 'WZD-2013-0001', '物资A11', '0.22', '22.00', '4.84', null);
+INSERT INTO `sproductrow` VALUES ('63', '2', 'WZD-2013-0003', '物资B11', '33.30', '2.00', '66.60', null);
+INSERT INTO `sproductrow` VALUES ('64', '2', 'WZD-2013-0004', '物资B12', '44.00', '1.00', '44.00', null);
+INSERT INTO `sproductrow` VALUES ('65', '2', null, '运输成本', '22.00', '1.00', '22.00', null);
+INSERT INTO `sproductrow` VALUES ('66', '2', null, '人力成本', '33.00', '1.00', '33.00', null);
+INSERT INTO `sproductrow` VALUES ('67', '2', null, '利润', '21.00', '1.00', '21.00', null);
+INSERT INTO `sproductrow` VALUES ('68', '3', 'WZD-2014-0001', '物资A21', '43.20', '2.00', '86.40', null);
+INSERT INTO `sproductrow` VALUES ('69', '3', 'WZD-2013-0004', '物资B12', '44.00', '1.00', '44.00', null);
+INSERT INTO `sproductrow` VALUES ('70', '3', null, '运输成本', '11.00', '1.00', '11.00', null);
+INSERT INTO `sproductrow` VALUES ('71', '3', null, '人力成本', '22.00', '1.00', '22.00', null);
+INSERT INTO `sproductrow` VALUES ('72', '3', null, '利润', '33.00', '1.00', '33.00', null);
+INSERT INTO `sproductrow` VALUES ('73', '1', 'WZD-2013-0004', '物资四', '44.00', '1.00', '44.00', null);
+INSERT INTO `sproductrow` VALUES ('74', '1', 'WZD-2013-0003', '物资三', '33.30', '2.00', '66.60', null);
+INSERT INTO `sproductrow` VALUES ('75', '1', null, '运输成本', '1.00', '1.00', '1.00', null);
+INSERT INTO `sproductrow` VALUES ('76', '1', null, '人力成本', '2.00', '1.00', '2.00', null);
+INSERT INTO `sproductrow` VALUES ('77', '1', null, '利润', '3.00', '1.00', '3.00', null);
 
 -- ----------------------------
 -- Table structure for `sproducttype`
 -- ----------------------------
 DROP TABLE IF EXISTS `sproducttype`;
 CREATE TABLE `sproducttype` (
-  `producttype` int(5) NOT NULL AUTO_INCREMENT COMMENT '产品类别编号',
+  `producttype` int(5) NOT NULL AUTO_INCREMENT COMMENT '产品类别主键',
+  `producttypeno` varchar(9) DEFAULT NULL COMMENT '产品类别编号',
   `producttypename` varchar(64) NOT NULL COMMENT '产品类别名称',
   `priority` int(3) DEFAULT NULL COMMENT '优先级',
-  `parent` int(5) DEFAULT NULL COMMENT '父级编号',
+  `parent` varchar(8) DEFAULT NULL COMMENT '父级编号',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`producttype`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
@@ -899,14 +1077,14 @@ CREATE TABLE `sproducttype` (
 -- ----------------------------
 -- Records of sproducttype
 -- ----------------------------
-INSERT INTO `sproducttype` VALUES ('1', '根节点', '1', null, null);
-INSERT INTO `sproducttype` VALUES ('11', '产品类别一', '1', '1', '');
-INSERT INTO `sproducttype` VALUES ('12', '产品类别二', '2', '1', '产品类别二');
-INSERT INTO `sproducttype` VALUES ('13', '产品类别三', '3', '1', '产品类别三');
-INSERT INTO `sproducttype` VALUES ('14', '产品类别一1', '1', '11', '产品类别一1');
-INSERT INTO `sproducttype` VALUES ('15', '产品类别一2', '2', '11', '产品类别一2');
-INSERT INTO `sproducttype` VALUES ('16', '产品类别二1', '1', '12', '产品类别二1');
-INSERT INTO `sproducttype` VALUES ('17', '产品类别二2', '2', '12', '');
+INSERT INTO `sproducttype` VALUES ('1', '2', '根节点', '1', null, null);
+INSERT INTO `sproducttype` VALUES ('11', '201', '产品类别一', '1', '1', '');
+INSERT INTO `sproducttype` VALUES ('12', '202', '产品类别二', '2', '1', '产品类别二');
+INSERT INTO `sproducttype` VALUES ('13', '203', '产品类别三', '3', '1', '产品类别三');
+INSERT INTO `sproducttype` VALUES ('14', '20101', '产品类别一1', '1', '11', '产品类别一1');
+INSERT INTO `sproducttype` VALUES ('15', '20102', '产品类别一2', '2', '11', '产品类别一2');
+INSERT INTO `sproducttype` VALUES ('16', '20201', '产品类别二1', '1', '12', '产品类别二1');
+INSERT INTO `sproducttype` VALUES ('17', '20202', '产品类别二2', '2', '12', '');
 
 -- ----------------------------
 -- Table structure for `srole`
@@ -940,7 +1118,7 @@ CREATE TABLE `sstaff` (
   `accountno` varchar(32) DEFAULT NULL COMMENT '工资银行账号',
   `accountname` varchar(64) DEFAULT NULL COMMENT '工资帐户名称',
   `remark` varchar(1024) DEFAULT NULL COMMENT '备注',
-  `salary` double(12,2) DEFAULT NULL,
+  `salary` double(12,2) DEFAULT NULL COMMENT '工资',
   `photo` varchar(64) DEFAULT NULL COMMENT '照片路径',
   PRIMARY KEY (`staffid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='员工表';
@@ -1008,7 +1186,6 @@ CREATE TABLE `suser_role` (
 -- ----------------------------
 INSERT INTO `suser_role` VALUES ('ZHOUJD', '1');
 INSERT INTO `suser_role` VALUES ('LINCC', '2');
-INSERT INTO `suser_role` VALUES ('LINCC', '3');
 
 -- ----------------------------
 -- Procedure structure for `proc_initWork`
@@ -1035,6 +1212,26 @@ BEGIN
 				FETCH cursor_name INTO istaffid; 
 			END WHILE;
 		CLOSE cursor_name ;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `proc_initWorkByStaff`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `proc_initWorkByStaff`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_initWorkByStaff`(vmonth varchar(7),istaffid int(11))
+BEGIN
+		DECLARE imonthNum INT;
+		DECLARE stop int default 0;
+		SET imonthNum = 0;
+		
+		SELECT DAY(DATE_ADD(DATE_ADD(CONCAT(vmonth,'-01'),INTERVAL 1 MONTH), INTERVAL -1 DAY)) INTO imonthNum;
+
+		SET @mycnt = -1;
+		INSERT INTO bwork(staffid, workdate)
+			(SELECT istaffid, DATE_ADD(CONCAT(vmonth,'-01'),INTERVAL @mycnt :=@mycnt + 1 DAY) AS DAY FROM spermission LIMIT imonthNum);
 END
 ;;
 DELIMITER ;
@@ -1184,6 +1381,23 @@ END
 DELIMITER ;
 
 -- ----------------------------
+-- Function structure for `func_getSalaryByMonth`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getSalaryByMonth`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getSalaryByMonth`(istaffid int, vmonth varchar(7)) RETURNS double(12,2)
+BEGIN
+		DECLARE isum DOUBLE(12,2);
+		SET isum = 0.00;
+		
+		SELECT IFNULL(SUM(salary), 0) INTO isum FROM bwork WHERE staffid = istaffid AND workdate LIKE CONCAT(vmonth,'%');
+
+		return isum;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
 -- Function structure for `func_getSalarytypeName`
 -- ----------------------------
 DROP FUNCTION IF EXISTS `func_getSalarytypeName`;
@@ -1278,7 +1492,7 @@ BEGIN
 			WHEN(SELECT 'CGD' LIKE vbtype)=1 THEN
 				SELECT SUM(sum) INTO isum FROM bbuyrow WHERE buyid = iid;
 			WHEN(SELECT 'CPD' LIKE vbtype)=1 THEN
-				SELECT SUM(materialprice) INTO isum FROM sproductrow WHERE productid = iid;
+				SELECT SUM(materialsum) INTO isum FROM sproductrow WHERE productid = iid;
 			WHEN(SELECT 'XSD' LIKE vbtype)=1 THEN
 				SELECT SUM(realsum) INTO isum FROM bsellrow WHERE sellid = iid;
 			WHEN(SELECT 'GZD' LIKE vbtype)=1 THEN
