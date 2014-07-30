@@ -4,6 +4,10 @@
 <script>
 	$(function() {
 		autoCom("[name='map[materialno]']:visible");
+		
+		setTimeout(function() {
+			setAllSum('sum', 'allsum');
+		}, 100);
 	});
 	
 	function addRowOther() {
@@ -61,6 +65,17 @@
 			});
 		}, 100);
 	}
+	
+	/**
+	 * 重写提交之前操作
+	 * @returns {Boolean}
+	 */
+	function doBeforeSubmit() {
+
+		 setMultiply(this, 'price', 'num', 'sum');
+		 setAllSum('sum', 'allsum');
+		return true;
+	}
 </script>
 
 <h1 class="margin10px">修改采购单</h1>
@@ -100,7 +115,7 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<select name="map[currflow]" style="width: 192px;" class="required">
+				<select name="map[currflow]" style="width: 184px;" class="required">
 					<option value=""></option>
 					<c:forEach items="${currflowList}" var="currflow">
 						<option value="${currflow.map.flowname}"
@@ -170,7 +185,7 @@
 					</td>
 					<td>
 						<input type="text" name="map[allsum]" style="width: 93%" class="number"
-							value="${form.map.allsum}" readonly="readonly"/>
+							value="" readonly="readonly"/>
 					</td>
 					<td></td>
 					<td></td>

@@ -1,6 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<script type="text/javascript">
+	$().ready(function() {
+		setTimeout(function() {
+			setAllSum('plansum', 'allplansum');
+			setAllSum('realsum', 'allrealsum');
+		}, 100);
+	});
+</script>
+
 <h2 class="contentTitle">修改单据</h2>
 <form method="post" action="<%=path%>/pay/edi" class="required-validate pageForm"
 	onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">

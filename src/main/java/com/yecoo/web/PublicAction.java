@@ -3,6 +3,7 @@ package com.yecoo.web;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -13,9 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.yecoo.dao.UserDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
+import com.yecoo.util.DateUtils;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
@@ -27,6 +30,7 @@ import com.yecoo.util.dwz.AjaxObject;
 public class PublicAction {
 
 	private UserDaoImpl daoImpl = new UserDaoImpl();
+	private DbUtils dbUtils = new DbUtils();
 
 	/**
 	 * 进入用户登录界面
@@ -61,29 +65,12 @@ public class PublicAction {
 			String sql = "SELECT * FROM smodule a WHERE EXISTS (SELECT 1 FROM spermission b, suser_role c"
 					+ " WHERE b.roleid = c.roleid and b.permission = concat(a.sn ,':view') and c.userid = '"
 					+ username +"') ORDER BY a.priority, a.parentid, a.moduleid";
-			DbUtils dbUtils = new DbUtils();
 			List<CodeTableForm> menuList = dbUtils.getListBySql(sql); //菜单信息
 			request.getSession().setAttribute(Constants.MENU_INFO_SESSION, menuList);
 			
-			sql = "SELECT t.buyid, t.buyname, t.buydate FROM bbuy t WHERE t.currflow <> '结束' ORDER BY t.createtime";
-			List<CodeTableForm> buyList = dbUtils.getListBySql(sql); //采购待办列表
-			
-			sql = "SELECT t.sellid, func_getManuName(t.manuid) manuname, t.selldate FROM bsell t WHERE t.currflow <> '结束' ORDER BY t.createtime";
-			List<CodeTableForm> sellList = dbUtils.getListBySql(sql); //销售待办列表
-			
-			sql = "SELECT t.salaryid, t.salaryname FROM bsalary t WHERE t.currflow <> '结束' ORDER BY t.createtime";
-			List<CodeTableForm> salaryList = dbUtils.getListBySql(sql); //工资单待办列表
-			
-			sql = "SELECT t.payid, func_getBtypeName(t.btype) btypename, t.paydate FROM bpay t WHERE t.currflow <> '结束' ORDER BY t.createtime";
-			List<CodeTableForm> payList = dbUtils.getListBySql(sql); //单据待办列表
-			
-			int toDoNum = buyList.size() + sellList.size() + salaryList.size() + payList.size();
-			
-			request.setAttribute("buyList", buyList);
-			request.setAttribute("sellList", sellList);
-			request.setAttribute("salaryList", salaryList);
-			request.setAttribute("payList", payList);
-			request.setAttribute("toDoNum", toDoNum);
+			setIndex(request);
+
+			this.saveLog(request, "登录");
 			
 			return "index";
 		} catch (UnknownAccountException ex) {
@@ -116,8 +103,10 @@ public class PublicAction {
 	 * 进入首页
 	 */
 	@RequestMapping(value = "/index")
-	public String index() {
+	public String index(HttpServletRequest request) {
 
+		setIndex(request);
+		
 		return "index";
 	}
 
@@ -143,6 +132,9 @@ public class PublicAction {
 			CodeTableForm user1 = daoImpl.getUserById(username);
 			request.getSession().setAttribute(Constants.USER_INFO_SESSION, user1);
 			AjaxObject ajaxObject = new AjaxObject("登录成功", "", "closeCurrent");
+			
+			this.saveLog(request, "登录");
+			
 			return ajaxObject.toString();
 		} catch (UnknownAccountException ex) {
 			AjaxObject ajaxObject = new AjaxObject("用户不存在");
@@ -153,6 +145,50 @@ public class PublicAction {
 		}catch (AuthenticationException e) {
 			AjaxObject ajaxObject = new AjaxObject("其他的登录错误");
 			return ajaxObject.toString();
+		}
+	}
+	
+	/**
+	 * 设置首页
+	 * @param request
+	 */
+	private void setIndex(HttpServletRequest request) {
+		String sql = "SELECT t.buyid, t.buyname, t.buydate FROM bbuy t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+		List<CodeTableForm> buyList = dbUtils.getListBySql(sql); //采购待办列表
+		
+		sql = "SELECT t.sellid, func_getManuName(t.manuid) manuname, t.selldate FROM bsell t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+		List<CodeTableForm> sellList = dbUtils.getListBySql(sql); //销售待办列表
+		
+		sql = "SELECT t.salaryid, t.salaryname FROM bsalary t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+		List<CodeTableForm> salaryList = dbUtils.getListBySql(sql); //工资单待办列表
+		
+		sql = "SELECT t.payid, func_getBtypeName(t.btype) btypename, t.paydate FROM bpay t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+		List<CodeTableForm> payList = dbUtils.getListBySql(sql); //单据待办列表
+		
+		int toDoNum = buyList.size() + sellList.size() + salaryList.size() + payList.size();
+		
+		request.setAttribute("buyList", buyList);
+		request.setAttribute("sellList", sellList);
+		request.setAttribute("salaryList", salaryList);
+		request.setAttribute("payList", payList);
+		request.setAttribute("toDoNum", toDoNum);
+	}
+	
+	/**
+	 * 保存日志
+	 * @param request
+	 * @param logtype
+	 */
+	public void saveLog(HttpServletRequest request, String logtype) {
+		try {
+			CodeTableForm user = (CodeTableForm) request.getSession().getAttribute(Constants.USER_INFO_SESSION);
+			CodeTableForm log = new CodeTableForm();
+			log.setValue("logtype", logtype);
+			log.setValue("operater", user.getValue("userid"));
+			log.setValue("operatetime", DateUtils.getNowDateTime());
+			dbUtils.setInsert(log, "slog");
+		} catch(Exception e) {
+			StrUtils.WriteLog(this.getClass().getName() + ".saveLog()", e);
 		}
 	}
 }

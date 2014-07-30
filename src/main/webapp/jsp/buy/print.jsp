@@ -4,6 +4,15 @@
 <script type="text/javascript" src="<%=path%>/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="<%=path%>/js/jquery.jqprint-0.3.js"></script>
 <script type="text/javascript" src="<%=path%>/js/print.js"></script>
+<script type="text/javascript" src="<%=path%>/js/public.js"></script>
+<script type="text/javascript">
+	$().ready(function() {
+		setTimeout(function() {
+			setAllSum('sum', 'allsum');
+			$("#allsumSpan").html($("[name='map[allsum]']").val());
+		}, 100);
+	});
+</script>
 <!-- 
 <br />
 <input type="button" onclick="funPrint()" value="打印"/>
@@ -50,27 +59,27 @@
 	<table style="width: 100%;">
 		<thead>
 			<tr>
-				<td width="6%">序号</th>
+				<td width="6%">序号</td>
 				<td width="12%">物资编码</td>
 				<td width="14%">物资名称</td>
-				<td width="7%">计量单位</td>
 				<td width="7%">单价</td>
 				<td width="6%">数量</td>
 				<td width="10%">总价</td>
 				<td width="13%">供应商名称</td>
 				<td width="7%">联系人</td>
 				<td width="11%">联系电话</td>
-				<td width="7%">备注</td>
+				<td>备注</td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td colspan="5"></td>
+				<td colspan="4"></td>
 				<td>
 					合计：
 				</td>
 				<td>
-					<span>${form.map.allsum}</span>
+					<span id="allsumSpan"></span>
+					<input type="hidden" name="map[allsum]" />
 				</td>
 				<td colspan="4"></td>
 			</tr>
@@ -86,9 +95,6 @@
 						<span>${bean.map.materialname}</span>
 			   		</td>
 			   		<td>
-			   			<span>${bean.map.unit}</span>
-			   		</td>
-			   		<td>
 			   			<span>${bean.map.price}</span>
 			   		</td>
 			   		<td>
@@ -96,6 +102,7 @@
 			   		</td>
 			   		<td>
 						<span>${bean.map.sum}</span>
+						<input type="hidden" name="map[sum]" value="${bean.map.sum}" />
 			   		</td>
 			   		<td>
 						<span>${bean.map.manuname}</span>

@@ -61,6 +61,17 @@
 			});
 		}, 100);
 	}
+	
+	/**
+	 * 重写提交之前操作
+	 * @returns {Boolean}
+	 */
+	function doBeforeSubmit() {
+
+		 setMultiply(this, 'price', 'num', 'sum');
+		 setAllSum('sum', 'allsum');
+		return true;
+	}
 </script>
 
 <h1 class="margin10px">新增采购单</h1>
@@ -157,7 +168,7 @@
 					</td>
 					<td>
 						<input type="text" name="map[allsum]" style="width: 93%" class="number"
-							value="${form.map.allsum}" readonly="readonly"/>
+							value="" readonly="readonly"/>
 					</td>
 					<td></td>
 					<td></td>

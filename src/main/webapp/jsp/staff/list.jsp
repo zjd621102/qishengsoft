@@ -9,7 +9,7 @@
 		<c:if test="${act!='backselect'}">
 			onsubmit="return navTabSearch(this);"
 		</c:if>
-		onsubmit="return navTabSearch(this);" action="<%=path%>/staff/list" method="post" rel="pagerForm" id="fid">
+		action="<%=path%>/staff/list" method="post" rel="pagerForm" id="fid">
 		<input type="hidden" name="act" value="${act}" />
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">
@@ -33,7 +33,7 @@
 					<td>
 						月份：
 						<input type="text" name="map[month]" size="30" value="${form.map.month}" class="date"
-							dateFmt="yyyy-MM"/>
+							dateFmt="yyyy-MM" readonly="readonly"/>
 					</td>
 				</tr>
 			</table>
@@ -78,7 +78,7 @@
 			</li>
 			</shiro:hasPermission>
 			<li>
-				<a class="edit" href="<%=path%>/staff/edi_work/{s_staffid}" target="dialog" rel="staff_work" mask="true"
+				<a class="edit" href="<%=path%>/staff/edi_work/{s_staffid}?map[workmonth]=${form.map.month}" target="dialog" rel="staff_work" mask="true"
 					width="1200" height="500">
 					<span>考勤情况</span>
 				</a>

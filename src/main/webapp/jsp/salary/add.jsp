@@ -106,13 +106,15 @@
 						<input type="hidden" name="map[staffid]"/>
 						<input type="text" name="map[staffname]" style="width: 70%" maxlength="13"
 							suggestFields="staffid,staffname,planmoney" readonly="readonly"/>
-						<a class="btnLook" href="<%=path%>/staff/list?first=true&act=backselect" lookupGroup="lookup"
+						<a class="btnLook" href="<%=path%>/staff/list?first=true&act=backselect&map[month]=${form.map.salarydate}" lookupGroup="staffLookup"
 							width="1200"></a>
 						<a href="javascript:void(0);" class="btnClear" suggestFields="staffid,staffname,planmoney"></a>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[planmoney]" style="width: 100%" maxlength="12"
-							class="number" value="0.00" onchange="setAllSum('planmoney', 'allplanmoney');"/>
+							class="number" value="0.00"
+							onchange="setAllSum('planmoney', 'allplanmoney');"
+							onblur="setAllSum('planmoney', 'allplanmoney');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"/>
@@ -122,20 +124,21 @@
 				   	<tr>
 						<td>
 							<input type="hidden" name="map[salaryrowid]" value="${bean.map.salaryrowid}"/>
-							<a href="#" class="btnDel delRow" />
+							<a href="#" class="btnDel delRow"></a>
 						</td>
 				   		<td>${vs.index+1}</td>
 				   		<td>
 							<input type="hidden" name="map[staffid]" value="${bean.map.staffid}"/>
 							<input type="text" name="map[staffname]" style="width: 70%" maxlength="13"
 								suggestFields="staffid,staffname,planmoney" value="${bean.map.staffname}" readonly="readonly"/>
-							<a class="btnLook" href="<%=path%>/staff/list?first=true" lookupGroup="lookup" width="1200"></a>
+							<a class="btnLook" href="<%=path%>/staff/list?first=true&act=backselect&map[month]=${form.map.salarydate}" lookupGroup="lookup" width="1200"></a>
 							<a href="javascript:void(0);" class="btnClear" suggestFields="staffid,staffname,planmoney"></a>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[planmoney]" style="width: 100%" maxlength="12"
 								class="number" value="${bean.map.planmoney}"
-								onchange="setAllSum('planmoney', 'allplanmoney');"/>
+								onchange="setAllSum('planmoney', 'allplanmoney');"
+								onblur="setAllSum('planmoney', 'allplanmoney');"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"

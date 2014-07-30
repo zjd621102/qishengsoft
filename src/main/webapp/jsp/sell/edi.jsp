@@ -4,6 +4,10 @@
 <script>
 	$(function() {
 		autoCom("[name='map[productno]']:visible");
+		
+		setTimeout(function() {
+			setAllSum('realsum', 'allrealsum');
+		}, 100);
 	});
 	
 	function addRowOther() {
@@ -54,11 +58,22 @@
 			});
 		}, 100);
 	}
+	
+	/**
+	 * 重写提交之前操作
+	 * @returns {Boolean}
+	 */
+	function doBeforeSubmit() {
+
+		 setMultiply(this, 'realprice', 'num', 'realsum');
+		 setAllSum('realsum', 'allrealsum');
+		return true;
+	}
 </script>
 
 <h1 class="margin10px">修改销售单</h1>
 <form method="post" action="<%=path%>/sell/edi" class="required-validate pageForm"
- onsubmit="return validateCallback(this, dialogAjaxDone);">
+ onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
  	<input type="hidden" name="map[sellid]" value="${form.map.sellid}" />
 	<div class="pageFormContent" layoutH="97">
 		<dl>
@@ -90,7 +105,7 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<select name="map[currflow]" style="width: 164px;" class="required">
+				<select name="map[currflow]" style="width: 159px;" class="required">
 					<option value=""></option>
 					<c:forEach items="${currflowList}" var="currflow">
 						<option value="${currflow.map.flowname}"
@@ -120,7 +135,7 @@
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="152" maxlength="256" value="${form.map.remark}" />
+				<input type="text" name="map[remark]" size="177" maxlength="256" value="${form.map.remark}" />
 			</dd>
 		</dl>
 		

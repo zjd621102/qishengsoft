@@ -4,6 +4,15 @@
 <script type="text/javascript" src="<%=path%>/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="<%=path%>/js/jquery.jqprint-0.3.js"></script>
 <script type="text/javascript" src="<%=path%>/js/print.js"></script>
+<script type="text/javascript" src="<%=path%>/js/public.js"></script>
+<script type="text/javascript">
+	$().ready(function() {
+		setTimeout(function() {
+			setAllSum('realsum', 'allrealsum');
+			$("#allrealsumSpan").html($("[name='map[allrealsum]']").val());
+		}, 100);
+	});
+</script>
 <!-- 
 <br />
 <input type="button" onclick="funPrint()" value="打印"/>
@@ -50,8 +59,6 @@
 				<td width="3%">序号</td>
 				<td width="8%">产品编码</td>
 				<td width="15%">产品名称</td>
-				<td width="8%">计量单位</td>
-				<td width="8%">应付单价</td>
 				<td width="8%">实付单价</td>
 				<td width="8%">数量</td>
 				<td width="8%">实付总价</td>
@@ -60,12 +67,13 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td colspan="6"></td>
+				<td colspan="4"></td>
 				<td>
 					合计：
 				</td>
 				<td>
-					<span>${form.map.allrealsum}</span>
+					<span id="allrealsumSpan">${form.map.allrealsum}</span>
+					<input type="hidden" name="map[allrealsum]" />
 				</td>
 				<td></td>
 			</tr>
@@ -81,12 +89,6 @@
 						<span>${bean.map.productname}</span>
 			   		</td>
 			   		<td>
-						<span>${bean.map.unitname}</span>
-			   		</td>
-			   		<td>
-						<span>${bean.map.planprice}</span>
-			   		</td>
-			   		<td>
 						<span>${bean.map.realprice}</span>
 			   		</td>
 			   		<td>
@@ -94,6 +96,7 @@
 			   		</td>
 			   		<td>
 						<span>${bean.map.realsum}</span>
+						<input type="hidden" name="map[realsum]" value="${bean.map.realsum}" />
 			   		</td>
 			   		<td>
 						<span>${bean.map.remarkrow}</span>

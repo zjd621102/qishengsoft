@@ -78,9 +78,10 @@
 			<tr>
 				<th width="5%">序号</th>
 				<th width="10%">工资单类型</th>
-				<th width="20%">工资单名称</th>
-				<th width="20%">工资单编号</th>
+				<th width="15%">工资单名称</th>
+				<th width="15%">工资单编号</th>
 				<th width="10%">工资单日期</th>
+				<th width="10%">工资单金额</th>
 				<th width="10%">当前流程</th>
 				<th width="10%">制单人</th>
 				<th width="15%">创建时间</th>
@@ -94,6 +95,7 @@
 			   		<td>${bean.map.salaryname}</td>
 			   		<td>${bean.map.salaryno}</td>
 			   		<td>${bean.map.salarydate}</td>
+			   		<td>${bean.map.allplanmoney}</td>
 			   		<td>${bean.map.currflow}</td>
 			   		<td>${bean.map.makername}</td>
 			   		<td>${bean.map.createtime}</td>

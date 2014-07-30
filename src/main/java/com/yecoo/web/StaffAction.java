@@ -125,20 +125,15 @@ public class StaffAction {
 
 		form.setValue("staffid", staffid);
 		
-		String month = StrUtils.nullToStr(form.getValue("month"));
-		if(month.equals("")) {
-			month = StrUtils.getSysdate("yyyy-MM");
-			form.setValue("month", month); // 初始化考勤月份
+		String workmonth = StrUtils.nullToStr(form.getValue("workmonth"));
+		if(workmonth.equals("")) {
+			workmonth = StrUtils.getSysdate("yyyy-MM");
+			form.setValue("workmonth", workmonth); // 初始化考勤月份
 		}
-		staffDaoImpl.initWork(month);
+		staffDaoImpl.initWork(workmonth);
 		
-		CodeTableForm staff = staffDaoImpl.getWork(form, request);
-		form.setValue("staffname", staff.getValue("staffname")); // 员工姓名
-		form.setValue("salary", staff.getValue("salary")); // 工资
-		String sql = "SELECT IFNULL(SUM(t.salary), 0) FROM bwork t WHERE t.staffid = '" + staffid
-				+ "' AND t.workdate like '" + form.getValue("month") + "%'";
-		double allsalary = Double.parseDouble(new DbUtils().execQuerySQL(sql));
-		form.setValue("allsalary", allsalary); // 合计
+		form = staffDaoImpl.getWork(form, request);
+		
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);

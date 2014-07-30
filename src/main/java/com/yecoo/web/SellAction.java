@@ -89,10 +89,6 @@ public class SellAction {
 		CodeTableForm form = null;
 		form = sellDaoImpl.getSellById(sellid, request);
 		
-		String sql = "SELECT IFNULL(SUM(t.realsum), 0) FROM bsellrow t WHERE t.sellid = '" + sellid + "'";
-		double allrealsum = Double.parseDouble(dbUtils.execQuerySQL(sql));
-		form.setValue("allrealsum", allrealsum); //总价合计
-		
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);

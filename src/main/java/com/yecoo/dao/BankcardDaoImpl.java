@@ -342,7 +342,7 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 				+ " FROM bpay a, bpayrow b WHERE a.payid = b.payid AND a.currflow = '结束'";
 		String cond = getTransactionListCondition(form);
 		sql += cond;
-		sql += " ORDER BY a.paydate DESC";
+		sql += " ORDER BY a.operatetime DESC, a.paydate DESC";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;

@@ -62,7 +62,7 @@ public class ManuAction {
 	public @ResponseBody String add(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
-		String createdate = StrUtils.getSysdate(); //当前日期
+		String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss"); //当前日期
 		form.setValue("createdate", createdate);
 		int iReturn = manuDaoImpl.addManu(form, request);
 		if (iReturn >= 0) {

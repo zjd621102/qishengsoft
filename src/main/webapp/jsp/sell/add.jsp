@@ -54,11 +54,22 @@
 			});
 		}, 100);
 	}
+	
+	/**
+	 * 重写提交之前操作
+	 * @returns {Boolean}
+	 */
+	function doBeforeSubmit() {
+
+		 setMultiply(this, 'realprice', 'num', 'realsum');
+		 setAllSum('realsum', 'allrealsum');
+		return true;
+	}
 </script>
 
 <h1 class="margin10px">新增销售单</h1>
 <form method="post" action="<%=path%>/sell/add" class="required-validate pageForm"
- onsubmit="return validateCallback(this, dialogAjaxDone);">
+ onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
 	<div class="pageFormContent" layoutH="97">
 		<dl>
 			<dt>销售日期：</dt>
@@ -99,7 +110,7 @@
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="152" maxlength="256" value="${form.map.remark}" />
+				<input type="text" name="map[remark]" size="178" maxlength="256" value="${form.map.remark}" />
 			</dd>
 		</dl>
 		

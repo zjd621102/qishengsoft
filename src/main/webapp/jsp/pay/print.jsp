@@ -4,6 +4,17 @@
 <script type="text/javascript" src="<%=path%>/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="<%=path%>/js/jquery.jqprint-0.3.js"></script>
 <script type="text/javascript" src="<%=path%>/js/print.js"></script>
+<script type="text/javascript" src="<%=path%>/js/public.js"></script>
+<script type="text/javascript">
+	$().ready(function() {
+		setTimeout(function() {
+			setAllSum('plansum', 'allplansum');
+			setAllSum('realsum', 'allrealsum');
+			$("#allplansumSpan").html($("[name='map[allplansum]']").val());
+			$("#allrealsumSpan").html($("[name='map[allrealsum]']").val());
+		}, 100);
+	});
+</script>
 <!-- 
 <br />
 <input type="button" onclick="funPrint()" value="打印"/>
@@ -68,10 +79,12 @@
 					小计：
 				</td>
 				<td>
-					<span>${form.map.allplansum}</span>
+					<span id="allplansumSpan">${form.map.allplansum}</span>
+					<input type="hidden" name="map[allplansum]" />
 				</td>
 				<td>
-					<span>${form.map.allrealsum}</span>
+					<span id="allrealsumSpan">${form.map.allrealsum}</span>
+					<input type="hidden" name="map[allrealsum]" />
 				</td>
 				<td></td>
 			</tr>
@@ -97,9 +110,11 @@
 			   		</td>
 			   		<td>
 						<span>${bean.map.plansum}</span>
+						<input type="hidden" name="map[plansum]" value="${bean.map.plansum}" />
 			   		</td>
 			   		<td>
 						<span>${bean.map.realsum}</span>
+						<input type="hidden" name="map[realsum]" value="${bean.map.realsum}" />
 			   		</td>
 			   		<td>
 						<span>${bean.map.remarkrow}</span>

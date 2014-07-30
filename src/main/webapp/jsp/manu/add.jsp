@@ -77,7 +77,7 @@
 			<thead>
 				<tr style="text-align: center;">
 					<th width="4%">
-						<a href="#" class="btnAdd addRow"/>
+						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="4%">序号</th>
 					<th width="20%">开户银行</th>
@@ -91,7 +91,7 @@
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>
 						<input type="hidden" name="map[manurowid]"/>
-						<a href="#" class="btnDel delRow"/>
+						<a href="#" class="btnDel delRow"></a>
 					</td>
 			   		<td></td>
 			   		<td>

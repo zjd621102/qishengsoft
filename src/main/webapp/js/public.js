@@ -74,7 +74,7 @@ function setAllSum(name1, name2) {
  */
 function checkRequiredField() {
 	var b = true;
-	$(".notnull").each(function(){
+	$(".notnull").each(function() {
 		if($(this).is(":visible") && $(this).val()=="") {
 			alertMsg.error($(this).attr("alt") + "不能为空");
 			b = false;;
@@ -90,5 +90,25 @@ function checkFormSubmit() {
 	var bool = true;
 	
 	bool = checkRequiredField();
+	if(bool) {
+		bool = doBeforeSubmit();
+	}
+	
 	return bool;
+}
+
+/**
+ * 提交之前操作
+ * @returns {Boolean}
+ */
+function doBeforeSubmit() {
+
+	return true;
+}
+
+/**
+ * 批量设置
+ */
+function batchSet(id1, name2) {
+	$("[name='" + name2 + "']").val($("#" + id1).val());
 }

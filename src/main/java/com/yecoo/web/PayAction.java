@@ -1,16 +1,20 @@
 package com.yecoo.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.yecoo.dao.PayDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
+import com.yecoo.util.DateUtils;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
@@ -84,13 +88,6 @@ public class PayAction {
 		CodeTableForm form = null;
 		form = payDaoImpl.getPayById(payid, request);
 
-		String sql = "SELECT IFNULL(SUM(t.plansum), 0) FROM bpayrow t WHERE t.payid = '" + payid + "'";
-		double allplansum = Double.parseDouble(dbUtils.execQuerySQL(sql));
-		form.setValue("allplansum", allplansum); //小计：应付金额
-		sql = "SELECT IFNULL(SUM(t.realsum), 0) FROM bpayrow t WHERE t.payid = '" + payid + "'";
-		double allrealsum = Double.parseDouble(dbUtils.execQuerySQL(sql));
-		form.setValue("allrealsum", allrealsum); //小计：实付金额
-
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);
@@ -106,6 +103,10 @@ public class PayAction {
 	@RequiresPermissions("Pay:edi")
 	@RequestMapping(value="/edi", method=RequestMethod.POST)
 	public @ResponseBody String edi(CodeTableForm form, HttpServletRequest request) {
+		
+		CodeTableForm user = (CodeTableForm) request.getSession().getAttribute(Constants.USER_INFO_SESSION);
+		form.setValue("operater", user.getValue("userid"));
+		form.setValue("operatetime", DateUtils.getNowDateTime());
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = payDaoImpl.ediPay(form, request);
@@ -147,7 +148,7 @@ public class PayAction {
 	 */
 	private void getSelects(HttpServletRequest request) {
 
-		String sql = "SELECT * FROM sbtype WHERE btype in ('FKD','SKD','YFD')";
+		String sql = "SELECT * FROM sbtype WHERE btype in ('FKD','SKD','YFD','GZD')";
 		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); //单据类型
 		sql = "SELECT * FROM sbankcard WHERE status = '1'";
 		List<CodeTableForm> bankcardList = dbUtils.getListBySql(sql); //银行卡

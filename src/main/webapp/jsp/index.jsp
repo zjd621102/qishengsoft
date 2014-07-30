@@ -163,55 +163,60 @@
 						</div>
 					
 						<div class="pageFormContent" layoutH="80" style="margin-right:230px">
-							<h2>采购待办列表:</h2>
-							<c:forEach var="buy" items="${buyList}">
-								<li>
-									<div class="unit">
-										<a href="<%=path%>/buy/edi/${buy.map.buyid}" target="dialog"
-											rel="buy_edi" mask="true" width="1300" height="500">
-											${buy.map.buyname}【${buy.map.buydate}】</a>
-									</div>
-								</li>
-							</c:forEach>
+							<c:if test="${not empty buyList}">
+								<h2>采购待办列表：</h2>
+								<c:forEach var="buy" items="${buyList}">
+									<li>
+										<div class="unit">
+											<a href="<%=path%>/buy/edi/${buy.map.buyid}" target="dialog"
+												rel="buy_edi" mask="true" width="1300" height="500">
+												${buy.map.buyname}【${buy.map.buydate}】</a>
+										</div>
+									</li>
+								</c:forEach>
+							</c:if>
 							
-							<div class="divider"></div>
+							<c:if test="${not empty sellList}">
+								<div class="divider"></div>
+								<h2>销售待办列表：</h2>
+								<c:forEach var="sell" items="${sellList}">
+									<li>
+										<div class="unit">
+											<a href="<%=path%>/sell/edi/${sell.map.sellid}" target="dialog"
+												rel="sell_edi" mask="true" width="1300" height="500">
+												${sell.map.manuname}【${sell.map.selldate}】</a>
+										</div>
+									</li>
+								</c:forEach>
+							</c:if>
 							
-							<h2>销售待办列表:</h2>
-							<c:forEach var="sell" items="${sellList}">
-								<li>
-									<div class="unit">
-										<a href="<%=path%>/sell/edi/${sell.map.sellid}" target="dialog"
-											rel="sell_edi" mask="true" width="1300" height="500">
-											${sell.map.manuname}【${sell.map.selldate}】</a>
-									</div>
-								</li>
-							</c:forEach>
+							<c:if test="${not empty salaryList}">
+								<div class="divider"></div>
+								<h2>工资单待办列表：</h2>
+								<c:forEach var="salary" items="${salaryList}">
+									<li>
+										<div class="unit">
+											<a href="<%=path%>/salary/edi/${salary.map.salaryid}" target="dialog"
+												rel="salary_edi" mask="true" width="1300" height="500">
+												${salary.map.salaryname}</a>
+										</div>
+									</li>
+								</c:forEach>
+							</c:if>
 							
-							<div class="divider"></div>
-							
-							<h2>工资单待办列表:</h2>
-							<c:forEach var="salary" items="${salaryList}">
-								<li>
-									<div class="unit">
-										<a href="<%=path%>/salary/edi/${salary.map.salaryid}" target="dialog"
-											rel="salary_edi" mask="true" width="1300" height="500">
-											${salary.map.salaryname}</a>
-									</div>
-								</li>
-							</c:forEach>
-							
-							<div class="divider"></div>
-							
-							<h2>单据待办列表:</h2>
-							<c:forEach var="pay" items="${payList}">
-								<li>
-									<div class="unit">
-										<a href="<%=path%>/pay/edi/${pay.map.payid}" target="dialog"
-											rel="pay_edi" mask="true" width="1300" height="500">
-											${pay.map.btypename}【${pay.map.paydate}】</a>
-									</div>
-								</li>
-							</c:forEach>
+							<c:if test="${not empty payList}">
+								<div class="divider"></div>
+								<h2>单据待办列表：</h2>
+								<c:forEach var="pay" items="${payList}">
+									<li>
+										<div class="unit">
+											<a href="<%=path%>/pay/edi/${pay.map.payid}" target="dialog"
+												rel="pay_edi" mask="true" width="1300" height="500">
+												${pay.map.btypename}【${pay.map.paydate}】</a>
+										</div>
+									</li>
+								</c:forEach>
+							</c:if>
 						</div>
 					</div>
 				</div>

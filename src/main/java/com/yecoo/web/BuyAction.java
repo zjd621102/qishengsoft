@@ -91,10 +91,6 @@ public class BuyAction {
 		CodeTableForm form = null;
 		form = buyDaoImpl.getBuyById(buyid, request);
 		
-		String sql = "SELECT IFNULL(SUM(t.sum), 0) FROM bbuyrow t WHERE t.buyid = '" + buyid + "'";
-		double allrealsum = Double.parseDouble(dbUtils.execQuerySQL(sql));
-		form.setValue("allsum", allrealsum); // 小计：总价
-		
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);

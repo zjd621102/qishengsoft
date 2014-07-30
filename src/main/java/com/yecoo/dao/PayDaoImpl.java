@@ -3,9 +3,7 @@ package com.yecoo.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
@@ -54,10 +52,14 @@ public class PayDaoImpl extends BaseDaoImpl {
 		
 		StringBuffer cond = new StringBuffer("");
 		String payid = StrUtils.nullToStr(form.getValue("payid"));
+		String btype = StrUtils.nullToStr(form.getValue("btype"));
 		String currflow = StrUtils.nullToStr(form.getValue("currflow"));
 		
 		if(!payid.equals("")) {
 			cond.append(" AND t.payid = '").append(payid).append("'");
+		}
+		if(!btype.equals("")) {
+			cond.append(" AND t.btype = '").append(btype).append("'");
 		}
 		if(!currflow.equals("")) {
 			cond.append(" AND t.currflow = '").append(currflow).append("'");
@@ -140,9 +142,10 @@ public class PayDaoImpl extends BaseDaoImpl {
 		Connection conn = null;
 		int iReturn = -1;
 		try {
+			
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false); //事务开启
-
+			
 			iReturn = dbUtils.setUpdate(conn, form, "", "bpay", "payid", "");
 			if(iReturn >= 1) { //保存行项表
 			  	iReturn = dbUtils.saveRowTable(request, conn, form, "bpayrow", "payrowid", "payid", "", 1);
@@ -153,7 +156,7 @@ public class PayDaoImpl extends BaseDaoImpl {
 			} else {
 				conn.rollback();
 			}
-			
+
 			String currflow = StrUtils.nullToStr(form.getValue("currflow"));
 			if(iReturn >= 1 && currflow.equals("结束")) { //流程结束
 				String btype = StrUtils.nullToStr(form.getValue("btype"));

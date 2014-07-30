@@ -38,7 +38,8 @@ public class StaffDaoImpl extends BaseDaoImpl {
 		
 		String month = StrUtils.nullToStr(form.getValue("month"));
 		if(month.equals("")) {
-			month = DateUtils.getAdjustTime(DateUtils.getNowDateTime(), "month", "", 1);// 默认为上个月
+//			month = DateUtils.getAdjustTime(DateUtils.getNowDateTime(), "month", "", 1);// 默认为上个月
+			month = DateUtils.getNowDate();
 			month = month.substring(0, 7);
 			form.setValue("month", month);
 		}
@@ -125,14 +126,16 @@ public class StaffDaoImpl extends BaseDaoImpl {
 	public CodeTableForm getWork(CodeTableForm form, HttpServletRequest request) {
 		
 		int staffid = Integer.parseInt(StrUtils.nullToStr(form.getValue("staffid")));
-		CodeTableForm codeTableForm = this.getStaffById(staffid);
+		String workmonth = StrUtils.nullToStr(form.getValue("workmonth"));
 		
-		String sql = "SELECT t.* FROM bwork t WHERE t.staffid = '" + staffid + "'";
-		String cond = getWorkCondition(form);
-		sql += cond;
-		sql += " ORDER BY t.workdate";
-		List<CodeTableForm> workList = dbUtils.getListBySql(sql);
-		request.setAttribute("workList", workList);
+		String sql = "SELECT a.*, b.staffname, b.salary FROM bwork a, sstaff b WHERE a.staffid = b.staffid AND a.staffid = '"
+				+ staffid + "' AND a.workmonth = '" + workmonth + "' ORDER BY b.staffid";
+		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
+		
+		sql = "SELECT a.* FROM bworkrow a WHERE a.workid = '" + codeTableForm.getValue("workid") + "'";
+		List<CodeTableForm> workrowList = dbUtils.getListBySql(sql);
+		request.setAttribute("workrowList", workrowList);
+		
 		return codeTableForm;
 	}
 	/**
@@ -167,7 +170,12 @@ public class StaffDaoImpl extends BaseDaoImpl {
 		try {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false); //事务开启
-			iReturn = dbUtils.saveRowTable(request, conn, form, "bwork", "workid", "staffid", "", 0);
+			
+			iReturn = dbUtils.setUpdate(form, "", "bwork", "workid", ""); //保存主表
+			if(iReturn >= 1) { //保存行项表
+			  	iReturn = dbUtils.saveRowTable(request, conn, form, "bworkrow", "workrowid", "workid", "", 0);
+			}
+			
 			if(iReturn == -1) {
 				conn.rollback();
 			} else {
@@ -203,10 +211,10 @@ public class StaffDaoImpl extends BaseDaoImpl {
 			List<CodeTableForm> staffList = dbUtils.getListBySql(sql);
 			for(CodeTableForm form : staffList) {
 				staffid = StrUtils.nullToStr(form.getValue("staffid"));
-				sql = "SELECT COUNT(1) FROM bwork t WHERE t.workdate like '" + month + "%' AND t.staffid = '"
+				sql = "SELECT COUNT(1) FROM bwork t WHERE t.workmonth = '" + month + "' AND t.staffid = '"
 						+ staffid + "'";
 				int worknum = dbUtils.getIntBySql(sql);
-				if(worknum==0) {
+				if(worknum == 0) {
 					sql = "call proc_initWorkByStaff('" + month + "', '" + staffid + "')";
 					dbUtils.executeSQL(sql);
 				}
