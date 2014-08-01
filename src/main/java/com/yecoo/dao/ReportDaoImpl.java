@@ -46,8 +46,8 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			
 			dataStr.delete(0, dataStr.length());
 			for(int i = 0, monthLen = monthList.size(); i < monthLen; i++) {
-				sql = "SELECT IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid"
-						+ " AND a.currflow = '结束' AND a.buydate LIKE '"
+				sql = "SELECT IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b WHERE a.payid = b.payid"
+						+ " AND a.btype = 'FKD' AND a.currflow = '结束' AND a.paydate LIKE '"
 						+ monthList.get(i) + "%' AND b.manuid = '" + manu.getValue("manuid") + "'";
 				sum = dbUtils.execQuerySQL(sql);
 				if(i >= 1) {
@@ -97,9 +97,9 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			
 			dataStr.delete(0, dataStr.length());
 			for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
-				sql = "SELECT IFNULL(SUM(b.realsum), 0) sum FROM bsell a, bsellrow b WHERE a.sellid = b.sellid"
-						+ " AND a.currflow = '结束' AND a.selldate LIKE '"
-						+ monthList.get(monthIndex) + "%' AND a.manuid = '" + manu.getValue("manuid") + "'";
+				sql = "SELECT IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b WHERE a.payid = b.payid"
+						+ " AND a.btype = 'SKD' AND a.currflow = '结束' AND a.paydate LIKE '"
+						+ monthList.get(monthIndex) + "%' AND b.manuid = '" + manu.getValue("manuid") + "'";
 				sum = dbUtils.execQuerySQL(sql);
 				if(monthIndex >= 1) {
 					dataStr.append(",");
@@ -306,9 +306,9 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		form.setValue("dateTo", dateTo);
 		
 		sql = "SELECT m.* FROM "
-				+ "(SELECT c.manuname, IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b, smanu c"
-				+ " WHERE a.buyid = b.buyid AND b.manuid = c.manuid AND a.currflow = '结束' AND a.buydate >= '"
-				+ dateFrom + "' AND a.buydate <= '" + dateTo + "' GROUP BY c.manuname) m ORDER BY m.sum DESC";
+				+ "(SELECT c.manuname, IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b, smanu c"
+				+ " WHERE a.payid = b.payid AND b.manuid = c.manuid AND a.btype = 'FKD' AND a.currflow = '结束' AND a.paydate >= '"
+				+ dateFrom + "' AND a.paydate <= '" + dateTo + "' GROUP BY c.manuname) m ORDER BY m.sum DESC";
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		int i = 0;
 		for(CodeTableForm codeTableForm : list) {
@@ -340,9 +340,9 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		form.setValue("dateTo", dateTo);
 		
 		sql = "SELECT m.* FROM "
-				+ "(SELECT c.manuname, IFNULL(SUM(b.realsum), 0) sum FROM bsell a, bsellrow b, smanu c"
-				+ " WHERE a.sellid = b.sellid AND a.manuid = c.manuid AND a.currflow = '结束' AND a.selldate >= '"
-				+ dateFrom + "' AND a.selldate <= '" + dateTo + "' GROUP BY c.manuname) m ORDER BY m.sum DESC";
+				+ "(SELECT c.manuname, IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b, smanu c"
+				+ " WHERE a.payid = b.payid AND b.manuid = c.manuid AND a.btype = 'SKD' AND a.currflow = '结束' AND a.paydate >= '"
+				+ dateFrom + "' AND a.paydate <= '" + dateTo + "' GROUP BY c.manuname) m ORDER BY m.sum DESC";
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		int i = 0;
 		for(CodeTableForm codeTableForm : list) {

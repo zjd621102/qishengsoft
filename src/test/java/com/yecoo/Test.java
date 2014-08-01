@@ -32,8 +32,8 @@ public class Test {
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery("select * from information_schema.COLUMNS where TABLE_NAME = upper('suser')");
 		while (resultSet.next()) {
-			System.out.print("字段名： " + resultSet.getString("column_name"));
-			System.out.println(">>>字段类型： " + resultSet.getString("data_type"));
+			System.out.print("columnName: " + resultSet.getString("column_name"));
+			System.out.println(">>>columnType: " + resultSet.getString("data_type"));
 		}
 //		resultSet = statement.executeQuery("SELECT COUNT(t.userid) count FROM suser t");
 //		if (resultSet.next()) {
