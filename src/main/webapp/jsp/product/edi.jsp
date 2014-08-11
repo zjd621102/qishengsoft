@@ -1,11 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h2 class="contentTitle">修改产品</h2>
 <form method="post" action="<%=path%>/product/edi" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
 	<input type="hidden" name="map[productid]" value="${form.map.productid}"/>
-	<div class="pageFormContent" layoutH="97">
+	<div class="pageFormContent" layoutH="56">
 		<dl>
 			<dt>产品编码：</dt>
 			<dd>
@@ -31,7 +30,7 @@
 		<dl>
 			<dt>计量单位：</dt>
 			<dd>
-				<select name="map[unit]" style="width: 193px;" class="required">
+				<select name="map[unit]" style="width: 185px;" class="required">
 					<option value=""></option>
 					<c:forEach items="${unitList}" var="unit">
 						<option value="${unit.map.unitid}"

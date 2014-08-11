@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2014-07-31 10:56:32
+Date: 2014-08-11 10:52:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -795,7 +795,7 @@ CREATE TABLE `slog` (
   `operatetime` varchar(20) NOT NULL COMMENT '操作时间',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`logid`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='日志表';
 
 -- ----------------------------
 -- Records of slog
@@ -815,6 +815,9 @@ INSERT INTO `slog` VALUES ('12', '登录', 'ZHOUJD', '2014-07-31 09:39:46', null
 INSERT INTO `slog` VALUES ('13', '登录', 'ZHOUJD', '2014-07-31 09:39:46', null);
 INSERT INTO `slog` VALUES ('14', '登录', 'ZHOUJD', '2014-07-31 09:39:46', null);
 INSERT INTO `slog` VALUES ('15', '登录', 'ZHOUJD', '2014-07-31 09:39:46', null);
+INSERT INTO `slog` VALUES ('16', '登录', 'ZHOUJD', '2014-08-10 21:15:34', null);
+INSERT INTO `slog` VALUES ('17', '登录', 'ZHOUJD', '2014-08-10 21:15:34', null);
+INSERT INTO `slog` VALUES ('18', '登录', 'ZHOUJD', '2014-08-11 08:37:20', null);
 
 -- ----------------------------
 -- Table structure for `smanu`
@@ -899,28 +902,30 @@ INSERT INTO `smaterial` VALUES ('6', '1010201', '物资A21', '6', '3', '43.20', 
 -- ----------------------------
 DROP TABLE IF EXISTS `smaterialtype`;
 CREATE TABLE `smaterialtype` (
-  `materialtype` int(5) NOT NULL COMMENT '物资类型主键',
+  `materialtype` int(5) NOT NULL AUTO_INCREMENT COMMENT '物资类型主键',
   `materialtypeno` varchar(9) DEFAULT NULL COMMENT '物资类型编码',
   `materialtypename` varchar(64) NOT NULL COMMENT '物资类型名称',
   `priority` int(3) DEFAULT NULL COMMENT '优先级',
   `parent` varchar(8) DEFAULT NULL COMMENT '父级编号',
+  `materialtypeall` varchar(64) DEFAULT NULL,
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`materialtype`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`materialtype`),
+  UNIQUE KEY `u_smaterialtype_no` (`materialtypeno`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of smaterialtype
 -- ----------------------------
-INSERT INTO `smaterialtype` VALUES ('1', '1', '根节点', '1', null, null);
-INSERT INTO `smaterialtype` VALUES ('2', '101', '物资类型A', '1', '1', '物资类型A备注');
-INSERT INTO `smaterialtype` VALUES ('3', '102', '物资类型B', '2', '1', '物资类型B备注');
-INSERT INTO `smaterialtype` VALUES ('4', '103', '物资类型C', '99', '1', '');
-INSERT INTO `smaterialtype` VALUES ('5', '10101', '物资类型A-1', '1', '2', '物资类型A-1备注');
-INSERT INTO `smaterialtype` VALUES ('6', '10102', '物资类型A-2', '2', '2', '');
-INSERT INTO `smaterialtype` VALUES ('7', '10103', '物资类型A-3', '99', '2', '');
-INSERT INTO `smaterialtype` VALUES ('8', '10201', '物资类型B-1', '1', '3', '');
-INSERT INTO `smaterialtype` VALUES ('9', '10202', '物资类型B-2', '99', '3', '');
-INSERT INTO `smaterialtype` VALUES ('10', '10301', '物资类型C-1', '99', '4', '');
+INSERT INTO `smaterialtype` VALUES ('1', '1', '根节点', '1', null, '1', null);
+INSERT INTO `smaterialtype` VALUES ('2', '101', '物资类型A', '1', '1', '1-2', '物资类型A备注');
+INSERT INTO `smaterialtype` VALUES ('3', '102', '物资类型B', '2', '1', '1-3', '物资类型B备注');
+INSERT INTO `smaterialtype` VALUES ('4', '103', '物资类型C', '99', '1', '1-4', '');
+INSERT INTO `smaterialtype` VALUES ('5', '10101', '物资类型A-1', '1', '2', '1-2-5', '物资类型A-1备注');
+INSERT INTO `smaterialtype` VALUES ('6', '10102', '物资类型A-2', '2', '2', '1-2-6', '');
+INSERT INTO `smaterialtype` VALUES ('7', '10103', '物资类型A-3', '99', '2', '1-2-7', '');
+INSERT INTO `smaterialtype` VALUES ('8', '10201', '物资类型B-1', '1', '3', '1-3-8', '');
+INSERT INTO `smaterialtype` VALUES ('9', '10202', '物资类型B-2', '99', '3', '1-3-9', '');
+INSERT INTO `smaterialtype` VALUES ('10', '10301', '物资类型C-1', '99', '4', '1-4-10', '');
 
 -- ----------------------------
 -- Table structure for `smodule`
@@ -1142,7 +1147,7 @@ CREATE TABLE `sproduct` (
   `createdate` varchar(10) DEFAULT NULL COMMENT '新增日期',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`productid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='产品表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='产品表';
 
 -- ----------------------------
 -- Records of sproduct
@@ -1150,6 +1155,7 @@ CREATE TABLE `sproduct` (
 INSERT INTO `sproduct` VALUES ('1', '2010101', '产品1', '14', '2', '120.00', '2013-03-06', '产品一备注');
 INSERT INTO `sproduct` VALUES ('2', '2010102', '产品2', '14', '1', '190.00', '2014-07-12', '');
 INSERT INTO `sproduct` VALUES ('3', '2010103', '产品3', '14', '1', '200.20', '2014-07-12', '');
+INSERT INTO `sproduct` VALUES ('5', '2010201', '产品8', '15', '1', '0.00', '2014-08-11', null);
 
 -- ----------------------------
 -- Table structure for `sproductrow`
@@ -1197,21 +1203,23 @@ CREATE TABLE `sproducttype` (
   `producttypename` varchar(64) NOT NULL COMMENT '产品类别名称',
   `priority` int(3) DEFAULT NULL COMMENT '优先级',
   `parent` varchar(8) DEFAULT NULL COMMENT '父级编号',
+  `producttypeall` varchar(64) DEFAULT NULL,
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`producttype`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`producttype`),
+  UNIQUE KEY `u_sproduct_no` (`producttypeno`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sproducttype
 -- ----------------------------
-INSERT INTO `sproducttype` VALUES ('1', '2', '根节点', '1', null, null);
-INSERT INTO `sproducttype` VALUES ('11', '201', '产品类别一', '1', '1', '');
-INSERT INTO `sproducttype` VALUES ('12', '202', '产品类别二', '2', '1', '产品类别二');
-INSERT INTO `sproducttype` VALUES ('13', '203', '产品类别三', '3', '1', '产品类别三');
-INSERT INTO `sproducttype` VALUES ('14', '20101', '产品类别一1', '1', '11', '产品类别一1');
-INSERT INTO `sproducttype` VALUES ('15', '20102', '产品类别一2', '2', '11', '产品类别一2');
-INSERT INTO `sproducttype` VALUES ('16', '20201', '产品类别二1', '1', '12', '产品类别二1');
-INSERT INTO `sproducttype` VALUES ('17', '20202', '产品类别二2', '2', '12', '');
+INSERT INTO `sproducttype` VALUES ('1', '2', '根节点', '1', null, '1', null);
+INSERT INTO `sproducttype` VALUES ('11', '201', '产品类别一', '1', '1', '1-11', '');
+INSERT INTO `sproducttype` VALUES ('12', '202', '产品类别二', '2', '1', '1-12', '产品类别二');
+INSERT INTO `sproducttype` VALUES ('13', '203', '产品类别三', '3', '1', '1-13', '产品类别三');
+INSERT INTO `sproducttype` VALUES ('14', '20101', '产品类别一1', '1', '11', '1-11-14', '产品类别一1');
+INSERT INTO `sproducttype` VALUES ('15', '20102', '产品类别一2', '2', '11', '1-11-15', '产品类别一2');
+INSERT INTO `sproducttype` VALUES ('16', '20201', '产品类别二1', '1', '12', '1-12-16', '产品类别二1');
+INSERT INTO `sproducttype` VALUES ('17', '20202', '产品类别二2', '2', '12', '1-12-17', '');
 
 -- ----------------------------
 -- Table structure for `srole`

@@ -52,6 +52,10 @@ public class SellAction {
 	public String toAdd(HttpServletRequest request) {
 
 		CodeTableForm form = new CodeTableForm();
+		
+		String selldate = StrUtils.getSysdate(); //销售日期默认为当前日期
+		form.setValue("selldate", selldate);
+		
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);

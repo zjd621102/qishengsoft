@@ -7,6 +7,7 @@
 	onsubmit="return validateCallback(this, dialogAjaxDone);">
 	<input type="hidden" name="map[producttype]" value="${form.map.producttype}" />
 	<input type="hidden" name="map[parent]" value="${form.map.parent}" />
+	<input type="hidden" name="map[producttypeall]" value="${form.map.producttypeall}" />
 	<div class="pageFormContent" layoutH="97">
 		<dl>
 			<dt>产品类别编码：</dt>

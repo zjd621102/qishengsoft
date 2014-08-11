@@ -78,6 +78,14 @@ public class MaterialtypeAction {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = materialtypeDaoImpl.addMaterialtype(form);
+		
+		if(iReturn > 0) {
+			DbUtils dbUtils = new DbUtils();
+			String sql = "UPDATE smaterialtype a, smaterialtype b SET a.materialtypeall = CONCAT(b.materialtypeall, '-', a.materialtype)"
+					+ " WHERE a.parent = b.materialtype AND a.materialtypeno = '" + form.getValue("materialtypeno") + "'";
+			iReturn = dbUtils.executeSQL(sql);
+		}
+		
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "materialtype_tree", "closeCurrent");
 		} else {
@@ -104,6 +112,7 @@ public class MaterialtypeAction {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = materialtypeDaoImpl.ediMaterialtype(form);
+		
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "materialtype_tree", "closeCurrent");
 		} else {

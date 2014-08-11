@@ -42,7 +42,7 @@
 			<td>当前流程：
 				<span>${form.map.currflow}</span>
 			</td>
-			<td>制单人：
+			<td>制&nbsp;单&nbsp;人：
 				<span>${form.map.makername}</span>
 			</td>
 		</tr>
@@ -50,7 +50,7 @@
 			<td>创建日期：
 				<span>${form.map.createtime}</span>
 			</td>
-			<td colspan="2">备注：
+			<td colspan="2">备&nbsp;&nbsp;&nbsp;&nbsp;注：
 				<span>${form.map.remark}</span>
 			</td>
 		</tr>
@@ -63,7 +63,7 @@
 			<tr>
 				<th width="7%">序号</th>
 				<th width="20%">员工</th>
-				<th width="15%">应付款</th>
+				<th width="15%">金额</th>
 				<th width="68%">备注</th>
 			</tr>
 		</thead>

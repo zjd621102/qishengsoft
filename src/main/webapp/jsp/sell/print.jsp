@@ -37,7 +37,7 @@
 			<td>当前流程：
 				<span>${form.map.currflow}</span>
 			</td>
-			<td>制单人：
+			<td>制&nbsp;单&nbsp;人：
 				<span>${form.map.makername}</span>
 			</td>
 			<td>创建日期：
@@ -45,7 +45,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3">备注：
+			<td colspan="3">备&nbsp;&nbsp;&nbsp;&nbsp;注：
 				<span>${form.map.remark}</span>
 			</td>
 		</tr>
@@ -59,9 +59,9 @@
 				<td width="3%">序号</td>
 				<td width="8%">产品编码</td>
 				<td width="15%">产品名称</td>
-				<td width="8%">实付单价</td>
+				<td width="8%">单价</td>
 				<td width="8%">数量</td>
-				<td width="8%">实付总价</td>
+				<td width="8%">金额</td>
 				<td>备注</td>
 			</tr>
 		</thead>

@@ -1,10 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h2 class="contentTitle">新增单据</h2>
 <form method="post" action="<%=path%>/pay/add" class="required-validate pageForm"
  onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="97">
+	<div class="pageFormContent" layoutH="56">
 		<dl>
 			<dt>单据ID：</dt>
 			<dd>
@@ -67,7 +66,7 @@
 			<thead>
 				<tr>
 					<th width="3%">
-						<a href="#" class="btnAdd addRow"/>
+						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="3%">序号</th>
 					<th width="19%"><span class="red">*</span>银行卡卡号</th>
@@ -92,11 +91,11 @@
 						小计：
 					</td>
 					<td>
-						<input type="text" name="map[allplansum]" style="width: 100%" class="number"
+						<input type="text" name="map[allplansum]" style="width: 93%" class="number"
 							value="${form.map.allplansum}" readonly="readonly"/>
 					</td>
 					<td>
-						<input type="text" name="map[allrealsum]" style="width: 100%" class="number"
+						<input type="text" name="map[allrealsum]" style="width: 93%" class="number"
 							value="${form.map.allrealsum}" readonly="readonly"/>
 					</td>
 					<td></td>
@@ -104,11 +103,11 @@
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>
 						<input type="hidden" name="map[payrowid]"/>
-						<a href="#" class="btnDel delRow" />
+						<a href="#" class="btnDel delRow"></a>
 					</td>
 			   		<td></td>
 					<td>
-						<select name="map[bankcardno]" style="width: 95%;" class="notnull" alt="银行卡卡号">
+						<select name="map[bankcardno]" style="width: 100%;" class="notnull" alt="银行卡卡号">
 							<option value=""></option>
 							<c:forEach items="${bankcardList}" var="bankcard">
 								<option value="${bankcard.map.bankcardno}">
@@ -125,29 +124,29 @@
 							<a class="btnLook" href="<%=path%>/manu/list?act=backselect" lookupGroup="manuLookup"
 								width="1000" height="500">查找带回</a>
 						<a href="javascript:void(0);" class="btnClear"
-							suggestFields="manuid,manuname,manubankname,manubankcardno,manuaccountname"/>
+							suggestFields="manuid,manuname,manubankname,manubankcardno,manuaccountname"></a>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[manubankname]" style="width: 100%" maxlength="32"/>
+						<input type="text" name="map[manubankname]" style="width: 96%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[manubankcardno]" style="width: 100%" maxlength="32"/>
+						<input type="text" name="map[manubankcardno]" style="width: 96%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[manuaccountname]" style="width: 100%" maxlength="32"/>
+						<input type="text" name="map[manuaccountname]" style="width: 95%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[plansum]" style="width: 100%" maxlength="12"
+						<input type="text" name="map[plansum]" style="width: 93%" maxlength="12"
 							class="number" value="0.00"
 							onchange="setAllSum('plansum', 'allplansum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[realsum]" style="width: 100%" maxlength="12"
+						<input type="text" name="map[realsum]" style="width: 93%" maxlength="12"
 							class="number" value="0.00"
 							onchange="setAllSum('realsum', 'allrealsum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" style="width: 95%" maxlength="256"/>
 			   		</td>
 			   	</tr>
 			   	<tr id="IDEndRow"></tr>

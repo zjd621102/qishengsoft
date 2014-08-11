@@ -78,6 +78,14 @@ public class ProducttypeAction {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = producttypeDaoImpl.addProducttype(form);
+		
+		if(iReturn > 0) {
+			DbUtils dbUtils = new DbUtils();
+			String sql = "UPDATE sproducttype a, sproducttype b SET a.producttypeall = CONCAT(b.producttypeall, '-', a.producttype)"
+					+ " WHERE a.parent = b.producttype AND a.producttypeno = '" + form.getValue("producttypeno") + "'";
+			iReturn = dbUtils.executeSQL(sql);
+		}
+		
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "producttype_tree", "closeCurrent");
 		} else {

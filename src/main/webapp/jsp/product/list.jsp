@@ -12,6 +12,9 @@
 					<td>
 						产品名称：<input type="text" name="map[productname]" value="${form.map.productname}"/>
 					</td>
+					<td>
+						物资编码：<input type="text" name="map[materialtypeno]" value="${form.map.materialtypeno}"/>
+					</td>
 				</tr>
 			</table>
 			<div class="subBar">

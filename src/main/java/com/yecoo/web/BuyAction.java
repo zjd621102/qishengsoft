@@ -1,13 +1,16 @@
 package com.yecoo.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.yecoo.dao.BuyDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
@@ -53,6 +56,10 @@ public class BuyAction {
 	public String toAdd(HttpServletRequest request) {
 
 		CodeTableForm form = new CodeTableForm();
+		
+		String buydate = StrUtils.getSysdate(); //采购日期默认为当前日期
+		form.setValue("buydate", buydate);
+		
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);

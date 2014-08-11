@@ -22,13 +22,13 @@
 <br /><br />
  -->
 <div id="printdiv">
-	<h2>修改发票</h2>
+	<h2>发票</h2>
 	<table style="width: 100%;">
 		<tr>
 			<td>单据类型：
 				<span>${form.map.btypename}</span>
 			</td>
-			<td>制单人：
+			<td>制&nbsp;单&nbsp;人：
 				<span>${form.map.makername}</span>
 			</td>
 			<td>发票日期：
@@ -50,7 +50,7 @@
 			<td>创建时间：
 				<span>${form.map.createtime}</span>
 			</td>
-			<td colspan="2">备注：
+			<td colspan="2">备&nbsp;&nbsp;&nbsp;&nbsp;注：
 				<span>${form.map.remark}</span>
 			</td>
 		</tr>
@@ -76,7 +76,7 @@
 			<tr>
 				<td colspan="5"></td>
 				<td>
-					小计：
+					合计：
 				</td>
 				<td>
 					<span id="allplansumSpan">${form.map.allplansum}</span>

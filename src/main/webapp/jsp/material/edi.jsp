@@ -1,11 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h2 class="contentTitle">修改物资</h2>
 <form method="post" action="<%=path%>/material/edi" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
 	<input type="hidden" name="map[materialid]" value="${form.map.materialid}"/>
-	<div class="pageFormContent" layoutH="97">
+	<div class="pageFormContent" layoutH="56">
 		<dl>
 			<dt>物资编码：</dt>
 			<dd>
@@ -31,7 +30,7 @@
 		<dl>
 			<dt>计量单位：</dt>
 			<dd>
-				<select name="map[unit]" style="width: 193px;" class="required">
+				<select name="map[unit]" style="width: 185px;" class="required">
 					<option value=""></option>
 					<c:forEach items="${unitList}" var="unit">
 						<option value="${unit.map.unitid}"
@@ -55,10 +54,10 @@
 			<dd>
 				<input type="hidden" name="map[manuid]" value="${form.map.manuid}"/>
 				<input type="text" class="required" name="map[manuname]" value="${form.map.manuname}"
-					size="24" suggestFields="manuid,manuname" readonly="readonly"/>
+					size="30" suggestFields="manuid,manuname" readonly="readonly"/>
 				<a class="btnLook" href="<%=path%>/manu/list?act=backselect" lookupGroup="manuLookup"
 					width="1000" height="500">查找带回</a>
-				<a href="javascript:void(0);" class="btnClear" suggestFields="manuid,manuname"/>
+				<a href="javascript:void(0);" class="btnClear" suggestFields="manuid,manuname"></a>
 			</dd>
 		</dl>
 		<dl>

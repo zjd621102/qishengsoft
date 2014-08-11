@@ -71,11 +71,10 @@
 	}
 </script>
 
-<h1 class="margin10px">修改销售单</h1>
 <form method="post" action="<%=path%>/sell/edi" class="required-validate pageForm"
  onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
  	<input type="hidden" name="map[sellid]" value="${form.map.sellid}" />
-	<div class="pageFormContent" layoutH="97">
+	<div class="pageFormContent" layoutH="56">
 		<dl>
 			<dt>销售编号：</dt>
 			<dd>

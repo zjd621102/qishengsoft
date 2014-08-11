@@ -65,7 +65,7 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 			cond.append(" AND t.materialname like '%").append(materialname).append("%'");
 		}
 		if(!materialtype.equals("")) {
-			cond.append(" AND t.materialtype = '").append(materialtype).append("'");
+			cond.append(" AND EXISTS (SELECT 1 FROM smaterialtype m WHERE m.materialtype = t.materialtype AND CONCAT('-', m.materialtypeall, '-') LIKE '%-").append(materialtype).append("-%')");
 		}
 		
 		return cond.toString();

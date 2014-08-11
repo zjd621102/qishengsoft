@@ -65,12 +65,17 @@ public class ProductDaoImpl extends BaseDaoImpl {
 		StringBuffer cond = new StringBuffer("");
 		String productname = StrUtils.nullToStr(form.getValue("productname"));
 		String producttype = StrUtils.nullToStr(form.getValue("producttype"));
+		String materialtypeno = StrUtils.nullToStr(form.getValue("materialtypeno"));
 		
 		if(!productname.equals("")) {
 			cond.append(" AND t.productname like '%").append(productname).append("%'");
 		}
 		if(!producttype.equals("")) {
-			cond.append(" AND t.producttype = '").append(producttype).append("'");
+			cond.append(" AND EXISTS (SELECT 1 FROM sproducttype m WHERE m.producttype = t.producttype AND CONCAT('-', m.producttypeall, '-') LIKE '%-").append(producttype).append("-%')");
+		}
+		if(!materialtypeno.equals("")) {
+			cond.append(" AND EXISTS (SELECT 1 FROM sproductrow n WHERE n.productid = t.productid AND n.materialno = '")
+				.append(materialtypeno).append("')");
 		}
 		
 		return cond.toString();

@@ -40,7 +40,7 @@
 			<td>当前流程：
 				<span>${form.map.currflow}</span>
 			</td>
-			<td>制单人：
+			<td>制&nbsp;单&nbsp;人：
 				<span>${form.map.makername}</span>
 			</td>
 		</tr>
@@ -48,7 +48,7 @@
 			<td>创建日期：
 				<span>${form.map.createtime}</span>
 			</td>
-			<td colspan="2">备注：
+			<td colspan="2">备&nbsp;&nbsp;&nbsp;&nbsp;注：
 				<span>${form.map.remark}</span>
 			</td>
 		</tr>
@@ -64,7 +64,7 @@
 				<td width="14%">物资名称</td>
 				<td width="7%">单价</td>
 				<td width="6%">数量</td>
-				<td width="10%">总价</td>
+				<td width="10%">金额</td>
 				<td width="13%">供应商名称</td>
 				<td width="7%">联系人</td>
 				<td width="11%">联系电话</td>

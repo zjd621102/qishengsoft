@@ -10,10 +10,9 @@
 	});
 </script>
 
-<h2 class="contentTitle">修改单据</h2>
 <form method="post" action="<%=path%>/pay/edi" class="required-validate pageForm"
 	onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="97">
+	<div class="pageFormContent" layoutH="56">
 		<dl>
 			<dt>单据ID：</dt>
 			<dd>
@@ -120,11 +119,11 @@
 						小计：
 					</td>
 					<td>
-						<input type="text" name="map[allplansum]" style="width: 100%" class="number"
+						<input type="text" name="map[allplansum]" style="width: 93%" class="number"
 							value="${form.map.allplansum}" readonly="readonly"/>
 					</td>
 					<td>
-						<input type="text" name="map[allrealsum]" style="width: 100%" class="number"
+						<input type="text" name="map[allrealsum]" style="width: 93%" class="number"
 							value="${form.map.allrealsum}" readonly="readonly"/>
 					</td>
 					<td></td>
@@ -136,7 +135,7 @@
 					</td>
 			   		<td></td>
 					<td>
-						<select name="map[bankcardno]" style="width: 95%;" class="notnull" alt="银行卡卡号">
+						<select name="map[bankcardno]" style="width: 100%;" class="notnull" alt="银行卡卡号">
 							<option value=""></option>
 							<c:forEach items="${bankcardList}" var="bankcard">
 								<option value="${bankcard.map.bankcardno}">
@@ -155,26 +154,26 @@
 							suggestFields="manuid,manuname,manubankname,manubankcardno,manuaccountname"></a>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[manubankname]" style="width: 100%" maxlength="32"/>
+						<input type="text" name="map[manubankname]" style="width: 96%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[manubankcardno]" style="width: 100%" maxlength="32"/>
+						<input type="text" name="map[manubankcardno]" style="width: 96%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[manuaccountname]" style="width: 100%" maxlength="32"/>
+						<input type="text" name="map[manuaccountname]" style="width: 95%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[plansum]" style="width: 100%" maxlength="12"
+						<input type="text" name="map[plansum]" style="width: 93%" maxlength="12"
 							class="number" value="0.00"
 							onchange="setAllSum('plansum', 'allplansum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[realsum]" style="width: 100%" maxlength="12"
+						<input type="text" name="map[realsum]" style="width: 93%" maxlength="12"
 							class="number" value="0.00"
 							onchange="setAllSum('realsum', 'allrealsum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" style="width: 95%" maxlength="256"/>
 			   		</td>
 			   	</tr>
 				<c:forEach items="${payrowList}" var="bean" varStatus="vs">
@@ -185,7 +184,7 @@
 						</td>
 				   		<td>${vs.index+1}</td>
 						<td>
-							<select name="map[bankcardno]" style="width: 95%;" class="notnull" alt="银行卡卡号">
+							<select name="map[bankcardno]" style="width: 100%;" class="notnull" alt="银行卡卡号">
 								<option value=""></option>
 								<c:forEach items="${bankcardList}" var="bankcard">
 									<option value="${bankcard.map.bankcardno}"
@@ -207,29 +206,29 @@
 								suggestFields="manuid,manuname,manubankname,manubankcardno,manuaccountname"></a>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[manubankname]" style="width: 100%" maxlength="32"
+							<input type="text" name="map[manubankname]" style="width: 96%" maxlength="32"
 								value="${bean.map.manubankname}"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[manubankcardno]" style="width: 100%" maxlength="32"
+							<input type="text" name="map[manubankcardno]" style="width: 96%" maxlength="32"
 								value="${bean.map.manubankcardno}"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[manuaccountname]" style="width: 100%" maxlength="32"
+							<input type="text" name="map[manuaccountname]" style="width: 95%" maxlength="32"
 								value="${bean.map.manuaccountname}"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[plansum]" style="width: 100%" maxlength="12"
+							<input type="text" name="map[plansum]" style="width: 93%" maxlength="12"
 								class="number" value="${bean.map.plansum}"
 								onchange="setAllSum('plansum', 'allplansum');"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[realsum]" style="width: 100%" maxlength="12"
+							<input type="text" name="map[realsum]" style="width: 93%" maxlength="12"
 								class="number" value="${bean.map.realsum}"
 								onchange="setAllSum('realsum', 'allrealsum');"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"
+							<input type="text" name="map[remarkrow]" style="width: 95%" maxlength="256"
 								value="${bean.map.remarkrow}"/>
 				   		</td>
 				   	</tr>
