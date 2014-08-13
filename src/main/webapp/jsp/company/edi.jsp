@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h2 class="contentTitle">修改公司信息</h2>
+<h2 class="contentTitle">公司信息</h2>
 <form method="post" action="<%=path%>/company/edi" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
 	<input type="hidden" name="map[companyid]" value="${form.map.companyid}"/>

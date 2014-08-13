@@ -9,7 +9,7 @@
 	});
 </script>
 
-<h1 class="margin10px">修改工资单</h1>
+<h1 class="margin10px">工资单信息</h1>
 <form method="post" action="<%=path%>/salary/edi" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
  	<input type="hidden" name="map[salaryid]" value="${form.map.salaryid}" />
@@ -105,7 +105,7 @@
 						合计：
 					</td>
 					<td>
-						<input type="text" name="map[allplanmoney]" style="width: 100%" class="number"
+						<input type="text" name="map[allplanmoney]" style="width: 94%" class="number"
 							value="${form.map.allplanmoney}" readonly="readonly"/>
 					</td>
 					<td></td>
@@ -118,17 +118,17 @@
 			   		<td></td>
 			   		<td>
 						<input type="hidden" name="map[staffid]"/>
-						<input type="text" name="map[staffname]" style="width: 70%" maxlength="13"
+						<input type="text" name="map[staffname]" style="width: 82%" maxlength="13"
 							suggestFields="staffid,staffname,planmoney" readonly="readonly"/>
 						<a class="btnLook" href="<%=path%>/staff/list?first=true&act=backselect&map[month]=${form.map.salarydate}" lookupGroup="staffLookup" width="1200"></a>
 						<a href="javascript:void(0);" class="btnClear" suggestFields="staffid,staffname,planmoney"></a>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[planmoney]" style="width: 100%" maxlength="12"
+						<input type="text" name="map[planmoney]" style="width: 94%" maxlength="12"
 							class="number" value="0.00" onchange="setAllSum('planmoney', 'allplanmoney');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" style="width: 99%" maxlength="256"/>
 			   		</td>
 			   	</tr>
 				<c:forEach items="${salaryrowList}" var="bean" varStatus="vs">
@@ -140,19 +140,19 @@
 				   		<td>${vs.index+1}</td>
 				   		<td>
 							<input type="hidden" name="map[staffid]" value="${bean.map.staffid}"/>
-							<input type="text" name="map[staffname]" style="width: 70%" maxlength="13"
+							<input type="text" name="map[staffname]" style="width: 82%" maxlength="13"
 								suggestFields="staffid,staffname,planmoney" value="${bean.map.staffname}" readonly="readonly"/>
 							<a class="btnLook" href="<%=path%>/staff/list?first=true&act=backselect&map[month]=${form.map.salarydate}" lookupGroup="staffLookup" width="1200"></a>
 							<a href="javascript:void(0);" class="btnClear" suggestFields="staffid,staffname,planmoney"></a>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[planmoney]" style="width: 100%" maxlength="12"
+							<input type="text" name="map[planmoney]" style="width: 94%" maxlength="12"
 								class="number" value="${bean.map.planmoney}"
 								onchange="setAllSum('planmoney', 'allplanmoney');"
 								onblur="setAllSum('planmoney', 'allplanmoney');"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"
+							<input type="text" name="map[remarkrow]" style="width: 99%" maxlength="256"
 								value="${bean.map.remarkrow}"/>
 				   		</td>
 				   	</tr>

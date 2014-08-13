@@ -72,13 +72,12 @@
 	 */
 	function doBeforeSubmit() {
 
-		 setMultiply(this, 'price', 'num', 'sum');
-		 setAllSum('sum', 'allsum');
+		 setMultiply('price', 'num', 'sum');
 		return true;
 	}
 </script>
 
-<h1 class="margin10px">修改采购单</h1>
+<h1 class="margin10px">采购单信息</h1>
 <form method="post" action="<%=path%>/buy/edi" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
  	<input type="hidden" name="map[buyid]" value="${form.map.buyid}" />
@@ -221,12 +220,12 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[price]" style="width: 93%" maxlength="12"
-							class="number required" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
+							class="number required" value="0.00" onchange="setMultiply('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[num]" style="width: 90%" maxlength="12"
-							class="number required" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
+							class="number required" value="0.00" onchange="setMultiply('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
@@ -282,13 +281,13 @@
 				   		<td>
 							<input type="text" name="map[price]" style="width: 93%" maxlength="12"
 								class="number required" value="${bean.map.price}"
-								onchange="setMultiply(this, 'price', 'num', 'sum');
+								onchange="setMultiply('price', 'num', 'sum');
 								setAllSum('sum', 'allsum');"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[num]" style="width: 90%" maxlength="12"
 								class="number required" value="${bean.map.num}"
-								onchange="setMultiply(this, 'price', 'num', 'sum');
+								onchange="setMultiply('price', 'num', 'sum');
 								setAllSum('sum', 'allsum');"/>
 				   		</td>
 				   		<td>

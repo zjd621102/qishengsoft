@@ -18,7 +18,8 @@ $(function () {
         yAxis: {
             title: {
                 text: '元'
-            }
+            },
+            min: 0
         },
         tooltip: {
             enabled: false,

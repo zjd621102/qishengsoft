@@ -18,13 +18,26 @@
 					</td>
 					<td>
 						当前流程：
-						<select name="map[currflow]" style="width: 100px;">
+						<select name="map[currflow]">
 							<option value=""></option>
 							<c:forEach items="${currflowList}" var="currflow">
 								<option value="${currflow.map.flowname}"
 									${currflow.map.flowname==form.map.currflow?"selected":""}
 								>
 									${currflow.map.flowname}
+								</option>
+							</c:forEach>
+						</select>
+					</td>
+					<td>
+						单据类型：
+						<select name="map[btype]">
+							<option value=""></option>
+							<c:forEach items="${btypeList}" var="btype">
+								<option value="${btype.map.btype}"
+									${btype.map.btype==form.map.btype?"selected":""}
+								>
+									${btype.map.btypename}
 								</option>
 							</c:forEach>
 						</select>

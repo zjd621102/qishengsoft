@@ -68,13 +68,12 @@
 	 */
 	function doBeforeSubmit() {
 
-		 setMultiply(this, 'price', 'num', 'sum');
-		 setAllSum('sum', 'allsum');
+		 setMultiply('price', 'num', 'sum');
 		return true;
 	}
 </script>
 
-<h1 class="margin10px">新增采购单</h1>
+<h1 class="margin10px">采购单信息</h1>
 <form method="post" action="<%=path%>/buy/add" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
 	<div class="pageFormContent" layoutH="97">
@@ -204,12 +203,12 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[price]" style="width: 93%" maxlength="12"
-							class="number required" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
+							class="number required" value="0.00" onchange="setMultiply('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[num]" style="width: 90%" maxlength="12"
-							class="number required" value="0.00" onchange="setMultiply(this, 'price', 'num', 'sum');
+							class="number required" value="0.00" onchange="setMultiply('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>

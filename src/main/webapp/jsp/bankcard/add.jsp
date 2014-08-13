@@ -1,10 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h1 class="margin10px">新增银行卡</h1>
+<h1 class="margin10px">银行卡信息</h1>
 <form method="post" action="<%=path%>/bankcard/add" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="97">
+	<div class="pageFormContent" layoutH="88">
 		<dl>
 			<dt>银行卡卡号：</dt>
 			<dd>
@@ -64,9 +64,15 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>优先级：</dt>
+			<dd>
+				<input type="text" name="map[priority]" size="30" maxlength="2" value="9" />
+			</dd>
+		</dl>
+		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="30" maxlength="256" value="${form.map.remark}" />
+				<textarea name="map[remark]" cols="27" rows="5" maxlength="256">${form.map.remark}</textarea>
 			</dd>
 		</dl>
 	</div>

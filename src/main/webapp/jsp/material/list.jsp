@@ -59,14 +59,14 @@
 	<table class="table" style="width: 100%;" layoutH="144" rel="jbsxBox2material">
 		<thead>
 			<tr>
-				<th width="10%">序号</th>
+				<th width="5%">序号</th>
 				<th width="15%">物资编码</th>
 				<th width="15%">物资名称</th>
 				<th width="15%">物资类型</th>
 				<th width="10%">计量单位</th>
 				<th width="10%">单价</th>
 				<th width="15%">供应商</th>
-				<th width="10%">新增日期</th>
+				<th width="15%">新增时间</th>
 			</tr>
 		</thead>
 		<tbody>

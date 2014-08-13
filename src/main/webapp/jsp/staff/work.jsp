@@ -103,7 +103,7 @@
 					合计：
 				</td>
 				<td>
-					<input type="text" name="map[allsalary]" style="width: 100%" class="number"
+					<input type="text" name="map[allsalary]" style="width: 93%" class="number"
 						value="" readonly="readonly"/>
 				</td>
 				<td></td>
@@ -113,19 +113,19 @@
 			   		<td>${vs.index+1}</td>
 			   		<td>
 						<input type="hidden" name="map[workrowid]" value="${bean.map.workrowid}"/>
-						<input type="text" name="map[workdate]" style="width: 100%" maxlength="10"
+						<input type="text" name="map[workdate]" style="width: 93%" maxlength="10"
 							value="${bean.map.workdate}"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[starttime]" class="date" dateFmt="HH:mm" style="width: 100%"
+						<input type="text" name="map[starttime]" class="date" dateFmt="HH:mm" style="width: 93%"
 							value="${bean.map.starttime}" readonly="readonly"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[endtime]" class="date" dateFmt="HH:mm" style="width: 100%"
+						<input type="text" name="map[endtime]" class="date" dateFmt="HH:mm" style="width: 93%"
 							value="${bean.map.endtime}" readonly="readonly"/>
 			   		</td>
 			   		<td>
-						<select name="map[workstatus]" style="width: 90%;">
+						<select name="map[workstatus]" style="width: 100%;">
 							<option value=""></option>
 							<c:forEach items="${workstatusList}" var="workstatus">
 								<option value="${workstatus.map.workstatus}"
@@ -137,12 +137,12 @@
 						</select>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[salary]" style="width: 100%" maxlength="12"
+						<input type="text" name="map[salary]" style="width: 93%" maxlength="12"
 							class="number" value="${bean.map.salary}"
 							onchange="setAllSum('salary', 'allsalary');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remark]" style="width: 100%" maxlength="256"
+						<input type="text" name="map[remark]" style="width: 99%" maxlength="256"
 							value="${bean.map.remark}"/>
 			   		</td>
 			   	</tr>

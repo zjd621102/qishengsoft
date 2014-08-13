@@ -38,7 +38,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			monthStr.append("'").append(monthList.get(i)).append("'");
 		}
 
-		String sql = "SELECT manuid, manuname FROM smanu t WHERE t.manutypeid = '1' ORDER BY t.createdate";
+		String sql = "SELECT manuid, manuname FROM smanu t WHERE t.manutypeid = '1' ORDER BY t.priority ASC";
 		List<CodeTableForm> manuList = dbUtils.getListBySql(sql);
 		String sum = null;
 		for (int manuIndex = 0, manuLen = manuList.size(); manuIndex < manuLen; manuIndex++) {
@@ -89,7 +89,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			monthStr.append("'").append(monthList.get(i)).append("'");
 		}
 
-		String sql = "SELECT manuid, manuname FROM smanu t WHERE t.manutypeid = '2' ORDER BY t.createdate";
+		String sql = "SELECT manuid, manuname FROM smanu t WHERE t.manutypeid = '2' ORDER BY t.priority ASC";
 		List<CodeTableForm> manuList = dbUtils.getListBySql(sql);
 		String sum = null;
 		for (int manuIndex = 0; manuIndex < manuList.size(); manuIndex++) {
@@ -226,32 +226,41 @@ public class ReportDaoImpl extends BaseDaoImpl {
 	 * @param request
 	 */
 	public void getReportMaterialList(CodeTableForm form, HttpServletRequest request) {
-		
+
+		StringBuffer titleStr = new StringBuffer();
 		StringBuffer dataStr = new StringBuffer();
 		String sql = null;
 		
 		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), DateUtils.getStepDateTime(-366));
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
+		String sort = StrUtils.nullToStr(form.getValue("sort"), "DESC");// 排序
+		String limitFrom = StrUtils.nullToStr(form.getValue("limitFrom"), "0");
+		String limitNum = StrUtils.nullToStr(form.getValue("limitNum"), "15");
 		form.setValue("dateFrom", dateFrom);
 		form.setValue("dateTo", dateTo);
+		form.setValue("sort", sort);
+		form.setValue("limitFrom", limitFrom);
+		form.setValue("limitNum", limitNum);
 		
-		sql = "SELECT n.materialname, m.sum FROM "
-				+ "(SELECT b.materialid, IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b"
-				+ " WHERE a.buyid = b.buyid AND a.currflow = '结束' AND a.buydate >= '"
-				+ dateFrom + "' AND a.buydate <= '" + dateTo + "' GROUP BY b.materialid) m, smaterial n"
-				+ " WHERE m.materialid = n.materialid ORDER BY m.sum DESC";
+		sql = "SELECT * FROM (SELECT CONCAT(a.materialno, '-', a.materialname) name,"
+				+ " (SELECT IFNULL(SUM(c.sum), 0) FROM bbuy b, bbuyrow c WHERE b.buyid = c.buyid AND b.currflow = '结束' AND c.materialid = a.materialid"
+				+ " AND b.buydate >= '" + dateFrom + "' AND b.buydate <= '" + dateTo + "') sum FROM smaterial a) m ORDER BY m.sum " + sort
+				+ " LIMIT " + limitFrom + "," + limitNum;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
-		int i = 0;
-		for(CodeTableForm codeTableForm : list) {
-			if(i >= 1) {
+		int len = list.size();
+		CodeTableForm codeTableForm = null;
+		for(int i = len-1; i >= 0; i--) {
+			codeTableForm = (CodeTableForm) list.get(i);
+			if(i < len-1) {
+				titleStr.append(",");
 				dataStr.append(",");
 			}
-			i++;
-			
-			dataStr.append("['").append(codeTableForm.getValue("materialname")).append("', ")
-			.append(codeTableForm.getValue("sum")).append("]");
+
+			titleStr.append("'").append(codeTableForm.getValue("name")).append("'");
+			dataStr.append(codeTableForm.getValue("sum"));
 		}
-		
+
+		request.setAttribute("titleStr", titleStr.toString());
 		request.setAttribute("dataStr", dataStr.toString());
 	}
 	
@@ -261,32 +270,41 @@ public class ReportDaoImpl extends BaseDaoImpl {
 	 * @param request
 	 */
 	public void getReportProductList(CodeTableForm form, HttpServletRequest request) {
-		
+
+		StringBuffer titleStr = new StringBuffer();
 		StringBuffer dataStr = new StringBuffer();
 		String sql = null;
 		
 		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), DateUtils.getStepDateTime(-366));
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
+		String sort = StrUtils.nullToStr(form.getValue("sort"), "DESC");// 排序
+		String limitFrom = StrUtils.nullToStr(form.getValue("limitFrom"), "0");
+		String limitNum = StrUtils.nullToStr(form.getValue("limitNum"), "15");
 		form.setValue("dateFrom", dateFrom);
 		form.setValue("dateTo", dateTo);
+		form.setValue("sort", sort);
+		form.setValue("limitFrom", limitFrom);
+		form.setValue("limitNum", limitNum);
 		
-		sql = "SELECT n.productname, m.sum FROM "
-				+ "(SELECT b.productid, IFNULL(SUM(b.realsum), 0) sum FROM bsell a, bsellrow b"
-				+ " WHERE a.sellid = b.sellid AND a.currflow = '结束' AND a.selldate >= '"
-				+ dateFrom + "' AND a.selldate <= '" + dateTo + "' GROUP BY b.productid) m, sproduct n"
-				+ " WHERE m.productid = n.productid ORDER BY m.sum DESC";
+		sql = "SELECT * FROM (SELECT CONCAT(a.productno, '-', a.productname) name,"
+				+ " (SELECT IFNULL(SUM(c.realsum), 0) FROM bsell b, bsellrow c WHERE b.sellid = c.sellid AND b.currflow = '结束' AND c.productid = a.productid"
+				+ " AND b.selldate >= '" + dateFrom + "' AND b.selldate <= '" + dateTo + "') sum FROM sproduct a) m ORDER BY m.sum " + sort
+				+ " LIMIT " + limitFrom + "," + limitNum;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
-		int i = 0;
-		for(CodeTableForm codeTableForm : list) {
-			if(i >= 1) {
+		int len = list.size();
+		CodeTableForm codeTableForm = null;
+		for(int i = len-1; i >= 0; i--) {
+			codeTableForm = (CodeTableForm) list.get(i);
+			if(i < len-1) {
+				titleStr.append(",");
 				dataStr.append(",");
 			}
-			i++;
-			
-			dataStr.append("['").append(codeTableForm.getValue("productname")).append("', ")
-			.append(codeTableForm.getValue("sum")).append("]");
+
+			titleStr.append("'").append(codeTableForm.getValue("name")).append("'");
+			dataStr.append(codeTableForm.getValue("sum"));
 		}
-		
+
+		request.setAttribute("titleStr", titleStr.toString());
 		request.setAttribute("dataStr", dataStr.toString());
 	}
 	
@@ -296,31 +314,42 @@ public class ReportDaoImpl extends BaseDaoImpl {
 	 * @param request
 	 */
 	public void getReportManuList(CodeTableForm form, HttpServletRequest request) {
-		
+
+		StringBuffer titleStr = new StringBuffer();
 		StringBuffer dataStr = new StringBuffer();
 		String sql = null;
 		
 		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), DateUtils.getStepDateTime(-366));
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
+		String sort = StrUtils.nullToStr(form.getValue("sort"), "DESC");// 排序
+		String limitFrom = StrUtils.nullToStr(form.getValue("limitFrom"), "0");
+		String limitNum = StrUtils.nullToStr(form.getValue("limitNum"), "15");
 		form.setValue("dateFrom", dateFrom);
 		form.setValue("dateTo", dateTo);
+		form.setValue("sort", sort);
+		form.setValue("limitFrom", limitFrom);
+		form.setValue("limitNum", limitNum);
 		
 		sql = "SELECT m.* FROM "
-				+ "(SELECT c.manuname, IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b, smanu c"
+				+ "(SELECT c.manuname name, IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b, smanu c"
 				+ " WHERE a.payid = b.payid AND b.manuid = c.manuid AND a.btype = 'FKD' AND a.currflow = '结束' AND a.paydate >= '"
-				+ dateFrom + "' AND a.paydate <= '" + dateTo + "' GROUP BY c.manuname) m ORDER BY m.sum DESC";
+				+ dateFrom + "' AND a.paydate <= '" + dateTo + "' GROUP BY c.manuname) m ORDER BY m.sum " + sort
+				+ " LIMIT " + limitFrom + "," + limitNum;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
-		int i = 0;
-		for(CodeTableForm codeTableForm : list) {
-			if(i >= 1) {
+		int len = list.size();
+		CodeTableForm codeTableForm = null;
+		for(int i = len-1; i >= 0; i--) {
+			codeTableForm = (CodeTableForm) list.get(i);
+			if(i < len-1) {
+				titleStr.append(",");
 				dataStr.append(",");
 			}
-			i++;
-			
-			dataStr.append("['").append(codeTableForm.getValue("manuname")).append("', ")
-			.append(codeTableForm.getValue("sum")).append("]");
+
+			titleStr.append("'").append(codeTableForm.getValue("name")).append("'");
+			dataStr.append(codeTableForm.getValue("sum"));
 		}
-		
+
+		request.setAttribute("titleStr", titleStr.toString());
 		request.setAttribute("dataStr", dataStr.toString());
 	}
 	

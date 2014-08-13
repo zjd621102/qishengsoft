@@ -103,13 +103,14 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="10%">序号</th>
+				<th width="5%">序号</th>
 				<th width="15%">银行卡卡号</th>
 				<th width="15%">开户银行名称</th>
 				<th width="15%">银行类型</th>
 				<th width="15%">账户名称</th>
 				<th width="15%">金额</th>
-				<th width="15%">是否可用</th>
+				<th width="10%">是否可用</th>
+				<th width="10%">优先级</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -122,6 +123,7 @@
 			   		<td>${bean.map.accountname}</td>
 			   		<td>${bean.map.money}</td>
 			   		<td>${bean.map.statusname}</td>
+			   		<td>${bean.map.priority}</td>
 			   	</tr>
 		   	</c:forEach>
 	   	</tbody>

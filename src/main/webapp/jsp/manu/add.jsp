@@ -1,10 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h1 class="margin10px">新增供应商</h1>
+<h2 class="margin10px">供应商信息</h2>
 <form method="post" action="<%=path%>/manu/add" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="97">
+	<div class="pageFormContent" layoutH="88">
 		<dl>
 			<dt>供应商名称：</dt>
 			<dd>
@@ -63,9 +63,22 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>创建时间：</dt>
+			<dd>
+				<input type="text" name="map[createdate]" size="30" maxlength="32"
+					value="${form.map.createdate}" readonly/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>优先级</dt>
+			<dd>
+				<input type="text" name="map[priority]" size="30" maxlength="3" value="99"/>
+			</dd>
+		</dl>
+		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="30" maxlength="512" value="${form.map.remark}" />
+				<input type="text" name="map[remark]" size="106" maxlength="512" value="${form.map.remark}" />
 			</dd>
 		</dl>
 		
@@ -95,20 +108,20 @@
 					</td>
 			   		<td></td>
 			   		<td>
-						<input type="text" name="map[bankrow]" style="width: 100%" maxlength="32"/>
+						<input type="text" name="map[bankrow]" style="width: 96%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[accountnorow]" style="width: 100%" maxlength="32"/>
+						<input type="text" name="map[accountnorow]" style="width: 96%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[accountnamerow]" style="width: 100%" maxlength="32"/>
+						<input type="text" name="map[accountnamerow]" style="width: 96%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[priorityrow]" class="digits" style="width: 100%" maxlength="2"
+						<input type="text" name="map[priorityrow]" class="digits" style="width: 93%" maxlength="2"
 							value="9"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="255"/>
+						<input type="text" name="map[remarkrow]" style="width: 96%" maxlength="255"/>
 			   		</td>
 			   	</tr>
 			   	<tr id="IDEndRow"></tr>

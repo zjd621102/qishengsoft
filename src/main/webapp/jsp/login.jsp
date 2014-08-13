@@ -54,24 +54,24 @@
 														</td>
 													</tr>
 													<tr>
-														<td height="198" align="right" valign="top">
-															<table style="width: 100%;border: 0">
+														<td height="198" align="right" valign="top" style="padding-left: 160px;">
+															<table style="width: 100%;border: 0;">
 																<tr>
 																	<td width="35%">&nbsp;</td>
 																	<td height="25" colspan="2" class="left_txt">
-																		<p>1-地区商家信息网门户站建立的首选方案...</p>
+																		<p>1、地区商家信息网门户站建立的首选方案...</p>
 																	</td>
 																</tr>
 																<tr>
 																	<td>&nbsp;</td>
 																	<td height="25" colspan="2" class="left_txt">
-																		<p>2-一站通式的整合方式，方便用户使用...</p>
+																		<p>2、一站通式的整合方式，方便用户使用...</p>
 																	</td>
 																</tr>
 																<tr>
 																	<td>&nbsp;</td>
 																	<td height="25" colspan="2" class="left_txt">
-																		<p>3-强大的后台系统，管理内容易如反掌...</p>
+																		<p>3、强大的后台系统，管理内容易如反掌...</p>
 																	</td>
 																</tr>
 															</table>
@@ -102,7 +102,7 @@
 														<td colspan="2" style="height: 164px;">
 															<table style="width: 100%;height: 143px;border: 0;" id="table212">
 																<tr>
-																	<td width="13%" height="38" class="top_hui_text">
+																	<td width="10%" height="38" class="top_hui_text">
 																		<span class="login_txt">管理员：&nbsp;&nbsp; </span>
 																	</td>
 																	<td height="38" colspan="2" class="top_hui_text">
@@ -110,7 +110,7 @@
 																	</td>
 																</tr>
 																<tr>
-																	<td width="13%" height="35" class="top_hui_text">
+																	<td height="35" class="top_hui_text">
 																		<span class="login_txt"> 密&nbsp;&nbsp;&nbsp;&nbsp;码： &nbsp;&nbsp; </span>
 																	</td>
 																	<td height="35" colspan="2" class="top_hui_text">
@@ -130,7 +130,7 @@
 																-->
 																<tr>
 																	<td height="35">&nbsp;</td>
-																	<td width="20%" height="35">
+																	<td height="35">
 																		<input name="Submit" type="submit" class="button" id="Submit" value="登 陆">
 																	</td>
 																</tr>

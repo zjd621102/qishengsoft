@@ -94,11 +94,12 @@
 			<tr>
 				<th width="5%">序号</th>
 				<th width="20%">供应商名称</th>
-				<th width="15%">供应商类别</th>
-				<th width="15%">供应商状态</th>
-				<th width="15%">创建日期</th>
+				<th width="10%">供应商类别</th>
+				<th width="10%">供应商状态</th>
+				<th width="15%">创建时间</th>
 				<th width="15%">联系人</th>
 				<th width="15%">联系电话</th>
+				<th width="10%">优先级</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -118,6 +119,7 @@
 			   		<td>${bean.map.createdate}</td>
 			   		<td>${bean.map.manucontact}</td>
 			   		<td>${bean.map.manutel}</td>
+			   		<td>${bean.map.priority}</td>
 			   	</tr>
 		   	</c:forEach>
 	   	</tbody>

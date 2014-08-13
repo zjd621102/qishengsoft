@@ -25,6 +25,7 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 		if(!bankcardid.equals("")) {
 			sql += " AND t.bankcardid <> '" + bankcardid + "'";
 		}
+		sql += " ORDER BY t.priority ASC, t.bankcardid ASC";
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
 	}
@@ -54,7 +55,7 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 				+ " func_getStatusName(t.status) statusname FROM sbankcard t WHERE 1 = 1";
 		String cond = getBankcardListCondition(form);
 		sql  += cond;
-		sql += " ORDER BY bankcardid";
+		sql += " ORDER BY t.priority ASC, t.bankcardid ASC";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;

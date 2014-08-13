@@ -46,7 +46,7 @@ public class ManuDaoImpl extends BaseDaoImpl {
 				+ " FROM smanu t WHERE 1 = 1";
 		String cond = getManuListCondition(form);
 		sql  += cond;
-		sql += " ORDER BY manuid";
+		sql += " ORDER BY priority ASC, manuid ASC";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;

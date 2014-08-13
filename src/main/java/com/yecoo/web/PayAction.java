@@ -56,6 +56,10 @@ public class PayAction {
 	public String toAdd(HttpServletRequest request) {
 
 		CodeTableForm form = new CodeTableForm();
+		
+		String paydate = StrUtils.getSysdate(); //单据日期默认为当前日期
+		form.setValue("paydate", paydate);
+		
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);

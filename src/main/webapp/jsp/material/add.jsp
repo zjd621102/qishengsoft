@@ -1,9 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<h1 class="margin10px">物资信息</h1>
 <form method="post" action="<%=path%>/material/add" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="56">
+	<div class="pageFormContent" layoutH="88">
 		<dl>
 			<dt>物资编码：</dt>
 			<dd>
@@ -29,7 +30,7 @@
 		<dl>
 			<dt>计量单位：</dt>
 			<dd>
-				<select name="map[unit]" style="width: 185px;" class="required">
+				<select name="map[unit]" style="width: 185px;">
 					<option value=""></option>
 					<c:forEach items="${unitList}" var="unit">
 						<option value="${unit.map.unitid}"
@@ -54,7 +55,7 @@
 				<input type="hidden" name="map[manuid]" value="${form.map.manuid}"/>
 				<input type="text" class="required" name="map[manuname]" value="${form.map.manuname}"
 					size="30" suggestFields="manuid,manuname" readonly="readonly"/>
-				<a class="btnLook" href="<%=path%>/manu/list?act=backselect" lookupGroup="manuLookup"
+				<a class="btnLook" href="<%=path%>/manu/list?act=backselect&map[manutypeid]=1" lookupGroup="manuLookup"
 					width="1000" height="500">查找带回</a>
 				<a href="javascript:void(0);" class="btnClear" suggestFields="manuid,manuname"></a>
 			</dd>
@@ -62,8 +63,7 @@
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="30" maxlength="256"
-					value="${form.map.remark}"/>
+				<textarea name="map[remark]" cols="27" rows="6" maxlength="256"></textarea>
 			</dd>
 		</dl>
 	</div>	

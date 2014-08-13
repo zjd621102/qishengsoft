@@ -74,12 +74,18 @@
 				</dd>
 			</dl>
 			<dl>
-				<dt>备注：</dt>
+				<dt>优先级</dt>
 				<dd>
-					<input type="text" name="map[remark]" size="30" maxlength="512"/>
+					<input type="text" name="map[priority]" size="30" maxlength="2" value="9"/>
 				</dd>
 			</dl>
-		</div>	
+			<dl>
+				<dt>备注：</dt>
+				<dd>
+					<textarea name="map[remark]" cols="27" rows="5" maxlength="512"></textarea>
+				</dd>
+			</dl>
+		</div>
 		
 		<div class="formBar">
 			<ul>

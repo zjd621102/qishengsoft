@@ -1,11 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h1 class="margin10px">修改银行卡</h1>
+<h1 class="margin10px">银行卡信息</h1>
 <form method="post" action="<%=path%>/bankcard/edi" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
  	<input type="hidden" name="map[bankcardid]" value="${form.map.bankcardid}" />
-	<div class="pageFormContent" layoutH="97">
+	<div class="pageFormContent" layoutH="88">
 		<dl>
 			<dt>银行卡卡号：</dt>
 			<dd>
@@ -65,9 +65,15 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>优先级：</dt>
+			<dd>
+				<input type="text" name="map[priority]" size="30" maxlength="2" value="${form.map.priority}" />
+			</dd>
+		</dl>
+		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="30" maxlength="256" value="${form.map.remark}" />
+				<textarea name="map[remark]" cols="27" rows="5" maxlength="256">${form.map.remark}</textarea>
 			</dd>
 		</dl>
 	</div>

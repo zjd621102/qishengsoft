@@ -422,9 +422,9 @@ public class StrUtils {
 		DbUtils dbUtils = new DbUtils();
 		String no = parentNo;
 		StringBuffer sql = new StringBuffer("");
-		sql.append("SELECT IFNULL(MAX(SUBSTR(").append(noclumn).append(", -2)), 0) + 1 FROM ").append(tabname)
-			.append(" WHERE ").append(noclumn).append(" like '" + parentNo + "__'");
-		no += StringUtils.leftPad(dbUtils.execQuerySQL(sql.toString()), 2,"0");
+		sql.append("SELECT IFNULL(MAX(SUBSTR(").append(noclumn).append(", -3)), 0) + 1 FROM ").append(tabname)
+			.append(" WHERE ").append(noclumn).append(" like '" + parentNo + "___'");
+		no += StringUtils.leftPad(dbUtils.execQuerySQL(sql.toString()), 3,"0");
 		
 		return no;
 	}

@@ -2,40 +2,64 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 <script type="text/javascript">
 ﻿﻿$(function () {
-    $('#reportMaterial_div').highcharts({
-        chart: {
-            type: 'pie',
-            options3d: {
-                enabled: true,
-                alpha: 45,
-                beta: 0
-            }
-        },
-        title: {
-            text: '综合物资报表'
-        },
-        tooltip: {
-            pointFormat: '<b>{series.name}: {point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                depth: 35,
-                dataLabels: {
-                    enabled: true,
-                    formatter: function() {
-                        return '<b>'+ this.point.name +'</b>: '+ this.y +' 元';
-                    }
-                }
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: '百分比',
-            data: [${requestScope.dataStr}]
-        }]
-    });
+    var categories = [${requestScope.titleStr}];
+	$(document).ready(function () {
+	    $('#reportMaterial_div').highcharts({
+	        chart: {
+	            type: 'bar'
+	        },
+	        title: {
+	            text: '综合物资报表'
+	        },
+	        subtitle: {
+	            text: '${form.map.dateFrom} 至 ${form.map.dateTo}'
+	        },
+	        xAxis: [{
+	            categories: categories,
+	            reversed: false,
+	            labels: {
+	                step: 1
+	            }
+	        }, { // mirror axis on right side
+	            opposite: true,
+	            reversed: false,
+	            categories: categories,
+	            linkedTo: 0,
+	            labels: {
+	                step: 1
+	            }
+	        }],
+	        yAxis: {
+	            title: {
+	                text: null
+	            },
+	            labels: {
+	                formatter: function () {
+	                    return this.value;
+	                }
+	            },
+	            min: 0
+// 	            ,max: 40000
+	        },
+	
+	        plotOptions: {
+	            series: {
+	                stacking: 'normal'
+	            }
+	        },
+	
+	        tooltip: {
+	            formatter: function () {
+	            	return '<b>'+ this.point.category + '</b>：'+ Highcharts.numberFormat(Math.abs(this.point.y), 0);
+	            }
+	        },
+	
+	        series: [ {
+	            name: '物资',
+	            data: [${requestScope.dataStr}]
+	        }]
+	    });
+	});
 });
 </script>
 <div class="pageHeader">
@@ -50,6 +74,19 @@
 					</td>
 					<td>至：<input type="text" class="date" readonly="readonly"
 						name="map[dateTo]" value="${form.map.dateTo}" />
+					</td>
+					<td>
+						排序：
+						<select name="map[sort]">
+							<option value="ASC" ${form.map.sort=="ASC"?"selected":""}>升序</option>
+							<option value="DESC" ${form.map.sort=="DESC"?"selected":""}>降序</option>
+						</select>
+					</td>
+					<td>
+						数量从：<input type="text" name="map[limitFrom]" value="${form.map.limitFrom}" />开始
+					</td>
+					<td>
+						获取数量：<input type="text" name="map[limitNum]" value="${form.map.limitNum}" />
 					</td>
 				</tr>
 			</table>

@@ -5,7 +5,7 @@
 	<form method="post" action="<%=path%>/staff/edi" class="required-validate pageForm"
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<input type="hidden" name="map[staffid]" value="${form.map.staffid}"/>
-		<div class="pageFormContent" layoutH="65">
+		<div class="pageFormContent" layoutH="56">
 			<dl>
 				<dt>员工名称：</dt>
 				<dd>
@@ -77,9 +77,15 @@
 				</dd>
 			</dl>
 			<dl>
+				<dt>优先级</dt>
+				<dd>
+					<input type="text" name="map[priority]" size="30" maxlength="2" value="${form.map.priority}"/>
+				</dd>
+			</dl>
+			<dl>
 				<dt>备注：</dt>
 				<dd>
-					<input type="text" name="map[remark]" size="30" maxlength="512" value="${form.map.remark}"/>
+					<textarea name="map[remark]" cols="27" rows="5" maxlength="512">${form.map.remark}</textarea>
 				</dd>
 			</dl>
 		</div>

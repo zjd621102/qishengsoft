@@ -1,9 +1,21 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<script type="text/javascript">
+	/**
+	 * 重写提交之前操作
+	 * @returns {Boolean}
+	 */
+	function doBeforeSubmit() {
+		setMultiply('materialprice', 'materialnum', 'materialsum');
+		return true;
+	}
+</script>
+
+<h1 class="margin10px">产品信息</h1>
 <form method="post" action="<%=path%>/product/add" class="required-validate pageForm"
- onsubmit="return validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="56">
+ onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
+	<div class="pageFormContent" layoutH="88">
 		<dl>
 			<dt>产品编码：</dt>
 			<dd>
@@ -49,22 +61,29 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>新增时间：</dt>
+			<dd>
+				<input type="text" name="map[createdate]" class="required" size="30" maxlength="19"
+					value="${form.map.createdate}" readonly="readonly"/>
+			</dd>
+		</dl>
+		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="30" maxlength="256"
+				<input type="text" name="map[remark]" size="106" maxlength="256"
 					value="${form.map.remark}"/>
 			</dd>
 		</dl>
 		
 		<div class="divider"></div>
 		
-		<h1 class="margin10px">产品清单（预计单价 = 配件成本+运输成本+人力成本+利润：成本/9）</h1>
+		<h1 class="margin10px">产品清单（预计单价 = 其他成本+人力成本+配件成本+利润：成本/9）</h1>
 
 		<table class="table" style="width: 100%;">
 			<thead>
 				<tr>
 					<th width="5%">
-						<a href="#" class="btnAdd addRow"/>
+						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="5%">序号</th>
 					<th width="20%">物资编码</th>
@@ -86,7 +105,7 @@
 						预计单价：
 					</td>
 					<td>
-						<input type="text" name="map[planprice]" style="width: 100%" class="number"
+						<input type="text" name="map[planprice]" style="width: 92%" class="number"
 							value="0.00" readonly="readonly"/>
 					</td>
 					<td></td>
@@ -94,33 +113,33 @@
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>
 						<input type="hidden" name="map[productrowid]"/>
-						<a href="#" class="btnDel delRow"/>
+						<a href="#" class="btnDel delRow"></a>
 					</td>
 			   		<td></td>
 			   		<td>
-						<input type="text" name="map[materialno]" style="width: 70%" maxlength="13"
+						<input type="text" name="map[materialno]" style="width: 76%" maxlength="13"
 							suggestFields="materialno,materialname,materialprice"
-							readonly="readonly"/>
-						<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"/>
-						<a href="javascript:void(0);" class="btnClear" suggestFields="materialno,materialname,materialprice"/>
+							readonly="readonly"></a>
+						<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
+						<a href="javascript:void(0);" class="btnClear" suggestFields="materialno,materialname,materialprice"></a>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[materialname]" style="width: 100%" maxlength="32"/>
+						<input type="text" name="map[materialname]" style="width: 96%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[materialprice]" style="width: 100%" maxlength="12"
-							class="number" value="0.00" onblur="setMultiply(this, 'materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
+						<input type="text" name="map[materialprice]" style="width: 93%" maxlength="12"
+							class="number" value="0.00" onblur="setMultiply('materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[materialnum]" style="width: 100%" maxlength="9"
-							class="number" value="1" onblur="setMultiply(this, 'materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
+						<input type="text" name="map[materialnum]" style="width: 93%" maxlength="9"
+							class="number" value="1" onblur="setMultiply('materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[materialsum]" style="width: 100%" maxlength="12"
+						<input type="text" name="map[materialsum]" style="width: 92%" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 100%" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" style="width: 96%" maxlength="256"/>
 			   		</td>
 			   	</tr>
 			   	<tr id="IDEndRow"></tr>

@@ -56,6 +56,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		String buyname = StrUtils.nullToStr(form.getValue("buyname"));
 		String buyno = StrUtils.nullToStr(form.getValue("buyno"));
 		String currflow = StrUtils.nullToStr(form.getValue("currflow"));
+		String btype = StrUtils.nullToStr(form.getValue("btype"));
 		String buydateFrom = StrUtils.nullToStr(form.getValue("buydateFrom"));
 		String buydateTo = StrUtils.nullToStr(form.getValue("buydateTo"));
 		
@@ -67,6 +68,9 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		}
 		if(!currflow.equals("")) {
 			cond.append(" AND t.currflow = '").append(currflow).append("'");
+		}
+		if(!btype.equals("")) {
+			cond.append(" AND t.btype = '").append(btype).append("'");
 		}
 		if(!buydateFrom.equals("")) {
 			cond.append(" AND t.buydate >= '").append(buydateFrom).append("'");

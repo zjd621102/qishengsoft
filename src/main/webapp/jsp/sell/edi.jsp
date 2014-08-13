@@ -65,8 +65,7 @@
 	 */
 	function doBeforeSubmit() {
 
-		 setMultiply(this, 'realprice', 'num', 'realsum');
-		 setAllSum('realsum', 'allrealsum');
+		setMultiply('realprice', 'num', 'realsum');
 		return true;
 	}
 </script>
@@ -211,12 +210,12 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realprice]" style="width: 92%" maxlength="12"
-							class="number required" value="0.00" onchange="setMultiply(this, 'realprice', 'num', 'realsum');
+							class="number required" value="0.00" onchange="setMultiply('realprice', 'num', 'realsum');
 							setAllSum('realsum', 'allrealsum');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[num]" style="width: 91%" maxlength="12"
-							class="number required" value="0.00" onchange="setMultiply(this, 'realprice', 'num', 'realsum');
+							class="number required" value="0.00" onchange="setMultiply('realprice', 'num', 'realsum');
 							setAllSum('realsum', 'allrealsum');"/>
 			   		</td>
 			   		<td>
@@ -266,13 +265,13 @@
 				   		<td>
 							<input type="text" name="map[realprice]" style="width: 92%" maxlength="12"
 								class="number required" value="${bean.map.realprice}"
-								onchange="setMultiply(this, 'realprice', 'num', 'realsum');
+								onchange="setMultiply('realprice', 'num', 'realsum');
 								setAllSum('realsum', 'allrealsum');"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[num]" style="width: 91%" maxlength="12"
 								class="number required" value="${bean.map.num}"
-								onchange="setMultiply(this, 'realprice', 'num', 'realsum');
+								onchange="setMultiply('realprice', 'num', 'realsum');
 								setAllSum('realsum', 'allrealsum');"/>
 				   		</td>
 				   		<td>

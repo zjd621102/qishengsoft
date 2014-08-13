@@ -67,6 +67,7 @@ public class ProductAction {
 		form.setValue("producttype", producttype);
 		form.setValue("productno", productno); //产品类型编码
 		form.setValue("producttypename", StrUtils.nullToStr(parentForm.getValue("producttypename")));
+		form.setValue("unit", "1");// 默认单位：只
 		
 		request.setAttribute("form", form);
 		this.getSelects(request);
@@ -78,7 +79,7 @@ public class ProductAction {
 	public @ResponseBody String add(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
-		String createdate = StrUtils.getSysdate(); //当前日期
+		String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss"); //当前日期
 		form.setValue("createdate", createdate);
 		int iReturn = productDaoImpl.addProduct(form, request);
 		if (iReturn >= 0) {

@@ -70,6 +70,7 @@ public class MaterialAction {
 		form.setValue("materialtype", materialtype);
 		form.setValue("materialno", materialno); //物资类型编码
 		form.setValue("materialtypename", StrUtils.nullToStr(parentForm.getValue("materialtypename")));
+		form.setValue("unit", "1");// 默认单位：只
 
 		request.setAttribute("form", form);
 		this.getSelects(request);
@@ -81,7 +82,7 @@ public class MaterialAction {
 	public @ResponseBody String add(CodeTableForm form) {
 		
 		AjaxObject ajaxObject = null;
-		String createdate = StrUtils.getSysdate(); //当前日期
+		String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss"); //当前日期
 		form.setValue("createdate", createdate);
 		int iReturn = materialDaoImpl.addMaterial(form);
 		if (iReturn >= 0) {

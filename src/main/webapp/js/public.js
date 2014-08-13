@@ -38,12 +38,11 @@ function multiply(dou1, dou2) {
 }
 /**
  * 赋值相乘的值
- * @param obj
  * @param name1 相乘字段
  * @param name2 相乘字段
  * @param name3 赋值字段
  */
-function setMultiply(obj, name1, name2, name3) {
+function setMultiply(name1, name2, name3) {
 	$("input[name*='map[" + name1 + "]']").each(function() {
 		var row = $(this).parents("tr:first");
 		var realprice = row.find("[name*='map[" + name1 + "]']").val();
