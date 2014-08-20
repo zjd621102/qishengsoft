@@ -61,6 +61,9 @@ public class BuyAction {
 		String buydate = StrUtils.getSysdate(); //采购日期默认为当前日期
 		form.setValue("buydate", buydate);
 		
+		String buyname = StrUtils.getSysdate("yyyy.MM.dd") + "采购"; //采购名称
+		form.setValue("buyname", buyname);
+		
 		request.setAttribute("form", form);
 		
 		this.getSelects(request);

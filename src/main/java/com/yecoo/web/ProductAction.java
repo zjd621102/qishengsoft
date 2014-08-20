@@ -79,12 +79,6 @@ public class ProductAction {
 		/**************初始化行项Begin**************/
 		List<CodeTableForm> productrowList = new ArrayList<CodeTableForm>();
 		CodeTableForm productrow = new CodeTableForm();
-		productrow.setValue("materialname", "利润");
-		productrow.setValue("materialprice", "0");
-		productrow.setValue("materialnum", "1");
-		productrowList.add(productrow);
-		
-		productrow = new CodeTableForm();
 		productrow.setValue("materialname", "人力成本");
 		productrow.setValue("materialprice", "0");
 		productrow.setValue("materialnum", "1");

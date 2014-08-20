@@ -429,6 +429,27 @@ public class DateUtils {
 	}
 
 	/**
+	 * 获取月份所有日期
+	 * @param date
+	 * @return
+	 */
+	public static List<String> getMonthDate(String date) {
+		List<String> list = new ArrayList<String>();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(parseDate(date, "yyyy-MM"));
+		cal.set(Calendar.DATE, 1);
+
+		SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
+		
+		int month = cal.get(Calendar.MONTH);
+		while(cal.get(Calendar.MONTH) == month){
+			list.add(d.format(cal.getTime()));
+			cal.add(Calendar.DATE, 1);
+		}
+		return list;
+	}
+
+	/**
 	 * add by wuqingshun at 2009-5-25 把日期字符串转换为指定的日期格式类型。
 	 * 
 	 * @param String

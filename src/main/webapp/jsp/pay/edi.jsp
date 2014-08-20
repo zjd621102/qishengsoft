@@ -4,15 +4,23 @@
 <script type="text/javascript">
 	$().ready(function() {
 		setTimeout(function() {
-			setAllSum('plansum', 'allplansum');
-			setAllSum('realsum', 'allrealsum');
+			changeValue();
 		}, 100);
 	});
+	 
+	/**
+	 * 修改值
+	 */
+	function changeValue() {
+		setAllSum('plansum', 'allplansum');
+		setAllSum('realsum', 'allrealsum');
+	}
 </script>
 
+<h1 class="margin10px">单据信息</h1>
 <form method="post" action="<%=path%>/pay/edi" class="required-validate pageForm"
 	onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="56">
+	<div class="pageFormContent" layoutH="88">
 		<dl>
 			<dt>单据ID：</dt>
 			<dd>
@@ -131,7 +139,7 @@
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>
 						<input type="hidden" name="map[payrowid]"/>
-						<a href="#" class="btnDel delRow"></a>
+						<a href="#" class="btnDel delRow" onmouseout="changeValue();"></a>
 					</td>
 			   		<td></td>
 					<td>
@@ -165,12 +173,12 @@
 			   		<td>
 						<input type="text" name="map[plansum]" style="width: 93%" maxlength="12"
 							class="number" value="0.00"
-							onchange="setAllSum('plansum', 'allplansum');"/>
+							onchange="changeValue();"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realsum]" style="width: 93%" maxlength="12"
 							class="number" value="0.00"
-							onchange="setAllSum('realsum', 'allrealsum');"/>
+							onchange="changeValue();"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 95%" maxlength="256"/>
@@ -180,7 +188,7 @@
 				   	<tr>
 						<td>
 							<input type="hidden" name="map[payrowid]" value="${bean.map.payrowid}"/>
-							<a href="#" class="btnDel delRow"></a>
+							<a href="#" class="btnDel delRow" onmouseout="changeValue();"></a>
 						</td>
 				   		<td>${vs.index+1}</td>
 						<td>
@@ -220,12 +228,12 @@
 				   		<td>
 							<input type="text" name="map[plansum]" style="width: 93%" maxlength="12"
 								class="number" value="${bean.map.plansum}"
-								onchange="setAllSum('plansum', 'allplansum');"/>
+								onchange="changeValue();"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[realsum]" style="width: 93%" maxlength="12"
 								class="number" value="${bean.map.realsum}"
-								onchange="setAllSum('realsum', 'allrealsum');"/>
+								onchange="changeValue();"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[remarkrow]" style="width: 95%" maxlength="256"

@@ -206,19 +206,53 @@ public class StaffDaoImpl extends BaseDaoImpl {
 	public void initWork(String month) {
 		
 		String staffid = null;
-		if(!"".equals(month)) {
-			String sql = "SELECT staffid FROM sstaff WHERE staffstatus = '1'";
-			List<CodeTableForm> staffList = dbUtils.getListBySql(sql);
-			for(CodeTableForm form : staffList) {
-				staffid = StrUtils.nullToStr(form.getValue("staffid"));
-				sql = "SELECT COUNT(1) FROM bwork t WHERE t.workmonth = '" + month + "' AND t.staffid = '"
-						+ staffid + "'";
-				int worknum = dbUtils.getIntBySql(sql);
-				if(worknum == 0) {
-					sql = "call proc_initWorkByStaff('" + month + "', '" + staffid + "')";
-					dbUtils.executeSQL(sql);
+		Connection conn = null;
+		boolean res = true;
+		int ires = 0;
+		try {
+			if(!"".equals(month)) {
+				String sql = "SELECT staffid FROM sstaff WHERE staffstatus = '1'";
+				List<CodeTableForm> staffList = dbUtils.getListBySql(sql);
+				for(CodeTableForm form : staffList) {
+					staffid = StrUtils.nullToStr(form.getValue("staffid"));
+					sql = "SELECT COUNT(1) FROM bwork t WHERE t.workmonth = '" + month + "' AND t.staffid = '"
+							+ staffid + "' AND EXISTS (SELECT 1 FROM bworkrow b WHERE b.workid = t.workid)";
+					int worknum = dbUtils.getIntBySql(sql);
+					if(worknum == 0) {
+						sql = "SELECT t.workid FROM bwork t WHERE t.workmonth = '" + month + "' AND t.staffid = '" + staffid + "';";
+						String workid = dbUtils.execQuerySQL(sql);
+						
+						if(workid.equals("")) {
+							sql = "INSERT INTO bwork(workmonth, staffid) VALUES ('" + month + "', '" + staffid + "')";
+							dbUtils.executeSQL(sql);
+						}
+
+						sql = "SELECT t.workid FROM bwork t WHERE t.workmonth = '" + month + "' AND t.staffid = '" + staffid + "';";
+						workid = dbUtils.execQuerySQL(sql);
+
+						conn = dbUtils.dbConnection();
+						conn.setAutoCommit(false); //事务开启
+						
+						List<String> dateList = DateUtils.getMonthDate(month);
+						for(String date : dateList) {
+							sql = "INSERT INTO bworkrow(workid, workdate) VALUES ('" + workid + "', '" + date + "')";
+							ires = dbUtils.executeSQL(conn, sql);
+							if(ires <= 0) {
+								res = false;
+								break;
+							}
+						}
+						
+						if(res) {
+							conn.commit();
+						} else {
+							conn.rollback();
+						}
+					}
 				}
 			}
+		} catch(Exception e) {
+			StrUtils.WriteLog(this.getClass().getName() + ".initWork()", e);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 		autoCom("[name='map[productno]']:visible");
 		
 		setTimeout(function() {
-			setAllSum('realsum', 'allrealsum');
+			changeValue();
 		}, 100);
 	});
 	
@@ -32,6 +32,7 @@
 			                        productname: item.map.productname,
 			                        productid: item.map.productid,
 			                        unit: item.map.unit,
+			                        costprice: item.map.costprice,
 			                        realprice: item.map.realprice
 			                    }
 			                }));
@@ -44,6 +45,7 @@
 					row.find("[name='map[productname]']").val(ui.item.productname);
 					row.find("[name='map[productid]']").val(ui.item.productid);
 					row.find("[name='map[unit]']").val(ui.item.unit);
+					row.find("[name='map[costprice]']").val(ui.item.costprice);
 					row.find("[name='map[planprice]']").val(ui.item.realprice);
 					row.find("[name='map[realprice]']").val(ui.item.realprice);
 				},
@@ -64,10 +66,35 @@
 	 * @returns {Boolean}
 	 */
 	function doBeforeSubmit() {
-
+		changeValue();
+		return true;
+	}
+	 
+	/**
+	 * 修改值
+	 */
+	function changeValue() {
 		setMultiply('realprice', 'num', 'realsum');
 		setAllSum('realsum', 'allrealsum');
-		return true;
+		
+		$("input[name*='map[realprice]']").each(function() {
+			var row = $(this).parents("tr:first");
+			var realprice = row.find("[name*='map[realprice]']").val();
+			var costprice = row.find("[name*='map[costprice]']").val();
+			var profit = realprice - costprice;
+			profit = Math.round(profit * 100) / 100;
+			row.find("[name*='map[profit]']").val(profit);
+		});
+
+		var allprofit = 0.00;
+		$("input[name*='map[profit]']").each(function() {
+			var row = $(this).parents("tr:first");
+			var profit = row.find("[name*='map[profit]']").val();
+			var num = row.find("[name*='map[num]']").val();
+			allprofit += multiply(profit, num);
+		});
+		allprofit = Math.round(allprofit * 100) / 100;
+		$("[name*='map[allprofit]']").val(allprofit);
 	}
 </script>
 
@@ -152,8 +179,10 @@
 					<th width="10%">产品编码</th>
 					<th width="15%">产品名称</th>
 					<th width="6%">计量单位</th>
-					<th width="6%">应付单价</th>
+					<th width="6%">产品单价</th>
 					<th width="6%">实付单价</th>
+					<th width="6%">成本单价</th>
+					<th width="6%">利润</th>
 					<th width="6%">数量</th>
 					<th width="6%">实付总价</th>
 					<th>备注</th>
@@ -172,8 +201,13 @@
 						合计：
 					</td>
 					<td>
+						<input type="text" name="map[allprofit]" style="width: 91%" class="number"
+							value="0.00" readonly="readonly"/>
+					</td>
+					<td></td>
+					<td>
 						<input type="text" name="map[allrealsum]" style="width: 91%" class="number"
-							value="${form.map.allrealsum}" readonly="readonly"/>
+							value="0.00" readonly="readonly"/>
 					</td>
 					<td></td>
 				</tr>
@@ -186,10 +220,10 @@
 			   		<td>
 				   		<input type="hidden" name="map[productid]" value="" />
 						<input type="text" name="map[productno]" style="width: 60%" maxlength="13"
-							suggestFields="productid,productno,productname,unit,planprice,realprice" />
+							suggestFields="productid,productno,productname,unit,costprice,planprice,realprice" />
 						<a class="btnLook" href="<%=path%>/product/tree" lookupGroup="lookup" width="1200"></a>
 						<a href="javascript:void(0);" class="btnClear"
-							suggestFields="productid,productno,productname,unit,planprice,realprice,num,realsum"></a>
+							suggestFields="productid,productno,productname,unit,costprice,planprice,realprice,num,realsum"></a>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[productname]" style="width: 96%" maxlength="32"
@@ -211,13 +245,19 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realprice]" style="width: 92%" maxlength="12"
-							class="number required" value="0.00" onchange="setMultiply('realprice', 'num', 'realsum');
-							setAllSum('realsum', 'allrealsum');"/>
+							class="number required" value="0.00" onchange="changeValue();"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[costprice]" style="width: 92%" maxlength="12"
+							class="number" value="0.00" readonly="readonly"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[profit]" style="width: 91%" maxlength="12"
+							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[num]" style="width: 91%" maxlength="12"
-							class="number required" value="0.00" onchange="setMultiply('realprice', 'num', 'realsum');
-							setAllSum('realsum', 'allrealsum');"/>
+							class="number required" value="0.00" onchange="changeValue();"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realsum]" style="width: 91%" maxlength="12"
@@ -237,11 +277,11 @@
 				   		<td>
 				   			<input type="hidden" name="map[productid]" value="${bean.map.productid}" />
 							<input type="text" name="map[productno]" style="width: 60%" maxlength="13"
-								suggestFields="productid,productno,productname,unit,planprice,realprice"
+								suggestFields="productid,productno,productname,unit,costprice,planprice,realprice"
 								value="${bean.map.productno}" />
 							<a class="btnLook" href="<%=path%>/product/tree" lookupGroup="lookup" width="1200"></a>
 							<a href="javascript:void(0);" class="btnClear"
-								suggestFields="productid,productno,productname,unit,planprice,realprice,num,realsum"></a>
+								suggestFields="productid,productno,productname,unit,costprice,planprice,realprice,num,realsum"></a>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[productname]" style="width: 96%" maxlength="32"
@@ -265,15 +305,19 @@
 				   		</td>
 				   		<td>
 							<input type="text" name="map[realprice]" style="width: 92%" maxlength="12"
-								class="number required" value="${bean.map.realprice}"
-								onchange="setMultiply('realprice', 'num', 'realsum');
-								setAllSum('realsum', 'allrealsum');"/>
+								class="number required" value="${bean.map.realprice}" onchange="changeValue();"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[costprice]" style="width: 92%" maxlength="12"
+								class="number" value="${bean.map.costprice}" readonly="readonly"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[profit]" style="width: 91%" maxlength="12"
+								class="number" value="${bean.map.profit}" readonly="readonly"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[num]" style="width: 91%" maxlength="12"
-								class="number required" value="${bean.map.num}"
-								onchange="setMultiply('realprice', 'num', 'realsum');
-								setAllSum('realsum', 'allrealsum');"/>
+								class="number required" value="${bean.map.num}" onchange="changeValue();"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[realsum]" style="width: 91%" maxlength="12"

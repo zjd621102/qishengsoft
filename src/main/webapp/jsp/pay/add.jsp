@@ -1,9 +1,20 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<script type="text/javascript">
+	/**
+	 * 修改值
+	 */
+	function changeValue() {
+		setAllSum('plansum', 'allplansum');
+		setAllSum('realsum', 'allrealsum');
+	}
+</script>
+
+<h1 class="margin10px">单据信息</h1>
 <form method="post" action="<%=path%>/pay/add" class="required-validate pageForm"
  onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="56">
+	<div class="pageFormContent" layoutH="88">
 		<dl>
 			<dt>单据ID：</dt>
 			<dd>
@@ -103,7 +114,7 @@
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>
 						<input type="hidden" name="map[payrowid]"/>
-						<a href="#" class="btnDel delRow"></a>
+						<a href="#" class="btnDel delRow" onmouseout="changeValue();"></a>
 					</td>
 			   		<td></td>
 					<td>

@@ -43,8 +43,10 @@
 	        },
 	
 	        plotOptions: {
-	            series: {
-	                stacking: 'normal'
+	            bar: {
+	                dataLabels: {
+	                    enabled: true
+	                }
 	            }
 	        },
 	
@@ -54,9 +56,12 @@
 	            }
 	        },
 	
-	        series: [ {
-	            name: '产品',
+	        series: [{
+	            name: '销售额',
 	            data: [${requestScope.dataStr}]
+	        }, {
+	            name: '利润',
+	            data: [${requestScope.dataProfitStr}]
 	        }]
 	    });
 	});

@@ -46,8 +46,7 @@ public class ProductDaoImpl extends BaseDaoImpl {
 	public List<CodeTableForm> getProductList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getProducttypeName(t.producttype) producttypename,"
-				+ " func_getUnitName(t.unit) unitname, func_getSum(t.productid, 'CPD') planprice"
-				+ " FROM sproduct t WHERE 1 = 1";
+				+ " func_getUnitName(t.unit) unitname FROM sproduct t WHERE 1 = 1";
 		String cond = getProductListCondition(form);
 		sql  += cond;
 		sql += " ORDER BY productid";
@@ -136,8 +135,7 @@ public class ProductDaoImpl extends BaseDaoImpl {
 	public CodeTableForm getProductById(int productid, HttpServletRequest request) {
 		
 		String sql = "SELECT a.*, func_getProducttypeName(a.producttype) producttypename,"
-				+ " func_getUnitName(a.unit) unitname, func_getSum(a.productid, 'CPD') planprice"
-				+ " FROM sproduct a WHERE a.productid = '" + productid + "'";
+				+ " func_getUnitName(a.unit) unitname FROM sproduct a WHERE a.productid = '" + productid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
 		sql = "SELECT a.* FROM sproductrow a WHERE a.productid = '" + productid + "'";

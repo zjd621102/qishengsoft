@@ -98,12 +98,12 @@
 				<th width="5%">序号</th>
 				<th width="10%">单据类型</th>
 				<th width="20%">采购单名称</th>
-				<th width="10%">采购编号</th>
+				<th width="13%">采购编号</th>
 				<th width="10%">采购日期</th>
 				<th width="10%">采购金额</th>
 				<th width="10%">当前流程</th>
 				<th width="10%">制单人</th>
-				<th width="15%">创建时间</th>
+				<th width="12%">创建时间</th>
 			</tr>
 		</thead>
 		<tbody>

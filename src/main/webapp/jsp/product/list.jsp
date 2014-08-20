@@ -64,11 +64,10 @@
 			<tr>
 				<th width="10%">序号</th>
 				<th width="15%">产品编码</th>
-				<th width="15%">产品名称</th>
-				<th width="15%">产品类型</th>
+				<th width="20%">产品名称</th>
+				<th width="20%">产品类型</th>
 				<th width="10%">计量单位</th>
-				<th width="10%">预计单价</th>
-				<th width="10%">实际单价</th>
+				<th width="10%">产品单价</th>
 				<th width="15%">新增日期</th>
 			</tr>
 		</thead>
@@ -80,6 +79,7 @@
 			   		productno:'${bean.map.productno}',
 					productname:'${bean.map.productname}',
 					unit:'${bean.map.unit}',
+					planprice:'${bean.map.costprice}',
 					planprice:'${bean.map.realprice}',
 					realprice:'${bean.map.realprice}'})"
 			   	>
@@ -88,7 +88,6 @@
 			   		<td>${bean.map.productname}</td>
 			   		<td>${bean.map.producttypename}</td>
 			   		<td>${bean.map.unitname}</td>
-			   		<td>${bean.map.planprice}</td>
 			   		<td>${bean.map.realprice}</td>
 			   		<td>${bean.map.createdate}</td>
 			   	</tr>

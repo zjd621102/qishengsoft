@@ -68,6 +68,17 @@ function setAllSum(name1, name2) {
 	return allsum;
 }
 /**
+ * 相减赋值
+ * @param name1 相减字段
+ * @param name2 被减字段
+ * @param name3 赋值字段
+ */
+function setReduction(name1, name2, name3) {
+	var val = $("input[name*='map[" + name1 + "]']").val()*1 - $("input[name*='map[" + name2 + "]']").val()*1;
+	val = Math.round(val * 100) / 100;
+	$("input[name*='map[" + name3 + "]']").val(val);
+}
+/**
  * 校验必填
  * @returns {Boolean}
  */

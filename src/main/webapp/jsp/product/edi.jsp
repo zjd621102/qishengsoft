@@ -2,13 +2,28 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 
 <script type="text/javascript">
+	$(function() {
+		setTimeout(function() {
+			changeValue();
+		}, 100);
+	});
+
 	/**
 	 * 重写提交之前操作
 	 * @returns {Boolean}
 	 */
 	function doBeforeSubmit() {
-		setMultiply('materialprice', 'materialnum', 'materialsum');
+		changeValue();
 		return true;
+	}
+	 
+	/**
+	 * 修改值
+	 */
+	function changeValue() {
+		setMultiply('materialprice', 'materialnum', 'materialsum');
+		setAllSum('materialsum', 'costprice');
+		setReduction('realprice', 'costprice', 'profit');
 	}
 </script>
 
@@ -55,10 +70,24 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>实际单价：</dt>
+			<dt>成本单价：</dt>
+			<dd>
+				<input type="text" name="map[costprice]" class="required number" size="30" maxlength="12"
+					value="${form.map.costprice}" readonly="readonly"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>利润：</dt>
+			<dd>
+				<input type="text" name="map[profit]" class="required number" size="30" maxlength="12"
+					value="${form.map.profit}" readonly="readonly"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>产品单价：</dt>
 			<dd>
 				<input type="text" name="map[realprice]" class="required number" size="30" maxlength="12"
-					value="${form.map.realprice}"/>
+					value="${form.map.realprice}" onchange="changeValue();"/>
 			</dd>
 		</dl>
 		<dl>
@@ -78,7 +107,7 @@
 		
 		<div class="divider"></div>
 		
-		<h1 class="margin10px">产品清单（预计单价 = 其他成本+人力成本+配件成本+利润）</h1>
+		<h1 class="margin10px">产品清单（成本单价=人力成本+其他成本+配件成本）</h1>
 
 		<table class="table" style="width: 100%;">
 			<thead>
@@ -102,19 +131,14 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td style="font-size: 13px; font-weight: bold; color: red;">
-						预计单价：
-					</td>
-					<td>
-						<input type="text" name="map[planprice]" style="width: 92%" class="number"
-							value="${form.map.planprice}" readonly="readonly"/>
-					</td>
+					<td></td>
+					<td></td>
 					<td></td>
 				</tr>
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>
 						<input type="hidden" name="map[productrowid]"/>
-						<a href="#" class="btnDel delRow" onclick="setAllSum('materialsum', 'planprice');"></a>
+						<a href="#" class="btnDel delRow" onclick="changeValue();"></a>
 					</td>
 			   		<td></td>
 			   		<td>
@@ -129,11 +153,11 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[materialprice]" style="width: 93%" maxlength="12" class="number"
-							value="0.00" onblur="setMultiply('materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
+							value="0.00" onblur="changeValue();"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[materialnum]" style="width: 93%" maxlength="9" class="number"
-							value="1" onblur="setMultiply('materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
+							value="1" onblur="changeValue();"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[materialsum]" style="width: 92%" maxlength="12" class="number"
@@ -147,7 +171,7 @@
 				   	<tr>
 						<td>
 							<input type="hidden" name="map[productrowid]" value="${bean.map.productrowid}"/>
-							<a href="#" class="btnDel delRow" onclick="setAllSum('materialsum', 'planprice');"></a>
+							<a href="#" class="btnDel delRow" onclick="changeValue();"></a>
 						</td>
 				   		<td>${vs.index+1}</td>
 				   		<td>
@@ -165,12 +189,12 @@
 				   		<td>
 							<input type="text" name="map[materialprice]" style="width: 93%" maxlength="12"
 								class="number" value="${bean.map.materialprice}"
-								onblur="setMultiply('materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
+								onblur="changeValue();"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[materialnum]" style="width: 93%" maxlength="9"
 								class="number" value="${bean.map.materialnum}"
-								onblur="setMultiply('materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
+								onblur="changeValue();"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[materialsum]" style="width: 92%" maxlength="12"

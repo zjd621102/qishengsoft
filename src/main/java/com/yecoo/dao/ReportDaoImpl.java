@@ -235,7 +235,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
 		String sort = StrUtils.nullToStr(form.getValue("sort"), "DESC");// 排序
 		String limitFrom = StrUtils.nullToStr(form.getValue("limitFrom"), "0");
-		String limitNum = StrUtils.nullToStr(form.getValue("limitNum"), "15");
+		String limitNum = StrUtils.nullToStr(form.getValue("limitNum"), "12");
 		form.setValue("dateFrom", dateFrom);
 		form.setValue("dateTo", dateTo);
 		form.setValue("sort", sort);
@@ -272,14 +272,15 @@ public class ReportDaoImpl extends BaseDaoImpl {
 	public void getReportProductList(CodeTableForm form, HttpServletRequest request) {
 
 		StringBuffer titleStr = new StringBuffer();
-		StringBuffer dataStr = new StringBuffer();
+		StringBuffer dataStr = new StringBuffer();// 销售
+		StringBuffer dataProfitStr = new StringBuffer();// 利润
 		String sql = null;
 		
 		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), DateUtils.getStepDateTime(-366));
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
 		String sort = StrUtils.nullToStr(form.getValue("sort"), "DESC");// 排序
 		String limitFrom = StrUtils.nullToStr(form.getValue("limitFrom"), "0");
-		String limitNum = StrUtils.nullToStr(form.getValue("limitNum"), "15");
+		String limitNum = StrUtils.nullToStr(form.getValue("limitNum"), "10");
 		form.setValue("dateFrom", dateFrom);
 		form.setValue("dateTo", dateTo);
 		form.setValue("sort", sort);
@@ -288,7 +289,9 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		
 		sql = "SELECT * FROM (SELECT CONCAT(a.productno, '-', a.productname) name,"
 				+ " (SELECT IFNULL(SUM(c.realsum), 0) FROM bsell b, bsellrow c WHERE b.sellid = c.sellid AND b.currflow = '结束' AND c.productid = a.productid"
-				+ " AND b.selldate >= '" + dateFrom + "' AND b.selldate <= '" + dateTo + "') sum FROM sproduct a) m ORDER BY m.sum " + sort
+				+ " AND b.selldate >= '" + dateFrom + "' AND b.selldate <= '" + dateTo + "') sum,"
+				+ " (SELECT IFNULL(SUM(c.profit*c.num), 0) FROM bsell b, bsellrow c WHERE b.sellid = c.sellid AND b.currflow = '结束' AND c.productid = a.productid"
+				+ " AND b.selldate >= '" + dateFrom + "' AND b.selldate <= '" + dateTo + "') profit FROM sproduct a) m ORDER BY m.sum " + sort
 				+ " LIMIT " + limitFrom + "," + limitNum;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		int len = list.size();
@@ -298,14 +301,18 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			if(i < len-1) {
 				titleStr.append(",");
 				dataStr.append(",");
+				dataProfitStr.append(",");
 			}
 
 			titleStr.append("'").append(codeTableForm.getValue("name")).append("'");
 			dataStr.append(codeTableForm.getValue("sum"));
+			dataProfitStr.append(codeTableForm.getValue("profit"));
 		}
 
 		request.setAttribute("titleStr", titleStr.toString());
 		request.setAttribute("dataStr", dataStr.toString());
+		request.setAttribute("dataProfitStr", dataProfitStr.toString());
+		/**************利润End**************/
 	}
 	
 	/**
@@ -323,7 +330,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
 		String sort = StrUtils.nullToStr(form.getValue("sort"), "DESC");// 排序
 		String limitFrom = StrUtils.nullToStr(form.getValue("limitFrom"), "0");
-		String limitNum = StrUtils.nullToStr(form.getValue("limitNum"), "15");
+		String limitNum = StrUtils.nullToStr(form.getValue("limitNum"), "12");
 		form.setValue("dateFrom", dateFrom);
 		form.setValue("dateTo", dateTo);
 		form.setValue("sort", sort);

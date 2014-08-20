@@ -4,9 +4,16 @@
 <script type="text/javascript">
 	$().ready(function() {
 		setTimeout(function() {
-			setAllSum('planmoney', 'allplanmoney');
+			changeValue();
 		}, 100);
 	});
+	 
+	/**
+	 * 修改值
+	 */
+	function changeValue() {
+		setAllSum('planmoney', 'allplanmoney');
+	}
 </script>
 
 <h1 class="margin10px">工资单信息</h1>
@@ -113,7 +120,7 @@
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>
 						<input type="hidden" name="map[salaryrowid]"/>
-						<a href="#" class="btnDel delRow"></a>
+						<a href="#" class="btnDel delRow" onmouseout="changeValue();"></a>
 					</td>
 			   		<td></td>
 			   		<td>
@@ -125,7 +132,7 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[planmoney]" style="width: 94%" maxlength="12"
-							class="number" value="0.00" onchange="setAllSum('planmoney', 'allplanmoney');"/>
+							class="number" value="0.00" onchange="changeValue();"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 99%" maxlength="256"/>
@@ -135,7 +142,7 @@
 				   	<tr>
 						<td>
 							<input type="hidden" name="map[salaryrowid]" value="${bean.map.salaryrowid}"/>
-							<a href="#" class="btnDel delRow"></a>
+							<a href="#" class="btnDel delRow" onmouseout="changeValue();"></a>
 						</td>
 				   		<td>${vs.index+1}</td>
 				   		<td>
@@ -148,8 +155,8 @@
 				   		<td>
 							<input type="text" name="map[planmoney]" style="width: 94%" maxlength="12"
 								class="number" value="${bean.map.planmoney}"
-								onchange="setAllSum('planmoney', 'allplanmoney');"
-								onblur="setAllSum('planmoney', 'allplanmoney');"/>
+								onchange="changeValue();"
+								onblur="changeValue();"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[remarkrow]" style="width: 99%" maxlength="256"
