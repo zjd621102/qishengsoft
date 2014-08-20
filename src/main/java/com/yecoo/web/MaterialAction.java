@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.MaterialDaoImpl;
 import com.yecoo.dao.MaterialtypeDaoImpl;
 import com.yecoo.model.CodeTableForm;
@@ -79,7 +80,7 @@ public class MaterialAction {
 
 	@RequiresPermissions("Material:add")
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public @ResponseBody String add(CodeTableForm form) {
+	public @ResponseBody String add(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss"); //当前日期
@@ -87,6 +88,8 @@ public class MaterialAction {
 		int iReturn = materialDaoImpl.addMaterial(form);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject(200, "新增成功！", "", "", "jbsxBox2material", "closeCurrent");
+
+			StrUtils.saveLog(request, "新增物资", form);
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
@@ -107,12 +110,14 @@ public class MaterialAction {
 
 	@RequiresPermissions("Material:edi")
 	@RequestMapping(value="/edi", method=RequestMethod.POST)
-	public @ResponseBody String edi(CodeTableForm form) {
+	public @ResponseBody String edi(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = materialDaoImpl.ediMaterial(form);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject(200, "修改成功！", "", "", "jbsxBox2material", "closeCurrent");
+
+			StrUtils.saveLog(request, "修改物资", form);
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
@@ -121,12 +126,14 @@ public class MaterialAction {
 
 	@RequiresPermissions("Material:delete")
 	@RequestMapping(value="/delete/{materialid}")
-	public @ResponseBody String delete(@PathVariable int materialid) {
+	public @ResponseBody String delete(@PathVariable int materialid, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = materialDaoImpl.deleteMaterial(materialid);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject(200, "删除成功！", "", "", "jbsxBox2material", "");
+
+			LogDaoImpl.saveLog(request, "删除物资", materialid);
 		} else {
 			ajaxObject = new AjaxObject("删除失败");
 		}

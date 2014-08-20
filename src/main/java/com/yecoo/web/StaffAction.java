@@ -1,13 +1,17 @@
 package com.yecoo.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.StaffDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
@@ -60,11 +64,13 @@ public class StaffAction {
 
 	@RequiresPermissions("Staff:add")
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public @ResponseBody String add(CodeTableForm form) {
+	public @ResponseBody String add(CodeTableForm form, HttpServletRequest request) {
 		AjaxObject ajaxObject = null;
 		int iReturn = staffDaoImpl.addStaff(form);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "staff_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "新增员工", form);
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
@@ -86,12 +92,14 @@ public class StaffAction {
 
 	@RequiresPermissions("Staff:edi")
 	@RequestMapping(value="/edi", method=RequestMethod.POST)
-	public @ResponseBody String edi(CodeTableForm form) {
+	public @ResponseBody String edi(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = staffDaoImpl.ediStaff(form);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "staff_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "修改员工", form);
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
@@ -100,13 +108,15 @@ public class StaffAction {
 
 	@RequiresPermissions("Staff:delete")
 	@RequestMapping(value="/delete/{staffid}")
-	public @ResponseBody String delete(@PathVariable int staffid) {
+	public @ResponseBody String delete(@PathVariable int staffid, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
 		iReturn = staffDaoImpl.deleteStaff(staffid);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("删除成功！", "staff_list", "");
+
+			LogDaoImpl.saveLog(request, "删除员工", staffid);
 		} else {
 			ajaxObject = new AjaxObject("删除失败");
 		}

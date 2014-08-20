@@ -1,13 +1,17 @@
 package com.yecoo.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.SellDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
@@ -80,6 +84,8 @@ public class SellAction {
 		int iReturn = sellDaoImpl.addSell(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "sell_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "新增销售单", form);
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
@@ -113,6 +119,8 @@ public class SellAction {
 		int iReturn = sellDaoImpl.ediSell(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "sell_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "修改销售单", form);
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
@@ -121,7 +129,7 @@ public class SellAction {
 
 	@RequiresPermissions("Sell:delete")
 	@RequestMapping(value="/delete/{sellid}")
-	public @ResponseBody String delete(@PathVariable int sellid) {
+	public @ResponseBody String delete(@PathVariable int sellid, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
@@ -133,6 +141,8 @@ public class SellAction {
 			iReturn = sellDaoImpl.deleteSell(sellid);
 			if (iReturn >= 0) {
 				ajaxObject = new AjaxObject("删除成功！", "sell_list", "");
+
+				LogDaoImpl.saveLog(request, "删除销售单", sellid);
 			} else {
 				ajaxObject = new AjaxObject("删除失败");
 			}

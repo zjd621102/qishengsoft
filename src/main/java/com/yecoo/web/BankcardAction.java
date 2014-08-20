@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yecoo.dao.BankcardDaoImpl;
+import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
@@ -75,6 +76,8 @@ public class BankcardAction {
 			int iReturn = bankcardDaoImpl.addBankcard(form);
 			if (iReturn >= 1) {
 				ajaxObject = new AjaxObject("新增成功！", "bankcard_list", "closeCurrent");
+
+				StrUtils.saveLog(request, "新增银行卡", form);
 			} else {
 				ajaxObject = new AjaxObject("新增失败");
 			}
@@ -103,6 +106,8 @@ public class BankcardAction {
 		int iReturn = bankcardDaoImpl.ediBankcard(form);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "bankcard_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "修改银行卡", form);
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
@@ -111,13 +116,15 @@ public class BankcardAction {
 
 	@RequiresPermissions("Bankcard:delete")
 	@RequestMapping(value="/delete/{bankcardid}")
-	public @ResponseBody String delete(@PathVariable int bankcardid) {
+	public @ResponseBody String delete(@PathVariable int bankcardid, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
 		iReturn = bankcardDaoImpl.deleteBankcard(bankcardid);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("删除成功！", "bankcard_list", "");
+
+			LogDaoImpl.saveLog(request, "删除银行卡", bankcardid);
 		} else {
 			ajaxObject = new AjaxObject("删除失败");
 		}

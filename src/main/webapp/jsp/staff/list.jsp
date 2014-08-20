@@ -88,15 +88,16 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="11%">序号</th>
+				<th width="5%">序号</th>
 				<th width="11%">员工名称</th>
-				<th width="11%">员工类别</th>
-				<th width="11%">员工状态</th>
+				<th width="6%">员工类别</th>
+				<th width="6%">员工状态</th>
 				<th width="11%">联系电话</th>
-				<th width="11%">工资开户银行</th>
-				<th width="11%">工资银行账号</th>
+				<th width="16%">工资开户银行</th>
+				<th width="16%">工资银行账号</th>
 				<th width="11%">工资帐户名称</th>
 				<th width="11%">当月总工资</th>
+				<th width="6%">优先级</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -116,6 +117,7 @@
 			   		<td>${bean.map.accountno}</td>
 			   		<td>${bean.map.accountname}</td>
 			   		<td>${bean.map.monthsalary}</td>
+			   		<td>${bean.map.priority}</td>
 			   	</tr>
 		   	</c:forEach>
 	   	</tbody>

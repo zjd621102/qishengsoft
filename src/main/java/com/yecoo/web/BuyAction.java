@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yecoo.dao.BuyDaoImpl;
+import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
@@ -85,6 +86,8 @@ public class BuyAction {
 		int iReturn = buyDaoImpl.addBuy(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "buy_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "新增采购单", form);
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
@@ -118,6 +121,8 @@ public class BuyAction {
 		int iReturn = buyDaoImpl.ediBuy(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "buy_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "修改采购单", form);
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
@@ -126,7 +131,7 @@ public class BuyAction {
 
 	@RequiresPermissions("Buy:delete")
 	@RequestMapping(value="/delete/{buyid}")
-	public @ResponseBody String delete(@PathVariable int buyid) {
+	public @ResponseBody String delete(@PathVariable int buyid, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
@@ -138,6 +143,8 @@ public class BuyAction {
 			iReturn = buyDaoImpl.deleteBuy(buyid);
 			if (iReturn >= 0) {
 				ajaxObject = new AjaxObject("删除成功！", "buy_list", "");
+
+				LogDaoImpl.saveLog(request, "删除采购单", buyid);
 			} else {
 				ajaxObject = new AjaxObject("删除失败");
 			}

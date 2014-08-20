@@ -92,6 +92,8 @@ public class SalaryAction {
 		int iReturn = salaryDaoImpl.addSalary(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "salary_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "新增工资单", form);
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
@@ -125,6 +127,8 @@ public class SalaryAction {
 		int iReturn = salaryDaoImpl.ediSalary(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "salary_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "修改工资单", form);
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}

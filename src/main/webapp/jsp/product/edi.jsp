@@ -78,7 +78,7 @@
 		
 		<div class="divider"></div>
 		
-		<h1 class="margin10px">产品清单（预计单价 = 其他成本+人力成本+配件成本+利润：成本/9）</h1>
+		<h1 class="margin10px">产品清单（预计单价 = 其他成本+人力成本+配件成本+利润）</h1>
 
 		<table class="table" style="width: 100%;">
 			<thead>

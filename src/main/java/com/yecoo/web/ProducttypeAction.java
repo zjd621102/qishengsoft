@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.ProducttypeDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
@@ -88,6 +89,8 @@ public class ProducttypeAction {
 		
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "producttype_tree", "closeCurrent");
+
+			StrUtils.saveLog(request, "新增产品类型", form);
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
@@ -108,12 +111,14 @@ public class ProducttypeAction {
 	@RequiresPermissions("Producttype:edi")
 	@ResponseBody
 	@RequestMapping(value = "/edi", method = RequestMethod.POST)
-	public String doEdi(CodeTableForm form) {
+	public String doEdi(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = producttypeDaoImpl.ediProducttype(form);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "producttype_tree", "closeCurrent");
+
+			StrUtils.saveLog(request, "修改产品类型", form);
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
@@ -144,6 +149,8 @@ public class ProducttypeAction {
 				iReturn = producttypeDaoImpl.deleteProducttype(producttype);
 				if (iReturn >= 0) {
 					ajaxObject = new AjaxObject("删除成功！", "producttype_tree", "");
+
+					LogDaoImpl.saveLog(request, "删除产品类型", producttype);
 				} else {
 					ajaxObject = new AjaxObject("删除失败");
 				}

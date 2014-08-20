@@ -63,7 +63,7 @@
 		<dl>
 			<dt>新增时间：</dt>
 			<dd>
-				<input type="text" name="map[createdate]" class="required" size="30" maxlength="19"
+				<input type="text" name="map[createdate]" size="30" maxlength="19"
 					value="${form.map.createdate}" readonly="readonly"/>
 			</dd>
 		</dl>
@@ -77,7 +77,7 @@
 		
 		<div class="divider"></div>
 		
-		<h1 class="margin10px">产品清单（预计单价 = 其他成本+人力成本+配件成本+利润：成本/9）</h1>
+		<h1 class="margin10px">产品清单（预计单价 = 其他成本+人力成本+配件成本+利润）</h1>
 
 		<table class="table" style="width: 100%;">
 			<thead>
@@ -142,6 +142,45 @@
 						<input type="text" name="map[remarkrow]" style="width: 96%" maxlength="256"/>
 			   		</td>
 			   	</tr>
+				<c:forEach items="${productrowList}" var="bean" varStatus="vs">
+				   	<tr>
+						<td>
+							<input type="hidden" name="map[productrowid]" value="${bean.map.productrowid}"/>
+							<a href="#" class="btnDel delRow" onclick="setAllSum('materialsum', 'planprice');"></a>
+						</td>
+				   		<td>${vs.index+1}</td>
+				   		<td>
+							<input type="text" name="map[materialno]" style="width: 75%" maxlength="13"
+								suggestFields="materialno,materialname,materialprice"
+								value="${bean.map.materialno}" readonly="readonly"/>
+							<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
+							<a href="javascript:void(0);" class="btnClear"
+								suggestFields="materialno,materialname,materialprice"></a>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[materialname]" style="width: 96%" maxlength="32"
+								value="${bean.map.materialname}"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[materialprice]" style="width: 93%" maxlength="12"
+								class="number" value="${bean.map.materialprice}"
+								onblur="setMultiply('materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[materialnum]" style="width: 93%" maxlength="9"
+								class="number" value="${bean.map.materialnum}"
+								onblur="setMultiply('materialprice', 'materialnum', 'materialsum');setAllSum('materialsum', 'planprice');"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[materialsum]" style="width: 92%" maxlength="12"
+								class="number" value="${bean.map.materialsum}" readonly="readonly"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[remarkrow]" style="width: 96%" maxlength="256"
+								value="${bean.map.remarkrow}"/>
+				   		</td>
+				   	</tr>
+			   	</c:forEach>
 			   	<tr id="IDEndRow"></tr>
 		   	</tbody>
 		</table>

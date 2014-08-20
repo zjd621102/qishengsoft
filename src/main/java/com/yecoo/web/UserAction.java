@@ -1,13 +1,17 @@
 package com.yecoo.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.RoleDaoImpl;
 import com.yecoo.dao.UserDaoImpl;
 import com.yecoo.model.CodeTableForm;
@@ -67,7 +71,7 @@ public class UserAction {
 	@RequiresPermissions("User:add")
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String doAdd(CodeTableForm form) {
+	public String doAdd(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		if(validUserid(form).equals("false")) {
@@ -76,6 +80,8 @@ public class UserAction {
 			int iReturn = userDaoImpl.addUser(form);
 			if (iReturn >= 0) {
 				ajaxObject = new AjaxObject("新增成功！", "user_list", "closeCurrent");
+
+				StrUtils.saveLog(request, "新增用户", form);
 			} else {
 				ajaxObject = new AjaxObject("新增失败");
 			}
@@ -122,12 +128,14 @@ public class UserAction {
 	@RequiresPermissions("User:edi")
 	@ResponseBody
 	@RequestMapping(value = "/edi", method = RequestMethod.POST)
-	public String doEdi(CodeTableForm form) {
+	public String doEdi(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = userDaoImpl.ediUser(form);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "user_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "修改用户", form);
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
@@ -147,11 +155,12 @@ public class UserAction {
 	public String validUserid(CodeTableForm form) {
 		
 		String result = "false";
-		String userid = StrUtils.nullToStr(form.getValue("userid"));
+		String userid = StrUtils.nullToStr(form.getValue("userid")).toUpperCase();
 		CodeTableForm codeTableForm = userDaoImpl.getUserById(userid);
 		if (codeTableForm == null) {
 			result = "true";
 		}
+		form.setValue("userid", userid);
 		return result;
 	}
 
@@ -177,6 +186,8 @@ public class UserAction {
 		iReturn = userDaoImpl.deleteUsers("'" + userid + "'");
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("删除成功！", "", "");
+
+			LogDaoImpl.saveLog(request, "删除用户", userid);
 		} else {
 			ajaxObject = new AjaxObject("删除失败");
 		}

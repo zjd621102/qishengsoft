@@ -1,16 +1,21 @@
 package com.yecoo.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.ModuleDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
+import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
  * 模块管理
@@ -67,6 +72,8 @@ public class ModuleAction {
 		int iReturn = moduleDaoImpl.addModule(form);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "module_tree", "closeCurrent");
+
+			StrUtils.saveLog(request, "新增模块", form);
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
@@ -87,12 +94,14 @@ public class ModuleAction {
 	@RequiresPermissions("Module:edi")
 	@ResponseBody
 	@RequestMapping(value = "/edi", method = RequestMethod.POST)
-	public String doEdi(CodeTableForm form) {
+	public String doEdi(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = moduleDaoImpl.ediModule(form);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "module_tree", "closeCurrent");
+
+			StrUtils.saveLog(request, "修改模块", form);
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
@@ -116,6 +125,8 @@ public class ModuleAction {
 			iReturn = moduleDaoImpl.deleteModule(moduleid);
 			if (iReturn >= 0) {
 				ajaxObject = new AjaxObject("删除成功！", "module_tree", "");
+
+				LogDaoImpl.saveLog(request, "删除模块", moduleid);
 			} else {
 				ajaxObject = new AjaxObject("删除失败");
 			}

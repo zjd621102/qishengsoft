@@ -1,13 +1,18 @@
 package com.yecoo.web;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.ProductDaoImpl;
 import com.yecoo.dao.ProducttypeDaoImpl;
 import com.yecoo.model.CodeTableForm;
@@ -70,6 +75,29 @@ public class ProductAction {
 		form.setValue("unit", "1");// 默认单位：只
 		
 		request.setAttribute("form", form);
+		
+		/**************初始化行项Begin**************/
+		List<CodeTableForm> productrowList = new ArrayList<CodeTableForm>();
+		CodeTableForm productrow = new CodeTableForm();
+		productrow.setValue("materialname", "利润");
+		productrow.setValue("materialprice", "0");
+		productrow.setValue("materialnum", "1");
+		productrowList.add(productrow);
+		
+		productrow = new CodeTableForm();
+		productrow.setValue("materialname", "人力成本");
+		productrow.setValue("materialprice", "0");
+		productrow.setValue("materialnum", "1");
+		productrowList.add(productrow);
+		
+		productrow = new CodeTableForm();
+		productrow.setValue("materialname", "其他成本");
+		productrow.setValue("materialprice", "0");
+		productrow.setValue("materialnum", "1");
+		productrowList.add(productrow);
+		request.setAttribute("productrowList", productrowList);
+		/**************初始化行项End**************/
+		
 		this.getSelects(request);
 		return "product/add";
 	}
@@ -84,6 +112,8 @@ public class ProductAction {
 		int iReturn = productDaoImpl.addProduct(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject(200, "新增成功！", "", "", "jbsxBox2product", "closeCurrent");
+
+			StrUtils.saveLog(request, "新增产品", form);
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
@@ -110,6 +140,8 @@ public class ProductAction {
 		int iReturn = productDaoImpl.ediProduct(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject(200, "修改成功！", "", "", "jbsxBox2product", "closeCurrent");
+
+			StrUtils.saveLog(request, "修改产品", form);
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
@@ -118,12 +150,14 @@ public class ProductAction {
 
 	@RequiresPermissions("Product:delete")
 	@RequestMapping(value="/delete/{productid}")
-	public @ResponseBody String delete(@PathVariable int productid) {
+	public @ResponseBody String delete(@PathVariable int productid, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = productDaoImpl.deleteProduct(productid);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject(200, "删除成功！", "", "", "jbsxBox2product", "");
+
+			LogDaoImpl.saveLog(request, "删除产品", productid);
 		} else {
 			ajaxObject = new AjaxObject("删除失败");
 		}

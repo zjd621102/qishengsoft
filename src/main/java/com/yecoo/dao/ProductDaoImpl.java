@@ -199,7 +199,6 @@ public class ProductDaoImpl extends BaseDaoImpl {
 		sqls[0] = "DELETE FROM sproduct WHERE productid = '" + productid + "'";
 		sqls[1] = "DELETE FROM sproductrow WHERE productid = '" + productid + "'";
 		int iReturn = dbUtils.executeSQLs(sqls);
-		System.out.println(sqls);
 		return iReturn;
 	}
 }

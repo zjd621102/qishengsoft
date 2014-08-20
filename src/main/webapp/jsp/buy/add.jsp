@@ -68,7 +68,8 @@
 	 */
 	function doBeforeSubmit() {
 
-		 setMultiply('price', 'num', 'sum');
+		setMultiply('price', 'num', 'sum');
+		setAllSum('sum', 'allsum');
 		return true;
 	}
 </script>

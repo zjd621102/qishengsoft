@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.MaterialtypeDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
@@ -88,6 +89,8 @@ public class MaterialtypeAction {
 		
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "materialtype_tree", "closeCurrent");
+
+			StrUtils.saveLog(request, "新增物资类型", form);
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
@@ -108,13 +111,15 @@ public class MaterialtypeAction {
 	@RequiresPermissions("Materialtype:edi")
 	@ResponseBody
 	@RequestMapping(value = "/edi", method = RequestMethod.POST)
-	public String doEdi(CodeTableForm form) {
+	public String doEdi(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = materialtypeDaoImpl.ediMaterialtype(form);
 		
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "materialtype_tree", "closeCurrent");
+
+			StrUtils.saveLog(request, "修改物资类型", form);
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
@@ -145,6 +150,8 @@ public class MaterialtypeAction {
 				iReturn = materialtypeDaoImpl.deleteMaterialtype(materialtype);
 				if (iReturn >= 0) {
 					ajaxObject = new AjaxObject("删除成功！", "materialtype_tree", "");
+
+					LogDaoImpl.saveLog(request, "删除物资类型", materialtype);
 				} else {
 					ajaxObject = new AjaxObject("删除失败");
 				}

@@ -1,13 +1,17 @@
 package com.yecoo.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.ManuDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
@@ -67,6 +71,8 @@ public class ManuAction {
 		int iReturn = manuDaoImpl.addManu(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "manu_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "新增供应商", form);
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
@@ -94,6 +100,8 @@ public class ManuAction {
 		int iReturn = manuDaoImpl.ediManu(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "manu_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "修改供应商", form);
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
@@ -102,13 +110,15 @@ public class ManuAction {
 
 	@RequiresPermissions("Manu:delete")
 	@RequestMapping(value="/delete/{manuid}")
-	public @ResponseBody String delete(@PathVariable int manuid) {
+	public @ResponseBody String delete(@PathVariable int manuid, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
 		iReturn = manuDaoImpl.deleteManu(manuid);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("删除成功！", "manu_list", "");
+
+			LogDaoImpl.saveLog(request, "删除供应商", manuid);
 		} else {
 			ajaxObject = new AjaxObject("删除失败");
 		}

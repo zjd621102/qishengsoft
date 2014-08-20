@@ -1,9 +1,5 @@
 package com.yecoo.util;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.InputStream;
-//import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,7 +12,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
@@ -27,23 +22,6 @@ import com.yecoo.model.CodeTableForm;
  */
 public class DbUtils {
 
-	private String dbUrl;
-
-	public DbUtils() {
-		String url = this.getClass().getResource("/").getPath()
-				+ "application.properties";
-		InputStream in;
-		try {
-			in = new BufferedInputStream(new FileInputStream(url));
-			Properties p = new Properties();
-			p.load(in);
-			dbUrl = p.getProperty("dbUrl");
-			in.close();
-		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".DbUtils()", e);
-		}
-	}
-
 	/**
 	 * 从数据库连接池中获取一个数据库连接
 	 * 
@@ -53,7 +31,7 @@ public class DbUtils {
 		Connection myConn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			myConn = DriverManager.getConnection(dbUrl);// 访问的数据库的帐号密码
+			myConn = DriverManager.getConnection(Constants.dbUrl);// 访问的数据库的帐号密码
 		} catch (Exception e) {
 			StrUtils.WriteLog(this.getClass().getName() + ".dbConnection()", e);
 			this.closeConnection(null, null, myConn);
@@ -121,8 +99,7 @@ public class DbUtils {
 	 * @param myConn
 	 *            creadate 2012-3-9
 	 */
-	public void closeConnection(ResultSet rs, PreparedStatement pStmt,
-			Connection myConn) {
+	public void closeConnection(ResultSet rs, PreparedStatement pStmt, Connection myConn) {
 		try {
 			if (rs != null) {
 				rs.close();
@@ -847,12 +824,11 @@ public class DbUtils {
 	public int setInsert(CodeTableForm form, String tabName, String num) {
 		Connection myConn = this.dbConnection();
 		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
-				+ " WHERE TABLE_NAME = UPPER('" + tabName + "')";
+				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
-		String count = this.execQuerySQL(myConn,
-				"SELECT COUNT(*) FROM information_schema.COLUMNS"
-						+ " WHERE TABLE_NAME = UPPER('" + tabName + "')");
+		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS"
+			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')");
 		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		str[1] = "";
@@ -869,8 +845,7 @@ public class DbUtils {
 				if (form.getValue(columnname + num) != null) {
 					str[0] = str[0] + columnname + ",";
 					fieldname = fieldname + columnname + ",";
-					String sColVal = StrUtils.nullToStr((String) form
-							.getValue(columnname + num));
+					String sColVal = StrUtils.nullToStr(form.getValue(columnname + num));
 					if (rs.getString("type").equals("DATE")) {
 						if (sColVal.length() == 19) {
 							str[1] = str[1]
@@ -887,10 +862,9 @@ public class DbUtils {
 						str[1] = str[1] + "?,";
 						fieldvalue = fieldvalue
 								+ "'"
-								+ StrUtils.nullToStr((String) form
-										.getValue(columnname + num)) + "',";
+								+ StrUtils.nullToStr(form.getValue(columnname + num)) + "',";
 					}
-					str[i] = (String) form.getValue(columnname + num);
+					str[i] = StrUtils.nullToStr(form.getValue(columnname + num));
 					i = i + 1;
 					str[i] = "#";
 				}
@@ -939,12 +913,11 @@ public class DbUtils {
 	public int setInsert(Connection myConn, CodeTableForm form, String tabName,
 			String num) {
 		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
-				+ " WHERE TABLE_NAME = UPPER('" + tabName + "')";
+				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
-		String count = this.execQuerySQL(myConn,
-				"SELECT COUNT(*) FROM information_schema.COLUMNS"
-						+ " WHERE TABLE_NAME = UPPER('" + tabName + "')");
+		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS"
+			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')");
 		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		str[1] = "";
@@ -1053,12 +1026,11 @@ public class DbUtils {
 			String key, String num) {
 		Connection myConn = this.dbConnection();
 		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
-				+ " WHERE TABLE_NAME = UPPER('" + tabName + "')";
+				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
-		String count = this.execQuerySQL(myConn,
-				"SELECT COUNT(*) FROM information_schema.COLUMNS"
-						+ " WHERE TABLE_NAME = UPPER('" + tabName + "')");
+		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS"
+			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')");
 		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		int iReturn = 1;
@@ -1151,12 +1123,11 @@ public class DbUtils {
 	public int setUpdate(Connection myConn, CodeTableForm form, String strEdit,
 			String tabName, String key, String num) {
 		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
-				+ " WHERE TABLE_NAME = UPPER('" + tabName + "')";
+				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
-		String count = this.execQuerySQL(myConn,
-				"SELECT COUNT(*) FROM information_schema.COLUMNS"
-						+ " WHERE TABLE_NAME = UPPER('" + tabName + "')");
+		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS"
+			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')");
 		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		int iReturn = 1;
@@ -1243,12 +1214,11 @@ public class DbUtils {
 			String[] keys, String num) {
 		Connection myConn = this.dbConnection();
 		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
-				+ " WHERE TABLE_NAME = UPPER('" + tabName + "')";
+				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
-		String count = this.execQuerySQL(myConn,
-				"SELECT COUNT(*) FROM information_schema.COLUMNS"
-						+ " WHERE TABLE_NAME = UPPER('" + tabName + "')");
+		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS"
+			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')");
 		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		int iReturn = 1;
@@ -1394,8 +1364,8 @@ public class DbUtils {
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
 		HashMap<String, String[]> map = new HashMap<String, String[]>();
-		String sql = "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_NAME = UPPER('"
-				+ tabName + "')";
+		String sql = "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '"
+				+ Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
 		String[] str = new String[this.getIntBySql(sql)];
 		int iReturn = 0;
 
@@ -1407,7 +1377,7 @@ public class DbUtils {
 			int recordcount = record.length;
 			// 取出要保存的表结构
 			sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
-					+ " WHERE TABLE_NAME = UPPER('" + tabName + "')";
+					+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
 			pStmt = myConn.prepareStatement(sql);
 			rs = pStmt.executeQuery();
 			int i = 0;

@@ -66,6 +66,7 @@
 	function doBeforeSubmit() {
 
 		setMultiply('realprice', 'num', 'realsum');
+		setAllSum('realsum', 'allrealsum');
 		return true;
 	}
 </script>

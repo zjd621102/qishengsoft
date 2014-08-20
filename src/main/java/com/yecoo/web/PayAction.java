@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.PayDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
@@ -79,6 +80,8 @@ public class PayAction {
 		int iReturn = payDaoImpl.addPay(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("新增成功！", "pay_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "新增单据", form);
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
@@ -116,6 +119,8 @@ public class PayAction {
 		int iReturn = payDaoImpl.ediPay(form, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("修改成功！", "pay_list", "closeCurrent");
+
+			StrUtils.saveLog(request, "修改单据", form);
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
@@ -139,6 +144,8 @@ public class PayAction {
 			iReturn = payDaoImpl.deletePay(payid);
 			if (iReturn >= 0) {
 				ajaxObject = new AjaxObject("删除成功！", "pay_list", "");
+
+				LogDaoImpl.saveLog(request, "删除单据", payid);
 			} else {
 				ajaxObject = new AjaxObject("删除失败");
 			}

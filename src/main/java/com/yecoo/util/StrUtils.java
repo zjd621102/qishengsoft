@@ -8,13 +8,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.StringTokenizer;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+
+import com.yecoo.model.CodeTableForm;
 /**
  * 公用方法
  * @author zhoujd
@@ -29,6 +34,16 @@ public class StrUtils {
 	public static final void WriteLog(String classname, Object obj) {
 		Logger logger = Logger.getLogger(classname);
 		logger.error(obj);
+	}
+	/**
+	 * 写入日志
+	 * @param classname
+	 * @param e
+	 * @creadate 2014-08-19
+	 */
+	public static final void WriteLog(String classname, Exception e) {
+		Logger logger = Logger.getLogger(classname);
+		logger.error(classname, e);
 	}
 	/**
 	 * 将sourceStr转换为指定长度输出，用‘0’补足
@@ -445,5 +460,45 @@ public class StrUtils {
 		no += StringUtils.leftPad(dbUtils.execQuerySQL(sql.toString()), 3,"0");
 		
 		return no;
+	}
+	
+	/**
+	 * 保存日志
+	 * @param request
+	 * @param logtype	日志类型
+	 * @param form		日志内容
+	 */
+	public static void saveLog(HttpServletRequest request, String logtype, CodeTableForm form) {
+		try {
+			DbUtils dbUtils = new DbUtils();
+			CodeTableForm user = (CodeTableForm) request.getSession().getAttribute(Constants.USER_INFO_SESSION);
+			CodeTableForm log = new CodeTableForm();
+			log.setValue("logtype", logtype);
+			log.setValue("operater", user.getValue("userid"));
+			log.setValue("operatetime", DateUtils.getNowDateTime());
+			
+			if(form != null) {
+				StringBuffer remark = new StringBuffer();
+				Map<String, Object> formMap = form.getMap();
+				Object formArray[] = formMap.keySet().toArray();
+				String formMapValue = null;
+				for(int i = 0; i < formArray.length; i++) {
+					formMapValue = String.valueOf(formMap.get(formArray[i]));
+					
+					if(formMapValue.contains("Ljava.lang.String")) {
+						continue;
+					}
+					
+					if(remark.length() >= 1) {
+						remark.append(",");
+					}
+					remark.append(formArray[i] + ":" + formMapValue);
+				}
+				log.setValue("remark", remark.toString());
+			}
+			dbUtils.setInsert(log, "slog");
+		} catch(Exception e) {
+			StrUtils.WriteLog("StrUtils.saveLog()", e);
+		}
 	}
 }

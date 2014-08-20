@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.UserDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
-import com.yecoo.util.DateUtils;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
@@ -70,7 +70,7 @@ public class PublicAction {
 			
 			setIndex(request);
 
-			this.saveLog(request, "登录");
+			LogDaoImpl.saveLog(request, "登录", "");
 			
 			return "index";
 		} catch (UnknownAccountException ex) {
@@ -133,7 +133,7 @@ public class PublicAction {
 			request.getSession().setAttribute(Constants.USER_INFO_SESSION, user1);
 			AjaxObject ajaxObject = new AjaxObject("登录成功", "", "closeCurrent");
 			
-			this.saveLog(request, "登录");
+			LogDaoImpl.saveLog(request, "登录", "");
 			
 			return ajaxObject.toString();
 		} catch (UnknownAccountException ex) {
@@ -172,23 +172,5 @@ public class PublicAction {
 		request.setAttribute("salaryList", salaryList);
 		request.setAttribute("payList", payList);
 		request.setAttribute("toDoNum", toDoNum);
-	}
-	
-	/**
-	 * 保存日志
-	 * @param request
-	 * @param logtype
-	 */
-	public void saveLog(HttpServletRequest request, String logtype) {
-		try {
-			CodeTableForm user = (CodeTableForm) request.getSession().getAttribute(Constants.USER_INFO_SESSION);
-			CodeTableForm log = new CodeTableForm();
-			log.setValue("logtype", logtype);
-			log.setValue("operater", user.getValue("userid"));
-			log.setValue("operatetime", DateUtils.getNowDateTime());
-			dbUtils.setInsert(log, "slog");
-		} catch(Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".saveLog()", e);
-		}
 	}
 }
