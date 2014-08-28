@@ -19,16 +19,8 @@
 					</td>
 					<td>
 						员工状态：
-						<select name="map[staffstatus]" style="width: 184px;">
-							<option value=""></option>
-							<c:forEach items="${staffstatusList}" var="staffstatus">
-								<option value="${staffstatus.map.staffstatusid}"
-									${staffstatus.map.staffstatusid==form.map.staffstatus?"selected":""}
-								>
-									${staffstatus.map.staffstatusname}
-								</option>
-							</c:forEach>
-						</select>
+						<st:select dictType="员工状态" name="map[staffstatus]" value="${form.map.staffstatus}"
+							expStr="style='width: 184px;'" />
 					</td>
 					<td>
 						月份：

@@ -42,8 +42,10 @@ public class PayAction {
 
 		int totalCount = payDaoImpl.getPayCount(form);
 		List<CodeTableForm> payList = payDaoImpl.getPayList(form);
+		String totalSum = payDaoImpl.getPaySum(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
 		request.setAttribute("payList", payList); // 单据列表
+		request.setAttribute("totalSum", totalSum); // 销售额
 		request.setAttribute("sn", "pay"); //授权名称
 		request.setAttribute("form", form);
 		
@@ -163,10 +165,7 @@ public class PayAction {
 		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); //单据类型
 		sql = "SELECT * FROM sbankcard WHERE status = '1'";
 		List<CodeTableForm> bankcardList = dbUtils.getListBySql(sql); //银行卡
-		sql = "SELECT * FROM sflow WHERE btype = 'XXX' ORDER BY priority,flowid";
-		List<CodeTableForm> currflowList = dbUtils.getListBySql(sql); //当前流程
 		request.setAttribute("btypeList", btypeList);
 		request.setAttribute("bankcardList", bankcardList);
-		request.setAttribute("currflowList", currflowList);
 	}
 }

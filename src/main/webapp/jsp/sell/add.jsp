@@ -119,18 +119,7 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<select name="map[currflow]" style="width: 164px;" class="required">
-					<option value=""></option>
-					<c:forEach items="${currflowList}" var="currflow">
-						<c:if test="${currflow.map.flowname=='申请'}">
-							<option value="${currflow.map.flowname}"
-								${currflow.map.flowname=="申请"?"selected":""}
-							>
-								${currflow.map.flowname}
-							</option>
-						</c:if>
-					</c:forEach>
-				</select>
+				<st:select dictType="流程状态" name="map[currflow]" value="申请" expStr="style='width: 164px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
@@ -157,7 +146,7 @@
 					<th width="6%">产品单价</th>
 					<th width="6%">实付单价</th>
 					<th width="6%">成本单价</th>
-					<th width="6%">利润</th>
+					<th width="6%">LL</th>
 					<th width="6%">数量</th>
 					<th width="6%">实付总价</th>
 					<th>备注</th>
@@ -204,14 +193,7 @@
 						<input type="text" name="map[productname]" style="width: 96%" maxlength="32" class="required"/>
 			   		</td>
 			   		<td>
-						<select name="map[unit]" style="width: 100%;">
-							<option value=""></option>
-							<c:forEach items="${unitList}" var="unit">
-								<option value="${unit.map.unitid}">
-									${unit.map.unitname}
-								</option>
-							</c:forEach>
-						</select>
+			   			<st:select dictType="计量单位" name="map[unit]" expStr="style='width: 100%;'" />
 			   		</td>
 			   		<td>
 						<input type="text" name="map[planprice]" style="width: 92%" maxlength="12"

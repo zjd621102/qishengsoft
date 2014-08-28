@@ -131,16 +131,7 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<select name="map[currflow]" style="width: 159px;" class="required">
-					<option value=""></option>
-					<c:forEach items="${currflowList}" var="currflow">
-						<option value="${currflow.map.flowname}"
-							${currflow.map.flowname==form.map.currflow?"selected":""}
-						>
-							${currflow.map.flowname}
-						</option>
-					</c:forEach>
-				</select>
+				<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 159px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
@@ -182,7 +173,7 @@
 					<th width="6%">产品单价</th>
 					<th width="6%">实付单价</th>
 					<th width="6%">成本单价</th>
-					<th width="6%">利润</th>
+					<th width="6%">LL</th>
 					<th width="6%">数量</th>
 					<th width="6%">实付总价</th>
 					<th>备注</th>
@@ -230,14 +221,7 @@
 							class="required"/>
 			   		</td>
 			   		<td>
-						<select name="map[unit]" style="width: 100%;">
-							<option value=""></option>
-							<c:forEach items="${unitList}" var="unit">
-								<option value="${unit.map.unitid}">
-									${unit.map.unitname}
-								</option>
-							</c:forEach>
-						</select>
+			   			<st:select dictType="计量单位" name="map[unit]" expStr="style='width: 100%;'" />
 			   		</td>
 			   		<td>
 						<input type="text" name="map[planprice]" style="width: 92%" maxlength="12"
@@ -288,16 +272,7 @@
 								value="${bean.map.productname}" class="required"/>
 				   		</td>
 				   		<td>
-							<select name="map[unit]" style="width: 100%;">
-								<option value=""></option>
-								<c:forEach items="${unitList}" var="unit">
-									<option value="${unit.map.unitid}"
-										${unit.map.unitid==bean.map.unit?"selected":""}
-									>
-										${unit.map.unitname}
-									</option>
-								</c:forEach>
-							</select>
+				   			<st:select dictType="计量单位" name="map[unit]" value="${bean.map.unit}" expStr="style='width: 100%;'" />
 				   		</td>
 				   		<td>
 							<input type="text" name="map[planprice]" style="width: 92%" maxlength="12"

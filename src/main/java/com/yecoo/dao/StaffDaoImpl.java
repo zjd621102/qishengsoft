@@ -44,8 +44,8 @@ public class StaffDaoImpl extends BaseDaoImpl {
 			form.setValue("month", month);
 		}
 		
-		String sql = "SELECT t.*, func_getStaffstatusName(t.staffstatus) staffstatusname,"
-				+ " func_getStafftypeName(t.stafftype) stafftypename,"
+		String sql = "SELECT t.*, func_getDictName('员工状态', t.staffstatus) staffstatusname,"
+				+ " func_getDictName('员工类别', t.stafftype) stafftypename,"
 				+ " func_getSalaryByMonth(t.staffid, '" + month + "') monthsalary FROM sstaff t WHERE 1 = 1";
 		
 		String cond = getStaffListCondition(form);
@@ -91,8 +91,8 @@ public class StaffDaoImpl extends BaseDaoImpl {
 	 */
 	public CodeTableForm getStaffById(int staffid) {
 		
-		String sql = "SELECT a.*, func_getStaffstatusName(a.staffstatus) staffstatusname,"
-				+ " func_getStafftypeName(a.stafftype) stafftypename FROM sstaff a WHERE a.staffid = '" + staffid + "'";
+		String sql = "SELECT a.*, func_getDictName('员工状态', a.staffstatus) staffstatusname,"
+				+ " func_getDictName('员工类别', a.stafftype) stafftypename FROM sstaff a WHERE a.staffid = '" + staffid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		return codeTableForm;
 	}

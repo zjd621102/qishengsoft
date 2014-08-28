@@ -23,16 +23,7 @@
 		<dl>
 			<dt>工资类型：</dt>
 			<dd>
-				<select name="map[salarytype]" style="width: 184px;" class="required">
-					<option value=""></option>
-					<c:forEach items="${salarytypeList}" var="salarytype">
-						<option value="${salarytype.map.salarytype}"
-							${salarytype.map.salarytype=="1"?"selected":""}
-						>
-							${salarytype.map.salarytypename}
-						</option>
-					</c:forEach>
-				</select>
+				<st:select dictType="工资类型" name="map[salarytype]" value="1" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
@@ -53,18 +44,7 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<select name="map[currflow]" style="width: 184px;" class="required">
-					<option value=""></option>
-					<c:forEach items="${currflowList}" var="currflow">
-						<c:if test="${currflow.map.flowname=='申请'}">
-							<option value="${currflow.map.flowname}"
-								${currflow.map.flowname=="申请"?"selected":""}
-							>
-								${currflow.map.flowname}
-							</option>
-						</c:if>
-					</c:forEach>
-				</select>
+				<st:select dictType="流程状态" name="map[currflow]" value="申请" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>

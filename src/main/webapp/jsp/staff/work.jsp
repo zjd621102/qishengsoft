@@ -125,16 +125,7 @@
 							value="${bean.map.endtime}" readonly="readonly"/>
 			   		</td>
 			   		<td>
-						<select name="map[workstatus]" style="width: 100%;">
-							<option value=""></option>
-							<c:forEach items="${workstatusList}" var="workstatus">
-								<option value="${workstatus.map.workstatus}"
-									${workstatus.map.workstatus==bean.map.workstatus?"selected":""}
-								>
-									${workstatus.map.workstatusname}
-								</option>
-							</c:forEach>
-						</select>
+			   			<st:select dictType="员工状态" name="map[workstatus]" value="${bean.map.workstatus}" expStr="style='width: 100%;'" />
 			   		</td>
 			   		<td>
 						<input type="text" name="map[salary]" style="width: 93%" maxlength="12"

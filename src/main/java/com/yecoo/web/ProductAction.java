@@ -92,7 +92,6 @@ public class ProductAction {
 		request.setAttribute("productrowList", productrowList);
 		/**************初始化行项End**************/
 		
-		this.getSelects(request);
 		return "product/add";
 	}
 
@@ -122,7 +121,6 @@ public class ProductAction {
 		form = productDaoImpl.getProductById(productid, request);
 		
 		request.setAttribute("form", form);
-		this.getSelects(request);
 		return "product/edi";
 	}
 
@@ -156,17 +154,6 @@ public class ProductAction {
 			ajaxObject = new AjaxObject("删除失败");
 		}
 		return ajaxObject.toString();
-	}
-	
-	/**
-	 * 获取下拉列表
-	 * @param request
-	 */
-	private void getSelects(HttpServletRequest request) {
-
-		String sql = "select * from cunit order by priority";
-		List<CodeTableForm> unitList = dbUtils.getListBySql(sql); //计量单位
-		request.setAttribute("unitList", unitList);
 	}
 	
 	/**

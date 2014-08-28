@@ -29,16 +29,7 @@
 		<dl>
 			<dt>银行卡类别：</dt>
 			<dd>
-				<select name="map[banktype]" style="width: 184px;" class="required">
-					<option value=""></option>
-					<c:forEach items="${banktypeList}" var="banktype">
-						<option value="${banktype.map.banktypeid}"
-							${banktype.map.banktypeid==form.map.banktype?"selected":""}
-						>
-							${banktype.map.banktypename}
-						</option>
-					</c:forEach>
-				</select>
+				<st:select dictType="银行" name="map[banktype]" value="${form.map.banktype}" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
@@ -51,16 +42,7 @@
 		<dl>
 			<dt>是否可用：</dt>
 			<dd>
-				<select name="map[status]" style="width: 184px;" class="required">
-					<option value=""></option>
-					<c:forEach items="${statusList}" var="status">
-						<option value="${status.map.statusid}"
-							${status.map.statusid==1?"selected":""}
-						>
-							${status.map.statusname}
-						</option>
-					</c:forEach>
-				</select>
+				<st:select dictType="状态" name="map[status]" value="1" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>

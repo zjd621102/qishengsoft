@@ -41,12 +41,12 @@ public class SellAction {
 
 		int totalCount = sellDaoImpl.getSellCount(form);
 		List<CodeTableForm> sellList = sellDaoImpl.getSellList(form);
+		String totalSum = sellDaoImpl.getSellSum(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
 		request.setAttribute("sellList", sellList); // 销售单列表
+		request.setAttribute("totalSum", totalSum); // 销售额
 		request.setAttribute("sn", "sell"); //授权名称
 		request.setAttribute("form", form);
-		
-		this.getSelects(request);
 		
 		return "sell/list";
 	}
@@ -61,8 +61,6 @@ public class SellAction {
 		form.setValue("selldate", selldate);
 		
 		request.setAttribute("form", form);
-		
-		this.getSelects(request);
 		
 		return "sell/add";
 	}
@@ -100,8 +98,6 @@ public class SellAction {
 		form = sellDaoImpl.getSellById(sellid, request);
 		
 		request.setAttribute("form", form);
-		
-		this.getSelects(request);
 		
 		String act = StrUtils.nullToStr(request.getParameter("act"));
 		if(act.equals("print")) {
@@ -148,20 +144,5 @@ public class SellAction {
 			}
 		}
 		return ajaxObject.toString();
-	}
-	
-	/**
-	 * 获取下拉列表
-	 * @param request
-	 */
-	private void getSelects(HttpServletRequest request) {
-
-		String sql = "SELECT * FROM cunit ORDER BY priority";
-		List<CodeTableForm> unitList = dbUtils.getListBySql(sql); //计量单位
-		request.setAttribute("unitList", unitList);
-
-		sql = "SELECT * FROM sflow WHERE btype = 'XXX' ORDER BY priority,flowid";
-		List<CodeTableForm> currflowList = dbUtils.getListBySql(sql); //当前流程
-		request.setAttribute("currflowList", currflowList);
 	}
 }

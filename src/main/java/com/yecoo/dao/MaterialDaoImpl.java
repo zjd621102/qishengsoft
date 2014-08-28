@@ -41,7 +41,7 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 	public List<CodeTableForm> getMaterialList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getMaterialtypeName(t.materialtype) materialtypename,"
-				+ " func_getUnitName(t.unit) unitname, sm.manuname, sm.manucontact, sm.manutel"
+				+ " func_getDictName('计量单位', t.unit) unitname, sm.manuname, sm.manucontact, sm.manutel"
 				+" FROM smaterial t LEFT JOIN smanu sm on t.manuid = sm.manuid WHERE 1 = 1";
 		String cond = getMaterialListCondition(form);
 		sql  += cond;
@@ -88,7 +88,7 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 	public CodeTableForm getMaterialById(int materialid) {
 		
 		String sql = "SELECT a.*, func_getMaterialtypeName(a.materialtype) materialtypename,"
-				+ " func_getUnitName(a.unit) unitname, func_getManuName(a.manuid) manuname"
+				+ " func_getDictName('计量单位', a.unit) unitname, func_getManuName(a.manuid) manuname"
 				+ " FROM smaterial a WHERE a.materialid = '" + materialid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		return codeTableForm;
@@ -100,7 +100,7 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 	 */
 	public int ediMaterial(CodeTableForm form) {
 		
-		int iReturn = dbUtils.setUpdate(form, "", "smaterial", "materialid", "");
+		int iReturn = dbUtils.setUpdate(form, "smaterial", "materialid");
 		return iReturn;
 	}
 	/**

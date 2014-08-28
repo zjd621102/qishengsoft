@@ -44,8 +44,6 @@ public class ManuAction {
 		request.setAttribute("sn", "manu"); //授权名称
 		request.setAttribute("form", form);
 		
-		this.getSelects(request);
-		
 		return "manu/list";
 	}
 
@@ -55,8 +53,6 @@ public class ManuAction {
 
 		CodeTableForm form = new CodeTableForm();
 		request.setAttribute("form", form);
-		
-		this.getSelects(request);
 		
 		return "manu/add";
 	}
@@ -86,8 +82,6 @@ public class ManuAction {
 		CodeTableForm form = null;
 		form = manuDaoImpl.getManuById(manuid, request);
 		request.setAttribute("form", form);
-		
-		this.getSelects(request);
 		
 		return "manu/edi";
 	}
@@ -123,20 +117,5 @@ public class ManuAction {
 			ajaxObject = new AjaxObject("删除失败");
 		}
 		return ajaxObject.toString();
-	}
-	
-	/**
-	 * 获取下拉列表
-	 * @param request
-	 */
-	private void getSelects(HttpServletRequest request) {
-
-		DbUtils dbUtils = new DbUtils();
-		String sql = "select * from cmanutype order by manutypeid";
-		List<CodeTableForm> manuTypeList = dbUtils.getListBySql(sql); //供应商类型
-		sql = "select * from cstatus order by statusid";
-		List<CodeTableForm> statusList = dbUtils.getListBySql(sql); //供应商状态
-		request.setAttribute("manuTypeList", manuTypeList);
-		request.setAttribute("statusList", statusList);
 	}
 }

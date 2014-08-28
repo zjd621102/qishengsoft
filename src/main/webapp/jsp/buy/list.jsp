@@ -7,27 +7,13 @@
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						采购单名称：
-						<input type="text" name="map[buyname]" size="20" maxlength="32"
-							value="${form.map.buyname}"/>
-					</td>
-					<td>
 						采购单编号：
 						<input type="text" name="map[buyno]" size="15" maxlength="13"
 							value="${form.map.buyno}"/>
 					</td>
 					<td>
 						当前流程：
-						<select name="map[currflow]">
-							<option value=""></option>
-							<c:forEach items="${currflowList}" var="currflow">
-								<option value="${currflow.map.flowname}"
-									${currflow.map.flowname==form.map.currflow?"selected":""}
-								>
-									${currflow.map.flowname}
-								</option>
-							</c:forEach>
-						</select>
+						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" />
 					</td>
 					<td>
 						单据类型：
@@ -97,10 +83,10 @@
 			<tr>
 				<th width="5%">序号</th>
 				<th width="10%">单据类型</th>
-				<th width="20%">采购单名称</th>
+				<th width="15%">采购单名称</th>
 				<th width="13%">采购编号</th>
 				<th width="10%">采购日期</th>
-				<th width="10%">采购金额</th>
+				<th width="15%">采购金额（${totalSum}）</th>
 				<th width="10%">当前流程</th>
 				<th width="10%">制单人</th>
 				<th width="12%">创建时间</th>

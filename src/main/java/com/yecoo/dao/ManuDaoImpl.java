@@ -35,8 +35,8 @@ public class ManuDaoImpl extends BaseDaoImpl {
 	 */
 	public List<CodeTableForm> getManuList(CodeTableForm form) {
 		
-		String sql = "SELECT t.*, func_getManutypeName(manutypeid) manutypename ,"
-				+ " func_getStatusName(statusid) statusname,"
+		String sql = "SELECT t.*, func_getDictName('计量单位', manutypeid) manutypename ,"
+				+ " func_getDictName('状态', statusid) statusname,"
 				+ " (SELECT sm.bankrow FROM smanurow sm"
 				+ " WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1) manubankname,"
 				+ " (SELECT sm.accountnorow FROM smanurow sm"

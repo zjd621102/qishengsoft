@@ -46,6 +46,19 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		return list;
 	}
 	/**
+	 * 获取采购额
+	 * @param form
+	 * @return
+	 */
+	public String getBuySum(CodeTableForm form) {
+		
+		String sql = "SELECT IFNULL(SUM(b.sum), 0) FROM bbuy t, bbuyrow b WHERE 1 = 1 AND t.buyid = b.buyid";
+		String cond = getBuyListCondition(form);
+		sql  += cond;
+		String sum = dbUtils.execQuerySQL(sql);
+		return sum;
+	}
+	/**
 	 * 获取采购单列表-条件
 	 * @param form
 	 * @return

@@ -51,8 +51,8 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 	 */
 	public List<CodeTableForm> getBankcardList(CodeTableForm form) {
 		
-		String sql = "SELECT t.*, func_getBanktypeName(t.banktype) banktypename,"
-				+ " func_getStatusName(t.status) statusname FROM sbankcard t WHERE 1 = 1";
+		String sql = "SELECT t.*, func_getDictName('银行类型', t.banktype) banktypename,"
+				+ " func_getDictName('状态', t.status) statusname FROM sbankcard t WHERE 1 = 1";
 		String cond = getBankcardListCondition(form);
 		sql  += cond;
 		sql += " ORDER BY t.priority ASC, t.bankcardid ASC";
@@ -97,8 +97,8 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 	 */
 	public CodeTableForm getBankcardById(int bankcardid) {
 		
-		String sql = "SELECT a.*, func_getBanktypeName(a.banktype) banktypename,"
-				+ " func_getStatusName(a.status) FROM sbankcard a WHERE a.bankcardid = '" + bankcardid + "'";
+		String sql = "SELECT a.*, func_getDictName('银行类型', a.banktype) banktypename,"
+				+ " func_getDictName('状态', a.status) FROM sbankcard a WHERE a.bankcardid = '" + bankcardid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		return codeTableForm;
 	}
@@ -301,7 +301,7 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 	public List<CodeTableForm> getReceandpayList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getBankcardno(t.bankcardid) bankcardno,"
-				+ " func_getReceandpaytypeName(t.receandpaytype) receandpaytypename FROM breceandpay t WHERE 1 = 1";
+				+ " func_getDictName('收支类型', t.receandpaytype) receandpaytypename FROM breceandpay t WHERE 1 = 1";
 		String cond = getReceandpayListCondition(form);
 		sql += cond;
 		sql += " ORDER BY t.createtime DESC";

@@ -42,8 +42,10 @@ public class BuyAction {
 
 		int totalCount = buyDaoImpl.getBuyCount(form);
 		List<CodeTableForm> buyList = buyDaoImpl.getBuyList(form);
+		String totalSum = buyDaoImpl.getBuySum(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
 		request.setAttribute("buyList", buyList); // 采购单列表
+		request.setAttribute("totalSum", totalSum); // 销售额
 		request.setAttribute("sn", "buy"); // 授权名称
 		request.setAttribute("form", form);
 		
@@ -161,15 +163,7 @@ public class BuyAction {
 	 */
 	private void getSelects(HttpServletRequest request) {
 
-		String sql = "SELECT * FROM cunit ORDER BY priority";
-		List<CodeTableForm> unitList = dbUtils.getListBySql(sql); // 计量单位
-		request.setAttribute("unitList", unitList);
-
-		sql = "SELECT * FROM sflow WHERE btype = 'XXX' ORDER BY priority,flowid";
-		List<CodeTableForm> currflowList = dbUtils.getListBySql(sql); // 当前流程
-		request.setAttribute("currflowList", currflowList);
-
-		sql = "SELECT * FROM sbtype WHERE btype in ('CGD','JYD')";
+		String sql = "SELECT * FROM sbtype WHERE btype in ('CGD','JYD')";
 		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); // 单据类型
 		request.setAttribute("btypeList", btypeList);
 	}

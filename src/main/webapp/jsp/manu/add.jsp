@@ -15,31 +15,13 @@
 		<dl>
 			<dt>供应商类别：</dt>
 			<dd>
-				<select name="map[manutypeid]" style="width: 184px;" class="required">
-					<option value=""></option>
-					<c:forEach items="${manuTypeList}" var="manuType">
-						<option value="${manuType.map.manutypeid}"
-							${manuType.map.manutypeid==form.map.manutypeid?"selected":""}
-						>
-							${manuType.map.manutypename}
-						</option>
-					</c:forEach>
-				</select>
+				<st:select dictType="供应商类别" name="map[manutypeid]" value="${form.map.manutypeid}" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
 			<dt>供应商状态：</dt>
 			<dd>
-				<select name="map[statusid]" style="width: 184px;" class="required">
-					<option value=""></option>
-					<c:forEach items="${statusList}" var="status">
-						<option value="${status.map.statusid}"
-							${status.map.statusid==form.map.statusid?"selected":""}
-						>
-							${status.map.statusname}
-						</option>
-					</c:forEach>
-				</select>
+				<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>

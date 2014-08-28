@@ -37,7 +37,7 @@ public class SalaryDaoImpl extends BaseDaoImpl {
 	public List<CodeTableForm> getSalaryList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getUserName(t.maker) makername,"
-				+ " func_getSalarytypeName(t.salarytype) salarytypename,"
+				+ " func_getDictName('工资类型', t.salarytype) salarytypename,"
 				+ " func_getSum(t.salaryid, 'GZD') allplanmoney FROM bsalary t WHERE 1 = 1";
 		String cond = getSalaryListCondition(form);
 		sql  += cond;
@@ -128,7 +128,7 @@ public class SalaryDaoImpl extends BaseDaoImpl {
 	 */
 	public CodeTableForm getSalaryById(int salaryid, HttpServletRequest request) {
 		
-		String sql = "SELECT a.*, func_getUserName(a.maker) makername, func_getSalarytypeName(a.salarytype) salarytypename"
+		String sql = "SELECT a.*, func_getUserName(a.maker) makername, func_getDictName('工资类型', a.salarytype) salarytypename"
 				+ " FROM bsalary a WHERE a.salaryid = '" + salaryid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		

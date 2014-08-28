@@ -46,6 +46,19 @@ public class SellDaoImpl extends BaseDaoImpl {
 		return list;
 	}
 	/**
+	 * 获取销售额
+	 * @param form
+	 * @return
+	 */
+	public String getSellSum(CodeTableForm form) {
+		
+		String sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bsell t, bsellrow b WHERE 1 = 1 AND t.sellid = b.sellid";
+		String cond = getSellListCondition(form);
+		sql  += cond;
+		String sum = dbUtils.execQuerySQL(sql);
+		return sum;
+	}
+	/**
 	 * 获取销售单列表-条件
 	 * @param form
 	 * @return
@@ -137,7 +150,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 				+ " FROM bsell a WHERE a.sellid = '" + sellid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
-		sql = "SELECT a.*, b.productno, func_getUnitName(a.unit) unitname"
+		sql = "SELECT a.*, b.productno, func_getDictName('计量单位', a.unit) unitname"
 				+ " FROM bsellrow a LEFT JOIN sproduct b ON a.productid = b.productid WHERE a.sellid = '" + sellid + "'";
 		List<CodeTableForm> sellrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("sellrowList", sellrowList);
@@ -158,66 +171,77 @@ public class SellDaoImpl extends BaseDaoImpl {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false); //事务开启
 			
-			iReturn = dbUtils.setUpdate(form, "", "bsell", "sellid", ""); //保存主表
+			iReturn = dbUtils.setUpdate(form, "", "bsell", "sellid", ""); //保存主表，不做事务处理，否则表被锁定不能进行下面的操作
 			if(iReturn >= 1) { //保存行项表
 			  	iReturn = dbUtils.saveRowTable(request, conn, form, "bsellrow", "sellrowid", "sellid", "", 1);
 			}
 			
 			String currflow = StrUtils.nullToStr(form.getValue("currflow"));
 			if(iReturn >= 1 && currflow.equals("结束")) { //流程结束
-				CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
-				String maker = StrUtils.nullToStr(user.getValue("userid")); //当前登录用户
-				String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss");
-				String sellid = StrUtils.nullToStr(form.getValue("sellid"));
-				StringBuffer sql = new StringBuffer("INSERT INTO bpay(btype, maker, paydate, relateno, relatemoney,")
-					.append(" currflow, createtime)	SELECT 'SKD', '").append(maker)
-					.append("', selldate, sellno, func_getSum(sellid, 'XSD'), '申请', '").append(createdate)
-					.append("' FROM bsell WHERE sellid = '").append(sellid).append("'");
-
-				iReturn = dbUtils.executeSQL(sql.toString()); //直接保存，用于下面获取payid
 				
-				if(iReturn >= 1) { //生成销售单
-					sql.delete(0,sql.length());
-					sql.append("SELECT MAX(payid) FROM bpay");
-					int payid = dbUtils.getIntBySql(sql.toString());
-					int payid2 = 0;
-					sql.delete(0,sql.length());
-					sql.append("INSERT INTO bpayrow(payid, manuid, manubankname, manubankcardno, manuaccountname, plansum, realsum)")
-						.append(" SELECT ").append(payid).append(", t.manuid,")
-						.append(" (SELECT sm.bankrow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
-						.append(" (SELECT sm.accountnorow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
-						.append(" (SELECT sm.accountnamerow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
-						.append(" func_getSum(t.sellid, 'XSD'), func_getSum(t.sellid, 'XSD')")
-						.append(" FROM bsell t WHERE sellid = '").append(sellid).append("'");
-					iReturn = dbUtils.executeSQL(conn, sql.toString());
-					
-					if(iReturn >= 1) { //生成运费单
-						sql = new StringBuffer("INSERT INTO bpay(btype, maker, paydate, relateno, relatemoney,")
-						.append(" currflow, createtime)	SELECT 'YFD', '").append(maker)
+				//计算库存
+				StringBuffer sql = new StringBuffer("UPDATE smaterial m, (")
+					.append("SELECT a.materialid, SUM(b.materialnum * d.num) sum FROM smaterial a, sproductrow b, sproduct c, bsellrow d")
+					.append(" WHERE a.materialid = b.materialid AND b.productid = c.productid AND c.productid = d.productid")
+					.append(" AND a.usestock = '1' AND d.sellid = '").append(form.getValue("sellid")).append("' GROUP BY a.materialid")
+					.append(") n SET m.stock = (m.stock - n.sum) WHERE m.materialid = n.materialid");
+				iReturn = dbUtils.executeSQL(conn, sql.toString());
+				
+				if(iReturn >= 1) {
+					CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
+					String maker = StrUtils.nullToStr(user.getValue("userid")); //当前登录用户
+					String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss");
+					String sellid = StrUtils.nullToStr(form.getValue("sellid"));
+					sql.delete(0, sql.length());
+					sql.append("INSERT INTO bpay(btype, maker, paydate, relateno, relatemoney,")
+						.append(" currflow, createtime)	SELECT 'SKD', '").append(maker)
 						.append("', selldate, sellno, func_getSum(sellid, 'XSD'), '申请', '").append(createdate)
 						.append("' FROM bsell WHERE sellid = '").append(sellid).append("'");
-						
-						iReturn = dbUtils.executeSQL(sql.toString()); //直接保存，用于下面获取payid
-						
-						if(iReturn >= 1) {
-							sql.delete(0,sql.length());
-							sql.append("SELECT MAX(payid) FROM bpay");
-							payid2 = dbUtils.getIntBySql(sql.toString());
-							sql.delete(0,sql.length());
-							sql.append("INSERT INTO bpayrow(payid) values ('").append(payid2).append("')");
-							iReturn = dbUtils.executeSQL(conn, sql.toString());
-						}
-					}
+	
+					iReturn = dbUtils.executeSQL(sql.toString()); //直接保存，用于下面获取payid
 					
-					if(iReturn == -1) { //行项保存失败，删除主表
+					if(iReturn >= 1) { //生成销售单
 						sql.delete(0,sql.length());
-						sql.append("DELETE FROM bpay WHERE payid = '").append(payid).append("'");
-						dbUtils.executeSQL(sql.toString());
+						sql.append("SELECT MAX(payid) FROM bpay");
+						int payid = dbUtils.getIntBySql(sql.toString());
 						sql.delete(0,sql.length());
-						sql.append("DELETE FROM bpay WHERE payid = '").append(payid2).append("'");
-						dbUtils.executeSQL(sql.toString());
-						sql.append("UPDATE bsell SET currflow = '申请' WHERE sellid = '").append(sellid).append("'");
-						dbUtils.executeSQL(sql.toString());
+						sql.append("INSERT INTO bpayrow(payid, manuid, manubankname, manubankcardno, manuaccountname, plansum, realsum)")
+							.append(" SELECT ").append(payid).append(", t.manuid,")
+							.append(" (SELECT sm.bankrow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
+							.append(" (SELECT sm.accountnorow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
+							.append(" (SELECT sm.accountnamerow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
+							.append(" func_getSum(t.sellid, 'XSD'), func_getSum(t.sellid, 'XSD')")
+							.append(" FROM bsell t WHERE sellid = '").append(sellid).append("'");
+						iReturn = dbUtils.executeSQL(conn, sql.toString());
+						/*
+						if(iReturn >= 1) { //生成运费单
+							sql = new StringBuffer("INSERT INTO bpay(btype, maker, paydate, relateno, relatemoney,")
+							.append(" currflow, createtime)	SELECT 'YFD', '").append(maker)
+							.append("', selldate, sellno, func_getSum(sellid, 'XSD'), '申请', '").append(createdate)
+							.append("' FROM bsell WHERE sellid = '").append(sellid).append("'");
+							
+							iReturn = dbUtils.executeSQL(sql.toString()); //直接保存，用于下面获取payid
+							
+							if(iReturn >= 1) {
+								sql.delete(0,sql.length());
+								sql.append("SELECT MAX(payid) FROM bpay");
+								payid2 = dbUtils.getIntBySql(sql.toString());
+								sql.delete(0,sql.length());
+								sql.append("INSERT INTO bpayrow(payid) values ('").append(payid2).append("')");
+								iReturn = dbUtils.executeSQL(conn, sql.toString());
+							}
+						}
+						*/
+						if(iReturn == -1) { //行项保存失败，删除主表
+							sql.delete(0,sql.length());
+							sql.append("DELETE FROM bpay WHERE payid = '").append(payid).append("'");
+							dbUtils.executeSQL(sql.toString());
+							sql.delete(0,sql.length());
+							sql.append("DELETE FROM bpayrow WHERE payid = '").append(payid).append("'");
+							dbUtils.executeSQL(sql.toString());
+							sql.append("UPDATE bsell SET currflow = '申请' WHERE sellid = '").append(sellid).append("'");
+							dbUtils.executeSQL(sql.toString());
+						}
 					}
 				}
 			}

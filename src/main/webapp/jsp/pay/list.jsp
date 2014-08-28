@@ -25,16 +25,7 @@
 					</td>
 					<td>
 						当前流程：
-						<select name="map[currflow]" style="width: 184px;">
-							<option value=""></option>
-							<c:forEach items="${currflowList}" var="currflow">
-								<option value="${currflow.map.flowname}"
-									${currflow.map.flowname==form.map.currflow?"selected":""}
-								>
-									${currflow.map.flowname}
-								</option>
-							</c:forEach>
-						</select>
+						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 184px;'" />
 					</td>
 				</tr>
 			</table>
@@ -87,9 +78,9 @@
 				<th width="10%">单据ID</th>
 				<th width="15%">单据类型</th>
 				<th width="15%">单据日期</th>
-				<th width="20%">关联单号</th>
+				<th width="15%">关联单号</th>
 				<th width="10%">当前流程</th>
-				<th width="10%">实付金额</th>
+				<th width="15%">实付金额（${totalSum}）</th>
 				<th width="15%">创建时间</th>
 			</tr>
 		</thead>

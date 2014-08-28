@@ -47,8 +47,6 @@ public class SalaryAction {
 		request.setAttribute("sn", "salary"); // 授权名称
 		request.setAttribute("form", form);
 		
-		this.getSelects(request);
-		
 		return "salary/list";
 	}
 
@@ -69,8 +67,6 @@ public class SalaryAction {
 				+ salarydate + "') planmoney FROM sstaff t WHERE t.staffstatus = '1'";
 		List<CodeTableForm> salaryrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("salaryrowList", salaryrowList);
-		
-		this.getSelects(request);
 		
 		return "salary/add";
 	}
@@ -108,8 +104,6 @@ public class SalaryAction {
 		form = salaryDaoImpl.getSalaryById(salaryid, request);
 		
 		request.setAttribute("form", form);
-		
-		this.getSelects(request);
 		
 		String act = StrUtils.nullToStr(request.getParameter("act"));
 		if(act.equals("print")) {
@@ -154,20 +148,5 @@ public class SalaryAction {
 			}
 		}
 		return ajaxObject.toString();
-	}
-	
-	/**
-	 * 获取下拉列表
-	 * @param request
-	 */
-	private void getSelects(HttpServletRequest request) {
-
-		String sql = "SELECT * FROM sflow WHERE btype = 'XXX' ORDER BY priority,flowid";
-		List<CodeTableForm> currflowList = dbUtils.getListBySql(sql); // 当前流程
-		request.setAttribute("currflowList", currflowList);
-
-		sql = "SELECT * FROM csalarytype";
-		List<CodeTableForm> salarytypeList = dbUtils.getListBySql(sql); // 单据类型
-		request.setAttribute("salarytypeList", salarytypeList);
 	}
 }
