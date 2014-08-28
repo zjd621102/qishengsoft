@@ -30,7 +30,6 @@ public class Constants {
 	public final static String OPERATION_DELETE = "delete";// 删除
 
 	public static String dbName = "";// 数据库名
-	public static String dbUrl = "";// 数据库连接
 	
 	static {
 		InputStream in = null;
@@ -40,7 +39,6 @@ public class Constants {
 			Properties p = new Properties();
 			p.load(in);
 			dbName = p.getProperty("dbName");
-			dbUrl = p.getProperty("dbUrl");
 		} catch (Exception e) {
 			StrUtils.WriteLog(Constants.class.getName() + ".Constants()", e);
 		} finally {

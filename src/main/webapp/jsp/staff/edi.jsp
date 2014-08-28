@@ -16,31 +16,15 @@
 			<dl>
 				<dt>员工类别：</dt>
 				<dd>
-					<select name="map[stafftype]" style="width: 184px;" class="required">
-						<option value=""></option>
-						<c:forEach items="${stafftypeList}" var="stafftype">
-							<option value="${stafftype.map.stafftypeid}"
-								${stafftype.map.stafftypeid==form.map.stafftype?"selected":""}
-							>
-								${stafftype.map.stafftypename}
-							</option>
-						</c:forEach>
-					</select>
+					<st:select dictType="员工类别" name="map[stafftype]" value="${form.map.stafftype}"
+						expStr="style='width: 184px;' class='required'" />
 				</dd>
 			</dl>
 			<dl>
 				<dt>员工状态：</dt>
 				<dd>
-					<select name="map[staffstatus]" style="width: 184px;" class="required">
-						<option value=""></option>
-						<c:forEach items="${staffstatusList}" var="staffstatus">
-							<option value="${staffstatus.map.staffstatusid}"
-								${staffstatus.map.staffstatusid==form.map.staffstatus?"selected":""}
-							>
-								${staffstatus.map.staffstatusname}
-							</option>
-						</c:forEach>
-					</select>
+					<st:select dictType="员工状态" name="map[staffstatus]" value="${form.map.staffstatus}"
+						expStr="style='width: 184px;' class='required'" />
 				</dd>
 			</dl>
 			<dl>

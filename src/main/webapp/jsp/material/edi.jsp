@@ -31,16 +31,8 @@
 		<dl>
 			<dt>计量单位：</dt>
 			<dd>
-				<select name="map[unit]" style="width: 185px;">
-					<option value=""></option>
-					<c:forEach items="${unitList}" var="unit">
-						<option value="${unit.map.unitid}"
-							${unit.map.unitid==form.map.unit?"selected":""}
-						>
-							${unit.map.unitname}
-						</option>
-					</c:forEach>
-				</select>
+				<st:select dictType="计量单位" name="map[unit]" value="${form.map.unit}"
+					expStr="style='width: 185px;' class='required number'" />
 			</dd>
 		</dl>
 		<dl>
@@ -62,16 +54,36 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>启用库存：</dt>
+			<dd>
+				<st:select dictType="是否" name="map[usestock]" value="${form.map.usestock}" expStr="style='width: 185px;'" />
+			</dd>
+		</dl>
+		<dl>
+			<dt>库存量：</dt>
+			<dd>
+				<input type="text" name="map[stock]" class="required number" size="30" maxlength="12"
+					value="${form.map.stock}"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>报警量：</dt>
+			<dd>
+				<input type="text" name="map[alarmnum]" class="required number" size="30" maxlength="12"
+					value="${form.map.alarmnum}"/>
+			</dd>
+		</dl>
+		<dl>
 			<dt>新增时间：</dt>
 			<dd>
-				<input type="text" name="map[createdate]" class="required" size="30" maxlength="19"
+				<input type="text" name="map[createdate]" size="30" maxlength="19"
 					value="${form.map.createdate}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<textarea name="map[remark]" cols="27" rows="6" maxlength="256"></textarea>
+				<textarea name="map[remark]" cols="27" rows="4" maxlength="256"></textarea>
 			</dd>
 		</dl>
 	</div>	

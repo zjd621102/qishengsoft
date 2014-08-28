@@ -24,14 +24,7 @@
 		<dl>
 			<dt>收支类型：</dt>
 			<dd>
-				<select name="map[receandpaytype]" style="width: 184px;" class="required">
-					<option value=""></option>
-					<c:forEach items="${receandpaytypeList}" var="receandpaytype">
-						<option value="${receandpaytype.map.receandpaytypeid}">
-							${receandpaytype.map.receandpaytypename}
-						</option>
-					</c:forEach>
-				</select>
+				<st:select dictType="收支类型" name="map[receandpaytype]" value="${form.map.receandpaytype}" expStr="style='width: 184px;'" />
 			</dd>
 		</dl>
 		<dl>

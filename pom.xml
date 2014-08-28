@@ -129,6 +129,12 @@
             <artifactId>jackson-mapper-lgpl</artifactId>
             <version>1.9.13</version>
         </dependency>
+		<!-- proxool -->
+		<dependency>
+			<groupId>com.cloudhopper.proxool</groupId>
+			<artifactId>proxool</artifactId>
+			<version>0.9.1</version>
+		</dependency>
 		<!-- 其它 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

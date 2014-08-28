@@ -44,6 +44,19 @@ public class PayDaoImpl extends BaseDaoImpl {
 		return list;
 	}
 	/**
+	 * 获取金额
+	 * @param form
+	 * @return
+	 */
+	public String getPaySum(CodeTableForm form) {
+		
+		String sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bpay t, bpayrow b WHERE 1 = 1 AND t.payid = b.payid";
+		String cond = getPayListCondition(form);
+		sql += cond;
+		String sum = dbUtils.execQuerySQL(sql);
+		return sum;
+	}
+	/**
 	 * 获取发票列表-条件
 	 * @param form
 	 * @return

@@ -54,16 +54,7 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<select name="map[currflow]" style="width: 184px;" class="required">
-					<option value=""></option>
-					<c:forEach items="${currflowList}" var="currflow">
-						<option value="${currflow.map.flowname}"
-							${currflow.map.flowname==form.map.currflow?"selected":""}
-						>
-							${currflow.map.flowname}
-						</option>
-					</c:forEach>
-				</select>
+				<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>

@@ -74,7 +74,6 @@ public class MaterialAction {
 		form.setValue("unit", "1");// 默认单位：只
 
 		request.setAttribute("form", form);
-		this.getSelects(request);
 		return "material/add";
 	}
 
@@ -104,7 +103,6 @@ public class MaterialAction {
 		form = materialDaoImpl.getMaterialById(materialid);
 		
 		request.setAttribute("form", form);
-		this.getSelects(request);
 		return "material/edi";
 	}
 
@@ -138,18 +136,6 @@ public class MaterialAction {
 			ajaxObject = new AjaxObject("删除失败");
 		}
 		return ajaxObject.toString();
-	}
-	
-	/**
-	 * 获取下拉列表
-	 * @param request
-	 */
-	private void getSelects(HttpServletRequest request) {
-
-		DbUtils dbUtils = new DbUtils();
-		String sql = "select * from cunit order by priority";
-		List<CodeTableForm> unitList = dbUtils.getListBySql(sql); //计量单位
-		request.setAttribute("unitList", unitList);
 	}
 	
 	/**

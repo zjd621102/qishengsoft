@@ -11,16 +11,7 @@
 					</td>
 					<td>
 						是否可用：
-						<select name="map[status]" style="width: 184px;">
-							<option value=""></option>
-							<c:forEach items="${statusList}" var="status">
-								<option value="${status.map.statusid}"
-									${status.map.statusid==form.map.status?"selected":""}
-								>
-									${status.map.statusname}
-								</option>
-							</c:forEach>
-						</select>
+						<st:select dictType="状态" name="map[status]" value="${form.map.status}" expStr="style='width: 184px;'" />
 					</td>
 				</tr>
 			</table>

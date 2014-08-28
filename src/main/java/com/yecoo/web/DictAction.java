@@ -1,97 +1,103 @@
 package com.yecoo.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.yecoo.dao.UnitDaoImpl;
+
+import com.yecoo.dao.DictDaoImpl;
 import com.yecoo.model.CodeTableForm;
+import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
- * 单位管理
+ * 字典管理
  * @author zhoujd
  */
 @Controller
-@RequestMapping("/unit")
-public class UnitAction {
+@RequestMapping("/dict")
+public class DictAction {
 
-	private UnitDaoImpl unitDaoImpl = new UnitDaoImpl();
+	private DictDaoImpl dictDaoImpl = new DictDaoImpl();
 
-	@RequiresPermissions("Unit:view")
+	@RequiresPermissions("Dict:view")
 	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
 	public String list(CodeTableForm form, HttpServletRequest request) {
 
-		unitDaoImpl.initAction(request);
+		dictDaoImpl.initAction(request);
 
-		int totalCount = unitDaoImpl.getUnitCount(form);
-		List<CodeTableForm> unitList = unitDaoImpl.getUnitList(form);
+		int totalCount = dictDaoImpl.getDictCount(form);
+		List<CodeTableForm> dictList = dictDaoImpl.getDictList(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
-		request.setAttribute("unitList", unitList); // 单位列表
-		request.setAttribute("sn", "unit"); //授权名称
+		request.setAttribute("dictList", dictList); // 字典列表
+		request.setAttribute("sn", "dict"); //授权名称
 		request.setAttribute("form", form);
 
-		return "unit/list";
+		return "dict/list";
 	}
 
-	@RequiresPermissions("Unit:add")
+	@RequiresPermissions("Dict:add")
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String toAdd(HttpServletRequest request) {
 
 		CodeTableForm form = new CodeTableForm();
 		request.setAttribute("form", form);
-		return "unit/add";
+		return "dict/add";
 	}
 
-	@RequiresPermissions("Unit:add")
+	@RequiresPermissions("Dict:add")
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public @ResponseBody String add(CodeTableForm form) {
+	public @ResponseBody String add(CodeTableForm form, HttpServletRequest request) {
 		AjaxObject ajaxObject = null;
-		int iReturn = unitDaoImpl.addUnit(form);
+		String createtime = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss"); //当前日期
+		form.setValue("createtime", createtime);
+		int iReturn = dictDaoImpl.addDict(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("新增成功！", "unit_list", "closeCurrent");
+			ajaxObject = new AjaxObject("新增成功！", "dict_list", "closeCurrent");
 		} else {
 			ajaxObject = new AjaxObject("新增失败");
 		}
 		return ajaxObject.toString();
 	}
 
-	@RequiresPermissions("Unit:edi")
-	@RequestMapping(value="/edi/{unitid}", method=RequestMethod.GET)
-	public String toEdi(@PathVariable("unitid") int unitid, HttpServletRequest request) {
+	@RequiresPermissions("Dict:edi")
+	@RequestMapping(value="/edi/{dictid}", method=RequestMethod.GET)
+	public String toEdi(@PathVariable("dictid") int dictid, HttpServletRequest request) {
 		
 		CodeTableForm form = null;
-		form = unitDaoImpl.getUnitById(unitid);
+		form = dictDaoImpl.getDictById(dictid, request);
 		request.setAttribute("form", form);
-		return "unit/edi";
+		return "dict/edi";
 	}
 
-	@RequiresPermissions("Unit:edi")
+	@RequiresPermissions("Dict:edi")
 	@RequestMapping(value="/edi", method=RequestMethod.POST)
-	public @ResponseBody String edi(CodeTableForm form) {
+	public @ResponseBody String edi(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
-		int iReturn = unitDaoImpl.ediUnit(form);
+		int iReturn = dictDaoImpl.ediDict(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("修改成功！", "unit_list", "closeCurrent");
+			ajaxObject = new AjaxObject("修改成功！", "dict_list", "closeCurrent");
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}
 		return ajaxObject.toString();
 	}
 
-	@RequiresPermissions("Unit:delete")
-	@RequestMapping(value="/delete/{unitid}")
-	public @ResponseBody String delete(@PathVariable int unitid) {
+	@RequiresPermissions("Dict:delete")
+	@RequestMapping(value="/delete/{dictid}")
+	public @ResponseBody String delete(@PathVariable int dictid) {
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = 0;
-		iReturn = unitDaoImpl.deleteUnit(unitid);
+		iReturn = dictDaoImpl.deleteDict(dictid);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("删除成功！", "unit_list", "");
+			ajaxObject = new AjaxObject("删除成功！", "dict_list", "");
 		} else {
 			ajaxObject = new AjaxObject("删除失败");
 		}

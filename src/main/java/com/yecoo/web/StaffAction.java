@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.StaffDaoImpl;
 import com.yecoo.model.CodeTableForm;
-import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
@@ -43,9 +42,6 @@ public class StaffAction {
 		request.setAttribute("staffList", staffList); // 员工列表
 		request.setAttribute("sn", "staff"); //授权名称
 		request.setAttribute("form", form);
-
-		
-		this.getSelects(request);
 		
 		return "staff/list";
 	}
@@ -56,8 +52,6 @@ public class StaffAction {
 
 		CodeTableForm form = new CodeTableForm();
 		request.setAttribute("form", form);
-
-		this.getSelects(request);
 		
 		return "staff/add";
 	}
@@ -84,8 +78,6 @@ public class StaffAction {
 		CodeTableForm form = null;
 		form = staffDaoImpl.getStaffById(staffid);
 		request.setAttribute("form", form);
-
-		this.getSelects(request);
 		
 		return "staff/edi";
 	}
@@ -146,8 +138,6 @@ public class StaffAction {
 		
 		request.setAttribute("form", form);
 		
-		this.getSelects(request);
-		
 		return "staff/work";
 	}
 
@@ -170,23 +160,5 @@ public class StaffAction {
 			ajaxObject = new AjaxObject("修改失败");
 		}
 		return ajaxObject.toString();
-	}
-	
-	/**
-	 * 获取下拉列表
-	 * @param request
-	 */
-	private void getSelects(HttpServletRequest request) {
-
-		DbUtils dbUtils = new DbUtils();
-		String sql = "select * from cstaffstatus order by staffstatusid";
-		List<CodeTableForm> staffstatusList = dbUtils.getListBySql(sql); //员工状态
-		sql = "select * from cstafftype order by stafftypeid";
-		List<CodeTableForm> stafftypeList = dbUtils.getListBySql(sql); //员工类型
-		sql = "select * from cworkstatus order by workstatus";
-		List<CodeTableForm> workstatusList = dbUtils.getListBySql(sql); //考勤状态
-		request.setAttribute("staffstatusList", staffstatusList);
-		request.setAttribute("stafftypeList", stafftypeList);
-		request.setAttribute("workstatusList", workstatusList);
 	}
 }

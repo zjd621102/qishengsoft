@@ -44,8 +44,6 @@ public class BankcardAction {
 		request.setAttribute("sn", "bankcard"); //授权名称
 		request.setAttribute("form", form);
 		
-		this.getSelects(request);
-		
 		return "bankcard/list";
 	}
 
@@ -55,8 +53,6 @@ public class BankcardAction {
 
 		CodeTableForm form = new CodeTableForm();
 		request.setAttribute("form", form);
-		
-		this.getSelects(request);
 		
 		return "bankcard/add";
 	}
@@ -93,8 +89,6 @@ public class BankcardAction {
 		form = bankcardDaoImpl.getBankcardById(bankcardid);
 		request.setAttribute("form", form);
 		
-		this.getSelects(request);
-		
 		return "bankcard/edi";
 	}
 
@@ -129,21 +123,6 @@ public class BankcardAction {
 			ajaxObject = new AjaxObject("删除失败");
 		}
 		return ajaxObject.toString();
-	}
-	
-	/**
-	 * 获取下拉列表
-	 * @param request
-	 */
-	private void getSelects(HttpServletRequest request) {
-
-		DbUtils dbUtils = new DbUtils();
-		String sql = "select * from cbanktype order by banktypeid";
-		List<CodeTableForm> banktypeList = dbUtils.getListBySql(sql); //银行类型
-		sql = "select * from cstatus order by statusid";
-		List<CodeTableForm> statusList = dbUtils.getListBySql(sql); //状态
-		request.setAttribute("banktypeList", banktypeList);
-		request.setAttribute("statusList", statusList);
 	}
 	
 	/**
@@ -217,11 +196,6 @@ public class BankcardAction {
 		form = bankcardDaoImpl.getBankcardById(bankcardid);
 		request.setAttribute("form", form);
 		
-		String sql = "select * from creceandpaytype order by receandpaytypeid";
-		DbUtils dbUtils = new DbUtils();
-		List<CodeTableForm> receandpaytypeList = dbUtils.getListBySql(sql); //收支类型
-		request.setAttribute("receandpaytypeList", receandpaytypeList);
-		
 		return "bankcard/receandpay";
 	}
 	
@@ -263,11 +237,6 @@ public class BankcardAction {
 		request.setAttribute("receandpayList", receandpayList); //转账列表
 		request.setAttribute("sn", "bankcard"); //授权名称
 		request.setAttribute("form", form);
-
-		String sql = "select * from creceandpaytype order by receandpaytypeid";
-		DbUtils dbUtils = new DbUtils();
-		List<CodeTableForm> receandpaytypeList = dbUtils.getListBySql(sql); //收支类型
-		request.setAttribute("receandpaytypeList", receandpaytypeList);
 		
 		return "bankcard/receandpay_list";
 	}

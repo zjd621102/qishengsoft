@@ -13,16 +13,7 @@
 					</td>
 					<td>
 						当前流程：
-						<select name="map[currflow]" style="width: 100px;">
-							<option value=""></option>
-							<c:forEach items="${currflowList}" var="currflow">
-								<option value="${currflow.map.flowname}"
-									${currflow.map.flowname==form.map.currflow?"selected":""}
-								>
-									${currflow.map.flowname}
-								</option>
-							</c:forEach>
-						</select>
+						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 100px;'" />
 					</td>
 					<td>
 						销售日期从：<input type="text" name="map[selldateFrom]" size="15" value="${form.map.selldateFrom}" class="date"/>
@@ -85,9 +76,9 @@
 				<th width="15%">销售编号</th>
 				<th width="10%">销售日期</th>
 				<th width="15%">客户名称</th>
-				<th width="15%">当前流程</th>
+				<th width="10%">当前流程</th>
 				<th width="10%">制单人</th>
-				<th width="10%">销售金额</th>
+				<th width="15%">销售金额（${totalSum}）</th>
 				<th width="15%">创建时间</th>
 			</tr>
 		</thead>

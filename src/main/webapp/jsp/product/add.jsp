@@ -55,16 +55,7 @@
 		<dl>
 			<dt>计量单位：</dt>
 			<dd>
-				<select name="map[unit]" style="width: 185px;" class="required">
-					<option value=""></option>
-					<c:forEach items="${unitList}" var="unit">
-						<option value="${unit.map.unitid}"
-							${unit.map.unitid==form.map.unit?"selected":""}
-						>
-							${unit.map.unitname}
-						</option>
-					</c:forEach>
-				</select>
+				<st:select dictType="计量单位" name="map[unit]" value="${form.map.unit}" expStr="style='width: 185px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
@@ -140,11 +131,12 @@
 					</td>
 			   		<td></td>
 			   		<td>
+			   			<input type="hidden" name="map[materialid]" />
 						<input type="text" name="map[materialno]" style="width: 76%" maxlength="13"
-							suggestFields="materialno,materialname,materialprice"
-							readonly="readonly"></a>
+							suggestFields="materialid,materialno,materialname,materialprice"
+							readonly="readonly" />
 						<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
-						<a href="javascript:void(0);" class="btnClear" suggestFields="materialno,materialname,materialprice"></a>
+						<a href="javascript:void(0);" class="btnClear" suggestFields="materialid,materialno,materialname,materialprice"></a>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[materialname]" style="width: 96%" maxlength="32"/>
@@ -173,12 +165,13 @@
 						</td>
 				   		<td>${vs.index+1}</td>
 				   		<td>
+				   			<input type="hidden" name="map[materialid]" value="${bean.map.materialid}"/>
 							<input type="text" name="map[materialno]" style="width: 75%" maxlength="13"
-								suggestFields="materialno,materialname,materialprice"
+								suggestFields="materialid,materialno,materialname,materialprice"
 								value="${bean.map.materialno}" readonly="readonly"/>
 							<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
 							<a href="javascript:void(0);" class="btnClear"
-								suggestFields="materialno,materialname,materialprice"></a>
+								suggestFields="materialid,materialno,materialname,materialprice"></a>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[materialname]" style="width: 96%" maxlength="32"

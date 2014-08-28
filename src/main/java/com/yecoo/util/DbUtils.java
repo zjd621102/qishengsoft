@@ -18,7 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import com.yecoo.model.CodeTableForm;
 
 /**
- * 公用数据库操作 author zhoujd creadate 2012-3-2
+ * 公用数据库操作
+ * @author zhoujd
+ * @date   2012年8月28日 上午10:48:04
  */
 public class DbUtils {
 
@@ -30,8 +32,8 @@ public class DbUtils {
 	public Connection dbConnection() {
 		Connection myConn = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			myConn = DriverManager.getConnection(Constants.dbUrl);// 访问的数据库的帐号密码
+			Class.forName("org.logicalcobwebs.proxool.ProxoolDriver");
+			myConn = DriverManager.getConnection("proxool.dbname");// 访问的数据库的帐号密码
 		} catch (Exception e) {
 			StrUtils.WriteLog(this.getClass().getName() + ".dbConnection()", e);
 			this.closeConnection(null, null, myConn);
@@ -1025,6 +1027,37 @@ public class DbUtils {
 	public int setUpdate(CodeTableForm form, String strEdit, String tabName,
 			String key, String num) {
 		Connection myConn = this.dbConnection();
+		int iReturn = -1;
+		try {
+			iReturn = this.setUpdate(myConn, form, strEdit, tabName, key, num);
+		} catch (Exception e) {
+			StrUtils.WriteLog(this.getClass().getName() + ".setUpdate()", e);
+			iReturn = -1;
+		} finally {
+			this.closeConnection(null, null, myConn);
+		}
+		return iReturn;
+	}
+
+	/**
+	 * 更新表数据函数
+	 * 
+	 * @param myConn
+	 *            传进的连接对象
+	 * @param form
+	 *            保存的表单
+	 * @param strEdit
+	 *            编辑域 strEdit=1表示更新所有记录，否则，根据编辑域来更新记录
+	 * @param tabName
+	 *            要保存的表名
+	 * @param key
+	 *            要保存的主键
+	 * @param num
+	 *            要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
+	 * @return 返回 >=0 表示有操作成功，-1 表示操作失败
+	 */
+	public int setUpdate(Connection myConn, CodeTableForm form, String strEdit,
+			String tabName, String key, String num) {
 		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
 				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
 		PreparedStatement pStmt = null;
@@ -1033,7 +1066,7 @@ public class DbUtils {
 			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')");
 		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
-		int iReturn = 1;
+		int iReturn = -1;
 		strEdit = "";// 目前先不控制更改的编辑
 		String sGeneSQL = "";
 		try {
@@ -1097,102 +1130,6 @@ public class DbUtils {
 		} catch (Exception e) {
 			StrUtils.WriteLog(this.getClass().getName() + ".setUpdate()", e);
 			iReturn = -1;
-		} finally {
-			this.closeConnection(rs, pStmt, myConn);
-		}
-		return iReturn;
-	}
-
-	/**
-	 * 更新表数据函数
-	 * 
-	 * @param myConn
-	 *            传进的连接对象
-	 * @param form
-	 *            保存的表单
-	 * @param strEdit
-	 *            编辑域 strEdit=1表示更新所有记录，否则，根据编辑域来更新记录
-	 * @param tabName
-	 *            要保存的表名
-	 * @param key
-	 *            要保存的主键
-	 * @param num
-	 *            要保存的行项代号，针对凭证的同名多行项的情况，保存一个表单的多笔带主从表的记录
-	 * @return 返回 >=0 表示有操作成功，-1 表示操作失败
-	 */
-	public int setUpdate(Connection myConn, CodeTableForm form, String strEdit,
-			String tabName, String key, String num) {
-		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
-				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
-		PreparedStatement pStmt = null;
-		ResultSet rs = null;
-		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS"
-			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')");
-		String[] str = new String[Integer.parseInt(count) + 5];
-		str[0] = "";
-		int iReturn = 1;
-		strEdit = "";// 目前先不控制更改的编辑
-		String sGeneSQL = "";
-		try {
-			pStmt = myConn.prepareStatement(sql);
-			rs = pStmt.executeQuery();
-			int i = 1;
-			while (rs.next()) {
-				String columnname = rs.getString("name").toLowerCase();
-				if (form.getValue(columnname + num) != null
-						&& !form.getValue(columnname + num).equals("undefined")
-						&& ((strEdit.indexOf(";" + columnname + ";") > -1)
-								|| strEdit.equals("") || strEdit.equals("1"))) {
-					if(form.getValue(columnname + num).equals("")) {
-						form.setValue(columnname + num, null);
-					}
-					if (rs.getString("type").equals("DATE")) {
-						str[0] = str[0] + columnname
-								+ "=to_date(?,'yyyy-mm-dd'),";
-						sGeneSQL = sGeneSQL
-								+ columnname
-								+ "=to_date('"
-								+ StrUtils.nullToStr((String) form
-										.getValue(columnname + num))
-								+ "','yyyy-mm-dd'),";
-					} else {
-						str[0] = str[0] + columnname + "=?,";
-						sGeneSQL = sGeneSQL
-								+ columnname
-								+ "='"
-								+ StrUtils.nullToStr((String) form
-										.getValue(columnname + num)) + "',";
-					}
-					str[i] = StrUtils.nullToStr((String) form
-							.getValue(columnname + num));
-					i = i + 1;
-					str[i] = "#";
-				}
-			}
-			if (!str[0].equals("")) {
-				str[0] = str[0].substring(0, str[0].length() - 1);
-				sGeneSQL = sGeneSQL.substring(0, sGeneSQL.length() - 1);
-			}
-			pStmt.close();
-			// 更新表记录
-			if (!str[0].equals("")) {
-				String sql2 = "update " + tabName + " set " + str[0]
-						+ " WHERE " + key + "='" + form.getValue(key + num)
-						+ "'";
-				sGeneSQL = "update " + tabName + " set " + sGeneSQL + " WHERE "
-						+ key + "='" + form.getValue(key + num) + "'";
-				pStmt = myConn.prepareStatement(sql2);
-				for (i = 1; i < str.length; i++) {
-					pStmt.setString(i, str[i]);
-					if (i < str.length - 1
-							&& StrUtils.nullToStr(str[i + 1]).equals("#")) {
-						break;
-					}
-				}
-				iReturn = pStmt.executeUpdate();
-			}
-		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".setUpdate()", e);
 		} finally {
 			this.closeConnection(rs, pStmt, null);
 		}
