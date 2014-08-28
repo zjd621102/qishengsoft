@@ -15,6 +15,7 @@ import com.yecoo.util.StrUtils;
 public class ReportDaoImpl extends BaseDaoImpl {
 
 	private DbUtils dbUtils = new DbUtils();
+	DateUtils dateUtils = new DateUtils();
 	/**
 	 * 月度供应商报表
 	 * @param form
@@ -26,7 +27,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		StringBuffer dataStr = new StringBuffer();
 		StringBuffer dataArray = new StringBuffer();
 		
-		String buydateFrom = StrUtils.nullToStr(form.getValue("buydateFrom"), DateUtils.getStepDateTime(-366));
+		String buydateFrom = StrUtils.nullToStr(form.getValue("buydateFrom"), dateUtils.getStepDateTime(-366));
 		String buydateTo = StrUtils.nullToStr(form.getValue("buydateTo"), DateUtils.getNowDate());
 		form.setValue("buydateFrom", buydateFrom);
 		form.setValue("buydateTo", buydateTo);
@@ -77,7 +78,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		StringBuffer dataStr = new StringBuffer();
 		StringBuffer dataArray = new StringBuffer();
 		
-		String selldateFrom = StrUtils.nullToStr(form.getValue("selldateFrom"), DateUtils.getStepDateTime(-366));
+		String selldateFrom = StrUtils.nullToStr(form.getValue("selldateFrom"), dateUtils.getStepDateTime(-366));
 		String selldateTo = StrUtils.nullToStr(form.getValue("selldateTo"), DateUtils.getNowDate());
 		form.setValue("selldateFrom", selldateFrom);
 		form.setValue("selldateTo", selldateTo);
@@ -130,7 +131,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		String sql = null;
 		String sum = null;
 		
-		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), DateUtils.getStepDateTime(-366));
+		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), dateUtils.getStepDateTime(-366));
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
 		form.setValue("dateFrom", dateFrom);
 		form.setValue("dateTo", dateTo);
@@ -231,7 +232,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		StringBuffer dataStr = new StringBuffer();
 		String sql = null;
 		
-		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), DateUtils.getStepDateTime(-366));
+		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), dateUtils.getStepDateTime(-366));
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
 		String sort = StrUtils.nullToStr(form.getValue("sort"), "DESC");// 排序
 		String limitFrom = StrUtils.nullToStr(form.getValue("limitFrom"), "0");
@@ -276,7 +277,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		StringBuffer dataProfitStr = new StringBuffer();// 利润
 		String sql = null;
 		
-		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), DateUtils.getStepDateTime(-366));
+		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), dateUtils.getStepDateTime(-366));
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
 		String sort = StrUtils.nullToStr(form.getValue("sort"), "DESC");// 排序
 		String limitFrom = StrUtils.nullToStr(form.getValue("limitFrom"), "0");
@@ -326,7 +327,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		StringBuffer dataStr = new StringBuffer();
 		String sql = null;
 		
-		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), DateUtils.getStepDateTime(-366));
+		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), dateUtils.getStepDateTime(-366));
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
 		String sort = StrUtils.nullToStr(form.getValue("sort"), "DESC");// 排序
 		String limitFrom = StrUtils.nullToStr(form.getValue("limitFrom"), "0");
@@ -370,7 +371,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		StringBuffer dataStr = new StringBuffer();
 		String sql = null;
 		
-		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), DateUtils.getStepDateTime(-366));
+		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), dateUtils.getStepDateTime(-366));
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
 		form.setValue("dateFrom", dateFrom);
 		form.setValue("dateTo", dateTo);
@@ -405,7 +406,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		String sql = null;
 		String sum = null;
 		
-		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), DateUtils.getStepDateTime(-366));
+		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), dateUtils.getStepDateTime(-366));
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
 		form.setValue("dateFrom", dateFrom);
 		form.setValue("dateTo", dateTo);

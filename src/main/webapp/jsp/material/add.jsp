@@ -55,7 +55,7 @@
 		<dl>
 			<dt>启用库存：</dt>
 			<dd>
-				<st:select dictType="是否" name="map[usestock]" value="${form.map.usestock}" expStr="style='width: 185px;'" />
+				<st:select dictType="是否" name="map[usestock]" value="0" expStr="style='width: 185px;'" />
 			</dd>
 		</dl>
 		<dl>
@@ -69,13 +69,13 @@
 			<dt>报警量：</dt>
 			<dd>
 				<input type="text" name="map[alarmnum]" class="required number" size="30" maxlength="12"
-					value="9999"/>
+					value="0"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<textarea name="map[remark]" cols="27" rows="4" maxlength="256"></textarea>
+				<textarea name="map[remark]" cols="27" rows="6" maxlength="256"></textarea>
 			</dd>
 		</dl>
 	</div>	

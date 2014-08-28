@@ -217,6 +217,20 @@
 									</li>
 								</c:forEach>
 							</c:if>
+							
+							<c:if test="${not empty alarmStockList}">
+								<div class="divider"></div>
+								<h2>库存报警列表：</h2>
+								<c:forEach var="material" items="${alarmStockList}">
+									<li>
+										<div class="unit">
+											<a href="<%=path%>/material/edi/${material.map.materialid}" target="dialog"
+												rel="pay_edi" mask="true" width="500" height="550">
+												【${material.map.materialno}】【${material.map.materialname}】【${material.map.stock}】</a>
+										</div>
+									</li>
+								</c:forEach>
+							</c:if>
 						</div>
 					</div>
 				</div>

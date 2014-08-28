@@ -92,7 +92,7 @@
 				<th width="3%">序号</th>
 				<th width="8%">操作类型</th>
 				<th width="8%">操作人</th>
-				<th width="12%">操作时间</th>
+				<th width="13%">操作时间</th>
 				<th>备注</th>
 			</tr>
 		</thead>

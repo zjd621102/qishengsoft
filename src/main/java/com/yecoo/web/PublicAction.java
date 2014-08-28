@@ -165,12 +165,16 @@ public class PublicAction {
 		sql = "SELECT t.payid, func_getBtypeName(t.btype) btypename, t.paydate FROM bpay t WHERE t.currflow <> '结束' ORDER BY t.createtime";
 		List<CodeTableForm> payList = dbUtils.getListBySql(sql); //单据待办列表
 		
-		int toDoNum = buyList.size() + sellList.size() + salaryList.size() + payList.size();
+		sql = "SELECT a.materialid, a.materialno, a.materialname, a.stock FROM smaterial a WHERE a.stock < a.alarmnum AND a.usestock = '1'";
+		List<CodeTableForm> alarmStockList = dbUtils.getListBySql(sql); //库存报警列表
+		
+		int toDoNum = buyList.size() + sellList.size() + salaryList.size() + payList.size() + alarmStockList.size();
 		
 		request.setAttribute("buyList", buyList);
 		request.setAttribute("sellList", sellList);
 		request.setAttribute("salaryList", salaryList);
 		request.setAttribute("payList", payList);
+		request.setAttribute("alarmStockList", alarmStockList);
 		request.setAttribute("toDoNum", toDoNum);
 	}
 }

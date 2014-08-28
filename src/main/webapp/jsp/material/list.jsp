@@ -34,7 +34,7 @@
 			<shiro:hasPermission name="Material:add">
 			<li>
 				<a class="add" href="<%=path%>/material/add/${form.map.materialtype}" target="dialog" rel="material_add"
-					mask="true" width="500" height="500">
+					mask="true" width="500" height="550">
 					<span>新增物资</span>
 				</a>
 			</li>
@@ -42,7 +42,7 @@
 			<shiro:hasPermission name="Material:edi">
 			<li>
 				<a class="edit" href="<%=path%>/material/edi/{s_materialid}" target="dialog" rel="material_edi" mask="true"
-					width="500" height="500">
+					width="500" height="550">
 					<span>修改物资</span>
 				</a>
 			</li>

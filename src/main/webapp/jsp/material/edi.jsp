@@ -83,7 +83,7 @@
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<textarea name="map[remark]" cols="27" rows="4" maxlength="256"></textarea>
+				<textarea name="map[remark]" cols="27" rows="6" maxlength="256"></textarea>
 			</dd>
 		</dl>
 	</div>	

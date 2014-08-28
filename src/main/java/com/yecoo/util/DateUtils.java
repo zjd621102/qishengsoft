@@ -13,7 +13,7 @@ public class DateUtils {
 
 	static final String DATEPATTERN = "yyyy-MM-dd HH:mm:ss";
 	static final SimpleDateFormat SF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	static long nowtime = System.currentTimeMillis();
+	long nowtime = System.currentTimeMillis();
 
 	/**
 	 * 以当前系统时间构造DateTime对象
@@ -69,7 +69,7 @@ public class DateUtils {
 	 *            datePattern 格式字符串
 	 * @return String 格式化的日期、时间字符串
 	 */
-	public static String getNowTime(String datePattern) {
+	public String getNowTime(String datePattern) {
 		String retValue = null;
 		SimpleDateFormat sf = new SimpleDateFormat(datePattern);
 		retValue = sf.format(new Date(nowtime));
@@ -144,7 +144,7 @@ public class DateUtils {
 	 * 
 	 * @return String 日期
 	 */
-	public static String getDateOnly() {
+	public String getDateOnly() {
 		return getNowTime("yyyy-MM-dd");
 	}
 
@@ -180,7 +180,7 @@ public class DateUtils {
 	 * 
 	 * @param int i 要调整的基数，正表示加，负表示减
 	 */
-	public static void adjustDay(int i) {
+	public void adjustDay(int i) {
 		adjustTime(0, 0, i, 0, 0);
 	}
 
@@ -211,7 +211,7 @@ public class DateUtils {
 	 * @param int h 小时
 	 * @param int mm 分钟
 	 */
-	protected static void adjustTime(int y, int m, int d, int h, int mm) {
+	protected void adjustTime(int y, int m, int d, int h, int mm) {
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTimeInMillis(nowtime);
 		cal.add(1, y);
@@ -233,15 +233,6 @@ public class DateUtils {
 	}
 
 	/**
-	 * 获取当前时间yyyy-MM-dd
-	 * 
-	 * @return String
-	 */
-	public static String getNowDate() {
-		return DateUtils.getNowTime("yyyy-MM-dd");
-	}
-
-	/**
 	 * 按指定格式返回当前日期.
 	 * 
 	 * @param String
@@ -249,7 +240,17 @@ public class DateUtils {
 	 * @return String 格式化的日期／时间
 	 */
 	public static String getNowDateTime(String pattern) {
-		return DateUtils.getNowTime(pattern);
+		DateUtils dt = new DateUtils();
+		return dt.getNowTime(pattern);
+	}
+
+	/**
+	 * 获取当前时间yyyy-MM-dd
+	 * 
+	 * @return String
+	 */
+	public static String getNowDate() {
+		return getNowDateTime("yyyy-MM-dd");
 	}
 
 	/**
@@ -258,7 +259,7 @@ public class DateUtils {
 	 * @return String
 	 */
 	public static String getNowDateTimeChinese() {
-		return getNowDateTimeChinese("yyyy年M月d日E") + DateUtils.getNowTime("H点mm分");
+		return getNowDateTimeChinese("yyyy年M月d日E") + getNowDateTime("H点mm分");
 	}
 
 	/**
@@ -269,7 +270,7 @@ public class DateUtils {
 	 * @return String 时间、日期字符串
 	 */
 	public static String getNowDateTimeChinese(String pattern) {
-		return numberToChinese(DateUtils.getNowTime(pattern));
+		return numberToChinese(getNowDateTime(pattern));
 	}
 
 	/**
@@ -352,6 +353,7 @@ public class DateUtils {
 		try {
 			d = sf.parse(s);
 		} catch (ParseException parseexception) {
+			
 		}
 		return d;
 	}
@@ -372,7 +374,7 @@ public class DateUtils {
 	 *            为正则加，为负则减
 	 * @return String-格式为yyyy-MM-dd的日期
 	 */
-	public static String getStepDateTime(int n) {
+	public String getStepDateTime(int n) {
 		String dt = new String();
 		adjustDay(n);
 		dt = getDateOnly();
@@ -722,6 +724,6 @@ public class DateUtils {
 	public static void main(String[] args) {
 //		List<String> list = DateUtils.getMonthList("2012-04-28", "2012-11-05");
 //		System.out.println(list.toString());
-		System.out.println(DateUtils.getNowDate());
+//		System.out.println(DateUtils.getNowDate());
 	}
 }
