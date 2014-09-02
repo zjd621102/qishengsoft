@@ -162,7 +162,7 @@ public class PublicAction {
 		sql = "SELECT t.salaryid, t.salaryname FROM bsalary t WHERE t.currflow <> '结束' ORDER BY t.createtime";
 		List<CodeTableForm> salaryList = dbUtils.getListBySql(sql); //工资单待办列表
 		
-		sql = "SELECT t.payid, func_getBtypeName(t.btype) btypename, t.paydate FROM bpay t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+		sql = "SELECT t.payid, func_getDictName('单据类型', t.btype) btypename, t.paydate FROM bpay t WHERE t.currflow <> '结束' ORDER BY t.createtime";
 		List<CodeTableForm> payList = dbUtils.getListBySql(sql); //单据待办列表
 		
 		sql = "SELECT a.materialid, a.materialno, a.materialname, a.stock FROM smaterial a WHERE a.stock < a.alarmnum AND a.usestock = '1'";

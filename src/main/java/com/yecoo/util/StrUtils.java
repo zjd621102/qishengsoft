@@ -405,7 +405,7 @@ public class StrUtils {
 		}
 	}
 	/**
-	 * 获取当前时间
+	 * 获取当前日期
 	 * @return String
 	 * @creadate 2012-3-22
 	 */
@@ -424,6 +424,15 @@ public class StrUtils {
 			format = "yyyy-MM-dd";
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		return sdf.format(new Date());
+	}
+	/**
+	 * 获取当前时间
+	 * @return String
+	 * @creadate 2012-3-22
+	 */
+	public static String getSysdatetime() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(new Date());
 	}
 	/**

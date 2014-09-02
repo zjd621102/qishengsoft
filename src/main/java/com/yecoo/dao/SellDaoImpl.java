@@ -282,4 +282,42 @@ public class SellDaoImpl extends BaseDaoImpl {
 		int iReturn = dbUtils.executeSQLs(sqls);
 		return iReturn;
 	}
+	
+	/**
+	 * 通过销售单新增采购单
+	 * @param sellid
+	 * @return
+	 */
+	public int addBuy(CodeTableForm form, String maker) {
+		int iReturn = -1;
+		String sql = null;
+
+		CodeTableForm buyForm = new CodeTableForm(); //采购单
+		buyForm.setValue("btype", "CGD");
+		buyForm.setValue("buyname", StrUtils.getSysdate("yyyy.MM.dd") + "采购");
+		buyForm.setValue("buyno", StrUtils.getNewNO("CGD", "buyno", "bbuy"));
+		buyForm.setValue("relateno", form.getValue("sellno"));
+		buyForm.setValue("buydate", StrUtils.getSysdate());
+		buyForm.setValue("currflow", "申请");
+		buyForm.setValue("maker", maker);
+		buyForm.setValue("createtime", StrUtils.getSysdatetime());
+		iReturn = dbUtils.setInsert(buyForm, "bbuy", ""); //保存主表
+
+		sql = "SELECT IFNULL(MAX(buyid), 1) FROM bbuy";
+		int buyid = dbUtils.getIntBySql(sql);
+		
+		if(iReturn >= 1) { //保存行项表
+			sql = "INSERT INTO bbuyrow"
+				+ " SELECT NULL, '" + buyid + "', n.materialid, n.materialname, n.unit, n.price, m.num, n.price * m.num sum, o.manuid, o.manuname, o.manucontact, o.manutel, NULL FROM ("
+				+ "SELECT a.materialid, SUM(b.materialnum * c.num) num FROM smaterial a, sproductrow b, bsellrow c WHERE a.materialid = b.materialid AND b.productid = c.productid AND c.sellid = '" + buyid + "' GROUP BY a.materialid"
+				+ ") m, smaterial n, smanu o WHERE m.materialid = n.materialid AND n.manuid = o.manuid";
+			iReturn = dbUtils.executeSQL(sql);
+			if(iReturn == -1) { //保存失败，删除主表
+				sql = "DELETE FROM bbuy WHERE buyid = '" + buyid + "'";
+				dbUtils.execQuerySQL(sql);
+			}
+		}
+		
+		return iReturn;
+	}
 }

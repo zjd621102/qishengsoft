@@ -24,28 +24,28 @@
 		<dl>
 			<dt>单据ID：</dt>
 			<dd>
-				<input type="text" name="map[payid]" size="30" value="${form.map.payid}" readonly="readonly"/>
+				<input type="text" name="map[payid]" size="25" value="${form.map.payid}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>单据类型：</dt>
 			<dd>
 				<input type="hidden" name="map[btype]" value="${form.map.btype}" />
-				<input type="text" name="map[btypename]" size="30" value="${form.map.btypename}" readonly="readonly"/>
+				<input type="text" name="map[btypename]" size="25" value="${form.map.btypename}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>制单人：</dt>
 			<dd>
 				<input type="hidden" name="map[maker]" value="${form.map.maker}" />
-				<input type="text" name="map[makername]" class="required" size="30" maxlength="64"
+				<input type="text" name="map[makername]" class="required" size="25" maxlength="64"
 					value="${form.map.makername}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>单据日期：</dt>
 			<dd>
-				<input type="text" name="map[paydate]" class="required date" size="30"
+				<input type="text" name="map[paydate]" class="required date" size="25"
 					value="${form.map.paydate}" readonly="readonly"/>
 				<a class="inputDateButton" href="javascript:;">选择</a>
 			</dd>
@@ -53,14 +53,14 @@
 		<dl>
 			<dt>关联单号：</dt>
 			<dd>
-				<input type="text" name="map[relateno]" size="30" maxlength="16"
+				<input type="text" name="map[relateno]" size="25" maxlength="16"
 					value="${form.map.relateno}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>关联金额：</dt>
 			<dd>
-				<input type="text" name="map[relatemoney]" class="number" size="30" maxlength="12"
+				<input type="text" name="map[relatemoney]" class="number" size="25" maxlength="12"
 					value="${form.map.relatemoney}" readonly="readonly"/>
 			</dd>
 		</dl>
@@ -73,14 +73,14 @@
 		<dl>
 			<dt>创建时间：</dt>
 			<dd>
-				<input type="text" name="map[createtime]" class="required" size="30" maxlength="19"
+				<input type="text" name="map[createtime]" class="required" size="25" maxlength="19"
 					value="${form.map.createtime}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="30" maxlength="256"
+				<input type="text" name="map[remark]" size="25" maxlength="256"
 					value="${form.map.remark}"/>
 			</dd>
 		</dl>

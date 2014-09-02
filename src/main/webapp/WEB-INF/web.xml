@@ -117,7 +117,6 @@
 	  	</init-param>
 	  	<load-on-startup>1</load-on-startup>
 	</servlet>
-
 	<servlet>
 		<servlet-name>proxoolAdmin</servlet-name>
 		<servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>

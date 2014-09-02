@@ -339,7 +339,7 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 	public List<CodeTableForm> getTransactionList(CodeTableForm form) {
 		
 		String sql = "SELECT b.bankcardno, b.realsum*if(a.btype='SKD', 1, -1) realsum, a.paydate, a.payid, a.relateno,"
-				+ " func_getBtypeName(a.btype) btypename"
+				+ " func_getDictName('单据类型', a.btype) btypename"
 				+ " FROM bpay a, bpayrow b WHERE a.payid = b.payid AND a.currflow = '结束'";
 		String cond = getTransactionListCondition(form);
 		sql += cond;

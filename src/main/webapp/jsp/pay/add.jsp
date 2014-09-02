@@ -18,7 +18,7 @@
 		<dl>
 			<dt>单据ID：</dt>
 			<dd>
-				<input type="text" name="map[payid]" size="30" value="${form.map.payid}" readonly="readonly"/>
+				<input type="text" name="map[payid]" size="25" value="${form.map.payid}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
@@ -27,10 +27,10 @@
 				<select name="map[btype]" style="width: 184px;" class="required">
 					<option value=""></option>
 					<c:forEach items="${btypeList}" var="btype">
-						<option value="${btype.map.btype}"
-							${btype.map.btype==form.map.btype?"selected":""}
+						<option value="${btype.map.dictvalue}"
+							${btype.map.dictvalue==form.map.btype?"selected":""}
 						>
-							${btype.map.btypename}
+							${btype.map.dictname}
 						</option>
 					</c:forEach>
 				</select>
@@ -39,7 +39,7 @@
 		<dl>
 			<dt>单据日期：</dt>
 			<dd>
-				<input type="text" name="map[paydate]" class="required date" size="30"
+				<input type="text" name="map[paydate]" class="required date" size="25"
 					value="${form.map.paydate}" readonly="readonly"/>
 				<a class="inputDateButton" href="javascript:;">选择</a>
 			</dd>
@@ -53,7 +53,7 @@
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="30" maxlength="256"
+				<input type="text" name="map[remark]" size="25" maxlength="256"
 					value="${form.map.remark}"/>
 			</dd>
 		</dl>

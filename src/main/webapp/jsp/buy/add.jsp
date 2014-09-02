@@ -81,13 +81,13 @@
 		<dl>
 			<dt>单据类型：</dt>
 			<dd>
-				<select name="map[btype]" style="width: 184px;" class="required">
+				<select name="map[btype]" style="width: 213px;" class="required">
 					<option value=""></option>
 					<c:forEach items="${btypeList}" var="btype">
-						<option value="${btype.map.btype}"
-							${btype.map.btype=="CGD"?"selected":""}
+						<option value="${btype.map.dictvalue}"
+							${btype.map.dictvalue=="CGD"?"selected":""}
 						>
-							${btype.map.btypename}
+							${btype.map.dictname}
 						</option>
 					</c:forEach>
 				</select>
@@ -111,7 +111,7 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<st:select dictType="流程状态" name="map[currflow]" value="申请" expStr="style='width: 184px;' class='required'" />
+				<st:select dictType="流程状态" name="map[currflow]" value="申请" expStr="style='width: 213px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>

@@ -96,11 +96,22 @@
 		allprofit = Math.round(allprofit * 100) / 100;
 		$("[name*='map[allprofit]']").val(allprofit);
 	}
+	
+	/**
+	 * 生成采购单
+	 */
+	function addBuy() {
+		$("[name='map[addBuy]']").val("1");
+		if(checkFormSubmit()) {
+			validateCallback($(".pageForm")[0], dialogAjaxDone);
+		}
+	}
 </script>
 
 <form method="post" action="<%=path%>/sell/edi" class="required-validate pageForm"
  onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
  	<input type="hidden" name="map[sellid]" value="${form.map.sellid}" />
+ 	<input type="hidden" name="map[addBuy]" value="" />
 	<div class="pageFormContent" layoutH="56">
 		<dl>
 			<dt>销售编号：</dt>
@@ -317,6 +328,7 @@
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
 			<li><div class="button"><div class="buttonContent"><button type="button"
 				onclick="window.open('<%=path%>/sell/edi/${form.map.sellid}?act=print');">打印</button></div></div></li>
+			<li><div class="button"><div class="buttonContent"><button type="button" onclick="addBuy()">生成采购单</button></div></div></li>
 		</ul>
 	</div>
 </form>

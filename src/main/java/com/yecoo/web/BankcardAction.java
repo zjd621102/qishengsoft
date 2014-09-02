@@ -260,7 +260,8 @@ public class BankcardAction {
 		request.setAttribute("form", form);
 
 		DbUtils dbUtils = new DbUtils();
-		String sql = "SELECT * FROM sbtype WHERE btype in ('FKD','SKD','YFD','GZD')";
+		String sql = "SELECT a.dictname, a.dictvalue FROM cdictrow a, cdict b"
+				+ " WHERE a.dictid = b.dictid AND b.dicttype = '单据类型' AND a.dictvalue in ('FKD','SKD','YFD','GZD')";
 		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); //单据类型
 		request.setAttribute("btypeList", btypeList);
 		

@@ -78,11 +78,11 @@ public class BuyAction {
 	public @ResponseBody String add(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
-		String createtime = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss"); // 当前日期
+		String createtime = StrUtils.getSysdatetime(); // 当前日期
 		form.setValue("createtime", createtime);
 		
 		String btype = StrUtils.nullToStr(form.getValue("btype"));				
-		String buyno = StrUtils.getNewNO(btype,"buyno","bbuy");
+		String buyno = StrUtils.getNewNO(btype, "buyno", "bbuy");
 		form.setValue("buyno", buyno); // 初始化单据号
 		
 		CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
@@ -163,7 +163,8 @@ public class BuyAction {
 	 */
 	private void getSelects(HttpServletRequest request) {
 
-		String sql = "SELECT * FROM sbtype WHERE btype in ('CGD','JYD')";
+		String sql = "SELECT a.dictname, a.dictvalue FROM cdictrow a, cdict b"
+				+ " WHERE a.dictid = b.dictid AND b.dicttype = '单据类型' AND a.dictvalue in ('CGD','JYD')";
 		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); // 单据类型
 		request.setAttribute("btypeList", btypeList);
 	}

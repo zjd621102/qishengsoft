@@ -117,6 +117,24 @@ public class SellAction {
 			ajaxObject = new AjaxObject("修改成功！", "sell_list", "closeCurrent");
 
 			StrUtils.saveLog(request, "修改销售单", form);
+			
+			if("1".equals(form.getValue("addBuy"))) {// 生成采购单
+				String sql = "SELECT COUNT(1) FROM bbuy t WHERE t.relateno = '" + form.getValue("sellno") + "'";
+				int cou = dbUtils.getIntBySql(sql);
+				if(cou >= 1) {
+					ajaxObject = new AjaxObject("关联采购单已存在");
+				} else {
+					CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
+					String maker = StrUtils.nullToStr(user.getValue("userid"));
+					
+					iReturn = sellDaoImpl.addBuy(form, maker);
+					if(iReturn >= 0) {
+						ajaxObject = new AjaxObject("生成采购单成功！", "sell_list", "closeCurrent");
+					} else {
+						ajaxObject = new AjaxObject("生成采购单失败");
+					}
+				}
+			}
 		} else {
 			ajaxObject = new AjaxObject("修改失败");
 		}

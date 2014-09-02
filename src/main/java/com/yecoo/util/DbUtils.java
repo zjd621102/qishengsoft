@@ -26,14 +26,13 @@ public class DbUtils {
 
 	/**
 	 * 从数据库连接池中获取一个数据库连接
-	 * 
 	 * @return Connection
 	 */
 	public Connection dbConnection() {
 		Connection myConn = null;
 		try {
 			Class.forName("org.logicalcobwebs.proxool.ProxoolDriver");
-			myConn = DriverManager.getConnection("proxool.dbname");// 访问的数据库的帐号密码
+			myConn = DriverManager.getConnection("proxool.dbname");
 		} catch (Exception e) {
 			StrUtils.WriteLog(this.getClass().getName() + ".dbConnection()", e);
 			this.closeConnection(null, null, myConn);

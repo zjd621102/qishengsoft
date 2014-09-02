@@ -33,7 +33,7 @@ public class PayDaoImpl extends BaseDaoImpl {
 	 */
 	public List<CodeTableForm> getPayList(CodeTableForm form) {
 		
-		String sql = "SELECT t.*, func_getBtypeName(t.btype) btypename, func_getUserName(t.maker) makername,"
+		String sql = "SELECT t.*, func_getDictName('单据类型', t.btype) btypename, func_getUserName(t.maker) makername,"
 				+ " (SELECT IFNULL(SUM(bp.realsum), 0) FROM bpayrow bp WHERE bp.payid = t.payid) allrealsum"
 				+ " FROM bpay t WHERE 1 = 1";
 		String cond = getPayListCondition(form);
@@ -135,7 +135,7 @@ public class PayDaoImpl extends BaseDaoImpl {
 	 */
 	public CodeTableForm getPayById(int payid, HttpServletRequest request) {
 		
-		String sql = "SELECT a.*, func_getBtypeName(a.btype) btypename, func_getUserName(a.maker) makername"
+		String sql = "SELECT a.*, func_getDictName('单据类型', a.btype) btypename, func_getUserName(a.maker) makername"
 				+ " FROM bpay a WHERE a.payid = '" + payid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		

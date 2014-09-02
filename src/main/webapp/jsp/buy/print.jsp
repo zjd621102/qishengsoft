@@ -34,21 +34,24 @@
 			</td>
 		</tr>
 		<tr>
+			<td>关联编号：
+				<span>${form.map.relateno}</span>
+			</td>
 			<td>采购日期：
 				<span>${form.map.buydate}</span>
 			</td>
 			<td>当前流程：
 				<span>${form.map.currflow}</span>
 			</td>
+		</tr>
+		<tr>
 			<td>制&nbsp;单&nbsp;人：
 				<span>${form.map.makername}</span>
 			</td>
-		</tr>
-		<tr>
 			<td>创建日期：
 				<span>${form.map.createtime}</span>
 			</td>
-			<td colspan="2">备&nbsp;&nbsp;&nbsp;&nbsp;注：
+			<td>备&nbsp;&nbsp;&nbsp;&nbsp;注：
 				<span>${form.map.remark}</span>
 			</td>
 		</tr>

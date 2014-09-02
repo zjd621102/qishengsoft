@@ -15,10 +15,10 @@
 						<select name="map[btype]" style="width: 184px;">
 							<option value=""></option>
 							<c:forEach items="${btypeList}" var="btype">
-								<option value="${btype.map.btype}"
-									${btype.map.btype==form.map.btype?"selected":""}
+								<option value="${btype.map.dictvalue}"
+									${btype.map.dictvalue==form.map.btype?"selected":""}
 								>
-									${btype.map.btypename}
+									${btype.map.dictname}
 								</option>
 							</c:forEach>
 						</select>

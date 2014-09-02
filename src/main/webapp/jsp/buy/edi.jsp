@@ -105,9 +105,16 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>关联编号：</dt>
+			<dd>
+				<input type="text" name="map[relateno]" size="30" maxlength="16"
+					 value="${form.map.relateno}" readonly="readonly"/>
+			</dd>
+		</dl>
+		<dl>
 			<dt>采购日期：</dt>
 			<dd>
-				<input type="text" name="map[buydate]" class="required date" size="30"
+				<input type="text" name="map[buydate]" class="required date" size="27"
 					value="${form.map.buydate}" readonly="readonly"/>
 				<a class="inputDateButton" href="javascript:;">选择</a>
 			</dd>
@@ -115,7 +122,7 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 184px;' class='required'" />
+				<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 213px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>

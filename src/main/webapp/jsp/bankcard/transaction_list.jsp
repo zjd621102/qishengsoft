@@ -8,29 +8,29 @@
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						银行卡卡号：<input type="text" name="map[bankcardno]" size="25" value="${form.map.bankcardno}"/>
+						银行卡卡号：<input type="text" name="map[bankcardno]" size="20" value="${form.map.bankcardno}"/>
 					</td>
 					<td>
 						单据类型：
 						<select name="map[btype]" style="width: 80px;">
 							<option value=""></option>
 							<c:forEach items="${btypeList}" var="btype">
-								<option value="${btype.map.btype}"
-									${btype.map.btype==form.map.btype?"selected":""}
+								<option value="${btype.map.dictvalue}"
+									${btype.map.dictvalue==form.map.btype?"selected":""}
 								>
-									${btype.map.btypename}
+									${btype.map.dictname}
 								</option>
 							</c:forEach>
 						</select>
 					</td>
 					<td>
-						单据ID：<input type="text" name="map[payid]" size="10" value="${form.map.payid}" class="number"/>
+						单据ID：<input type="text" name="map[payid]" size="6" value="${form.map.payid}" class="number"/>
 					</td>
 					<td>
-						单据日期从：<input type="text" name="map[paydateFrom]" size="20" value="${form.map.paydateFrom}" class="date"/>
+						单据日期从：<input type="text" name="map[paydateFrom]" size="10" value="${form.map.paydateFrom}" class="date"/>
 					</td>
 					<td>
-						至：<input type="text" name="map[paydateTo]" size="20" value="${form.map.paydateTo}" class="date"/>
+						至：<input type="text" name="map[paydateTo]" size="10" value="${form.map.paydateTo}" class="date"/>
 					</td>
 				</tr>
 			</table>
