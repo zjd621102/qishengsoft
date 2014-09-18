@@ -11,6 +11,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -176,5 +177,18 @@ public class PublicAction {
 		request.setAttribute("payList", payList);
 		request.setAttribute("alarmStockList", alarmStockList);
 		request.setAttribute("toDoNum", toDoNum);
+	}
+	
+	/**
+	 * 通过NO获取URL地址
+	 */
+	@RequestMapping(value="/getUrlByNo/{no}")
+	@ResponseBody
+	public String getUrlByNo(@PathVariable("no") String no, HttpServletRequest request) {
+		
+		String sql = "SELECT func_getUrlByNo('" + no + "') FROM DUAL";
+		String url = dbUtils.execQuerySQL(sql);
+		
+		return url;
 	}
 }

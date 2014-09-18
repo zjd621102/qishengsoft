@@ -108,11 +108,12 @@
 	}
 </script>
 
+<h1 class="margin10px">销售单信息</h1>
 <form method="post" action="<%=path%>/sell/edi" class="required-validate pageForm"
  onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
  	<input type="hidden" name="map[sellid]" value="${form.map.sellid}" />
  	<input type="hidden" name="map[addBuy]" value="" />
-	<div class="pageFormContent" layoutH="56">
+	<div class="pageFormContent" layoutH="88">
 		<dl>
 			<dt>销售编号：</dt>
 			<dd>
@@ -142,7 +143,7 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 159px;' class='required'" />
+				<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
@@ -163,7 +164,7 @@
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="177" maxlength="256" value="${form.map.remark}" />
+				<input type="text" name="map[remark]" size="152" maxlength="256" value="${form.map.remark}" />
 			</dd>
 		</dl>
 		
@@ -324,11 +325,11 @@
 		<ul>
 			<c:if test="${form.map.currflow != '结束'}">
 			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+			<li><div class="button"><div class="buttonContent"><button type="button" onclick="addBuy()">生成采购单</button></div></div></li>
 			</c:if>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
 			<li><div class="button"><div class="buttonContent"><button type="button"
 				onclick="window.open('<%=path%>/sell/edi/${form.map.sellid}?act=print');">打印</button></div></div></li>
-			<li><div class="button"><div class="buttonContent"><button type="button" onclick="addBuy()">生成采购单</button></div></div></li>
 		</ul>
 	</div>
 </form>

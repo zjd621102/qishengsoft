@@ -9,59 +9,71 @@
 		<dl>
 			<dt>供应商名称：</dt>
 			<dd>
-				<input type="text" name="map[manuname]" class="required" size="30" maxlength="32"
+				<input type="text" name="map[manuname]" class="required" size="25" maxlength="32"
 					 value="${form.map.manuname}"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>供应商类别：</dt>
 			<dd>
-				<st:select dictType="供应商类别" name="map[manutypeid]" value="${form.map.manutypeid}" expStr="style='width: 184px;' class='required'" />
+				<st:select dictType="供应商类别" name="map[manutypeid]" value="${form.map.manutypeid}"
+				 expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
 			<dt>供应商状态：</dt>
 			<dd>
-				<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}" expStr="style='width: 184px;' class='required'" />
+				<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
+				 expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
 			<dt>联系人：</dt>
 			<dd>
-				<input type="text" name="map[manucontact]" class="required" size="30" maxlength="32"
+				<input type="text" name="map[manucontact]" class="required" size="25" maxlength="32"
 					 value="${form.map.manucontact}"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>联系电话：</dt>
 			<dd>
-				<input type="text" name="map[manutel]" class="required" size="30" maxlength="32"
+				<input type="text" name="map[manutel]" class="required" size="25" maxlength="32"
 					 value="${form.map.manutel}"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>EMAIL：</dt>
 			<dd>
-				<input type="text" name="map[manuemail]" size="30" maxlength="64" value="${form.map.manuemail}"/>
+				<input type="text" name="map[manuemail]" size="25" maxlength="64" value="${form.map.manuemail}"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>创建时间：</dt>
 			<dd>
-				<input type="text" name="map[createdate]" size="30" maxlength="32"
+				<input type="text" name="map[createdate]" size="25" maxlength="19"
 					value="${form.map.createdate}" readonly/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>优先级</dt>
 			<dd>
-				<input type="text" name="map[priority]" size="30" maxlength="3" value="${form.map.priority}"/>
+				<input type="text" name="map[priority]" size="25" maxlength="3" value="${form.map.priority}"/>
 			</dd>
+		</dl>
+		<dl>
+			<dt>推荐人</dt>
+			<dd>
+				<input type="text" name="map[referee]" size="25" maxlength="16" value="${form.map.referee}" />
+			</dd>
+		</dl>
+		<dl>
+			<dt></dt>
+			<dd></dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="106" maxlength="512" value="${form.map.remark}" />
+				<input type="text" name="map[remark]" size="88" maxlength="512" value="${form.map.remark}" />
 			</dd>
 		</dl>
 		

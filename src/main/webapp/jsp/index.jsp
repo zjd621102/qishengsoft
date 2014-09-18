@@ -32,6 +32,9 @@
 <link rel="stylesheet" href="<%=path%>/js/jquery-ui-1.9.2.custom/css/ui-lightness/jquery-ui-1.9.2.custom.min.css"></link>
 <script src="<%=path%>/js/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js"></script>
 
+<link rel="stylesheet" href="<%=path%>/js/uploadify/css/uploadify.css"></link>
+<script src="<%=path%>/js/uploadify/scripts/jquery.uploadify.js"></script>
+
 <script type="text/javascript">
 	$(function() {
 		DWZ.init("<%=path%>/resources/dwz.frag.xml", {

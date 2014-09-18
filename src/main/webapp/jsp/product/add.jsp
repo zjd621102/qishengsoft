@@ -33,14 +33,14 @@
 		<dl>
 			<dt>产品编码：</dt>
 			<dd>
-				<input type="text" name="map[productno]" class="required" size="30" maxlength="17"
+				<input type="text" name="map[productno]" class="required" size="25" maxlength="17"
 					value="${form.map.productno}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>产品名称：</dt>
 			<dd>
-				<input type="text" name="map[productname]" class="required" size="30" maxlength="32"
+				<input type="text" name="map[productname]" class="required" size="25" maxlength="32"
 					value="${form.map.productname}"/>
 			</dd>
 		</dl>
@@ -48,48 +48,48 @@
 			<dt>产品类型：</dt>
 			<dd>
 				<input type="hidden" name="map[producttype]" value="${form.map.producttype}"/>
-				<input type="text" name="map[producttypename]" size="30" value="${form.map.producttypename}"
+				<input type="text" name="map[producttypename]" size="25" value="${form.map.producttypename}"
 					 readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>计量单位：</dt>
 			<dd>
-				<st:select dictType="计量单位" name="map[unit]" value="${form.map.unit}" expStr="style='width: 185px;' class='required'" />
+				<st:select dictType="计量单位" name="map[unit]" value="${form.map.unit}" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
 			<dt>成本单价：</dt>
 			<dd>
-				<input type="text" name="map[costprice]" class="required number" size="30" maxlength="12"
+				<input type="text" name="map[costprice]" class="required number" size="25" maxlength="12"
 					value="0.00" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>利润：</dt>
 			<dd>
-				<input type="text" name="map[profit]" class="required number" size="30" maxlength="12"
+				<input type="text" name="map[profit]" class="required number" size="25" maxlength="12"
 					value="0.00" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>产品单价：</dt>
 			<dd>
-				<input type="text" name="map[realprice]" class="required number" size="30" maxlength="12"
+				<input type="text" name="map[realprice]" class="required number" size="25" maxlength="12"
 					value="0.00" onchange="changeValue();"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>新增时间：</dt>
 			<dd>
-				<input type="text" name="map[createdate]" size="30" maxlength="19"
+				<input type="text" name="map[createdate]" size="25" maxlength="19"
 					value="${form.map.createdate}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="106" maxlength="256"
+				<input type="text" name="map[remark]" size="89" maxlength="256"
 					value="${form.map.remark}"/>
 			</dd>
 		</dl>

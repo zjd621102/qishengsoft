@@ -53,7 +53,7 @@
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="25" maxlength="256"
+				<input type="text" name="map[remark]" size="91" maxlength="256"
 					value="${form.map.remark}"/>
 			</dd>
 		</dl>

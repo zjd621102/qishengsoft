@@ -156,6 +156,35 @@ public class BuyAction {
 		}
 		return ajaxObject.toString();
 	}
+
+	/**
+	 * 合并采购单
+	 * @param request
+	 * @return
+	 */
+	@RequiresPermissions("Buy:edi")
+	@RequestMapping(value="/merge")
+	public @ResponseBody String merge(HttpServletRequest request) {
+		
+		AjaxObject ajaxObject = null;
+		int iReturn = -1;
+		
+		CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
+		String maker = StrUtils.nullToStr(user.getValue("userid"));
+		
+		String[] ids = request.getParameterValues("ids");
+		String buyids = StrUtils.ArrayToStr(ids, "','");
+		buyids = "'" + buyids + "'";
+		
+		iReturn = buyDaoImpl.mergeBuy(buyids, maker);
+		
+		if (iReturn >= 0) {
+			ajaxObject = new AjaxObject("合并成功！", "buy_list", "");
+		} else {
+			ajaxObject = new AjaxObject("合并失败");
+		}
+		return ajaxObject.toString();
+	}
 	
 	/**
 	 * 获取下拉列表

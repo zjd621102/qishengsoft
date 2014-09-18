@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2014-08-28 16:41:43
+Date: 2014-09-18 16:00:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,25 +24,28 @@ CREATE TABLE `bbuy` (
   `btype` varchar(3) NOT NULL COMMENT '单据类型',
   `buyname` varchar(64) DEFAULT NULL COMMENT '采购名称',
   `buyno` varchar(16) NOT NULL COMMENT '采购编号',
+  `relateno` varchar(16) DEFAULT NULL COMMENT '关联单据号',
   `buydate` varchar(10) DEFAULT NULL COMMENT '采购日期',
   `currflow` varchar(32) DEFAULT NULL COMMENT '当前流程',
   `maker` varchar(32) DEFAULT NULL COMMENT '制单人',
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`buyid`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='采购表';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='采购表';
 
 -- ----------------------------
 -- Records of bbuy
 -- ----------------------------
-INSERT INTO `bbuy` VALUES ('2', 'CGD', '采购单名称一', 'CGD-2013-0002', '2013-03-01', '结束', 'ZHOUJD', '2013-03-01 17:03:37', '备注二');
-INSERT INTO `bbuy` VALUES ('3', 'JYD', '简易采购单1', 'JYD-2013-0001', '2014-05-01', '结束', 'ZHOUJD', '2013-03-01 17:05:32', '');
-INSERT INTO `bbuy` VALUES ('4', 'CGD', '采购单名称三', 'CGD-2013-0003', '2013-03-01', '结束', 'ZHOUJD', '2013-03-02 20:44:21', '备注三');
-INSERT INTO `bbuy` VALUES ('5', 'CGD', '采购单2', 'CGD-2014-0001', '2014-07-04', '结束', 'ZHOUJD', '2014-07-04 11:16:49', '');
-INSERT INTO `bbuy` VALUES ('6', 'CGD', '采购单3', 'CGD-2014-0002', '2014-07-04', '结束', 'ZHOUJD', '2014-07-04 11:20:29', '');
-INSERT INTO `bbuy` VALUES ('7', 'CGD', '采购单4', 'CGD-2014-0003', '2014-06-01', '结束', 'ZHOUJD', '2014-07-04 11:31:38', '');
-INSERT INTO `bbuy` VALUES ('8', 'CGD', '2014.07.19小周采购', 'CGD-2014-0004', '2014-07-19', '结束', 'ZHOUJD', '2014-07-19 14:16:29', '');
-INSERT INTO `bbuy` VALUES ('9', 'CGD', '2014.08.20采购', 'CGD-20140820-001', '2014-08-20', '结束', 'ZHOUJD', '2014-08-20 14:55:12', '');
+INSERT INTO `bbuy` VALUES ('2', 'CGD', '采购单名称一', 'CGD-2013-0002', null, '2013-03-01', '结束', 'ZHOUJD', '2013-03-01 17:03:37', '备注二');
+INSERT INTO `bbuy` VALUES ('3', 'JYD', '简易采购单1', 'JYD-2013-0001', null, '2014-05-01', '结束', 'ZHOUJD', '2013-03-01 17:05:32', '');
+INSERT INTO `bbuy` VALUES ('4', 'CGD', '采购单名称三', 'CGD-2013-0003', null, '2013-03-01', '结束', 'ZHOUJD', '2013-03-02 20:44:21', '备注三');
+INSERT INTO `bbuy` VALUES ('5', 'CGD', '采购单2', 'CGD-2014-0001', null, '2014-07-04', '结束', 'ZHOUJD', '2014-07-04 11:16:49', '');
+INSERT INTO `bbuy` VALUES ('6', 'CGD', '采购单3', 'CGD-2014-0002', null, '2014-07-04', '结束', 'ZHOUJD', '2014-07-04 11:20:29', '');
+INSERT INTO `bbuy` VALUES ('7', 'CGD', '采购单4', 'CGD-2014-0003', null, '2014-06-01', '结束', 'ZHOUJD', '2014-07-04 11:31:38', '');
+INSERT INTO `bbuy` VALUES ('8', 'CGD', '2014.07.19小周采购', 'CGD-2014-0004', null, '2014-07-19', '结束', 'ZHOUJD', '2014-07-19 14:16:29', '');
+INSERT INTO `bbuy` VALUES ('9', 'CGD', '2014.08.20采购', 'CGD-20140820-001', null, '2014-08-20', '结束', 'ZHOUJD', '2014-08-20 14:55:12', '');
+INSERT INTO `bbuy` VALUES ('13', 'CGD', '2014.09.01采购', 'CGD-20140901-001', 'XSD-20140828-002', '2014-09-01', '结束', 'ZHOUJD', '2014-09-01 17:04:22', '');
+INSERT INTO `bbuy` VALUES ('29', 'CGD', '2014.09.02采购', 'CGD-20140902-016', null, '2014-09-02', '申请', 'ZHOUJD', '2014-09-02 17:44:26', '合并采购单');
 
 -- ----------------------------
 -- Table structure for `bbuyrow`
@@ -63,7 +66,7 @@ CREATE TABLE `bbuyrow` (
   `manutel` varchar(32) DEFAULT NULL COMMENT '联系电话',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`buyrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=utf8 COMMENT='采购行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=276 DEFAULT CHARSET=utf8 COMMENT='采购行项表';
 
 -- ----------------------------
 -- Records of bbuyrow
@@ -90,6 +93,13 @@ INSERT INTO `bbuyrow` VALUES ('208', '8', '1', '物资A11', '1', '0.22', '2200.0
 INSERT INTO `bbuyrow` VALUES ('212', '9', '6', '物资A21', '1', '43.20', '110.00', '4752.00', '8', '供应商B', '供应商B', '00000', null);
 INSERT INTO `bbuyrow` VALUES ('213', '9', '1', '物资A11', '1', '0.22', '23.00', '5.06', '4', '供应商A', '周少华', '11111111', null);
 INSERT INTO `bbuyrow` VALUES ('214', '9', '9', '5', '1', '5.00', '43.00', '215.00', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('227', '13', '1', '物资A11', '1', '0.22', '70.00', '15.40', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('228', '13', '5', '物资B12', '1', '44.00', '5.00', '220.00', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('229', '13', '6', '物资A21', '1', '43.20', '6.00', '259.20', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('272', '29', '1', '物资A11', '1', '0.22', '5.00', '1.10', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('273', '29', '4', '物资B11', '1', '33.30', '7.00', '233.10', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('274', '29', '5', '物资B12', '1', '44.00', '9.00', '396.00', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('275', '29', '6', '物资A21', '1', '43.20', '1.00', '43.20', '8', '供应商B', '供应商B', '00000', null);
 
 -- ----------------------------
 -- Table structure for `bpay`
@@ -108,7 +118,7 @@ CREATE TABLE `bpay` (
   `operater` varchar(64) DEFAULT NULL COMMENT '操作人ID',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`payid`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COMMENT='付款单/收款单';
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COMMENT='付款单/收款单';
 
 -- ----------------------------
 -- Records of bpay
@@ -144,6 +154,8 @@ INSERT INTO `bpay` VALUES ('55', 'FKD', 'ZHOUJD', '2014-08-20', 'CGD-20140820-00
 INSERT INTO `bpay` VALUES ('56', 'GZD', 'ZHOUJD', '2014-07', 'GZD-20140820-001', '2250.00', '结束', '2014-08-20 15:23:35', '2014-08-20 15:05:16', 'ZHOUJD', '');
 INSERT INTO `bpay` VALUES ('57', 'GZD', 'ZHOUJD', '2014-07', 'GZD-20140820-002', '3596.00', '结束', '2014-08-20 15:34:56', '2014-08-20 15:05:16', 'ZHOUJD', '');
 INSERT INTO `bpay` VALUES ('58', 'SKD', 'ZHOUJD', '2014-08-28', 'XSD-20140828-001', '1017.00', '结束', '2014-08-28 15:33:16', '2014-08-28 11:05:14', 'ZHOUJD', '');
+INSERT INTO `bpay` VALUES ('59', 'FKD', 'ZHOUJD', '2014-09-01', 'CGD-20140901-001', '494.60', '结束', '2014-09-01 17:28:36', '2014-09-01 17:29:54', 'ZHOUJD', '');
+INSERT INTO `bpay` VALUES ('60', 'SKD', 'ZHOUJD', '2014-08-28', 'XSD-20140828-002', '847.90', '结束', '2014-09-01 17:29:22', '2014-09-01 17:29:57', 'ZHOUJD', '');
 
 -- ----------------------------
 -- Table structure for `bpayrow`
@@ -161,7 +173,7 @@ CREATE TABLE `bpayrow` (
   `realsum` double(12,2) DEFAULT '0.00' COMMENT '实付金额',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`payrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bpayrow
@@ -213,6 +225,9 @@ INSERT INTO `bpayrow` VALUES ('164', '56', '00000', null, null, null, '员工三
 INSERT INTO `bpayrow` VALUES ('170', '57', '00000', null, '建设银行南安支行', '11111111', '员工一', '1643.00', '1643.01', null);
 INSERT INTO `bpayrow` VALUES ('171', '57', '00000', null, '建设银行南安支行', '22222222', '员工二', '1953.00', '1953.03', null);
 INSERT INTO `bpayrow` VALUES ('173', '58', '6227001823550092014', '5', '中国银行泉州分行', '22222222', '刘星', '1017.00', '1017.00', null);
+INSERT INTO `bpayrow` VALUES ('181', '59', '622909116836651310', '4', '建设银行泉州分行', '1111111111', '周少华', '15.40', '15.40', null);
+INSERT INTO `bpayrow` VALUES ('182', '59', '622909116836651310', '8', '中国农业银行福建支行', '444444', '供应商B账户名称', '479.20', '479.20', null);
+INSERT INTO `bpayrow` VALUES ('183', '60', '6227001823550092014', '9', '中国银行泉州分行', '2222222', '客户B', '847.90', '847.90', null);
 
 -- ----------------------------
 -- Table structure for `breceandpay`
@@ -324,7 +339,7 @@ INSERT INTO `bsell` VALUES ('8', 'XSD-2014-0006', '2014-03-12', '5', '结束', '
 INSERT INTO `bsell` VALUES ('10', 'XSD-2014-0007', '2014-07-18', '5', '结束', 'ZHOUJD', '2014-07-18 19:08:31', '');
 INSERT INTO `bsell` VALUES ('11', 'XSD-20140820-001', '2014-08-20', '5', '结束', 'ZHOUJD', '2014-08-20 11:14:34', '');
 INSERT INTO `bsell` VALUES ('12', 'XSD-20140828-001', '2014-08-28', '5', '结束', 'ZHOUJD', '2014-08-28 11:50:07', '');
-INSERT INTO `bsell` VALUES ('13', 'XSD-20140828-002', '2014-08-28', '9', '申请', 'ZHOUJD', '2014-08-28 15:53:20', null);
+INSERT INTO `bsell` VALUES ('13', 'XSD-20140828-002', '2014-08-28', '9', '结束', 'ZHOUJD', '2014-08-28 15:53:20', '');
 
 -- ----------------------------
 -- Table structure for `bsellrow`
@@ -344,7 +359,7 @@ CREATE TABLE `bsellrow` (
   `realsum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '实际总价',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`sellrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8 COMMENT='销售行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8 COMMENT='销售行项表';
 
 -- ----------------------------
 -- Records of bsellrow
@@ -372,6 +387,8 @@ INSERT INTO `bsellrow` VALUES ('131', '11', '2', '产品2', '1', '170.44', '200.
 INSERT INTO `bsellrow` VALUES ('132', '11', '5', '产品8', '1', '33.30', '43.10', '43.10', '23.00', '9.80', '991.30', null);
 INSERT INTO `bsellrow` VALUES ('147', '12', '1', '产品1', '1', '113.80', '123.20', '123.20', '5.00', '9.40', '616.00', null);
 INSERT INTO `bsellrow` VALUES ('148', '12', '2', '产品2', '1', '170.44', '200.50', '200.50', '2.00', '30.06', '401.00', null);
+INSERT INTO `bsellrow` VALUES ('161', '13', '1', '产品1', '1', '47.64', '123.20', '123.20', '2.00', '75.56', '246.40', null);
+INSERT INTO `bsellrow` VALUES ('162', '13', '2', '产品2', '1', '190.24', '200.50', '200.50', '3.00', '10.26', '601.50', null);
 
 -- ----------------------------
 -- Table structure for `btransferaccount`
@@ -715,7 +732,7 @@ CREATE TABLE `cdict` (
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dictid`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='字典表';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='字典表';
 
 -- ----------------------------
 -- Records of cdict
@@ -731,6 +748,7 @@ INSERT INTO `cdict` VALUES ('17', '是否', '2014-08-22 11:37:56', null);
 INSERT INTO `cdict` VALUES ('18', '收支类型', '2014-08-22 11:40:37', null);
 INSERT INTO `cdict` VALUES ('19', '银行类型', '2014-08-22 12:42:18', '');
 INSERT INTO `cdict` VALUES ('20', '流程状态', '2014-08-22 12:52:03', null);
+INSERT INTO `cdict` VALUES ('21', '单据类型', '2014-09-01 14:24:57', null);
 
 -- ----------------------------
 -- Table structure for `cdictrow`
@@ -744,7 +762,7 @@ CREATE TABLE `cdictrow` (
   `sordid` int(3) DEFAULT NULL COMMENT '排序',
   `rowremark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dictrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8 COMMENT='字典行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8 COMMENT='字典行项表';
 
 -- ----------------------------
 -- Records of cdictrow
@@ -785,6 +803,15 @@ INSERT INTO `cdictrow` VALUES ('76', '19', '兴业银行', '6', '6', null);
 INSERT INTO `cdictrow` VALUES ('77', '19', '其它', '9', '9', null);
 INSERT INTO `cdictrow` VALUES ('78', '20', '申请', '申请', '1', null);
 INSERT INTO `cdictrow` VALUES ('79', '20', '结束', '结束', '2', null);
+INSERT INTO `cdictrow` VALUES ('80', '21', '采购单', 'CGD', '1', null);
+INSERT INTO `cdictrow` VALUES ('81', '21', '产品单', 'CPD', '2', null);
+INSERT INTO `cdictrow` VALUES ('82', '21', '付款单', 'FKD', '3', null);
+INSERT INTO `cdictrow` VALUES ('83', '21', '工资单', 'GZD', '4', null);
+INSERT INTO `cdictrow` VALUES ('84', '21', '简易采购单', 'JYD', '5', null);
+INSERT INTO `cdictrow` VALUES ('85', '21', '收款单', 'SKD', '6', null);
+INSERT INTO `cdictrow` VALUES ('86', '21', '物资单', 'WZD', '7', null);
+INSERT INTO `cdictrow` VALUES ('87', '21', '销售单', 'XSD', '8', null);
+INSERT INTO `cdictrow` VALUES ('88', '21', '运费单', 'YFD', '9', null);
 
 -- ----------------------------
 -- Table structure for `sbankcard`
@@ -807,32 +834,8 @@ CREATE TABLE `sbankcard` (
 -- Records of sbankcard
 -- ----------------------------
 INSERT INTO `sbankcard` VALUES ('1', '00000', '现金', '9', '现金', '48438.44', '1', '1', '此为现金');
-INSERT INTO `sbankcard` VALUES ('2', '6227001823550092014', '建设银行福州支行', '2', '林珊珊', '68263.80', '1', '2', '');
-INSERT INTO `sbankcard` VALUES ('3', '622909116836651310', '兴业银行福州支行', '6', '王建辉', '58118.08', '1', '3', '');
-
--- ----------------------------
--- Table structure for `sbtype`
--- ----------------------------
-DROP TABLE IF EXISTS `sbtype`;
-CREATE TABLE `sbtype` (
-  `btype` varchar(16) NOT NULL COMMENT '单据类型',
-  `btypename` varchar(16) DEFAULT NULL COMMENT '单据类型名称',
-  `relatetabname` varchar(64) DEFAULT NULL COMMENT '关联表',
-  PRIMARY KEY (`btype`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='单据类型表';
-
--- ----------------------------
--- Records of sbtype
--- ----------------------------
-INSERT INTO `sbtype` VALUES ('CGD', '采购单', 'bbuy,bbuyrow');
-INSERT INTO `sbtype` VALUES ('CPD', '产品单', 'sproduct,sproductrow');
-INSERT INTO `sbtype` VALUES ('FKD', '付款单', 'bpay,bpayrow');
-INSERT INTO `sbtype` VALUES ('GZD', '工资单', 'bsalary,bsalaryrow');
-INSERT INTO `sbtype` VALUES ('JYD', '简易采购单', 'bbuy,bbuyrow');
-INSERT INTO `sbtype` VALUES ('SKD', '收款单', 'bpay,bpayrow');
-INSERT INTO `sbtype` VALUES ('WZD', '物资单', 'smaterial,smaterialrow');
-INSERT INTO `sbtype` VALUES ('XSD', '销售单', 'bsell,bsellrow');
-INSERT INTO `sbtype` VALUES ('YFD', '运费单', 'bpay,bpayrow');
+INSERT INTO `sbankcard` VALUES ('2', '6227001823550092014', '建设银行福州支行', '2', '林珊珊', '69111.70', '1', '2', '');
+INSERT INTO `sbankcard` VALUES ('3', '622909116836651310', '兴业银行福州支行', '6', '王建辉', '57623.48', '1', '3', '');
 
 -- ----------------------------
 -- Table structure for `scompany`
@@ -867,7 +870,7 @@ CREATE TABLE `slog` (
   `operatetime` varchar(20) NOT NULL COMMENT '操作时间',
   `remark` text COMMENT '备注',
   PRIMARY KEY (`logid`)
-) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8 COMMENT='日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=295 DEFAULT CHARSET=utf8 COMMENT='日志表';
 
 -- ----------------------------
 -- Records of slog
@@ -1063,6 +1066,101 @@ INSERT INTO `slog` VALUES ('196', '修改物资', 'ZHOUJD', '2014-08-28 16:05:58
 INSERT INTO `slog` VALUES ('197', '新增物资', 'ZHOUJD', '2014-08-28 16:09:15', 'unit:1,usestock:,stock:0,price:3,remark:,materialtypename:物资类型C-1,materialname:222,createdate:2014-08-28 16:09:15,manuid:8,materialtype:10,materialno:10301001,manuname:供应商B,alarmnum:9999');
 INSERT INTO `slog` VALUES ('198', '删除物资', 'ZHOUJD', '2014-08-28 16:09:32', '26');
 INSERT INTO `slog` VALUES ('199', '登录', 'ZHOUJD', '2014-08-28 16:24:32', '');
+INSERT INTO `slog` VALUES ('200', '登录', 'ZHOUJD', '2014-08-28 16:45:38', '');
+INSERT INTO `slog` VALUES ('201', '修改物资', 'ZHOUJD', '2014-08-28 16:46:08', 'unit:1,usestock:1,stock:447.00,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:9999.00,materialid:1');
+INSERT INTO `slog` VALUES ('202', '登录', 'ZHOUJD', '2014-09-01 10:54:19', '');
+INSERT INTO `slog` VALUES ('203', '登录', 'ZHOUJD', '2014-09-01 10:57:31', '');
+INSERT INTO `slog` VALUES ('204', '登录', 'ZHOUJD', '2014-09-01 11:29:31', '');
+INSERT INTO `slog` VALUES ('205', '修改销售单', 'ZHOUJD', '2014-09-01 11:29:40', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('206', '修改销售单', 'ZHOUJD', '2014-09-01 11:29:57', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('207', '修改销售单', 'ZHOUJD', '2014-09-01 11:30:09', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('208', '修改销售单', 'ZHOUJD', '2014-09-01 11:30:49', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('209', '修改销售单', 'ZHOUJD', '2014-09-01 11:31:25', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:,productname:');
+INSERT INTO `slog` VALUES ('210', '修改销售单', 'ZHOUJD', '2014-09-01 11:31:31', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:,productname:');
+INSERT INTO `slog` VALUES ('211', '修改销售单', 'ZHOUJD', '2014-09-01 11:31:59', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('212', '修改销售单', 'ZHOUJD', '2014-09-01 11:34:02', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('213', '修改销售单', 'ZHOUJD', '2014-09-01 11:34:13', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('214', '修改销售单', 'ZHOUJD', '2014-09-01 11:34:29', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('215', '登录', 'ZHOUJD', '2014-09-01 11:38:13', '');
+INSERT INTO `slog` VALUES ('216', '修改销售单', 'ZHOUJD', '2014-09-01 11:44:03', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('217', '修改销售单', 'ZHOUJD', '2014-09-01 11:44:25', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('218', '修改销售单', 'ZHOUJD', '2014-09-01 11:44:50', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('219', '修改销售单', 'ZHOUJD', '2014-09-01 11:45:42', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('220', '修改销售单', 'ZHOUJD', '2014-09-01 11:45:46', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('221', '修改销售单', 'ZHOUJD', '2014-09-01 11:45:56', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('222', '修改销售单', 'ZHOUJD', '2014-09-01 11:46:01', 'sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:');
+INSERT INTO `slog` VALUES ('223', '登录', 'ZHOUJD', '2014-09-01 14:04:28', '');
+INSERT INTO `slog` VALUES ('224', '登录', 'ZHOUJD', '2014-09-01 15:16:44', '');
+INSERT INTO `slog` VALUES ('225', '登录', 'ZHOUJD', '2014-09-01 15:52:26', '');
+INSERT INTO `slog` VALUES ('226', '修改销售单', 'ZHOUJD', '2014-09-01 15:53:06', 'sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:申请,selldate:2014-08-28,addBuy:');
+INSERT INTO `slog` VALUES ('227', '登录', 'ZHOUJD', '2014-09-01 16:43:54', '');
+INSERT INTO `slog` VALUES ('228', '登录', 'ZHOUJD', '2014-09-01 16:43:54', '');
+INSERT INTO `slog` VALUES ('229', '修改销售单', 'ZHOUJD', '2014-09-01 16:46:57', 'sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:申请,selldate:2014-08-28,addBuy:1');
+INSERT INTO `slog` VALUES ('230', '修改销售单', 'ZHOUJD', '2014-09-01 16:51:13', 'sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:申请,selldate:2014-08-28,addBuy:1');
+INSERT INTO `slog` VALUES ('231', '修改销售单', 'ZHOUJD', '2014-09-01 16:51:57', 'sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:申请,selldate:2014-08-28,addBuy:1');
+INSERT INTO `slog` VALUES ('232', '修改销售单', 'ZHOUJD', '2014-09-01 16:53:10', 'sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:申请,selldate:2014-08-28,addBuy:1');
+INSERT INTO `slog` VALUES ('233', '删除采购单', 'ZHOUJD', '2014-09-01 17:03:43', '12');
+INSERT INTO `slog` VALUES ('234', '修改销售单', 'ZHOUJD', '2014-09-01 17:04:22', 'sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:申请,selldate:2014-08-28,addBuy:1');
+INSERT INTO `slog` VALUES ('235', '修改采购单', 'ZHOUJD', '2014-09-01 17:28:36', 'btypename:采购单,remark:null,allsum:494.6,makername:周坚定,buyname:2014.09.01采购,createtime:2014-09-01 17:04:22,relateno:XSD-20140828-002,buyno:CGD-20140901-001,btype:CGD,maker:ZHOUJD,buyid:13,currflow:结束,buydate:2014-09-01');
+INSERT INTO `slog` VALUES ('236', '修改销售单', 'ZHOUJD', '2014-09-01 17:29:22', 'sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:结束,selldate:2014-08-28,addBuy:');
+INSERT INTO `slog` VALUES ('237', '修改单据', 'ZHOUJD', '2014-09-01 17:29:41', 'btypename:付款单,operatetime:2014-09-01 17:29:41,remark:null,operater:ZHOUJD,allplansum:494.6,makername:周坚定,createtime:2014-09-01 17:28:36,relateno:CGD-20140901-001,btype:FKD,maker:ZHOUJD,relatemoney:494.60,paydate:2014-09-01,payid:59,allrealsum:494.6,currflow:申请');
+INSERT INTO `slog` VALUES ('238', '修改单据', 'ZHOUJD', '2014-09-01 17:29:46', 'btypename:收款单,operatetime:2014-09-01 17:29:46,remark:null,operater:ZHOUJD,allplansum:847.9,makername:周坚定,createtime:2014-09-01 17:29:22,relateno:XSD-20140828-002,btype:SKD,maker:ZHOUJD,relatemoney:847.90,paydate:2014-08-28,payid:60,allrealsum:847.9,currflow:申请');
+INSERT INTO `slog` VALUES ('239', '修改单据', 'ZHOUJD', '2014-09-01 17:29:54', 'btypename:付款单,operatetime:2014-09-01 17:29:54,remark:null,operater:ZHOUJD,allplansum:494.6,makername:周坚定,createtime:2014-09-01 17:28:36,relateno:CGD-20140901-001,btype:FKD,maker:ZHOUJD,relatemoney:494.60,paydate:2014-09-01,payid:59,allrealsum:494.6,currflow:结束');
+INSERT INTO `slog` VALUES ('240', '修改单据', 'ZHOUJD', '2014-09-01 17:29:58', 'btypename:收款单,operatetime:2014-09-01 17:29:57,remark:null,operater:ZHOUJD,allplansum:847.9,makername:周坚定,createtime:2014-09-01 17:29:22,relateno:XSD-20140828-002,btype:SKD,maker:ZHOUJD,relatemoney:847.90,paydate:2014-08-28,payid:60,allrealsum:847.9,currflow:结束');
+INSERT INTO `slog` VALUES ('241', '修改物资', 'ZHOUJD', '2014-09-01 17:30:19', 'unit:1,usestock:1,stock:307.00,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:100,materialid:1');
+INSERT INTO `slog` VALUES ('242', '登录', 'ZHOUJD', '2014-09-01 17:34:08', '');
+INSERT INTO `slog` VALUES ('243', '登录', 'ZHOUJD', '2014-09-02 14:56:37', '');
+INSERT INTO `slog` VALUES ('244', '新增采购单', 'ZHOUJD', '2014-09-02 14:56:57', 'btype:CGD,remark:null,allsum:,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 14:56:57,buyid:14,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-001');
+INSERT INTO `slog` VALUES ('245', '新增采购单', 'ZHOUJD', '2014-09-02 14:57:08', 'btype:CGD,remark:null,allsum:66.6,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 14:57:08,buyid:15,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-002');
+INSERT INTO `slog` VALUES ('246', '修改采购单', 'ZHOUJD', '2014-09-02 14:57:24', 'btypename:采购单,remark:null,allsum:0.66,makername:周坚定,buyname:2014.09.02采购,createtime:2014-09-02 14:56:57,relateno:null,buyno:CGD-20140902-001,btype:CGD,maker:ZHOUJD,buyid:14,currflow:申请,buydate:2014-09-02');
+INSERT INTO `slog` VALUES ('247', '登录', 'ZHOUJD', '2014-09-02 15:43:27', '');
+INSERT INTO `slog` VALUES ('248', '登录', 'ZHOUJD', '2014-09-02 16:21:13', '');
+INSERT INTO `slog` VALUES ('249', '登录', 'ZHOUJD', '2014-09-02 16:22:05', '');
+INSERT INTO `slog` VALUES ('250', '修改采购单', 'ZHOUJD', '2014-09-02 16:26:41', 'btypename:采购单,remark:合并采购单,allsum:67.26,makername:周坚定,buyname:2014.09.02采购,createtime:2014-09-02 16:24:09,relateno:null,buyno:CGD-20140902-003,btype:CGD,maker:ZHOUJD,buyid:16,currflow:申请,buydate:2014-09-02');
+INSERT INTO `slog` VALUES ('251', '新增采购单', 'ZHOUJD', '2014-09-02 17:15:47', 'btype:CGD,remark:null,allsum:275.9,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 17:15:47,buyid:18,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-005');
+INSERT INTO `slog` VALUES ('252', '新增采购单', 'ZHOUJD', '2014-09-02 17:18:42', 'btype:CGD,remark:null,allsum:0.44,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 17:18:41,buyid:21,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-008');
+INSERT INTO `slog` VALUES ('253', '新增采购单', 'ZHOUJD', '2014-09-02 17:39:36', 'btype:CGD,remark:null,allsum:87.2,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 17:39:35,buyid:23,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-010');
+INSERT INTO `slog` VALUES ('254', '新增采购单', 'ZHOUJD', '2014-09-02 17:39:56', 'btype:CGD,remark:null,allsum:88,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 17:39:56,buyid:24,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-011');
+INSERT INTO `slog` VALUES ('255', '新增采购单', 'ZHOUJD', '2014-09-02 17:44:00', 'btype:CGD,remark:null,allsum:88,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 17:44:00,buyid:26,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-013');
+INSERT INTO `slog` VALUES ('256', '新增采购单', 'ZHOUJD', '2014-09-02 17:44:21', 'btype:CGD,remark:null,allsum:66.6,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 17:44:21,buyid:28,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-015');
+INSERT INTO `slog` VALUES ('257', '登录', 'ZHOUJD', '2014-09-10 16:00:02', '');
+INSERT INTO `slog` VALUES ('258', '登录', 'ZHOUJD', '2014-09-10 16:06:41', '');
+INSERT INTO `slog` VALUES ('259', '修改用户', 'ZHOUJD', '2014-09-10 16:06:52', 'tele:null,birthday:null,username:测试账号,roleid:3,userid:CESHI');
+INSERT INTO `slog` VALUES ('260', '登录', 'ZHOUJD', '2014-09-10 16:12:39', '');
+INSERT INTO `slog` VALUES ('261', '登录', 'ZHOUJD', '2014-09-10 19:09:51', '');
+INSERT INTO `slog` VALUES ('262', '登录', 'ZHOUJD', '2014-09-10 19:34:49', '');
+INSERT INTO `slog` VALUES ('263', '登录', 'ZHOUJD', '2014-09-11 14:11:24', '');
+INSERT INTO `slog` VALUES ('264', '修改供应商', 'ZHOUJD', '2014-09-11 14:49:33', 'manuemail:b@yecoo.com,remark:备注B,manutypeid:2,createdate:2013-02-21,manuid:5,statusid:1,manucontact:刘星,manuname:客户A,referee:推荐人,manutel:22222222,priority:11');
+INSERT INTO `slog` VALUES ('265', '登录', 'ZHOUJD', '2014-09-11 15:20:18', '');
+INSERT INTO `slog` VALUES ('266', '登录', 'ZHOUJD', '2014-09-11 15:30:35', '');
+INSERT INTO `slog` VALUES ('267', '登录', 'ZHOUJD', '2014-09-11 15:34:50', '');
+INSERT INTO `slog` VALUES ('268', '登录', 'ZHOUJD', '2014-09-11 15:38:28', '');
+INSERT INTO `slog` VALUES ('269', '登录', 'ZHOUJD', '2014-09-11 15:42:05', '');
+INSERT INTO `slog` VALUES ('270', '登录', 'ZHOUJD', '2014-09-11 15:49:07', '');
+INSERT INTO `slog` VALUES ('271', '登录', 'ZHOUJD', '2014-09-11 15:49:45', '');
+INSERT INTO `slog` VALUES ('272', '登录', 'ZHOUJD', '2014-09-11 18:58:06', '');
+INSERT INTO `slog` VALUES ('273', '登录', 'ZHOUJD', '2014-09-11 19:05:24', '');
+INSERT INTO `slog` VALUES ('274', '登录', 'ZHOUJD', '2014-09-11 19:38:06', '');
+INSERT INTO `slog` VALUES ('275', '登录', 'ZHOUJD', '2014-09-11 19:38:50', '');
+INSERT INTO `slog` VALUES ('276', '登录', 'ZHOUJD', '2014-09-11 19:39:51', '');
+INSERT INTO `slog` VALUES ('277', '登录', 'ZHOUJD', '2014-09-18 10:48:34', '');
+INSERT INTO `slog` VALUES ('278', '登录', 'ZHOUJD', '2014-09-18 11:42:46', '');
+INSERT INTO `slog` VALUES ('279', '登录', 'ZHOUJD', '2014-09-18 11:44:26', '');
+INSERT INTO `slog` VALUES ('280', '登录', 'ZHOUJD', '2014-09-18 11:46:29', '');
+INSERT INTO `slog` VALUES ('281', '登录', 'ZHOUJD', '2014-09-18 11:47:44', '');
+INSERT INTO `slog` VALUES ('282', '登录', 'ZHOUJD', '2014-09-18 11:49:16', '');
+INSERT INTO `slog` VALUES ('283', '登录', 'ZHOUJD', '2014-09-18 11:50:19', '');
+INSERT INTO `slog` VALUES ('284', '登录', 'ZHOUJD', '2014-09-18 14:15:12', '');
+INSERT INTO `slog` VALUES ('285', '登录', 'ZHOUJD', '2014-09-18 14:18:18', '');
+INSERT INTO `slog` VALUES ('286', '登录', 'ZHOUJD', '2014-09-18 14:18:46', '');
+INSERT INTO `slog` VALUES ('287', '登录', 'ZHOUJD', '2014-09-18 14:19:31', '');
+INSERT INTO `slog` VALUES ('288', '登录', 'ZHOUJD', '2014-09-18 14:20:34', '');
+INSERT INTO `slog` VALUES ('289', '登录', 'ZHOUJD', '2014-09-18 14:24:24', '');
+INSERT INTO `slog` VALUES ('290', '登录', 'ZHOUJD', '2014-09-18 15:20:46', '');
+INSERT INTO `slog` VALUES ('291', '登录', 'ZHOUJD', '2014-09-18 15:32:22', '');
+INSERT INTO `slog` VALUES ('292', '登录', 'ZHOUJD', '2014-09-18 15:34:01', '');
+INSERT INTO `slog` VALUES ('293', '登录', 'ZHOUJD', '2014-09-18 15:42:26', '');
+INSERT INTO `slog` VALUES ('294', '登录', 'ZHOUJD', '2014-09-18 15:45:38', '');
 
 -- ----------------------------
 -- Table structure for `smanu`
@@ -1078,6 +1176,7 @@ CREATE TABLE `smanu` (
   `manutel` varchar(32) DEFAULT NULL COMMENT '联系电话',
   `manuemail` varchar(64) DEFAULT NULL COMMENT 'EMAIL',
   `priority` int(3) DEFAULT '0' COMMENT '优先级',
+  `referee` varchar(32) DEFAULT NULL COMMENT '推荐人',
   `remark` varchar(1024) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`manuid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='供应商表';
@@ -1085,12 +1184,12 @@ CREATE TABLE `smanu` (
 -- ----------------------------
 -- Records of smanu
 -- ----------------------------
-INSERT INTO `smanu` VALUES ('4', '供应商A', '1', '1', '2013-02-05', '周少华', '11111111', '', '41', '备注a');
-INSERT INTO `smanu` VALUES ('5', '客户A', '2', '1', '2013-02-21', '刘星', '22222222', 'b@yecoo.com', '11', '备注B');
-INSERT INTO `smanu` VALUES ('7', '物流A', '3', '1', '2013-02-21', '林长城', '33333333', '', '81', '');
-INSERT INTO `smanu` VALUES ('8', '供应商B', '1', '1', '2013-02-25', '供应商B', '00000', '', '42', '');
-INSERT INTO `smanu` VALUES ('9', '客户B', '2', '1', '2013-02-25', '无', '00000', '', '12', '');
-INSERT INTO `smanu` VALUES ('10', '物流B', '3', '1', '2013-02-25', '无', '00000', '', '82', '');
+INSERT INTO `smanu` VALUES ('4', '供应商A', '1', '1', '2013-02-05', '周少华', '11111111', '', '41', null, '备注a');
+INSERT INTO `smanu` VALUES ('5', '客户A', '2', '1', '2013-02-21', '刘星', '22222222', 'b@yecoo.com', '11', '推荐人', '备注B');
+INSERT INTO `smanu` VALUES ('7', '物流A', '3', '1', '2013-02-21', '林长城', '33333333', '', '81', null, '');
+INSERT INTO `smanu` VALUES ('8', '供应商B', '1', '1', '2013-02-25', '供应商B', '00000', '', '42', null, '');
+INSERT INTO `smanu` VALUES ('9', '客户B', '2', '1', '2013-02-25', '无', '00000', '', '12', null, '');
+INSERT INTO `smanu` VALUES ('10', '物流B', '3', '1', '2013-02-25', '无', '00000', '', '82', null, '');
 
 -- ----------------------------
 -- Table structure for `smanurow`
@@ -1105,17 +1204,17 @@ CREATE TABLE `smanurow` (
   `priorityrow` int(2) DEFAULT '0' COMMENT '优先级',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`manurowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8 COMMENT='供应商账号表';
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8 COMMENT='供应商账号表';
 
 -- ----------------------------
 -- Records of smanurow
 -- ----------------------------
-INSERT INTO `smanurow` VALUES ('191', '5', '中国银行泉州分行', '22222222', '刘星', '9', null);
 INSERT INTO `smanurow` VALUES ('195', '7', '工商银行泉州分行', '33333333', '林长城', '9', null);
 INSERT INTO `smanurow` VALUES ('196', '10', '建设银行南安支行', '66666666', '物流B', '9', null);
 INSERT INTO `smanurow` VALUES ('197', '4', '建设银行泉州分行', '1111111111', '周少华', '1', null);
 INSERT INTO `smanurow` VALUES ('198', '8', '中国农业银行福建支行', '444444', '供应商B账户名称', '9', null);
 INSERT INTO `smanurow` VALUES ('199', '9', '中国银行泉州分行', '2222222', '客户B', '1', null);
+INSERT INTO `smanurow` VALUES ('200', '5', '中国银行泉州分行', '22222222', '刘星', '9', null);
 
 -- ----------------------------
 -- Table structure for `smaterial`
@@ -1136,14 +1235,14 @@ CREATE TABLE `smaterial` (
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`materialid`),
   UNIQUE KEY `uni_smaterial_no` (`materialno`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of smaterial
 -- ----------------------------
-INSERT INTO `smaterial` VALUES ('1', '10101001', '物资A11', '5', '1', '0.22', '4', '1', '447.00', '9999.00', '2013-02-24', '');
+INSERT INTO `smaterial` VALUES ('1', '10101001', '物资A11', '5', '1', '0.22', '4', '1', '307.00', '100.00', '2013-02-24', '');
 INSERT INTO `smaterial` VALUES ('4', '10201001', '物资B11', '8', '1', '33.30', '4', '0', '0.00', '0.00', '2013-03-04', '');
-INSERT INTO `smaterial` VALUES ('5', '10201002', '物资B12', '8', '1', '44.00', '8', '1', '328.00', '100.00', '2013-03-04', '');
+INSERT INTO `smaterial` VALUES ('5', '10201002', '物资B12', '8', '1', '44.00', '8', '1', '318.00', '100.00', '2013-03-04', '');
 INSERT INTO `smaterial` VALUES ('6', '10102001', '物资A21', '6', '1', '43.20', '8', null, null, null, '2014-07-04', '');
 INSERT INTO `smaterial` VALUES ('8', '10103001', '4', '7', '1', '4.00', '4', null, null, null, '2014-08-12 15:51:04', '');
 INSERT INTO `smaterial` VALUES ('9', '10103002', '5', '7', '1', '5.00', '4', null, null, null, '2014-08-12 15:51:13', '');
@@ -1178,7 +1277,7 @@ CREATE TABLE `smaterialtype` (
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`materialtype`),
   UNIQUE KEY `u_smaterialtype_no` (`materialtypeno`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of smaterialtype
@@ -1421,17 +1520,18 @@ CREATE TABLE `sproduct` (
   `profit` double(12,2) DEFAULT NULL COMMENT '利润',
   `realprice` double(12,2) NOT NULL COMMENT '产品单价',
   `createdate` varchar(19) DEFAULT NULL COMMENT '新增日期',
+  `excelname` varchar(63) DEFAULT NULL COMMENT 'EXCEL文件名',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`productid`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='产品表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='产品表';
 
 -- ----------------------------
 -- Records of sproduct
 -- ----------------------------
-INSERT INTO `sproduct` VALUES ('1', '20101001', '产品1', '14', '1', '47.64', '75.56', '123.20', '2013-03-06', '产品一备注');
-INSERT INTO `sproduct` VALUES ('2', '20101002', '产品2', '14', '1', '190.24', '10.26', '200.50', '2014-07-12', '');
-INSERT INTO `sproduct` VALUES ('3', '20101003', '产品3', '14', '1', '163.40', '39.80', '203.20', '2014-07-12', '');
-INSERT INTO `sproduct` VALUES ('5', '20102001', '产品8', '15', '1', '33.30', '9.80', '43.10', '2014-08-11', '');
+INSERT INTO `sproduct` VALUES ('1', '20101001', '产品1', '14', '1', '47.64', '75.56', '123.20', '2013-03-06', null, '产品一备注');
+INSERT INTO `sproduct` VALUES ('2', '20101002', '产品2', '14', '1', '190.24', '10.26', '200.50', '2014-07-12', null, '');
+INSERT INTO `sproduct` VALUES ('3', '20101003', '产品3', '14', '1', '163.40', '39.80', '203.20', '2014-07-12', null, '');
+INSERT INTO `sproduct` VALUES ('5', '20102001', '产品8', '15', '1', '33.30', '9.80', '43.10', '2014-08-11', null, '');
 
 -- ----------------------------
 -- Table structure for `sproductrow`
@@ -1482,7 +1582,7 @@ CREATE TABLE `sproducttype` (
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`producttype`),
   UNIQUE KEY `u_sproduct_no` (`producttypeno`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sproducttype
@@ -1633,22 +1733,6 @@ END
 DELIMITER ;
 
 -- ----------------------------
--- Function structure for `func_getBtypeName`
--- ----------------------------
-DROP FUNCTION IF EXISTS `func_getBtypeName`;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` FUNCTION `func_getBtypeName`(vbtype varchar(16)) RETURNS varchar(255) CHARSET utf8
-BEGIN
-    DECLARE vbtypename VARCHAR(255);
-
-    SELECT btypename INTO vbtypename FROM sbtype WHERE btype = vbtype;
-
-		return vbtypename;
-END
-;;
-DELIMITER ;
-
--- ----------------------------
 -- Function structure for `func_getDictName`
 -- ----------------------------
 DROP FUNCTION IF EXISTS `func_getDictName`;
@@ -1785,6 +1869,32 @@ BEGIN
 
 
 		return isum;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `func_getUrlByNo`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getUrlByNo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getUrlByNo`(billno varchar(32)) RETURNS varchar(128) CHARSET utf8
+BEGIN
+		DECLARE _url VARCHAR(128);
+		SET _url = '';
+		
+		CASE
+
+			WHEN (SELECT billno LIKE 'CGD%')=1 OR (SELECT billno LIKE 'JYD%')=1 THEN
+				SELECT CONCAT('/buy/edi/', buyid) INTO _url FROM bbuy WHERE buyno = billno;
+			WHEN (SELECT billno LIKE 'XSD%')=1 THEN
+				SELECT CONCAT('/sell/edi/', sellid) INTO _url FROM bsell WHERE sellno = billno;
+			WHEN (SELECT billno LIKE 'GZD%')=1 THEN
+				SELECT CONCAT('/salary/edi/', salaryid) INTO _url FROM bsalary WHERE salaryno = billno;
+	
+		END CASE;
+
+		RETURN _url;
 END
 ;;
 DELIMITER ;

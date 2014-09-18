@@ -68,6 +68,11 @@
 					<span>修改采购单</span>
 				</a>
 			</li>
+			<li>
+				<a class="edit" href="<%=path%>/buy/merge" target="selectedTodo" rel="ids" title="确实要合并这些记录吗?">
+					<span>合并采购单</span>
+				</a>
+			</li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="Buy:delete">
 			<li>
@@ -81,12 +86,15 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
+				<th width="3%">
+					<input type="checkbox" group="ids" class="checkboxCtrl">
+				</th>
 				<th width="5%">序号</th>
 				<th width="10%">单据类型</th>
 				<th width="15%">采购单名称</th>
 				<th width="13%">采购编号</th>
 				<th width="10%">采购日期</th>
-				<th width="15%">采购金额（${totalSum}）</th>
+				<th width="12%">采购金额（${totalSum}）</th>
 				<th width="10%">当前流程</th>
 				<th width="10%">制单人</th>
 				<th width="12%">创建时间</th>
@@ -95,6 +103,11 @@
 		<tbody>
 			<c:forEach items="${buyList}" var="bean" varStatus="vs">
 			   	<tr target="s_buyid" rel="${bean.map.buyid}">
+		   			<td>
+			   			<c:if test="${bean.map.currflow=='申请'}">
+		   				<input name="ids" value="${bean.map.buyid}" type="checkbox">
+		   				</c:if>
+		   			</td>
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.btypename}</td>
 			   		<td>${bean.map.buyname}</td>

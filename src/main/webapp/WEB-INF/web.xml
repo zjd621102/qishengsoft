@@ -128,6 +128,6 @@
 	
 	<!-- 首页配置 -->
 	<welcome-file-list>
-		<welcome-file>jsp/index.jsp</welcome-file>
+		<welcome-file>/login</welcome-file>
 	</welcome-file-list>
 </web-app>

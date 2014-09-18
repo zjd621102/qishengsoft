@@ -82,7 +82,7 @@
 <form method="post" action="<%=path%>/buy/edi" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
  	<input type="hidden" name="map[buyid]" value="${form.map.buyid}" />
-	<div class="pageFormContent" layoutH="97">
+	<div class="pageFormContent" layoutH="88">
 		<dl>
 			<dt>单据类型：</dt>
 			<dd>

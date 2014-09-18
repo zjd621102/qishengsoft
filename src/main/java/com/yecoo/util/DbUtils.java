@@ -380,6 +380,9 @@ public class DbUtils {
 					java.sql.ResultSet.CONCUR_READ_ONLY);
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
+				if(rs.getString(1) == null) {
+					continue;
+				}
 				str += separator + rs.getString(1);
 			}
 		} catch (Exception e) {

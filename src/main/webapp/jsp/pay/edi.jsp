@@ -54,7 +54,7 @@
 			<dt>关联单号：</dt>
 			<dd>
 				<input type="text" name="map[relateno]" size="25" maxlength="16"
-					value="${form.map.relateno}" readonly="readonly"/>
+					value="${form.map.relateno}" readonly="readonly" ondblclick="openBillByNo('<%=path%>', '${form.map.relateno}')"/>
 			</dd>
 		</dl>
 		<dl>
@@ -78,9 +78,13 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt></dt>
+			<dd></dd>
+		</dl>
+		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="25" maxlength="256"
+				<input type="text" name="map[remark]" size="152" maxlength="256"
 					value="${form.map.remark}"/>
 			</dd>
 		</dl>

@@ -163,7 +163,6 @@ public class SellDaoImpl extends BaseDaoImpl {
 	 * @return
 	 */
 	public int ediSell(CodeTableForm form, HttpServletRequest request) {
-
 		
 		Connection conn = null;
 		int iReturn = -1;

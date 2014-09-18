@@ -57,23 +57,5 @@
 	   	</tbody>
 	</table>
 
-	<div class="panelBar">
-		<div class="pages">
-			<span>显示</span> <select class="combox" name="numPerPage"
-				onchange="navTabPageBreak({numPerPage:this.value})"
-				value="${numPerPage}">
-				<option value="15" <c:if test="${numPerPage==15}">selected</c:if>>15</option>
-				<option value="30" <c:if test="${numPerPage==30}">selected</c:if>>30</option>
-				<option value="50" <c:if test="${numPerPage==50}">selected</c:if>>50</option>
-				<option value="100" <c:if test="${numPerPage==100}">selected</c:if>>100</option>
-			</select> <span>条，共${totalCount}条</span>
-		</div>
-		<div class="pagination" targetType="navTab" totalCount="${totalCount}"
-			numPerPage="${numPerPage}" pageNumShown="10" currentPage="${pageNum}">
-		</div>
-	</div>
-	<form id="pagerForm" method="post" action="<%=path%>/${sn}/transferAccount_list">
-		<input type="hidden" name="pageNum" value="${pageNum}" />
-		<input type="hidden" name="numPerPage" value="${numPerPage}" />
-	</form>
+	<jsp:include page="../pub/paged.jsp"></jsp:include>
 </div>

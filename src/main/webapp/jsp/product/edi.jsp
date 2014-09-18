@@ -25,6 +25,34 @@
 		setAllSum('materialsum', 'costprice');
 		setReduction('realprice', 'costprice', 'profit');
 	}
+	
+	// 上传成功
+	function uploadifySuccess(file, data, response) {
+		if(response == true) {
+			$.pdialog.reload("<%=path%>/product/edi/${form.map.productid}", {data:{}, dialogId:"product_edi", callback:null});
+		} else {
+			
+		}
+	}
+	
+	// 上传完成
+	function uploadifyQueueComplete(file) {
+		
+	}
+	
+	// 删除文件
+	function deleteExcel() {
+		$.get(
+			"<%=path%>/product/deleteExcel/${form.map.productid}",
+			function(data) {
+				if(data == "true") {
+					$.pdialog.reload("<%=path%>/product/edi/${form.map.productid}", {data:{}, dialogId:"product_edi", callback:null});
+				} else {
+					
+				}
+			}
+		);
+	}
 </script>
 
 <h1 class="margin10px">产品信息</h1>
@@ -35,14 +63,14 @@
 		<dl>
 			<dt>产品编码：</dt>
 			<dd>
-				<input type="text" name="map[productno]" class="required" size="30" maxlength="17"
+				<input type="text" name="map[productno]" class="required" size="25" maxlength="17"
 					value="${form.map.productno}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>产品名称：</dt>
 			<dd>
-				<input type="text" name="map[productname]" class="required" size="30" maxlength="32"
+				<input type="text" name="map[productname]" class="required" size="25" maxlength="32"
 					value="${form.map.productname}"/>
 			</dd>
 		</dl>
@@ -50,49 +78,78 @@
 			<dt>产品类型：</dt>
 			<dd>
 				<input type="hidden" name="map[producttype]" value="${form.map.producttype}"/>
-				<input type="text" name="map[producttypename]" size="30" value="${form.map.producttypename}"
+				<input type="text" name="map[producttypename]" size="25" value="${form.map.producttypename}"
 					 readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>计量单位：</dt>
 			<dd>
-				<st:select dictType="计量单位" name="map[unit]" value="${form.map.unit}" expStr="style='width: 185px;' class='required'" />
+				<st:select dictType="计量单位" name="map[unit]" value="${form.map.unit}" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
 			<dt>成本单价：</dt>
 			<dd>
-				<input type="text" name="map[costprice]" class="required number" size="30" maxlength="12"
+				<input type="text" name="map[costprice]" class="required number" size="25" maxlength="12"
 					value="${form.map.costprice}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>利润：</dt>
 			<dd>
-				<input type="text" name="map[profit]" class="required number" size="30" maxlength="12"
+				<input type="text" name="map[profit]" class="required number" size="25" maxlength="12"
 					value="${form.map.profit}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>产品单价：</dt>
 			<dd>
-				<input type="text" name="map[realprice]" class="required number" size="30" maxlength="12"
+				<input type="text" name="map[realprice]" class="required number" size="25" maxlength="12"
 					value="${form.map.realprice}" onchange="changeValue();"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>新增时间：</dt>
 			<dd>
-				<input type="text" name="map[createdate]" class="required" size="30" maxlength="19"
+				<input type="text" name="map[createdate]" class="required" size="25" maxlength="19"
 					value="${form.map.createdate}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="106" maxlength="256"
+				<input type="text" name="map[remark]" size="88" maxlength="256"
 					value="${form.map.remark}"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt></dt>
+			<dd></dd>
+		</dl>
+		<dl>
+			<dt>
+				<input id="testFileInput" type="file" name="image" 
+					uploaderOption="{
+						height: 20,
+						width: 50,
+						swf:'<%=path%>/js/uploadify/scripts/uploadify.swf',
+						uploader:'<%=path%>/product/upload',
+						formData:{productid:${form.map.productid}},
+						buttonText:'上传',
+						fileSizeLimit:'10240KB',
+						auto:true,
+						multi:true,
+						onUploadSuccess:uploadifySuccess,
+						onQueueComplete:uploadifyQueueComplete
+					}"
+				/>
+			</dt>
+			<dd>
+				<c:if test="${not empty form.map.excelname}">
+					<a href="<%=path%>/resources/productexcel/${form.map.excelname}" style="color: #F57800;">【下载】</a>
+					<a onclick="deleteExcel()" style="color: #F57800; cursor: pointer;">【删除】</a>
+				</c:if>
 			</dd>
 		</dl>
 		

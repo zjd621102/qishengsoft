@@ -10,30 +10,29 @@
 			<dl>
 				<dt>物资类型编码：</dt>
 				<dd>
-					<input type="text" name="map[materialtypeno]" class="required" size="30"
-						maxlength="8" value="${form.map.materialtypeno}" alt="请输入物资类型编码"
-						readonly="readonly" />
+					<input type="text" name="map[materialtypeno]" class="required" size="25"
+						maxlength="8" value="${form.map.materialtypeno}" readonly="readonly" />
 				</dd>
 			</dl>
 			<dl>
 				<dt>物资类型名称：</dt>
 				<dd>
-					<input type="text" name="map[materialtypename]" class="required" size="30"
-						maxlength="32" value="${form.map.materialtypename}" alt="请输入物资类型名称" />
+					<input type="text" name="map[materialtypename]" class="required" size="25"
+						maxlength="32" value="${form.map.materialtypename}" />
 				</dd>
 			</dl>
 			<dl>
 				<dt>优先级：</dt>
 				<dd style="width: 65%">
 					<input type="text" name="map[priority]" class="required digits"
-						size="30" min="1" max="99" value="99" />
+						size="25" min="1" max="99" value="99" />
 					<span class="info">&nbsp;&nbsp;默认:99</span>
 				</dd>
 			</dl>
 			<dl>
 				<dt>备注：</dt>
 				<dd>
-					<textarea name="map[remark]" cols="30" rows="3" maxlength="256">${form.map.remark}</textarea>
+					<textarea name="map[remark]" cols="27" rows="8" maxlength="256">${form.map.remark}</textarea>
 				</dd>
 			</dl>
 		</div>

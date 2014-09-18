@@ -35,7 +35,7 @@ public class ManuDaoImpl extends BaseDaoImpl {
 	 */
 	public List<CodeTableForm> getManuList(CodeTableForm form) {
 		
-		String sql = "SELECT t.*, func_getDictName('计量单位', manutypeid) manutypename ,"
+		String sql = "SELECT t.*, func_getDictName('供应商类别', manutypeid) manutypename ,"
 				+ " func_getDictName('状态', statusid) statusname,"
 				+ " (SELECT sm.bankrow FROM smanurow sm"
 				+ " WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1) manubankname,"
@@ -62,6 +62,7 @@ public class ManuDaoImpl extends BaseDaoImpl {
 		String manuname = StrUtils.nullToStr(form.getValue("manuname"));
 		String manutypeid = StrUtils.nullToStr(form.getValue("manutypeid"));
 		String statusid = StrUtils.nullToStr(form.getValue("statusid"));
+		String referee = StrUtils.nullToStr(form.getValue("referee"));
 		
 		if(!manuname.equals("")) {
 			cond.append(" AND t.manuname like '%").append(manuname).append("%'");
@@ -71,6 +72,9 @@ public class ManuDaoImpl extends BaseDaoImpl {
 		}
 		if(!statusid.equals("")) {
 			cond.append(" AND t.statusid = '").append(statusid).append("'");
+		}
+		if(!referee.equals("")) {
+			cond.append(" AND t.referee like '%").append(referee).append("%'");
 		}
 		
 		return cond.toString();

@@ -122,3 +122,26 @@ function doBeforeSubmit() {
 function batchSet(id1, name2) {
 	$("[name='" + name2 + "']").val($("#" + id1).val());
 }
+
+/**
+ * 通过编号打开单据
+ */
+function openBillByNo(path, billNo) {
+	
+	if(billNo == "") {
+		return;
+	}
+	
+	$.post(
+		path + "/getUrlByNo/" + billNo,
+		function(url) {
+			
+			url = path +　url;
+			var dlgId = "_blank";
+			var title = " ";
+			var options = {width:1300,height:500,mask:true};
+			
+			$.pdialog.open(url, dlgId, title, options);
+		}
+	);
+}

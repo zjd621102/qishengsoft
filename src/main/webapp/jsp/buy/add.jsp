@@ -77,7 +77,7 @@
 <h1 class="margin10px">采购单信息</h1>
 <form method="post" action="<%=path%>/buy/add" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="97">
+	<div class="pageFormContent" layoutH="88">
 		<dl>
 			<dt>单据类型：</dt>
 			<dd>

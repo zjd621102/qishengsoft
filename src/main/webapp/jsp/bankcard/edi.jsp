@@ -9,21 +9,21 @@
 		<dl>
 			<dt>银行卡卡号：</dt>
 			<dd>
-				<input type="text" name="map[bankcardno]" class="required" size="30" maxlength="32" alt="请输入银行卡卡号"
+				<input type="text" name="map[bankcardno]" class="required" size="25" maxlength="32"
 					 value="${form.map.bankcardno}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>开户银行名称：</dt>
 			<dd>
-				<input type="text" name="map[bankname]" class="required" size="30" maxlength="32" alt="开户银行名称"
+				<input type="text" name="map[bankname]" class="required" size="25" maxlength="32"
 					 value="${form.map.bankname}"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>账户名称：</dt>
 			<dd>
-				<input type="text" name="map[accountname]" class="required" size="30" maxlength="32" alt="账户名称"
+				<input type="text" name="map[accountname]" class="required" size="25" maxlength="32"
 					 value="${form.map.accountname}"/>
 			</dd>
 		</dl>
@@ -36,7 +36,7 @@
 		<dl>
 			<dt>金额：</dt>
 			<dd>
-				<input type="text" name="map[money]" class="required number" size="30" maxlength="12" alt="金额"
+				<input type="text" name="map[money]" class="required number" size="25" maxlength="12"
 					 value="${form.map.money}" readonly="readonly"/>
 			</dd>
 		</dl>
@@ -49,7 +49,7 @@
 		<dl>
 			<dt>优先级：</dt>
 			<dd>
-				<input type="text" name="map[priority]" size="30" maxlength="2" value="${form.map.priority}" />
+				<input type="text" name="map[priority]" size="25" maxlength="2" value="${form.map.priority}" />
 			</dd>
 		</dl>
 		<dl>

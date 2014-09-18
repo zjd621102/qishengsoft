@@ -16,16 +16,23 @@
 				<tr>
 					<td>
 						供应商名称：
-						<input type="text" name="map[manuname]" size="30" maxlength="32"
+						<input type="text" name="map[manuname]" size="12" maxlength="32"
 							value="${form.map.manuname}"/>
 					</td>
 					<td>
 						供应商类别：
-						<st:select dictType="供应商类别" name="map[manutypeid]" value="${form.map.manutypeid}" expStr="style='width: 184px;'" />
+						<st:select dictType="供应商类别" name="map[manutypeid]" value="${form.map.manutypeid}"
+						 expStr="style='width: 92px;'" />
 					</td>
 					<td>
 						供应商状态：
-						<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}" expStr="style='width: 184px;'" />
+						<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
+						 expStr="style='width: 92px;'" />
+					</td>
+					<td>
+						推荐人：
+						<input type="text" name="map[referee]" size="12" maxlength="16"
+						 value="${form.map.referee}"/>
 					</td>
 				</tr>
 			</table>
@@ -74,14 +81,15 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="5%">序号</th>
+				<th width="3%">序号</th>
 				<th width="20%">供应商名称</th>
 				<th width="10%">供应商类别</th>
 				<th width="10%">供应商状态</th>
 				<th width="15%">创建时间</th>
 				<th width="15%">联系人</th>
 				<th width="15%">联系电话</th>
-				<th width="10%">优先级</th>
+				<th width="8%">推荐人</th>
+				<th width="4%">优先级</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -101,6 +109,7 @@
 			   		<td>${bean.map.createdate}</td>
 			   		<td>${bean.map.manucontact}</td>
 			   		<td>${bean.map.manutel}</td>
+			   		<td>${bean.map.referee}</td>
 			   		<td>${bean.map.priority}</td>
 			   	</tr>
 		   	</c:forEach>

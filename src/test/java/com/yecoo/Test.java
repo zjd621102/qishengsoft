@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Test {
-	
+	/*
 	public static void main(String[] args) throws Exception {
 		Test test = new Test();
 		test.test1();
@@ -44,5 +44,5 @@ public class Test {
 		resultSet.close();
 		statement.close();
 		connection.close();
-	}
+	}*/
 }

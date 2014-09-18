@@ -31,6 +31,8 @@ public class Constants {
 
 	public static String dbName = "";// 数据库名
 	
+	public final static String PATH_PRODUCT_EXCEL = "\\resources\\productexcel\\";
+	
 	static {
 		InputStream in = null;
 		try {

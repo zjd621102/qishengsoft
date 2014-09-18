@@ -94,9 +94,10 @@
 	}
 </script>
 
+<h1 class="margin10px">销售单信息</h1>
 <form method="post" action="<%=path%>/sell/add" class="required-validate pageForm"
  onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="56">
+	<div class="pageFormContent" layoutH="88">
 		<dl>
 			<dt>销售日期：</dt>
 			<dd>
@@ -119,13 +120,13 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<st:select dictType="流程状态" name="map[currflow]" value="申请" expStr="style='width: 164px;' class='required'" />
+				<st:select dictType="流程状态" name="map[currflow]" value="申请" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="178" maxlength="256" value="${form.map.remark}" />
+				<input type="text" name="map[remark]" size="152" maxlength="256" value="${form.map.remark}" />
 			</dd>
 		</dl>
 		

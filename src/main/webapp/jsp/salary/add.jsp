@@ -19,7 +19,7 @@
 <h1 class="margin10px">工资单信息</h1>
 <form method="post" action="<%=path%>/salary/add" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="97">
+	<div class="pageFormContent" layoutH="88">
 		<dl>
 			<dt>工资类型：</dt>
 			<dd>

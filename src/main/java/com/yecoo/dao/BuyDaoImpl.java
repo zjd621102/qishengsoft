@@ -262,4 +262,81 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		int iReturn = dbUtils.executeSQLs(sqls);
 		return iReturn;
 	}
+	
+	/**
+	 * 合并采购单
+	 * @param buyids
+	 * @return
+	 */
+	public int mergeBuy(String buyids, String maker) {
+		
+		String sql = null;
+		Connection conn = null;
+		int iReturn = -1;
+		try {
+			conn = dbUtils.dbConnection();
+			conn.setAutoCommit(false); //事务开启
+		
+			sql = "SELECT relateno FROM bbuy t WHERE t.buyid IN (" + buyids + ")";
+			String remark = dbUtils.getStrJoinBySql(sql, ",");
+			if(remark.equals("")) {
+				remark = "合并采购单";
+			} else {
+				remark = "合并采购单（" + remark + "）";
+			}
+	
+			CodeTableForm buyForm = new CodeTableForm(); //采购单
+			buyForm.setValue("btype", "CGD");
+			buyForm.setValue("buyname", StrUtils.getSysdate("yyyy.MM.dd") + "采购");
+			buyForm.setValue("buyno", StrUtils.getNewNO("CGD", "buyno", "bbuy"));
+			buyForm.setValue("buydate", StrUtils.getSysdate());
+			buyForm.setValue("currflow", "申请");
+			buyForm.setValue("maker", maker);
+			buyForm.setValue("createtime", StrUtils.getSysdatetime());
+			buyForm.setValue("remark", remark);
+			iReturn = dbUtils.setInsert(buyForm, "bbuy", ""); //保存主表
+	
+			sql = "SELECT IFNULL(MAX(buyid), 1) FROM bbuy";
+			int buyid = dbUtils.getIntBySql(sql);
+			
+			if(iReturn >= 1) { //保存行项表
+				sql = "INSERT INTO bbuyrow"
+					+ " SELECT NULL, '" + buyid + "', n.materialid, n.materialname, n.unit, n.price, m.num, n.price * m.num sum, o.manuid, o.manuname, o.manucontact, o.manutel, NULL FROM ("
+					+ "SELECT a.materialid, SUM(a.num) num FROM bbuyrow a WHERE a.buyid IN (" + buyids + ") GROUP BY a.materialid"
+					+ ") m, smaterial n, smanu o WHERE m.materialid = n.materialid AND n.manuid = o.manuid";
+	
+				String[] sqls = new String[3];
+				sqls[0] = sql;
+				sqls[1] = "DELETE FROM bbuy WHERE buyid IN (" + buyids + ")";
+				sqls[2] = "DELETE FROM bbuyrow WHERE buyid IN (" + buyids + ")";
+				iReturn = dbUtils.executeSQLs(sqls);
+				if(iReturn == -1) { //保存失败，删除主表
+					sql = "DELETE FROM bbuy WHERE buyid = '" + buyid + "'";
+					dbUtils.execQuerySQL(sql);
+				}
+			}
+			
+			if(iReturn >= 0) {
+				conn.commit();
+			} else {
+				conn.rollback();
+			}
+		} catch(Exception e) {
+			iReturn = -1;
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				
+			}
+			StrUtils.WriteLog(this.getClass().getName() + ".ediSell()", e);
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				
+			}
+		}
+		
+		return iReturn;
+	}
 }
