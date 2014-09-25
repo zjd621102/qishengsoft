@@ -29,7 +29,7 @@ CodeTableForm form2 = (CodeTableForm) request.getAttribute("form");
 	<div class="tabs">
 		<div class="tabsContent">
 			<div>
-				<div layoutH="0"
+				<div layoutH="10"
 					style="float: left; display: block; overflow: auto; width: 240px; border: solid 1px #CCC; line-height: 21px; background: #fff">
 					<ul class="tree treeFolder expand">
 						<li>
