@@ -58,13 +58,13 @@
 	
 	<h2>工资清单</h2>
 	
-	<table style="width: 100%; text-align: center;">
+	<table class="rowtable">
 		<thead>
 			<tr>
-				<th width="7%">序号</th>
-				<th width="20%">员工</th>
-				<th width="15%">金额</th>
-				<th width="68%">备注</th>
+				<th width="4%">序号</th>
+				<th width="12%">员工</th>
+				<th width="12%">金额</th>
+				<th>备注</th>
 			</tr>
 		</thead>
 		<tbody>

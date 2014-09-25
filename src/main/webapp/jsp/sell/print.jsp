@@ -53,15 +53,15 @@
 
 	<h2>销售清单</h2>
 
-	<table style="width: 100%;">
+	<table class="rowtable">
 		<thead>
 			<tr>
-				<td width="3%">序号</td>
+				<td width="4%">序号</td>
 				<td width="8%">产品编码</td>
 				<td width="15%">产品名称</td>
 				<td width="8%">单价</td>
 				<td width="8%">数量</td>
-				<td width="8%">金额</td>
+				<td width="10%">金额</td>
 				<td>备注</td>
 			</tr>
 		</thead>

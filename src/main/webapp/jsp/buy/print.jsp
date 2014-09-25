@@ -59,17 +59,17 @@
 
 	<h2>采购清单</h2>
 
-	<table style="width: 100%;">
+	<table class="rowtable">
 		<thead>
 			<tr>
-				<td width="6%">序号</td>
-				<td width="12%">物资编码</td>
+				<td width="4%">序号</td>
+				<td width="8%">物资编码</td>
 				<td width="14%">物资名称</td>
 				<td width="7%">单价</td>
 				<td width="6%">数量</td>
 				<td width="10%">金额</td>
 				<td width="13%">供应商名称</td>
-				<td width="7%">联系人</td>
+				<td width="9%">联系人</td>
 				<td width="11%">联系电话</td>
 				<td>备注</td>
 			</tr>

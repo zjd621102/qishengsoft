@@ -58,10 +58,10 @@
 
 	<h2>发票清单</h2>
 
-	<table style="width: 100%;">
+	<table class="rowtable">
 		<thead>
 			<tr>
-				<td width="6%">序号</td>
+				<td width="4%">序号</td>
 				<td width="16%">银行卡卡号</td>
 				<td width="15%">供应商</td>
 				<td width="13%">供应商开户银行</td>
@@ -69,7 +69,7 @@
 				<td width="13%">供应商账户名称</td>
 				<td width="7%">应付金额</td>
 				<td width="7%">实付金额</td>
-				<td width="8%">备注</td>
+				<td>备注</td>
 			</tr>
 		</thead>
 		<tbody>
