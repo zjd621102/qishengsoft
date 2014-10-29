@@ -29,14 +29,14 @@
 		<dl>
 			<dt>工资单名称：</dt>
 			<dd>
-				<input type="text" name="map[salaryname]" class="required" size="30" maxlength="32"
+				<input type="text" name="map[salaryname]" class="required" size="25" maxlength="32"
 					 value="${form.map.salaryname}"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>工资单日期：</dt>
 			<dd>
-				<input type="text" name="map[salarydate]" class="required date" style="width: 178px;"
+				<input type="text" name="map[salarydate]" class="required date" size="25"
 					value="${form.map.salarydate}" readonly="readonly" dateFmt="yyyy-MM"/>
 				<a class="inputDateButton" href="javascript:;">选择</a>
 			</dd>
@@ -44,13 +44,14 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<st:select dictType="流程状态" name="map[currflow]" value="申请" expStr="style='width: 184px;' class='required'" />
+				<input type="text" name="map[currflow]" class="readonly" size="25"
+					value="申请" readonly="readonly" />
 			</dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="30" maxlength="256" value="${form.map.remark}" />
+				<input type="text" name="map[remark]" size="25" maxlength="256" value="${form.map.remark}" />
 			</dd>
 		</dl>
 		

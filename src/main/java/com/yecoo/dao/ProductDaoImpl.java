@@ -79,6 +79,7 @@ public class ProductDaoImpl extends BaseDaoImpl {
 		
 		return cond.toString();
 	}
+	
 	/**
 	 * 新增产品
 	 * @param form

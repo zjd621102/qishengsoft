@@ -78,21 +78,31 @@ public class ProducttypeAction {
 	public String add(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
-		int iReturn = producttypeDaoImpl.addProducttype(form);
 		
-		if(iReturn > 0) {
-			DbUtils dbUtils = new DbUtils();
-			String sql = "UPDATE sproducttype a, sproducttype b SET a.producttypeall = CONCAT(b.producttypeall, '-', a.producttype)"
-					+ " WHERE a.parent = b.producttype AND a.producttypeno = '" + form.getValue("producttypeno") + "'";
-			iReturn = dbUtils.executeSQL(sql);
-		}
+		// 校验编码是否可用
+		String producttype = StrUtils.nullToStr(form.getValue("producttype"));
+		String producttypeno = StrUtils.nullToStr(form.getValue("producttypeno"));
+		boolean checkNO = producttypeDaoImpl.checkNo(producttype, producttypeno);
 		
-		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("新增成功！", "producttype_tree", "closeCurrent");
-
-			StrUtils.saveLog(request, "新增产品类型", form);
+		if(checkNO) {
+			int iReturn = producttypeDaoImpl.addProducttype(form);
+			
+			if(iReturn > 0) {
+				DbUtils dbUtils = new DbUtils();
+				String sql = "UPDATE sproducttype a, sproducttype b SET a.producttypeall = CONCAT(b.producttypeall, '-', a.producttype)"
+						+ " WHERE a.parent = b.producttype AND a.producttypeno = '" + form.getValue("producttypeno") + "'";
+				iReturn = dbUtils.executeSQL(sql);
+			}
+			
+			if (iReturn >= 0) {
+				ajaxObject = new AjaxObject("新增成功！", "producttype_tree", "closeCurrent");
+	
+				StrUtils.saveLog(request, "新增产品类型", form);
+			} else {
+				ajaxObject = new AjaxObject("新增失败");
+			}
 		} else {
-			ajaxObject = new AjaxObject("新增失败");
+			ajaxObject = new AjaxObject("产品类型编码已存在");
 		}
 		return ajaxObject.toString();
 	}
@@ -114,13 +124,23 @@ public class ProducttypeAction {
 	public String doEdi(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
-		int iReturn = producttypeDaoImpl.ediProducttype(form);
-		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("修改成功！", "producttype_tree", "closeCurrent");
-
-			StrUtils.saveLog(request, "修改产品类型", form);
+		
+		// 校验编码是否可用
+		String producttype = StrUtils.nullToStr(form.getValue("producttype"));
+		String producttypeno = StrUtils.nullToStr(form.getValue("producttypeno"));
+		boolean checkNO = producttypeDaoImpl.checkNo(producttype, producttypeno);
+		
+		if(checkNO) {
+			int iReturn = producttypeDaoImpl.ediProducttype(form);
+			if (iReturn >= 0) {
+				ajaxObject = new AjaxObject("修改成功！", "producttype_tree", "closeCurrent");
+	
+				StrUtils.saveLog(request, "修改产品类型", form);
+			} else {
+				ajaxObject = new AjaxObject("修改失败");
+			}
 		} else {
-			ajaxObject = new AjaxObject("修改失败");
+			ajaxObject = new AjaxObject("产品类型编码已存在");
 		}
 		return ajaxObject.toString();
 	}

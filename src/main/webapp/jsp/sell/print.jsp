@@ -69,7 +69,7 @@
 			<tr>
 				<td colspan="4"></td>
 				<td>
-					合计：
+					合计
 				</td>
 				<td>
 					<span id="allrealsumSpan">${form.map.allrealsum}</span>

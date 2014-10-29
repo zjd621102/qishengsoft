@@ -9,14 +9,14 @@
 			<dl>
 				<dt>角色名称：</dt>
 				<dd>
-					<input type="text" name="map[rolename]" class="required" size="30" maxlength="64" alt="请输入角色名称"
+					<input type="text" name="map[rolename]" class="required" size="25" maxlength="64" alt="请输入角色名称"
 					 value="${form.map.rolename}"/>
 				</dd>
 			</dl>
 			<dl>
 				<dt>优先级：</dt>
 				<dd style="width: 65%;">
-					<input type="text" name="map[priority]" class="required digits" size="30" min="1" max="99" value="${form.map.priority}"/>
+					<input type="text" name="map[priority]" class="required digits" size="25" min="1" max="99" value="${form.map.priority}"/>
 					<span class="info">&nbsp;&nbsp;默认:99</span>
 				</dd>
 			</dl>

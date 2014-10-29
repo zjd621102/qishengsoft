@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
@@ -144,6 +145,29 @@ public class ProducttypeDaoImpl extends BaseDaoImpl {
 		codeTableForm.setValue("childrenList", getChildrenList(codeTableForm));
 		return codeTableForm;
 	}
+
+	/**
+	 * 校验编码是否可用
+	 * @param producttype
+	 * @param producttypeno
+	 * @return
+	 */
+	public boolean checkNo(String producttype, String producttypeno) {
+		boolean bRes = false;
+		
+		int iRes = 0;
+		String sql = "SELECT COUNT(1) FROM sproducttype t WHERE t.producttypeno = '" + producttypeno + "'";
+		if(!producttype.equals("")) {
+			sql += " AND t.producttype <> '" + producttype + "'";
+		}
+		iRes = dbUtils.getIntBySql(sql);
+		if(iRes == 0) {
+			bRes = true;
+		}
+		
+		return bRes;
+	}
+	
 	/**
 	 * 新增产品类别
 	 * @param form

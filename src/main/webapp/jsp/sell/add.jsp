@@ -1,6 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<!-- 有“销售:其它”权限，可查看产品成本、利润权限 -->
+<shiro:lacksPermission name="Sell:other">
+	<c:set var="showProfit" value="none" scope="page" />
+</shiro:lacksPermission>
+
 <script>
 	$(function() {
 		autoCom("[name='map[productno]']:visible");
@@ -120,7 +125,8 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<st:select dictType="流程状态" name="map[currflow]" value="申请" expStr="style='width: 184px;' class='required'" />
+				<input type="text" name="map[currflow]" class="readonly" size="25"
+					value="申请" readonly="readonly" />
 			</dd>
 		</dl>
 		<dl>
@@ -146,8 +152,8 @@
 					<th width="6%">计量单位</th>
 					<th width="6%">产品单价</th>
 					<th width="6%">实付单价</th>
-					<th width="6%">成本单价</th>
-					<th width="6%">LL</th>
+					<th width="6%" style="display: ${showProfit};">成本单价</th>
+					<th width="6%" style="display: ${showProfit};">利润</th>
 					<th width="6%">数量</th>
 					<th width="6%">实付总价</th>
 					<th>备注</th>
@@ -161,11 +167,11 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td></td>
+					<td style="display: ${showProfit};"></td>
 					<td style="font-size: 13px; font-weight: bold; color: red;">
 						合计：
 					</td>
-					<td>
+					<td style="display: ${showProfit};">
 						<input type="text" name="map[allprofit]" style="width: 91%" class="number"
 							value="0.00" readonly="readonly"/>
 					</td>
@@ -204,11 +210,11 @@
 						<input type="text" name="map[realprice]" style="width: 92%" maxlength="12"
 							class="number required" value="0.00" onchange="changeValue();"/>
 			   		</td>
-			   		<td>
+			   		<td style="display: ${showProfit};">
 						<input type="text" name="map[costprice]" style="width: 92%" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
-			   		<td>
+			   		<td style="display: ${showProfit};">
 						<input type="text" name="map[profit]" style="width: 91%" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
 			   		</td>

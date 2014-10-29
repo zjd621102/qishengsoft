@@ -78,7 +78,7 @@
 			<tr>
 				<td colspan="4"></td>
 				<td>
-					合计：
+					合计
 				</td>
 				<td>
 					<span id="allsumSpan"></span>

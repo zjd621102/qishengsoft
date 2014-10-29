@@ -137,7 +137,7 @@ public class SalaryAction {
 		int iReturn = 0;
 		String sql = "SELECT COUNT(1) FROM bsalary t WHERE t.currflow <> '申请' AND t.salaryid = '" + salaryid + "'";
 		int icount = dbUtils.getIntBySql(sql);
-		if(icount >= 1) {
+		if(icount >= 3) {
 			ajaxObject = new AjaxObject("删除失败（单据不在申请流程）");
 		} else {
 			iReturn = salaryDaoImpl.deleteSalary(salaryid);

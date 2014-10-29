@@ -25,21 +25,21 @@
 			<dt>工资单类型：</dt>
 			<dd>
 				<input type="hidden" name="map[salarytype]" value="${form.map.salarytype}" />
-				<input type="text" name="map[salarytypename]" size="30" value="${form.map.salarytypename}"
+				<input type="text" name="map[salarytypename]" size="25" value="${form.map.salarytypename}"
 					readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>工资单名称：</dt>
 			<dd>
-				<input type="text" name="map[salaryname]" class="required" size="30" maxlength="32"
+				<input type="text" name="map[salaryname]" class="required" size="25" maxlength="32"
 					 value="${form.map.salaryname}"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>工资单编号：</dt>
 			<dd>
-				<input type="text" name="map[salaryno]" class="required" size="30" maxlength="16"
+				<input type="text" name="map[salaryno]" class="required" size="25" maxlength="16"
 					 value="${form.map.salaryno}" readonly="readonly"/>
 			</dd>
 		</dl>
@@ -61,21 +61,21 @@
 			<dt>制单人：</dt>
 			<dd>
 				<input type="hidden" name="map[maker]" value="${form.map.maker}" />
-				<input type="text" name="map[makername]" class="required" size="30" maxlength="16"
+				<input type="text" name="map[makername]" class="required" size="25" maxlength="16"
 					value="${form.map.makername}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>创建日期：</dt>
 			<dd>
-				<input type="text" name="map[createtime]" size="30" maxlength="19"
+				<input type="text" name="map[createtime]" size="25" maxlength="19"
 					value="${form.map.createtime}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="30" maxlength="256" value="${form.map.remark}" />
+				<input type="text" name="map[remark]" size="25" maxlength="256" value="${form.map.remark}" />
 			</dd>
 		</dl>
 		

@@ -65,26 +65,26 @@
 			</li>
 			<li>
 				<a class="edit" href="<%=path%>/bankcard/transferAccount_list" target="dialog"
-					rel="bankcard_transferAccount_list" mask="true" width="1000" height="500">
+					rel="bankcard_transferAccount_list" mask="true" width="1000" height="510">
 					<span>转账列表</span>
 				</a>
 			</li>
 			<li class="line">line</li>
 			<li>
 				<a class="edit" href="<%=path%>/bankcard/receandpay/{s_bankcardid}" target="dialog"
-					rel="bankcard_receandpay" mask="true" width="500" height="500">
+					rel="bankcard_receandpay" mask="true" width="500" height="350">
 					<span>其它收支</span>
 				</a>
 			</li>
 			<li>
 				<a class="edit" href="<%=path%>/bankcard/receandpay_list" target="dialog"
-					rel="bankcard_receandpay_list" mask="true" width="1000" height="500">
+					rel="bankcard_receandpay_list" mask="true" width="1000" height="510">
 					<span>其它收支列表</span>
 				</a>
 			</li>
 			<li>
 				<a class="edit" href="<%=path%>/bankcard/transaction_list" target="dialog"
-					rel="bankcard_transaction_list" mask="true" width="1000" height="500">
+					rel="bankcard_transaction_list" mask="true" width="1000" height="510">
 					<span>交易列表</span>
 				</a>
 			</li>

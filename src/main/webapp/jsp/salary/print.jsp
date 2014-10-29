@@ -71,7 +71,7 @@
 			<tr style="line-height: 35px;">
 				<td></td>
 				<td style="font-size: 13px; font-weight: bold; color: red;">
-					合计：
+					合计
 				</td>
 				<td>
 					<input type="hidden" name="map[allplanmoney]" />

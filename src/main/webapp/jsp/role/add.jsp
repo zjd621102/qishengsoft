@@ -8,13 +8,13 @@
 			<dl>
 				<dt>角色名称：</dt>
 				<dd>
-					<input type="text" name="map[rolename]" class="required" size="30" maxlength="64" alt="请输入角色名称"/>
+					<input type="text" name="map[rolename]" class="required" size="25" maxlength="64" alt="请输入角色名称"/>
 				</dd>
 			</dl>
 			<dl>
 				<dt>优先级：</dt>
 				<dd style="width: 65%;">
-					<input type="text" name="map[priority]" value="99" class="required digits" size="30" min="1" max="99"/>
+					<input type="text" name="map[priority]" value="99" class="required digits" size="25" min="1" max="99"/>
 					<span class="info">&nbsp;&nbsp;默认:99</span>
 				</dd>
 			</dl>
@@ -30,6 +30,7 @@
 								<span class="crud">创建</span>
 								<span class="crud">修改</span>
 								<span class="crud">删除</span>
+								<span class="crud">其它</span>
 							</span>
 						</a>
 					</div>
@@ -46,6 +47,7 @@
 											<input type="checkbox" name="map[permission]" value="${m1.map.sn}:add"/>
 											<input type="checkbox" name="map[permission]" value="${m1.map.sn}:edi"/>
 											<input type="checkbox" name="map[permission]" value="${m1.map.sn}:delete"/>
+											<input type="checkbox" name="map[permission]" value="${m1.map.sn}:other"/>
 										</span>
 									</a>
 								</div>
@@ -63,6 +65,7 @@
 														<input type="checkbox" name="map[permission]" value="${m2.map.sn}:add"/>
 														<input type="checkbox" name="map[permission]" value="${m2.map.sn}:edi"/>
 														<input type="checkbox" name="map[permission]" value="${m2.map.sn}:delete"/>
+														<input type="checkbox" name="map[permission]" value="${m2.map.sn}:other"/>
 													</span>
 												</a>
 											</div>

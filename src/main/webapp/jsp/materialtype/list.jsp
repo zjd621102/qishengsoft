@@ -39,7 +39,7 @@
 			<li>
 				<a class="add"
 					href="<%=path%>/materialtype/add/${form.map.parent}" target="dialog"
-					rel="materialtype_add" mask="true" width="500" height="500">
+					rel="materialtype_add" mask="true" width="500" height="350">
 					<span>新增物资类型</span>
 				</a>
 			</li>
@@ -48,7 +48,7 @@
 			<li>
 				<a class="edit" href="<%=path%>/materialtype/edi/{s_materialtype}"
 					target="dialog" rel="materialtype_edi" mask="true" width="500"
-					height="500">
+					height="350">
 					<span>修改物资类型</span>
 				</a>
 			</li>

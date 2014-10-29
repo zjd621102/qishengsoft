@@ -253,6 +253,14 @@ public class StaffDaoImpl extends BaseDaoImpl {
 			}
 		} catch(Exception e) {
 			StrUtils.WriteLog(this.getClass().getName() + ".initWork()", e);
+		} finally {
+			try {
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				StrUtils.WriteLog(this.getClass().getName() + ".initWork()", e);
+			}
 		}
 	}
 }

@@ -9,14 +9,22 @@
 		}, 100);
 	});
 
+	// 修改操作方式
 	function changeAction(act) {
-		if(act=="save") {
+		if(act=="save") {// 保存
 			$('#staff_work_form').attr("action","<%=path%>/staff/edi_work");
 		 	$('#staff_work_form').attr("onsubmit","return validateCallback(this, dialogAjaxDone);");
-		} else {
+		} else {// 查询
 		 	$('#staff_work_form').attr("action","<%=path%>/staff/edi_work/${form.map.staffid}");
 			$('#staff_work_form').attr("onsubmit", "return dwzSearch(this, 'dialog');");
 		}
+	}
+	
+	// 批量设置
+	function allSet() {
+		$("[name='map[workstatus]']").val("1");
+		batchSet('salary', 'map[salary]');
+		setAllSum('salary', 'allsalary');
 	}
 </script>
 
@@ -63,7 +71,7 @@
 				<li>
 					<div class="buttonActive">
 						<div class="buttonContent">
-							<button type="button" onclick="batchSet('salary', 'map[salary]');setAllSum('salary', 'allsalary');">
+							<button type="button" onclick="allSet()">
 								批量设置</button>
 						</div>
 					</div>
@@ -125,7 +133,7 @@
 							value="${bean.map.endtime}" readonly="readonly"/>
 			   		</td>
 			   		<td>
-			   			<st:select dictType="员工状态" name="map[workstatus]" value="${bean.map.workstatus}" expStr="style='width: 100%;'" />
+			   			<st:select dictType="考勤状态" name="map[workstatus]" value="${bean.map.workstatus}" expStr="style='width: 100%;'" />
 			   		</td>
 			   		<td>
 						<input type="text" name="map[salary]" style="width: 93%" maxlength="12"

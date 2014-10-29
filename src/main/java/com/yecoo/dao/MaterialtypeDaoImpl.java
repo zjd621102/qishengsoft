@@ -144,6 +144,29 @@ public class MaterialtypeDaoImpl extends BaseDaoImpl {
 		codeTableForm.setValue("childrenList", getChildrenList(codeTableForm));
 		return codeTableForm;
 	}
+	
+	/**
+	 * 校验编码是否可用
+	 * @param materialtype
+	 * @param materialtypeno
+	 * @return
+	 */
+	public boolean checkNo(String materialtype, String materialtypeno) {
+		boolean bRes = false;
+		
+		int iRes = 0;
+		String sql = "SELECT COUNT(1) FROM smaterialtype t WHERE t.materialtypeno = '" + materialtypeno + "'";
+		if(!materialtype.equals("")) {
+			sql += " AND t.materialtype <> '" + materialtype + "'";
+		}
+		iRes = dbUtils.getIntBySql(sql);
+		if(iRes == 0) {
+			bRes = true;
+		}
+		
+		return bRes;
+	}
+	
 	/**
 	 * 新增物资类型
 	 * @param form

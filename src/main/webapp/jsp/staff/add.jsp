@@ -8,7 +8,7 @@
 			<dl>
 				<dt>员工名称：</dt>
 				<dd>
-					<input type="text" name="map[staffname]" class="required" size="30" maxlength="64"/>
+					<input type="text" name="map[staffname]" class="required" size="25" maxlength="64"/>
 				</dd>
 			</dl>
 			<dl>
@@ -28,31 +28,31 @@
 			<dl>
 				<dt>联系电话：</dt>
 				<dd>
-					<input type="text" name="map[tel]" class="required" size="30" maxlength="32"/>
+					<input type="text" name="map[tel]" class="required" size="25" maxlength="32"/>
 				</dd>
 			</dl>
 			<dl>
 				<dt>工资开户银行：</dt>
 				<dd>
-					<input type="text" name="map[bank]" size="30" maxlength="32"/>
+					<input type="text" name="map[bank]" size="25" maxlength="32"/>
 				</dd>
 			</dl>
 			<dl>
 				<dt>工资银行账号：</dt>
 				<dd>
-					<input type="text" name="map[accountno]" size="30" maxlength="32"/>
+					<input type="text" name="map[accountno]" size="25" maxlength="32"/>
 				</dd>
 			</dl>
 			<dl>
 				<dt>工资帐户名称：</dt>
 				<dd>
-					<input type="text" name="map[accountname]" size="30" maxlength="32"/>
+					<input type="text" name="map[accountname]" size="25" maxlength="32"/>
 				</dd>
 			</dl>
 			<dl style="width: 100%;">
 				<dt>工资：</dt>
 				<dd style="width: 70%;">
-					<input type="text" name="map[salary]" class="required number" size="30" maxlength="12"
+					<input type="text" name="map[salary]" class="required number" size="25" maxlength="12"
 						value="0.00"/>
 					<span style="color: red;">（单位：元/天）</span>
 				</dd>
@@ -60,13 +60,13 @@
 			<dl>
 				<dt>优先级</dt>
 				<dd>
-					<input type="text" name="map[priority]" size="30" maxlength="2" value="9"/>
+					<input type="text" name="map[priority]" size="25" maxlength="2" value="9"/>
 				</dd>
 			</dl>
 			<dl>
 				<dt>备注：</dt>
 				<dd>
-					<textarea name="map[remark]" cols="27" rows="5" maxlength="512"></textarea>
+					<textarea name="map[remark]" cols="27" rows="6" maxlength="512"></textarea>
 				</dd>
 			</dl>
 		</div>

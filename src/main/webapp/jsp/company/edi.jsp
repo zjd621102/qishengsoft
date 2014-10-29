@@ -58,7 +58,7 @@
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<textarea name="map[remark]" cols="30" rows="3" maxlength="512">${form.map.remark}</textarea>
+				<textarea name="map[remark]" cols="32" rows="6" maxlength="512">${form.map.remark}</textarea>
 			</dd>
 		</dl>
 	</div>	

@@ -76,7 +76,7 @@
 			<tr>
 				<td colspan="5"></td>
 				<td>
-					合计：
+					合计
 				</td>
 				<td>
 					<span id="allplansumSpan">${form.map.allplansum}</span>

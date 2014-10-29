@@ -12,8 +12,8 @@
 			<dl>
 				<dt>产品类别编码：</dt>
 				<dd>
-					<input type="text" name="map[producttypeno]" class="required readonly" size="25"
-						maxlength="8" value="${form.map.producttypeno}" readonly="readonly" />
+					<input type="text" name="map[producttypeno]" class="required" size="25"
+						maxlength="8" value="${form.map.producttypeno}" />
 				</dd>
 			</dl>
 			<dl>

@@ -78,21 +78,31 @@ public class MaterialtypeAction {
 	public String add(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
-		int iReturn = materialtypeDaoImpl.addMaterialtype(form);
 		
-		if(iReturn > 0) {
-			DbUtils dbUtils = new DbUtils();
-			String sql = "UPDATE smaterialtype a, smaterialtype b SET a.materialtypeall = CONCAT(b.materialtypeall, '-', a.materialtype)"
-					+ " WHERE a.parent = b.materialtype AND a.materialtypeno = '" + form.getValue("materialtypeno") + "'";
-			iReturn = dbUtils.executeSQL(sql);
-		}
+		// 校验编码是否可用
+		String materialtype = StrUtils.nullToStr(form.getValue("materialtype"));
+		String materialtypeno = StrUtils.nullToStr(form.getValue("materialtypeno"));
+		boolean checkNO = materialtypeDaoImpl.checkNo(materialtype, materialtypeno);
 		
-		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("新增成功！", "materialtype_tree", "closeCurrent");
-
-			StrUtils.saveLog(request, "新增物资类型", form);
+		if(checkNO) {
+			int iReturn = materialtypeDaoImpl.addMaterialtype(form);
+			
+			if(iReturn > 0) {
+				DbUtils dbUtils = new DbUtils();
+				String sql = "UPDATE smaterialtype a, smaterialtype b SET a.materialtypeall = CONCAT(b.materialtypeall, '-', a.materialtype)"
+						+ " WHERE a.parent = b.materialtype AND a.materialtypeno = '" + form.getValue("materialtypeno") + "'";
+				iReturn = dbUtils.executeSQL(sql);
+			}
+			
+			if (iReturn >= 0) {
+				ajaxObject = new AjaxObject("新增成功！", "materialtype_tree", "closeCurrent");
+	
+				StrUtils.saveLog(request, "新增物资类型", form);
+			} else {
+				ajaxObject = new AjaxObject("新增失败");
+			}
 		} else {
-			ajaxObject = new AjaxObject("新增失败");
+			ajaxObject = new AjaxObject("物资类型编码已存在");
 		}
 		return ajaxObject.toString();
 	}
@@ -114,14 +124,24 @@ public class MaterialtypeAction {
 	public String doEdi(CodeTableForm form, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
-		int iReturn = materialtypeDaoImpl.ediMaterialtype(form);
 		
-		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("修改成功！", "materialtype_tree", "closeCurrent");
-
-			StrUtils.saveLog(request, "修改物资类型", form);
+		// 校验编码是否可用
+		String materialtype = StrUtils.nullToStr(form.getValue("materialtype"));
+		String materialtypeno = StrUtils.nullToStr(form.getValue("materialtypeno"));
+		boolean checkNO = materialtypeDaoImpl.checkNo(materialtype, materialtypeno);
+		
+		if(checkNO) {
+			int iReturn = materialtypeDaoImpl.ediMaterialtype(form);
+			
+			if (iReturn >= 0) {
+				ajaxObject = new AjaxObject("修改成功！", "materialtype_tree", "closeCurrent");
+	
+				StrUtils.saveLog(request, "修改物资类型", form);
+			} else {
+				ajaxObject = new AjaxObject("修改失败");
+			}
 		} else {
-			ajaxObject = new AjaxObject("修改失败");
+			ajaxObject = new AjaxObject("物资类型编码已存在");
 		}
 		return ajaxObject.toString();
 	}

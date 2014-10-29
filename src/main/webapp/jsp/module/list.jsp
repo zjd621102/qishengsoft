@@ -35,7 +35,7 @@
 			<li>
 				<a class="add"
 					href="<%=path%>/module/add/${form.map.parentid}" target="dialog"
-					rel="module_add" mask="true" width="500" height="500">
+					rel="module_add" mask="true" width="500" height="400">
 					<span>新增模块</span>
 				</a>
 			</li>
@@ -44,7 +44,7 @@
 			<li>
 				<a class="edit" href="<%=path%>/module/edi/{s_moduleid}"
 					target="dialog" rel="module_edi" mask="true" width="500"
-					height="500">
+					height="400">
 					<span>修改模块</span>
 				</a>
 			</li>
