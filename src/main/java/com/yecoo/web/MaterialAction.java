@@ -66,7 +66,7 @@ public class MaterialAction {
 				String.valueOf(materialtype));
 		
 		String materialno = StrUtils.getNO(StrUtils.nullToStr(parentForm.getValue("materialtypeno")),
-				"materialno", "smaterial");
+				"materialno", "smaterial", 3);
 
 		form.setValue("materialtype", materialtype);
 		form.setValue("materialno", materialno); //物资类型编码

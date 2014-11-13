@@ -63,7 +63,7 @@ public class MaterialtypeAction {
 		
 		CodeTableForm parentForm = dbUtils.getFormByColumn("smaterialtype", "materialtype", String.valueOf(parent));
 		String materialtypeno = StrUtils.getNO(StrUtils.nullToStr(parentForm.getValue("materialtypeno")),
-				"materialtypeno", "smaterialtype");
+				"materialtypeno", "smaterialtype", 2);
 		
 		form.setValue("parent", parent);
 		form.setValue("materialtypeno", materialtypeno); //物资类型编码

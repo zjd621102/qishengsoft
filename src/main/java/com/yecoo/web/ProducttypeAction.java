@@ -63,7 +63,7 @@ public class ProducttypeAction {
 		
 		CodeTableForm parentForm = dbUtils.getFormByColumn("sproducttype", "producttype", String.valueOf(parent));
 		String producttypeno = StrUtils.getNO(StrUtils.nullToStr(parentForm.getValue("producttypeno")),
-				"producttypeno", "sproducttype");
+				"producttypeno", "sproducttype", 2);
 		
 		form.setValue("parent", parent);
 		form.setValue("producttypeno", producttypeno); //产品类型编码

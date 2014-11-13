@@ -437,18 +437,25 @@ public class StrUtils {
 	}
 	/**
 	 * 获取编码
-	 * @param parentNo父级编码
-	 * @param noclumn 编码字段
-	 * @param tabname 表名
+	 * @param parentNo	父级编码
+	 * @param noclumn 	编码字段
+	 * @param tabname 	表名
+	 * @param len		新增编码长度
 	 * @return
 	 */
-	public static String getNO(String parentNo, String noclumn, String tabname) {
+	public static String getNO(String parentNo, String noclumn, String tabname, int len) {
 		DbUtils dbUtils = new DbUtils();
 		String no = parentNo;
+		
+		String likeStr = "";
+		for(int i = 0; i<len; i++) {
+			likeStr += "_";
+		}
+		
 		StringBuffer sql = new StringBuffer("");
-		sql.append("SELECT IFNULL(MAX(SUBSTR(").append(noclumn).append(", -2)), 0) + 1 FROM ").append(tabname)
-			.append(" WHERE ").append(noclumn).append(" like '" + parentNo + "__'");
-		no += StringUtils.leftPad(dbUtils.execQuerySQL(sql.toString()), 2, "0");
+		sql.append("SELECT IFNULL(MAX(SUBSTR(").append(noclumn).append(", -").append(len).append(")), 0) + 1 FROM ").append(tabname)
+			.append(" WHERE ").append(noclumn).append(" like '" + parentNo + likeStr + "'");
+		no += StringUtils.leftPad(dbUtils.execQuerySQL(sql.toString()), len, "0");
 		
 		return no;
 	}
