@@ -55,11 +55,13 @@
 			<tr>
 				<th width="5%">序号</th>
 				<th width="20%">银行卡卡号</th>
-				<th width="15%">实付金额</th>
-				<th width="20%">单据类型</th>
+				<th width="10%">原有余额</th>
+				<th width="10%">现有金额</th>
+				<th width="10%">交易金额</th>
+				<th width="10%">单据类型</th>
 				<th width="10%">单据ID</th>
 				<th width="10%">单据日期</th>
-				<th width="20%">关联单号</th>
+				<th width="15%">关联单号</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -67,6 +69,8 @@
 			   	<tr target="s_payid" rel="${bean.map.payid}">
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.bankcardno}</td>
+			   		<td>${bean.map.oldmoney}</td>
+			   		<td>${bean.map.newmoney}</td>
 			   		<td>${bean.map.realsum}</td>
 			   		<td>${bean.map.btypename}</td>
 			   		<td>${bean.map.payid}</td>

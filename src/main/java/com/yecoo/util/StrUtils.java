@@ -479,6 +479,20 @@ public class StrUtils {
 	}
 	
 	/**
+	 * 获取表的最大ID
+	 * @param tabname	表名
+	 * @param column	字段名
+	 * @return
+	 */
+	public static int getMaxId(String tabname, String column) {
+		DbUtils dbUtils = new DbUtils();
+		String sql = "SELECT IFNULL(MAX(" + column + "), 1) FROM " + tabname;
+		int maxId = Integer.parseInt(dbUtils.execQuerySQL(sql));
+		
+		return maxId;
+	}
+	
+	/**
 	 * 保存日志
 	 * @param request
 	 * @param logtype	日志类型

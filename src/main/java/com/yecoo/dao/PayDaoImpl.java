@@ -154,8 +154,12 @@ public class PayDaoImpl extends BaseDaoImpl {
 		
 		Connection conn = null;
 		int iReturn = -1;
+		String sql = null;
+
+		String currflow = StrUtils.nullToStr(form.getValue("currflow"));
+		String payid = null;
+		
 		try {
-			
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false); //事务开启
 			
@@ -169,26 +173,51 @@ public class PayDaoImpl extends BaseDaoImpl {
 			} else {
 				conn.rollback();
 			}
-
-			String currflow = StrUtils.nullToStr(form.getValue("currflow"));
 			if(iReturn >= 1 && currflow.equals("结束")) { //流程结束
 				String btype = StrUtils.nullToStr(form.getValue("btype"));
-				String sql = null;
-				String payid = StrUtils.nullToStr(form.getValue("payid"));
+				payid = StrUtils.nullToStr(form.getValue("payid"));
+				
+				String sing = null;
 				if(btype.equals("FKD") || btype.equals("YFD") || btype.equals("GZD")) {
-					sql = "UPDATE sbankcard t SET t.money = t.money - "
-							+ "(SELECT IFNULL(SUM(a.realsum), 0) FROM bpayrow a WHERE a.payid = '" + payid + "'"
-							+ " AND a.bankcardno = t.bankcardno)"
-							+ " WHERE exists (SELECT 1 FROM bpayrow b WHERE b.payid = '"
-							+ payid + "' AND b.bankcardno = t.bankcardno)";
+					sing = "-";
 				} else if(btype.equals("SKD")) {
-					sql = "UPDATE sbankcard t SET t.money = t.money + "
-							+ "(SELECT IFNULL(SUM(a.realsum), 0) FROM bpayrow a WHERE a.payid = '" + payid + "'"
-							+ " AND a.bankcardno = t.bankcardno)"
-							+ " WHERE exists (SELECT 1 FROM bpayrow b WHERE b.payid = '"
-							+ payid + "' AND b.bankcardno = t.bankcardno)";
+					sing = "+";
 				}
-				iReturn =  dbUtils.executeSQL(sql);
+				
+				if(sing == null) {
+					iReturn = -1;
+					if(currflow.equals("结束") && payid != null) { //单据不能结束
+						sql = "UPDATE bpay t SET t.currflow = '申请' WHERE t.payid = '" + payid + "'";
+						dbUtils.executeSQL(sql);
+					}
+				} else {
+					sql = "SELECT a.payrowid, a.bankcardno, a.realsum FROM bpayrow a WHERE a.payid = '"
+						+ payid + "'";
+					List<CodeTableForm> list = dbUtils.getListBySql(sql);
+					for(CodeTableForm codeTableForm : list) {
+						String payrowid = StrUtils.nullToStr(codeTableForm.getValue("payrowid"));
+						String bankcardno = StrUtils.nullToStr(codeTableForm.getValue("bankcardno"));
+						String realsum = StrUtils.nullToStr(codeTableForm.getValue("realsum"), "0");
+						sql = "UPDATE sbankcard t SET t.money = (t.money " + sing
+							+ realsum + "), t.changetype = 'bpayrow', t.changeid = '" + payrowid + "'"
+							+ " WHERE t.bankcardno = '" + bankcardno + "'";
+						
+						iReturn =  dbUtils.executeSQL(conn, sql);
+						if(iReturn == -1) {
+							break;
+						}
+					}
+					
+					if(iReturn >= 0) {
+						conn.commit();
+					} else {// 保存失败，回滚
+						conn.rollback();
+						if(iReturn >= 1 && currflow.equals("结束")) { //单据不能结束
+							sql = "UPDATE bpay t SET t.currflow = '申请' WHERE t.payid = '" + payid + "'";
+							dbUtils.executeSQL(sql);
+						}
+					}
+				}
 			}
 		} catch(Exception e) {
 			iReturn = -1;
@@ -196,6 +225,11 @@ public class PayDaoImpl extends BaseDaoImpl {
 				conn.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
+			}
+			
+			if(currflow.equals("结束") && payid != null) { //单据不能结束
+				sql = "UPDATE bpay t SET t.currflow = '申请' WHERE t.payid = '" + payid + "'";
+				dbUtils.executeSQL(sql);
 			}
 			StrUtils.WriteLog(this.getClass().getName() + ".ediPay()", e);
 		} finally {

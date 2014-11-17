@@ -141,10 +141,15 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 				String fromBankcardid = StrUtils.nullToStr(form.getValue("bankcardid"));
 				String toBankcardid = StrUtils.nullToStr(form.getValue("transferbankcardid"));
 				double transfermoney = Double.parseDouble(StrUtils.nullToStr(form.getValue("transfermoney")));
+				
+				int changeid = StrUtils.getMaxId("btransferaccount", "transferaccountid") + 1;
+				
 				String[] sqls = new String[2];
 				sqls[0] = "UPDATE sbankcard t SET t.money = t.money - " + transfermoney
+						+ ", changetype = 'btransferaccount', changeid = '" + changeid + "'"
 						+ " WHERE t.bankcardid = '" + fromBankcardid + "'";
 				sqls[1] = "UPDATE sbankcard t SET t.money = t.money + " + transfermoney
+						+ ", changetype = 'btransferaccount', changeid = '" + changeid + "'"
 						+ " WHERE t.bankcardid = '" + toBankcardid + "'";
 				iReturn =  dbUtils.executeSQLs(conn, sqls);
 			}
@@ -194,7 +199,15 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 	public List<CodeTableForm> getTransferaccountList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getBankcardno(t.bankcardid) bankcardno,"
-				+ " func_getBankcardno(t.transferbankcardid) transferbankcardno FROM btransferaccount t WHERE 1 = 1";
+			+ " func_getBankcardno(t.transferbankcardid) transferbankcardno,"
+			+ " IFNULL(a.oldmoney, '') fromoldmoney, IFNULL(a.newmoney, '') fromnewmoney,"
+			+ " IFNULL(b.oldmoney, '') tooldmoney, IFNULL(b.newmoney, '') tonewmoney"
+			+ " FROM btransferaccount t"
+			+ " LEFT JOIN sbankcard_log a ON a.changeid = t.transferaccountid"
+			+ " AND a.changetype = 'btransferaccount' AND a.bankcardid = t.bankcardid"
+			+ " LEFT JOIN sbankcard_log b ON b.changeid = t.transferaccountid"
+			+ " AND b.changetype = 'btransferaccount' AND b.bankcardid = t.transferbankcardid"
+			+ " WHERE 1 = 1";
 		String cond = getTransferaccountListCondition(form);
 		sql += cond;
 		sql += " ORDER BY t.createtime DESC";
@@ -242,14 +255,19 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 				String bankcardid = StrUtils.nullToStr(form.getValue("bankcardid"));
 				String receandpaytype = StrUtils.nullToStr(form.getValue("receandpaytype"));
 				double money = Double.parseDouble(StrUtils.nullToStr(form.getValue("money")));
+				
+				int changeid = StrUtils.getMaxId("breceandpay", "receandpay") + 1;
+				
 				String sql = "";
 				if(receandpaytype.equals("1")) {
 					sql = "UPDATE sbankcard t SET t.money = t.money + " + money
-							+ " WHERE t.bankcardid = '" + bankcardid + "'";
+						+ ", changetype = 'breceandpay', changeid = '" + changeid + "'"
+						+ " WHERE t.bankcardid = '" + bankcardid + "'";
 					iReturn =  dbUtils.executeSQL(conn, sql);
 				} else if(receandpaytype.equals("2")) {
 					sql = "UPDATE sbankcard t SET t.money = t.money - " + money
-							+ " WHERE t.bankcardid = '" + bankcardid + "'";
+						+ ", changetype = 'breceandpay', changeid = '" + changeid + "'"
+						+ " WHERE t.bankcardid = '" + bankcardid + "'";
 					iReturn =  dbUtils.executeSQL(conn, sql);
 				} else {
 					iReturn = -1;
@@ -300,8 +318,11 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 	 */
 	public List<CodeTableForm> getReceandpayList(CodeTableForm form) {
 		
-		String sql = "SELECT t.*, func_getBankcardno(t.bankcardid) bankcardno,"
-				+ " func_getDictName('收支类型', t.receandpaytype) receandpaytypename FROM breceandpay t WHERE 1 = 1";
+		String sql = "SELECT t.*, t.money*if(t.receandpaytype='1', 1, -1) changemoney, func_getBankcardno(t.bankcardid) bankcardno,"
+			+ " func_getDictName('收支类型', t.receandpaytype) receandpaytypename,"
+			+ " a.oldmoney, a.newmoney FROM breceandpay t"
+			+ " LEFT JOIN sbankcard_log a ON t.receandpay = a.changeid AND t.bankcardid = a.bankcardid"
+			+ " AND a.changetype = 'breceandpay' WHERE 1 = 1";
 		String cond = getReceandpayListCondition(form);
 		sql += cond;
 		sql += " ORDER BY t.createtime DESC";
@@ -339,8 +360,10 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 	public List<CodeTableForm> getTransactionList(CodeTableForm form) {
 		
 		String sql = "SELECT b.bankcardno, b.realsum*if(a.btype='SKD', 1, -1) realsum, a.paydate, a.payid, a.relateno,"
-				+ " func_getDictName('单据类型', a.btype) btypename"
-				+ " FROM bpay a, bpayrow b WHERE a.payid = b.payid AND a.currflow = '结束'";
+				+ " func_getDictName('单据类型', a.btype) btypename, c.oldmoney, c.newmoney"
+				+ " FROM bpay a, bpayrow b LEFT JOIN sbankcard_log c ON b.payrowid = c.changeid"
+				+ " AND EXISTS (SELECT 1 FROM sbankcard d WHERE d.bankcardid = c.bankcardid AND d.bankcardno = b.bankcardno)"
+				+ " WHERE a.payid = b.payid AND a.currflow = '结束'";
 		String cond = getTransactionListCondition(form);
 		sql += cond;
 		sql += " ORDER BY a.operatetime DESC, a.paydate DESC";
