@@ -35,12 +35,16 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="5%">序号</th>
-				<th width="20%">转出银行卡卡号</th>
-				<th width="20%">转入银行卡卡号</th>
-				<th width="15%">转账金额</th>
-				<th width="25%">转账备注</th>
-				<th width="25%">转账时间</th>
+				<th width="50">序号</th>
+				<th width="150">转出银行卡卡号</th>
+				<th width="90">转出原有金额</th>
+				<th width="90">转出现有金额</th>
+				<th width="150">转入银行卡卡号</th>
+				<th width="90">转入原有金额</th>
+				<th width="90">转入现有金额</th>
+				<th width="90">转账金额</th>
+				<th width="140">转账时间</th>
+				<th>转账备注</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -48,10 +52,14 @@
 			   	<tr target="s_transferaccountid" rel="${bean.map.transferaccountid}">
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.bankcardno}</td>
+			   		<td>${bean.map.fromoldmoney}</td>
+			   		<td>${bean.map.fromnewmoney}</td>
 			   		<td>${bean.map.transferbankcardno}</td>
+			   		<td>${bean.map.tooldmoney}</td>
+			   		<td>${bean.map.tonewmoney}</td>
 			   		<td>${bean.map.transfermoney}</td>
-			   		<td>${bean.map.transferremark}</td>
 			   		<td>${bean.map.createtime}</td>
+			   		<td>${bean.map.transferremark}</td>
 			   	</tr>
 		   	</c:forEach>
 	   	</tbody>

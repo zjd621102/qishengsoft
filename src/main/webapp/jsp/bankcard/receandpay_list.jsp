@@ -39,9 +39,11 @@
 				<th width="15">发生日期</th>
 				<th width="15%">银行账户</th>
 				<th width="10%">收支类型</th>
-				<th width="15%">金额</th>
+				<th width="10%">原有余额</th>
+				<th width="10%">现有金额</th>
+				<th width="10%">交易金额</th>
 				<th width="15%">创建时间</th>
-				<th width="25%">备注</th>
+				<th width="15%">备注</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -51,7 +53,9 @@
 			   		<td>${bean.map.happendate}</td>
 			   		<td>${bean.map.bankcardno}</td>
 			   		<td>${bean.map.receandpaytypename}</td>
-			   		<td>${bean.map.money}</td>
+			   		<td>${bean.map.oldmoney}</td>
+			   		<td>${bean.map.newmoney}</td>
+			   		<td>${bean.map.changemoney}</td>
 			   		<td>${bean.map.createtime}</td>
 			   		<td>${bean.map.remark}</td>
 			   	</tr>

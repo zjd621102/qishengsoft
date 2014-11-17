@@ -65,8 +65,8 @@
 			</li>
 			<li>
 				<a class="edit" href="<%=path%>/bankcard/transferAccount_list" target="dialog"
-					rel="bankcard_transferAccount_list" mask="true" width="1000" height="510">
-					<span>转账列表</span>
+					rel="bankcard_transferAccount_list" mask="true" width="1100" height="510">
+					<span>内部转账列表</span>
 				</a>
 			</li>
 			<li class="line">line</li>
