@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
+import com.yecoo.util.IdSingleton;
 import com.yecoo.util.StrUtils;
 
 public class RoleDaoImpl extends BaseDaoImpl {
@@ -75,19 +76,19 @@ public class RoleDaoImpl extends BaseDaoImpl {
 	public int addRole(CodeTableForm form) {
 		
 		int iReturn = -1;
-		int roleid = 0;
 		String sql = null;
 		Connection conn = null;
 		try {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false);//事务开启
 			
-			iReturn = dbUtils.setInsert(form, "srole", "");
-			sql = "SELECT IFNULL(MAX(t.roleid),1) FROM srole t";
-			roleid = Integer.parseInt(dbUtils.execQuerySQL(sql));
+			String roleid = IdSingleton.getInstance().getNewId();
+			form.setValue("roleid", roleid);
+			
+			iReturn = dbUtils.setInsert(conn, form, "srole", "");
 			
 			//插入角色资源表
-			if(iReturn > 0 && form.getValue("permission")!=null) {
+			if(iReturn >= 1 && form.getValue("permission") != null) {
 				if(form.getValue("permission").toString().indexOf(":") > -1) {//只有一个资源
 					sql = "INSERT INTO spermission(roleid,permission) VALUES ('"
 							+ form.getValue("roleid") + "','" + form.getValue("permission") + "')";
@@ -103,15 +104,13 @@ public class RoleDaoImpl extends BaseDaoImpl {
 				}
 			}
 			
-			conn.commit();
-		} catch(Exception e) {
-			try {
-				sql = "DELETE FROM srole WHERE roleid = '" + roleid + "'";
-				dbUtils.executeSQL(sql);
+			if(iReturn >= 0) {
+				conn.commit();
+			} else {
 				conn.rollback();
-			} catch (SQLException e1) {
-
+				iReturn = -1;
 			}
+		} catch(Exception e) {
 			iReturn = -1;
 			StrUtils.WriteLog(this.getClass().getName() + ".addRole()", e);
 		} finally {

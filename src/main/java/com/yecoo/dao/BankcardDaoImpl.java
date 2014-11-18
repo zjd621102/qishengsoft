@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
+import com.yecoo.util.IdSingleton;
 import com.yecoo.util.StrUtils;
 
 public class BankcardDaoImpl extends BaseDaoImpl {
@@ -135,6 +136,9 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false);//事务开启
 			
+			String transferaccountid = IdSingleton.getInstance().getNewId();
+			form.setValue("transferaccountid", transferaccountid);
+			
 			iReturn = dbUtils.setInsert(conn, form, "btransferaccount", "");
 			
 			if(iReturn >= 1) {
@@ -142,17 +146,16 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 				String toBankcardid = StrUtils.nullToStr(form.getValue("transferbankcardid"));
 				double transfermoney = Double.parseDouble(StrUtils.nullToStr(form.getValue("transfermoney")));
 				
-				int changeid = StrUtils.getMaxId("btransferaccount", "transferaccountid") + 1;
-				
 				String[] sqls = new String[2];
 				sqls[0] = "UPDATE sbankcard t SET t.money = t.money - " + transfermoney
-						+ ", changetype = 'btransferaccount', changeid = '" + changeid + "'"
+						+ ", changetype = 'btransferaccount', changeid = '" + transferaccountid + "'"
 						+ " WHERE t.bankcardid = '" + fromBankcardid + "'";
 				sqls[1] = "UPDATE sbankcard t SET t.money = t.money + " + transfermoney
-						+ ", changetype = 'btransferaccount', changeid = '" + changeid + "'"
+						+ ", changetype = 'btransferaccount', changeid = '" + transferaccountid + "'"
 						+ " WHERE t.bankcardid = '" + toBankcardid + "'";
 				iReturn =  dbUtils.executeSQLs(conn, sqls);
 			}
+			
 			if(iReturn >= 1) {
 				conn.commit();
 			} else {
@@ -249,6 +252,9 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false);//事务开启
 			
+			String receandpayid = IdSingleton.getInstance().getNewId();
+			form.setValue("receandpayid", receandpayid);
+			
 			iReturn = dbUtils.setInsert(conn, form, "breceandpay", "");
 			
 			if(iReturn >= 1) {
@@ -256,17 +262,15 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 				String receandpaytype = StrUtils.nullToStr(form.getValue("receandpaytype"));
 				double money = Double.parseDouble(StrUtils.nullToStr(form.getValue("money")));
 				
-				int changeid = StrUtils.getMaxId("breceandpay", "receandpay") + 1;
-				
-				String sql = "";
+				String sql = null;
 				if(receandpaytype.equals("1")) {
 					sql = "UPDATE sbankcard t SET t.money = t.money + " + money
-						+ ", changetype = 'breceandpay', changeid = '" + changeid + "'"
+						+ ", changetype = 'breceandpay', changeid = '" + receandpayid + "'"
 						+ " WHERE t.bankcardid = '" + bankcardid + "'";
 					iReturn =  dbUtils.executeSQL(conn, sql);
 				} else if(receandpaytype.equals("2")) {
 					sql = "UPDATE sbankcard t SET t.money = t.money - " + money
-						+ ", changetype = 'breceandpay', changeid = '" + changeid + "'"
+						+ ", changetype = 'breceandpay', changeid = '" + receandpayid + "'"
 						+ " WHERE t.bankcardid = '" + bankcardid + "'";
 					iReturn =  dbUtils.executeSQL(conn, sql);
 				} else {

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
+import com.yecoo.util.IdSingleton;
 import com.yecoo.util.StrUtils;
 
 public class ProductDaoImpl extends BaseDaoImpl {
@@ -93,29 +94,27 @@ public class ProductDaoImpl extends BaseDaoImpl {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false); //事务开启
 			
-			iReturn = dbUtils.setInsert(conn, form, "sproduct", ""); //保存主表
-			conn.commit();
-			
-			String sql = "SELECT IFNULL(MAX(productid), 1) FROM sproduct";
-			int productid = dbUtils.getIntBySql(sql);
+			String productid = IdSingleton.getInstance().getNewId();
 			form.setValue("productid", productid);
+			
+			iReturn = dbUtils.setInsert(conn, form, "sproduct", ""); //保存主表
 			
 			if(iReturn >= 1) { //保存行项表
 			  	iReturn = dbUtils.saveRowTable(request, conn, form, "sproductrow", "productrowid", "productid", "", 1);
 			}
 			
-			if(iReturn == -1) {
-				dbUtils.setDelete(String.valueOf(productid), "sproduct", "productid");
-				conn.rollback();
-			} else {
+			if(iReturn >= 0) {
 				conn.commit();
+			} else {
+				conn.rollback();
+				iReturn = -1;
 			}
 		} catch(Exception e) {
 			iReturn = -1;
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				
 			}
 			StrUtils.WriteLog(this.getClass().getName() + ".addProduct()", e);
 		} finally {

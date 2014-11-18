@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
+import com.yecoo.util.IdSingleton;
 import com.yecoo.util.StrUtils;
 
 public class SalaryDaoImpl extends BaseDaoImpl {
@@ -83,32 +84,27 @@ public class SalaryDaoImpl extends BaseDaoImpl {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false); //事务开启
 			
-			iReturn = dbUtils.setInsert(conn, form, "bsalary", ""); //保存主表
-			conn.commit();
-			
-			String sql = "SELECT IFNULL(MAX(salaryid), 1) FROM bsalary";
-			int salaryid = dbUtils.getIntBySql(sql);
+			String salaryid = IdSingleton.getInstance().getNewId();
 			form.setValue("salaryid", salaryid);
+			
+			iReturn = dbUtils.setInsert(conn, form, "bsalary", ""); //保存主表
 			
 			if(iReturn >= 1) { //保存行项表
 			  	iReturn = dbUtils.saveRowTable(request, conn, form, "bsalaryrow", "salaryrowid", "salaryid", "", 1);
 			}
 			
-			if(iReturn == -1) {
-				dbUtils.setDelete(String.valueOf(salaryid), "bsalary", "salaryid");
-			}
-			
-			if(iReturn == -1) {
-				conn.rollback();
-			} else {
+			if(iReturn >= 0) {
 				conn.commit();
+			} else {
+				conn.rollback();
+				iReturn = -1;
 			}
 		} catch(Exception e) {
 			iReturn = -1;
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				
 			}
 			StrUtils.WriteLog(this.getClass().getName() + ".addSalary()", e);
 		} finally {

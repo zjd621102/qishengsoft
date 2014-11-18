@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
+import com.yecoo.util.IdSingleton;
 import com.yecoo.util.StrUtils;
 
 public class SellDaoImpl extends BaseDaoImpl {
@@ -104,22 +105,20 @@ public class SellDaoImpl extends BaseDaoImpl {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false); //事务开启
 			
-			iReturn = dbUtils.setInsert(conn, form, "bsell", ""); //保存主表
-			conn.commit();
-			
-			String sql = "SELECT IFNULL(MAX(sellid), 1) FROM bsell";
-			int sellid = dbUtils.getIntBySql(sql);
+			String sellid = IdSingleton.getInstance().getNewId();
 			form.setValue("sellid", sellid);
+			
+			iReturn = dbUtils.setInsert(conn, form, "bsell", ""); //保存主表
 			
 			if(iReturn >= 1) { //保存行项表
 			  	iReturn = dbUtils.saveRowTable(request, conn, form, "bsellrow", "sellrowid", "sellid", "", 1);
 			}
 			
-			if(iReturn == -1) {
-				dbUtils.setDelete(String.valueOf(sellid), "bsell", "sellid");
-				conn.rollback();
-			} else {
+			if(iReturn >= 0) {
 				conn.commit();
+			} else {
+				conn.rollback();
+				iReturn = -1;
 			}
 		} catch(Exception e) {
 			iReturn = -1;
@@ -300,10 +299,11 @@ public class SellDaoImpl extends BaseDaoImpl {
 		buyForm.setValue("currflow", "申请");
 		buyForm.setValue("maker", maker);
 		buyForm.setValue("createtime", StrUtils.getSysdatetime());
-		iReturn = dbUtils.setInsert(buyForm, "bbuy", ""); //保存主表
 
-		sql = "SELECT IFNULL(MAX(buyid), 1) FROM bbuy";
-		int buyid = dbUtils.getIntBySql(sql);
+		String buyid = IdSingleton.getInstance().getNewId();
+		buyForm.setValue("buyid", buyid);
+		
+		iReturn = dbUtils.setInsert(buyForm, "bbuy", ""); //保存主表
 		
 		if(iReturn >= 1) { //保存行项表
 			sql = "INSERT INTO bbuyrow"

@@ -112,8 +112,7 @@ public class DbUtils {
 				myConn.close();
 			}
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".closeConnection()",
-					e);
+			StrUtils.WriteLog(this.getClass().getName() + ".closeConnection()", e);
 		}
 	}
 
@@ -137,8 +136,7 @@ public class DbUtils {
 				myConn.close();
 			}
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".closeConnection()",
-					e);
+			StrUtils.WriteLog(this.getClass().getName() + ".closeConnection()", e);
 		}
 	}
 
@@ -436,19 +434,18 @@ public class DbUtils {
 		PreparedStatement pStmt = null;
 		String rstStr = "";
 		try {
-			myConn = this.dbConnection();
 			pStmt = myConn.prepareStatement(sql);
 			rs = this.getResult(pStmt);
 			if (rs.next()) {
 				rstStr = StrUtils.nullToStr(rs.getString(1));
 			}
 		} catch (Exception e) {
-			StrUtils.WriteLog(this.getClass().getName() + ".execQuerySQL()",
-					"ERROR sql=" + sql);
+			StrUtils.WriteLog(this.getClass().getName() + ".execQuerySQL()", "ERROR sql=" + sql);
 			StrUtils.WriteLog(this.getClass().getName() + ".execQuerySQL()", e);
 		} finally {
-			this.closeConnection(rs, pStmt, myConn);
+			this.closeConnection(rs, pStmt, null);
 		}
+		
 		return rstStr;
 	}
 
@@ -941,26 +938,20 @@ public class DbUtils {
 					}
 					str[0] = str[0] + columnname + ",";
 					fieldname = fieldname + columnname + ",";
-					String sColVal = StrUtils.nullToStr((String) form
-							.getValue(columnname + num));
+					String sColVal = StrUtils.nullToStr((String) form.getValue(columnname + num));
 					if (rs.getString("type").equals("DATE")) {
 						if (sColVal.length() == 19) {
-							str[1] = str[1]
-									+ "to_date(trim(?),'yyyy-mm-dd hh24:mi:ss'),";
-							fieldvalue = fieldvalue + "to_date('" + sColVal
-									+ "','yyyy-mm-dd hh24:mi:ss'),";
+							str[1] = str[1] + "to_date(trim(?),'yyyy-mm-dd hh24:mi:ss'),";
+							fieldvalue = fieldvalue + "to_date('" + sColVal + "','yyyy-mm-dd hh24:mi:ss'),";
 						} else {
 							str[1] = str[1] + "to_date(trim(?),'yyyy-mm-dd'),";
-							fieldvalue = fieldvalue + "to_date('" + sColVal
-									+ "','yyyy-mm-dd'),";
+							fieldvalue = fieldvalue + "to_date('" + sColVal + "','yyyy-mm-dd'),";
 						}
 					} else {
 						// str[0]=str[0]+columnname+",";
 						str[1] = str[1] + "?,";
-						fieldvalue = fieldvalue
-								+ "'"
-								+ StrUtils.nullToStr((String) form
-										.getValue(columnname + num)) + "',";
+						fieldvalue = fieldvalue + "'"
+							+ StrUtils.nullToStr((String) form .getValue(columnname + num)) + "',";
 					}
 					str[i] = (String) form.getValue(columnname + num);
 					i = i + 1;

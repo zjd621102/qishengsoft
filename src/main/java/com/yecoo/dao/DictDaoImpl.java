@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
+import com.yecoo.util.IdSingleton;
 import com.yecoo.util.StrUtils;
 /**
  * 字典DAO
@@ -77,32 +78,27 @@ public class DictDaoImpl extends BaseDaoImpl {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false); //事务开启
 			
-			iReturn = dbUtils.setInsert(conn, form, "cdict", ""); //保存主表
-			conn.commit();
-			
-			String sql = "SELECT IFNULL(MAX(dictid), 1) FROM cdict";
-			int dictid = dbUtils.getIntBySql(sql);
+			String dictid = IdSingleton.getInstance().getNewId();
 			form.setValue("dictid", dictid);
+			
+			iReturn = dbUtils.setInsert(conn, form, "cdict", ""); //保存主表
 			
 			if(iReturn >= 1) { //保存行项表
 			  	iReturn = dbUtils.saveRowTable(request, conn, form, "cdictrow", "dictrowid", "dictid", "", 1);
-			}
-			
-			if(iReturn == -1) {
-				dbUtils.setDelete(String.valueOf(dictid), "cdict", "dictid");
 			}
 			
 			if(iReturn >= 0) {
 				conn.commit();
 			} else {
 				conn.rollback();
+				iReturn = -1;
 			}
 		} catch(Exception e) {
 			iReturn = -1;
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				
 			}
 			StrUtils.WriteLog(this.getClass().getName() + ".addDict()", e);
 		} finally {
