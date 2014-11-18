@@ -17,7 +17,7 @@ public class IdSingleton {
 
 	}
 
-	public static synchronized IdSingleton getInstance() {
+	public static IdSingleton getInstance() {
 		// 先检查实例是否存在，如果不存在才进入下面的同步块
 		if (instance == null) {
 			// 同步块，线程安全的创建实例
@@ -35,7 +35,7 @@ public class IdSingleton {
 	 * 获取新ID
 	 * @return
 	 */
-	public String getNewId() {
+	public synchronized String getNewId() {
 		
 		int id = -1;
 		DbUtils dbUtils = new DbUtils();
