@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2014-11-17 21:53:50
+Date: 2014-11-18 15:48:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `bbuy`;
 CREATE TABLE `bbuy` (
-  `buyid` int(9) NOT NULL AUTO_INCREMENT COMMENT '采购ID',
+  `buyid` int(9) NOT NULL COMMENT '采购ID',
   `btype` varchar(3) NOT NULL COMMENT '单据类型',
   `buyname` varchar(64) DEFAULT NULL COMMENT '采购名称',
   `buyno` varchar(16) NOT NULL COMMENT '采购编号',
@@ -31,7 +31,7 @@ CREATE TABLE `bbuy` (
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`buyid`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COMMENT='采购表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='采购表';
 
 -- ----------------------------
 -- Records of bbuy
@@ -47,6 +47,8 @@ INSERT INTO `bbuy` VALUES ('9', 'CGD', '2014.08.20采购', 'CGD-20140820-001', n
 INSERT INTO `bbuy` VALUES ('13', 'CGD', '2014.09.01采购', 'CGD-20140901-001', 'XSD-20140828-002', '2014-09-01', '结束', 'ZHOUJD', '2014-09-01 17:04:22', '');
 INSERT INTO `bbuy` VALUES ('35', 'CGD', '2014.10.22采购', 'CGD-20141022-002', '', '2014-10-22', '结束', 'ZHOUJD', '2014-10-22 18:37:22', '合并采购单（XSD-20140925-001）');
 INSERT INTO `bbuy` VALUES ('36', 'CGD', '2014.11.14采购', 'CGD-20141114-001', 'XSD-20141114-001', '2014-11-14', '结束', 'ZHOUJD', '2014-11-14 10:24:02', '');
+INSERT INTO `bbuy` VALUES ('40', 'CGD', '2014.11.18采购', 'CGD-20141118-002', '', '2014-11-18', '申请', 'ZHOUJD', '2014-11-18 15:15:09', '合并采购单（XSD-20141118-001）');
+INSERT INTO `bbuy` VALUES ('42', 'CGD', '2014.11.18采购', 'CGD-20141118-003', 'XSD-20141118-001', '2014-11-18', '申请', 'ZHOUJD', '2014-11-18 15:29:13', null);
 
 -- ----------------------------
 -- Table structure for `bbuyrow`
@@ -67,7 +69,7 @@ CREATE TABLE `bbuyrow` (
   `manutel` varchar(32) DEFAULT NULL COMMENT '联系电话',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`buyrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=315 DEFAULT CHARSET=utf8 COMMENT='采购行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=336 DEFAULT CHARSET=utf8 COMMENT='采购行项表';
 
 -- ----------------------------
 -- Records of bbuyrow
@@ -104,13 +106,19 @@ INSERT INTO `bbuyrow` VALUES ('296', '35', '6', '物资A21', '1', '43.20', '165.
 INSERT INTO `bbuyrow` VALUES ('312', '36', '1', '物资A11', '1', '0.22', '46.00', '10.12', '4', '供应商A', '周少华', '11111111', null);
 INSERT INTO `bbuyrow` VALUES ('313', '36', '5', '物资B12', '1', '44.00', '3.00', '132.00', '8', '供应商B', '供应商B', '00000', null);
 INSERT INTO `bbuyrow` VALUES ('314', '36', '6', '物资A21', '1', '43.20', '4.00', '172.80', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('327', '40', '1', '物资A11', '1', '0.22', '22.00', '4.84', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('328', '40', '5', '物资B12', '1', '44.00', '3.00', '132.00', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('329', '40', '6', '物资A21', '1', '43.20', '6.00', '259.20', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('333', '42', '1', '物资A11', '1', '0.22', '22.00', '4.84', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('334', '42', '5', '物资B12', '1', '44.00', '3.00', '132.00', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('335', '42', '6', '物资A21', '1', '43.20', '6.00', '259.20', '8', '供应商B', '供应商B', '00000', null);
 
 -- ----------------------------
 -- Table structure for `bpay`
 -- ----------------------------
 DROP TABLE IF EXISTS `bpay`;
 CREATE TABLE `bpay` (
-  `payid` int(9) NOT NULL AUTO_INCREMENT COMMENT '单据ID',
+  `payid` int(9) NOT NULL COMMENT '单据ID',
   `btype` varchar(16) NOT NULL COMMENT '单据类型',
   `maker` varchar(32) DEFAULT NULL COMMENT '制单人',
   `paydate` varchar(10) DEFAULT NULL COMMENT '付款日期/收款日期',
@@ -122,7 +130,7 @@ CREATE TABLE `bpay` (
   `operater` varchar(64) DEFAULT NULL COMMENT '操作人ID',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`payid`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COMMENT='付款单/收款单';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='付款单/收款单';
 
 -- ----------------------------
 -- Records of bpay
@@ -258,7 +266,7 @@ INSERT INTO `bpayrow` VALUES ('216', '68', '6227001823550092014', '9', '中国�
 -- ----------------------------
 DROP TABLE IF EXISTS `breceandpay`;
 CREATE TABLE `breceandpay` (
-  `receandpay` int(9) NOT NULL AUTO_INCREMENT COMMENT '其它收支ID',
+  `receandpay` int(9) NOT NULL COMMENT '其它收支ID',
   `happendate` varchar(10) DEFAULT NULL COMMENT '发生日期',
   `bankcardid` int(9) NOT NULL COMMENT '银行卡ID',
   `receandpaytype` int(1) NOT NULL COMMENT '收支类型',
@@ -266,7 +274,7 @@ CREATE TABLE `breceandpay` (
   `remark` varchar(1024) DEFAULT NULL COMMENT '备注',
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`receandpay`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='其它收支表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='其它收支表';
 
 -- ----------------------------
 -- Records of breceandpay
@@ -284,7 +292,7 @@ INSERT INTO `breceandpay` VALUES ('7', '2014-11-13', '1', '1', '1.00', '1', '201
 -- ----------------------------
 DROP TABLE IF EXISTS `bsalary`;
 CREATE TABLE `bsalary` (
-  `salaryid` int(9) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `salaryid` int(9) NOT NULL COMMENT 'ID',
   `salarytype` int(1) DEFAULT NULL COMMENT '单据类型',
   `salaryname` varchar(64) DEFAULT NULL COMMENT '工资单名称',
   `salaryno` varchar(16) NOT NULL COMMENT '工资编号',
@@ -294,7 +302,7 @@ CREATE TABLE `bsalary` (
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建日期',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`salaryid`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bsalary
@@ -346,7 +354,7 @@ INSERT INTO `bsalaryrow` VALUES ('94', '13', '5', '2250.00', null);
 -- ----------------------------
 DROP TABLE IF EXISTS `bsell`;
 CREATE TABLE `bsell` (
-  `sellid` int(7) NOT NULL AUTO_INCREMENT COMMENT '销售单ID',
+  `sellid` int(7) NOT NULL COMMENT '销售单ID',
   `sellno` varchar(16) NOT NULL COMMENT '销售单编号',
   `selldate` varchar(10) DEFAULT NULL COMMENT '销售日期',
   `manuid` int(9) NOT NULL COMMENT '客户ID',
@@ -355,7 +363,7 @@ CREATE TABLE `bsell` (
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`sellid`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='销售表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='销售表';
 
 -- ----------------------------
 -- Records of bsell
@@ -373,6 +381,7 @@ INSERT INTO `bsell` VALUES ('12', 'XSD-20140828-001', '2014-08-28', '5', '结束
 INSERT INTO `bsell` VALUES ('13', 'XSD-20140828-002', '2014-08-28', '9', '结束', 'ZHOUJD', '2014-08-28 15:53:20', '');
 INSERT INTO `bsell` VALUES ('14', 'XSD-20140925-001', '2014-09-25', '5', '结束', 'ZHOUJD', '2014-09-25 16:44:19', '');
 INSERT INTO `bsell` VALUES ('15', 'XSD-20141114-001', '2014-11-14', '9', '结束', 'ZHOUJD', '2014-11-14 10:23:17', '');
+INSERT INTO `bsell` VALUES ('38', 'XSD-20141118-001', '2014-11-18', '5', '申请', 'ZHOUJD', '2014-11-18 15:14:37', '');
 
 -- ----------------------------
 -- Table structure for `bsellrow`
@@ -392,7 +401,7 @@ CREATE TABLE `bsellrow` (
   `realsum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '实际总价',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`sellrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=187 DEFAULT CHARSET=utf8 COMMENT='销售行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8 COMMENT='销售行项表';
 
 -- ----------------------------
 -- Records of bsellrow
@@ -427,20 +436,22 @@ INSERT INTO `bsellrow` VALUES ('179', '14', '2', '产品2', '1', '190.24', '200.
 INSERT INTO `bsellrow` VALUES ('180', '14', '3', '产品3', '1', '163.40', '203.20', '203.20', '20.00', '39.80', '4064.00', null);
 INSERT INTO `bsellrow` VALUES ('185', '15', '1', '产品1', '1', '47.64', '123.20', '124.20', '1.00', '76.56', '124.20', null);
 INSERT INTO `bsellrow` VALUES ('186', '15', '2', '产品2', '1', '190.24', '200.50', '205.50', '2.00', '15.26', '411.00', null);
+INSERT INTO `bsellrow` VALUES ('197', '38', '2', '产品2', '1', '190.24', '200.50', '200.50', '1.00', '10.26', '200.50', null);
+INSERT INTO `bsellrow` VALUES ('198', '38', '3', '产品3', '1', '163.40', '203.20', '203.20', '2.00', '39.80', '406.40', null);
 
 -- ----------------------------
 -- Table structure for `btransferaccount`
 -- ----------------------------
 DROP TABLE IF EXISTS `btransferaccount`;
 CREATE TABLE `btransferaccount` (
-  `transferaccountid` int(9) NOT NULL AUTO_INCREMENT COMMENT '内部转账ID',
+  `transferaccountid` int(9) NOT NULL COMMENT '内部转账ID',
   `bankcardid` int(9) DEFAULT NULL COMMENT '银行卡ID',
   `transferbankcardid` int(9) DEFAULT NULL COMMENT '转入账号',
   `transfermoney` double(12,2) DEFAULT NULL COMMENT '转入金额',
   `transferremark` varchar(512) DEFAULT NULL COMMENT '转入备注',
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`transferaccountid`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='内部转账表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='内部转账表';
 
 -- ----------------------------
 -- Records of btransferaccount
@@ -932,37 +943,16 @@ INSERT INTO `bworkrow` VALUES ('75751', '14', '2014-09-29', null, null, '1', '75
 INSERT INTO `bworkrow` VALUES ('75752', '14', '2014-09-30', null, null, '1', '75.00', null);
 
 -- ----------------------------
--- Table structure for `cbanktype`
--- ----------------------------
-DROP TABLE IF EXISTS `cbanktype`;
-CREATE TABLE `cbanktype` (
-  `banktypeid` int(2) NOT NULL COMMENT '银行编号',
-  `banktypename` varchar(32) DEFAULT NULL COMMENT '银行名称',
-  PRIMARY KEY (`banktypeid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='银行表';
-
--- ----------------------------
--- Records of cbanktype
--- ----------------------------
-INSERT INTO `cbanktype` VALUES ('1', '中国工商银行');
-INSERT INTO `cbanktype` VALUES ('2', '中国建设银行');
-INSERT INTO `cbanktype` VALUES ('3', '中国银行');
-INSERT INTO `cbanktype` VALUES ('4', '中国农业银行');
-INSERT INTO `cbanktype` VALUES ('5', '招商银行');
-INSERT INTO `cbanktype` VALUES ('6', '兴业银行');
-INSERT INTO `cbanktype` VALUES ('99', '其它');
-
--- ----------------------------
 -- Table structure for `cdict`
 -- ----------------------------
 DROP TABLE IF EXISTS `cdict`;
 CREATE TABLE `cdict` (
-  `dictid` int(4) NOT NULL AUTO_INCREMENT COMMENT '字典表ID',
+  `dictid` int(4) NOT NULL COMMENT '字典表ID',
   `dicttype` varchar(64) DEFAULT NULL COMMENT '字典类型',
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dictid`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='字典表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字典表';
 
 -- ----------------------------
 -- Records of cdict
@@ -992,7 +982,7 @@ CREATE TABLE `cdictrow` (
   `sordid` int(3) DEFAULT NULL COMMENT '排序',
   `rowremark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dictrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8 COMMENT='字典行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8 COMMENT='字典行项表';
 
 -- ----------------------------
 -- Records of cdictrow
@@ -1024,13 +1014,6 @@ INSERT INTO `cdictrow` VALUES ('53', '17', '是', '1', '1', null);
 INSERT INTO `cdictrow` VALUES ('54', '17', '否', '0', '2', null);
 INSERT INTO `cdictrow` VALUES ('55', '18', '收入', '1', '1', null);
 INSERT INTO `cdictrow` VALUES ('56', '18', '支出', '2', '2', null);
-INSERT INTO `cdictrow` VALUES ('71', '19', '中国建设银行', '1', '1', null);
-INSERT INTO `cdictrow` VALUES ('72', '19', '中国工商银行', '2', '2', null);
-INSERT INTO `cdictrow` VALUES ('73', '19', '中国银行', '3', '3', null);
-INSERT INTO `cdictrow` VALUES ('74', '19', '中国农业银行', '4', '4', null);
-INSERT INTO `cdictrow` VALUES ('75', '19', '招商银行', '5', '5', null);
-INSERT INTO `cdictrow` VALUES ('76', '19', '兴业银行', '6', '6', null);
-INSERT INTO `cdictrow` VALUES ('77', '19', '其它', '9', '9', null);
 INSERT INTO `cdictrow` VALUES ('78', '20', '申请', '申请', '1', null);
 INSERT INTO `cdictrow` VALUES ('79', '20', '结束', '结束', '2', null);
 INSERT INTO `cdictrow` VALUES ('89', '21', '采购单', 'CGD', '1', null);
@@ -1042,6 +1025,26 @@ INSERT INTO `cdictrow` VALUES ('94', '21', '收款单', 'SKD', '6', null);
 INSERT INTO `cdictrow` VALUES ('95', '21', '物资单', 'WZD', '7', null);
 INSERT INTO `cdictrow` VALUES ('96', '21', '销售单', 'XSD', '8', null);
 INSERT INTO `cdictrow` VALUES ('97', '21', '运费单', 'YFD', '9', null);
+INSERT INTO `cdictrow` VALUES ('98', '19', '中国建设银行', '1', '1', null);
+INSERT INTO `cdictrow` VALUES ('99', '19', '中国工商银行', '2', '2', null);
+INSERT INTO `cdictrow` VALUES ('100', '19', '中国银行', '3', '3', null);
+INSERT INTO `cdictrow` VALUES ('101', '19', '中国农业银行', '4', '4', null);
+INSERT INTO `cdictrow` VALUES ('102', '19', '招商银行', '5', '5', null);
+INSERT INTO `cdictrow` VALUES ('103', '19', '兴业银行', '6', '6', null);
+INSERT INTO `cdictrow` VALUES ('104', '19', '其它', '9', '9', null);
+
+-- ----------------------------
+-- Table structure for `cseq`
+-- ----------------------------
+DROP TABLE IF EXISTS `cseq`;
+CREATE TABLE `cseq` (
+  `seq` int(9) DEFAULT NULL COMMENT '序列值'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='序列';
+
+-- ----------------------------
+-- Records of cseq
+-- ----------------------------
+INSERT INTO `cseq` VALUES ('42');
 
 -- ----------------------------
 -- Table structure for `sbankcard`
@@ -1128,7 +1131,7 @@ CREATE TABLE `slog` (
   `operatetime` varchar(20) NOT NULL COMMENT '操作时间',
   `remark` text COMMENT '备注',
   PRIMARY KEY (`logid`)
-) ENGINE=InnoDB AUTO_INCREMENT=380 DEFAULT CHARSET=utf8 COMMENT='日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=399 DEFAULT CHARSET=utf8 COMMENT='日志表';
 
 -- ----------------------------
 -- Records of slog
@@ -1504,13 +1507,32 @@ INSERT INTO `slog` VALUES ('376', '登录', 'ZHOUJD', '2014-11-17 18:12:50', '')
 INSERT INTO `slog` VALUES ('377', '登录', 'ZHOUJD', '2014-11-17 18:13:05', '');
 INSERT INTO `slog` VALUES ('378', '登录', 'ZHOUJD', '2014-11-17 18:13:46', '');
 INSERT INTO `slog` VALUES ('379', '登录', 'ZHOUJD', '2014-11-17 21:19:39', '');
+INSERT INTO `slog` VALUES ('380', '新增销售单', 'ZHOUJD', '2014-11-17 22:40:16', 'sellno:XSD-20141117-001,profit:0,realprice:0.00,remark:null,costprice:0.00,planprice:0.00,productno:,sellrowid:,maker:ZHOUJD,manuid:5,allrealsum:0,allprofit:0,manuname:客户A,realsum:0,createtime:2014-11-17 22:40:16,unit:,num:0.00,productid:,sellid:16,currflow:申请,selldate:2014-11-17,remarkrow:,productname:');
+INSERT INTO `slog` VALUES ('381', '删除销售单', 'ZHOUJD', '2014-11-17 22:40:25', '16');
+INSERT INTO `slog` VALUES ('382', '新增采购单', 'ZHOUJD', '2014-11-17 22:57:56', 'btype:CGD,remark:null,allsum:,maker:ZHOUJD,buyname:2014.11.17采购,createtime:2014-11-17 22:57:56,buyid:37,currflow:申请,buydate:2014-11-17,buyno:CGD-20141117-001');
+INSERT INTO `slog` VALUES ('383', '删除采购单', 'ZHOUJD', '2014-11-17 22:58:52', '44');
+INSERT INTO `slog` VALUES ('384', '新增采购单', 'ZHOUJD', '2014-11-17 22:59:49', 'btype:CGD,remark:null,allsum:,maker:ZHOUJD,buyname:2014.11.17采购,createtime:2014-11-17 22:59:10,buyid:37,currflow:申请,buydate:2014-11-17,buyno:CGD-20141117-001');
+INSERT INTO `slog` VALUES ('385', '登录', 'ZHOUJD', '2014-11-18 11:29:24', '');
+INSERT INTO `slog` VALUES ('386', '登录', 'ZHOUJD', '2014-11-18 14:35:26', '');
+INSERT INTO `slog` VALUES ('387', '新增采购单', 'ZHOUJD', '2014-11-18 15:08:56', 'btype:CGD,remark:null,allsum:,maker:ZHOUJD,buyname:2014.11.18采购,createtime:2014-11-18 15:08:56,buyid:37,currflow:申请,buydate:2014-11-18,buyno:CGD-20141118-001');
+INSERT INTO `slog` VALUES ('388', '删除采购单', 'ZHOUJD', '2014-11-18 15:13:12', '37');
+INSERT INTO `slog` VALUES ('389', '登录', 'ZHOUJD', '2014-11-18 15:14:24', '');
+INSERT INTO `slog` VALUES ('390', '新增销售单', 'ZHOUJD', '2014-11-18 15:14:37', 'sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18');
+INSERT INTO `slog` VALUES ('391', '修改销售单', 'ZHOUJD', '2014-11-18 15:14:50', 'sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:1');
+INSERT INTO `slog` VALUES ('392', '登录', 'ZHOUJD', '2014-11-18 15:27:29', '');
+INSERT INTO `slog` VALUES ('393', '修改采购单', 'ZHOUJD', '2014-11-18 15:27:39', 'btypename:采购单,remark:合并采购单（XSD-20141118-001）,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:15:09,relateno:null,buyno:CGD-20141118-002,btype:CGD,maker:ZHOUJD,buyid:40,currflow:申请,buydate:2014-11-18');
+INSERT INTO `slog` VALUES ('394', '修改销售单', 'ZHOUJD', '2014-11-18 15:27:43', 'sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:');
+INSERT INTO `slog` VALUES ('395', '修改销售单', 'ZHOUJD', '2014-11-18 15:27:53', 'sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:1');
+INSERT INTO `slog` VALUES ('396', '删除采购单', 'ZHOUJD', '2014-11-18 15:28:38', '41');
+INSERT INTO `slog` VALUES ('397', '修改销售单', 'ZHOUJD', '2014-11-18 15:29:13', 'sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:1');
+INSERT INTO `slog` VALUES ('398', '修改销售单', 'ZHOUJD', '2014-11-18 15:29:25', 'sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:1');
 
 -- ----------------------------
 -- Table structure for `smanu`
 -- ----------------------------
 DROP TABLE IF EXISTS `smanu`;
 CREATE TABLE `smanu` (
-  `manuid` int(4) NOT NULL AUTO_INCREMENT COMMENT '供应商ID',
+  `manuid` int(4) NOT NULL COMMENT '供应商ID',
   `manuname` varchar(64) DEFAULT NULL COMMENT '供应商名称',
   `manutypeid` int(2) DEFAULT NULL COMMENT '供应商类别',
   `statusid` int(1) DEFAULT NULL COMMENT '供应商状态',
@@ -1522,7 +1544,7 @@ CREATE TABLE `smanu` (
   `referee` varchar(32) DEFAULT NULL COMMENT '推荐人',
   `remark` varchar(1024) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`manuid`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='供应商表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应商表';
 
 -- ----------------------------
 -- Records of smanu
@@ -1851,7 +1873,7 @@ INSERT INTO `spermission` VALUES ('1', 'Log:edi');
 -- ----------------------------
 DROP TABLE IF EXISTS `sproduct`;
 CREATE TABLE `sproduct` (
-  `productid` int(9) NOT NULL AUTO_INCREMENT COMMENT '产品ID',
+  `productid` int(9) NOT NULL COMMENT '产品ID',
   `productno` varchar(11) NOT NULL COMMENT '产品编码',
   `productname` varchar(64) DEFAULT NULL COMMENT '产品名称',
   `producttype` int(5) DEFAULT NULL COMMENT '产品类型',
@@ -1863,7 +1885,7 @@ CREATE TABLE `sproduct` (
   `excelname` varchar(63) DEFAULT NULL COMMENT 'EXCEL文件名',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`productid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='产品表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='产品表';
 
 -- ----------------------------
 -- Records of sproduct
@@ -1941,11 +1963,11 @@ INSERT INTO `sproducttype` VALUES ('17', '20202', '产品类别二2', '2', '12',
 -- ----------------------------
 DROP TABLE IF EXISTS `srole`;
 CREATE TABLE `srole` (
-  `roleid` int(10) NOT NULL AUTO_INCREMENT COMMENT '角色编号',
+  `roleid` int(10) NOT NULL COMMENT '角色编号',
   `rolename` varchar(128) NOT NULL COMMENT '角色名称',
   `priority` int(4) DEFAULT '99' COMMENT '优先级（数据越小，优先级越高）',
   PRIMARY KEY (`roleid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='角色表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 -- ----------------------------
 -- Records of srole
