@@ -1,5 +1,6 @@
 package com.yecoo.dao;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.yecoo.model.CodeTableForm;
+import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.IdSingleton;
 import com.yecoo.util.StrUtils;
@@ -191,12 +193,30 @@ public class ProductDaoImpl extends BaseDaoImpl {
 	 * @param productid
 	 * @return
 	 */
-	public int deleteProduct(int productid) {
+	public int deleteProduct(int productid, HttpServletRequest request) {
 		
-		String[] sqls = new String[2];
+		String filePath = null;
+		
+		String sql = "SELECT t.fileid, t.suffix FROM sfile t WHERE t.pid = '" + productid + "'";
+		List<CodeTableForm> fileList = dbUtils.getListBySql(sql);
+		
+		String[] sqls = new String[3];
 		sqls[0] = "DELETE FROM sproduct WHERE productid = '" + productid + "'";
 		sqls[1] = "DELETE FROM sproductrow WHERE productid = '" + productid + "'";
+		sqls[2] = "DELETE FROM sfile WHERE pid = '" + productid + "'";// 删除附件
 		int iReturn = dbUtils.executeSQLs(sqls);
+		
+		// 删除附件
+		String ctxPath = request.getSession().getServletContext().getRealPath("/")
+				+ Constants.PATH_FILE;
+		for(CodeTableForm form : fileList) {
+			filePath = ctxPath + form.getValue("fileid") + "." + form.getValue("suffix");
+			File file = new File(filePath);
+			if (file.exists()) {
+				file.delete();
+			}
+		}
+		
 		return iReturn;
 	}
 }

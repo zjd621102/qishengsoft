@@ -37,7 +37,7 @@
 			<shiro:hasPermission name="Product:add">
 			<li>
 				<a class="add" href="<%=path%>/product/add/${form.map.producttype}" target="dialog" rel="product_add"
-					mask="true" width="1000" height="500">
+					mask="true" width="1000" height="620">
 					<span>新增产品</span>
 				</a>
 			</li>
@@ -45,7 +45,7 @@
 			<shiro:hasPermission name="Product:edi">
 			<li>
 				<a class="edit" href="<%=path%>/product/edi/{s_productid}" target="dialog" rel="product_edi" mask="true"
-					width="1000" height="500">
+					width="1000" height="620">
 					<span>修改产品</span>
 				</a>
 			</li>

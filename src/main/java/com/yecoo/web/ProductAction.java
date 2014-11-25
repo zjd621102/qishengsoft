@@ -1,29 +1,22 @@
 package com.yecoo.web;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.yecoo.dao.FileDaoImpl;
 import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.ProductDaoImpl;
 import com.yecoo.dao.ProducttypeDaoImpl;
 import com.yecoo.model.CodeTableForm;
-import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
@@ -128,7 +121,11 @@ public class ProductAction {
 		CodeTableForm form = null;
 		form = productDaoImpl.getProductById(productid, request);
 		
+		FileDaoImpl fileDaoImpl = new FileDaoImpl();
+		List<CodeTableForm> fileList = fileDaoImpl.getFileList(productid, "");// 附件列表
+		
 		request.setAttribute("form", form);
+		request.setAttribute("fileList", fileList);
 		return "product/edi";
 	}
 
@@ -153,7 +150,7 @@ public class ProductAction {
 	public @ResponseBody String delete(@PathVariable int productid, HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
-		int iReturn = productDaoImpl.deleteProduct(productid);
+		int iReturn = productDaoImpl.deleteProduct(productid, request);
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject(200, "删除成功！", "", "", "jbsxBox2product", "");
 
@@ -177,81 +174,4 @@ public class ProductAction {
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
         return list;
     }
-    
-	@RequestMapping(value = "/upload")
-	@ResponseBody
-	public String upload(HttpServletRequest request, HttpServletResponse response) {
-
-		String res = null;
-		String sql = null;
-		try {
-			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-			// 获取前台传值
-			String[] productids = multipartRequest.getParameterValues("productid");
-			String productid = "";
-			if (productids != null) {
-				productid = productids[0];
-			}
-			Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-			String ctxPath = request.getSession().getServletContext().getRealPath("/")
-					+ Constants.PATH_PRODUCT_EXCEL;
-			
-			// 创建文件夹
-			File file = new File(ctxPath);
-			if (!file.exists()) {
-				file.mkdirs();
-			}
-			String fileName = null;
-			for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
-				// 上传文件名
-				MultipartFile mf = entity.getValue();
-				fileName = mf.getOriginalFilename();
-	
-				String suffix = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf("."), fileName.length()) : null;
-	
-				sql = "SELECT CONCAT(t.productno, '-', t.productname) filename FROM sproduct t WHERE t.productid = '" + productid + "'";
-				String filename = dbUtils.execQuerySQL(sql);
-				String newFileName = filename + (suffix != null ? suffix : "");// 构成新文件名。
-	
-				File uploadFile = new File(ctxPath + newFileName);
-				try {
-					FileCopyUtils.copy(mf.getBytes(), uploadFile);
-					res = "上传成功";
-					
-					sql = "UPDATE sproduct t SET t.excelname = '" + newFileName + "' WHERE t.productid = '" + productid + "'";
-					dbUtils.executeSQL(sql);
-				} catch (IOException e) {
-					res = "上传失败";
-					StrUtils.WriteLog(this.getClass().getName() + ".upload()", e);
-				}
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-
-		return res;
-	}
-    
-	@RequestMapping(value="/deleteExcel/{productid}")
-	public @ResponseBody String deleteExcel(@PathVariable int productid, HttpServletRequest request) {
-		String res = "false";
-
-		String sql = "SELECT t.excelname FROM sproduct t WHERE t.productid = '" + productid + "'";
-		String excelname = dbUtils.execQuerySQL(sql);
-		
-		sql = "UPDATE sproduct t SET t.excelname = NULL WHERE t.productid = '" + productid + "'";
-		int ires = dbUtils.executeSQL(sql);
-		
-		if(ires >= 1) {
-			String ctxPath = request.getSession().getServletContext().getRealPath("/")
-					+ Constants.PATH_PRODUCT_EXCEL + excelname;
-			File file = new File(ctxPath);
-			if (file.exists()) {
-				file.delete();
-			}
-			res = "true";
-		}
-		
-		return res;
-	}
 }

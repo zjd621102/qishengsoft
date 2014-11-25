@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2014-11-18 15:48:19
+Date: 2014-11-25 11:43:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1044,7 +1044,7 @@ CREATE TABLE `cseq` (
 -- ----------------------------
 -- Records of cseq
 -- ----------------------------
-INSERT INTO `cseq` VALUES ('42');
+INSERT INTO `cseq` VALUES ('78');
 
 -- ----------------------------
 -- Table structure for `sbankcard`
@@ -1121,6 +1121,25 @@ CREATE TABLE `scompany` (
 INSERT INTO `scompany` VALUES ('1', '岐盛', '周坚定', '福建南安', '059586211111', '059586211111', '362300', 'zjdxxxx@163.com', '这是一家好公司');
 
 -- ----------------------------
+-- Table structure for `sfile`
+-- ----------------------------
+DROP TABLE IF EXISTS `sfile`;
+CREATE TABLE `sfile` (
+  `fileid` int(9) NOT NULL COMMENT '文件ID',
+  `pid` int(9) DEFAULT NULL COMMENT '关联ID',
+  `btype` varchar(32) DEFAULT NULL COMMENT '类型',
+  `filename` varchar(128) DEFAULT NULL COMMENT '文件名',
+  `suffix` varchar(8) DEFAULT NULL COMMENT '后缀名',
+  `createuser` varchar(64) DEFAULT NULL COMMENT '创建人',
+  `createtime` varchar(20) DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`fileid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文件表';
+
+-- ----------------------------
+-- Records of sfile
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `slog`
 -- ----------------------------
 DROP TABLE IF EXISTS `slog`;
@@ -1131,7 +1150,7 @@ CREATE TABLE `slog` (
   `operatetime` varchar(20) NOT NULL COMMENT '操作时间',
   `remark` text COMMENT '备注',
   PRIMARY KEY (`logid`)
-) ENGINE=InnoDB AUTO_INCREMENT=399 DEFAULT CHARSET=utf8 COMMENT='日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=419 DEFAULT CHARSET=utf8 COMMENT='日志表';
 
 -- ----------------------------
 -- Records of slog
@@ -1526,6 +1545,26 @@ INSERT INTO `slog` VALUES ('395', '修改销售单', 'ZHOUJD', '2014-11-18 15:27
 INSERT INTO `slog` VALUES ('396', '删除采购单', 'ZHOUJD', '2014-11-18 15:28:38', '41');
 INSERT INTO `slog` VALUES ('397', '修改销售单', 'ZHOUJD', '2014-11-18 15:29:13', 'sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:1');
 INSERT INTO `slog` VALUES ('398', '修改销售单', 'ZHOUJD', '2014-11-18 15:29:25', 'sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:1');
+INSERT INTO `slog` VALUES ('399', '登录', 'ZHOUJD', '2014-11-24 09:40:19', '');
+INSERT INTO `slog` VALUES ('400', '登录', 'ZHOUJD', '2014-11-24 10:13:24', '');
+INSERT INTO `slog` VALUES ('401', '登录', 'ZHOUJD', '2014-11-24 10:26:51', '');
+INSERT INTO `slog` VALUES ('402', '登录', 'ZHOUJD', '2014-11-24 11:42:33', '');
+INSERT INTO `slog` VALUES ('403', '登录', 'ZHOUJD', '2014-11-24 14:38:36', '');
+INSERT INTO `slog` VALUES ('404', '登录', 'ZHOUJD', '2014-11-24 15:04:12', '');
+INSERT INTO `slog` VALUES ('405', '新增产品', 'ZHOUJD', '2014-11-24 15:08:23', 'profit:0,realprice:0.00,remark:null,costprice:0,productno:20101004,producttypename:产品类别一1,createdate:2014-11-24 15:08:23,unit:1,productid:49,producttype:14,productname:abc');
+INSERT INTO `slog` VALUES ('406', '删除产品', 'ZHOUJD', '2014-11-24 15:09:15', '49');
+INSERT INTO `slog` VALUES ('407', '登录', 'ZHOUJD', '2014-11-24 15:11:01', '');
+INSERT INTO `slog` VALUES ('408', '新增产品', 'ZHOUJD', '2014-11-24 15:11:10', 'profit:0,realprice:0.00,remark:null,costprice:0,productno:20101004,producttypename:产品类别一1,createdate:2014-11-24 15:11:10,unit:1,productid:52,producttype:14,productname:bb');
+INSERT INTO `slog` VALUES ('409', '删除产品', 'ZHOUJD', '2014-11-24 15:14:03', '52');
+INSERT INTO `slog` VALUES ('410', '新增产品', 'ZHOUJD', '2014-11-24 15:15:08', 'profit:0,realprice:0.00,remark:null,costprice:0,productno:20101004,producttypename:产品类别一1,createdate:2014-11-24 15:15:08,unit:1,productid:57,producttype:14,productname:bbb');
+INSERT INTO `slog` VALUES ('411', '删除产品', 'ZHOUJD', '2014-11-24 15:18:33', '57');
+INSERT INTO `slog` VALUES ('412', '登录', 'ZHOUJD', '2014-11-25 10:29:11', '');
+INSERT INTO `slog` VALUES ('413', '新增产品', 'ZHOUJD', '2014-11-25 10:39:22', 'profit:0,realprice:0.00,remark:null,costprice:0,productno:20101004,producttypename:产品类别一1,createdate:2014-11-25 10:39:22,unit:1,productid:61,producttype:14,productname:dddd');
+INSERT INTO `slog` VALUES ('414', '登录', 'ZHOUJD', '2014-11-25 10:41:02', '');
+INSERT INTO `slog` VALUES ('415', '登录', 'ZHOUJD', '2014-11-25 10:47:44', '');
+INSERT INTO `slog` VALUES ('416', '登录', 'ZHOUJD', '2014-11-25 11:12:24', '');
+INSERT INTO `slog` VALUES ('417', '登录', 'ZHOUJD', '2014-11-25 11:23:48', '');
+INSERT INTO `slog` VALUES ('418', '删除产品', 'ZHOUJD', '2014-11-25 11:42:34', '61');
 
 -- ----------------------------
 -- Table structure for `smanu`
@@ -1882,7 +1921,6 @@ CREATE TABLE `sproduct` (
   `profit` double(12,2) DEFAULT NULL COMMENT '利润',
   `realprice` double(12,2) NOT NULL COMMENT '产品单价',
   `createdate` varchar(19) DEFAULT NULL COMMENT '新增日期',
-  `excelname` varchar(63) DEFAULT NULL COMMENT 'EXCEL文件名',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`productid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='产品表';
@@ -1890,10 +1928,10 @@ CREATE TABLE `sproduct` (
 -- ----------------------------
 -- Records of sproduct
 -- ----------------------------
-INSERT INTO `sproduct` VALUES ('1', '20101001', '产品1', '14', '1', '47.64', '75.56', '123.20', '2013-03-06', null, '产品一备注');
-INSERT INTO `sproduct` VALUES ('2', '20101002', '产品2', '14', '1', '190.24', '10.26', '200.50', '2014-07-12', null, '');
-INSERT INTO `sproduct` VALUES ('3', '20101003', '产品3', '14', '1', '163.40', '39.80', '203.20', '2014-07-12', null, '');
-INSERT INTO `sproduct` VALUES ('5', '20102001', '产品8', '15', '1', '33.30', '9.80', '43.10', '2014-08-11', null, '');
+INSERT INTO `sproduct` VALUES ('1', '20101001', '产品1', '14', '1', '47.64', '75.56', '123.20', '2013-03-06', '产品一备注');
+INSERT INTO `sproduct` VALUES ('2', '20101002', '产品2', '14', '1', '190.24', '10.26', '200.50', '2014-07-12', '');
+INSERT INTO `sproduct` VALUES ('3', '20101003', '产品3', '14', '1', '163.40', '39.80', '203.20', '2014-07-12', '');
+INSERT INTO `sproduct` VALUES ('5', '20102001', '产品8', '15', '1', '33.30', '9.80', '43.10', '2014-08-11', '');
 
 -- ----------------------------
 -- Table structure for `sproductrow`
@@ -1910,7 +1948,7 @@ CREATE TABLE `sproductrow` (
   `materialsum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '物资总价',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`productrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8 COMMENT='产品行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=utf8 COMMENT='产品行项表';
 
 -- ----------------------------
 -- Records of sproductrow

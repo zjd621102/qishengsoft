@@ -41,9 +41,9 @@
 	}
 	
 	// 删除文件
-	function deleteExcel() {
+	function deleteFile(fileid) {
 		$.get(
-			"<%=path%>/product/deleteExcel/${form.map.productid}",
+			"<%=path%>/file/deleteFile/" + fileid,
 			function(data) {
 				if(data == "true") {
 					$.pdialog.reload("<%=path%>/product/edi/${form.map.productid}", {data:{}, dialogId:"product_edi", callback:null});
@@ -53,9 +53,17 @@
 			}
 		);
 	}
+	
+	// 下载文件
+	function downloadFile(fileid) {
+		var _url = "<%=path%>/file/downloadFile/" + fileid;
+		$("#downloadForm").attr("action", _url);
+		$("#downloadForm")[0].submit();
+	}
 </script>
 
 <h1 class="margin10px">产品信息</h1>
+<form id="downloadForm" method="post"></form>
 <form method="post" action="<%=path%>/product/edi" class="required-validate pageForm"
  onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
 	<input type="hidden" name="map[productid]" value="${form.map.productid}"/>
@@ -134,24 +142,31 @@
 						height: 20,
 						width: 50,
 						swf:'<%=path%>/js/uploadify/scripts/uploadify.swf',
-						uploader:'<%=path%>/product/upload',
-						formData:{productid:${form.map.productid}},
+						uploader:'<%=path%>/file/uploadFile',
+						formData:{pid:${form.map.productid}, btype: 'product'},
 						buttonText:'上传',
 						fileSizeLimit:'10240KB',
 						auto:true,
-						multi:true,
+						multi:false,
 						onUploadSuccess:uploadifySuccess,
 						onQueueComplete:uploadifyQueueComplete
 					}"
 				/>
 			</dt>
 			<dd>
-				<c:if test="${not empty form.map.excelname}">
-					<a href="<%=path%>/resources/productexcel/${form.map.excelname}" style="color: #F57800;">【下载】</a>
-					<a onclick="deleteExcel()" style="color: #F57800; cursor: pointer;">【删除】</a>
-				</c:if>
+
 			</dd>
 		</dl>
+		<table class="table" style="width: 100%;">
+			<c:forEach items="${fileList}" var="file" varStatus="status">
+			<tr>
+				<td>
+					<a onclick="downloadFile('${file.map.fileid}')" style="color: #F57800; cursor: pointer;">【${file.map.filename}】</a>
+					<a onclick="deleteFile('${file.map.fileid}')" style="color: #F57800; cursor: pointer;">【删除】</a>
+				</td>
+			</tr>
+			</c:forEach>
+		</table>
 		
 		<div class="divider"></div>
 		
