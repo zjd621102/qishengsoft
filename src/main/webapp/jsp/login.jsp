@@ -158,7 +158,7 @@
 						<table style="width: 100%;border: 0;" class="login-buttom-bg">
 							<tr>
 								<td align="center">
-									<span class="login-buttom-txt">Copyright&copy;2012-2012 www.yecoo.com</span>
+									<span class="login-buttom-txt">Copyright&copy;2012-2014 www.xxxx.com</span>
 								</td>
 							</tr>
 						</table>

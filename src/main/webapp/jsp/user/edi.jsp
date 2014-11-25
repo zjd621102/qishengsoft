@@ -3,7 +3,7 @@
 <div class="pageContent">
 	<form method="post" action="<%=path%>/user/edi" class="pageForm required-validate"
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">
-		<div class="pageFormContent" layoutH="56">
+		<div class="pageFormContent" layoutH="54">
 			<p>
 				<label>用户账号：</label>
 				<input type="text" class="required alphanumeric" readonly="readonly" minlength="4" maxlength="32" size="30"

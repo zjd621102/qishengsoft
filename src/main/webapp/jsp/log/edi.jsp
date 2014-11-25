@@ -4,7 +4,7 @@
 	<form method="post" action="<%=path%>/user/edi" class="pageForm required-validate"
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">
  		<input type="hidden" name="map[logid]" value="${form.map.logid}" />
-		<div class="pageFormContent" layoutH="56">
+		<div class="pageFormContent" layoutH="54">
 			<p>
 				<label>操作类型：</label>
 				<input type="text" readonly="readonly" size="30" name="map[logtype]" value="${form.map.logtype}" />
@@ -19,7 +19,7 @@
 			</p>
 			<p>
 				<label>备注：</label>
-				<textarea readonly="readonly" name="map[remark]" cols="27" rows="6">${form.map.remark}</textarea>
+				<textarea readonly="readonly" name="map[remark]" cols="32" rows="7">${form.map.remark}</textarea>
 			</p>
 		</div>
 		<div class="formBar">

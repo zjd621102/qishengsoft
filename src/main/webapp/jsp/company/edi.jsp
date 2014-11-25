@@ -1,11 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h2 class="contentTitle">公司信息</h2>
 <form method="post" action="<%=path%>/company/edi" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
 	<input type="hidden" name="map[companyid]" value="${form.map.companyid}"/>
-	<div class="pageFormContent" layoutH="97" style="width: 450px;">
+	<div class="pageFormContent" layoutH="56" style="width: 450px;">
 		<dl>
 			<dt>公司名称：</dt>
 			<dd>

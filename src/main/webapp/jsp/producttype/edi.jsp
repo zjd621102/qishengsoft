@@ -8,7 +8,7 @@
 		<input type="hidden" name="map[producttype]" value="${form.map.producttype}" />
 		<input type="hidden" name="map[parent]" value="${form.map.parent}" />
 		<input type="hidden" name="map[producttypeall]" value="${form.map.producttypeall}" />
-		<div class="pageFormContent" layoutH="56">
+		<div class="pageFormContent" layoutH="54">
 			<dl>
 				<dt>产品类别编码：</dt>
 				<dd>

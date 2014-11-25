@@ -5,7 +5,7 @@
 		onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<input type="hidden" name="map[task]" value="changePasswd" />
 		<input type="hidden" name="map[userid]" value="${userSessionInfo.map.userid}" />
-		<div class="pageFormContent" layoutH="56">
+		<div class="pageFormContent" layoutH="54">
 			<p>
 				<label>原&nbsp;&nbsp;密&nbsp;&nbsp;码：</label>
 				<input type="password" name="map[oldPasswd]" class="required" size="30" alt="请输入用户密码"/>

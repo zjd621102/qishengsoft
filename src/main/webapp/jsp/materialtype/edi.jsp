@@ -7,7 +7,7 @@
 		onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<input type="hidden" name="map[materialtype]" value="${form.map.materialtype}" />
 		<input type="hidden" name="map[parent]" value="${form.map.parent}" />
-		<div class="pageFormContent" layoutH="56">
+		<div class="pageFormContent" layoutH="54">
 			<dl>
 				<dt>物资类型编码：</dt>
 				<dd>

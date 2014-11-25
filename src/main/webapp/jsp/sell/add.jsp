@@ -99,10 +99,9 @@
 	}
 </script>
 
-<h1 class="margin10px">销售单信息</h1>
 <form method="post" action="<%=path%>/sell/add" class="required-validate pageForm"
  onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="88">
+	<div class="pageFormContent" layoutH="52">
 		<dl>
 			<dt>销售日期：</dt>
 			<dd>

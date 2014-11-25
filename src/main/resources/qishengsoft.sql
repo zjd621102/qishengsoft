@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2014-11-25 11:43:18
+Date: 2014-11-25 16:11:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -69,7 +69,7 @@ CREATE TABLE `bbuyrow` (
   `manutel` varchar(32) DEFAULT NULL COMMENT '联系电话',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`buyrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=336 DEFAULT CHARSET=utf8 COMMENT='采购行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=339 DEFAULT CHARSET=utf8 COMMENT='采购行项表';
 
 -- ----------------------------
 -- Records of bbuyrow
@@ -106,12 +106,12 @@ INSERT INTO `bbuyrow` VALUES ('296', '35', '6', '物资A21', '1', '43.20', '165.
 INSERT INTO `bbuyrow` VALUES ('312', '36', '1', '物资A11', '1', '0.22', '46.00', '10.12', '4', '供应商A', '周少华', '11111111', null);
 INSERT INTO `bbuyrow` VALUES ('313', '36', '5', '物资B12', '1', '44.00', '3.00', '132.00', '8', '供应商B', '供应商B', '00000', null);
 INSERT INTO `bbuyrow` VALUES ('314', '36', '6', '物资A21', '1', '43.20', '4.00', '172.80', '8', '供应商B', '供应商B', '00000', null);
-INSERT INTO `bbuyrow` VALUES ('327', '40', '1', '物资A11', '1', '0.22', '22.00', '4.84', '4', '供应商A', '周少华', '11111111', null);
-INSERT INTO `bbuyrow` VALUES ('328', '40', '5', '物资B12', '1', '44.00', '3.00', '132.00', '8', '供应商B', '供应商B', '00000', null);
-INSERT INTO `bbuyrow` VALUES ('329', '40', '6', '物资A21', '1', '43.20', '6.00', '259.20', '8', '供应商B', '供应商B', '00000', null);
 INSERT INTO `bbuyrow` VALUES ('333', '42', '1', '物资A11', '1', '0.22', '22.00', '4.84', '4', '供应商A', '周少华', '11111111', null);
 INSERT INTO `bbuyrow` VALUES ('334', '42', '5', '物资B12', '1', '44.00', '3.00', '132.00', '8', '供应商B', '供应商B', '00000', null);
 INSERT INTO `bbuyrow` VALUES ('335', '42', '6', '物资A21', '1', '43.20', '6.00', '259.20', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('336', '40', '1', '物资A11', '1', '0.22', '22.00', '4.84', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('337', '40', '5', '物资B12', '1', '44.00', '3.00', '132.00', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('338', '40', '6', '物资A21', '1', '43.20', '6.00', '259.20', '8', '供应商B', '供应商B', '00000', null);
 
 -- ----------------------------
 -- Table structure for `bpay`
@@ -401,7 +401,7 @@ CREATE TABLE `bsellrow` (
   `realsum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '实际总价',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`sellrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8 COMMENT='销售行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=202 DEFAULT CHARSET=utf8 COMMENT='销售行项表';
 
 -- ----------------------------
 -- Records of bsellrow
@@ -436,8 +436,9 @@ INSERT INTO `bsellrow` VALUES ('179', '14', '2', '产品2', '1', '190.24', '200.
 INSERT INTO `bsellrow` VALUES ('180', '14', '3', '产品3', '1', '163.40', '203.20', '203.20', '20.00', '39.80', '4064.00', null);
 INSERT INTO `bsellrow` VALUES ('185', '15', '1', '产品1', '1', '47.64', '123.20', '124.20', '1.00', '76.56', '124.20', null);
 INSERT INTO `bsellrow` VALUES ('186', '15', '2', '产品2', '1', '190.24', '200.50', '205.50', '2.00', '15.26', '411.00', null);
-INSERT INTO `bsellrow` VALUES ('197', '38', '2', '产品2', '1', '190.24', '200.50', '200.50', '1.00', '10.26', '200.50', null);
-INSERT INTO `bsellrow` VALUES ('198', '38', '3', '产品3', '1', '163.40', '203.20', '203.20', '2.00', '39.80', '406.40', null);
+INSERT INTO `bsellrow` VALUES ('199', '38', '2', '产品2', '1', '190.24', '200.50', '200.50', '1.00', '10.26', '200.50', null);
+INSERT INTO `bsellrow` VALUES ('200', '38', '3', '产品3', '1', '163.40', '203.20', '203.20', '2.00', '39.80', '406.40', null);
+INSERT INTO `bsellrow` VALUES ('201', '38', '80', '树叶淋浴', '1', '32.00', '42.00', '42.00', '2.00', '10.00', '84.00', null);
 
 -- ----------------------------
 -- Table structure for `btransferaccount`
@@ -982,7 +983,7 @@ CREATE TABLE `cdictrow` (
   `sordid` int(3) DEFAULT NULL COMMENT '排序',
   `rowremark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dictrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8 COMMENT='字典行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8 COMMENT='字典行项表';
 
 -- ----------------------------
 -- Records of cdictrow
@@ -1016,15 +1017,6 @@ INSERT INTO `cdictrow` VALUES ('55', '18', '收入', '1', '1', null);
 INSERT INTO `cdictrow` VALUES ('56', '18', '支出', '2', '2', null);
 INSERT INTO `cdictrow` VALUES ('78', '20', '申请', '申请', '1', null);
 INSERT INTO `cdictrow` VALUES ('79', '20', '结束', '结束', '2', null);
-INSERT INTO `cdictrow` VALUES ('89', '21', '采购单', 'CGD', '1', null);
-INSERT INTO `cdictrow` VALUES ('90', '21', '产品单', 'CPD', '2', null);
-INSERT INTO `cdictrow` VALUES ('91', '21', '付款单', 'FKD', '3', null);
-INSERT INTO `cdictrow` VALUES ('92', '21', '工资单', 'GZD', '4', null);
-INSERT INTO `cdictrow` VALUES ('93', '21', '简易采购单', 'JYD', '5', null);
-INSERT INTO `cdictrow` VALUES ('94', '21', '收款单', 'SKD', '6', null);
-INSERT INTO `cdictrow` VALUES ('95', '21', '物资单', 'WZD', '7', null);
-INSERT INTO `cdictrow` VALUES ('96', '21', '销售单', 'XSD', '8', null);
-INSERT INTO `cdictrow` VALUES ('97', '21', '运费单', 'YFD', '9', null);
 INSERT INTO `cdictrow` VALUES ('98', '19', '中国建设银行', '1', '1', null);
 INSERT INTO `cdictrow` VALUES ('99', '19', '中国工商银行', '2', '2', null);
 INSERT INTO `cdictrow` VALUES ('100', '19', '中国银行', '3', '3', null);
@@ -1032,6 +1024,15 @@ INSERT INTO `cdictrow` VALUES ('101', '19', '中国农业银行', '4', '4', null
 INSERT INTO `cdictrow` VALUES ('102', '19', '招商银行', '5', '5', null);
 INSERT INTO `cdictrow` VALUES ('103', '19', '兴业银行', '6', '6', null);
 INSERT INTO `cdictrow` VALUES ('104', '19', '其它', '9', '9', null);
+INSERT INTO `cdictrow` VALUES ('105', '21', '采购单', 'CGD', '1', null);
+INSERT INTO `cdictrow` VALUES ('106', '21', '产品单', 'CPD', '2', null);
+INSERT INTO `cdictrow` VALUES ('107', '21', '付款单', 'FKD', '3', null);
+INSERT INTO `cdictrow` VALUES ('108', '21', '工资单', 'GZD', '4', null);
+INSERT INTO `cdictrow` VALUES ('109', '21', '简易采购单', 'JYD', '5', null);
+INSERT INTO `cdictrow` VALUES ('110', '21', '收款单', 'SKD', '6', null);
+INSERT INTO `cdictrow` VALUES ('111', '21', '物资单', 'WZD', '7', null);
+INSERT INTO `cdictrow` VALUES ('112', '21', '销售单', 'XSD', '8', null);
+INSERT INTO `cdictrow` VALUES ('113', '21', '运费单', 'YFD', '9', null);
 
 -- ----------------------------
 -- Table structure for `cseq`
@@ -1044,7 +1045,7 @@ CREATE TABLE `cseq` (
 -- ----------------------------
 -- Records of cseq
 -- ----------------------------
-INSERT INTO `cseq` VALUES ('78');
+INSERT INTO `cseq` VALUES ('80');
 
 -- ----------------------------
 -- Table structure for `sbankcard`
@@ -1150,7 +1151,7 @@ CREATE TABLE `slog` (
   `operatetime` varchar(20) NOT NULL COMMENT '操作时间',
   `remark` text COMMENT '备注',
   PRIMARY KEY (`logid`)
-) ENGINE=InnoDB AUTO_INCREMENT=419 DEFAULT CHARSET=utf8 COMMENT='日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=442 DEFAULT CHARSET=utf8 COMMENT='日志表';
 
 -- ----------------------------
 -- Records of slog
@@ -1565,6 +1566,29 @@ INSERT INTO `slog` VALUES ('415', '登录', 'ZHOUJD', '2014-11-25 10:47:44', '')
 INSERT INTO `slog` VALUES ('416', '登录', 'ZHOUJD', '2014-11-25 11:12:24', '');
 INSERT INTO `slog` VALUES ('417', '登录', 'ZHOUJD', '2014-11-25 11:23:48', '');
 INSERT INTO `slog` VALUES ('418', '删除产品', 'ZHOUJD', '2014-11-25 11:42:34', '61');
+INSERT INTO `slog` VALUES ('419', '登录', 'ZHOUJD', '2014-11-25 11:49:06', '');
+INSERT INTO `slog` VALUES ('420', '修改产品', 'ZHOUJD', '2014-11-25 11:49:33', 'profit:75.56,realprice:123.20,remark:产品一备注,costprice:47.64,productno:20101001,producttypename:产品类别一1,createdate:2013-03-06,unit:1,productid:1,producttype:14,productname:产品1');
+INSERT INTO `slog` VALUES ('421', '登录', 'ZHOUJD', '2014-11-25 14:20:45', '');
+INSERT INTO `slog` VALUES ('422', '新增产品类型', 'ZHOUJD', '2014-11-25 14:29:39', 'producttypeno:JL04,remark:,producttypename:金龙系列,priority:4,parent:1');
+INSERT INTO `slog` VALUES ('423', '修改产品类型', 'ZHOUJD', '2014-11-25 14:30:26', 'producttypeno:JL,remark:null,producttypename:金龙系列,priority:4,parent:1,producttypeall:1-18,producttype:18');
+INSERT INTO `slog` VALUES ('424', '新增产品类型', 'ZHOUJD', '2014-11-25 14:31:00', 'producttypeno:JL01,remark:,producttypename:金龙淋浴,priority:1,parent:18');
+INSERT INTO `slog` VALUES ('425', '新增产品类型', 'ZHOUJD', '2014-11-25 14:31:47', 'producttypeno:JL02,remark:,producttypename:金龙花洒,priority:2,parent:18');
+INSERT INTO `slog` VALUES ('426', '新增产品类型', 'ZHOUJD', '2014-11-25 14:33:54', 'producttypeno:DL,remark:,producttypename:李德林,priority:5,parent:1');
+INSERT INTO `slog` VALUES ('427', '新增产品类型', 'ZHOUJD', '2014-11-25 14:34:34', 'producttypeno:DL01,remark:,producttypename:金龙系列,priority:1,parent:21');
+INSERT INTO `slog` VALUES ('428', '新增产品类型', 'ZHOUJD', '2014-11-25 14:34:58', 'producttypeno:DL0101,remark:,producttypename:金龙淋浴,priority:1,parent:22');
+INSERT INTO `slog` VALUES ('429', '新增产品', 'ZHOUJD', '2014-11-25 14:36:30', 'profit:0,realprice:0.00,remark:null,costprice:0,productno:DL0101001,producttypename:金龙淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴');
+INSERT INTO `slog` VALUES ('430', '修改产品', 'ZHOUJD', '2014-11-25 14:37:30', 'profit:-32,realprice:0.00,remark:null,costprice:32,productno:DL0101001,producttypename:金龙淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴');
+INSERT INTO `slog` VALUES ('431', '修改产品类型', 'ZHOUJD', '2014-11-25 14:39:21', 'producttypeno:DL01,remark:null,producttypename:真龍系列,priority:1,parent:21,producttypeall:1-21-22,producttype:22');
+INSERT INTO `slog` VALUES ('432', '修改产品类型', 'ZHOUJD', '2014-11-25 14:39:31', 'producttypeno:DL0101,remark:null,producttypename:真龍淋浴,priority:1,parent:22,producttypeall:1-21-22-23,producttype:23');
+INSERT INTO `slog` VALUES ('433', '登录', 'ZHOUJD', '2014-11-25 14:50:07', '');
+INSERT INTO `slog` VALUES ('434', '登录', 'ZHOUJD', '2014-11-25 15:42:26', '');
+INSERT INTO `slog` VALUES ('435', '登录', 'ZHOUJD', '2014-11-25 15:43:27', '');
+INSERT INTO `slog` VALUES ('436', '修改采购单', 'ZHOUJD', '2014-11-25 15:49:34', 'btypename:采购单,remark:合并采购单（XSD-20141118-001）,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:15:09,relateno:null,buyno:CGD-20141118-002,btype:CGD,maker:ZHOUJD,buyid:40,currflow:申请,buydate:2014-11-18');
+INSERT INTO `slog` VALUES ('437', '修改用户', 'ZHOUJD', '2014-11-25 15:54:55', 'tele:null,birthday:null,username:测试账号,roleid:3,userid:CESHI');
+INSERT INTO `slog` VALUES ('438', '修改模块', 'ZHOUJD', '2014-11-25 15:57:43', 'modulename:用户管理,sn:User,priority:1,description:用户管理-描述,moduleid:10101,parentid:101,rel:user_list,url:/user/list');
+INSERT INTO `slog` VALUES ('439', '修改物资', 'ZHOUJD', '2014-11-25 16:02:45', 'unit:1,usestock:1,stock:956.00,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:100.00,materialid:1');
+INSERT INTO `slog` VALUES ('440', '修改产品', 'ZHOUJD', '2014-11-25 16:09:12', 'profit:10,realprice:42,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴');
+INSERT INTO `slog` VALUES ('441', '修改销售单', 'ZHOUJD', '2014-11-25 16:09:30', 'sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:690.9,allprofit:109.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:');
 
 -- ----------------------------
 -- Table structure for `smanu`
@@ -1932,6 +1956,7 @@ INSERT INTO `sproduct` VALUES ('1', '20101001', '产品1', '14', '1', '47.64', '
 INSERT INTO `sproduct` VALUES ('2', '20101002', '产品2', '14', '1', '190.24', '10.26', '200.50', '2014-07-12', '');
 INSERT INTO `sproduct` VALUES ('3', '20101003', '产品3', '14', '1', '163.40', '39.80', '203.20', '2014-07-12', '');
 INSERT INTO `sproduct` VALUES ('5', '20102001', '产品8', '15', '1', '33.30', '9.80', '43.10', '2014-08-11', '');
+INSERT INTO `sproduct` VALUES ('80', 'DL0101001', '树叶淋浴', '23', '1', '32.00', '10.00', '42.00', '2014-11-25 14:36:30', '');
 
 -- ----------------------------
 -- Table structure for `sproductrow`
@@ -1948,15 +1973,11 @@ CREATE TABLE `sproductrow` (
   `materialsum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '物资总价',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`productrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=utf8 COMMENT='产品行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=262 DEFAULT CHARSET=utf8 COMMENT='产品行项表';
 
 -- ----------------------------
 -- Records of sproductrow
 -- ----------------------------
-INSERT INTO `sproductrow` VALUES ('228', '1', '5', '10201002', '物资B12', '44.00', '1.00', '44.00', null);
-INSERT INTO `sproductrow` VALUES ('229', '1', '1', '10101001', '物资A11', '0.22', '2.00', '0.44', null);
-INSERT INTO `sproductrow` VALUES ('230', '1', null, null, '其他成本', '1.20', '1.00', '1.20', null);
-INSERT INTO `sproductrow` VALUES ('231', '1', null, null, '人力成本', '2.00', '1.00', '2.00', null);
 INSERT INTO `sproductrow` VALUES ('232', '2', '1', '10101001', '物资A11', '0.22', '22.00', '4.84', null);
 INSERT INTO `sproductrow` VALUES ('233', '2', '6', '10102001', '物资A21', '43.20', '2.00', '86.40', null);
 INSERT INTO `sproductrow` VALUES ('234', '2', '5', '10201002', '物资B12', '44.00', '1.00', '44.00', null);
@@ -1967,6 +1988,13 @@ INSERT INTO `sproductrow` VALUES ('238', '3', '5', '10201002', '物资B12', '44.
 INSERT INTO `sproductrow` VALUES ('239', '3', null, null, '其他成本', '11.00', '1.00', '11.00', null);
 INSERT INTO `sproductrow` VALUES ('240', '3', null, null, '人力成本', '22.00', '1.00', '22.00', null);
 INSERT INTO `sproductrow` VALUES ('241', '5', '4', '10201001', '物资B11', '33.30', '1.00', '33.30', null);
+INSERT INTO `sproductrow` VALUES ('250', '1', '5', '10201002', '物资B12', '44.00', '1.00', '44.00', null);
+INSERT INTO `sproductrow` VALUES ('251', '1', '1', '10101001', '物资A11', '0.22', '2.00', '0.44', null);
+INSERT INTO `sproductrow` VALUES ('252', '1', null, null, '其他成本', '1.20', '1.00', '1.20', null);
+INSERT INTO `sproductrow` VALUES ('253', '1', null, null, '人力成本', '2.00', '1.00', '2.00', null);
+INSERT INTO `sproductrow` VALUES ('259', '80', null, null, '人力成本', '4.00', '1.00', '4.00', null);
+INSERT INTO `sproductrow` VALUES ('260', '80', null, null, '其他成本', '5.00', '1.00', '5.00', null);
+INSERT INTO `sproductrow` VALUES ('261', '80', null, null, '手把', '23.00', '1.00', '23.00', null);
 
 -- ----------------------------
 -- Table structure for `sproducttype`
@@ -1981,8 +2009,8 @@ CREATE TABLE `sproducttype` (
   `producttypeall` varchar(64) DEFAULT NULL,
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`producttype`),
-  UNIQUE KEY `u_sproduct_no` (`producttypeno`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `u_sproducttype_no` (`producttypeno`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sproducttype
@@ -1995,6 +2023,12 @@ INSERT INTO `sproducttype` VALUES ('14', '20101', '产品类别一1', '1', '11',
 INSERT INTO `sproducttype` VALUES ('15', '20102', '产品类别一2', '2', '11', '1-11-15', '产品类别一2');
 INSERT INTO `sproducttype` VALUES ('16', '20201', '产品类别二1', '1', '12', '1-12-16', '产品类别二1');
 INSERT INTO `sproducttype` VALUES ('17', '20202', '产品类别二2', '2', '12', '1-12-17', '');
+INSERT INTO `sproducttype` VALUES ('18', 'JL', '金龙系列', '4', '1', '1-18', '');
+INSERT INTO `sproducttype` VALUES ('19', 'JL01', '金龙淋浴', '1', '18', '1-18-19', '');
+INSERT INTO `sproducttype` VALUES ('20', 'JL02', '金龙花洒', '2', '18', '1-18-20', '');
+INSERT INTO `sproducttype` VALUES ('21', 'DL', '李德林', '5', '1', '1-21', '');
+INSERT INTO `sproducttype` VALUES ('22', 'DL01', '真龍系列', '1', '21', '1-21-22', '');
+INSERT INTO `sproducttype` VALUES ('23', 'DL0101', '真龍淋浴', '1', '22', '1-21-22-23', '');
 
 -- ----------------------------
 -- Table structure for `srole`

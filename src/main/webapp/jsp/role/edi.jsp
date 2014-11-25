@@ -5,7 +5,7 @@
 	<form method="post" action="<%=path%>/role/edi" class="required-validate pageForm"
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<input type="hidden" name="map[roleid]" value="${form.map.roleid}"/>
-		<div class="pageFormContent" layoutH="56">
+		<div class="pageFormContent" layoutH="54">
 			<dl>
 				<dt>角色名称：</dt>
 				<dd>

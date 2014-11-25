@@ -3,7 +3,7 @@
 <div class="pageContent">
 	<form method="post" action="<%=path%>/user/add" class="pageForm required-validate"
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">
-		<div class="pageFormContent" layoutH="56">
+		<div class="pageFormContent" layoutH="54">
 			<p>
 				<label>用户账号：</label>
 				<input type="text" class="required alphanumeric" minlength="4" maxlength="32" size="30" name="map[userid]"

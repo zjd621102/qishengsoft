@@ -16,11 +16,10 @@
 	}
 </script>
 
-<h1 class="margin10px">工资单信息</h1>
 <form method="post" action="<%=path%>/salary/edi" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
  	<input type="hidden" name="map[salaryid]" value="${form.map.salaryid}" />
-	<div class="pageFormContent" layoutH="88">
+	<div class="pageFormContent" layoutH="52">
 		<dl>
 			<dt>工资单类型：</dt>
 			<dd>

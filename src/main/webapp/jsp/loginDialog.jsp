@@ -5,7 +5,7 @@
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<%-- 指定为ajax请求 --%>
 		<input type="hidden" name="isDialog" value="true"/>
-		<div class="pageFormContent" layoutH="56">
+		<div class="pageFormContent" layoutH="54">
 			<p>
 				<label>用户账号：</label>
 				<input type="text" class="required alphanumeric" minlength="4" maxlength="32" size="30" name="username" />

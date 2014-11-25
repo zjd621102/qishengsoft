@@ -1,10 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h2 class="margin10px">供应商信息</h2>
 <form method="post" action="<%=path%>/manu/add" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="88">
+	<div class="pageFormContent" layoutH="52">
 		<dl>
 			<dt>供应商名称：</dt>
 			<dd>

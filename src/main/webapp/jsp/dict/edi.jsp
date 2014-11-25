@@ -1,11 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<h1 class="margin10px">字典信息</h1>
 <form method="post" action="<%=path%>/dict/edi" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
 	<input type="hidden" name="map[dictid]" value="${form.map.dictid}" />
-	<div class="pageFormContent" layoutH="88">
+	<div class="pageFormContent" layoutH="52">
 		<dl>
 			<dt>字典类型：</dt>
 			<dd>

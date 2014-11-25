@@ -5,7 +5,7 @@
 	<form method="post" action="<%=path%>/staff/edi" class="required-validate pageForm"
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<input type="hidden" name="map[staffid]" value="${form.map.staffid}"/>
-		<div class="pageFormContent" layoutH="56">
+		<div class="pageFormContent" layoutH="54">
 			<dl>
 				<dt>员工名称：</dt>
 				<dd>

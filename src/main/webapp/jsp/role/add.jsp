@@ -4,7 +4,7 @@
 <div class="pageContent">
 	<form method="post" action="<%=path%>/role/add" class="required-validate pageForm"
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">
-		<div class="pageFormContent" layoutH="56">
+		<div class="pageFormContent" layoutH="54">
 			<dl>
 				<dt>角色名称：</dt>
 				<dd>

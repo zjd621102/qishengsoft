@@ -5,7 +5,7 @@
 	<form method="post" action="<%=path%>/bankcard/edi" class="required-validate pageForm"
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">
 	 	<input type="hidden" name="map[bankcardid]" value="${form.map.bankcardid}" />
-		<div class="pageFormContent" layoutH="56">
+		<div class="pageFormContent" layoutH="54">
 			<dl>
 				<dt>银行卡卡号：</dt>
 				<dd>

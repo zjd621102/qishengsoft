@@ -7,7 +7,7 @@
 		onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<input type="hidden" name="map[moduleid]" value="${form.map.moduleid}" />
 		<input type="hidden" name="map[parentid]" value="${form.map.parentid}" />
-		<div class="pageFormContent" layoutH="56">
+		<div class="pageFormContent" layoutH="54">
 			<dl>
 				<dt>模块名称：</dt>
 				<dd>

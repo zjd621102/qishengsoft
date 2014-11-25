@@ -11,10 +11,9 @@
 	}
 </script>
 
-<h1 class="margin10px">单据信息</h1>
 <form method="post" action="<%=path%>/pay/add" class="required-validate pageForm"
  onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="88">
+	<div class="pageFormContent" layoutH="52">
 		<dl>
 			<dt>单据ID：</dt>
 			<dd>
