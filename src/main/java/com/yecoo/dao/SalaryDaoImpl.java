@@ -148,7 +148,7 @@ public class SalaryDaoImpl extends BaseDaoImpl {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false); //事务开启
 			
-			iReturn = dbUtils.setUpdate(form, "", "bsalary", "salaryid", ""); //保存主表
+			iReturn = dbUtils.setUpdate(conn, form, "", "bsalary", "salaryid", ""); //保存主表
 			if(iReturn >= 1) { //保存行项表
 			  	iReturn = dbUtils.saveRowTable(request, conn, form, "bsalaryrow", "salaryrowid", "salaryid", "", 1);
 			}
@@ -159,17 +159,17 @@ public class SalaryDaoImpl extends BaseDaoImpl {
 				String maker = StrUtils.nullToStr(user.getValue("userid")); //当前登录用户
 				String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss");
 				String salaryid = StrUtils.nullToStr(form.getValue("salaryid"));
-				StringBuffer sql = new StringBuffer("INSERT INTO bpay(btype, maker, paydate, relateno, relatemoney,")
-					.append(" currflow, createtime)	SELECT 'GZD', '").append(maker)
+
+				String payid = IdSingleton.getInstance().getNewId();
+				
+				StringBuffer sql = new StringBuffer("INSERT INTO bpay(payid, btype, maker, paydate, relateno, relatemoney,")
+					.append(" currflow, createtime)	SELECT '").append(payid).append("', 'GZD', '").append(maker)
 					.append("', salarydate, salaryno, func_getSum(salaryid, 'GZD'), '申请', '").append(createdate)
 					.append("' FROM bsalary WHERE salaryid = '").append(salaryid).append("'");
 
-				iReturn = dbUtils.executeSQL(sql.toString()); //直接保存，用于下面获取payid
+				iReturn = dbUtils.executeSQL(conn, sql.toString()); //直接保存，用于下面获取payid
 				
 				if(iReturn >= 1) {
-					sql.delete(0,sql.length());
-					sql.append("SELECT MAX(payid) FROM bpay");
-					int payid = dbUtils.getIntBySql(sql.toString());
 					sql.delete(0,sql.length());
 					sql.append("INSERT INTO bpayrow(payid, manubankname, manubankcardno, manuaccountname, plansum, realsum)")
 						.append(" SELECT ").append(payid).append(",")
@@ -180,14 +180,6 @@ public class SalaryDaoImpl extends BaseDaoImpl {
 						.append(" FROM (SELECT staffid, SUM(planmoney) planmoney FROM bsalaryrow WHERE salaryid = '").append(salaryid)
 						.append("' GROUP BY staffid) t");
 					iReturn = dbUtils.executeSQL(conn, sql.toString());
-					if(iReturn == -1) { //行项保存失败，删除主表
-						sql.delete(0,sql.length());
-						sql.append("DELETE FROM bpay WHERE payid = '").append(payid).append("'");
-						dbUtils.executeSQL(sql.toString());
-						sql.delete(0,sql.length());
-						sql.append("UPDATE bsalary SET currflow = '申请' WHERE salaryid = '").append(salaryid).append("'");
-						dbUtils.executeSQL(sql.toString());
-					}
 				}
 			}
 			
@@ -201,7 +193,7 @@ public class SalaryDaoImpl extends BaseDaoImpl {
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				
 			}
 			StrUtils.WriteLog(this.getClass().getName() + ".ediSalary()", e);
 		} finally {

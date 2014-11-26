@@ -169,7 +169,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false); //事务开启
 			
-			iReturn = dbUtils.setUpdate(form, "", "bsell", "sellid", ""); //保存主表，不做事务处理，否则表被锁定不能进行下面的操作
+			iReturn = dbUtils.setUpdate(conn, form, "", "bsell", "sellid", ""); //保存主表，不做事务处理，否则表被锁定不能进行下面的操作
 			if(iReturn >= 1) { //保存行项表
 			  	iReturn = dbUtils.saveRowTable(request, conn, form, "bsellrow", "sellrowid", "sellid", "", 1);
 			}
@@ -190,18 +190,18 @@ public class SellDaoImpl extends BaseDaoImpl {
 					String maker = StrUtils.nullToStr(user.getValue("userid")); //当前登录用户
 					String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss");
 					String sellid = StrUtils.nullToStr(form.getValue("sellid"));
+					
+					String payid = IdSingleton.getInstance().getNewId();
+					
 					sql.delete(0, sql.length());
-					sql.append("INSERT INTO bpay(btype, maker, paydate, relateno, relatemoney,")
-						.append(" currflow, createtime)	SELECT 'SKD', '").append(maker)
+					sql.append("INSERT INTO bpay(payid, btype, maker, paydate, relateno, relatemoney,")
+						.append(" currflow, createtime)	SELECT '").append(payid).append("', 'SKD', '").append(maker)
 						.append("', selldate, sellno, func_getSum(sellid, 'XSD'), '申请', '").append(createdate)
 						.append("' FROM bsell WHERE sellid = '").append(sellid).append("'");
 	
-					iReturn = dbUtils.executeSQL(sql.toString()); //直接保存，用于下面获取payid
+					iReturn = dbUtils.executeSQL(conn, sql.toString()); //直接保存，用于下面获取payid
 					
 					if(iReturn >= 1) { //生成销售单
-						sql.delete(0,sql.length());
-						sql.append("SELECT MAX(payid) FROM bpay");
-						int payid = dbUtils.getIntBySql(sql.toString());
 						sql.delete(0,sql.length());
 						sql.append("INSERT INTO bpayrow(payid, manuid, manubankname, manubankcardno, manuaccountname, plansum, realsum)")
 							.append(" SELECT ").append(payid).append(", t.manuid,")
@@ -230,16 +230,6 @@ public class SellDaoImpl extends BaseDaoImpl {
 							}
 						}
 						*/
-						if(iReturn == -1) { //行项保存失败，删除主表
-							sql.delete(0,sql.length());
-							sql.append("DELETE FROM bpay WHERE payid = '").append(payid).append("'");
-							dbUtils.executeSQL(sql.toString());
-							sql.delete(0,sql.length());
-							sql.append("DELETE FROM bpayrow WHERE payid = '").append(payid).append("'");
-							dbUtils.executeSQL(sql.toString());
-							sql.append("UPDATE bsell SET currflow = '申请' WHERE sellid = '").append(sellid).append("'");
-							dbUtils.executeSQL(sql.toString());
-						}
 					}
 				}
 			}
@@ -254,7 +244,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				
 			}
 			StrUtils.WriteLog(this.getClass().getName() + ".ediSell()", e);
 		} finally {

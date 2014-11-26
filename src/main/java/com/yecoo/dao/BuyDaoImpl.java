@@ -154,7 +154,8 @@ public class BuyDaoImpl extends BaseDaoImpl {
 				+ " FROM bbuy a WHERE a.buyid = '" + buyid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
-		sql = "SELECT a.*, b.materialno FROM bbuyrow a LEFT JOIN smaterial b ON a.materialid = b.materialid WHERE a.buyid = '" + buyid + "'";
+		sql = "SELECT a.*, b.materialno FROM bbuyrow a LEFT JOIN smaterial b ON a.materialid = b.materialid"
+				+ " WHERE a.buyid = '" + buyid + "' ORDER BY a.manuid, a.materialid";
 		List<CodeTableForm> buyrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("buyrowList", buyrowList);
 		
@@ -173,7 +174,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false); //事务开启
 			
-			iReturn = dbUtils.setUpdate(form, "", "bbuy", "buyid", ""); //保存主表
+			iReturn = dbUtils.setUpdate(conn, form, "", "bbuy", "buyid", ""); //保存主表
 			if(iReturn >= 1) { //保存行项表
 			  	iReturn = dbUtils.saveRowTable(request, conn, form, "bbuyrow", "buyrowid", "buyid", "", 1);
 			}
@@ -191,18 +192,18 @@ public class BuyDaoImpl extends BaseDaoImpl {
 					String maker = StrUtils.nullToStr(user.getValue("userid")); //当前登录用户
 					String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss");
 					String buyid = StrUtils.nullToStr(form.getValue("buyid"));
+					
+					String payid = IdSingleton.getInstance().getNewId();
+					
 					sql.delete(0, sql.length());
-					sql.append("INSERT INTO bpay(btype, maker, paydate, relateno, relatemoney,")
-						.append(" currflow, createtime)	SELECT 'FKD', '").append(maker)
+					sql.append("INSERT INTO bpay(payid, btype, maker, paydate, relateno, relatemoney,")
+						.append(" currflow, createtime)	SELECT '").append(payid).append("', 'FKD', '").append(maker)
 						.append("', buydate, buyno, func_getSum(buyid, 'CGD'), '申请', '").append(createdate)
 						.append("' FROM bbuy WHERE buyid = '").append(buyid).append("'");
 	
-					iReturn = dbUtils.executeSQL(sql.toString()); //直接保存，用于下面获取payid
+					iReturn = dbUtils.executeSQL(conn, sql.toString()); //直接保存，用于下面获取payid
 					
 					if(iReturn >= 1) {
-						sql.delete(0,sql.length());
-						sql.append("SELECT MAX(payid) FROM bpay");
-						int payid = dbUtils.getIntBySql(sql.toString());
 						sql.delete(0,sql.length());
 						sql.append("INSERT INTO bpayrow(payid, manuid, manubankname, manubankcardno, manuaccountname, plansum, realsum)")
 							.append(" SELECT ").append(payid).append(", t.manuid,")
@@ -213,13 +214,6 @@ public class BuyDaoImpl extends BaseDaoImpl {
 							.append(" FROM (SELECT manuid, SUM(sum) sum FROM bbuyrow WHERE buyid = '").append(buyid)
 							.append("' GROUP BY manuid) t");
 						iReturn = dbUtils.executeSQL(conn, sql.toString());
-						if(iReturn == -1) { //行项保存失败，删除主表
-							sql.delete(0,sql.length());
-							sql.append("DELETE FROM bpay WHERE payid = '").append(payid).append("'");
-							dbUtils.executeSQL(sql.toString());
-							sql.append("UPDATE bbuy SET currflow = '申请' WHERE buyid = '").append(buyid).append("'");
-							dbUtils.executeSQL(sql.toString());
-						}
 					}
 				}
 			}
@@ -234,7 +228,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				
 			}
 			StrUtils.WriteLog(this.getClass().getName() + ".ediBuy()", e);
 		} finally {

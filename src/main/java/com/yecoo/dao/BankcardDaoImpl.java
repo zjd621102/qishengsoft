@@ -252,8 +252,8 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false);//事务开启
 			
-			String receandpayid = IdSingleton.getInstance().getNewId();
-			form.setValue("receandpayid", receandpayid);
+			String receandpay = IdSingleton.getInstance().getNewId();
+			form.setValue("receandpay", receandpay);
 			
 			iReturn = dbUtils.setInsert(conn, form, "breceandpay", "");
 			
@@ -265,12 +265,12 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 				String sql = null;
 				if(receandpaytype.equals("1")) {
 					sql = "UPDATE sbankcard t SET t.money = t.money + " + money
-						+ ", changetype = 'breceandpay', changeid = '" + receandpayid + "'"
+						+ ", changetype = 'breceandpay', changeid = '" + receandpay + "'"
 						+ " WHERE t.bankcardid = '" + bankcardid + "'";
 					iReturn =  dbUtils.executeSQL(conn, sql);
 				} else if(receandpaytype.equals("2")) {
 					sql = "UPDATE sbankcard t SET t.money = t.money - " + money
-						+ ", changetype = 'breceandpay', changeid = '" + receandpayid + "'"
+						+ ", changetype = 'breceandpay', changeid = '" + receandpay + "'"
 						+ " WHERE t.bankcardid = '" + bankcardid + "'";
 					iReturn =  dbUtils.executeSQL(conn, sql);
 				} else {
@@ -370,7 +370,7 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 				+ " WHERE a.payid = b.payid AND a.currflow = '结束'";
 		String cond = getTransactionListCondition(form);
 		sql += cond;
-		sql += " ORDER BY a.operatetime DESC, a.paydate DESC";
+		sql += " ORDER BY a.operatetime DESC, a.paydate DESC, c.logid DESC";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;

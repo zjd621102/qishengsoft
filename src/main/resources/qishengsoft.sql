@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2014-11-25 16:11:14
+Date: 2014-11-26 14:42:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,8 +47,8 @@ INSERT INTO `bbuy` VALUES ('9', 'CGD', '2014.08.20采购', 'CGD-20140820-001', n
 INSERT INTO `bbuy` VALUES ('13', 'CGD', '2014.09.01采购', 'CGD-20140901-001', 'XSD-20140828-002', '2014-09-01', '结束', 'ZHOUJD', '2014-09-01 17:04:22', '');
 INSERT INTO `bbuy` VALUES ('35', 'CGD', '2014.10.22采购', 'CGD-20141022-002', '', '2014-10-22', '结束', 'ZHOUJD', '2014-10-22 18:37:22', '合并采购单（XSD-20140925-001）');
 INSERT INTO `bbuy` VALUES ('36', 'CGD', '2014.11.14采购', 'CGD-20141114-001', 'XSD-20141114-001', '2014-11-14', '结束', 'ZHOUJD', '2014-11-14 10:24:02', '');
-INSERT INTO `bbuy` VALUES ('40', 'CGD', '2014.11.18采购', 'CGD-20141118-002', '', '2014-11-18', '申请', 'ZHOUJD', '2014-11-18 15:15:09', '合并采购单（XSD-20141118-001）');
-INSERT INTO `bbuy` VALUES ('42', 'CGD', '2014.11.18采购', 'CGD-20141118-003', 'XSD-20141118-001', '2014-11-18', '申请', 'ZHOUJD', '2014-11-18 15:29:13', null);
+INSERT INTO `bbuy` VALUES ('40', 'CGD', '2014.11.18采购', 'CGD-20141118-002', '', '2014-11-18', '结束', 'ZHOUJD', '2014-11-18 15:15:09', '合并采购单（XSD-20141118-001）');
+INSERT INTO `bbuy` VALUES ('42', 'CGD', '2014.11.18采购', 'CGD-20141118-003', 'XSD-20141118-001', '2014-11-18', '申请', 'ZHOUJD', '2014-11-18 15:29:13', '');
 
 -- ----------------------------
 -- Table structure for `bbuyrow`
@@ -69,7 +69,7 @@ CREATE TABLE `bbuyrow` (
   `manutel` varchar(32) DEFAULT NULL COMMENT '联系电话',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`buyrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=339 DEFAULT CHARSET=utf8 COMMENT='采购行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=350 DEFAULT CHARSET=utf8 COMMENT='采购行项表';
 
 -- ----------------------------
 -- Records of bbuyrow
@@ -106,12 +106,14 @@ INSERT INTO `bbuyrow` VALUES ('296', '35', '6', '物资A21', '1', '43.20', '165.
 INSERT INTO `bbuyrow` VALUES ('312', '36', '1', '物资A11', '1', '0.22', '46.00', '10.12', '4', '供应商A', '周少华', '11111111', null);
 INSERT INTO `bbuyrow` VALUES ('313', '36', '5', '物资B12', '1', '44.00', '3.00', '132.00', '8', '供应商B', '供应商B', '00000', null);
 INSERT INTO `bbuyrow` VALUES ('314', '36', '6', '物资A21', '1', '43.20', '4.00', '172.80', '8', '供应商B', '供应商B', '00000', null);
-INSERT INTO `bbuyrow` VALUES ('333', '42', '1', '物资A11', '1', '0.22', '22.00', '4.84', '4', '供应商A', '周少华', '11111111', null);
-INSERT INTO `bbuyrow` VALUES ('334', '42', '5', '物资B12', '1', '44.00', '3.00', '132.00', '8', '供应商B', '供应商B', '00000', null);
-INSERT INTO `bbuyrow` VALUES ('335', '42', '6', '物资A21', '1', '43.20', '6.00', '259.20', '8', '供应商B', '供应商B', '00000', null);
-INSERT INTO `bbuyrow` VALUES ('336', '40', '1', '物资A11', '1', '0.22', '22.00', '4.84', '4', '供应商A', '周少华', '11111111', null);
-INSERT INTO `bbuyrow` VALUES ('337', '40', '5', '物资B12', '1', '44.00', '3.00', '132.00', '8', '供应商B', '供应商B', '00000', null);
-INSERT INTO `bbuyrow` VALUES ('338', '40', '6', '物资A21', '1', '43.20', '6.00', '259.20', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('342', '40', '1', '物资A11', '1', '0.22', '22.00', '4.84', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('343', '40', '5', '物资B12', '1', '44.00', '3.00', '132.00', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('344', '40', '6', '物资A21', '1', '43.20', '6.00', '259.20', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('345', '42', '1', '物资A11', '1', '0.22', '22.00', '4.84', '4', '供应商A', '周少华', '11111111', null);
+INSERT INTO `bbuyrow` VALUES ('346', '42', '5', '物资B12', '1', '44.00', '3.00', '132.00', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('347', '42', '6', '物资A21', '1', '43.20', '6.00', '259.20', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('348', '42', '6', '物资A21', '1', '43.20', '0.00', '0.00', '8', '供应商B', '供应商B', '00000', null);
+INSERT INTO `bbuyrow` VALUES ('349', '42', '1', '物资A11', '1', '0.22', '0.00', '0.00', '4', '供应商A', '周少华', '11111111', null);
 
 -- ----------------------------
 -- Table structure for `bpay`
@@ -173,6 +175,9 @@ INSERT INTO `bpay` VALUES ('62', 'SKD', 'ZHOUJD', '2014-09-25', 'XSD-20140925-00
 INSERT INTO `bpay` VALUES ('63', 'FKD', 'ZHOUJD', '2014-10-22', 'CGD-20141022-002', '13524.84', '结束', '2014-10-22 18:38:35', '2014-10-22 18:38:58', 'ZHOUJD', '');
 INSERT INTO `bpay` VALUES ('64', 'FKD', 'ZHOUJD', '2014-11-14', 'CGD-20141114-001', '314.92', '结束', '2014-11-14 10:26:48', '2014-11-14 10:39:02', 'ZHOUJD', '');
 INSERT INTO `bpay` VALUES ('68', 'SKD', 'ZHOUJD', '2014-11-14', 'XSD-20141114-001', '535.20', '结束', '2014-11-14 18:01:34', '2014-11-14 18:01:46', 'ZHOUJD', '');
+INSERT INTO `bpay` VALUES ('81', 'FKD', 'ZHOUJD', '2014-11-18', 'CGD-20141118-002', '396.04', '结束', '2014-11-26 10:59:59', '2014-11-26 11:01:22', 'ZHOUJD', '');
+INSERT INTO `bpay` VALUES ('82', 'SKD', 'ZHOUJD', '2014-11-18', 'XSD-20141118-001', '690.90', '结束', '2014-11-26 11:10:25', '2014-11-26 11:11:15', 'ZHOUJD', '');
+INSERT INTO `bpay` VALUES ('84', 'GZD', 'ZHOUJD', '2014-10', 'GZD-20141126-001', '5740.10', '结束', '2014-11-26 11:25:25', '2014-11-26 11:28:10', 'ZHOUJD', '');
 
 -- ----------------------------
 -- Table structure for `bpayrow`
@@ -190,7 +195,7 @@ CREATE TABLE `bpayrow` (
   `realsum` double(12,2) DEFAULT '0.00' COMMENT '实付金额',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`payrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=217 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=236 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bpayrow
@@ -260,6 +265,12 @@ INSERT INTO `bpayrow` VALUES ('211', '67', null, '8', '中国农业银行福建�
 INSERT INTO `bpayrow` VALUES ('213', '64', '00000', '4', '建设银行泉州分行', '1111111111', '周少华', '10.12', '10.12', null);
 INSERT INTO `bpayrow` VALUES ('214', '64', '6227001823550092014', '8', '中国农业银行福建支行', '444444', '供应商B账户名称', '304.80', '304.80', null);
 INSERT INTO `bpayrow` VALUES ('216', '68', '6227001823550092014', '9', '中国银行泉州分行', '2222222', '客户B', '535.20', '535.20', null);
+INSERT INTO `bpayrow` VALUES ('222', '81', '6227001823550092014', '4', '建设银行泉州分行', '1111111111', '周少华', '4.84', '4.84', null);
+INSERT INTO `bpayrow` VALUES ('223', '81', '622909116836651310', '8', '中国农业银行福建支行', '444444', '供应商B账户名称', '391.20', '391.20', null);
+INSERT INTO `bpayrow` VALUES ('226', '82', '622909116836651310', '5', '中国银行泉州分行', '22222222', '刘星', '690.90', '690.10', null);
+INSERT INTO `bpayrow` VALUES ('233', '84', '6227001823550092014', null, '建设银行南安支行', '11111111', '员工一', '1537.00', '1537.40', null);
+INSERT INTO `bpayrow` VALUES ('234', '84', '6227001823550092014', null, '建设银行南安支行', '22222222', '员工二', '1953.10', '1953.50', null);
+INSERT INTO `bpayrow` VALUES ('235', '84', '622909116836651310', null, '兴业银行仑仓支行', '33333333', '员工三', '2250.00', '2250.60', null);
 
 -- ----------------------------
 -- Table structure for `breceandpay`
@@ -286,6 +297,7 @@ INSERT INTO `breceandpay` VALUES ('4', '2013-07-01', '2', '1', '120000.00', '初
 INSERT INTO `breceandpay` VALUES ('5', '2014-10-22', '1', '2', '1.22', '测试', '2014-10-22 17:24:02');
 INSERT INTO `breceandpay` VALUES ('6', '2014-10-22', '1', '1', '1.22', '测试', '2014-10-22 17:24:18');
 INSERT INTO `breceandpay` VALUES ('7', '2014-11-13', '1', '1', '1.00', '1', '2014-11-13 18:07:04');
+INSERT INTO `breceandpay` VALUES ('87', '2014-11-26', '2', '1', '2.12', '测试收入', '2014-11-26 12:17:45');
 
 -- ----------------------------
 -- Table structure for `bsalary`
@@ -314,6 +326,7 @@ INSERT INTO `bsalary` VALUES ('8', '1', '2014年06月份工资单', 'GZD-2014072
 INSERT INTO `bsalary` VALUES ('9', '1', '2014年07月份工资单', 'GZD-20140820-001', '2014-07', '结束', 'ZHOUJD', '2014-08-20 15:09:27', '补发【员工三】工资');
 INSERT INTO `bsalary` VALUES ('10', '1', '2014年07月份工资单', 'GZD-20140820-002', '2014-07', '结束', 'ZHOUJD', '2014-08-20 15:34:49', '');
 INSERT INTO `bsalary` VALUES ('13', '1', '2014年09月份工资单', 'GZD-20141022-001', '2014-09', '结束', 'ZHOUJD', '2014-10-22 18:19:57', '');
+INSERT INTO `bsalary` VALUES ('83', '1', '2014年10月份工资单', 'GZD-20141126-001', '2014-10', '结束', 'ZHOUJD', '2014-11-26 11:18:14', '');
 
 -- ----------------------------
 -- Table structure for `bsalaryrow`
@@ -326,7 +339,7 @@ CREATE TABLE `bsalaryrow` (
   `planmoney` double(12,2) DEFAULT NULL COMMENT '应付款',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`salaryrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bsalaryrow
@@ -348,6 +361,9 @@ INSERT INTO `bsalaryrow` VALUES ('79', '10', '3', '1953.00', null);
 INSERT INTO `bsalaryrow` VALUES ('92', '13', '2', '1590.00', null);
 INSERT INTO `bsalaryrow` VALUES ('93', '13', '3', '1890.00', null);
 INSERT INTO `bsalaryrow` VALUES ('94', '13', '5', '2250.00', null);
+INSERT INTO `bsalaryrow` VALUES ('101', '83', '2', '1537.00', null);
+INSERT INTO `bsalaryrow` VALUES ('102', '83', '3', '1953.10', null);
+INSERT INTO `bsalaryrow` VALUES ('103', '83', '5', '2250.00', null);
 
 -- ----------------------------
 -- Table structure for `bsell`
@@ -381,7 +397,7 @@ INSERT INTO `bsell` VALUES ('12', 'XSD-20140828-001', '2014-08-28', '5', '结束
 INSERT INTO `bsell` VALUES ('13', 'XSD-20140828-002', '2014-08-28', '9', '结束', 'ZHOUJD', '2014-08-28 15:53:20', '');
 INSERT INTO `bsell` VALUES ('14', 'XSD-20140925-001', '2014-09-25', '5', '结束', 'ZHOUJD', '2014-09-25 16:44:19', '');
 INSERT INTO `bsell` VALUES ('15', 'XSD-20141114-001', '2014-11-14', '9', '结束', 'ZHOUJD', '2014-11-14 10:23:17', '');
-INSERT INTO `bsell` VALUES ('38', 'XSD-20141118-001', '2014-11-18', '5', '申请', 'ZHOUJD', '2014-11-18 15:14:37', '');
+INSERT INTO `bsell` VALUES ('38', 'XSD-20141118-001', '2014-11-18', '5', '结束', 'ZHOUJD', '2014-11-18 15:14:37', '');
 
 -- ----------------------------
 -- Table structure for `bsellrow`
@@ -401,7 +417,7 @@ CREATE TABLE `bsellrow` (
   `realsum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '实际总价',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`sellrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=202 DEFAULT CHARSET=utf8 COMMENT='销售行项表';
+) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=utf8 COMMENT='销售行项表';
 
 -- ----------------------------
 -- Records of bsellrow
@@ -436,9 +452,9 @@ INSERT INTO `bsellrow` VALUES ('179', '14', '2', '产品2', '1', '190.24', '200.
 INSERT INTO `bsellrow` VALUES ('180', '14', '3', '产品3', '1', '163.40', '203.20', '203.20', '20.00', '39.80', '4064.00', null);
 INSERT INTO `bsellrow` VALUES ('185', '15', '1', '产品1', '1', '47.64', '123.20', '124.20', '1.00', '76.56', '124.20', null);
 INSERT INTO `bsellrow` VALUES ('186', '15', '2', '产品2', '1', '190.24', '200.50', '205.50', '2.00', '15.26', '411.00', null);
-INSERT INTO `bsellrow` VALUES ('199', '38', '2', '产品2', '1', '190.24', '200.50', '200.50', '1.00', '10.26', '200.50', null);
-INSERT INTO `bsellrow` VALUES ('200', '38', '3', '产品3', '1', '163.40', '203.20', '203.20', '2.00', '39.80', '406.40', null);
-INSERT INTO `bsellrow` VALUES ('201', '38', '80', '树叶淋浴', '1', '32.00', '42.00', '42.00', '2.00', '10.00', '84.00', null);
+INSERT INTO `bsellrow` VALUES ('208', '38', '2', '产品2', '1', '190.24', '200.50', '200.50', '1.00', '10.26', '200.50', null);
+INSERT INTO `bsellrow` VALUES ('209', '38', '3', '产品3', '1', '163.40', '203.20', '203.20', '2.00', '39.80', '406.40', null);
+INSERT INTO `bsellrow` VALUES ('210', '38', '80', '树叶淋浴', '1', '32.00', '42.00', '42.00', '2.00', '10.00', '84.00', null);
 
 -- ----------------------------
 -- Table structure for `btransferaccount`
@@ -464,6 +480,7 @@ INSERT INTO `btransferaccount` VALUES ('9', '2', '1', '50000.00', '转到现金'
 INSERT INTO `btransferaccount` VALUES ('10', '1', '2', '1.00', '测试', '2014-10-22 17:21:47');
 INSERT INTO `btransferaccount` VALUES ('11', '1', '2', '1.00', '测试', '2014-10-22 17:22:11');
 INSERT INTO `btransferaccount` VALUES ('12', '1', '2', '2.00', '测试用', '2014-11-17 21:25:15');
+INSERT INTO `btransferaccount` VALUES ('85', '2', '3', '1.23', '测试转入', '2014-11-26 11:47:39');
 
 -- ----------------------------
 -- Table structure for `bwork`
@@ -474,7 +491,7 @@ CREATE TABLE `bwork` (
   `workmonth` varchar(7) NOT NULL COMMENT '月份',
   `staffid` int(9) DEFAULT NULL COMMENT '员工ID',
   PRIMARY KEY (`workid`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bwork
@@ -493,6 +510,9 @@ INSERT INTO `bwork` VALUES ('11', '2014-10', '5');
 INSERT INTO `bwork` VALUES ('12', '2014-09', '2');
 INSERT INTO `bwork` VALUES ('13', '2014-09', '3');
 INSERT INTO `bwork` VALUES ('14', '2014-09', '5');
+INSERT INTO `bwork` VALUES ('15', '2014-11', '2');
+INSERT INTO `bwork` VALUES ('16', '2014-11', '3');
+INSERT INTO `bwork` VALUES ('17', '2014-11', '5');
 
 -- ----------------------------
 -- Table structure for `bworkrow`
@@ -508,7 +528,7 @@ CREATE TABLE `bworkrow` (
   `salary` double(12,2) DEFAULT NULL COMMENT '增减工资',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`workrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=75753 DEFAULT CHARSET=utf8 COMMENT='考勤表';
+) ENGINE=InnoDB AUTO_INCREMENT=75967 DEFAULT CHARSET=utf8 COMMENT='考勤表';
 
 -- ----------------------------
 -- Records of bworkrow
@@ -759,99 +779,6 @@ INSERT INTO `bworkrow` VALUES ('75476', '8', '2014-07-28', null, null, null, '75
 INSERT INTO `bworkrow` VALUES ('75477', '8', '2014-07-29', null, null, null, '75.00', null);
 INSERT INTO `bworkrow` VALUES ('75478', '8', '2014-07-30', null, null, null, '75.00', null);
 INSERT INTO `bworkrow` VALUES ('75479', '8', '2014-07-31', null, null, null, '75.00', null);
-INSERT INTO `bworkrow` VALUES ('75480', '9', '2014-10-01', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75481', '9', '2014-10-02', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75482', '9', '2014-10-03', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75483', '9', '2014-10-04', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75484', '9', '2014-10-05', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75485', '9', '2014-10-06', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75486', '9', '2014-10-07', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75487', '9', '2014-10-08', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75488', '9', '2014-10-09', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75489', '9', '2014-10-10', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75490', '9', '2014-10-11', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75491', '9', '2014-10-12', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75492', '9', '2014-10-13', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75493', '9', '2014-10-14', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75494', '9', '2014-10-15', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75495', '9', '2014-10-16', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75496', '9', '2014-10-17', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75497', '9', '2014-10-18', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75498', '9', '2014-10-19', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75499', '9', '2014-10-20', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75500', '9', '2014-10-21', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75501', '9', '2014-10-22', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75502', '9', '2014-10-23', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75503', '9', '2014-10-24', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75504', '9', '2014-10-25', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75505', '9', '2014-10-26', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75506', '9', '2014-10-27', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75507', '9', '2014-10-28', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75508', '9', '2014-10-29', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75509', '9', '2014-10-30', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75510', '9', '2014-10-31', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75511', '10', '2014-10-01', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75512', '10', '2014-10-02', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75513', '10', '2014-10-03', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75514', '10', '2014-10-04', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75515', '10', '2014-10-05', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75516', '10', '2014-10-06', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75517', '10', '2014-10-07', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75518', '10', '2014-10-08', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75519', '10', '2014-10-09', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75520', '10', '2014-10-10', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75521', '10', '2014-10-11', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75522', '10', '2014-10-12', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75523', '10', '2014-10-13', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75524', '10', '2014-10-14', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75525', '10', '2014-10-15', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75526', '10', '2014-10-16', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75527', '10', '2014-10-17', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75528', '10', '2014-10-18', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75529', '10', '2014-10-19', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75530', '10', '2014-10-20', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75531', '10', '2014-10-21', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75532', '10', '2014-10-22', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75533', '10', '2014-10-23', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75534', '10', '2014-10-24', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75535', '10', '2014-10-25', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75536', '10', '2014-10-26', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75537', '10', '2014-10-27', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75538', '10', '2014-10-28', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75539', '10', '2014-10-29', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75540', '10', '2014-10-30', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75541', '10', '2014-10-31', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75542', '11', '2014-10-01', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75543', '11', '2014-10-02', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75544', '11', '2014-10-03', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75545', '11', '2014-10-04', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75546', '11', '2014-10-05', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75547', '11', '2014-10-06', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75548', '11', '2014-10-07', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75549', '11', '2014-10-08', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75550', '11', '2014-10-09', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75551', '11', '2014-10-10', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75552', '11', '2014-10-11', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75553', '11', '2014-10-12', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75554', '11', '2014-10-13', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75555', '11', '2014-10-14', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75556', '11', '2014-10-15', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75557', '11', '2014-10-16', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75558', '11', '2014-10-17', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75559', '11', '2014-10-18', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75560', '11', '2014-10-19', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75561', '11', '2014-10-20', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75562', '11', '2014-10-21', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75563', '11', '2014-10-22', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75564', '11', '2014-10-23', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75565', '11', '2014-10-24', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75566', '11', '2014-10-25', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75567', '11', '2014-10-26', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75568', '11', '2014-10-27', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75569', '11', '2014-10-28', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75570', '11', '2014-10-29', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75571', '11', '2014-10-30', null, null, null, null, null);
-INSERT INTO `bworkrow` VALUES ('75572', '11', '2014-10-31', null, null, null, null, null);
 INSERT INTO `bworkrow` VALUES ('75663', '12', '2014-09-01', null, null, '1', '53.00', null);
 INSERT INTO `bworkrow` VALUES ('75664', '12', '2014-09-02', null, null, '1', '53.00', null);
 INSERT INTO `bworkrow` VALUES ('75665', '12', '2014-09-03', null, null, '1', '53.00', null);
@@ -942,6 +869,189 @@ INSERT INTO `bworkrow` VALUES ('75749', '14', '2014-09-27', null, null, '1', '75
 INSERT INTO `bworkrow` VALUES ('75750', '14', '2014-09-28', null, null, '1', '75.00', null);
 INSERT INTO `bworkrow` VALUES ('75751', '14', '2014-09-29', null, null, '1', '75.00', null);
 INSERT INTO `bworkrow` VALUES ('75752', '14', '2014-09-30', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75753', '15', '2014-11-01', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75754', '15', '2014-11-02', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75755', '15', '2014-11-03', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75756', '15', '2014-11-04', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75757', '15', '2014-11-05', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75758', '15', '2014-11-06', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75759', '15', '2014-11-07', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75760', '15', '2014-11-08', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75761', '15', '2014-11-09', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75762', '15', '2014-11-10', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75763', '15', '2014-11-11', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75764', '15', '2014-11-12', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75765', '15', '2014-11-13', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75766', '15', '2014-11-14', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75767', '15', '2014-11-15', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75768', '15', '2014-11-16', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75769', '15', '2014-11-17', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75770', '15', '2014-11-18', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75771', '15', '2014-11-19', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75772', '15', '2014-11-20', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75773', '15', '2014-11-21', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75774', '15', '2014-11-22', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75775', '15', '2014-11-23', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75776', '15', '2014-11-24', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75777', '15', '2014-11-25', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75778', '15', '2014-11-26', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75779', '15', '2014-11-27', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75780', '15', '2014-11-28', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75781', '15', '2014-11-29', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75782', '15', '2014-11-30', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75783', '16', '2014-11-01', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75784', '16', '2014-11-02', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75785', '16', '2014-11-03', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75786', '16', '2014-11-04', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75787', '16', '2014-11-05', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75788', '16', '2014-11-06', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75789', '16', '2014-11-07', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75790', '16', '2014-11-08', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75791', '16', '2014-11-09', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75792', '16', '2014-11-10', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75793', '16', '2014-11-11', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75794', '16', '2014-11-12', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75795', '16', '2014-11-13', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75796', '16', '2014-11-14', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75797', '16', '2014-11-15', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75798', '16', '2014-11-16', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75799', '16', '2014-11-17', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75800', '16', '2014-11-18', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75801', '16', '2014-11-19', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75802', '16', '2014-11-20', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75803', '16', '2014-11-21', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75804', '16', '2014-11-22', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75805', '16', '2014-11-23', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75806', '16', '2014-11-24', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75807', '16', '2014-11-25', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75808', '16', '2014-11-26', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75809', '16', '2014-11-27', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75810', '16', '2014-11-28', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75811', '16', '2014-11-29', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75812', '16', '2014-11-30', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75813', '17', '2014-11-01', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75814', '17', '2014-11-02', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75815', '17', '2014-11-03', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75816', '17', '2014-11-04', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75817', '17', '2014-11-05', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75818', '17', '2014-11-06', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75819', '17', '2014-11-07', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75820', '17', '2014-11-08', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75821', '17', '2014-11-09', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75822', '17', '2014-11-10', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75823', '17', '2014-11-11', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75824', '17', '2014-11-12', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75825', '17', '2014-11-13', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75826', '17', '2014-11-14', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75827', '17', '2014-11-15', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75828', '17', '2014-11-16', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75829', '17', '2014-11-17', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75830', '17', '2014-11-18', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75831', '17', '2014-11-19', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75832', '17', '2014-11-20', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75833', '17', '2014-11-21', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75834', '17', '2014-11-22', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75835', '17', '2014-11-23', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75836', '17', '2014-11-24', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75837', '17', '2014-11-25', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75838', '17', '2014-11-26', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75839', '17', '2014-11-27', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75840', '17', '2014-11-28', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75841', '17', '2014-11-29', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75842', '17', '2014-11-30', null, null, null, null, null);
+INSERT INTO `bworkrow` VALUES ('75874', '9', '2014-10-01', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75875', '9', '2014-10-02', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75876', '9', '2014-10-03', null, null, '5', '0.00', '请假一天');
+INSERT INTO `bworkrow` VALUES ('75877', '9', '2014-10-04', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75878', '9', '2014-10-05', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75879', '9', '2014-10-06', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75880', '9', '2014-10-07', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75881', '9', '2014-10-08', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75882', '9', '2014-10-09', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75883', '9', '2014-10-10', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75884', '9', '2014-10-11', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75885', '9', '2014-10-12', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75886', '9', '2014-10-13', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75887', '9', '2014-10-14', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75888', '9', '2014-10-15', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75889', '9', '2014-10-16', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75890', '9', '2014-10-17', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75891', '9', '2014-10-18', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75892', '9', '2014-10-19', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75893', '9', '2014-10-20', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75894', '9', '2014-10-21', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75895', '9', '2014-10-22', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75896', '9', '2014-10-23', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75897', '9', '2014-10-24', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75898', '9', '2014-10-25', null, null, '5', '0.00', '请假一天');
+INSERT INTO `bworkrow` VALUES ('75899', '9', '2014-10-26', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75900', '9', '2014-10-27', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75901', '9', '2014-10-28', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75902', '9', '2014-10-29', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75903', '9', '2014-10-30', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75904', '9', '2014-10-31', null, null, '1', '53.00', null);
+INSERT INTO `bworkrow` VALUES ('75905', '10', '2014-10-01', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75906', '10', '2014-10-02', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75907', '10', '2014-10-03', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75908', '10', '2014-10-04', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75909', '10', '2014-10-05', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75910', '10', '2014-10-06', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75911', '10', '2014-10-07', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75912', '10', '2014-10-08', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75913', '10', '2014-10-09', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75914', '10', '2014-10-10', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75915', '10', '2014-10-11', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75916', '10', '2014-10-12', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75917', '10', '2014-10-13', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75918', '10', '2014-10-14', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75919', '10', '2014-10-15', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75920', '10', '2014-10-16', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75921', '10', '2014-10-17', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75922', '10', '2014-10-18', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75923', '10', '2014-10-19', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75924', '10', '2014-10-20', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75925', '10', '2014-10-21', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75926', '10', '2014-10-22', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75927', '10', '2014-10-23', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75928', '10', '2014-10-24', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75929', '10', '2014-10-25', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75930', '10', '2014-10-26', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75931', '10', '2014-10-27', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75932', '10', '2014-10-28', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75933', '10', '2014-10-29', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75934', '10', '2014-10-30', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75935', '10', '2014-10-31', null, null, '1', '63.00', null);
+INSERT INTO `bworkrow` VALUES ('75936', '11', '2014-10-01', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75937', '11', '2014-10-02', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75938', '11', '2014-10-03', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75939', '11', '2014-10-04', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75940', '11', '2014-10-05', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75941', '11', '2014-10-06', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75942', '11', '2014-10-07', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75943', '11', '2014-10-08', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75944', '11', '2014-10-09', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75945', '11', '2014-10-10', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75946', '11', '2014-10-11', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75947', '11', '2014-10-12', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75948', '11', '2014-10-13', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75949', '11', '2014-10-14', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75950', '11', '2014-10-15', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75951', '11', '2014-10-16', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75952', '11', '2014-10-17', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75953', '11', '2014-10-18', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75954', '11', '2014-10-19', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75955', '11', '2014-10-20', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75956', '11', '2014-10-21', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75957', '11', '2014-10-22', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75958', '11', '2014-10-23', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75959', '11', '2014-10-24', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75960', '11', '2014-10-25', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75961', '11', '2014-10-26', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75962', '11', '2014-10-27', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75963', '11', '2014-10-28', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75964', '11', '2014-10-29', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75965', '11', '2014-10-30', null, null, '1', '75.00', null);
+INSERT INTO `bworkrow` VALUES ('75966', '11', '2014-10-31', null, null, '5', null, null);
 
 -- ----------------------------
 -- Table structure for `cdict`
@@ -1045,7 +1155,7 @@ CREATE TABLE `cseq` (
 -- ----------------------------
 -- Records of cseq
 -- ----------------------------
-INSERT INTO `cseq` VALUES ('80');
+INSERT INTO `cseq` VALUES ('87');
 
 -- ----------------------------
 -- Table structure for `sbankcard`
@@ -1070,8 +1180,8 @@ CREATE TABLE `sbankcard` (
 -- Records of sbankcard
 -- ----------------------------
 INSERT INTO `sbankcard` VALUES ('1', '00000', '现金', '9', '现金', '42695.32', '1', '1', '此为现金', 'btransferaccount', '11');
-INSERT INTO `sbankcard` VALUES ('2', '6227001823550092014', '建设银行福州支行', '2', '林珊珊', '69346.10', '1', '2', '', 'btransferaccount', '11');
-INSERT INTO `sbankcard` VALUES ('3', '622909116836651310', '兴业银行福州支行', '6', '王建辉', '55083.54', '1', '3', '', null, null);
+INSERT INTO `sbankcard` VALUES ('2', '6227001823550092014', '建设银行福州支行', '2', '林珊珊', '65851.25', '1', '2', '', 'breceandpay', '87');
+INSERT INTO `sbankcard` VALUES ('3', '622909116836651310', '兴业银行福州支行', '6', '王建辉', '53133.07', '1', '3', '', 'btransferaccount', '85');
 
 -- ----------------------------
 -- Table structure for `sbankcard_log`
@@ -1087,7 +1197,7 @@ CREATE TABLE `sbankcard_log` (
   `changetype` varchar(20) DEFAULT NULL COMMENT '更改类型',
   `changeid` int(9) DEFAULT NULL COMMENT '更改相关ID',
   PRIMARY KEY (`logid`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='银行卡更改日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='银行卡更改日志表';
 
 -- ----------------------------
 -- Records of sbankcard_log
@@ -1098,6 +1208,16 @@ INSERT INTO `sbankcard_log` VALUES ('7', '2', '69113.70', '68808.90', '304.80', 
 INSERT INTO `sbankcard_log` VALUES ('8', '2', '68808.90', '69344.10', '-535.20', '2014-11-14 18:01:46', 'bpayrow', '216');
 INSERT INTO `sbankcard_log` VALUES ('9', '1', '42697.32', '42695.32', '2.00', '2014-11-17 21:25:15', 'btransferaccount', '12');
 INSERT INTO `sbankcard_log` VALUES ('10', '2', '69344.10', '69346.10', '-2.00', '2014-11-17 21:25:15', 'btransferaccount', '12');
+INSERT INTO `sbankcard_log` VALUES ('11', '2', '69346.10', '69341.26', '4.84', '2014-11-26 11:01:23', 'bpayrow', '222');
+INSERT INTO `sbankcard_log` VALUES ('12', '3', '55083.54', '54692.34', '391.20', '2014-11-26 11:01:23', 'bpayrow', '223');
+INSERT INTO `sbankcard_log` VALUES ('13', '3', '54692.34', '55382.44', '-690.10', '2014-11-26 11:11:15', 'bpayrow', '226');
+INSERT INTO `sbankcard_log` VALUES ('14', '2', '69341.26', '67803.86', '1537.40', '2014-11-26 11:28:11', 'bpayrow', '233');
+INSERT INTO `sbankcard_log` VALUES ('15', '2', '67803.86', '65850.36', '1953.50', '2014-11-26 11:28:11', 'bpayrow', '234');
+INSERT INTO `sbankcard_log` VALUES ('16', '3', '55382.44', '53131.84', '2250.60', '2014-11-26 11:28:11', 'bpayrow', '235');
+INSERT INTO `sbankcard_log` VALUES ('17', '2', '65850.36', '65849.13', '1.23', '2014-11-26 11:47:39', 'btransferaccount', '85');
+INSERT INTO `sbankcard_log` VALUES ('18', '3', '53131.84', '53133.07', '-1.23', '2014-11-26 11:47:39', 'btransferaccount', '85');
+INSERT INTO `sbankcard_log` VALUES ('19', '2', '65849.13', '65851.25', '-2.12', '2014-11-26 12:17:45', 'breceandpay', '87');
+INSERT INTO `sbankcard_log` VALUES ('20', '1', '42695.32', '42695.32', '0.00', '2014-11-26 14:34:39', 'btransferaccount', '11');
 
 -- ----------------------------
 -- Table structure for `scompany`
@@ -1151,7 +1271,7 @@ CREATE TABLE `slog` (
   `operatetime` varchar(20) NOT NULL COMMENT '操作时间',
   `remark` text COMMENT '备注',
   PRIMARY KEY (`logid`)
-) ENGINE=InnoDB AUTO_INCREMENT=442 DEFAULT CHARSET=utf8 COMMENT='日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=464 DEFAULT CHARSET=utf8 COMMENT='日志表';
 
 -- ----------------------------
 -- Records of slog
@@ -1589,6 +1709,28 @@ INSERT INTO `slog` VALUES ('438', '修改模块', 'ZHOUJD', '2014-11-25 15:57:43
 INSERT INTO `slog` VALUES ('439', '修改物资', 'ZHOUJD', '2014-11-25 16:02:45', 'unit:1,usestock:1,stock:956.00,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:100.00,materialid:1');
 INSERT INTO `slog` VALUES ('440', '修改产品', 'ZHOUJD', '2014-11-25 16:09:12', 'profit:10,realprice:42,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴');
 INSERT INTO `slog` VALUES ('441', '修改销售单', 'ZHOUJD', '2014-11-25 16:09:30', 'sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:690.9,allprofit:109.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:');
+INSERT INTO `slog` VALUES ('442', '登录', 'ZHOUJD', '2014-11-26 09:17:06', '');
+INSERT INTO `slog` VALUES ('443', '登录', 'ZHOUJD', '2014-11-26 10:50:13', '');
+INSERT INTO `slog` VALUES ('444', '登录', 'ZHOUJD', '2014-11-26 10:52:29', '');
+INSERT INTO `slog` VALUES ('445', '修改采购单', 'ZHOUJD', '2014-11-26 11:00:01', 'btypename:采购单,remark:合并采购单（XSD-20141118-001）,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:15:09,relateno:null,buyno:CGD-20141118-002,btype:CGD,maker:ZHOUJD,buyid:40,currflow:结束,buydate:2014-11-18');
+INSERT INTO `slog` VALUES ('446', '修改单据', 'ZHOUJD', '2014-11-26 11:01:12', 'btypename:付款单,operatetime:2014-11-26 11:01:12,remark:null,operater:ZHOUJD,allplansum:396.04,makername:周坚定,createtime:2014-11-26 10:59:59,relateno:CGD-20141118-002,btype:FKD,maker:ZHOUJD,relatemoney:396.04,paydate:2014-11-18,payid:81,allrealsum:396.04,currflow:申请');
+INSERT INTO `slog` VALUES ('447', '修改单据', 'ZHOUJD', '2014-11-26 11:01:24', 'btypename:付款单,operatetime:2014-11-26 11:01:22,remark:null,operater:ZHOUJD,allplansum:396.04,makername:周坚定,createtime:2014-11-26 10:59:59,relateno:CGD-20141118-002,btype:FKD,maker:ZHOUJD,relatemoney:396.04,paydate:2014-11-18,payid:81,allrealsum:396.04,currflow:结束');
+INSERT INTO `slog` VALUES ('448', '登录', 'ZHOUJD', '2014-11-26 11:03:47', '');
+INSERT INTO `slog` VALUES ('449', '修改销售单', 'ZHOUJD', '2014-11-26 11:04:41', 'sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:690.9,allprofit:109.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:');
+INSERT INTO `slog` VALUES ('450', '修改销售单', 'ZHOUJD', '2014-11-26 11:10:25', 'sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:690.9,allprofit:109.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:结束,selldate:2014-11-18,addBuy:');
+INSERT INTO `slog` VALUES ('451', '修改单据', 'ZHOUJD', '2014-11-26 11:11:10', 'btypename:收款单,operatetime:2014-11-26 11:11:10,remark:null,operater:ZHOUJD,allplansum:690.9,makername:周坚定,createtime:2014-11-26 11:10:25,relateno:XSD-20141118-001,btype:SKD,maker:ZHOUJD,relatemoney:690.90,paydate:2014-11-18,payid:82,allrealsum:690.1,currflow:申请');
+INSERT INTO `slog` VALUES ('452', '修改单据', 'ZHOUJD', '2014-11-26 11:11:15', 'btypename:收款单,operatetime:2014-11-26 11:11:15,remark:null,operater:ZHOUJD,allplansum:690.9,makername:周坚定,createtime:2014-11-26 11:10:25,relateno:XSD-20141118-001,btype:SKD,maker:ZHOUJD,relatemoney:690.90,paydate:2014-11-18,payid:82,allrealsum:690.1,currflow:结束');
+INSERT INTO `slog` VALUES ('453', '修改员工', 'ZHOUJD', '2014-11-26 11:16:58', 'stafftype:1,accountno:33333333,accountname:员工三,remark:null,priority:3,tel:15060000021,staffstatus:1,staffid:5,bank:兴业银行仑仓支行,salary:75.00,staffname:员工三');
+INSERT INTO `slog` VALUES ('454', '新增工资单', 'ZHOUJD', '2014-11-26 11:18:15', 'remark:null,maker:ZHOUJD,salaryno:GZD-20141126-001,salarytype:1,salaryname:2014年10月份工资单,createtime:2014-11-26 11:18:14,salaryid:83,salarydate:2014-10,allplanmoney:5740,currflow:申请');
+INSERT INTO `slog` VALUES ('455', '修改工资单', 'ZHOUJD', '2014-11-26 11:25:26', 'remark:null,maker:ZHOUJD,salarytypename:工资,makername:周坚定,salaryno:GZD-20141126-001,salarytype:1,salaryname:2014年10月份工资单,createtime:2014-11-26 11:18:14,salaryid:83,salarydate:2014-10,allplanmoney:5740.1,currflow:结束');
+INSERT INTO `slog` VALUES ('456', '修改单据', 'ZHOUJD', '2014-11-26 11:27:46', 'btypename:工资单,operatetime:2014-11-26 11:27:46,remark:null,operater:ZHOUJD,allplansum:5740.1,makername:周坚定,createtime:2014-11-26 11:25:25,relateno:GZD-20141126-001,btype:GZD,maker:ZHOUJD,relatemoney:5740.10,paydate:2014-10,payid:84,allrealsum:5740.6,currflow:申请');
+INSERT INTO `slog` VALUES ('457', '修改单据', 'ZHOUJD', '2014-11-26 11:28:11', 'btypename:工资单,operatetime:2014-11-26 11:28:10,remark:null,operater:ZHOUJD,allplansum:5740.1,makername:周坚定,createtime:2014-11-26 11:25:25,relateno:GZD-20141126-001,btype:GZD,maker:ZHOUJD,relatemoney:5740.10,paydate:2014-10,payid:84,allrealsum:5741.5,currflow:结束');
+INSERT INTO `slog` VALUES ('458', '登录', 'ZHOUJD', '2014-11-26 14:16:54', '');
+INSERT INTO `slog` VALUES ('459', '修改采购单', 'ZHOUJD', '2014-11-26 14:30:21', 'btypename:采购单,remark:null,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18');
+INSERT INTO `slog` VALUES ('460', '修改银行卡', 'ZHOUJD', '2014-11-26 14:34:39', 'bankcardno:00000,accountname:现金,status:1,remark:此为现金,bankname:现金,priority:1,banktype:9,money:42695.32,bankcardid:1');
+INSERT INTO `slog` VALUES ('461', '修改物资类型', 'ZHOUJD', '2014-11-26 14:35:01', 'materialtypeno:10101,remark:物资类型A-1备注,materialtypename:物资类型A-1,priority:1,parent:2,materialtype:5');
+INSERT INTO `slog` VALUES ('462', '登录', 'ZHOUJD', '2014-11-26 14:37:55', '');
+INSERT INTO `slog` VALUES ('463', '登录', 'ZHOUJD', '2014-11-26 14:38:10', '');
 
 -- ----------------------------
 -- Table structure for `smanu`
@@ -2074,7 +2216,7 @@ CREATE TABLE `sstaff` (
 INSERT INTO `sstaff` VALUES ('2', '员工一', '1', '1', '11111111', '建设银行南安支行', '11111111', '员工一', '备注1', '53.00', '1', null);
 INSERT INTO `sstaff` VALUES ('3', '员工二', '1', '1', '22222222', '建设银行南安支行', '22222222', '员工二', '备注2', '63.00', '2', null);
 INSERT INTO `sstaff` VALUES ('4', '员工三', '1', '2', '33333333', '建设银行南安支行', '33333333', '员工三', '', null, '0', null);
-INSERT INTO `sstaff` VALUES ('5', '员工三', '1', '1', '15060000021', '', '', '员工三', '', '75.00', '3', null);
+INSERT INTO `sstaff` VALUES ('5', '员工三', '1', '1', '15060000021', '兴业银行仑仓支行', '33333333', '员工三', '', '75.00', '3', null);
 
 -- ----------------------------
 -- Table structure for `suser`
