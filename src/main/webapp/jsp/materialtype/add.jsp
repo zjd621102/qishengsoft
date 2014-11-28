@@ -11,7 +11,8 @@
 				<dt>物资类型编码：</dt>
 				<dd>
 					<input type="text" name="map[materialtypeno]" class="required" size="25"
-						maxlength="8" value="${form.map.materialtypeno}" />
+						maxlength="8" value="${form.map.materialtypeno}"
+						remote="<%=path%>/checkOnlyone/materialtype/-1" />
 				</dd>
 			</dl>
 			<dl>

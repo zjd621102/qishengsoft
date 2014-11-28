@@ -33,7 +33,8 @@
 			<dt>产品编码：</dt>
 			<dd>
 				<input type="text" name="map[productno]" class="required" size="25" maxlength="17"
-					value="${form.map.productno}" readonly="readonly"/>
+					value="${form.map.productno}"
+					remote="<%=path%>/checkOnlyone/product/-1" />
 			</dd>
 		</dl>
 		<dl>

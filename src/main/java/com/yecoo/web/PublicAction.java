@@ -191,4 +191,58 @@ public class PublicAction {
 		
 		return url;
 	}
+
+	/**
+	 * 唯一性校验
+	 * @param btype			类型
+	 * @param idColumnValue	主键值
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/checkOnlyone/{btype}/{idColumnValue}")
+	@ResponseBody
+	public boolean checkOnlyone(@PathVariable("btype") String btype,
+			@PathVariable("idColumnValue") String idColumnValue, HttpServletRequest request) {
+		
+		boolean bRes = false;
+
+		String tableName = "";
+		String columnName = "";
+		String columnValue = "";
+		String idColumnName = "";
+		
+		if(btype.equals("materialtype")) {// 物资类型
+			tableName = "smaterialtype";
+			columnName = "materialtypeno";
+			columnValue = request.getParameter("map[materialtypeno]");
+			idColumnName = "materialtype";
+		} else if(btype.equals("producttype")) {// 产品类型
+			tableName = "sproducttype";
+			columnName = "producttypeno";
+			columnValue = request.getParameter("map[producttypeno]");
+			idColumnName = "producttype";
+		} else if(btype.equals("material")) {// 物资
+			tableName = "smaterial";
+			columnName = "materialno";
+			columnValue = request.getParameter("map[materialno]");
+			idColumnName = "materialid";
+		} else if(btype.equals("product")) {// 产品
+			tableName = "sproduct";
+			columnName = "productno";
+			columnValue = request.getParameter("map[productno]");
+			idColumnName = "productid";
+		}
+		
+		if(columnValue != null) {
+			String sql = "SELECT COUNT(1) FROM " + tableName + " t WHERE t." + columnName + " = '"
+					+ columnValue + "' AND t." + idColumnName + " <> '" + idColumnValue + "'";
+			
+			int iRes = dbUtils.getIntBySql(sql);
+			if(iRes == 0) {
+				bRes = true;
+			}
+		}
+		
+		return bRes;
+	}
 }

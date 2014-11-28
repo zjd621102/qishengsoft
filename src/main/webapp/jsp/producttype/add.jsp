@@ -11,7 +11,8 @@
 				<dt>产品类别编码：</dt>
 				<dd>
 					<input type="text" name="map[producttypeno]" class="required" size="25"
-						maxlength="8" value="${form.map.producttypeno}" />
+						maxlength="8" value="${form.map.producttypeno}"
+						remote="<%=path%>/checkOnlyone/producttype/-1" />
 				</dd>
 			</dl>
 			<dl>

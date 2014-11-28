@@ -12,7 +12,7 @@
 				<dt>物资类型编码：</dt>
 				<dd>
 					<input type="text" name="map[materialtypeno]" class="required" size="25"
-						maxlength="8" value="${form.map.materialtypeno}" />
+						maxlength="8" value="${form.map.materialtypeno}" readonly="readonly" />
 				</dd>
 			</dl>
 			<dl>

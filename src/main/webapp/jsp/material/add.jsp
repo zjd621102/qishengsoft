@@ -9,7 +9,8 @@
 				<dt>物资编码：</dt>
 				<dd>
 					<input type="text" name="map[materialno]" class="required" size="25" maxlength="17"
-						value="${form.map.materialno}" readonly="readonly"/>
+						value="${form.map.materialno}"
+						remote="<%=path%>/checkOnlyone/material/-1" />
 				</dd>
 			</dl>
 			<dl>
