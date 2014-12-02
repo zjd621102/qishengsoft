@@ -1,7 +1,47 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<style>
+	/***********重写上传文件按钮样式Begin***********/
+	.uploadify-button {
+	 	background-color: transparent; 
+	 	background-image: -webkit-linear-gradient(bottom, transparent 0%, transparent 100%);
+		background-image: -webkit-gradient(
+			linear,
+			left bottom,
+			left top,
+			color-stop(0, transparent),
+			color-stop(1, transparent)
+		);
+	 	border: 0 solid #808080;
+	}
+	.uploadify:hover .uploadify-button {
+	 	background-color: transparent; 
+	 	background-image: -webkit-linear-gradient(top, transparent 0%, transparent 100%);
+		background-image: -webkit-gradient(
+			linear,
+			left bottom,
+			left top,
+			color-stop(0, transparent),
+			color-stop(1, transparent)
+		);
+	}
+	/***********重写上传文件按钮样式End***********/
+</style>
+
+<script type="text/javascript">
+	// 重写上传成功
+	function uploadifySuccess(file, data, response) {
+		if(response == true) {
+			$.pdialog.reload("<%=path%>/material/edi/${form.map.materialid}", {data:{}, dialogId:"material_edi", callback:null});
+		} else {
+			
+		}
+	}
+</script>
+
 <div class="pageContent">
+	<form id="downloadForm" method="post"></form>
 	<form method="post" action="<%=path%>/material/edi" class="required-validate pageForm"
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<input type="hidden" name="map[materialid]" value="${form.map.materialid}"/>
@@ -83,14 +123,37 @@
 			<dl>
 				<dt>备注：</dt>
 				<dd>
-					<textarea name="map[remark]" cols="27" rows="6" maxlength="256">${form.map.remark}</textarea>
+					<textarea name="map[remark]" cols="90" rows="5" maxlength="256">${form.map.remark}</textarea>
 				</dd>
 			</dl>
-		</div>	
+			
+			<div class="divider" style="padding-top: 70px;"></div>
+			
+			<%@ include file="/jsp/pub/fileList.jsp"%>
+		</div>
 		
 		<div class="formBar">
 			<ul>
-				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+				<li>
+					<div class="button">
+						<input id="fileInput" type="file" name="image" 
+							uploaderOption="{
+								height: 20,
+								width: 40,
+								swf:'<%=path%>/js/uploadify/scripts/uploadify.swf',
+								uploader:'<%=path%>/file/uploadFile',
+								formData:{pid:${form.map.materialid}, btype: 'material'},
+								buttonText:'上传',
+								fileSizeLimit:'10240KB',
+								auto:true,
+								multi:false,
+								onUploadSuccess:uploadifySuccess,
+								onQueueComplete:uploadifyQueueComplete
+							}"
+						/>
+					</div>
+				</li>
+				<li><div class="button"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
 				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
 			</ul>
 		</div>

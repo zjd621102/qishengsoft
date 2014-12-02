@@ -45,11 +45,14 @@ public class ProductAction {
 	@RequestMapping(value="/list/{producttype}")
 	public String list(@PathVariable("producttype") int producttype, CodeTableForm form, HttpServletRequest request) {
 
+		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// 来自tree.jsp
+		
 		form.setValue("producttype", producttype);
 		productDaoImpl.initAction(request);
 
 		int totalCount = productDaoImpl.getProductCount(form);
 		List<CodeTableForm> productList = productDaoImpl.getProductList(form);
+		request.setAttribute("curTime", curTime);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
 		request.setAttribute("productList", productList); // 列表
 		request.setAttribute("sn", "product"); //授权名称
@@ -122,7 +125,7 @@ public class ProductAction {
 		form = productDaoImpl.getProductById(productid, request);
 		
 		FileDaoImpl fileDaoImpl = new FileDaoImpl();
-		List<CodeTableForm> fileList = fileDaoImpl.getFileList(productid, "");// 附件列表
+		List<CodeTableForm> fileList = fileDaoImpl.getFileList(productid, "'product'");// 附件列表
 		
 		request.setAttribute("form", form);
 		request.setAttribute("fileList", fileList);

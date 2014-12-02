@@ -74,9 +74,16 @@
 				</dd>
 			</dl>
 			<dl>
+				<dt>新增时间：</dt>
+				<dd>
+					<input type="text" name="map[createdate]" size="25" maxlength="19"
+						value="${form.map.createdate}" readonly="readonly"/>
+				</dd>
+			</dl>
+			<dl>
 				<dt>备注：</dt>
 				<dd>
-					<textarea name="map[remark]" cols="27" rows="6" maxlength="256"></textarea>
+					<textarea name="map[remark]" cols="90" rows="5" maxlength="256"></textarea>
 				</dd>
 			</dl>
 		</div>	

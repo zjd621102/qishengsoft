@@ -1,29 +1,14 @@
-<%@page import="com.yecoo.model.CodeTableForm"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page import="com.yecoo.util.DateUtils"%>
+<%@ page import="com.yecoo.model.CodeTableForm"%>
+<%@ page import="com.yecoo.dao.MaterialDaoImpl"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<%!
-public String tree(CodeTableForm form, String path) {
-	if (form.getValue("childrenList")==null || ((List<CodeTableForm>) form.getValue("childrenList")).isEmpty()) {
-		return "";
-	}
-	StringBuffer buffer = new StringBuffer();
-	buffer.append("<ul>" + "\n");
-	for (Object obj : (List) form.getValue("childrenList")) {
-		CodeTableForm o = (CodeTableForm) obj;
-		buffer.append("<li><a href=\"" + path + "/material/list/"
-				+ o.getValue("materialtype")
-				+ "\" target=\"ajax\" rel=\"jbsxBox2material\">"
-				+ o.getValue("materialtypename") + "</a>" + "\n");
-		buffer.append(tree(o, path));
-		buffer.append("</li>" + "\n");
-	}
-	buffer.append("</ul>" + "\n");
-	return buffer.toString();
-}
-%>
 <%
+String curTime = DateUtils.getNowDateTime("HHmmss");
 CodeTableForm form2 = (CodeTableForm) request.getAttribute("form");
+
+MaterialDaoImpl materialDaoImpl = new MaterialDaoImpl();
 %>
 <div class="pageContent">
 	<div class="tabs">
@@ -34,15 +19,15 @@ CodeTableForm form2 = (CodeTableForm) request.getAttribute("form");
 					line-height: 21px; background: #fff">
 					<ul class="tree treeFolder expand">
 						<li>
-							<a href="<%=path%>/material/list/${form.map.materialtype}"
-								target="ajax" rel="jbsxBox2material">
+							<a href="<%=path%>/material/list/${form.map.materialtype}?curTime=<%=curTime%>"
+								target="ajax" rel="jbsxBox2material<%=curTime%>">
 								${form.map.materialtypename}
 							</a>
-							<%=tree(form2, path)%>
+							<%=materialDaoImpl.tree(form2, path, curTime)%>
 						</li>
 					</ul>
 				</div>
-				<div id="jbsxBox2material" class="unitBox" style="margin-left: 246px;"></div>
+				<div id="jbsxBox2material<%=curTime%>" class="unitBox" style="margin-left: 246px;"></div>
 			</div>
 		</div>
 	</div>

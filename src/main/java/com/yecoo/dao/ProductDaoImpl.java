@@ -219,4 +219,30 @@ public class ProductDaoImpl extends BaseDaoImpl {
 		
 		return iReturn;
 	}
+	
+	/**
+	 * 获取产品树
+	 * @param form
+	 * @param path		项目路径
+	 * @param curTime	当前时间HHmmss
+	 * @return
+	 */
+	public String tree(CodeTableForm form, String path, String curTime) {
+		if (form.getValue("childrenList")==null || ((List<CodeTableForm>) form.getValue("childrenList")).isEmpty()) {
+			return "";
+		}
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("<ul>" + "\n");
+		for (Object obj : (List) form.getValue("childrenList")) {
+			CodeTableForm o = (CodeTableForm) obj;
+			buffer.append("<li><a href=\"" + path + "/product/list/"
+					+ o.getValue("producttype")
+					+ "?curTime=" + curTime + "\" target=\"ajax\" rel=\"jbsxBox2product" + curTime + "\">"
+					+ o.getValue("producttypename") + "</a>" + "\n");
+			buffer.append(tree(o, path, curTime));
+			buffer.append("</li>" + "\n");
+		}
+		buffer.append("</ul>" + "\n");
+		return buffer.toString();
+	}
 }

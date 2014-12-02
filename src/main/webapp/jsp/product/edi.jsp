@@ -1,6 +1,34 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<style>
+	/***********重写上传文件按钮样式Begin***********/
+	.uploadify-button {
+	 	background-color: transparent; 
+	 	background-image: -webkit-linear-gradient(bottom, transparent 0%, transparent 100%);
+		background-image: -webkit-gradient(
+			linear,
+			left bottom,
+			left top,
+			color-stop(0, transparent),
+			color-stop(1, transparent)
+		);
+	 	border: 0 solid #808080;
+	}
+	.uploadify:hover .uploadify-button {
+	 	background-color: transparent; 
+	 	background-image: -webkit-linear-gradient(top, transparent 0%, transparent 100%);
+		background-image: -webkit-gradient(
+			linear,
+			left bottom,
+			left top,
+			color-stop(0, transparent),
+			color-stop(1, transparent)
+		);
+	}
+	/***********重写上传文件按钮样式End***********/
+</style>
+
 <script type="text/javascript">
 	$(function() {
 		setTimeout(function() {
@@ -26,39 +54,13 @@
 		setReduction('realprice', 'costprice', 'profit');
 	}
 	
-	// 上传成功
+	// 重写上传成功
 	function uploadifySuccess(file, data, response) {
 		if(response == true) {
 			$.pdialog.reload("<%=path%>/product/edi/${form.map.productid}", {data:{}, dialogId:"product_edi", callback:null});
 		} else {
 			
 		}
-	}
-	
-	// 上传完成
-	function uploadifyQueueComplete(file) {
-		
-	}
-	
-	// 删除文件
-	function deleteFile(fileid) {
-		$.get(
-			"<%=path%>/file/deleteFile/" + fileid,
-			function(data) {
-				if(data == "true") {
-					$.pdialog.reload("<%=path%>/product/edi/${form.map.productid}", {data:{}, dialogId:"product_edi", callback:null});
-				} else {
-					
-				}
-			}
-		);
-	}
-	
-	// 下载文件
-	function downloadFile(fileid) {
-		var _url = "<%=path%>/file/downloadFile/" + fileid;
-		$("#downloadForm").attr("action", _url);
-		$("#downloadForm")[0].submit();
 	}
 </script>
 
@@ -130,42 +132,10 @@
 					value="${form.map.remark}"/>
 			</dd>
 		</dl>
-		<dl>
-			<dt></dt>
-			<dd></dd>
-		</dl>
-		<dl>
-			<dt>
-				<input id="testFileInput" type="file" name="image" 
-					uploaderOption="{
-						height: 20,
-						width: 50,
-						swf:'<%=path%>/js/uploadify/scripts/uploadify.swf',
-						uploader:'<%=path%>/file/uploadFile',
-						formData:{pid:${form.map.productid}, btype: 'product'},
-						buttonText:'上传',
-						fileSizeLimit:'10240KB',
-						auto:true,
-						multi:false,
-						onUploadSuccess:uploadifySuccess,
-						onQueueComplete:uploadifyQueueComplete
-					}"
-				/>
-			</dt>
-			<dd>
+		
+		<div class="divider"></div>
 
-			</dd>
-		</dl>
-		<table class="table" style="width: 100%;">
-			<c:forEach items="${fileList}" var="file" varStatus="status">
-			<tr>
-				<td>
-					<a onclick="downloadFile('${file.map.fileid}')" style="color: #F57800; cursor: pointer;">【${file.map.filename}】</a>
-					<a onclick="deleteFile('${file.map.fileid}')" style="color: #F57800; cursor: pointer;">【删除】</a>
-				</td>
-			</tr>
-			</c:forEach>
-		</table>
+		<%@ include file="/jsp/pub/fileList.jsp"%>
 		
 		<div class="divider"></div>
 		
@@ -277,7 +247,26 @@
 	
 	<div class="formBar">
 		<ul>
-			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+			<li>
+				<div class="button">
+					<input id="fileInput" type="file" name="image" 
+						uploaderOption="{
+							height: 20,
+							width: 40,
+							swf:'<%=path%>/js/uploadify/scripts/uploadify.swf',
+							uploader:'<%=path%>/file/uploadFile',
+							formData:{pid:${form.map.productid}, btype: 'product'},
+							buttonText:'上传',
+							fileSizeLimit:'10240KB',
+							auto:true,
+							multi:false,
+							onUploadSuccess:uploadifySuccess,
+							onQueueComplete:uploadifyQueueComplete
+						}"
+					/>
+				</div>
+			</li>
+			<li><div class="button"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
 		</ul>
 	</div>

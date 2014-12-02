@@ -1,29 +1,14 @@
-<%@page import="com.yecoo.model.CodeTableForm"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page import="com.yecoo.util.DateUtils"%>
+<%@ page import="com.yecoo.model.CodeTableForm"%>
+<%@ page import="com.yecoo.dao.ProductDaoImpl"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<%!
-public String tree(CodeTableForm form, String path) {
-	if (form.getValue("childrenList")==null || ((List<CodeTableForm>) form.getValue("childrenList")).isEmpty()) {
-		return "";
-	}
-	StringBuffer buffer = new StringBuffer();
-	buffer.append("<ul>" + "\n");
-	for (Object obj : (List) form.getValue("childrenList")) {
-		CodeTableForm o = (CodeTableForm) obj;
-		buffer.append("<li><a href=\"" + path + "/product/list/"
-				+ o.getValue("producttype")
-				+ "\" target=\"ajax\" rel=\"jbsxBox2product\">"
-				+ o.getValue("producttypename") + "</a>" + "\n");
-		buffer.append(tree(o, path));
-		buffer.append("</li>" + "\n");
-	}
-	buffer.append("</ul>" + "\n");
-	return buffer.toString();
-}
-%>
 <%
+String curTime = DateUtils.getNowDateTime("HHmmss");
 CodeTableForm form2 = (CodeTableForm) request.getAttribute("form");
+
+ProductDaoImpl productDaoImpl = new ProductDaoImpl();
 %>
 <div class="pageContent">
 	<div class="tabs">
@@ -35,14 +20,14 @@ CodeTableForm form2 = (CodeTableForm) request.getAttribute("form");
 					<ul class="tree treeFolder expand">
 						<li>
 							<a href="<%=path%>/product/list/${form.map.producttype}"
-								target="ajax" rel="jbsxBox2product">
+								target="ajax" rel="jbsxBox2product<%=curTime%>">
 								${form.map.producttypename}
 							</a>
-							<%=tree(form2, path)%>
+							<%=productDaoImpl.tree(form2, path, curTime)%>
 						</li>
 					</ul>
 				</div>
-				<div id="jbsxBox2product" class="unitBox" style="margin-left: 246px;"></div>
+				<div id="jbsxBox2product<%=curTime%>" class="unitBox" style="margin-left: 246px;"></div>
 			</div>
 		</div>
 	</div>

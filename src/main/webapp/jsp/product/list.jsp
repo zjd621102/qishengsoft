@@ -2,7 +2,7 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 
 <div class="pageHeader">
-	<form onsubmit="return divSearch(this, 'jbsxBox2product');"
+	<form onsubmit="return divSearch(this, 'jbsxBox2product${curTime}');"
 		action="<%=path%>/product/list/${form.map.producttype}" method="post"
 		rel="pagerForm" id="fid">
 		<input type="hidden" name="map[producttype]" value="${form.map.producttype}" />
@@ -37,7 +37,7 @@
 			<shiro:hasPermission name="Product:add">
 			<li>
 				<a class="add" href="<%=path%>/product/add/${form.map.producttype}" target="dialog" rel="product_add"
-					mask="true" width="1000" height="620">
+					mask="true" width="1000" height="570">
 					<span>新增产品</span>
 				</a>
 			</li>
@@ -59,7 +59,7 @@
 			</shiro:hasPermission>
 		</ul>
 	</div>
-	<table class="table" style="width: 100%;" layoutH="144" rel="jbsxBox2product">
+	<table class="table" style="width: 100%;" layoutH="144" rel="jbsxBox2product${curTime}">
 		<thead>
 			<tr>
 				<th width="10%">序号</th>
@@ -99,14 +99,14 @@
 		<div class="pages">
 			<span>显示</span>
 			<select class="combox" name="numPerPage"
-				onchange="navTabPageBreak({numPerPage:this.value}, 'jbsxBox2product')" value="${numPerPage}">
+				onchange="navTabPageBreak({numPerPage:this.value}, 'jbsxBox2product${curTime}')" value="${numPerPage}">
 				<option value="15" <c:if test="${numPerPage==15}">selected</c:if>>15</option>
 				<option value="30" <c:if test="${numPerPage==30}">selected</c:if>>30</option>
 				<option value="50" <c:if test="${numPerPage==50}">selected</c:if>>50</option>
 				<option value="100" <c:if test="${numPerPage==100}">selected</c:if>>100</option>
 			</select> <span>条，共${totalCount}条</span>
 		</div>
-		<div class="pagination" targetType="navTab" rel="jbsxBox2product" totalCount="${totalCount}"
+		<div class="pagination" targetType="navTab" rel="jbsxBox2product${curTime}" totalCount="${totalCount}"
 			numPerPage="${numPerPage}" pageNumShown="10" currentPage="${pageNum}">
 		</div>
 	</div>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yecoo.dao.FileDaoImpl;
 import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.MaterialDaoImpl;
 import com.yecoo.dao.MaterialtypeDaoImpl;
@@ -43,11 +44,14 @@ public class MaterialAction {
 	@RequestMapping(value="/list/{materialtype}")
 	public String list(@PathVariable("materialtype") int materialtype, CodeTableForm form, HttpServletRequest request) {
 
+		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// 来自tree.jsp
+		
 		form.setValue("materialtype", materialtype); //物资类型
 		materialDaoImpl.initAction(request);
 
 		int totalCount = materialDaoImpl.getMaterialCount(form);
 		List<CodeTableForm> materialList = materialDaoImpl.getMaterialList(form);
+		request.setAttribute("curTime", curTime);
 		request.setAttribute("totalCount", totalCount); //列表总数量
 		request.setAttribute("materialList", materialList); //列表
 		request.setAttribute("sn", "material"); //授权名称
@@ -96,13 +100,17 @@ public class MaterialAction {
 	}
 
 	@RequiresPermissions("Material:edi")
-	@RequestMapping(value="/edi/{materialid}", method=RequestMethod.GET)
+	@RequestMapping(value="/edi/{materialid}")
 	public String toEdi(@PathVariable("materialid") int materialid, HttpServletRequest request) {
 		
 		CodeTableForm form = null;
 		form = materialDaoImpl.getMaterialById(materialid);
 		
+		FileDaoImpl fileDaoImpl = new FileDaoImpl();
+		List<CodeTableForm> fileList = fileDaoImpl.getFileList(materialid, "'material'");// 附件列表
+		
 		request.setAttribute("form", form);
+		request.setAttribute("fileList", fileList);
 		return "material/edi";
 	}
 

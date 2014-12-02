@@ -1,3 +1,6 @@
+
+var sSystemPath = "/" + location.pathname.split("/")[1] + "/";
+
 $(function(){
 	$(".addRow").live("click",function(event){ //新增行
 		var row_end = $("#IDEndRow");
@@ -118,6 +121,8 @@ function doBeforeSubmit() {
 
 /**
  * 批量设置
+ * @param id1	设置值ID
+ * @param name2	
  */
 function batchSet(id1, name2) {
 	$("[name='" + name2 + "']").val($("#" + id1).val());
@@ -125,6 +130,8 @@ function batchSet(id1, name2) {
 
 /**
  * 通过编号打开单据
+ * @param path		项目路径
+ * @param billNo 	单据编号
  */
 function openBillByNo(path, billNo) {
 	
@@ -145,3 +152,56 @@ function openBillByNo(path, billNo) {
 		}
 	);
 }
+
+/**********************附件上传Begin**********************/
+
+/**
+ * 上传成功
+ * @param file
+ * @param data
+ * @param response
+ */
+function uploadifySuccess(file, data, response) {
+	if(response == true) {
+		alert("上传成功，请重新打开");
+	} else {
+		alert("上传失败");
+	}
+}
+
+/**
+ * 上传完成
+ * @param file		上传的文件
+ */
+function uploadifyQueueComplete(file) {
+	
+}
+
+/**
+ * 删除文件
+ * @param fileid	文件ID
+ */
+function deleteFile(fileid) {
+	$.get(
+		sSystemPath + "/file/deleteFile/" + fileid,
+		function(data) {
+			if(data == "true") {
+				$("#tr_file_" + fileid).remove();
+			} else {
+				alert("删除失败");
+			}
+		}
+	);
+}
+
+/**
+ * 下载文件
+ * @param fileid	文件ID
+ */
+function downloadFile(fileid) {
+	var _url = sSystemPath + "/file/downloadFile/" + fileid;
+	$("#downloadForm").attr("action", _url);
+	$("#downloadForm")[0].submit();
+}
+
+/**********************附件上传End**********************/
