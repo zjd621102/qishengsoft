@@ -5,6 +5,7 @@
 	<form onsubmit="return divSearch(this, 'jbsxBox2product${curTime}');"
 		action="<%=path%>/product/list/${form.map.producttype}" method="post"
 		rel="pagerForm" id="fid">
+		<input type="hidden" name="curTime" value="${curTime}" />
 		<input type="hidden" name="map[producttype]" value="${form.map.producttype}" />
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">

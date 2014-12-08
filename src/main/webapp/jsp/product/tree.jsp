@@ -19,7 +19,7 @@ ProductDaoImpl productDaoImpl = new ProductDaoImpl();
 					line-height: 21px; background: #fff">
 					<ul class="tree treeFolder expand">
 						<li>
-							<a href="<%=path%>/product/list/${form.map.producttype}"
+							<a href="<%=path%>/product/list/${form.map.producttype}?curTime=<%=curTime%>"
 								target="ajax" rel="jbsxBox2product<%=curTime%>">
 								${form.map.producttypename}
 							</a>

@@ -27,18 +27,18 @@
 				<table class="searchContent" style="width: 80%">
 					<tr>
 						<td>
-							操作类型：<input type="text" name="map[logtype]" value="${form.map.logtype}"/>
+							操作类型：<input type="text" name="map[logtype]" value="${form.map.logtype}" size="10"/>
 						</td>
 						<td>
-							操作人：<input type="text" name="map[operatername]" value="${form.map.operatername}"/>
+							操作人：<input type="text" name="map[operatername]" value="${form.map.operatername}" size="10"/>
 						</td>
 						<td>
 							操作时间从：<input type="text" class="date" readonly="readonly" name="map[fromTime]"
-								dateFmt="yyyy-MM-dd HH:mm:ss" value="${form.map.fromTime}" />
+								dateFmt="yyyy-MM-dd HH:mm:ss" value="${form.map.fromTime}" size="15" />
 						</td>
 						<td>
 							至：<input type="text" class="date" readonly="readonly" name="map[toTime]"
-								dateFmt="yyyy-MM-dd HH:mm:ss" value="${form.map.toTime}" />
+								dateFmt="yyyy-MM-dd HH:mm:ss" value="${form.map.toTime}" size="15" />
 						</td>
 						<td>
 							备注：<input type="text" name="map[remark]" value="${form.map.remark}"/>

@@ -5,6 +5,7 @@
 	<form onsubmit="return divSearch(this, 'jbsxBox2material${curTime}');"
 		action="<%=path%>/material/list/${form.map.materialtype}?curTime=${curTime}" method="post"
 		rel="pagerForm" id="fid">
+		<input type="hidden" name="curTime" value="${curTime}" />
 		<input type="hidden" name="map[materialtype]" value="${form.map.materialtype}" />
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">

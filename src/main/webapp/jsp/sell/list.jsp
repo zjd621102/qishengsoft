@@ -8,22 +8,26 @@
 				<tr>
 					<td>
 						销售单编号：
-						<input type="text" name="map[sellno]" size="15" maxlength="13"
+						<input type="text" name="map[sellno]" size="15" maxlength="16"
 							value="${form.map.sellno}"/>
 					</td>
 					<td>
 						当前流程：
-						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 100px;'" />
+						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 60px;'" />
 					</td>
 					<td>
-						销售日期从：<input type="text" name="map[selldateFrom]" size="15" value="${form.map.selldateFrom}" class="date"/>
+						销售日期从：<input type="text" name="map[selldateFrom]" size="10" value="${form.map.selldateFrom}" class="date"/>
 					</td>
 					<td>
-						至：<input type="text" name="map[selldateTo]" size="15" value="${form.map.selldateTo}" class="date"/>
+						至：<input type="text" name="map[selldateTo]" size="10" value="${form.map.selldateTo}" class="date"/>
 					</td>
 					<td>
 						客户名称：
-						<input type="text" name="map[manuname]" size="15" value="${form.map.manuname}"/>
+						<input type="text" name="map[manuname]" size="10" value="${form.map.manuname}"/>
+					</td>
+					<td>
+						产品编码：
+						<input type="text" name="map[productno]" size="10" value="${form.map.productno}"/>
 					</td>
 				</tr>
 			</table>
@@ -73,7 +77,7 @@
 		<thead>
 			<tr>
 				<th width="10%">序号</th>
-				<th width="15%">销售编号</th>
+				<th width="15%">销售单编号</th>
 				<th width="10%">销售日期</th>
 				<th width="15%">客户名称</th>
 				<th width="10%">当前流程</th>

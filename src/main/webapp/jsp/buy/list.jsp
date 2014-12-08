@@ -8,7 +8,7 @@
 				<tr>
 					<td>
 						采购单编号：
-						<input type="text" name="map[buyno]" size="15" maxlength="13"
+						<input type="text" name="map[buyno]" size="14" maxlength="16"
 							value="${form.map.buyno}"/>
 					</td>
 					<td>
@@ -29,10 +29,18 @@
 						</select>
 					</td>
 					<td>
-						销售日期从：<input type="text" name="map[buydateFrom]" size="15" value="${form.map.buydateFrom}" class="date"/>
+						销售日期从：<input type="text" name="map[buydateFrom]" size="6" value="${form.map.buydateFrom}" class="date"/>
 					</td>
 					<td>
-						至：<input type="text" name="map[buydateTo]" size="15" value="${form.map.buydateTo}" class="date"/>
+						至：<input type="text" name="map[buydateTo]" size="6" value="${form.map.buydateTo}" class="date"/>
+					</td>
+					<td>
+						供应商名称：
+						<input type="text" name="map[manuname]" size="8" value="${form.map.manuname}"/>
+					</td>
+					<td>
+						物资编码：
+						<input type="text" name="map[materialno]" size="8" value="${form.map.materialno}"/>
 					</td>
 				</tr>
 			</table>

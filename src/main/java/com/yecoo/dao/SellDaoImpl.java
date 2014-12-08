@@ -72,6 +72,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 		String selldateFrom = StrUtils.nullToStr(form.getValue("selldateFrom"));
 		String selldateTo = StrUtils.nullToStr(form.getValue("selldateTo"));
 		String manuname = StrUtils.nullToStr(form.getValue("manuname"));
+		String productno = StrUtils.nullToStr(form.getValue("productno"));
 		
 		if(!sellno.equals("")) {
 			cond.append(" AND t.sellno like '%").append(sellno).append("%'");
@@ -88,6 +89,10 @@ public class SellDaoImpl extends BaseDaoImpl {
 		if(!manuname.equals("")) {
 			cond.append(" AND EXISTS (SELECT 1 FROM smanu m WHERE m.manuid = t.manuid AND m.manuname LIKE '%")
 				.append(manuname).append("%')");
+		}
+		if(!productno.equals("")) {
+			cond.append(" AND EXISTS (SELECT 1 FROM bsellrow n, sproduct o WHERE n.productid = o.productid")
+				.append(" AND n.sellid = t.sellid AND o.productno LIKE '%").append(productno).append("%')");
 		}
 		
 		return cond.toString();
