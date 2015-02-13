@@ -16,7 +16,7 @@
 						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 60px;'" />
 					</td>
 					<td>
-						销售日期从：<input type="text" name="map[selldateFrom]" size="10" value="${form.map.selldateFrom}" class="date"/>
+						定单日期从：<input type="text" name="map[selldateFrom]" size="10" value="${form.map.selldateFrom}" class="date"/>
 					</td>
 					<td>
 						至：<input type="text" name="map[selldateTo]" size="10" value="${form.map.selldateTo}" class="date"/>
@@ -78,7 +78,7 @@
 			<tr>
 				<th width="10%">序号</th>
 				<th width="15%">销售单编号</th>
-				<th width="10%">销售日期</th>
+				<th width="10%">定单日期</th>
 				<th width="15%">客户名称</th>
 				<th width="10%">当前流程</th>
 				<th width="10%">制单人</th>

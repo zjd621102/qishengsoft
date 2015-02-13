@@ -8,11 +8,13 @@
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						单据ID：<input type="text" name="map[payid]" size="10" value="${form.map.payid}" class="number"/>
+						单据ID：
+						<input type="text" name="map[payid]" value="${form.map.payid}"
+						 class="number" style="width: 100px;"/>
 					</td>
 					<td>
 						单据类型：
-						<select name="map[btype]" style="width: 184px;">
+						<select name="map[btype]" style="width: 100px;">
 							<option value=""></option>
 							<c:forEach items="${btypeList}" var="btype">
 								<option value="${btype.map.dictvalue}"
@@ -25,7 +27,8 @@
 					</td>
 					<td>
 						当前流程：
-						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 184px;'" />
+						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
+						 expStr="style='width: 100px;'" />
 					</td>
 				</tr>
 			</table>

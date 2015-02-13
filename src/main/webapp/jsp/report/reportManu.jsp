@@ -70,23 +70,28 @@
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>日期从：<input type="text" class="date" readonly="readonly"
-						name="map[dateFrom]" value="${form.map.dateFrom}" />
+						name="map[dateFrom]" value="${form.map.dateFrom}" style="width: 100px;" />
 					</td>
 					<td>至：<input type="text" class="date" readonly="readonly"
-						name="map[dateTo]" value="${form.map.dateTo}" />
+						name="map[dateTo]" value="${form.map.dateTo}" style="width: 100px;" />
 					</td>
 					<td>
 						排序：
-						<select name="map[sort]">
+						<select name="map[sort]" style="width: 100px;">
 							<option value="ASC" ${form.map.sort=="ASC"?"selected":""}>升序</option>
 							<option value="DESC" ${form.map.sort=="DESC"?"selected":""}>降序</option>
 						</select>
 					</td>
 					<td>
-						数量从：<input type="text" name="map[limitFrom]" value="${form.map.limitFrom}" />开始
+						数量从：
+						<input type="text" name="map[limitFrom]" value="${form.map.limitFrom}"
+						 style="width: 100px;" />
+						 开始
 					</td>
 					<td>
-						获取数量：<input type="text" name="map[limitNum]" value="${form.map.limitNum}" />
+						获取数量：
+						<input type="text" name="map[limitNum]" value="${form.map.limitNum}"
+						 style="width: 100px;" />
 					</td>
 				</tr>
 			</table>

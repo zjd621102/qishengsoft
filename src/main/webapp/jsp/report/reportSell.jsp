@@ -45,10 +45,12 @@ $(function () {
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						销售日期从：<input type="text" class="date" readonly="readonly" name="map[selldateFrom]" value="${form.map.selldateFrom}" />
-					</td>
-					<td>
-						至：<input type="text" class="date" readonly="readonly" name="map[selldateTo]" value="${form.map.selldateTo}" />
+						定单日期从
+						<input type="text" class="date" readonly="readonly"
+						 name="map[selldateFrom]" value="${form.map.selldateFrom}" style="width: 100px;" />
+						&nbsp;&nbsp;至&nbsp;&nbsp;
+						<input type="text" class="date" readonly="readonly" name="map[selldateTo]"
+						 value="${form.map.selldateTo}" style="width: 100px;" />
 					</td>
 				</tr>
 			</table>

@@ -35,8 +35,7 @@
 	</bean>
 
 	<!-- 启用基于注解的处理器映射，添加拦截器，类级别的处理器映射 -->
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 		<property name="interceptors">
 			<list>
 				<bean class="com.yecoo.util.MyHandlerInterceptor" />

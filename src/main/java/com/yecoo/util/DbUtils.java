@@ -825,11 +825,11 @@ public class DbUtils {
 	public int setInsert(CodeTableForm form, String tabName, String num) {
 		Connection myConn = this.dbConnection();
 		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
-				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
+				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND UPPER(TABLE_NAME) = UPPER('" + tabName + "')";
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
 		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS"
-			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')");
+			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND UPPER(TABLE_NAME) = UPPER('" + tabName + "')");
 		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		str[1] = "";
@@ -914,11 +914,11 @@ public class DbUtils {
 	public int setInsert(Connection myConn, CodeTableForm form, String tabName,
 			String num) {
 		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
-				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
+				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND UPPER(TABLE_NAME) = UPPER('" + tabName + "')";
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
 		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS"
-			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')");
+			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND UPPER(TABLE_NAME) = UPPER('" + tabName + "')");
 		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		str[1] = "";
@@ -1052,11 +1052,11 @@ public class DbUtils {
 	public int setUpdate(Connection myConn, CodeTableForm form, String strEdit,
 			String tabName, String key, String num) {
 		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
-				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
+				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND UPPER(TABLE_NAME) = UPPER('" + tabName + "')";
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
 		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS"
-			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')");
+			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND UPPER(TABLE_NAME) = UPPER('" + tabName + "')");
 		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		int iReturn = -1;
@@ -1144,11 +1144,11 @@ public class DbUtils {
 			String[] keys, String num) {
 		Connection myConn = this.dbConnection();
 		String sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
-				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
+				+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND UPPER(TABLE_NAME) = UPPER('" + tabName + "')";
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
 		String count = this.execQuerySQL(myConn, "SELECT COUNT(*) FROM information_schema.COLUMNS"
-			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')");
+			+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND UPPER(TABLE_NAME) = UPPER('" + tabName + "')");
 		String[] str = new String[Integer.parseInt(count) + 5];
 		str[0] = "";
 		int iReturn = 1;
@@ -1295,7 +1295,7 @@ public class DbUtils {
 		ResultSet rs = null;
 		HashMap<String, String[]> map = new HashMap<String, String[]>();
 		String sql = "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '"
-				+ Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
+				+ Constants.dbName + "' AND UPPER(TABLE_NAME) = UPPER('" + tabName + "')";
 		String[] str = new String[this.getIntBySql(sql)];
 		int iReturn = 0;
 
@@ -1307,7 +1307,7 @@ public class DbUtils {
 			int recordcount = record.length;
 			// 取出要保存的表结构
 			sql = "SELECT COLUMN_NAME NAME, DATA_TYPE TYPE, COLUMN_DEFAULT FROM information_schema.COLUMNS"
-					+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND TABLE_NAME = UPPER('" + tabName + "')";
+					+ " WHERE TABLE_SCHEMA = '" + Constants.dbName + "' AND UPPER(TABLE_NAME) = UPPER('" + tabName + "')";
 			pStmt = myConn.prepareStatement(sql);
 			rs = pStmt.executeQuery();
 			int i = 0;

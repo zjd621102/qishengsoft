@@ -10,7 +10,8 @@
 				<tr>
 					<td>
 						模块名称：
-						<input type="text" name="map[modulename]" value="${form.map.modulename}" />
+						<input type="text" name="map[modulename]" value="${form.map.modulename}"
+						 style="width: 120px;" />
 					</td>
 				</tr>
 			</table>
@@ -35,7 +36,7 @@
 			<li>
 				<a class="add"
 					href="<%=path%>/module/add/${form.map.parentid}" target="dialog"
-					rel="module_add" mask="true" width="500" height="400">
+					rel="module_add" mask="true" width="520" height="400">
 					<span>新增模块</span>
 				</a>
 			</li>
@@ -43,7 +44,7 @@
 			<shiro:hasPermission name="Module:edi">
 			<li>
 				<a class="edit" href="<%=path%>/module/edi/{s_moduleid}"
-					target="dialog" rel="module_edi" mask="true" width="500"
+					target="dialog" rel="module_edi" mask="true" width="520"
 					height="400">
 					<span>修改模块</span>
 				</a>

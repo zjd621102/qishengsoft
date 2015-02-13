@@ -7,11 +7,12 @@
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						银行卡卡号：<input type="text" name="map[bankcardno]" size="30" value="${form.map.bankcardno}"/>
-					</td>
-					<td>
+						银行卡卡号：
+						<input type="text" name="map[bankcardno]" value="${form.map.bankcardno}"
+						 style="width: 150px;"/>
 						是否可用：
-						<st:select dictType="状态" name="map[status]" value="${form.map.status}" expStr="style='width: 184px;'" />
+						<st:select dictType="状态" name="map[status]" value="${form.map.status}"
+						 expStr="style='width: 100px;'" />
 					</td>
 				</tr>
 			</table>

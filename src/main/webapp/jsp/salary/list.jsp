@@ -8,17 +8,18 @@
 				<tr>
 					<td>
 						工资单名称：
-						<input type="text" name="map[salaryname]" size="30" maxlength="32"
-							value="${form.map.salaryname}"/>
+						<input type="text" name="map[salaryname]" maxlength="32"
+							value="${form.map.salaryname}" style="width: 120px;"/>
 					</td>
 					<td>
 						工资单编号：
-						<input type="text" name="map[salaryno]" size="30" maxlength="13"
-							value="${form.map.salaryno}"/>
+						<input type="text" name="map[salaryno]" maxlength="17"
+							value="${form.map.salaryno}" style="width: 120px;"/>
 					</td>
 					<td>
 						当前流程：
-						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 184px;'" />
+						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
+						 expStr="style='width: 100px;'" />
 					</td>
 				</tr>
 			</table>

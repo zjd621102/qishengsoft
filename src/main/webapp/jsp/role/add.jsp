@@ -8,13 +8,15 @@
 			<dl>
 				<dt>角色名称：</dt>
 				<dd>
-					<input type="text" name="map[rolename]" class="required" size="25" maxlength="64" alt="请输入角色名称"/>
+					<input type="text" name="map[rolename]" class="required" maxlength="64"
+					 style="width: 150px;"/>
 				</dd>
 			</dl>
 			<dl>
 				<dt>优先级：</dt>
 				<dd style="width: 65%;">
-					<input type="text" name="map[priority]" value="99" class="required digits" size="25" min="1" max="99"/>
+					<input type="text" name="map[priority]" value="99" class="required digits"
+					 min="1" max="99" style="width: 150px;"/>
 					<span class="info">&nbsp;&nbsp;默认:99</span>
 				</dd>
 			</dl>

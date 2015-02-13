@@ -93,11 +93,15 @@
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">
 				<tr>
-					<td>日期从：<input type="text" class="date" readonly="readonly"
-						name="map[dateFrom]" value="${form.map.dateFrom}" />
+					<td>
+						日期从：
+						<input type="text" class="date" readonly="readonly" name="map[dateFrom]"
+						 value="${form.map.dateFrom}" style="width: 100px;" />
 					</td>
-					<td>至：<input type="text" class="date" readonly="readonly"
-						name="map[dateTo]" value="${form.map.dateTo}" />
+					<td>
+						至：
+						<input type="text" class="date" readonly="readonly" name="map[dateTo]"
+						 value="${form.map.dateTo}" style="width: 100px;" />
 					</td>
 				</tr>
 			</table>

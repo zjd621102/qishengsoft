@@ -7,7 +7,9 @@
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						角色名称：<input type="text" name="map[rolename]" value="${form.map.rolename}"/>
+						角色名称：
+						<input type="text" name="map[rolename]" value="${form.map.rolename}"
+						 style="width: 120px;"/>
 					</td>
 				</tr>
 			</table>
@@ -56,8 +58,8 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="50%">序号</th>
-				<th width="50%">角色名称</th>
+				<th width="5%">序号</th>
+				<th>角色名称</th>
 			</tr>
 		</thead>
 		<tbody>

@@ -29,7 +29,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	<!-- 会话超时校验过滤器 -->
+	<!-- 会话超时校验过滤器，为了超时时跳到登录对话框，不用退出 -->
 	<filter>
 		<filter-name>sessionValidateFilter</filter-name>
 		<filter-class>com.yecoo.filter.SessionValidateFilter</filter-class>

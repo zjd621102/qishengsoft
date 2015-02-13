@@ -28,7 +28,7 @@
 		<context:exclude-filter type="regex" expression="com.yecoo.web.*" />
 	</context:component-scan>
 	
-	<!-- SHIRO配置 -->
+	<!-- SHIRO配置，已被web.xml的拦截器阻止 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login" />

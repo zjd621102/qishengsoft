@@ -27,13 +27,15 @@
 				<table class="searchContent" style="width: 80%">
 					<tr>
 						<td>
-							用户姓名：<input type="text" name="map[username]" value="${form.map.username}"/>
-						</td>
-						<td>
-							出生日期从：<input type="text" class="date" readonly="readonly" name="map[fromBirthday]" value="${form.map.fromBirthday}" />
-						</td>
-						<td>
-							至：<input type="text" class="date" readonly="readonly" name="map[toBirthday]" value="${form.map.toBirthday}" />
+							用户姓名：
+							<input type="text" name="map[username]" value="${form.map.username}"
+							 style="width: 120px; margin-right: 20px;"/>
+							出生日期从：
+							<input type="text" class="date" readonly="readonly" name="map[fromBirthday]"
+							 value="${form.map.fromBirthday}" style="width: 120px; margin-right: 5px;" />
+							至：
+							<input type="text" class="date" readonly="readonly" name="map[toBirthday]"
+							 value="${form.map.toBirthday}" style="width: 120px;" />
 						</td>
 					</tr>
 				</table>
