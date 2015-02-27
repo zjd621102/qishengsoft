@@ -106,7 +106,7 @@
 																		<span class="login_txt">管理员：&nbsp;&nbsp; </span>
 																	</td>
 																	<td height="38" colspan="2" class="top_hui_text">
-																		<input id="userid" name="username" type="text" class="editbox4" value="zhoujd" size="20" />
+																		<input id="userid" name="username" type="text" class="editbox4" value="" size="20" />
 																	</td>
 																</tr>
 																<tr>
@@ -114,7 +114,7 @@
 																		<span class="login_txt"> 密&nbsp;&nbsp;&nbsp;&nbsp;码： &nbsp;&nbsp; </span>
 																	</td>
 																	<td height="35" colspan="2" class="top_hui_text">
-																		<input class="editbox4" type="password" size="21" name="password" value="888888" />
+																		<input class="editbox4" type="password" size="21" name="password" value="" />
 																		<img src="<%=path%>/images/luck.gif" width="19" height="18"></img>
 																	</td>
 																</tr>

@@ -45,6 +45,7 @@
 	<form method="post" action="<%=path%>/material/edi" class="required-validate pageForm"
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<input type="hidden" name="map[materialid]" value="${form.map.materialid}"/>
+		<input type="hidden" name="curTime" value="${curTime}"/>
 		<div class="pageFormContent" layoutH="54">
 			<dl>
 				<dt>物资编码：</dt>

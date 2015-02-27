@@ -63,6 +63,8 @@ public class MaterialAction {
 	@RequiresPermissions("Material:add")
 	@RequestMapping(value="/add/{materialtype}", method=RequestMethod.GET)
 	public String toAdd(@PathVariable("materialtype") int materialtype, HttpServletRequest request) {
+
+		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// List的时间
 		
 		CodeTableForm form = new CodeTableForm();
 		
@@ -78,19 +80,22 @@ public class MaterialAction {
 		form.setValue("unit", "1");// 默认单位：只
 
 		request.setAttribute("form", form);
+		request.setAttribute("curTime", curTime);
 		return "material/add";
 	}
 
 	@RequiresPermissions("Material:add")
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public @ResponseBody String add(CodeTableForm form, HttpServletRequest request) {
+
+		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// List的时间
 		
 		AjaxObject ajaxObject = null;
 		String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss"); //当前日期
 		form.setValue("createdate", createdate);
 		int iReturn = materialDaoImpl.addMaterial(form);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject(200, "新增成功！", "", "", "jbsxBox2material", "closeCurrent");
+			ajaxObject = new AjaxObject(200, "新增成功！", "", "", "jbsxBox2material" + curTime, "closeCurrent");
 
 			StrUtils.saveLog(request, "新增物资", form);
 		} else {
@@ -102,6 +107,8 @@ public class MaterialAction {
 	@RequiresPermissions("Material:edi")
 	@RequestMapping(value="/edi/{materialid}")
 	public String toEdi(@PathVariable("materialid") int materialid, HttpServletRequest request) {
+
+		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// List的时间
 		
 		CodeTableForm form = null;
 		form = materialDaoImpl.getMaterialById(materialid);
@@ -111,17 +118,20 @@ public class MaterialAction {
 		
 		request.setAttribute("form", form);
 		request.setAttribute("fileList", fileList);
+		request.setAttribute("curTime", curTime);
 		return "material/edi";
 	}
 
 	@RequiresPermissions("Material:edi")
 	@RequestMapping(value="/edi", method=RequestMethod.POST)
 	public @ResponseBody String edi(CodeTableForm form, HttpServletRequest request) {
+
+		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// List的时间
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = materialDaoImpl.ediMaterial(form);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject(200, "修改成功！", "", "", "jbsxBox2material", "closeCurrent");
+			ajaxObject = new AjaxObject(200, "修改成功！", "", "", "jbsxBox2material" + curTime, "closeCurrent");
 
 			StrUtils.saveLog(request, "修改物资", form);
 		} else {
@@ -133,11 +143,13 @@ public class MaterialAction {
 	@RequiresPermissions("Material:delete")
 	@RequestMapping(value="/delete/{materialid}")
 	public @ResponseBody String delete(@PathVariable int materialid, HttpServletRequest request) {
+
+		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// List的时间
 		
 		AjaxObject ajaxObject = null;
 		int iReturn = materialDaoImpl.deleteMaterial(materialid);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject(200, "删除成功！", "", "", "jbsxBox2material", "");
+			ajaxObject = new AjaxObject(200, "删除成功！", "", "", "jbsxBox2material" + curTime, "");
 
 			LogDaoImpl.saveLog(request, "删除物资", materialid);
 		} else {

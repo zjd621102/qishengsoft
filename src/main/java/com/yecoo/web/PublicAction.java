@@ -54,7 +54,7 @@ public class PublicAction {
 	public String login(HttpServletRequest request) {
 
 		String username = StrUtils.nullToStr(request.getParameter("username")).toUpperCase();
-		String password = StrUtils.nullToStr(request.getParameter("password")).toUpperCase();
+		String password = StrUtils.nullToStr(request.getParameter("password"));
 		String msg = "";
 		
 		try {
@@ -125,7 +125,7 @@ public class PublicAction {
 	public String loginDialog(HttpServletRequest request) {
 
 		String username = StrUtils.nullToStr(request.getParameter("username")).toUpperCase();
-		String password = StrUtils.nullToStr(request.getParameter("password")).toUpperCase();
+		String password = StrUtils.nullToStr(request.getParameter("password"));
 		
 		try {
 			UsernamePasswordToken token = new UsernamePasswordToken(username, password);
@@ -154,22 +154,50 @@ public class PublicAction {
 	 * @param request
 	 */
 	private void setIndex(HttpServletRequest request) {
-		String sql = "SELECT t.buyid, t.buyname, t.buydate FROM bbuy t WHERE t.currflow <> '结束' ORDER BY t.createtime";
-		List<CodeTableForm> buyList = dbUtils.getListBySql(sql); //采购待办列表
 		
-		sql = "SELECT t.sellid, func_getManuName(t.manuid) manuname, t.selldate FROM bsell t WHERE t.currflow <> '结束' ORDER BY t.createtime";
-		List<CodeTableForm> sellList = dbUtils.getListBySql(sql); //销售待办列表
+		int toDoNum = 0;
+		String sql = null;
+		List<CodeTableForm> buyList = null;
+		List<CodeTableForm> sellList = null;
+		List<CodeTableForm> salaryList = null;
+		List<CodeTableForm> payList = null;
+		List<CodeTableForm> alarmStockList = null;
 		
-		sql = "SELECT t.salaryid, t.salaryname FROM bsalary t WHERE t.currflow <> '结束' ORDER BY t.createtime";
-		List<CodeTableForm> salaryList = dbUtils.getListBySql(sql); //工资单待办列表
+		boolean bBuy = SecurityUtils.getSubject().isPermitted("Buy:edi");
+		boolean bSell = SecurityUtils.getSubject().isPermitted("Sell:edi");
+		boolean bSalary = SecurityUtils.getSubject().isPermitted("Salary:edi");
+		boolean bPay = SecurityUtils.getSubject().isPermitted("Pay:edi");
+		boolean bMaterial = SecurityUtils.getSubject().isPermitted("Material:edi");
 		
-		sql = "SELECT t.payid, func_getDictName('单据类型', t.btype) btypename, t.paydate FROM bpay t WHERE t.currflow <> '结束' ORDER BY t.createtime";
-		List<CodeTableForm> payList = dbUtils.getListBySql(sql); //单据待办列表
-		
-		sql = "SELECT a.materialid, a.materialno, a.materialname, a.stock FROM smaterial a WHERE a.stock < a.alarmnum AND a.usestock = '1'";
-		List<CodeTableForm> alarmStockList = dbUtils.getListBySql(sql); //库存报警列表
-		
-		int toDoNum = buyList.size() + sellList.size() + salaryList.size() + payList.size() + alarmStockList.size();
+		if(bBuy) {
+			sql = "SELECT t.buyid, t.buyname, t.buydate FROM bbuy t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+			buyList = dbUtils.getListBySql(sql); //采购待办列表
+			toDoNum += buyList.size();
+		}
+
+		if(bSell) {
+			sql = "SELECT t.sellid, func_getManuName(t.manuid) manuname, t.selldate FROM bsell t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+			sellList = dbUtils.getListBySql(sql); //销售待办列表
+			toDoNum += sellList.size();
+		}
+
+		if(bSalary) {
+			sql = "SELECT t.salaryid, t.salaryname FROM bsalary t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+			salaryList = dbUtils.getListBySql(sql); //工资单待办列表
+			toDoNum += salaryList.size();
+		}
+
+		if(bPay) {
+			sql = "SELECT t.payid, func_getDictName('单据类型', t.btype) btypename, t.paydate FROM bpay t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+			payList = dbUtils.getListBySql(sql); //单据待办列表
+			toDoNum += payList.size();
+		}
+
+		if(bMaterial) {
+			sql = "SELECT a.materialid, a.materialno, a.materialname, a.stock FROM smaterial a WHERE a.stock < a.alarmnum AND a.usestock = '1'";
+			alarmStockList = dbUtils.getListBySql(sql); //库存报警列表
+			toDoNum += alarmStockList.size();
+		}
 		
 		request.setAttribute("buyList", buyList);
 		request.setAttribute("sellList", sellList);

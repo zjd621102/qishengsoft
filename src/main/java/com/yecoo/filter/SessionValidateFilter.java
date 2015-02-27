@@ -31,18 +31,15 @@ public class SessionValidateFilter implements Filter {
 
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 
-		String serverName = StrUtils.nullToStr(httpServletRequest
-				.getServletPath());
+		String serverName = StrUtils.nullToStr(httpServletRequest.getServletPath());
 		if (!serverName.equals("/") && !serverName.equals("/login")
 				&& !serverName.equals("/loginDialog")
 				&& !serverName.equals("/logout")
 				&& serverName.indexOf("/images/") == -1) {
-			Object obj = httpServletRequest.getSession().getAttribute(
-					Constants.USER_INFO_SESSION);
+			Object obj = httpServletRequest.getSession().getAttribute(Constants.USER_INFO_SESSION);
 			if (obj == null) {
 				PrintWriter out = response.getWriter();
-				AjaxObject ajaxObject = new AjaxObject(301, "会话超时，请重新登录", "",
-						"", "", "closeCurrent");
+				AjaxObject ajaxObject = new AjaxObject(301, "会话超时，请重新登录", "", "", "", "closeCurrent");
 				out.println(ajaxObject.toString());
 				return;
 			}

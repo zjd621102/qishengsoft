@@ -64,6 +64,8 @@ public class ProductAction {
 	@RequiresPermissions("Product:add")
 	@RequestMapping(value="/add/{producttype}", method=RequestMethod.GET)
 	public String toAdd(@PathVariable("producttype") int producttype, HttpServletRequest request) {
+		
+		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// List的时间
 
 		CodeTableForm form = new CodeTableForm();
 		
@@ -79,6 +81,7 @@ public class ProductAction {
 		form.setValue("unit", "1");// 默认单位：只
 		
 		request.setAttribute("form", form);
+		request.setAttribute("curTime", curTime);
 		
 		/**************初始化行项Begin**************/
 		List<CodeTableForm> productrowList = new ArrayList<CodeTableForm>();
@@ -103,12 +106,14 @@ public class ProductAction {
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public @ResponseBody String add(CodeTableForm form, HttpServletRequest request) {
 		
+		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// List的时间
+		
 		AjaxObject ajaxObject = null;
 		String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss"); //当前日期
 		form.setValue("createdate", createdate);
 		int iReturn = productDaoImpl.addProduct(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject(200, "新增成功！", "", "", "jbsxBox2product", "closeCurrent");
+			ajaxObject = new AjaxObject(200, "新增成功！", "", "", "jbsxBox2product" + curTime, "closeCurrent");
 
 			StrUtils.saveLog(request, "新增产品", form);
 		} else {
@@ -126,9 +131,11 @@ public class ProductAction {
 		
 		FileDaoImpl fileDaoImpl = new FileDaoImpl();
 		List<CodeTableForm> fileList = fileDaoImpl.getFileList(productid, "'product'");// 附件列表
+		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// List的时间
 		
 		request.setAttribute("form", form);
 		request.setAttribute("fileList", fileList);
+		request.setAttribute("curTime", curTime);
 		return "product/edi";
 	}
 
@@ -136,10 +143,12 @@ public class ProductAction {
 	@RequestMapping(value="/edi", method=RequestMethod.POST)
 	public @ResponseBody String edi(CodeTableForm form, HttpServletRequest request) {
 		
+		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// List的时间
+		
 		AjaxObject ajaxObject = null;
 		int iReturn = productDaoImpl.ediProduct(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject(200, "修改成功！", "", "", "jbsxBox2product", "closeCurrent");
+			ajaxObject = new AjaxObject(200, "修改成功！", "", "", "jbsxBox2product" + curTime, "closeCurrent");
 
 			StrUtils.saveLog(request, "修改产品", form);
 		} else {
@@ -152,10 +161,12 @@ public class ProductAction {
 	@RequestMapping(value="/delete/{productid}")
 	public @ResponseBody String delete(@PathVariable int productid, HttpServletRequest request) {
 		
+		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// List的时间
+		
 		AjaxObject ajaxObject = null;
 		int iReturn = productDaoImpl.deleteProduct(productid, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject(200, "删除成功！", "", "", "jbsxBox2product", "");
+			ajaxObject = new AjaxObject(200, "删除成功！", "", "", "jbsxBox2product" + curTime, "");
 
 			LogDaoImpl.saveLog(request, "删除产品", productid);
 		} else {

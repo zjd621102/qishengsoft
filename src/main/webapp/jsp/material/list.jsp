@@ -34,23 +34,24 @@
 		<ul class="toolBar">
 			<shiro:hasPermission name="Material:add">
 			<li>
-				<a class="add" href="<%=path%>/material/add/${form.map.materialtype}" target="dialog" rel="material_add"
-					mask="true" width="890" height="390">
+				<a class="add" href="<%=path%>/material/add/${form.map.materialtype}?curTime=${curTime}"
+					target="dialog" rel="material_add" mask="true" width="890" height="390">
 					<span>新增物资</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="Material:edi">
 			<li>
-				<a class="edit" href="<%=path%>/material/edi/{s_materialid}" target="dialog" rel="material_edi" mask="true"
-					width="890" height="590">
+				<a class="edit" href="<%=path%>/material/edi/{s_materialid}?curTime=${curTime}" target="dialog"
+					rel="material_edi" mask="true" width="890" height="590">
 					<span>修改物资</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="Material:delete">
 			<li>
-				<a class="delete" href="<%=path%>/material/delete/{s_materialid}" target="ajaxTodo" title="确定要删除吗?">
+				<a class="delete" href="<%=path%>/material/delete/{s_materialid}?curTime=${curTime}"
+					target="ajaxTodo" title="确定要删除吗?">
 					<span>删除物资</span>
 				</a>
 			</li>

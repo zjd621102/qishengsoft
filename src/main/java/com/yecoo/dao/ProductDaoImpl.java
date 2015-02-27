@@ -140,7 +140,7 @@ public class ProductDaoImpl extends BaseDaoImpl {
 				+ " func_getDictName('计量单位', a.unit) unitname FROM sproduct a WHERE a.productid = '" + productid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
-		sql = "SELECT a.* FROM sproductrow a WHERE a.productid = '" + productid + "'";
+		sql = "SELECT a.* FROM sproductrow a WHERE a.productid = '" + productid + "' ORDER BY a.sort, a.productrowid";
 		List<CodeTableForm> productrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("productrowList", productrowList);
 		

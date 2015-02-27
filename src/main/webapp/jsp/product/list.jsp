@@ -37,23 +37,24 @@
 		<ul class="toolBar">
 			<shiro:hasPermission name="Product:add">
 			<li>
-				<a class="add" href="<%=path%>/product/add/${form.map.producttype}" target="dialog" rel="product_add"
-					mask="true" width="1000" height="570">
+				<a class="add" href="<%=path%>/product/add/${form.map.producttype}?curTime=${curTime}"
+					target="dialog" rel="product_add" mask="true" width="1000" height="570">
 					<span>新增产品</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="Product:edi">
 			<li>
-				<a class="edit" href="<%=path%>/product/edi/{s_productid}" target="dialog" rel="product_edi" mask="true"
-					width="1000" height="620">
+				<a class="edit" href="<%=path%>/product/edi/{s_productid}?curTime=${curTime}"
+					target="dialog" rel="product_edi" mask="true" width="1000" height="620">
 					<span>修改产品</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="Product:delete">
 			<li>
-				<a class="delete" href="<%=path%>/product/delete/{s_productid}" target="ajaxTodo" title="确定要删除吗?">
+				<a class="delete" href="<%=path%>/product/delete/{s_productid}?curTime=${curTime}"
+					target="ajaxTodo" title="确定要删除吗?">
 					<span>删除产品</span>
 				</a>
 			</li>
