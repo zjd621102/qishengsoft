@@ -1,6 +1,5 @@
 package com.yecoo.web;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -83,18 +82,20 @@ public class ProductAction {
 		request.setAttribute("form", form);
 		request.setAttribute("curTime", curTime);
 		
-		/**************初始化行项Begin**************/
+		/**************初始化行项Begin**************
 		List<CodeTableForm> productrowList = new ArrayList<CodeTableForm>();
 		CodeTableForm productrow = new CodeTableForm();
 		productrow.setValue("materialname", "人力成本");
 		productrow.setValue("materialprice", "0");
 		productrow.setValue("materialnum", "1");
+		productrow.setValue("sort", "1");
 		productrowList.add(productrow);
 		
 		productrow = new CodeTableForm();
 		productrow.setValue("materialname", "其他成本");
 		productrow.setValue("materialprice", "0");
 		productrow.setValue("materialnum", "1");
+		productrow.setValue("sort", "2");
 		productrowList.add(productrow);
 		request.setAttribute("productrowList", productrowList);
 		/**************初始化行项End**************/

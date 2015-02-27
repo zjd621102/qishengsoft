@@ -130,6 +130,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<td></td>
 				</tr>
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>

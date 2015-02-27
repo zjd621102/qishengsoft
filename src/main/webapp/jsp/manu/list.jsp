@@ -81,7 +81,7 @@
 				<th width="10%">供应商状态</th>
 				<th width="15%">创建时间</th>
 				<th width="15%">联系人</th>
-				<th width="15%">联系电话</th>
+				<th width="15%">手机号码</th>
 				<th width="8%">推荐人</th>
 				<th width="4%">优先级</th>
 			</tr>
@@ -102,7 +102,7 @@
 			   		<td>${bean.map.statusname}</td>
 			   		<td>${bean.map.createdate}</td>
 			   		<td>${bean.map.manucontact}</td>
-			   		<td>${bean.map.manutel}</td>
+			   		<td>${bean.map.manuphone}</td>
 			   		<td>${bean.map.referee}</td>
 			   		<td>${bean.map.priority}</td>
 			   	</tr>

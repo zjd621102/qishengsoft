@@ -1,6 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<script type="text/javascript">
+	// 修改排序的值
+	function addRowOther() {
+		$("[name='map[priorityrow]']:last").val($("#productRowTbody tr").size()-3);
+	}
+</script>
+
 <form method="post" action="<%=path%>/manu/add" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);">
 	<div class="pageFormContent" layoutH="52">
@@ -32,9 +39,15 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>联系电话：</dt>
+			<dt>手机号码：</dt>
 			<dd>
-				<input type="text" name="map[manutel]" class="required" size="25" maxlength="32"/>
+				<input type="text" name="map[manuphone]" class="required" size="25" maxlength="11"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>座机电话：</dt>
+			<dd>
+				<input type="text" name="map[manutel]" size="25" maxlength="32"/>
 			</dd>
 		</dl>
 		<dl>
@@ -60,6 +73,12 @@
 			<dt>推荐人</dt>
 			<dd>
 				<input type="text" name="map[referee]" size="25" maxlength="16" />
+			</dd>
+		</dl>
+		<dl>
+			<dt>地址：</dt>
+			<dd>
+				<input type="text" name="map[address]" size="88" maxlength="128" />
 			</dd>
 		</dl>
 		<dl>
@@ -91,7 +110,16 @@
 					<th width="22%">备注</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="productRowTbody">
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
 			   	<tr id="IDCopyRow" style="display:none">
 					<td>
 						<input type="hidden" name="map[manurowid]"/>
@@ -99,7 +127,8 @@
 					</td>
 			   		<td></td>
 			   		<td>
-						<input type="text" name="map[bankrow]" style="width: 96%" maxlength="32"/>
+						<st:select dictType="银行类型" name="map[bankrow]"
+							expStr="style='width: 182px;' class='required'" />
 			   		</td>
 			   		<td>
 						<input type="text" name="map[accountnorow]" style="width: 96%" maxlength="32"/>
