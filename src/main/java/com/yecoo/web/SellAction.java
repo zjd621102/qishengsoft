@@ -38,6 +38,8 @@ public class SellAction {
 			form.setValue("currflow", "申请");
 		}
 		sellDaoImpl.initAction(request);
+		
+		initManu(form, request);
 
 		int totalCount = sellDaoImpl.getSellCount(form);
 		List<CodeTableForm> sellList = sellDaoImpl.getSellList(form);
@@ -59,6 +61,8 @@ public class SellAction {
 		
 		String selldate = StrUtils.getSysdate(); //销售日期默认为当前日期
 		form.setValue("selldate", selldate);
+		
+		initManu(form, request);
 		
 		request.setAttribute("form", form);
 		
@@ -90,7 +94,6 @@ public class SellAction {
 		return ajaxObject.toString();
 	}
 
-	@RequiresPermissions("Sell:edi")
 	@RequestMapping(value="/edi/{sellid}", method=RequestMethod.GET)
 	public String toEdi(@PathVariable("sellid") int sellid, HttpServletRequest request) {
 		
@@ -162,5 +165,20 @@ public class SellAction {
 			}
 		}
 		return ajaxObject.toString();
+	}
+	
+	/**
+	 * 初始化客户信息
+	 * @param form
+	 * @param request
+	 */
+	private void initManu(CodeTableForm form, HttpServletRequest request) {
+		CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
+		CodeTableForm manu = dbUtils.getFormByColumn("smanu", "relateuserid",
+				String.valueOf(user.getValue("userid")));
+		if(manu != null) {
+			form.setValue("manuid", manu.getValue("manuid"));
+			form.setValue("manuname", manu.getValue("manuname"));
+		}
 	}
 }

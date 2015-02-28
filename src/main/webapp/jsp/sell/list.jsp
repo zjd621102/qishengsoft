@@ -1,6 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<!-- 有“销售:编辑”权限，才可修改客户名称 -->
+<shiro:lacksPermission name="Sell:edi">
+	<c:set var="changeManuname" value="readonly" scope="page" />
+</shiro:lacksPermission>
+
 <div class="pageHeader">
 	<form onsubmit="return navTabSearch(this);" action="<%=path%>/sell/list" method="post" rel="pagerForm" id="fid">
 		<div class="searchBar">
@@ -22,8 +27,9 @@
 						至：<input type="text" name="map[selldateTo]" size="10" value="${form.map.selldateTo}" class="date"/>
 					</td>
 					<td>
-						客户名称：
-						<input type="text" name="map[manuname]" size="10" value="${form.map.manuname}"/>
+						客户ID：
+						<input type="text" name="map[manuid]" size="10" value="${form.map.manuid}"
+							${changeManuname}/>
 					</td>
 					<td>
 						产品编码：
@@ -56,14 +62,13 @@
 				</a>
 			</li>
 			</shiro:hasPermission>
-			<shiro:hasPermission name="Sell:edi">
+			<!-- 编辑权限在编辑页面控制 -->
 			<li>
 				<a class="edit" href="<%=path%>/sell/edi/{s_sellid}" target="dialog" rel="sell_edi" mask="true"
 					width="1300" height="500">
 					<span>修改销售单</span>
 				</a>
 			</li>
-			</shiro:hasPermission>
 			<shiro:hasPermission name="Sell:delete">
 			<li>
 				<a class="delete" href="<%=path%>/sell/delete/{s_sellid}" target="ajaxTodo" title="确定要删除吗?">

@@ -241,7 +241,7 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[planprice]" style="width: 92%" maxlength="12"
-							class="number" value="0.00"/>
+							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realprice]" style="width: 92%" maxlength="12"
@@ -292,7 +292,7 @@
 				   		</td>
 				   		<td>
 							<input type="text" name="map[planprice]" style="width: 92%" maxlength="12"
-								class="number" value="${bean.map.planprice}"/>
+								class="number" value="${bean.map.planprice}" readonly="readonly"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[realprice]" style="width: 92%" maxlength="12"
@@ -328,8 +328,10 @@
 	<div class="formBar">
 		<ul>
 			<c:if test="${form.map.currflow != '结束'}">
+			<shiro:hasPermission name="Sell:edi">
 			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
 			<li><div class="button"><div class="buttonContent"><button type="button" onclick="addBuy()">生成采购单</button></div></div></li>
+			</shiro:hasPermission>
 			</c:if>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
 			<li><div class="button"><div class="buttonContent"><button type="button"

@@ -97,16 +97,16 @@
 	</c:if>
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
-			<tr style="width: 1000px;">
+			<tr>
 				<c:if test="${act!='excel'}">
 					<th width="3%">
 						<input type="checkbox" group="ids" class="checkboxCtrl">
 					</th>
 				</c:if>
-				<th width="22%">序号</th>
-				<th width="25%">用户名</th>
-				<th width="25%">手机号码</th>
-				<th width="25%">出生日期</th>
+				<th width="5%">序号</th>
+				<th width="15%">用户名</th>
+				<th width="10%">手机号码</th>
+				<th>&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -119,8 +119,8 @@
 			   		</c:if>
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.username}</td>
-			   		<td>${bean.map.tele}</td> 
-			   		<td>${bean.map.birthday}</td>
+			   		<td>${bean.map.tele}</td>
+			   		<td>&nbsp;</td>
 			   	</tr>
 		   	</c:forEach>
 	   	</tbody>

@@ -76,6 +76,16 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>关联用户ID</dt>
+			<dd>
+				<input type="text" name="map[relateuserid]" size="25" maxlength="64" />
+			</dd>
+		</dl>
+		<dl>
+			<dt></dt>
+			<dd></dd>
+		</dl>
+		<dl>
 			<dt>地址：</dt>
 			<dd>
 				<input type="text" name="map[address]" size="88" maxlength="128" />

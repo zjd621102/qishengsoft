@@ -76,11 +76,12 @@
 		<thead>
 			<tr>
 				<th width="3%">序号</th>
-				<th width="20%">供应商名称</th>
+				<th width="8%">供应商ID</th>
+				<th width="17%">供应商名称</th>
 				<th width="10%">供应商类别</th>
 				<th width="10%">供应商状态</th>
 				<th width="15%">创建时间</th>
-				<th width="15%">联系人</th>
+				<th width="10%">联系人</th>
 				<th width="15%">手机号码</th>
 				<th width="8%">推荐人</th>
 				<th width="4%">优先级</th>
@@ -97,6 +98,7 @@
 					manuaccountname:'${bean.map.manuaccountname}'})"
 			   	>
 			   		<td>${vs.index+1}</td>
+			   		<td>${bean.map.manuid}</td>
 			   		<td>${bean.map.manuname}</td>
 			   		<td>${bean.map.manutypename}</td>
 			   		<td>${bean.map.statusname}</td>

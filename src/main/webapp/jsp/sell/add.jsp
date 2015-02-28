@@ -116,9 +116,13 @@
 				<input type="hidden" name="map[manuid]" value="${form.map.manuid}"/>
 				<input type="text" class="required" name="map[manuname]" value="${form.map.manuname}"
 					size="25" suggestFields="manuid,manuname" readonly="readonly"/>
-				<a class="btnLook" href="<%=path%>/manu/list?act=backselect&map[manutypeid]=2" lookupGroup="manuLookup"
-					width="1000" height="500">查找带回</a>
-				<a href="javascript:void(0);" class="btnClear" suggestFields="manuid,manuname"></a>
+				
+				<!-- 客户无值才须显示 -->
+				<c:if test="${empty form.map.manuid}">
+					<a class="btnLook" href="<%=path%>/manu/list?act=backselect&map[manutypeid]=2" lookupGroup="manuLookup"
+						width="1000" height="500">查找带回</a>
+					<a href="javascript:void(0);" class="btnClear" suggestFields="manuid,manuname"></a>
+				</c:if>
 			</dd>
 		</dl>
 		<dl>
@@ -203,11 +207,11 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[planprice]" style="width: 92%" maxlength="12"
-							class="number" value="0.00"/>
+							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realprice]" style="width: 92%" maxlength="12"
-							class="number required" value="0.00" onchange="changeValue();"/>
+							class="number required" value="0.00" onchange="changeValue();" readonly="readonly"/>
 			   		</td>
 			   		<td style="display: ${showProfit};">
 						<input type="text" name="map[costprice]" style="width: 92%" maxlength="12"
