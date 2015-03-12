@@ -16,7 +16,7 @@
 			<option value="100" <c:if test="${numPerPage==100}">selected</c:if>>100</option>
 		</select> <span>条，共${totalCount}条</span>
 	</div>
-	<div class="pagination" targetType="navTab" totalCount="${totalCount}"
+	<div class="pagination" targetType="${empty targetType ? 'navTab' : targetType}" totalCount="${totalCount}"
 		numPerPage="${numPerPage}" pageNumShown="10" currentPage="${pageNum}">
 	</div>
 </div>

@@ -29,6 +29,11 @@ public class BaseDaoImpl {
 		} else if (!sNumPerPage.equals("")) {
 			numPerPage = Integer.parseInt(sNumPerPage);
 		}
+		
+		if(act.equals("backselect")) {// 查找带回
+			request.setAttribute("targetType", "dialog"); // 类型为弹出框
+		}
+		
 		request.setAttribute("pageNum", pageNum); // 当前页
 		request.setAttribute("numPerPage", numPerPage); // 每页数量
 		request.setAttribute("act", act);

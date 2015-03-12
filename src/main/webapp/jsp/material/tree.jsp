@@ -19,7 +19,7 @@ MaterialDaoImpl materialDaoImpl = new MaterialDaoImpl();
 					line-height: 21px; background: #fff">
 					<ul class="tree treeFolder expand">
 						<li>
-							<a href="<%=path%>/material/list/${form.map.materialtype}?curTime=<%=curTime%>"
+							<a href="<%=path%>/material/list/${form.map.materialtype}?act=${act}&curTime=<%=curTime%>"
 								target="ajax" rel="jbsxBox2material<%=curTime%>">
 								${form.map.materialtypename}
 							</a>

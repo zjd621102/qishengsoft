@@ -34,6 +34,9 @@ public class MaterialAction {
 	@RequiresPermissions("Material:view")
 	@RequestMapping(value="/tree")
 	public String tree(HttpServletRequest request) {
+
+		String act = StrUtils.nullToStr(request.getParameter("act"));// 用于查找带回
+		request.setAttribute("act", act);
 		
 		CodeTableForm form = materialtypeDaoImpl.getMaterialtypeById(1);
 		request.setAttribute("form", form);

@@ -86,34 +86,34 @@
 			<dt>单据类型：</dt>
 			<dd>
 				<input type="hidden" name="map[btype]" value="${form.map.btype}" />
-				<input type="text" name="map[btypename]" size="30" value="${form.map.btypename}" readonly="readonly"/>
+				<input type="text" name="map[btypename]" size="25" value="${form.map.btypename}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>采购单名称：</dt>
 			<dd>
-				<input type="text" name="map[buyname]" class="required" size="30" maxlength="32"
+				<input type="text" name="map[buyname]" class="required" size="25" maxlength="32"
 					 value="${form.map.buyname}"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>采购编号：</dt>
 			<dd>
-				<input type="text" name="map[buyno]" class="required" size="30" maxlength="16"
+				<input type="text" name="map[buyno]" class="required" size="25" maxlength="16"
 					 value="${form.map.buyno}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>关联编号：</dt>
 			<dd>
-				<input type="text" name="map[relateno]" size="30" maxlength="16"
+				<input type="text" name="map[relateno]" size="25" maxlength="16"
 					 value="${form.map.relateno}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>采购日期：</dt>
 			<dd>
-				<input type="text" name="map[buydate]" class="required date" size="27"
+				<input type="text" name="map[buydate]" class="required date" size="22"
 					value="${form.map.buydate}" readonly="readonly"/>
 				<a class="inputDateButton" href="javascript:;">选择</a>
 			</dd>
@@ -121,21 +121,21 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 213px;' class='required'" />
+				<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
 			<dt>制单人：</dt>
 			<dd>
 				<input type="hidden" name="map[maker]" value="${form.map.maker}" />
-				<input type="text" name="map[makername]" class="required" size="30" maxlength="16"
+				<input type="text" name="map[makername]" class="required" size="25" maxlength="16"
 					value="${form.map.makername}" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>创建日期：</dt>
 			<dd>
-				<input type="text" name="map[createtime]" size="30" maxlength="19"
+				<input type="text" name="map[createtime]" size="25" maxlength="19"
 					value="${form.map.createtime}" readonly="readonly"/>
 			</dd>
 		</dl>
@@ -146,7 +146,7 @@
 		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="157" maxlength="256" value="${form.map.remark}" />
+				<input type="text" name="map[remark]" size="152" maxlength="256" value="${form.map.remark}" />
 			</dd>
 		</dl>
 		
@@ -157,20 +157,22 @@
 		<table class="table" style="width: 100%;">
 			<thead>
 				<tr>
-					<th width="3%">
+					<th width="30px">
 						<a href="#" class="btnAdd addRow"></a>
 					</th>
-					<th width="3%">序号</th>
-					<th width="10%">物资编码</th>
-					<th width="15%">物资名称</th>
-					<th width="5%">计量单位</th>
-					<th width="7%">单价</th>
-					<th width="5%">数量</th>
-					<th width="7%">总价</th>
-					<th width="10%">供应商名称</th>
+					<th width="30px">序号</th>
+					<th width="90px">物资编码</th>
+					<th width="150px">物资名称</th>
+					<th width="60px">计量单位</th>
+					<th width="75px">单价</th>
+					<th width="75px">数量</th>
+					<th width="85px">总价</th>
+					<th width="120px">供应商名称</th>
+					<!-- 
 					<th width="7%">联系人</th>
 					<th width="8%">联系电话</th>
-					<th width="20%">备注</th>
+					-->
+					<th>备注</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -185,12 +187,14 @@
 						合计：
 					</td>
 					<td>
-						<input type="text" name="map[allsum]" style="width: 93%" class="number"
+						<input type="text" name="map[allsum]" style="width: 70px;" class="number"
 							value="" readonly="readonly"/>
 					</td>
 					<td></td>
+					<!-- 
 					<td></td>
 					<td></td>
+					-->
 					<td></td>
 				</tr>
 			   	<tr id="IDCopyRow" style="display:none">
@@ -201,7 +205,7 @@
 			   		<td></td>
 			   		<td>
 						<input type="hidden" name="map[materialid]"/>
-						<input type="text" name="map[materialno]" style="width: 60%" maxlength="13"
+						<input type="text" name="map[materialno]" style="width: 60px; margin-right: 5px;" maxlength="13"
 							suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel" />
 						<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
 						<a href="javascript:void(0);" class="btnClear"
@@ -214,29 +218,31 @@
 			   			<st:select dictType="计量单位" name="map[unit]" expStr="style='width: 100%;'" />
 			   		</td>
 			   		<td>
-						<input type="text" name="map[price]" style="width: 93%" maxlength="12"
+						<input type="text" name="map[price]" style="width: 60px" maxlength="12"
 							class="number required" value="0.00" onchange="setMultiply('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[num]" style="width: 90%" maxlength="12"
+						<input type="text" name="map[num]" style="width: 60px" maxlength="12"
 							class="number required" value="0.00" onchange="setMultiply('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[sum]" style="width: 93%" maxlength="12"
+						<input type="text" name="map[sum]" style="width: 70px" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
 						<input type="hidden" name="map[manuid]"/>
-						<input type="text" name="map[manuname]" style="width: 94%" readonly="readonly"/>
+						<input type="text" name="map[manuname]" style="width: 104px;" readonly="readonly"/>
 			   		</td>
+			   		<!-- 
 			   		<td>
 						<input type="text" name="map[manucontact]" style="width: 93%" maxlength="32" class="required"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[manutel]" style="width: 94%" maxlength="32" class="required"/>
 			   		</td>
+			   		-->
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 97%" maxlength="256"/>
 			   		</td>
@@ -250,7 +256,7 @@
 				   		<td>${vs.index+1}</td>
 				   		<td>
 							<input type="hidden" name="map[materialid]" value="${bean.map.materialid}"/>
-							<input type="text" name="map[materialno]" style="width: 60%" maxlength="13"
+							<input type="text" name="map[materialno]" style="width: 60px; margin-right: 5px;" maxlength="13"
 								suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel"
 								value="${bean.map.materialno}"/>
 							<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
@@ -265,26 +271,27 @@
 							<st:select dictType="计量单位" name="map[unit]" value="${bean.map.unit}" expStr="style='width: 100%;'" />
 				   		</td>
 				   		<td>
-							<input type="text" name="map[price]" style="width: 93%" maxlength="12"
+							<input type="text" name="map[price]" style="width: 60px;" maxlength="12"
 								class="number required" value="${bean.map.price}"
 								onchange="setMultiply('price', 'num', 'sum');
 								setAllSum('sum', 'allsum');"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[num]" style="width: 90%" maxlength="12"
+							<input type="text" name="map[num]" style="width: 60px;" maxlength="12"
 								class="number required" value="${bean.map.num}"
 								onchange="setMultiply('price', 'num', 'sum');
 								setAllSum('sum', 'allsum');"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[sum]" style="width: 93%" maxlength="12"
+							<input type="text" name="map[sum]" style="width: 70px;" maxlength="12"
 								class="number" value="${bean.map.sum}" readonly="readonly"/>
 				   		</td>
 				   		<td>
 							<input type="hidden" name="map[manuid]" value="${bean.map.manuid}"/>
 							<input type="text" name="map[manuname]" value="${bean.map.manuname}"
-								style="width: 94%" readonly="readonly"/>
+								style="width: 104px;" readonly="readonly"/>
 				   		</td>
+				   		<!--
 				   		<td>
 							<input type="text" name="map[manucontact]" style="width: 93%" maxlength="32"
 								value="${bean.map.manucontact}" class="required"/>
@@ -293,6 +300,7 @@
 							<input type="text" name="map[manutel]" style="width: 94%" maxlength="32"
 								value="${bean.map.manutel}" class="required"/>
 				   		</td>
+				   		-->
 				   		<td>
 							<input type="text" name="map[remarkrow]" style="width: 97%" maxlength="256"
 								value="${bean.map.remarkrow}"/>

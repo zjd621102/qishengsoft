@@ -93,6 +93,18 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>一盒数量：</dt>
+			<dd>
+				<input type="text" name="map[numofcase]" class="required digits" size="25" maxlength="999"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>一件数量：</dt>
+			<dd>
+				<input type="text" name="map[numofbox]" class="required digits" size="25" maxlength="999"/>
+			</dd>
+		</dl>
+		<dl>
 			<dt>备注：</dt>
 			<dd>
 				<input type="text" name="map[remark]" size="89" maxlength="256"
@@ -143,7 +155,7 @@
 						<input type="text" name="map[materialno]" style="width: 76%" maxlength="13"
 							suggestFields="materialid,materialno,materialname,materialprice"
 							readonly="readonly" />
-						<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
+						<a class="btnLook" href="<%=path%>/material/tree?act=backselect" lookupGroup="lookup" width="1200"></a>
 						<a href="javascript:void(0);" class="btnClear" suggestFields="materialid,materialno,materialname,materialprice"></a>
 			   		</td>
 			   		<td>

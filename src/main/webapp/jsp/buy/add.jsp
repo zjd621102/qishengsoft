@@ -80,7 +80,7 @@
 		<dl>
 			<dt>单据类型：</dt>
 			<dd>
-				<select name="map[btype]" style="width: 213px;" class="required">
+				<select name="map[btype]" style="width: 184px;" class="required">
 					<option value=""></option>
 					<c:forEach items="${btypeList}" var="btype">
 						<option value="${btype.map.dictvalue}"
@@ -95,7 +95,7 @@
 		<dl>
 			<dt>采购单名称：</dt>
 			<dd>
-				<input type="text" name="map[buyname]" class="required" size="30" maxlength="32"
+				<input type="text" name="map[buyname]" class="required" size="25" maxlength="32"
 					 value="${form.map.buyname}"/>
 			</dd>
 		</dl>
@@ -128,20 +128,22 @@
 		<table class="table" style="width: 100%;">
 			<thead>
 				<tr>
-					<th width="3%">
+					<th width="30px">
 						<a href="#" class="btnAdd addRow"></a>
 					</th>
-					<th width="3%">序号</th>
-					<th width="10%">物资编码</th>
-					<th width="15%">物资名称</th>
-					<th width="5%">计量单位</th>
-					<th width="7%">单价</th>
-					<th width="5%">数量</th>
-					<th width="7%">总价</th>
-					<th width="10%">供应商名称</th>
+					<th width="30px">序号</th>
+					<th width="90px">物资编码</th>
+					<th width="150px">物资名称</th>
+					<th width="60px">计量单位</th>
+					<th width="75px">单价</th>
+					<th width="75px">数量</th>
+					<th width="85px">总价</th>
+					<th width="120px">供应商名称</th>
+				   	<!--
 					<th width="7%">联系人</th>
 					<th width="8%">联系电话</th>
-					<th width="20%">备注</th>
+					-->
+					<th>备注</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -156,12 +158,14 @@
 						合计：
 					</td>
 					<td>
-						<input type="text" name="map[allsum]" style="width: 93%" class="number"
+						<input type="text" name="map[allsum]" style="width: 70px" class="number"
 							value="" readonly="readonly"/>
 					</td>
 					<td></td>
+				   	<!--
 					<td></td>
 					<td></td>
+					-->
 					<td></td>
 				</tr>
 			   	<tr id="IDCopyRow" style="display:none">
@@ -172,7 +176,7 @@
 			   		<td></td>
 			   		<td>
 						<input type="hidden" name="map[materialid]"/>
-						<input type="text" name="map[materialno]" style="width: 60%" maxlength="13"
+						<input type="text" name="map[materialno]" style="width: 60px; margin-right: 5px;" maxlength="13"
 							suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel"/>
 						<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
 						<a href="javascript:void(0);" class="btnClear"
@@ -185,29 +189,31 @@
 			   			<st:select dictType="计量单位" name="map[unit]" value="" expStr="style='width: 100%;'" />
 			   		</td>
 			   		<td>
-						<input type="text" name="map[price]" style="width: 93%" maxlength="12"
+						<input type="text" name="map[price]" style="width: 60px" maxlength="12"
 							class="number required" value="0.00" onchange="setMultiply('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[num]" style="width: 90%" maxlength="12"
+						<input type="text" name="map[num]" style="width: 60px" maxlength="12"
 							class="number required" value="0.00" onchange="setMultiply('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[sum]" style="width: 93%" maxlength="12"
+						<input type="text" name="map[sum]" style="width: 70px" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
 						<input type="hidden" name="map[manuid]"/>
-						<input type="text" name="map[manuname]" style="width: 94%" readonly="readonly"/>
+						<input type="text" name="map[manuname]" style="width: 104px" readonly="readonly"/>
 			   		</td>
+				   	<!--
 			   		<td>
 						<input type="text" name="map[manucontact]" style="width: 93%" maxlength="32" class="required"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[manutel]" style="width: 94%" maxlength="32" class="required"/>
 			   		</td>
+			   		-->
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 97%" maxlength="256"/>
 			   		</td>

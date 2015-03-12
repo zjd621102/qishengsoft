@@ -6,18 +6,19 @@
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">
 				<tr>
-					<td>
+					<td style="width: 25%;">
 						采购单编号：
 						<input type="text" name="map[buyno]" size="14" maxlength="16"
 							value="${form.map.buyno}"/>
 					</td>
-					<td>
+					<td style="width: 25%;">
 						当前流程：
-						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" />
+						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
+						 expStr="style='width: 116px;'" />
 					</td>
-					<td>
+					<td style="width: 25%;">
 						单据类型：
-						<select name="map[btype]">
+						<select name="map[btype]" style="width: 116px;">
 							<option value=""></option>
 							<c:forEach items="${btypeList}" var="btype">
 								<option value="${btype.map.dictvalue}"
@@ -28,20 +29,24 @@
 							</c:forEach>
 						</select>
 					</td>
-					<td>
-						销售日期从：<input type="text" name="map[buydateFrom]" size="6" value="${form.map.buydateFrom}" class="date"/>
+					<td style="width: 25%;">
+						销售日期从：<input type="text" name="map[buydateFrom]" size="8" value="${form.map.buydateFrom}" class="date"/>
 					</td>
 					<td>
-						至：<input type="text" name="map[buydateTo]" size="6" value="${form.map.buydateTo}" class="date"/>
+						至：<input type="text" name="map[buydateTo]" size="8" value="${form.map.buydateTo}" class="date"/>
 					</td>
+				</tr>
+				<tr>
 					<td>
 						供应商名称：
-						<input type="text" name="map[manuname]" size="8" value="${form.map.manuname}"/>
+						<input type="text" name="map[manuname]" size="14" value="${form.map.manuname}"/>
 					</td>
 					<td>
 						物资编码：
-						<input type="text" name="map[materialno]" size="8" value="${form.map.materialno}"/>
+						<input type="text" name="map[materialno]" size="14" value="${form.map.materialno}"/>
 					</td>
+					<td></td>
+					<td></td>
 				</tr>
 			</table>
 			<div class="subBar">
@@ -64,7 +69,7 @@
 			<shiro:hasPermission name="Buy:add">
 			<li>
 				<a class="add" href="<%=path%>/buy/add" target="dialog" rel="buy_add" mask="true"
-					width="1300" height="500">
+					width="1200" height="500">
 					<span>新增采购单</span>
 				</a>
 			</li>
@@ -72,7 +77,7 @@
 			<shiro:hasPermission name="Buy:edi">
 			<li>
 				<a class="edit" href="<%=path%>/buy/edi/{s_buyid}" target="dialog" rel="buy_edi" mask="true"
-					width="1300" height="500">
+					width="1200" height="500">
 					<span>修改采购单</span>
 				</a>
 			</li>
@@ -94,18 +99,18 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="3%">
+				<th width="30px;">
 					<input type="checkbox" group="ids" class="checkboxCtrl">
 				</th>
-				<th width="5%">序号</th>
-				<th width="10%">单据类型</th>
-				<th width="15%">采购单名称</th>
-				<th width="13%">采购编号</th>
-				<th width="10%">采购日期</th>
-				<th width="12%">采购金额（${totalSum}）</th>
-				<th width="10%">当前流程</th>
-				<th width="10%">制单人</th>
-				<th width="12%">创建时间</th>
+				<th width="30px;">序号</th>
+				<th width="60px">单据类型</th>
+				<th width="150px">采购单名称</th>
+				<th width="120px">采购编号</th>
+				<th width="80px">采购日期</th>
+				<th width="100px">采购金额（${totalSum}）</th>
+				<th width="60px">当前流程</th>
+				<th width="60px">制单人</th>
+				<th>创建时间</th>
 			</tr>
 		</thead>
 		<tbody>

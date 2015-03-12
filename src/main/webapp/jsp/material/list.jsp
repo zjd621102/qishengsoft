@@ -61,14 +61,14 @@
 	<table class="table" style="width: 100%;" layoutH="144" rel="jbsxBox2material${curTime}">
 		<thead>
 			<tr>
-				<th width="5%">序号</th>
-				<th width="15%">物资编码</th>
-				<th width="15%">物资名称</th>
-				<th width="15%">物资类型</th>
-				<th width="10%">计量单位</th>
-				<th width="10%">单价</th>
-				<th width="15%">供应商</th>
-				<th width="15%">新增时间</th>
+				<th width="30px">序号</th>
+				<th width="80px">物资编码</th>
+				<th width="150px">物资名称</th>
+				<th width="120px">物资类型</th>
+				<th width="60px">计量单位</th>
+				<th width="60px">单价</th>
+				<th width="120px">供应商</th>
+				<th>新增时间</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -110,12 +110,13 @@
 				<option value="100" <c:if test="${numPerPage==100}">selected</c:if>>100</option>
 			</select> <span>条，共${totalCount}条</span>
 		</div>
-		<div class="pagination" targetType="navTab" rel="jbsxBox2material${curTime}" totalCount="${totalCount}"
+		<div class="pagination" targetType="${empty targetType ? 'navTab' : targetType}" rel="jbsxBox2material${curTime}" totalCount="${totalCount}"
 			numPerPage="${numPerPage}" pageNumShown="10" currentPage="${pageNum}">
 		</div>
 	</div>
 	<form id="pagerForm" method="post" action="<%=path%>/${sn}/list/${form.map.materialtype}?curTime=${curTime}">
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 		<input type="hidden" name="numPerPage" value="${numPerPage}" />
+		<input type="hidden" name="act" value="${act}" />
 	</form>
 </div>

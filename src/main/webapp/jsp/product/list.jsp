@@ -64,13 +64,14 @@
 	<table class="table" style="width: 100%;" layoutH="144" rel="jbsxBox2product${curTime}">
 		<thead>
 			<tr>
-				<th width="10%">序号</th>
-				<th width="15%">产品编码</th>
-				<th width="20%">产品名称</th>
-				<th width="20%">产品类型</th>
-				<th width="10%">计量单位</th>
-				<th width="10%">产品单价</th>
-				<th width="15%">新增日期</th>
+				<th width="30px">序号</th>
+				<th width="80px">产品编码</th>
+				<th width="120px">产品名称</th>
+				<th width="80px">产品类型</th>
+				<th width="60px">计量单位</th>
+				<th width="60px">产品单价</th>
+				<th width="60px">一件数量</th>
+				<th>新增日期</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -81,9 +82,10 @@
 			   		productno:'${bean.map.productno}',
 					productname:'${bean.map.productname}',
 					unit:'${bean.map.unit}',
-					planprice:'${bean.map.costprice}',
+					costprice:'${bean.map.costprice}',
 					planprice:'${bean.map.realprice}',
-					realprice:'${bean.map.realprice}'})"
+					realprice:'${bean.map.realprice}',
+					numofbox:'${bean.map.numofbox}'})"
 			   	>
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.productno}</td>
@@ -91,6 +93,7 @@
 			   		<td>${bean.map.producttypename}</td>
 			   		<td>${bean.map.unitname}</td>
 			   		<td>${bean.map.realprice}</td>
+			   		<td>${bean.map.numofbox}</td>
 			   		<td>${bean.map.createdate}</td>
 			   	</tr>
 		   	</c:forEach>
