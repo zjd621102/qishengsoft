@@ -27,7 +27,7 @@
 		<dl>
 			<dt>供应商状态：</dt>
 			<dd>
-				<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
+				<st:select dictType="状态" name="map[statusid]" value="1"
 				 expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>

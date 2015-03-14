@@ -56,16 +56,42 @@
 	<table class="rowtable">
 		<thead>
 			<tr>
-				<td width="4%">序号</td>
-				<td width="8%">产品编码</td>
-				<td width="15%">产品名称</td>
-				<td width="8%">单价</td>
-				<td width="8%">数量</td>
-				<td width="10%">金额</td>
+				<td style="width: 35px;">序号</td>
+				<td style="width: 80px;">产品编码</td>
+				<td style="width: 200px;">产品名称</td>
+				<td style="width: 70px;">数量</td>
+				<td style="width: 70px;">单价</td>
+				<td style="width: 70px;">金额</td>
 				<td>备注</td>
 			</tr>
 		</thead>
 		<tbody>
+			<c:forEach items="${sellrowList}" var="bean" varStatus="vs">
+			   	<tr>
+			   		<td style="width: 35px;">
+			   			<span>${vs.index+1}</span>
+			   		</td>
+			   		<td style="width: 80px;">
+						<span>${bean.map.productno}</span>
+			   		</td>
+			   		<td style="width: 200px;">
+						<span>${bean.map.productname}</span>
+			   		</td>
+			   		<td style="width: 70px;">
+						<span>${bean.map.num}</span>
+			   		</td>
+			   		<td style="width: 70px;">
+						<span>${bean.map.realprice}</span>
+			   		</td>
+			   		<td style="width: 70px;">
+						<span>${bean.map.realsum}</span>
+						<input type="hidden" name="map[realsum]" value="${bean.map.realsum}" />
+			   		</td>
+			   		<td>
+						<span>${bean.map.remarkrow}</span>
+			   		</td>
+			   	</tr>
+		   	</c:forEach>
 			<tr>
 				<td colspan="4"></td>
 				<td>
@@ -77,32 +103,6 @@
 				</td>
 				<td></td>
 			</tr>
-			<c:forEach items="${sellrowList}" var="bean" varStatus="vs">
-			   	<tr>
-			   		<td>
-			   			<span>${vs.index+1}</span>
-			   		</td>
-			   		<td>
-						<span>${bean.map.productno}</span>
-			   		</td>
-			   		<td>
-						<span>${bean.map.productname}</span>
-			   		</td>
-			   		<td>
-						<span>${bean.map.realprice}</span>
-			   		</td>
-			   		<td>
-						<span>${bean.map.num}</span>
-			   		</td>
-			   		<td>
-						<span>${bean.map.realsum}</span>
-						<input type="hidden" name="map[realsum]" value="${bean.map.realsum}" />
-			   		</td>
-			   		<td>
-						<span>${bean.map.remarkrow}</span>
-			   		</td>
-			   	</tr>
-		   	</c:forEach>
 	   	</tbody>
 	</table>
 </div>
