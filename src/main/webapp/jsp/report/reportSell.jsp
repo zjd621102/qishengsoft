@@ -5,6 +5,13 @@ $(function () {
     $('#reportSell_div').highcharts({
         chart: {
             type: 'line'
+            ,events: {
+                load: function (event) {
+                    for (var i = this.series.length - 1; i >= 0; i--) {
+                        this.series[i].hide();// 设置只显示第一条线，其他都不显示  
+                    }
+                }
+            }
         },
         title: {
             text: '月度客户报表'
