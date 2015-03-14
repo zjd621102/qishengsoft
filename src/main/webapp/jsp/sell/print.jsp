@@ -8,6 +8,8 @@
 <script type="text/javascript">
 	$().ready(function() {
 		setTimeout(function() {
+			setAllSum('boxnum', 'allboxnum');
+			$("#allboxnumSpan").html($("[name='map[allboxnum]']").val());
 			setAllSum('realsum', 'allrealsum');
 			$("#allrealsumSpan").html($("[name='map[allrealsum]']").val());
 		}, 100);
@@ -58,11 +60,12 @@
 			<tr>
 				<td style="width: 35px;">序号</td>
 				<td style="width: 80px;">产品编码</td>
-				<td style="width: 200px;">产品名称</td>
-				<td style="width: 70px;">数量</td>
+				<td>产品名称</td>
+				<td style="width: 60px;">件数</td>
+				<td style="width: 70px;">一件数量</td>
+				<td style="width: 60px;">数量</td>
 				<td style="width: 70px;">单价</td>
 				<td style="width: 70px;">金额</td>
-				<td>备注</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -74,10 +77,17 @@
 			   		<td style="width: 80px;">
 						<span>${bean.map.productno}</span>
 			   		</td>
-			   		<td style="width: 200px;">
+			   		<td>
 						<span>${bean.map.productname}</span>
 			   		</td>
+			   		<td style="width: 60px;">
+						<span>${bean.map.boxnum}</span>
+						<input type="hidden" name="map[boxnum]" value="${bean.map.boxnum}" />
+			   		</td>
 			   		<td style="width: 70px;">
+						<span>${bean.map.numofonebox}</span>
+			   		</td>
+			   		<td style="width: 60px;">
 						<span>${bean.map.num}</span>
 			   		</td>
 			   		<td style="width: 70px;">
@@ -87,21 +97,22 @@
 						<span>${bean.map.realsum}</span>
 						<input type="hidden" name="map[realsum]" value="${bean.map.realsum}" />
 			   		</td>
-			   		<td>
-						<span>${bean.map.remarkrow}</span>
-			   		</td>
 			   	</tr>
 		   	</c:forEach>
 			<tr>
-				<td colspan="4"></td>
+				<td colspan="2"></td>
 				<td>
 					合计
 				</td>
 				<td>
+					<span id="allboxnumSpan">${form.map.allboxnum}</span>
+					<input type="hidden" name="map[allboxnum]" />
+				</td>
+				<td colspan="3"></td>
+				<td>
 					<span id="allrealsumSpan">${form.map.allrealsum}</span>
 					<input type="hidden" name="map[allrealsum]" />
 				</td>
-				<td></td>
 			</tr>
 	   	</tbody>
 	</table>

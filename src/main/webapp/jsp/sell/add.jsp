@@ -2,9 +2,9 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 
 <!-- 有“销售:其它”权限，可查看产品成本、利润权限 -->
-<shiro:lacksPermission name="Sell:other">
+<%-- <shiro:lacksPermission name="Sell:other"> --%>
 	<c:set var="showProfit" value="none" scope="page" />
-</shiro:lacksPermission>
+<%-- </shiro:lacksPermission> --%>
 
 <script>
 	$(function() {
@@ -34,7 +34,8 @@
 			                        productid: item.map.productid,
 			                        unit: item.map.unit,
 			                        costprice: item.map.costprice,
-			                        realprice: item.map.realprice
+			                        realprice: item.map.realprice,
+			                        numofonebox: item.map.numofonebox
 			                    }
 			                }));
 						}
@@ -49,6 +50,7 @@
 					row.find("[name='map[costprice]']").val(ui.item.costprice);
 					row.find("[name='map[planprice]']").val(ui.item.realprice);
 					row.find("[name='map[realprice]']").val(ui.item.realprice);
+					row.find("[name='map[numofonebox]']").val(ui.item.numofonebox);
 				},
 				open : function() {
 					$(this).removeClass("ui-corner-all").addClass(
@@ -69,6 +71,14 @@
 	function doBeforeSubmit() {
 		changeValue();
 		return true;
+	}
+	 
+	/**
+	 * 修改数量
+	 */
+	function changeNum() {
+		setMultiply('boxnum', 'numofonebox', 'num');
+		changeValue();
 	}
 	 
 	/**
@@ -158,6 +168,8 @@
 					<th width="6%" style="display: ${showProfit};">成本单价</th>
 					<th width="6%" style="display: ${showProfit};">利润</th>
 					<th width="6%">数量</th>
+					<th width="6%">件数</th>
+					<th width="6%">一件数量</th>
 					<th width="6%">实付总价</th>
 					<th>备注</th>
 				</tr>
@@ -170,14 +182,16 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<td></td>
 					<td style="display: ${showProfit};"></td>
-					<td style="font-size: 13px; font-weight: bold; color: red;">
-						合计：
-					</td>
 					<td style="display: ${showProfit};">
 						<input type="text" name="map[allprofit]" style="width: 91%" class="number"
 							value="0.00" readonly="readonly"/>
 					</td>
+					<td style="font-size: 13px; font-weight: bold; color: red;">
+						合计：
+					</td>
+					<td></td>
 					<td></td>
 					<td>
 						<input type="text" name="map[allrealsum]" style="width: 91%" class="number"
@@ -194,7 +208,7 @@
 			   		<td>
 				   		<input type="hidden" name="map[productid]" value="" />
 						<input type="text" name="map[productno]" style="width: 60%" maxlength="13"
-							suggestFields="productid,productno,productname,unit,costprice,planprice,realprice,num,realsum"/>
+							suggestFields="productid,productno,productname,unit,costprice,planprice,realprice,num,boxnum,numofonebox,realsum"/>
 						<a class="btnLook" href="<%=path%>/product/tree" lookupGroup="lookup" width="1200"></a>
 						<a href="javascript:void(0);" class="btnClear"
 							suggestFields="productid,productno,productname,unit,costprice,planprice,realprice"></a>
@@ -223,7 +237,15 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[num]" style="width: 91%" maxlength="12"
-							class="number required" value="0.00" onchange="changeValue();"/>
+							class="digits required" value="0" onchange="changeValue();"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[boxnum]" style="width: 91%" maxlength="12"
+							class="digits" value="0" onchange="changeNum();"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[numofonebox]" style="width: 91%" maxlength="12"
+							class="digits" value="0" onchange="changeNum();"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realsum]" style="width: 91%" maxlength="12"

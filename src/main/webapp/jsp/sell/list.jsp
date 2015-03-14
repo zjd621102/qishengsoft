@@ -57,7 +57,7 @@
 			<shiro:hasPermission name="Sell:add">
 			<li>
 				<a class="add" href="<%=path%>/sell/add" target="dialog" rel="sell_add" mask="true"
-					width="1300" height="500">
+					width="1200" height="500">
 					<span>新增销售单</span>
 				</a>
 			</li>
@@ -65,7 +65,7 @@
 			<!-- 编辑权限在编辑页面控制 -->
 			<li>
 				<a class="edit" href="<%=path%>/sell/edi/{s_sellid}" target="dialog" rel="sell_edi" mask="true"
-					width="1300" height="500">
+					width="1200" height="500">
 					<span>修改销售单</span>
 				</a>
 			</li>

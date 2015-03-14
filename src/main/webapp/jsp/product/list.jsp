@@ -46,7 +46,7 @@
 			<shiro:hasPermission name="Product:edi">
 			<li>
 				<a class="edit" href="<%=path%>/product/edi/{s_productid}?curTime=${curTime}"
-					target="dialog" rel="product_edi" mask="true" width="1000" height="620">
+					target="dialog" rel="product_edi" mask="true" width="1000" height="570">
 					<span>修改产品</span>
 				</a>
 			</li>
@@ -85,7 +85,7 @@
 					costprice:'${bean.map.costprice}',
 					planprice:'${bean.map.realprice}',
 					realprice:'${bean.map.realprice}',
-					numofbox:'${bean.map.numofbox}'})"
+					numofonebox:'${bean.map.numofonebox}'})"
 			   	>
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.productno}</td>
@@ -93,7 +93,7 @@
 			   		<td>${bean.map.producttypename}</td>
 			   		<td>${bean.map.unitname}</td>
 			   		<td>${bean.map.realprice}</td>
-			   		<td>${bean.map.numofbox}</td>
+			   		<td>${bean.map.numofonebox}</td>
 			   		<td>${bean.map.createdate}</td>
 			   	</tr>
 		   	</c:forEach>

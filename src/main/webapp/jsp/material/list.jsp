@@ -43,7 +43,7 @@
 			<shiro:hasPermission name="Material:edi">
 			<li>
 				<a class="edit" href="<%=path%>/material/edi/{s_materialid}?curTime=${curTime}" target="dialog"
-					rel="material_edi" mask="true" width="890" height="590">
+					rel="material_edi" mask="true" width="890" height="390">
 					<span>修改物资</span>
 				</a>
 			</li>

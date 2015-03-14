@@ -101,7 +101,7 @@
 		<dl>
 			<dt>一件数量：</dt>
 			<dd>
-				<input type="text" name="map[numofbox]" class="required digits" size="25" maxlength="999"/>
+				<input type="text" name="map[numofonebox]" class="required digits" size="25" maxlength="999"/>
 			</dd>
 		</dl>
 		<dl>
