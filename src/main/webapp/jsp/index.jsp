@@ -174,7 +174,7 @@
 										<li>
 											<div class="unit">
 												<a href="<%=path%>/buy/edi/${buy.map.buyid}" target="dialog"
-													rel="buy_edi" mask="true" width="1200" height="500"
+													rel="buy_edi" mask="true" width="1000" height="500"
 													style="font-size: 13px;">
 													${buy.map.buyname}【${buy.map.buydate}】</a>
 											</div>
@@ -191,7 +191,7 @@
 										<li>
 											<div class="unit">
 												<a href="<%=path%>/sell/edi/${sell.map.sellid}" target="dialog"
-													rel="sell_edi" mask="true" width="1200" height="500"
+													rel="sell_edi" mask="true" width="1000" height="500"
 													style="font-size: 13px;">
 													${sell.map.manuname}【${sell.map.selldate}】</a>
 											</div>

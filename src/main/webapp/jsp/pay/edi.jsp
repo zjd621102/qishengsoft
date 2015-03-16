@@ -121,11 +121,11 @@
 						小计：
 					</td>
 					<td>
-						<input type="text" name="map[allplansum]" style="width: 93%" class="number"
+						<input type="text" name="map[allplansum]" style="width: 91%" class="number"
 							value="${form.map.allplansum}" readonly="readonly"/>
 					</td>
 					<td>
-						<input type="text" name="map[allrealsum]" style="width: 93%" class="number"
+						<input type="text" name="map[allrealsum]" style="width: 91%" class="number"
 							value="${form.map.allrealsum}" readonly="readonly"/>
 					</td>
 					<td></td>
@@ -162,20 +162,20 @@
 						<input type="text" name="map[manubankcardno]" style="width: 96%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[manuaccountname]" style="width: 95%" maxlength="32"/>
+						<input type="text" name="map[manuaccountname]" style="width: 94%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[plansum]" style="width: 93%" maxlength="12"
+						<input type="text" name="map[plansum]" style="width: 91%" maxlength="12"
 							class="number" value="0.00"
 							onchange="changeValue();"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[realsum]" style="width: 93%" maxlength="12"
+						<input type="text" name="map[realsum]" style="width: 91%" maxlength="12"
 							class="number" value="0.00"
 							onchange="changeValue();"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 95%" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" style="width: 91%" maxlength="256"/>
 			   		</td>
 			   	</tr>
 				<c:forEach items="${payrowList}" var="bean" varStatus="vs">
@@ -216,21 +216,21 @@
 								value="${bean.map.manubankcardno}"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[manuaccountname]" style="width: 95%" maxlength="32"
+							<input type="text" name="map[manuaccountname]" style="width: 94%" maxlength="32"
 								value="${bean.map.manuaccountname}"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[plansum]" style="width: 93%" maxlength="12"
+							<input type="text" name="map[plansum]" style="width: 91%" maxlength="12"
 								class="number" value="${bean.map.plansum}"
 								onchange="changeValue();"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[realsum]" style="width: 93%" maxlength="12"
+							<input type="text" name="map[realsum]" style="width: 91%" maxlength="12"
 								class="number" value="${bean.map.realsum}"
 								onchange="changeValue();"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[remarkrow]" style="width: 95%" maxlength="256"
+							<input type="text" name="map[remarkrow]" style="width: 91%" maxlength="256"
 								value="${bean.map.remarkrow}"/>
 				   		</td>
 				   	</tr>

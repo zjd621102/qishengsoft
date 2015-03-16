@@ -90,11 +90,11 @@
 						小计：
 					</td>
 					<td>
-						<input type="text" name="map[allplansum]" style="width: 93%" class="number"
+						<input type="text" name="map[allplansum]" style="width: 91%" class="number"
 							value="${form.map.allplansum}" readonly="readonly"/>
 					</td>
 					<td>
-						<input type="text" name="map[allrealsum]" style="width: 93%" class="number"
+						<input type="text" name="map[allrealsum]" style="width: 91%" class="number"
 							value="${form.map.allrealsum}" readonly="readonly"/>
 					</td>
 					<td></td>
@@ -132,20 +132,20 @@
 						<input type="text" name="map[manubankcardno]" style="width: 96%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[manuaccountname]" style="width: 95%" maxlength="32"/>
+						<input type="text" name="map[manuaccountname]" style="width: 94%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[plansum]" style="width: 93%" maxlength="12"
+						<input type="text" name="map[plansum]" style="width: 91%" maxlength="12"
 							class="number" value="0.00"
 							onchange="setAllSum('plansum', 'allplansum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[realsum]" style="width: 93%" maxlength="12"
+						<input type="text" name="map[realsum]" style="width: 91%" maxlength="12"
 							class="number" value="0.00"
 							onchange="setAllSum('realsum', 'allrealsum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 95%" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" style="width: 91%" maxlength="256"/>
 			   		</td>
 			   	</tr>
 			   	<tr id="IDEndRow"></tr>
