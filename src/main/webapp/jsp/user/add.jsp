@@ -22,11 +22,13 @@
 				<label>手机号码：</label>
 				<input type="text" class="phone" size="30" name="map[tele]" />
 			</p>
+			<!--
 			<p>
 				<label>出生日期：</label>
 				<input type="text" class="date" size="30" name="map[birthday]" />
 				<a class="inputDateButton" href="javascript:;">选择</a>
 			</p>
+			-->
 			<p>
 				<label>角&nbsp;&nbsp;&nbsp;&nbsp;色：</label>
 				<c:forEach items="${roleList}" var="role">

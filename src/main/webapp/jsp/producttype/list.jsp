@@ -6,15 +6,17 @@
 		action="<%=path%>/producttype/list/${form.map.parent}" method="post"
 		rel="pagerForm" id="fid">
 		<div class="searchBar">
-			<table class="searchContent" style="width: 80%">
+			<table class="searchContent">
 				<tr>
 					<td>
 						产品类别名称：
-						<input type="text" name="map[producttypename]" value="${form.map.producttypename}" />
+						<input type="text" name="map[producttypename]" value="${form.map.producttypename}"
+							style="width: 100px;" />
 					</td>
 					<td>
 						产品类别编码：
-						<input type="text" name="map[producttypeno]" value="${form.map.producttypeno}" />
+						<input type="text" name="map[producttypeno]" value="${form.map.producttypeno}"
+							style="width: 100px;" />
 					</td>
 				</tr>
 			</table>
@@ -66,12 +68,12 @@
 	<table class="table" style="width: 100%;" layoutH="144">
 		<thead>
 			<tr>
-				<th width="10%">序号</th>
-				<th width="15%">产品类别编码</th>
-				<th width="20%">产品类别名称</th>
-				<th width="10%">优先级</th>
-				<th width="20%">父产品类别名称</th>
-				<th width="25%">备注</th>
+				<th width="30px">序号</th>
+				<th width="100px">产品类别编码</th>
+				<th width="130px">产品类别名称</th>
+				<th width="50px">优先级</th>
+				<th width="120px">父产品类别名称</th>
+				<th>备注</th>
 			</tr>
 		</thead>
 		<tbody>

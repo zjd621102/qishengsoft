@@ -15,16 +15,16 @@
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						员工名称：<input type="text" name="map[staffname]" size="30" value="${form.map.staffname}"/>
+						员工名称：<input type="text" name="map[staffname]" style="width: 80px" value="${form.map.staffname}"/>
 					</td>
 					<td>
 						员工状态：
 						<st:select dictType="员工状态" name="map[staffstatus]" value="${form.map.staffstatus}"
-							expStr="style='width: 184px;'" />
+							expStr="style='width: 80px;'" />
 					</td>
 					<td>
 						月份：
-						<input type="text" name="map[month]" size="30" value="${form.map.month}" class="date"
+						<input type="text" name="map[month]" style="width: 80px" value="${form.map.month}" class="date"
 							dateFmt="yyyy-MM" readonly="readonly"/>
 					</td>
 				</tr>
@@ -80,16 +80,16 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="5%">序号</th>
-				<th width="11%">员工名称</th>
-				<th width="6%">员工类别</th>
-				<th width="6%">员工状态</th>
-				<th width="11%">联系电话</th>
-				<th width="16%">工资开户银行</th>
-				<th width="16%">工资银行账号</th>
-				<th width="11%">工资帐户名称</th>
-				<th width="11%">当月总工资</th>
-				<th width="6%">优先级</th>
+				<th width="30px">序号</th>
+				<th width="80px">员工名称</th>
+				<th width="60px">员工类别</th>
+				<th width="60px">员工状态</th>
+				<th width="100px">联系电话</th>
+				<th width="120px">工资开户银行</th>
+				<th width="110px">工资银行账号</th>
+				<th width="80px">工资帐户名称</th>
+				<th width="70px">当月总工资</th>
+				<th>优先级</th>
 			</tr>
 		</thead>
 		<tbody>

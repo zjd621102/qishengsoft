@@ -6,15 +6,17 @@
 		action="<%=path%>/materialtype/list/${form.map.parent}" method="post"
 		rel="pagerForm" id="fid">
 		<div class="searchBar">
-			<table class="searchContent" style="width: 80%">
+			<table class="searchContent">
 				<tr>
 					<td>
 						物资类型名称：
-						<input type="text" name="map[materialtypename]" value="${form.map.materialtypename}" />
+						<input type="text" name="map[materialtypename]" value="${form.map.materialtypename}"
+							style="width: 120px;" />
 					</td>
 					<td>
 						物资类型编码：
-						<input type="text" name="map[materialtypeno]" value="${form.map.materialtypeno}" />
+						<input type="text" name="map[materialtypeno]" value="${form.map.materialtypeno}"
+							style="width: 120px;" />
 					</td>
 				</tr>
 			</table>
@@ -66,12 +68,12 @@
 	<table class="table" style="width: 100%;" layoutH="144">
 		<thead>
 			<tr>
-				<th width="10%">序号</th>
-				<th width="15%">物资类型编码</th>
-				<th width="20%">物资类型名称</th>
-				<th width="10%">优先级</th>
-				<th width="20%">父物资类型名称</th>
-				<th width="25%">备注</th>
+				<th width="30px">序号</th>
+				<th width="80px">物资类型编码</th>
+				<th width="120px">物资类型名称</th>
+				<th width="50px">优先级</th>
+				<th width="100px">父物资类型名称</th>
+				<th>备注</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -87,7 +89,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<!-- 
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
@@ -103,7 +104,6 @@
 			numPerPage="${numPerPage}" pageNumShown="10" currentPage="${pageNum}">
 		</div>
 	</div>
-	-->
 	<form id="pagerForm" method="post" action="<%=path%>/${sn}/list/${form.map.parent}">
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 		<input type="hidden" name="numPerPage" value="${numPerPage}" />

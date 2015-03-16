@@ -62,15 +62,13 @@
 	<table class="rowtable">
 		<thead>
 			<tr>
-				<td width="4%">序号</td>
-				<td width="8%">物资编码</td>
-				<td width="14%">物资名称</td>
-				<td width="7%">单价</td>
-				<td width="6%">数量</td>
-				<td width="10%">金额</td>
-				<td width="13%">供应商名称</td>
-				<td width="9%">联系人</td>
-				<td width="11%">联系电话</td>
+				<td width="35px">序号</td>
+				<td width="70px">物资编码</td>
+				<td width="150px">物资名称</td>
+				<td width="70px">单价</td>
+				<td width="70px">数量</td>
+				<td width="80px">金额</td>
+				<td width="120px">供应商名称</td>
 				<td>备注</td>
 			</tr>
 		</thead>
@@ -88,33 +86,27 @@
 			</tr>
 			<c:forEach items="${buyrowList}" var="bean" varStatus="vs">
 			   	<tr>
-			   		<td>
+			   		<td width="35px">
 			   			<span>${vs.index+1}</span>
 			   		</td>
-			   		<td>
+			   		<td width="70px">
 						<span>${bean.map.materialno}</span>
 			   		</td>
-			   		<td>
+			   		<td width="150px">
 						<span>${bean.map.materialname}</span>
 			   		</td>
-			   		<td>
+			   		<td width="60px">
 			   			<span>${bean.map.price}</span>
 			   		</td>
-			   		<td>
+			   		<td width="60px">
 						<span>${bean.map.num}</span>
 			   		</td>
-			   		<td>
+			   		<td width="60px">
 						<span>${bean.map.sum}</span>
 						<input type="hidden" name="map[sum]" value="${bean.map.sum}" />
 			   		</td>
-			   		<td>
+			   		<td width="100px">
 						<span>${bean.map.manuname}</span>
-			   		</td>
-			   		<td>
-						<span>${bean.map.manucontact}</span>
-			   		</td>
-			   		<td>
-						<span>${bean.map.manutel}</span>
 			   		</td>
 			   		<td>
 						<span>${bean.map.remarkrow}</span>

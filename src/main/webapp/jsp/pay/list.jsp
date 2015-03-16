@@ -11,8 +11,6 @@
 						单据ID：
 						<input type="text" name="map[payid]" value="${form.map.payid}"
 						 class="number" style="width: 100px;"/>
-					</td>
-					<td>
 						单据类型：
 						<select name="map[btype]" style="width: 100px;">
 							<option value=""></option>
@@ -24,8 +22,6 @@
 								</option>
 							</c:forEach>
 						</select>
-					</td>
-					<td>
 						当前流程：
 						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
 						 expStr="style='width: 100px;'" />
@@ -52,7 +48,7 @@
 			<shiro:hasPermission name="Pay:add">
 			<li>
 				<a class="add" href="<%=path%>/pay/add" target="dialog" rel="pay_add" mask="true"
-					width="1300" height="500">
+					width="1200" height="500">
 					<span>新增单据</span>
 				</a>
 			</li>
@@ -60,7 +56,7 @@
 			<shiro:hasPermission name="Pay:edi">
 			<li>
 				<a class="edit" href="<%=path%>/pay/edi/{s_payid}" target="dialog" rel="pay_edi" mask="true"
-					width="1300" height="500">
+					width="1200" height="500">
 					<span>修改单据</span>
 				</a>
 			</li>
@@ -77,14 +73,14 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="5%">序号</th>
-				<th width="10%">单据ID</th>
-				<th width="15%">单据类型</th>
-				<th width="15%">单据日期</th>
-				<th width="15%">关联单号</th>
-				<th width="10%">当前流程</th>
-				<th width="15%">实付金额（${totalSum}）</th>
-				<th width="15%">创建时间</th>
+				<th width="30px">序号</th>
+				<th width="50px">单据ID</th>
+				<th width="60px">单据类型</th>
+				<th width="80px">单据日期</th>
+				<th width="120px">关联单号</th>
+				<th width="60px">当前流程</th>
+				<th width="140px">实付金额（${totalSum}）</th>
+				<th>创建时间</th>
 			</tr>
 		</thead>
 		<tbody>

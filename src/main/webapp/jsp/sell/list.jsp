@@ -9,11 +9,11 @@
 <div class="pageHeader">
 	<form onsubmit="return navTabSearch(this);" action="<%=path%>/sell/list" method="post" rel="pagerForm" id="fid">
 		<div class="searchBar">
-			<table class="searchContent" style="width: 80%">
+			<table class="searchContent">
 				<tr>
 					<td>
 						销售单编号：
-						<input type="text" name="map[sellno]" size="15" maxlength="16"
+						<input type="text" name="map[sellno]" size="12" maxlength="16"
 							value="${form.map.sellno}"/>
 					</td>
 					<td>
@@ -21,19 +21,19 @@
 						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 60px;'" />
 					</td>
 					<td>
-						定单日期从：<input type="text" name="map[selldateFrom]" size="10" value="${form.map.selldateFrom}" class="date"/>
+						定单日期从：<input type="text" name="map[selldateFrom]" size="8" value="${form.map.selldateFrom}" class="date"/>
 					</td>
 					<td>
-						至：<input type="text" name="map[selldateTo]" size="10" value="${form.map.selldateTo}" class="date"/>
+						至：<input type="text" name="map[selldateTo]" size="8" value="${form.map.selldateTo}" class="date"/>
 					</td>
 					<td>
 						客户ID：
-						<input type="text" name="map[manuid]" size="10" value="${form.map.manuid}"
+						<input type="text" name="map[manuid]" size="8" value="${form.map.manuid}"
 							${changeManuname}/>
 					</td>
 					<td>
 						产品编码：
-						<input type="text" name="map[productno]" size="10" value="${form.map.productno}"/>
+						<input type="text" name="map[productno]" size="8" value="${form.map.productno}"/>
 					</td>
 				</tr>
 			</table>
@@ -57,7 +57,7 @@
 			<shiro:hasPermission name="Sell:add">
 			<li>
 				<a class="add" href="<%=path%>/sell/add" target="dialog" rel="sell_add" mask="true"
-					width="1200" height="500">
+					width="1000" height="500">
 					<span>新增销售单</span>
 				</a>
 			</li>
@@ -65,7 +65,7 @@
 			<!-- 编辑权限在编辑页面控制 -->
 			<li>
 				<a class="edit" href="<%=path%>/sell/edi/{s_sellid}" target="dialog" rel="sell_edi" mask="true"
-					width="1200" height="500">
+					width="1000" height="500">
 					<span>修改销售单</span>
 				</a>
 			</li>
@@ -81,14 +81,14 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="10%">序号</th>
-				<th width="15%">销售单编号</th>
-				<th width="10%">定单日期</th>
-				<th width="15%">客户名称</th>
-				<th width="10%">当前流程</th>
-				<th width="10%">制单人</th>
-				<th width="15%">销售金额（${totalSum}）</th>
-				<th width="15%">创建时间</th>
+				<th width="30px">序号</th>
+				<th width="130px">销售单编号</th>
+				<th width="80px">定单日期</th>
+				<th width="70px">客户名称</th>
+				<th width="60px">当前流程</th>
+				<th width="60px">制单人</th>
+				<th width="145px">销售金额（${totalSum}）</th>
+				<th>创建时间</th>
 			</tr>
 		</thead>
 		<tbody>

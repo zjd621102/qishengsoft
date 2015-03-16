@@ -8,10 +8,12 @@
 		<input type="hidden" name="curTime" value="${curTime}" />
 		<input type="hidden" name="map[materialtype]" value="${form.map.materialtype}" />
 		<div class="searchBar">
-			<table class="searchContent" style="width: 80%">
+			<table class="searchContent">
 				<tr>
 					<td>
-						物资名称：<input type="text" name="map[materialname]" value="${form.map.materialname}"/>
+						物资名称：
+						<input type="text" name="map[materialname]" value="${form.map.materialname}"
+							style="width: 100px;"/>
 					</td>
 				</tr>
 			</table>
@@ -62,11 +64,11 @@
 		<thead>
 			<tr>
 				<th width="30px">序号</th>
-				<th width="80px">物资编码</th>
+				<th width="60px">物资编码</th>
 				<th width="150px">物资名称</th>
+				<th width="60px">单价</th>
 				<th width="120px">物资类型</th>
 				<th width="60px">计量单位</th>
-				<th width="60px">单价</th>
 				<th width="120px">供应商</th>
 				<th>新增时间</th>
 			</tr>
@@ -89,9 +91,9 @@
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.materialno}</td>
 			   		<td>${bean.map.materialname}</td>
+			   		<td>${bean.map.price}</td>
 			   		<td>${bean.map.materialtypename}</td>
 			   		<td>${bean.map.unitname}</td>
-			   		<td>${bean.map.price}</td>
 			   		<td>${bean.map.manuname}</td>
 			   		<td>${bean.map.createdate}</td>
 			   	</tr>

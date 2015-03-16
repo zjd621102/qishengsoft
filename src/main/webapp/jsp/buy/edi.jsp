@@ -140,13 +140,9 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt></dt>
-			<dd></dd>
-		</dl>
-		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="152" maxlength="256" value="${form.map.remark}" />
+				<input type="text" name="map[remark]" style="width: 556px;" maxlength="256" value="${form.map.remark}" />
 			</dd>
 		</dl>
 		
@@ -161,7 +157,7 @@
 						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="30px">序号</th>
-					<th width="90px">物资编码</th>
+					<th width="110px">物资编码</th>
 					<th width="150px">物资名称</th>
 					<th width="60px">计量单位</th>
 					<th width="75px">单价</th>
@@ -205,7 +201,7 @@
 			   		<td></td>
 			   		<td>
 						<input type="hidden" name="map[materialid]"/>
-						<input type="text" name="map[materialno]" style="width: 60px; margin-right: 5px;" maxlength="13"
+						<input type="text" name="map[materialno]" style="width: 50px; margin-right: 5px;" maxlength="13"
 							suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel" />
 						<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
 						<a href="javascript:void(0);" class="btnClear"
@@ -256,7 +252,7 @@
 				   		<td>${vs.index+1}</td>
 				   		<td>
 							<input type="hidden" name="map[materialid]" value="${bean.map.materialid}"/>
-							<input type="text" name="map[materialno]" style="width: 60px; margin-right: 5px;" maxlength="13"
+							<input type="text" name="map[materialno]" style="width: 50px; margin-right: 5px;" maxlength="13"
 								suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel"
 								value="${bean.map.materialno}"/>
 							<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>

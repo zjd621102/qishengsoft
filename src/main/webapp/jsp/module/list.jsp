@@ -11,7 +11,7 @@
 					<td>
 						模块名称：
 						<input type="text" name="map[modulename]" value="${form.map.modulename}"
-						 style="width: 120px;" />
+						 style="width: 100px;" />
 					</td>
 				</tr>
 			</table>
@@ -63,13 +63,13 @@
 	<table class="table" style="width: 100%;" layoutH="144">
 		<thead>
 			<tr>
-				<th width="10%">序号</th>
-				<th width="15%">模块名称</th>
-				<th width="10%">优先级</th>
-				<th width="20%">模块地址</th>
-				<th width="15%">授权名称</th>
-				<th width="15%">父模块名称</th>
-				<th width="15%">描述</th>
+				<th width="30px">序号</th>
+				<th width="100px">模块名称</th>
+				<th width="40px">优先级</th>
+				<th width="150px">模块地址</th>
+				<th width="120px">授权名称</th>
+				<th width="100px">父模块名称</th>
+				<th>描述</th>
 			</tr>
 		</thead>
 		<tbody>

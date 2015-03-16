@@ -9,7 +9,7 @@
 					<td>
 						角色名称：
 						<input type="text" name="map[rolename]" value="${form.map.rolename}"
-						 style="width: 120px;"/>
+						 style="width: 100px;"/>
 					</td>
 				</tr>
 			</table>
@@ -58,7 +58,7 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="5%">序号</th>
+				<th width="40px">序号</th>
 				<th>角色名称</th>
 			</tr>
 		</thead>

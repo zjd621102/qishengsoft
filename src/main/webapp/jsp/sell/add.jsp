@@ -143,9 +143,13 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt></dt>
+			<dd></dd>
+		</dl>
+		<dl>
 			<dt>备注：</dt>
 			<dd>
-				<input type="text" name="map[remark]" size="152" maxlength="256" value="${form.map.remark}" />
+				<input type="text" name="map[remark]" style="width: 556px;" maxlength="256" value="${form.map.remark}" />
 			</dd>
 		</dl>
 		
@@ -156,21 +160,21 @@
 		<table class="table" style="width: 100%;">
 			<thead>
 				<tr>
-					<th width="3%">
+					<th width="30px">
 						<a href="#" class="btnAdd addRow"></a>
 					</th>
-					<th width="3%">序号</th>
-					<th width="10%">产品编码</th>
-					<th width="15%">产品名称</th>
-					<th width="6%">计量单位</th>
-					<th width="6%">产品单价</th>
-					<th width="6%">实付单价</th>
-					<th width="6%" style="display: ${showProfit};">成本单价</th>
-					<th width="6%" style="display: ${showProfit};">利润</th>
-					<th width="6%">数量</th>
-					<th width="6%">件数</th>
-					<th width="6%">一件数量</th>
-					<th width="6%">实付总价</th>
+					<th width="30px">序号</th>
+					<th width="150px">产品编码</th>
+					<th width="150px">产品名称</th>
+					<th width="60px">计量单位</th>
+					<th width="60px">产品单价</th>
+					<th width="60px">实付单价</th>
+					<th width="60px" style="display: ${showProfit};">成本单价</th>
+					<th width="60px" style="display: ${showProfit};">利润</th>
+					<th width="60px">数量</th>
+					<th width="60px">件数</th>
+					<th width="60px">一件数量</th>
+					<th width="80px">实付总价</th>
 					<th>备注</th>
 				</tr>
 			</thead>
@@ -185,16 +189,16 @@
 					<td></td>
 					<td style="display: ${showProfit};"></td>
 					<td style="display: ${showProfit};">
-						<input type="text" name="map[allprofit]" style="width: 91%" class="number"
+						<input type="text" name="map[allprofit]" style="width: 65px;" class="number"
 							value="0.00" readonly="readonly"/>
 					</td>
+					<td></td>
+					<td></td>
 					<td style="font-size: 13px; font-weight: bold; color: red;">
 						合计：
 					</td>
-					<td></td>
-					<td></td>
 					<td>
-						<input type="text" name="map[allrealsum]" style="width: 91%" class="number"
+						<input type="text" name="map[allrealsum]" style="width: 65px;" class="number"
 							value="0.00" readonly="readonly"/>
 					</td>
 					<td></td>
@@ -207,52 +211,52 @@
 			   		<td></td>
 			   		<td>
 				   		<input type="hidden" name="map[productid]" value="" />
-						<input type="text" name="map[productno]" style="width: 60%" maxlength="13"
+						<input type="text" name="map[productno]" style="width: 90px;" maxlength="13"
 							suggestFields="productid,productno,productname,unit,costprice,planprice,realprice,num,boxnum,numofonebox,realsum"/>
 						<a class="btnLook" href="<%=path%>/product/tree" lookupGroup="lookup" width="1200"></a>
 						<a href="javascript:void(0);" class="btnClear"
 							suggestFields="productid,productno,productname,unit,costprice,planprice,realprice"></a>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[productname]" style="width: 96%" maxlength="32" class="required"/>
+						<input type="text" name="map[productname]" style="width: 130px;" maxlength="32" class="required"/>
 			   		</td>
 			   		<td>
 			   			<st:select dictType="计量单位" name="map[unit]" expStr="style='width: 100%;'" />
 			   		</td>
 			   		<td>
-						<input type="text" name="map[planprice]" style="width: 92%" maxlength="12"
+						<input type="text" name="map[planprice]" style="width: 45px;" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[realprice]" style="width: 92%" maxlength="12"
+						<input type="text" name="map[realprice]" style="width: 45px;" maxlength="12"
 							class="number required" value="0.00" onchange="changeValue();" readonly="readonly"/>
 			   		</td>
 			   		<td style="display: ${showProfit};">
-						<input type="text" name="map[costprice]" style="width: 92%" maxlength="12"
+						<input type="text" name="map[costprice]" style="width: 45px;" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td style="display: ${showProfit};">
-						<input type="text" name="map[profit]" style="width: 91%" maxlength="12"
+						<input type="text" name="map[profit]" style="width: 45px;" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[num]" style="width: 91%" maxlength="12"
+						<input type="text" name="map[num]" style="width: 45px;" maxlength="12"
 							class="digits required" value="0" onchange="changeValue();"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[boxnum]" style="width: 91%" maxlength="12"
+						<input type="text" name="map[boxnum]" style="width: 45px;" maxlength="12"
 							class="digits" value="0" onchange="changeNum();"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[numofonebox]" style="width: 91%" maxlength="12"
+						<input type="text" name="map[numofonebox]" style="width: 45px;" maxlength="12"
 							class="digits" value="0" onchange="changeNum();"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[realsum]" style="width: 91%" maxlength="12"
+						<input type="text" name="map[realsum]" style="width: 65px;" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 98%" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" style="width: 155px;" maxlength="256"/>
 			   		</td>
 			   	</tr>
 			   	<tr id="IDEndRow"></tr>

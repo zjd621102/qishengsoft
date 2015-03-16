@@ -8,13 +8,17 @@
 		<input type="hidden" name="curTime" value="${curTime}" />
 		<input type="hidden" name="map[producttype]" value="${form.map.producttype}" />
 		<div class="searchBar">
-			<table class="searchContent" style="width: 80%">
+			<table class="searchContent">
 				<tr>
 					<td>
-						产品名称：<input type="text" name="map[productname]" value="${form.map.productname}"/>
+						产品名称：
+						<input type="text" name="map[productname]" value="${form.map.productname}"
+							style="width: 100px;"/>
 					</td>
 					<td>
-						物资编码：<input type="text" name="map[materialtypeno]" value="${form.map.materialtypeno}"/>
+						物资编码：
+						<input type="text" name="map[materialtypeno]" value="${form.map.materialtypeno}"
+							style="width: 100px;"/>
 					</td>
 				</tr>
 			</table>

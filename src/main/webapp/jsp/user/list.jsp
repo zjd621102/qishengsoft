@@ -29,13 +29,7 @@
 						<td>
 							用户姓名：
 							<input type="text" name="map[username]" value="${form.map.username}"
-							 style="width: 120px; margin-right: 20px;"/>
-							出生日期从：
-							<input type="text" class="date" readonly="readonly" name="map[fromBirthday]"
-							 value="${form.map.fromBirthday}" style="width: 120px; margin-right: 5px;" />
-							至：
-							<input type="text" class="date" readonly="readonly" name="map[toBirthday]"
-							 value="${form.map.toBirthday}" style="width: 120px;" />
+							 style="width: 80px; margin-right: 20px;"/>
 						</td>
 					</tr>
 				</table>
@@ -99,14 +93,13 @@
 		<thead>
 			<tr>
 				<c:if test="${act!='excel'}">
-					<th width="3%">
+					<th width="30px">
 						<input type="checkbox" group="ids" class="checkboxCtrl">
 					</th>
 				</c:if>
-				<th width="5%">序号</th>
-				<th width="15%">用户名</th>
-				<th width="10%">手机号码</th>
-				<th>&nbsp;</th>
+				<th width="30px">序号</th>
+				<th width="80px">用户名</th>
+				<th>手机号码</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -120,7 +113,6 @@
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.username}</td>
 			   		<td>${bean.map.tele}</td>
-			   		<td>&nbsp;</td>
 			   	</tr>
 		   	</c:forEach>
 	   	</tbody>

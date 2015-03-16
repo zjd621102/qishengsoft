@@ -4,7 +4,7 @@
 <div class="pageHeader">
 	<form onsubmit="return navTabSearch(this);" action="<%=path%>/buy/list" method="post" rel="pagerForm" id="fid">
 		<div class="searchBar">
-			<table class="searchContent" style="width: 80%">
+			<table class="searchContent">
 				<tr>
 					<td style="width: 25%;">
 						采购单编号：
@@ -69,7 +69,7 @@
 			<shiro:hasPermission name="Buy:add">
 			<li>
 				<a class="add" href="<%=path%>/buy/add" target="dialog" rel="buy_add" mask="true"
-					width="1200" height="500">
+					width="1000" height="500">
 					<span>新增采购单</span>
 				</a>
 			</li>
@@ -77,7 +77,7 @@
 			<shiro:hasPermission name="Buy:edi">
 			<li>
 				<a class="edit" href="<%=path%>/buy/edi/{s_buyid}" target="dialog" rel="buy_edi" mask="true"
-					width="1200" height="500">
+					width="1000" height="500">
 					<span>修改采购单</span>
 				</a>
 			</li>
@@ -104,10 +104,10 @@
 				</th>
 				<th width="30px;">序号</th>
 				<th width="60px">单据类型</th>
-				<th width="150px">采购单名称</th>
-				<th width="120px">采购编号</th>
+				<th width="120px">采购单名称</th>
+				<th width="125px">采购编号</th>
 				<th width="80px">采购日期</th>
-				<th width="100px">采购金额（${totalSum}）</th>
+				<th width="130px">采购金额（${totalSum}）</th>
 				<th width="60px">当前流程</th>
 				<th width="60px">制单人</th>
 				<th>创建时间</th>

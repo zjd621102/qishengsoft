@@ -94,7 +94,7 @@
 	
 	<!-- SESSION超时时间设置 -->
 	<session-config>
-		<session-timeout>30</session-timeout>
+		<session-timeout>120</session-timeout>
 	</session-config>
 	
 	<!-- 异常跳转设置 -->

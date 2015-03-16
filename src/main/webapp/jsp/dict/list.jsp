@@ -5,7 +5,7 @@
 	<form onsubmit="return navTabSearch(this);" action="<%=path%>/dict/list" method="post" rel="pagerForm" id="fid">
 		<input type="hidden" name="act" value="${act}" />
 		<div class="searchBar">
-			<table class="searchContent" style="width: 80%">
+			<table class="searchContent" style="width: 120px">
 				<tr>
 					<td>
 						字典类型：
@@ -59,9 +59,9 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="5%">序号</th>
-				<th width="20%">字典类型</th>
-				<th width="15%">创建时间</th>
+				<th width="30px">序号</th>
+				<th width="100px">字典类型</th>
+				<th width="120px">创建时间</th>
 				<th>备注</th>
 			</tr>
 		</thead>

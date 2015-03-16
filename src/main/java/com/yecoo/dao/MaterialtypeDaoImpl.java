@@ -103,7 +103,7 @@ public class MaterialtypeDaoImpl extends BaseDaoImpl {
 		String cond = getMaterialtypeListCondition(form);
 		sql  += cond;
 		sql += " ORDER BY priority, t.materialtype";
-//		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
+		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
 	}

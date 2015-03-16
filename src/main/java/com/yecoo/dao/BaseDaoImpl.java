@@ -14,13 +14,14 @@ public class BaseDaoImpl {
 	/**
 	 * 初始化Action
 	 * @param request
+	 * @param _numPerPage	分页数量
 	 */
-	public void initAction(HttpServletRequest request) {
+	public void initAction(HttpServletRequest request, int _numPerPage) {
 		String sPageNum = StrUtils.nullToStr(request.getParameter("pageNum"));
 		String sNumPerPage = StrUtils.nullToStr(request.getParameter("numPerPage"));
 		String act = StrUtils.nullToStr(request.getParameter("act"));
 		pageNum = 1;
-		numPerPage = Constants.NUMPERPAGE;
+		numPerPage = _numPerPage;
 		if (!act.equals("excel") && !sPageNum.equals("")) {
 			pageNum = Integer.parseInt(sPageNum);
 		}
@@ -37,5 +38,13 @@ public class BaseDaoImpl {
 		request.setAttribute("pageNum", pageNum); // 当前页
 		request.setAttribute("numPerPage", numPerPage); // 每页数量
 		request.setAttribute("act", act);
+	}
+	
+	/**
+	 * 初始化Action
+	 * @param request
+	 */
+	public void initAction(HttpServletRequest request) {
+		initAction(request, Constants.NUMPERPAGE);
 	}
 }
