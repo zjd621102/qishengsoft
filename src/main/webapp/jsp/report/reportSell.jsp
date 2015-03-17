@@ -52,7 +52,7 @@ $(function () {
 			<table class="searchContent" style="width: 80%">
 				<tr>
 					<td>
-						定单日期从
+						发货日期从
 						<input type="text" class="date" readonly="readonly"
 						 name="map[selldateFrom]" value="${form.map.selldateFrom}" style="width: 100px;" />
 						&nbsp;&nbsp;至&nbsp;&nbsp;

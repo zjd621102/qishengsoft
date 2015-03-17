@@ -2,8 +2,8 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 <c:if test="${act=='excel'}">
 <%
-	response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-	String excelname=new String("日志列表.xls".getBytes("UTF-8"),"iso8859-1");
+	response.setContentType("application/vnd.ms-excel;charset=GBK");
+	String excelname=new String("日志列表.xls".getBytes("GBK"),"iso8859-1");
 	response.setHeader("Content-disposition","inline; filename="+excelname);
 %>
 <style type="text/css">

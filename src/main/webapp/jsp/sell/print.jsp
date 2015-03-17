@@ -28,7 +28,7 @@
 			<td>销售编号：
 				<span>${form.map.sellno}</span>
 			</td>
-			<td>定单日期：
+			<td>发货日期：
 				<span>${form.map.selldate}</span>
 			</td>
 			<td>客户名称：

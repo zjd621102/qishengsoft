@@ -11,6 +11,9 @@
 			<table class="searchContent">
 				<tr>
 					<td>
+						物资编码：
+						<input type="text" name="map[materialno]" value="${form.map.materialno}"
+							style="width: 100px;"/>
 						物资名称：
 						<input type="text" name="map[materialname]" value="${form.map.materialname}"
 							style="width: 100px;"/>

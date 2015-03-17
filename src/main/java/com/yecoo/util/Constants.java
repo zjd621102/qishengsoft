@@ -18,7 +18,7 @@ public class Constants {
 	/**
 	 * 分页信息
 	 */
-	public final static int NUMPERPAGE = 100;// 每页数量
+	public final static int NUMPERPAGE = 50;// 每页数量
 	public final static int NUMPERPAGE_EXCEL = 1000;// 导出最大数量
 
 	/**

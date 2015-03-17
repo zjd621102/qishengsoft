@@ -34,7 +34,7 @@
 			<shiro:hasPermission name="Dict:add">
 			<li>
 				<a class="add" href="<%=path%>/dict/add" target="dialog" rel="dict_add" mask="true"
-					width="1000" height="500">
+					width="800" height="500">
 					<span>新增字典</span>
 				</a>
 			</li>
@@ -42,7 +42,7 @@
 			<shiro:hasPermission name="Dict:edi">
 			<li>
 				<a class="edit" href="<%=path%>/dict/edi/{s_dictid}" target="dialog" rel="dict_edi" mask="true"
-					width="1000" height="500">
+					width="800" height="500">
 					<span>修改字典</span>
 				</a>
 			</li>

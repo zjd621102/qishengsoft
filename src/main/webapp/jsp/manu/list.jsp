@@ -78,8 +78,8 @@
 				<th width="30px">序号</th>
 				<th width="60px">供应商ID</th>
 				<th width="120px">供应商名称</th>
-				<th width="60px">供应商类别</th>
-				<th width="60px">供应商状态</th>
+				<th width="70px">供应商类别</th>
+				<th width="70px">供应商状态</th>
 				<th width="80px">联系人</th>
 				<th width="100px">手机号码</th>
 				<th width="80px">推荐人</th>

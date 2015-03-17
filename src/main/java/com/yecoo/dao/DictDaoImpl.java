@@ -60,7 +60,7 @@ public class DictDaoImpl extends BaseDaoImpl {
 		String dicttype = StrUtils.nullToStr(form.getValue("dicttype"));
 
 		if(!dicttype.equals("")) {
-			cond.append(" AND t.dicttype = '").append(dicttype).append("'");
+			cond.append(" AND t.dicttype LIKE '%").append(dicttype).append("%'");
 		}
 		
 		return cond.toString();

@@ -58,9 +58,13 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 	public String getMaterialListCondition(CodeTableForm form) {
 		
 		StringBuffer cond = new StringBuffer("");
+		String materialno = StrUtils.nullToStr(form.getValue("materialno"));
 		String materialname = StrUtils.nullToStr(form.getValue("materialname"));
 		String materialtype = StrUtils.nullToStr(form.getValue("materialtype"));
-		
+
+		if(!materialno.equals("")) {
+			cond.append(" AND t.materialno like '%").append(materialno).append("%'");
+		}
 		if(!materialname.equals("")) {
 			cond.append(" AND t.materialname like '%").append(materialname).append("%'");
 		}
