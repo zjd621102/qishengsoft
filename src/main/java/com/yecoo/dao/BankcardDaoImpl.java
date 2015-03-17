@@ -363,10 +363,10 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 	 */
 	public List<CodeTableForm> getTransactionList(CodeTableForm form) {
 		
-		String sql = "SELECT b.bankcardno, b.realsum*if(a.btype='SKD', 1, -1) realsum, a.paydate, a.payid, a.relateno,"
+		String sql = "SELECT a.bankcardno, b.realsum*if(a.btype='SKD', 1, -1) realsum, a.paydate, a.payid, a.relateno,"
 				+ " func_getDictName('单据类型', a.btype) btypename, c.oldmoney, c.newmoney"
 				+ " FROM bpay a, bpayrow b LEFT JOIN sbankcard_log c ON b.payrowid = c.changeid"
-				+ " AND EXISTS (SELECT 1 FROM sbankcard d WHERE d.bankcardid = c.bankcardid AND d.bankcardno = b.bankcardno)"
+				+ " AND EXISTS (SELECT 1 FROM sbankcard d WHERE d.bankcardid = c.bankcardid AND d.bankcardno = a.bankcardno)"
 				+ " WHERE a.payid = b.payid AND a.currflow = '结束'";
 		String cond = getTransactionListCondition(form);
 		sql += cond;
@@ -390,7 +390,7 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 		String paydateTo = StrUtils.nullToStr(form.getValue("paydateTo"));
 		
 		if(!bankcardno.equals("")) {
-			cond.append(" AND b.bankcardno LIKE '%").append(bankcardno).append("%'");
+			cond.append(" AND a.bankcardno LIKE '%").append(bankcardno).append("%'");
 		}
 		if(!btype.equals("")) {
 			cond.append(" AND a.btype = '").append(btype).append("'");

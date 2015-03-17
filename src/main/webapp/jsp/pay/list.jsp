@@ -25,6 +25,8 @@
 						当前流程：
 						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
 						 expStr="style='width: 100px;'" />
+						供应商：
+						<input type="text" name="map[manuname]" value="${form.map.manuname}" style="width: 100px;"/>
 					</td>
 				</tr>
 			</table>
@@ -48,7 +50,7 @@
 			<shiro:hasPermission name="Pay:add">
 			<li>
 				<a class="add" href="<%=path%>/pay/add" target="dialog" rel="pay_add" mask="true"
-					width="1200" height="500">
+					width="800" height="500">
 					<span>新增单据</span>
 				</a>
 			</li>
@@ -56,7 +58,7 @@
 			<shiro:hasPermission name="Pay:edi">
 			<li>
 				<a class="edit" href="<%=path%>/pay/edi/{s_payid}" target="dialog" rel="pay_edi" mask="true"
-					width="1200" height="500">
+					width="800" height="500">
 					<span>修改单据</span>
 				</a>
 			</li>
@@ -78,8 +80,10 @@
 				<th width="60px">单据类型</th>
 				<th width="80px">单据日期</th>
 				<th width="120px">关联单号</th>
+				<th width="140px">应付金额（${totalPlanSum}）</th>
+				<th width="140px">实付金额（${totalRealSum}）</th>
+				<th width="100px">供应商</th>
 				<th width="60px">当前流程</th>
-				<th width="140px">实付金额（${totalSum}）</th>
 				<th>创建时间</th>
 			</tr>
 		</thead>
@@ -91,8 +95,10 @@
 			   		<td>${bean.map.btypename}</td>
 			   		<td>${bean.map.paydate}</td>
 			   		<td>${bean.map.relateno}</td>
-			   		<td>${bean.map.currflow}</td>
+			   		<td>${bean.map.allplansum}</td>
 			   		<td>${bean.map.allrealsum}</td>
+			   		<td>${bean.map.manuname}</td>
+			   		<td>${bean.map.currflow}</td>
 			   		<td>${bean.map.createtime}</td>
 			   	</tr>
 		   	</c:forEach>

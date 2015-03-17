@@ -35,7 +35,9 @@ public class PayDaoImpl extends BaseDaoImpl {
 	public List<CodeTableForm> getPayList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getDictName('单据类型', t.btype) btypename, func_getUserName(t.maker) makername,"
-				+ " (SELECT IFNULL(SUM(bp.realsum), 0) FROM bpayrow bp WHERE bp.payid = t.payid) allrealsum"
+				+ " (SELECT IFNULL(SUM(bp.plansum), 0) FROM bpayrow bp WHERE bp.payid = t.payid) allplansum,"
+				+ " (SELECT IFNULL(SUM(bp.realsum), 0) FROM bpayrow bp WHERE bp.payid = t.payid) allrealsum,"
+				+ " func_getManuName(t.manuid) manuname"
 				+ " FROM bpay t WHERE 1 = 1";
 		String cond = getPayListCondition(form);
 		sql  += cond;
@@ -45,7 +47,20 @@ public class PayDaoImpl extends BaseDaoImpl {
 		return list;
 	}
 	/**
-	 * 获取金额
+	 * 获取应付金额
+	 * @param form
+	 * @return
+	 */
+	public String getPlanSum(CodeTableForm form) {
+		
+		String sql = "SELECT IFNULL(SUM(b.plansum), 0) FROM bpay t, bpayrow b WHERE 1 = 1 AND t.payid = b.payid";
+		String cond = getPayListCondition(form);
+		sql += cond;
+		String sum = dbUtils.execQuerySQL(sql);
+		return sum;
+	}
+	/**
+	 * 获取实付金额
 	 * @param form
 	 * @return
 	 */
@@ -68,6 +83,7 @@ public class PayDaoImpl extends BaseDaoImpl {
 		String payid = StrUtils.nullToStr(form.getValue("payid"));
 		String btype = StrUtils.nullToStr(form.getValue("btype"));
 		String currflow = StrUtils.nullToStr(form.getValue("currflow"));
+		String manuname = StrUtils.nullToStr(form.getValue("manuname"));
 		
 		if(!payid.equals("")) {
 			cond.append(" AND t.payid = '").append(payid).append("'");
@@ -77,6 +93,10 @@ public class PayDaoImpl extends BaseDaoImpl {
 		}
 		if(!currflow.equals("")) {
 			cond.append(" AND t.currflow = '").append(currflow).append("'");
+		}
+		if(!manuname.equals("")) {
+			cond.append(" AND EXISTS (SELECT 1 FROM smanu m WHERE m.manuid = t.manuid AND m.manuname LIKE '%")
+				.append(manuname).append("%')");
 		}
 		
 		return cond.toString();
@@ -134,11 +154,11 @@ public class PayDaoImpl extends BaseDaoImpl {
 	 */
 	public CodeTableForm getPayById(int payid, HttpServletRequest request) {
 		
-		String sql = "SELECT a.*, func_getDictName('单据类型', a.btype) btypename, func_getUserName(a.maker) makername"
-				+ " FROM bpay a WHERE a.payid = '" + payid + "'";
+		String sql = "SELECT a.*, func_getDictName('单据类型', a.btype) btypename, func_getUserName(a.maker) makername,"
+				+ " func_getManuName(a.manuid) manuname" + " FROM bpay a WHERE a.payid = '" + payid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
-		sql = "SELECT a.*, func_getManuName(a.manuid) manuname FROM bpayrow a WHERE a.payid = '" + payid + "'";
+		sql = "SELECT a.* FROM bpayrow a WHERE a.payid = '" + payid + "'";
 		List<CodeTableForm> payrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("payrowList", payrowList);
 		
@@ -190,6 +210,8 @@ public class PayDaoImpl extends BaseDaoImpl {
 						dbUtils.executeSQL(sql);
 					}
 				} else {
+					/**
+					// 修改银行卡的金额
 					sql = "SELECT a.payrowid, a.bankcardno, a.realsum FROM bpayrow a WHERE a.payid = '"
 						+ payid + "'";
 					List<CodeTableForm> list = dbUtils.getListBySql(sql);
@@ -206,6 +228,7 @@ public class PayDaoImpl extends BaseDaoImpl {
 							break;
 						}
 					}
+					*/
 					
 					if(iReturn >= 0) {
 						conn.commit();

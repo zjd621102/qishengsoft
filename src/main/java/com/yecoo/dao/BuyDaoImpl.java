@@ -198,7 +198,8 @@ public class BuyDaoImpl extends BaseDaoImpl {
 					.append(form.getValue("buyid")).append("'");
 				iReturn = dbUtils.executeSQL(conn, sql.toString());
 				
-				if(iReturn >= 1) {
+				/**
+				if(iReturn >= 1) {// 生成付款单
 					CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
 					String maker = StrUtils.nullToStr(user.getValue("userid")); //当前登录用户
 					String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss");
@@ -214,7 +215,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 	
 					iReturn = dbUtils.executeSQL(conn, sql.toString()); //直接保存，用于下面获取payid
 					
-					if(iReturn >= 1) {
+					if(iReturn >= 0) {
 						sql.delete(0,sql.length());
 						sql.append("INSERT INTO bpayrow(payid, manuid, manubankname, manubankcardno, manuaccountname, plansum, realsum)")
 							.append(" SELECT ").append(payid).append(", t.manuid,")
@@ -227,6 +228,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 						iReturn = dbUtils.executeSQL(conn, sql.toString());
 					}
 				}
+				*/
 			}
 			
 			if(iReturn >= 0) {

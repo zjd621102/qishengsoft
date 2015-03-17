@@ -246,7 +246,6 @@ public class BankcardAction {
 	 * @param request
 	 * @return
 	 */
-	@RequiresPermissions("Bankcard:other")
 	@RequestMapping(value="/transaction_list", method={RequestMethod.GET, RequestMethod.POST})
 	public String transaction_list(CodeTableForm form, HttpServletRequest request) {
 

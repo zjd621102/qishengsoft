@@ -171,12 +171,10 @@ public class SalaryDaoImpl extends BaseDaoImpl {
 				
 				if(iReturn >= 1) {
 					sql.delete(0,sql.length());
-					sql.append("INSERT INTO bpayrow(payid, manubankname, manubankcardno, manuaccountname, plansum, realsum)")
+					sql.append("INSERT INTO bpayrow(payid, plansum, realsum, remarkrow)")
 						.append(" SELECT ").append(payid).append(",")
-						.append(" (SELECT ss.bank FROM sstaff ss WHERE ss.staffid = t.staffid),")
-						.append(" (SELECT ss.accountno FROM sstaff ss WHERE ss.staffid = t.staffid),")
-						.append(" (SELECT ss.accountname FROM sstaff ss WHERE ss.staffid = t.staffid),")
-						.append(" t.planmoney, t.planmoney")
+						.append(" t.planmoney, t.planmoney,")
+						.append(" (SELECT ss.staffname FROM sstaff ss WHERE ss.staffid = t.staffid)")
 						.append(" FROM (SELECT staffid, SUM(planmoney) planmoney FROM bsalaryrow WHERE salaryid = '").append(salaryid)
 						.append("' GROUP BY staffid) t");
 					iReturn = dbUtils.executeSQL(conn, sql.toString());

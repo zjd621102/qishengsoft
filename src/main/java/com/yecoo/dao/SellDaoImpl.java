@@ -190,7 +190,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 					.append(") n SET m.stock = (m.stock - n.sum) WHERE m.materialid = n.materialid");
 				iReturn = dbUtils.executeSQL(conn, sql.toString());
 				
-				if(iReturn >= 1) {
+				if(iReturn >= 0) {
 					CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
 					String maker = StrUtils.nullToStr(user.getValue("userid")); //当前登录用户
 					String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss");
@@ -200,41 +200,19 @@ public class SellDaoImpl extends BaseDaoImpl {
 					
 					sql.delete(0, sql.length());
 					sql.append("INSERT INTO bpay(payid, btype, maker, paydate, relateno, relatemoney,")
-						.append(" currflow, createtime)	SELECT '").append(payid).append("', 'SKD', '").append(maker)
-						.append("', selldate, sellno, func_getSum(sellid, 'XSD'), '申请', '").append(createdate)
-						.append("' FROM bsell WHERE sellid = '").append(sellid).append("'");
+						.append(" currflow, createtime, manuid)	SELECT '").append(payid).append("', 'SKD', '")
+						.append(maker).append("', selldate, sellno, func_getSum(sellid, 'XSD'), '申请', '").append(createdate)
+						.append("', '").append(form.getValue("manuid")).append("' FROM bsell WHERE sellid = '")
+						.append(sellid).append("'");
 	
 					iReturn = dbUtils.executeSQL(conn, sql.toString()); //直接保存，用于下面获取payid
 					
-					if(iReturn >= 1) { //生成销售单
+					if(iReturn >= 1) { //生成收款单
 						sql.delete(0,sql.length());
-						sql.append("INSERT INTO bpayrow(payid, manuid, manubankname, manubankcardno, manuaccountname, plansum, realsum)")
-							.append(" SELECT ").append(payid).append(", t.manuid,")
-							.append(" (SELECT sm.bankrow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
-							.append(" (SELECT sm.accountnorow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
-							.append(" (SELECT sm.accountnamerow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
-							.append(" func_getSum(t.sellid, 'XSD'), func_getSum(t.sellid, 'XSD')")
+						sql.append("INSERT INTO bpayrow(payid, plansum, realsum)")
+							.append(" SELECT ").append(payid).append(", func_getSum(t.sellid, 'XSD'), 0.00")
 							.append(" FROM bsell t WHERE sellid = '").append(sellid).append("'");
 						iReturn = dbUtils.executeSQL(conn, sql.toString());
-						/*
-						if(iReturn >= 1) { //生成运费单
-							sql = new StringBuffer("INSERT INTO bpay(btype, maker, paydate, relateno, relatemoney,")
-							.append(" currflow, createtime)	SELECT 'YFD', '").append(maker)
-							.append("', selldate, sellno, func_getSum(sellid, 'XSD'), '申请', '").append(createdate)
-							.append("' FROM bsell WHERE sellid = '").append(sellid).append("'");
-							
-							iReturn = dbUtils.executeSQL(sql.toString()); //直接保存，用于下面获取payid
-							
-							if(iReturn >= 1) {
-								sql.delete(0,sql.length());
-								sql.append("SELECT MAX(payid) FROM bpay");
-								payid2 = dbUtils.getIntBySql(sql.toString());
-								sql.delete(0,sql.length());
-								sql.append("INSERT INTO bpayrow(payid) values ('").append(payid2).append("')");
-								iReturn = dbUtils.executeSQL(conn, sql.toString());
-							}
-						}
-						*/
 					}
 				}
 			}

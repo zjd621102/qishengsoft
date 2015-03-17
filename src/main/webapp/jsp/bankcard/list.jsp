@@ -83,13 +83,13 @@
 					<span>其它收支列表</span>
 				</a>
 			</li>
+			</shiro:hasPermission>
 			<li>
 				<a class="edit" href="<%=path%>/bankcard/transaction_list" target="dialog"
 					rel="bankcard_transaction_list" mask="true" width="1000" height="510">
 					<span>交易列表</span>
 				</a>
 			</li>
-			</shiro:hasPermission>
 		</ul>
 	</div>
 	<table class="table" style="width: 100%;" layoutH="138">

@@ -42,10 +42,12 @@ public class PayAction {
 
 		int totalCount = payDaoImpl.getPayCount(form);
 		List<CodeTableForm> payList = payDaoImpl.getPayList(form);
-		String totalSum = payDaoImpl.getPaySum(form);
+		String totalPlanSum = payDaoImpl.getPlanSum(form);
+		String totalRealSum = payDaoImpl.getPaySum(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
 		request.setAttribute("payList", payList); // 单据列表
-		request.setAttribute("totalSum", totalSum); // 销售额
+		request.setAttribute("totalPlanSum", totalPlanSum); // 应付金额
+		request.setAttribute("totalRealSum", totalRealSum); // 实付金额
 		request.setAttribute("sn", "pay"); //授权名称
 		request.setAttribute("form", form);
 		

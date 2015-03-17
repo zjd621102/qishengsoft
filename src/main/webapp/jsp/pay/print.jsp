@@ -61,52 +61,17 @@
 	<table class="rowtable">
 		<thead>
 			<tr>
-				<td width="4%">序号</td>
-				<td width="16%">银行卡卡号</td>
-				<td width="15%">供应商</td>
-				<td width="13%">供应商开户银行</td>
-				<td width="15%">供应商银行卡卡号</td>
-				<td width="13%">供应商账户名称</td>
-				<td width="7%">应付金额</td>
-				<td width="7%">实付金额</td>
+				<td width="50px">序号</td>
+				<td width="80px">应付金额</td>
+				<td width="80px">实付金额</td>
 				<td>备注</td>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td colspan="5"></td>
-				<td>
-					合计
-				</td>
-				<td>
-					<span id="allplansumSpan">${form.map.allplansum}</span>
-					<input type="hidden" name="map[allplansum]" />
-				</td>
-				<td>
-					<span id="allrealsumSpan">${form.map.allrealsum}</span>
-					<input type="hidden" name="map[allrealsum]" />
-				</td>
-				<td></td>
-			</tr>
 			<c:forEach items="${payrowList}" var="bean" varStatus="vs">
 			   	<tr>
 			   		<td>
 			   			<span>${vs.index+1}</span>
-			   		</td>
-					<td>
-						<span>${bean.map.bankcardno}</span>
-					</td>
-			   		<td>
-						<span>${bean.map.manuname}</span>
-			   		</td>
-			   		<td>
-						<span>${bean.map.manubankname}</span>
-			   		</td>
-			   		<td>
-						<span>${bean.map.manubankcardno}</span>
-			   		</td>
-			   		<td>
-						<span>${bean.map.manuaccountname}</span>
 			   		</td>
 			   		<td>
 						<span>${bean.map.plansum}</span>
@@ -121,6 +86,20 @@
 			   		</td>
 			   	</tr>
 		   	</c:forEach>
+			<tr>
+				<td width="50px">
+					合计
+				</td>
+				<td width="80px">
+					<span id="allplansumSpan">${form.map.allplansum}</span>
+					<input type="hidden" name="map[allplansum]" />
+				</td>
+				<td width="80px">
+					<span id="allrealsumSpan">${form.map.allrealsum}</span>
+					<input type="hidden" name="map[allrealsum]" />
+				</td>
+				<td></td>
+			</tr>
 	   	</tbody>
 	</table>
 </div>
