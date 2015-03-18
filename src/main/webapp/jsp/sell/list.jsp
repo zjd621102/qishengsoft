@@ -27,8 +27,8 @@
 						至：<input type="text" name="map[selldateTo]" size="8" value="${form.map.selldateTo}" class="date"/>
 					</td>
 					<td>
-						客户ID：
-						<input type="text" name="map[manuid]" size="8" value="${form.map.manuid}"
+						客户名称：
+						<input type="text" name="map[manuname]" size="8" value="${form.map.manuname}"
 							${changeManuname}/>
 					</td>
 					<td>
