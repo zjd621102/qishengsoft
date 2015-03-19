@@ -245,4 +245,24 @@ public class ProductDaoImpl extends BaseDaoImpl {
 		buffer.append("</ul>" + "\n");
 		return buffer.toString();
 	}
+	
+	/**
+	 * 复制产品清单
+	 * @param copyproductno	要复制的产品编码
+	 * @param productid	产品ID
+	 * @return
+	 */
+	public int copyDetail(String copyproductno, int productid) {
+
+		String[] sqls = new String[2];
+		sqls[0] = "DELETE FROM sproductrow WHERE productid = '" + productid + "'";
+		sqls[1] = "INSERT INTO sproductrow (productid, materialid, materialno, materialname, materialprice,"
+				+ " materialnum, materialsum, sort, remarkrow) SELECT " + productid + ", materialid, materialno,"
+				+ " materialname, materialprice, materialnum, materialsum, sort, remarkrow"
+				+ " FROM sproductrow a, sproduct b WHERE a.productid = b.productid AND b.productno = '"
+				+ copyproductno + "'";
+		int iReturn = dbUtils.executeSQLs(sqls);
+		
+		return iReturn;
+	}
 }

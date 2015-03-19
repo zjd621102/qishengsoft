@@ -39,7 +39,7 @@
 			<td>当前流程：
 				<span>${form.map.currflow}</span>
 			</td>
-			<td>制&nbsp;单&nbsp;人：
+			<td>制 单 人：
 				<span>${form.map.makername}</span>
 			</td>
 			<td>创建日期：
@@ -47,7 +47,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3">备&nbsp;&nbsp;&nbsp;&nbsp;注：
+			<td colspan="3">备&nbsp;&nbsp;注：
 				<span>${form.map.remark}</span>
 			</td>
 		</tr>

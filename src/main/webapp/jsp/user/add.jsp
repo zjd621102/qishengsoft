@@ -7,16 +7,16 @@
 			<p>
 				<label>用户账号：</label>
 				<input type="text" class="required alphanumeric" minlength="4" maxlength="32" size="30" name="map[userid]"
-					alt="请输入用户账号" />
+					alt="" />
 			</p>
 			<p>
 				<label>用户姓名：</label>
-				<input type="text" class="required" size="30" name="map[username]" alt="请输入用户姓名" />
+				<input type="text" class="required" size="30" name="map[username]" al" />
 			</p>
 			<p>
 				<label>用户密码：</label>
 				<input type="text" class="required" minlength="4" maxlength="32" size="30" name="map[passwd]"
-					value="888888" alt="请输入用户密码" />
+					value="888888" alt="" />
 			</p>
 			<p>
 				<label>手机号码：</label>

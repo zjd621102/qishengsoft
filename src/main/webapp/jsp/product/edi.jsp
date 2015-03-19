@@ -67,6 +67,25 @@
 	function addRowOther() {
 		$("[name='map[sort]']:last").val($("#productRowTbody tr").size()-3);
 	}
+	
+	// 复制产品清单
+	function copyDetail() {
+		var _copyproductno = $("#copyproductno").val();
+		if(_copyproductno != "") {
+			$.post(
+				"<%=path%>/product/copyDetail",
+				{copyproductno: _copyproductno, productid: ${form.map.productid}},
+				function(data) {
+					if(data == "true") {// 复制成功
+						$.pdialog.reload("<%=path%>/product/edi/${form.map.productid}",
+								{data:{}, dialogId:"product_edi", callback:null});
+					} else {// 复制失败
+						
+					}
+				}
+			);
+		}			
+	}
 </script>
 
 <form id="downloadForm" method="post"></form>
@@ -159,7 +178,23 @@
 		
 		<div class="divider"></div>
 		
-		<h1 class="margin10px">产品清单（成本单价=人力成本+其他成本+配件成本）</h1>
+		<table>
+			<tr>
+				<td>
+					<h1 class="margin10px">产品清单</h1>
+				</td>
+				<td>
+					<input type="text" id="copyproductno" style="width: 100px;" />
+				</td>
+				<td>
+					<div class="button" style="margin-left: 5px;">
+						<div class="buttonContent">
+							<button type="button" onclick="copyDetail();">复制</button>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
 
 		<table class="table" style="width: 100%;">
 			<thead>

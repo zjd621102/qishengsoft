@@ -12,7 +12,7 @@
 			<p>
 				<label>用户姓名：</label>
 				<input type="text" class="required" size="30" name="map[username]" value="${form.map.username}"
-				 alt="请输入用户姓名"/>
+				 alt=""/>
 			</p>
 			<p>
 				<label>手机号码：</label>

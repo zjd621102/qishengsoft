@@ -189,4 +189,25 @@ public class ProductAction {
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
         return list;
     }
+    
+    /**
+     * 复制产品清单
+     * @param request
+     * @return
+     */
+	@RequestMapping(value="/copyDetail")
+	public @ResponseBody String copyDetail(HttpServletRequest request) {
+		
+		String result = "false";
+		
+		String copyproductno = StrUtils.nullToStr(request.getParameter("copyproductno"));
+		int productid = Integer.parseInt(StrUtils.nullToStr(request.getParameter("productid"), "0"));
+		
+		int iReturn = productDaoImpl.copyDetail(copyproductno, productid);
+		if (iReturn >= 0) {
+			result = "true";
+		}
+		
+		return result;
+	}
 }

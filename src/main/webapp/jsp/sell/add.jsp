@@ -77,6 +77,7 @@
 	 * 修改数量
 	 */
 	function changeNum() {
+		setAllSum('boxnum', 'allnum');
 		setMultiply('boxnum', 'numofonebox', 'num');
 		changeValue();
 	}
@@ -192,11 +193,14 @@
 						<input type="text" name="map[allprofit]" style="width: 65px;" class="number"
 							value="0.00" readonly="readonly"/>
 					</td>
-					<td></td>
-					<td></td>
 					<td style="font-size: 13px; font-weight: bold; color: red;">
 						合计：
 					</td>
+					<td>
+						<input type="text" name="map[allnum]" style="width: 65px;" class="digits"
+							value="0.00" readonly="readonly"/>
+					</td>
+					<td></td>
 					<td>
 						<input type="text" name="map[allrealsum]" style="width: 65px;" class="number"
 							value="0.00" readonly="readonly"/>
