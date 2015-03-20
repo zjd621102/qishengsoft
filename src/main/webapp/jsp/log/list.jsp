@@ -105,7 +105,11 @@
 			   			</td>
 			   		</c:if>
 			   		<td>${vs.index+1}</td>
-			   		<td>${bean.map.logtype}</td>
+			   		<td>
+			   			<c:if test="${act!='excel'}"><!-- 会乱码 -->
+			   				${bean.map.logtype}
+			   			</c:if>
+			   		</td>
 			   		<td>${bean.map.operatername}</td> 
 			   		<td>${bean.map.operatetime}</td>
 			   		<td>${bean.map.remark}</td>

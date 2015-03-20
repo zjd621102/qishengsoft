@@ -53,49 +53,53 @@
 		</tr>
 	</table>
 
-	<h2>销售清单</h2>
+	<h2>销售清单（铜为红色显示）</h2>
 
 	<table class="rowtable">
 		<thead>
 			<tr>
 				<td style="width: 35px;">序号</td>
 				<td style="width: 80px;">产品编码</td>
-				<td>产品名称</td>
-				<td style="width: 60px;">件数</td>
+				<td style="width: 135px;">产品名称</td>
+				<td style="width: 45px;">件数</td>
 				<td style="width: 70px;">一件数量</td>
-				<td style="width: 60px;">数量</td>
+				<td style="width: 50px;">数量</td>
 				<td style="width: 70px;">单价</td>
-				<td style="width: 70px;">金额</td>
+				<td style="width: 75px;">金额</td>
+				<td>备注</td>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${sellrowList}" var="bean" varStatus="vs">
 			   	<tr>
 			   		<td style="width: 35px;">
-			   			<span>${vs.index+1}</span>
+			   			<span style="${bean.map.materialtype == '1' ? 'color:red' : ''}">${vs.index+1}</span>
 			   		</td>
 			   		<td style="width: 80px;">
-						<span>${bean.map.productno}</span>
+						<span style="${bean.map.materialtype == '1' ? 'color:red' : ''}">${bean.map.productno}</span>
 			   		</td>
-			   		<td>
-						<span>${bean.map.productname}</span>
+			   		<td style="width: 125px;">
+						<span style="${bean.map.materialtype == '1' ? 'color:red' : ''}">${bean.map.productname}</span>
 			   		</td>
-			   		<td style="width: 60px;">
-						<span>${bean.map.boxnum}</span>
+			   		<td style="width: 45px;">
+						<span style="${bean.map.materialtype == '1' ? 'color:red' : ''}">${bean.map.boxnum}</span>
 						<input type="hidden" name="map[boxnum]" value="${bean.map.boxnum}" />
 			   		</td>
 			   		<td style="width: 70px;">
-						<span>${bean.map.numofonebox}</span>
+						<span style="${bean.map.materialtype == '1' ? 'color:red' : ''}">${bean.map.numofonebox}</span>
 			   		</td>
-			   		<td style="width: 60px;">
-						<span>${bean.map.num}</span>
-			   		</td>
-			   		<td style="width: 70px;">
-						<span>${bean.map.realprice}</span>
+			   		<td style="width: 50px;">
+						<span style="${bean.map.materialtype == '1' ? 'color:red' : ''}">${bean.map.num}</span>
 			   		</td>
 			   		<td style="width: 70px;">
-						<span>${bean.map.realsum}</span>
+						<span style="${bean.map.materialtype == '1' ? 'color:red' : ''}">${bean.map.realprice}</span>
+			   		</td>
+			   		<td style="width: 75px;">
+						<span style="${bean.map.materialtype == '1' ? 'color:red' : ''}">${bean.map.realsum}</span>
 						<input type="hidden" name="map[realsum]" value="${bean.map.realsum}" />
+			   		</td>
+			   		<td>
+			   			<span style="${bean.map.materialtype == '1' ? 'color:red' : ''}">${bean.map.remarkrow}</span>
 			   		</td>
 			   	</tr>
 		   	</c:forEach>
@@ -113,6 +117,7 @@
 					<span id="allrealsumSpan">${form.map.allrealsum}</span>
 					<input type="hidden" name="map[allrealsum]" />
 				</td>
+				<td></td>
 			</tr>
 	   	</tbody>
 	</table>

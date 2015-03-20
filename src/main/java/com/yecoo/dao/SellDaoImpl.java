@@ -154,7 +154,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 				+ " FROM bsell a WHERE a.sellid = '" + sellid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
-		sql = "SELECT a.*, b.productno, func_getDictName('计量单位', a.unit) unitname"
+		sql = "SELECT a.*, b.productno, func_getDictName('计量单位', a.unit) unitname, substr(b.productno, 3, 1) materialtype"
 				+ " FROM bsellrow a LEFT JOIN sproduct b ON a.productid = b.productid WHERE a.sellid = '" + sellid + "'";
 		List<CodeTableForm> sellrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("sellrowList", sellrowList);
