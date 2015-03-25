@@ -29,8 +29,10 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		
 		String buydateFrom = StrUtils.nullToStr(form.getValue("buydateFrom"), dateUtils.getStepDateTime(-366));
 		String buydateTo = StrUtils.nullToStr(form.getValue("buydateTo"), DateUtils.getNowDate());
+		String manuName = StrUtils.nullToStr(form.getValue("manuName"));
 		form.setValue("buydateFrom", buydateFrom);
 		form.setValue("buydateTo", buydateTo);
+		form.setValue("manuName", manuName);
 		List<String> monthList = DateUtils.getMonthList(buydateFrom, buydateTo);
 		for (int i = 0, montLen = monthList.size(); i < montLen; i++) {
 			if(i >= 1) {
@@ -39,28 +41,31 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			monthStr.append("'").append(monthList.get(i)).append("'");
 		}
 
-		String sql = "SELECT manuid, manuname FROM smanu t WHERE t.manutypeid = '1' ORDER BY t.priority ASC";
-		List<CodeTableForm> manuList = dbUtils.getListBySql(sql);
-		String sum = null;
-		for (int manuIndex = 0, manuLen = manuList.size(); manuIndex < manuLen; manuIndex++) {
-			CodeTableForm manu = manuList.get(manuIndex);
-			
-			dataStr.delete(0, dataStr.length());
-			for(int i = 0, monthLen = monthList.size(); i < monthLen; i++) {
-				sql = "SELECT IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b WHERE a.payid = b.payid"
-						+ " AND a.btype = 'FKD' AND a.currflow = '结束' AND a.paydate LIKE '"
-						+ monthList.get(i) + "%' AND a.manuid = '" + manu.getValue("manuid") + "'";
-				sum = dbUtils.execQuerySQL(sql);
-				if(i >= 1) {
-					dataStr.append(",");
+		if(!manuName.equals("")) {
+			String sql = "SELECT manuid, manuname FROM smanu t WHERE t.manutypeid = '1' AND t.manuname LIKE '%"
+					+ manuName + "%' ORDER BY t.priority ASC";
+			List<CodeTableForm> manuList = dbUtils.getListBySql(sql);
+			String sum = null;
+			for (int manuIndex = 0, manuLen = manuList.size(); manuIndex < manuLen; manuIndex++) {
+				CodeTableForm manu = manuList.get(manuIndex);
+				
+				dataStr.delete(0, dataStr.length());
+				for(int i = 0, monthLen = monthList.size(); i < monthLen; i++) {
+					sql = "SELECT IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid"
+							+ " AND a.buydate LIKE '"
+							+ monthList.get(i) + "%' AND b.manuid = '" + manu.getValue("manuid") + "'";
+					sum = dbUtils.execQuerySQL(sql);
+					if(i >= 1) {
+						dataStr.append(",");
+					}
+					dataStr.append(sum);
 				}
-				dataStr.append(sum);
+				
+				if(manuIndex >= 1) {
+					dataArray.append(",");
+				}
+				dataArray.append("{name:'").append(manu.getValue("manuname")).append("', data:[").append(dataStr).append("]}");
 			}
-			
-			if(manuIndex >= 1) {
-				dataArray.append(",");
-			}
-			dataArray.append("{name:'").append(manu.getValue("manuname")).append("', data:[").append(dataStr).append("]}");
 		}
 		
 		request.setAttribute("monthStr", monthStr.toString());
@@ -80,8 +85,10 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		
 		String selldateFrom = StrUtils.nullToStr(form.getValue("selldateFrom"), dateUtils.getStepDateTime(-366));
 		String selldateTo = StrUtils.nullToStr(form.getValue("selldateTo"), DateUtils.getNowDate());
+		String manuName = StrUtils.nullToStr(form.getValue("manuName"));
 		form.setValue("selldateFrom", selldateFrom);
 		form.setValue("selldateTo", selldateTo);
+		form.setValue("manuName", manuName);
 		List<String> monthList = DateUtils.getMonthList(selldateFrom, selldateTo);
 		for (int i = 0, montLen = monthList.size(); i < montLen; i++) {
 			if(i >= 1) {
@@ -90,7 +97,8 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			monthStr.append("'").append(monthList.get(i)).append("'");
 		}
 
-		String sql = "SELECT manuid, manuname FROM smanu t WHERE t.manutypeid = '2' ORDER BY t.priority ASC";
+		String sql = "SELECT manuid, manuname FROM smanu t WHERE t.manutypeid = '2' AND t.manuname LIKE '%"
+				+ manuName + "%' ORDER BY t.priority ASC";
 		List<CodeTableForm> manuList = dbUtils.getListBySql(sql);
 		String sum = null;
 		for (int manuIndex = 0; manuIndex < manuList.size(); manuIndex++) {
@@ -98,8 +106,8 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			
 			dataStr.delete(0, dataStr.length());
 			for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
-				sql = "SELECT IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b WHERE a.payid = b.payid"
-						+ " AND a.btype = 'SKD' AND a.currflow = '结束' AND a.paydate LIKE '"
+				sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bsell a, bsellrow b"
+						+ " WHERE a.sellid = b.sellid AND b.productid IS NOT NULL AND a.selldate LIKE '"
 						+ monthList.get(monthIndex) + "%' AND a.manuid = '" + manu.getValue("manuid") + "'";
 				sum = dbUtils.execQuerySQL(sql);
 				if(monthIndex >= 1) {
@@ -339,9 +347,9 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		form.setValue("limitNum", limitNum);
 		
 		sql = "SELECT m.* FROM "
-				+ "(SELECT c.manuname name, IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b, smanu c"
-				+ " WHERE a.payid = b.payid AND b.manuid = c.manuid AND a.btype = 'FKD' AND a.currflow = '结束' AND a.paydate >= '"
-				+ dateFrom + "' AND a.paydate <= '" + dateTo + "' GROUP BY c.manuname) m ORDER BY m.sum " + sort
+				+ "(SELECT c.manuname name, IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b, smanu c"
+				+ " WHERE a.buyid = b.buyid AND b.manuid = c.manuid AND a.buydate >= '"
+				+ dateFrom + "' AND a.buydate <= '" + dateTo + "' GROUP BY c.manuname) m ORDER BY m.sum " + sort
 				+ " LIMIT " + limitFrom + "," + limitNum;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		int len = list.size();
@@ -377,9 +385,9 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		form.setValue("dateTo", dateTo);
 		
 		sql = "SELECT m.* FROM "
-				+ "(SELECT c.manuname, IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b, smanu c"
-				+ " WHERE a.payid = b.payid AND a.manuid = c.manuid AND a.btype = 'SKD' AND a.currflow = '结束' AND a.paydate >= '"
-				+ dateFrom + "' AND a.paydate <= '" + dateTo + "' GROUP BY c.manuname) m ORDER BY m.sum DESC";
+				+ "(SELECT c.manuname, IFNULL(SUM(b.realsum), 0) sum FROM bsell a, bsellrow b, smanu c"
+				+ " WHERE a.sellid = b.sellid AND a.manuid = c.manuid AND a.selldate >= '"
+				+ dateFrom + "' AND a.selldate <= '" + dateTo + "' GROUP BY c.manuname) m ORDER BY m.sum DESC";
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		int i = 0;
 		for(CodeTableForm codeTableForm : list) {

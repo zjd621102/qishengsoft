@@ -5,13 +5,13 @@ $(function () {
     $('#reportSell_div').highcharts({
         chart: {
             type: 'line'
-            ,events: {
-                load: function (event) {
-                    for (var i = this.series.length - 1; i >= 0; i--) {
-                        this.series[i].hide();// 设置只显示第一条线，其他都不显示  
-                    }
-                }
-            }
+//             ,events: {
+//                 load: function (event) {
+//                     for (var i = this.series.length - 1; i >= 0; i--) {
+//                         this.series[i].hide();// 设置只显示第一条线，其他都不显示  
+//                     }
+//                 }
+//             }
         },
         title: {
             text: '月度客户报表'
@@ -58,6 +58,9 @@ $(function () {
 						&nbsp;&nbsp;至&nbsp;&nbsp;
 						<input type="text" class="date" readonly="readonly" name="map[selldateTo]"
 						 value="${form.map.selldateTo}" style="width: 100px;" />
+						供应商名称
+						<input type="text" maxlength="8" name="map[manuName]"
+						 value="${form.map.manuName}" style="width: 100px;" />
 					</td>
 				</tr>
 			</table>
