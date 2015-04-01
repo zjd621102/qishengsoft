@@ -80,8 +80,9 @@
 				<th width="60px">单据类型</th>
 				<th width="80px">单据日期</th>
 				<th width="120px">关联单号</th>
-				<th width="140px">应付金额（${totalPlanSum}）</th>
-				<th width="140px">实付金额（${totalRealSum}）</th>
+				<th width="100px">应付(${totalPlanSum})</th>
+				<th width="100px">实付(${totalRealSum})</th>
+				<th width="100px">待付(${unPaySum})</th>
 				<th width="100px">供应商</th>
 				<th width="60px">当前流程</th>
 				<th>创建时间</th>
@@ -97,6 +98,7 @@
 			   		<td>${bean.map.relateno}</td>
 			   		<td>${bean.map.allplansum}</td>
 			   		<td>${bean.map.allrealsum}</td>
+			   		<td>${bean.map.unpaysum}</td>
 			   		<td>${bean.map.manuname}</td>
 			   		<td>${bean.map.currflow}</td>
 			   		<td>${bean.map.createtime}</td>

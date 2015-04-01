@@ -43,6 +43,9 @@ public class PayDaoImpl extends BaseDaoImpl {
 		sql  += cond;
 		sql += " ORDER BY createtime DESC";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
+		
+		sql = "SELECT m.*, (m.allplansum - m.allrealsum) unpaysum FROM (" + sql + ") m";
+		
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
 	}

@@ -59,7 +59,7 @@ $(function () {
 						<input type="text" class="date" readonly="readonly" name="map[buydateTo]"
 						 value="${form.map.buydateTo}" style="width: 100px;" />
 						供应商名称
-						<input type="text" maxlength="8" name="map[manuName]"
+						<input type="text" maxlength="8" name="map[manuName]" class="required"
 						 value="${form.map.manuName}" style="width: 100px;" />
 					</td>
 				</tr>

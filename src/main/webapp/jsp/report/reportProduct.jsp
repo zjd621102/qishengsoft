@@ -59,10 +59,12 @@
 	        series: [{
 	            name: '销售额',
 	            data: [${requestScope.dataStr}]
-	        }, {
-	            name: '利润',
-	            data: [${requestScope.dataProfitStr}]
-	        }]
+	        }
+// 	        , {
+// 	            name: '利润',
+// 	            data: [${requestScope.dataProfitStr}]
+// 	        }
+	        ]
 	    });
 	});
 });
