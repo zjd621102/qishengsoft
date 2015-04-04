@@ -69,9 +69,9 @@
 		<thead>
 			<tr>
 				<th width="30px">序号</th>
-				<th width="80px">产品编码</th>
-				<th width="120px">产品名称</th>
-				<th width="80px">产品类型</th>
+				<th width="70px">产品编码</th>
+				<th width="130px">产品名称</th>
+				<th width="70px">产品类型</th>
 				<th width="60px">计量单位</th>
 				<th width="60px">产品单价</th>
 				<th width="60px">一件数量</th>

@@ -79,9 +79,10 @@
 				<th width="60px">供应商ID</th>
 				<th width="120px">供应商名称</th>
 				<th width="70px">供应商类别</th>
-				<th width="70px">供应商状态</th>
 				<th width="80px">联系人</th>
 				<th width="100px">手机号码</th>
+				<th width="100px">电话</th>
+				<th width="70px">供应商状态</th>
 				<th width="80px">推荐人</th>
 				<th width="130px">创建时间</th>
 				<th>优先级</th>
@@ -101,9 +102,10 @@
 			   		<td>${bean.map.manuid}</td>
 			   		<td>${bean.map.manuname}</td>
 			   		<td>${bean.map.manutypename}</td>
-			   		<td>${bean.map.statusname}</td>
 			   		<td>${bean.map.manucontact}</td>
-			   		<td>${bean.map.manuphone}</td>
+			   		<td><a href="wtai://wp/mc;${bean.map.manuphone}">${bean.map.manuphone}</a></td>
+			   		<td><a href="wtai://wp/mc;${bean.map.manutel}">${bean.map.manutel}</a></td>
+			   		<td>${bean.map.statusname}</td>
 			   		<td>${bean.map.referee}</td>
 			   		<td>${bean.map.createdate}</td>
 			   		<td>${bean.map.priority}</td>

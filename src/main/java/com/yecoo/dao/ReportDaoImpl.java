@@ -97,8 +97,8 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			monthStr.append("'").append(monthList.get(i)).append("'");
 		}
 
-		String sql = "SELECT manuid, manuname FROM smanu t WHERE t.manutypeid = '2' AND t.manuname LIKE '%"
-				+ manuName + "%' ORDER BY t.priority ASC";
+		String sql = "SELECT manuid, manuname FROM smanu t WHERE t.manutypeid = '2' AND t.statusid = '1'"
+				+ " AND t.manuname LIKE '%" + manuName + "%' ORDER BY t.priority ASC";
 		List<CodeTableForm> manuList = dbUtils.getListBySql(sql);
 		String sum = null;
 		for (int manuIndex = 0; manuIndex < manuList.size(); manuIndex++) {
@@ -151,11 +151,11 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			monthStr.append("'").append(monthList.get(i)).append("'");
 		}
 		
-		// 收款统计
+		// 发货统计
 		dataStr.delete(0, dataStr.length());
 		for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
-			sql = "SELECT IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b WHERE a.payid = b.payid"
-					+ " AND a.currflow = '结束' AND a.btype = 'SKD' AND a.paydate LIKE '"
+			sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bsell a, bsellrow b"
+					+ " WHERE a.sellid = b.sellid AND b.productid IS NOT NULL AND a.selldate LIKE '"
 					+ monthList.get(monthIndex) + "%'";
 			sum = dbUtils.execQuerySQL(sql);
 			if(monthIndex >= 1) {
@@ -163,13 +163,12 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			}
 			dataStr.append(sum);
 		}
-		dataArray.append("{name:'收款统计', data:[").append(dataStr).append("]}");
+		dataArray.append("{name:'发货统计', data:[").append(dataStr).append("]}");
 		
-		// 付款统计
+		// 采购统计
 		dataStr.delete(0, dataStr.length());
 		for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
-			sql = "SELECT IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b WHERE a.payid = b.payid"
-					+ " AND a.currflow = '结束' AND a.btype = 'FKD' AND a.paydate LIKE '"
+			sql = "SELECT IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.buydate LIKE '"
 					+ monthList.get(monthIndex) + "%'";
 			sum = dbUtils.execQuerySQL(sql);
 			if(monthIndex >= 1) {
@@ -178,7 +177,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			dataStr.append(sum);
 		}
 		dataArray.append(",");
-		dataArray.append("{name:'付款统计', data:[").append(dataStr).append("]}");
+		dataArray.append("{name:'采购统计', data:[").append(dataStr).append("]}");
 		/*
 		// 简易采购统计
 		dataStr.delete(0, dataStr.length());
@@ -419,16 +418,16 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		form.setValue("dateFrom", dateFrom);
 		form.setValue("dateTo", dateTo);
 		
-		sql = "SELECT IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b WHERE a.payid = b.payid"
-				+ " AND a.currflow = '结束' AND a.paydate >= '" + dateFrom + "' AND a.paydate <= '"
-				+ dateTo + "'";
-		
-		// 收款统计
-		sum = dbUtils.execQuerySQL(sql + " AND a.btype = 'SKD'");
+		// 发货统计
+		sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bsell a, bsellrow b WHERE a.sellid = b.sellid AND b.productid IS NOT NULL"
+				+ " AND a.selldate >= '" + dateFrom + "' AND a.selldate <= '" + dateTo + "'";
+		sum = dbUtils.execQuerySQL(sql);
 		dataStr.append(sum);
 		
-		// 付款统计
-		sum = dbUtils.execQuerySQL(sql + " AND a.btype = 'FKD'");
+		// 采购统计
+		sql = "SELECT IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid"
+				+ " AND a.buydate >= '" + dateFrom + "' AND a.buydate <= '" + dateTo + "'";
+		sum = dbUtils.execQuerySQL(sql);
 		dataStr.append(",");
 		dataStr.append(sum);
 		/*
@@ -450,7 +449,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		dataStr.append(",");
 		dataStr.append(sum);
 		*/
-		request.setAttribute("types", "'收款统计', '付款统计', '工资统计'");
+		request.setAttribute("types", "'发货统计', '采购统计', '工资统计'");
 		request.setAttribute("dataStr", dataStr.toString());
 	}
 }
