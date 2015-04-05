@@ -58,7 +58,7 @@ $(function () {
 						&nbsp;&nbsp;至&nbsp;&nbsp;
 						<input type="text" class="date" readonly="readonly" name="map[selldateTo]"
 						 value="${form.map.selldateTo}" style="width: 100px;" />
-						供应商名称
+						客户名称
 						<input type="text" maxlength="8" name="map[manuName]"
 						 value="${form.map.manuName}" style="width: 100px;" />
 					</td>

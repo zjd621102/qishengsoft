@@ -11,30 +11,40 @@
 		<div class="searchBar">
 			<table class="searchContent">
 				<tr>
-					<td>
+					<td style="width: 25%;">
 						销售单编号：
-						<input type="text" name="map[sellno]" size="12" maxlength="16"
+						<input type="text" name="map[sellno]" maxlength="16" style="width: 110px;"
 							value="${form.map.sellno}"/>
 					</td>
-					<td>
+					<td style="width: 25%;">
 						当前流程：
-						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 60px;'" />
+						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
+						 expStr="style='width: 114px;'" />
+					</td>
+					<td style="width: 25%;">
+						发货日期从：
+						<input type="text" name="map[selldateFrom]" style="width: 110px;"
+						 value="${form.map.selldateFrom}" class="date"/>
 					</td>
 					<td>
-						发货日期从：<input type="text" name="map[selldateFrom]" size="8" value="${form.map.selldateFrom}" class="date"/>
+						至：
+						<input type="text" name="map[selldateTo]" style="width: 110px;"
+						 value="${form.map.selldateTo}" class="date"/>
 					</td>
-					<td>
-						至：<input type="text" name="map[selldateTo]" size="8" value="${form.map.selldateTo}" class="date"/>
-					</td>
-					<td>
-						客户名称：
-						<input type="text" name="map[manuname]" size="8" value="${form.map.manuname}"
-							${changeManuname}/>
+				</tr>
+				<tr>
+					<td style="font-family: '宋体';">
+						&nbsp;客户名称：
+						<input type="text" name="map[manuname]" style="width: 110px;"
+						 value="${form.map.manuname}" ${changeManuname}/>
 					</td>
 					<td>
 						产品编码：
-						<input type="text" name="map[productno]" size="8" value="${form.map.productno}"/>
+						<input type="text" name="map[productno]" style="width: 110px;"
+						 value="${form.map.productno}"/>
 					</td>
+					<td></td>
+					<td></td>
 				</tr>
 			</table>
 			<div class="subBar">

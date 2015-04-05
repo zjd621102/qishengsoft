@@ -91,17 +91,21 @@
 		action="<%=path%>/report/reportStatistics" method="post"
 		rel="statistics_report" id="fid">
 		<div class="searchBar">
-			<table class="searchContent" style="width: 80%">
+			<table class="searchContent">
 				<tr>
 					<td>
 						日期从：
 						<input type="text" class="date" readonly="readonly" name="map[dateFrom]"
 						 value="${form.map.dateFrom}" style="width: 100px;" />
-					</td>
-					<td>
 						至：
 						<input type="text" class="date" readonly="readonly" name="map[dateTo]"
 						 value="${form.map.dateTo}" style="width: 100px;" />
+						产品类型：
+						<st:select dictType="产品类型" name="map[producttype]" value="${form.map.producttype}"
+						 expStr="style='width: 100px;'" />
+						客户名称
+						<input type="text" maxlength="8" name="map[manuName]"
+						 value="${form.map.manuName}" style="width: 100px;" />
 					</td>
 				</tr>
 			</table>

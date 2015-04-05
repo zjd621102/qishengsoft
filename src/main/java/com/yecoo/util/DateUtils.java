@@ -720,6 +720,18 @@ public class DateUtils {
 
 		return monthList;
 	}
+	
+	/**
+	 * 获取当前年份的第一天
+	 * @return
+	 */
+	public static String getFristDayOfCurYear() {
+		String date = null;
+		Calendar calendar = Calendar.getInstance();
+		int year = calendar.get(Calendar.YEAR);
+		date = year + "-01-01";
+		return date;
+	}
 
 	public static void main(String[] args) {
 //		List<String> list = DateUtils.getMonthList("2012-04-28", "2012-11-05");
