@@ -13,6 +13,7 @@
 	
 	function addRowOther() {
 		autoCom("[name='map[productno]']:last");
+		$("[name='map[sort]']:last").val($("#rowTbody tr").size()-3);
 	}
 	
 	function autoCom(obj) {
@@ -76,9 +77,9 @@
 	/**
 	 * 修改数量
 	 */
-	function changeNum() {
+	function changeNum(obj) {
 		setAllSum('boxnum', 'allnum');
-		setMultiply('boxnum', 'numofonebox', 'num');
+		setMultiply('boxnum', 'numofonebox', 'num', obj);
 		changeValue();
 	}
 	 
@@ -162,12 +163,12 @@
 			<thead>
 				<tr>
 					<th width="30px">
-						<a href="#" class="btnAdd addRow"></a>
+<!-- 						<a href="#" class="btnAdd addRow"></a> -->
 					</th>
 					<th width="30px">序号</th>
 					<th width="150px">产品编码</th>
 					<th width="150px">产品名称</th>
-					<th width="60px">计量单位</th>
+<!-- 					<th width="60px">计量单位</th> -->
 					<th width="60px">产品单价</th>
 					<th width="60px">实付单价</th>
 					<th width="60px" style="display: ${showProfit};">成本单价</th>
@@ -176,16 +177,17 @@
 					<th width="60px">件数</th>
 					<th width="60px">一件数量</th>
 					<th width="80px">实付总价</th>
+					<th width="50px">排序</th>
 					<th>备注</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="rowTbody">
 				<tr>
 					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
-					<td></td>
+<!-- 					<td></td> -->
 					<td></td>
 					<td></td>
 					<td style="display: ${showProfit};"></td>
@@ -198,13 +200,14 @@
 					</td>
 					<td>
 						<input type="text" name="map[allnum]" style="width: 65px;" class="digits"
-							value="0.00" readonly="readonly"/>
+							value="0" readonly="readonly"/>
 					</td>
 					<td></td>
 					<td>
 						<input type="text" name="map[allrealsum]" style="width: 65px;" class="number"
 							value="0.00" readonly="readonly"/>
 					</td>
+					<td></td>
 					<td></td>
 				</tr>
 			   	<tr id="IDCopyRow" style="display:none">
@@ -224,9 +227,11 @@
 			   		<td>
 						<input type="text" name="map[productname]" style="width: 130px;" maxlength="32" class="required"/>
 			   		</td>
+			   		<%-- 
 			   		<td>
 			   			<st:select dictType="计量单位" name="map[unit]" expStr="style='width: 100%;'" />
 			   		</td>
+			   		--%>
 			   		<td>
 						<input type="text" name="map[planprice]" style="width: 45px;" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
@@ -249,15 +254,19 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[boxnum]" style="width: 45px;" maxlength="12"
-							class="digits" value="0" onchange="changeNum();"/>
+							class="digits" value="0" onchange="changeNum(this);"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[numofonebox]" style="width: 45px;" maxlength="12"
-							class="digits" value="0" onchange="changeNum();"/>
+							class="digits" value="0" onchange="changeNum(this);"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realsum]" style="width: 65px;" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[sort]" style="width: 35px;" maxlength="4" class="number"
+							value="9"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 155px;" maxlength="256"/>
@@ -270,6 +279,13 @@
 	
 	<div class="formBar">
 		<ul>
+			<li>
+				<div class="buttonActive">
+					<div class="buttonContent">
+						<button type="button" class="btnAdd addRow">新增</button>
+					</div>
+				</div>
+			</li>
 			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
 		</ul>

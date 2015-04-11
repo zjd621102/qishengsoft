@@ -41,7 +41,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 				+ " func_getSum(t.sellid, 'XSD') allrealsum FROM bsell t WHERE 1 = 1";
 		String cond = getSellListCondition(form);
 		sql  += cond;
-		sql += " ORDER BY t.selldate DESC";
+		sql += " ORDER BY t.selldate DESC, createtime DESC";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
@@ -155,7 +155,8 @@ public class SellDaoImpl extends BaseDaoImpl {
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
 		sql = "SELECT a.*, b.productno, func_getDictName('计量单位', a.unit) unitname, substr(b.productno, 3, 1) materialtype"
-				+ " FROM bsellrow a LEFT JOIN sproduct b ON a.productid = b.productid WHERE a.sellid = '" + sellid + "'";
+				+ " FROM bsellrow a LEFT JOIN sproduct b ON a.productid = b.productid WHERE a.sellid = '"
+				+ sellid + "' ORDER BY sort, sellid";
 		List<CodeTableForm> sellrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("sellrowList", sellrowList);
 		

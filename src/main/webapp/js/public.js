@@ -44,15 +44,24 @@ function multiply(dou1, dou2) {
  * @param name1 相乘字段
  * @param name2 相乘字段
  * @param name3 赋值字段
+ * @param obj 	所在行的对象
  */
-function setMultiply(name1, name2, name3) {
-	$("input[name*='map[" + name1 + "]']").each(function() {
-		var row = $(this).parents("tr:first");
+function setMultiply(name1, name2, name3, obj) {
+	if(obj) {// 当前行
+		var row = $(obj).parents("tr:first");
 		var realprice = row.find("[name*='map[" + name1 + "]']").val();
 		var num = row.find("[name*='map[" + name2 + "]']").val();
 		var realsum = multiply(realprice, num);
 		row.find("[name*='map[" + name3 + "]']").val(realsum);
-	});
+	} else {// 所有行
+		$("input[name*='map[" + name1 + "]']").each(function() {
+			var row = $(this).parents("tr:first");
+			var realprice = row.find("[name*='map[" + name1 + "]']").val();
+			var num = row.find("[name*='map[" + name2 + "]']").val();
+			var realsum = multiply(realprice, num);
+			row.find("[name*='map[" + name3 + "]']").val(realsum);
+		});
+	}
 }
 /**
  * 相加所有值
