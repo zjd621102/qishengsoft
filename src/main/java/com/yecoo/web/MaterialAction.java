@@ -81,6 +81,13 @@ public class MaterialAction {
 		form.setValue("materialno", materialno); //物资类型编码
 		form.setValue("materialtypename", StrUtils.nullToStr(parentForm.getValue("materialtypename")));
 		form.setValue("unit", "1");// 默认单位：只
+		
+		// 默认供应商为物资类型同名供应商
+		String sql = "SELECT t.manuid, t.manuname FROM smanu t WHERE t.manuname = '"
+				+ parentForm.getValue("materialtypename") + "'";
+		CodeTableForm manuForm = dbUtils.getFormBySql(sql);
+		form.setValue("manuid", StrUtils.nullToStr(manuForm.getValue("manuid")));
+		form.setValue("manuname", StrUtils.nullToStr(manuForm.getValue("manuname")));
 
 		request.setAttribute("form", form);
 		request.setAttribute("curTime", curTime);

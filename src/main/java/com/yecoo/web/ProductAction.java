@@ -72,7 +72,7 @@ public class ProductAction {
 				String.valueOf(producttype));
 		
 		String productno = StrUtils.getNO(StrUtils.nullToStr(parentForm.getValue("producttypeno")),
-				"productno", "sproduct", 3);
+				"productno", "sproduct", 2);
 		
 		form.setValue("producttype", producttype);
 		form.setValue("productno", productno); //产品类型编码

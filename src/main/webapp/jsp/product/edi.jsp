@@ -200,7 +200,7 @@
 			<thead>
 				<tr>
 					<th width="5%">
-						<a href="#" class="btnAdd addRow"></a>
+<!-- 						<a href="#" class="btnAdd addRow"></a> -->
 					</th>
 					<th width="5%">序号</th>
 					<th width="20%">物资编码</th>
@@ -312,6 +312,13 @@
 	
 	<div class="formBar">
 		<ul>
+			<li>
+				<div class="buttonActive">
+					<div class="buttonContent">
+						<button type="button" class="btnAdd addRow">新增</button>
+					</div>
+				</div>
+			</li>
 			<li>
 				<div class="button">
 					<input id="fileInput" type="file" name="image" 
