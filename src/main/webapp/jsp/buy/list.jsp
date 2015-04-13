@@ -30,7 +30,7 @@
 						</select>
 					</td>
 					<td style="width: 25%;">
-						销售日期从：<input type="text" name="map[buydateFrom]" size="8" value="${form.map.buydateFrom}" class="date"/>
+						采购日期从：<input type="text" name="map[buydateFrom]" size="8" value="${form.map.buydateFrom}" class="date"/>
 					</td>
 					<td>
 						至：<input type="text" name="map[buydateTo]" size="8" value="${form.map.buydateTo}" class="date"/>
@@ -93,6 +93,14 @@
 					<span>删除采购单</span>
 				</a>
 			</li>
+			</shiro:hasPermission>
+			<shiro:hasPermission name="Buy:edi">
+				<li>
+					<a class="delete" href="<%=path%>/buy/end" target="selectedTodo" rel="ids"
+				 	 title="确实要结束这些采购单吗?">
+				 		<span>批量结束</span>
+				 	</a>
+				</li>
 			</shiro:hasPermission>
 		</ul>
 	</div>

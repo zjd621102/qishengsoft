@@ -183,4 +183,18 @@ public class MaterialAction {
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
         return list;
     }
+	
+	/**
+	 * 通过关键字查询物资
+	 * @param keyword
+	 * @return
+	 */
+    @RequestMapping(value = "/getMaterialsByKeyword")
+    @ResponseBody
+    public List<CodeTableForm> getMaterialsByKeyword(String keyword) {
+		String sql = "SELECT * FROM smaterial t WHERE (t.materialno LIKE '%"
+				+ keyword + "%' OR t.materialname LIKE '%" + keyword + "%')";
+		List<CodeTableForm> list = dbUtils.getListBySql(sql);
+        return list;
+    }
 }

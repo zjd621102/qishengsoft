@@ -158,6 +158,35 @@ public class BuyAction {
 	}
 
 	/**
+	 * 结束采购单
+	 * @param buyid
+	 * @param request
+	 * @return
+	 */
+	@RequiresPermissions("Buy:edi")
+	@RequestMapping(value="/end")
+	public @ResponseBody String end(HttpServletRequest request) {
+		
+		AjaxObject ajaxObject = null;
+
+		String[] ids = request.getParameterValues("ids");
+		String buyids = StrUtils.ArrayToStr(ids, "','");
+		
+		String sql = "UPDATE bbuy t SET t.currflow = '结束' WHERE t.buyid IN ('" + buyids + "')";
+		int iReturn = dbUtils.executeSQL(sql);
+
+		if (iReturn >= 0) {
+			ajaxObject = new AjaxObject("结束成功！", "buy_list", "");
+
+			LogDaoImpl.saveLog(request, "结束采购单", buyids);
+		} else {
+			ajaxObject = new AjaxObject("结束失败");
+		}
+	
+		return ajaxObject.toString();
+	}
+
+	/**
 	 * 合并采购单
 	 * @param request
 	 * @return
@@ -184,6 +213,28 @@ public class BuyAction {
 			ajaxObject = new AjaxObject("合并失败");
 		}
 		return ajaxObject.toString();
+	}
+	
+	/**
+	 * 获取待付列表
+	 * @param form
+	 * @param request
+	 * @return
+	 */
+	@RequiresPermissions("Buy:view")
+	@RequestMapping(value="/toPay", method={RequestMethod.GET, RequestMethod.POST})
+	public String toPay(CodeTableForm form, HttpServletRequest request) {
+
+		buyDaoImpl.initAction(request);
+
+		int totalCount = buyDaoImpl.getToPayCount(form);
+		List<CodeTableForm> buyList = buyDaoImpl.getToPayList(form);
+		request.setAttribute("totalCount", totalCount); // 列表总数量
+		request.setAttribute("buyList", buyList); // 采购单列表
+		request.setAttribute("sn", "buy"); // 授权名称
+		request.setAttribute("form", form);
+		
+		return "buy/toPay";
 	}
 	
 	/**

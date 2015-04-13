@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.yecoo.model.CodeTableForm;
-import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.IdSingleton;
 import com.yecoo.util.StrUtils;
@@ -41,7 +40,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 				+ " func_getSum(t.buyid, 'CGD') allsum FROM bbuy t WHERE 1 = 1";
 		String cond = getBuyListCondition(form);
 		sql  += cond;
-		sql += " ORDER BY buyid DESC";
+		sql += " ORDER BY t.buydate DESC, t.buyid DESC";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
@@ -341,5 +340,64 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		}
 		
 		return iReturn;
+	}
+	
+	/**
+	 * 获取采购待付数量
+	 * @param form
+	 * @return
+	 */
+	public int getToPayCount(CodeTableForm form) {
+		
+		String sql = "SELECT COUNT(1) FROM (SELECT 1 FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.currflow = '申请'";
+		String cond = getToPayCondition(form);
+		sql  += cond;
+		sql += " GROUP BY b.manuid) k";
+		int count = dbUtils.getIntBySql(sql);
+		return count;
+	}
+	
+	/**
+	 * 获取待付列表
+	 * @param form
+	 * @param pageNum
+	 * @param numPerPage
+	 * @return
+	 */
+	public List<CodeTableForm> getToPayList(CodeTableForm form) {
+		
+		String sql = "SELECT o.*, k.sum FROM (SELECT b.manuid, SUM(b.sum) sum"
+				+ " FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.currflow = '申请'";
+		String cond = getToPayCondition(form);
+		sql  += cond;
+		sql += " GROUP BY b.manuid ORDER BY SUM(b.sum) DESC) k, smanu o WHERE k.manuid = o.manuid";
+		List<CodeTableForm> list = dbUtils.getListBySql(sql);
+		return list;
+	}
+	
+	/**
+	 * 获取待付条件
+	 * @param form
+	 * @return
+	 */
+	public String getToPayCondition(CodeTableForm form) {
+		
+		StringBuffer cond = new StringBuffer("");
+		String buydateFrom = StrUtils.nullToStr(form.getValue("buydateFrom"));
+		String buydateTo = StrUtils.nullToStr(form.getValue("buydateTo"));
+		String manuname = StrUtils.nullToStr(form.getValue("manuname"));
+		
+		if(!buydateFrom.equals("")) {
+			cond.append(" AND a.buydate >= '").append(buydateFrom).append("'");
+		}
+		if(!buydateTo.equals("")) {
+			cond.append(" AND a.buydate <= '").append(buydateTo).append("'");
+		}
+		if(!manuname.equals("")) {
+			cond.append(" AND EXISTS (SELECT 1 FROM smanu m WHERE m.manuid = b.manuid AND m.manuname LIKE '%")
+				.append(manuname).append("%')");
+		}
+		
+		return cond.toString();
 	}
 }

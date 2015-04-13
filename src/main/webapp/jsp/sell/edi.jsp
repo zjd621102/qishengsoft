@@ -193,7 +193,7 @@
 			<thead>
 				<tr>
 					<th width="30px">
-<!-- 						<a href="#" class="btnAdd addRow"></a> -->
+						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="30px">序号</th>
 					<th width="150px">产品编码</th>

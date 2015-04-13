@@ -31,6 +31,8 @@
 
 <script type="text/javascript">
 	$(function() {
+		autoCom("[name='map[materialno]']:visible");
+		
 		setTimeout(function() {
 			changeValue();
 		}, 100);
@@ -66,6 +68,48 @@
 	// 修改排序的值
 	function addRowOther() {
 		$("[name='map[sort]']:last").val($("#productRowTbody tr").size()-3);
+	}
+	
+	function autoCom(obj) {
+		setTimeout(function() {
+			$(obj).autocomplete({
+				source : function(request, response) {
+					$.ajax({
+						url : "<%=path%>/material/getMaterialsByKeyword",
+						dataType : "json",
+						data : {
+							keyword : request.term
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+			                    return {
+			                        label: item.map.materialno + "　" + item.map.materialname,
+			                        value: item.map.materialno,
+			                        materialname: item.map.materialname,
+			                        materialid: item.map.materialid,
+			                        price: item.map.price
+			                    }
+			                }));
+						}
+					});
+				},
+				minLength : 1,
+				select : function(event, ui) {
+					var row = $(this).parents("tr:first");
+					row.find("[name='map[materialname]']").val(ui.item.materialname);
+					row.find("[name='map[materialid]']").val(ui.item.materialid);
+					row.find("[name='map[materialprice]']").val(ui.item.price);
+				},
+				open : function() {
+					$(this).removeClass("ui-corner-all").addClass(
+							"ui-corner-top");
+				},
+				close : function() {
+					$(this).removeClass("ui-corner-top").addClass(
+							"ui-corner-all");
+				}
+			});
+		}, 100);
 	}
 	
 	// 复制产品清单
@@ -200,7 +244,7 @@
 			<thead>
 				<tr>
 					<th width="5%">
-<!-- 						<a href="#" class="btnAdd addRow"></a> -->
+						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="5%">序号</th>
 					<th width="20%">物资编码</th>
@@ -233,8 +277,7 @@
 			   		<td>
 			   			<input type="hidden" name="map[materialid]"/>
 						<input type="text" name="map[materialno]" style="width: 75%" maxlength="13"
-							suggestFields="materialid,materialno,materialname,materialprice"
-							readonly="readonly"/>
+							suggestFields="materialid,materialno,materialname,materialprice" />
 						<a class="btnLook" href="<%=path%>/material/tree?act=backselect" lookupGroup="lookup" width="1200"></a>
 						<a href="javascript:void(0);" class="btnClear" suggestFields="materialid,materialno,materialname,materialprice"></a>
 			   		</td>
@@ -272,7 +315,7 @@
 				   			<input type="hidden" name="map[materialid]" value="${bean.map.materialid}"/>
 							<input type="text" name="map[materialno]" style="width: 75%" maxlength="13"
 								suggestFields="materialid,materialno,materialname,materialprice"
-								value="${bean.map.materialno}" readonly="readonly"/>
+								value="${bean.map.materialno}"/>
 							<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
 							<a href="javascript:void(0);" class="btnClear"
 								suggestFields="materialid,materialno,materialname,materialprice"></a>
