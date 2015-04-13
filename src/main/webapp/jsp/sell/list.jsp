@@ -12,7 +12,7 @@
 			<table class="searchContent">
 				<tr>
 					<td style="width: 25%;">
-						销售单编号：
+						单据编号：
 						<input type="text" name="map[sellno]" maxlength="16" style="width: 110px;"
 							value="${form.map.sellno}"/>
 					</td>
@@ -33,8 +33,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="font-family: '宋体';">
-						&nbsp;客户名称：
+					<td>
+						客户名称：
 						<input type="text" name="map[manuname]" style="width: 110px;"
 						 value="${form.map.manuname}" ${changeManuname}/>
 					</td>
