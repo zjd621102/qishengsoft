@@ -36,14 +36,14 @@
 		<dl>
 			<dt>联系人：</dt>
 			<dd>
-				<input type="text" name="map[manucontact]" class="required" size="25" maxlength="32"
+				<input type="text" name="map[manucontact]" size="25" maxlength="32"
 					 value="${form.map.manucontact}"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>手机号码：</dt>
 			<dd>
-				<input type="text" name="map[manuphone]" class="required" size="25" maxlength="11"
+				<input type="text" name="map[manuphone]" size="25" maxlength="11"
 					 value="${form.map.manuphone}"/>
 			</dd>
 		</dl>
