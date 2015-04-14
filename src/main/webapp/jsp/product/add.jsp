@@ -30,6 +30,7 @@
 	// 修改排序的值
 	function addRowOther() {
 		$("[name='map[sort]']:last").val($("#productRowTbody tr").size()-3);
+		autoCom("[name='map[materialno]']:visible");
 	}
 	
 	function autoCom(obj) {

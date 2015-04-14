@@ -86,8 +86,10 @@ public class MaterialAction {
 		String sql = "SELECT t.manuid, t.manuname FROM smanu t WHERE t.manuname = '"
 				+ parentForm.getValue("materialtypename") + "'";
 		CodeTableForm manuForm = dbUtils.getFormBySql(sql);
-		form.setValue("manuid", StrUtils.nullToStr(manuForm.getValue("manuid")));
-		form.setValue("manuname", StrUtils.nullToStr(manuForm.getValue("manuname")));
+		if(manuForm != null) {
+			form.setValue("manuid", StrUtils.nullToStr(manuForm.getValue("manuid")));
+			form.setValue("manuname", StrUtils.nullToStr(manuForm.getValue("manuname")));
+		}
 
 		request.setAttribute("form", form);
 		request.setAttribute("curTime", curTime);

@@ -31,7 +31,7 @@ CodeTableForm form2 = (CodeTableForm) request.getAttribute("form");
 			<div>
 				<div layoutH="10"
 					style="float: left; display: block; overflow: auto; width: 240px; border: solid 1px #CCC; line-height: 21px; background: #fff">
-					<ul class="tree treeFolder expand">
+					<ul class="tree treeFolder collapse">
 						<li>
 							<a href="<%=path%>/producttype/list/${form.map.producttype}"
 								target="ajax" rel="jbsxBox2producttype">
