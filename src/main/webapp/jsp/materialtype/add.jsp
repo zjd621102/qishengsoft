@@ -26,7 +26,7 @@
 				<dt>优先级：</dt>
 				<dd style="width: 65%">
 					<input type="text" name="map[priority]" class="required digits"
-						size="25" min="1" max="99" value="99" />
+						size="25" min="1" max="999" value="99" />
 					<span class="info">&nbsp;&nbsp;默认:99</span>
 				</dd>
 			</dl>
