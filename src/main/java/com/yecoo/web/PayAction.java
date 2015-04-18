@@ -48,7 +48,7 @@ public class PayAction {
 		request.setAttribute("payList", payList); // 单据列表
 		request.setAttribute("totalPlanSum", totalPlanSum); // 应付金额
 		request.setAttribute("totalRealSum", totalRealSum); // 实付金额
-		request.setAttribute("unPaySum", Double.parseDouble(totalPlanSum) - Double.parseDouble(totalRealSum)); // 待付金额
+		request.setAttribute("unPaySum", Float.parseFloat(totalPlanSum) - Float.parseFloat(totalRealSum)); // 待付金额
 		request.setAttribute("sn", "pay"); //授权名称
 		request.setAttribute("form", form);
 		
