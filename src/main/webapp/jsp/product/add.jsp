@@ -50,7 +50,8 @@
 			                        value: item.map.materialno,
 			                        materialname: item.map.materialname,
 			                        materialid: item.map.materialid,
-			                        price: item.map.price
+			                        price: item.map.price,
+			                        manuname: item.map.manuname
 			                    }
 			                }));
 						}
@@ -62,6 +63,7 @@
 					row.find("[name='map[materialname]']").val(ui.item.materialname);
 					row.find("[name='map[materialid]']").val(ui.item.materialid);
 					row.find("[name='map[materialprice]']").val(ui.item.price);
+					row.find("[name='map[manuname]']").val(ui.item.manuname);
 				},
 				open : function() {
 					$(this).removeClass("ui-corner-all").addClass(
@@ -164,21 +166,23 @@
 		<table class="table" style="width: 100%;">
 			<thead>
 				<tr>
-					<th width="5%">
+					<th width="30px">
 						<a href="#" class="btnAdd addRow"></a>
 					</th>
-					<th width="5%">序号</th>
-					<th width="20%">物资编码</th>
-					<th width="20%">物资名称</th>
-					<th width="8%">物资单价</th>
-					<th width="8%">物资数量</th>
-					<th width="8%">物资总价</th>
-					<th width="6%">排序</th>
-					<th width="20%">备注</th>
+					<th width="30px">序号</th>
+					<th width="100px">物资编码</th>
+					<th width="120px">物资名称</th>
+					<th width="70px">物资单价</th>
+					<th width="70px">物资数量</th>
+					<th width="70px">物资总价</th>
+					<th width="120px">供应商</th>
+					<th width="50px">排序</th>
+					<th>备注</th>
 				</tr>
 			</thead>
 			<tbody id="productRowTbody">
 				<tr>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -197,32 +201,37 @@
 			   		<td></td>
 			   		<td>
 			   			<input type="hidden" name="map[materialid]" />
-						<input type="text" name="map[materialno]" style="width: 76%" maxlength="13"
-							suggestFields="materialid,materialno,materialname,materialprice" />
+						<input type="text" name="map[materialno]" style="width: 50%" maxlength="13"
+							suggestFields="materialid,materialno,materialname,materialprice,manuname" />
 						<a class="btnLook" href="<%=path%>/material/tree?act=backselect" lookupGroup="lookup" width="1200"></a>
-						<a href="javascript:void(0);" class="btnClear" suggestFields="materialid,materialno,materialname,materialprice"></a>
+						<a href="javascript:void(0);" class="btnClear"
+						 suggestFields="materialid,materialno,materialname,materialprice,manuname"></a>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[materialname]" style="width: 96%" maxlength="32"/>
+						<input type="text" name="map[materialname]" style="width: 94%" maxlength="32"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[materialprice]" style="width: 92%" maxlength="12"
+						<input type="text" name="map[materialprice]" style="width: 90%" maxlength="12"
 							class="number" value="0.00" onblur="changeValue();"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[materialnum]" style="width: 92%" maxlength="9"
+						<input type="text" name="map[materialnum]" style="width: 90%" maxlength="9"
 							class="number" value="1" onblur="changeValue();"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[materialsum]" style="width: 92%" maxlength="12"
+						<input type="text" name="map[materialsum]" style="width: 90%" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[sort]" style="width: 88%" maxlength="2" class="number"
+						<input type="text" name="map[manuname]" style="width: 94%" maxlength="256"
+							 readonly="readonly" class="readonly" />
+			   		</td>
+			   		<td>
+						<input type="text" name="map[sort]" style="width: 84%" maxlength="2" class="number"
 							value="9"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 96%" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" style="width: 98%" maxlength="256"/>
 			   		</td>
 			   	</tr>
 				<c:forEach items="${productrowList}" var="bean" varStatus="vs">

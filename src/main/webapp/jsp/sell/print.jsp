@@ -112,7 +112,10 @@
 					<span id="allboxnumSpan">${form.map.allboxnum}</span>
 					<input type="hidden" name="map[allboxnum]" />
 				</td>
-				<td colspan="3"></td>
+				<td colspan="2"></td>
+				<td>
+					本批待付
+				</td>
 				<td>
 					<span id="allrealsumSpan">${form.map.allrealsum}</span>
 					<input type="hidden" name="map[allrealsum]" />
@@ -123,7 +126,7 @@
 				<tr>
 					<td colspan="6"></td>
 					<td>
-						其他待付
+						历史待付
 					</td>
 					<td>
 						<span id="historyToPaysum">${historyToPaysum}</span>
