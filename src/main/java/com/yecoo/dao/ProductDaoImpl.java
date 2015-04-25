@@ -52,7 +52,7 @@ public class ProductDaoImpl extends BaseDaoImpl {
 				+ " func_getDictName('计量单位', t.unit) unitname FROM sproduct t WHERE 1 = 1";
 		String cond = getProductListCondition(form);
 		sql  += cond;
-		sql += " ORDER BY t.sort, t.productno";
+		sql += " ORDER BY t.productsort, t.productno";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;

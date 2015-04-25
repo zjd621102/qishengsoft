@@ -99,7 +99,7 @@
 			   		<td>${bean.map.unitname}</td>
 			   		<td>${bean.map.realprice}</td>
 			   		<td>${bean.map.numofonebox}</td>
-			   		<td>${bean.map.sort}</td>
+			   		<td>${bean.map.productsort}</td>
 			   		<td>${bean.map.createdate}</td>
 			   	</tr>
 		   	</c:forEach>

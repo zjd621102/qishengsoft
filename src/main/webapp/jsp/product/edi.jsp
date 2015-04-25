@@ -214,8 +214,8 @@
 		<dl>
 			<dt>排序：</dt>
 			<dd>
-				<input type="text" name="map[sort]" class="digits" size="25" maxlength="99"
-					value="${form.map.sort}"/>
+				<input type="text" name="map[productsort]" class="digits" size="25" maxlength="99"
+					value="${form.map.productsort}"/>
 			</dd>
 		</dl>
 		<dl>
