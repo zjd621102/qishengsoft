@@ -165,7 +165,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
 		sql = "SELECT a.*, b.materialno FROM bbuyrow a LEFT JOIN smaterial b ON a.materialid = b.materialid"
-				+ " WHERE a.buyid = '" + buyid + "' ORDER BY a.manuid, a.materialid";
+				+ " WHERE a.buyid = '" + buyid + "' ORDER BY a.manuid";
 		List<CodeTableForm> buyrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("buyrowList", buyrowList);
 		
@@ -306,8 +306,10 @@ public class BuyDaoImpl extends BaseDaoImpl {
 			
 			if(iReturn >= 1) { //保存行项表
 				sql = "INSERT INTO bbuyrow"
-					+ " SELECT NULL, '" + buyid + "', n.materialid, n.materialname, n.unit, n.price, m.num, n.price * m.num sum, o.manuid, o.manuname, o.manucontact, o.manutel, NULL FROM ("
-					+ "SELECT a.materialid, SUM(a.num) num FROM bbuyrow a WHERE a.buyid IN (" + buyids + ") GROUP BY a.materialid"
+					+ " SELECT NULL, '" + buyid + "', n.materialid, n.materialname, n.unit, n.price, m.num,"
+					+ " n.price * m.num sum, o.manuid, o.manuname, o.manucontact, o.manutel, NULL FROM ("
+					+ "SELECT a.materialid, SUM(a.num) num FROM bbuyrow a WHERE a.buyid IN (" + buyids
+					+ ") GROUP BY a.materialid"
 					+ ") m, smaterial n, smanu o WHERE m.materialid = n.materialid AND n.manuid = o.manuid";
 	
 				String[] sqls = new String[3];

@@ -156,7 +156,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 		
 		sql = "SELECT a.*, b.productno, func_getDictName('计量单位', a.unit) unitname, substr(b.productno, 3, 1) materialtype"
 				+ " FROM bsellrow a LEFT JOIN sproduct b ON a.productid = b.productid WHERE a.sellid = '"
-				+ sellid + "' ORDER BY sort, sellid";
+				+ sellid + "' ORDER BY a.sort, b.productno";
 		List<CodeTableForm> sellrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("sellrowList", sellrowList);
 		

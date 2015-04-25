@@ -119,6 +119,28 @@
 				</td>
 				<td></td>
 			</tr>
+			<c:if test="${form.map.currflow == '申请'}">
+				<tr>
+					<td colspan="6"></td>
+					<td>
+						其他待付
+					</td>
+					<td>
+						<span id="historyToPaysum">${historyToPaysum}</span>
+					</td>
+					<td></td>
+				</tr>
+			<tr>
+				<td colspan="6"></td>
+				<td>
+					总计待付
+				</td>
+				<td>
+					<span id="allToPaysum">${allToPaysum}</span>
+				</td>
+				<td></td>
+			</tr>
+			</c:if>
 	   	</tbody>
 	</table>
 </div>

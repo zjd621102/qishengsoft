@@ -13,7 +13,7 @@
 	
 	function addRowOther() {
 		autoCom("[name='map[productno]']:last");
-		$("[name='map[sort]']:last").val($("#rowTbody tr").size()-3);
+// 		$("[name='map[sort]']:last").val($("#rowTbody tr").size()-3);
 	}
 	
 	function autoCom(obj) {

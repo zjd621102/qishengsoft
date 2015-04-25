@@ -104,6 +104,26 @@ public class SellAction {
 		
 		String act = StrUtils.nullToStr(request.getParameter("act"));
 		if(act.equals("print")) {
+			String currflow = StrUtils.nullToStr(form.getValue("currflow"));
+			if(currflow.equals("申请")) {
+				String manuid = StrUtils.nullToStr(form.getValue("manuid"));
+				String sql = "SELECT SUM(m.realsum) FROM ("
+						+ "SELECT IFNULL(SUM(b.plansum - b.realsum), 0) realsum FROM bpay a, bpayrow b WHERE a.payid = b.payid"
+						+ " AND a.currflow = '申请' AND a.manuid = '" + manuid + "'"
+						+ " UNION ALL"
+						+ " SELECT IFNULL(SUM(b.realsum), 0) realsum FROM bsell a, bsellrow b WHERE a.sellid = b.sellid"
+						+ " AND a.currflow = '申请' AND a.manuid = '" + manuid + "'"
+						+ ") m";
+				double allToPaysum = Double.parseDouble(dbUtils.execQuerySQL(sql));// 所有待付款
+				sql = "SELECT IFNULL(SUM(b.realsum), 0) realsum FROM bsellrow b WHERE b.sellid = '" + sellid + "'";
+				double currToPaysum = Double.parseDouble(dbUtils.execQuerySQL(sql));// 当前待付款
+				double historyToPaysum = allToPaysum - currToPaysum;
+
+				request.setAttribute("currToPaysum", currToPaysum);
+				request.setAttribute("historyToPaysum", historyToPaysum);
+				request.setAttribute("allToPaysum", allToPaysum);
+			}
+			
 			return "sell/print"; // 打印
 		}
 		

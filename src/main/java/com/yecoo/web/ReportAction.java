@@ -72,7 +72,7 @@ public class ReportAction {
 	}
 
 	/**
-	 * 综合物资报表
+	 * 综合统计报表
 	 * @param form
 	 * @param request
 	 * @return
@@ -90,7 +90,7 @@ public class ReportAction {
 	}
 
 	/**
-	 * 综合统计报表
+	 * 综合物资报表
 	 * @param form
 	 * @param request
 	 * @return
