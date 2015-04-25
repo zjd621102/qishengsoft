@@ -75,6 +75,7 @@
 				<th width="60px">计量单位</th>
 				<th width="60px">产品单价</th>
 				<th width="60px">一件数量</th>
+				<th width="40px">排序</th>
 				<th>新增日期</th>
 			</tr>
 		</thead>
@@ -98,6 +99,7 @@
 			   		<td>${bean.map.unitname}</td>
 			   		<td>${bean.map.realprice}</td>
 			   		<td>${bean.map.numofonebox}</td>
+			   		<td>${bean.map.sort}</td>
 			   		<td>${bean.map.createdate}</td>
 			   	</tr>
 		   	</c:forEach>

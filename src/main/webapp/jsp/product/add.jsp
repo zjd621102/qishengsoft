@@ -152,6 +152,17 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>排序：</dt>
+			<dd>
+				<input type="text" name="map[sort]" class="digits" size="25" maxlength="99"
+					value="50"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt></dt>
+			<dd></dd>
+		</dl>
+		<dl>
 			<dt>备注：</dt>
 			<dd>
 				<input type="text" name="map[remark]" size="89" maxlength="256"
