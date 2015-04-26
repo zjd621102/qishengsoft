@@ -52,7 +52,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 				dataStr.delete(0, dataStr.length());
 				for(int i = 0, monthLen = monthList.size(); i < monthLen; i++) {
 					sql = "SELECT IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid"
-							+ " AND a.buydate LIKE '"
+							+ " AND a.btype = 'CGD' AND a.buydate LIKE '"
 							+ monthList.get(i) + "%' AND b.manuid = '" + manu.getValue("manuid") + "'";
 					sum = dbUtils.execQuerySQL(sql);
 					if(i >= 1) {
@@ -169,7 +169,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		// 采购统计
 		dataStr.delete(0, dataStr.length());
 		for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
-			sql = "SELECT IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.buydate LIKE '"
+			sql = "SELECT IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.btype = 'CGD' AND a.buydate LIKE '"
 					+ monthList.get(monthIndex) + "%'";
 			sum = dbUtils.execQuerySQL(sql);
 			if(monthIndex >= 1) {
@@ -252,7 +252,8 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		form.setValue("limitNum", limitNum);
 		
 		sql = "SELECT * FROM (SELECT CONCAT(a.materialno, '-', a.materialname) name,"
-				+ " (SELECT IFNULL(SUM(c.sum), 0) FROM bbuy b, bbuyrow c WHERE b.buyid = c.buyid AND b.currflow = '结束' AND c.materialid = a.materialid"
+				+ " (SELECT IFNULL(SUM(c.sum), 0) FROM bbuy b, bbuyrow c WHERE b.buyid = c.buyid AND b.currflow = '结束' AND a.btype = 'CGD'"
+				+ " AND c.materialid = a.materialid"
 				+ " AND b.buydate >= '" + dateFrom + "' AND b.buydate <= '" + dateTo + "') sum FROM smaterial a) m ORDER BY m.sum " + sort
 				+ " LIMIT " + limitFrom + "," + limitNum;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
@@ -348,7 +349,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		
 		sql = "SELECT m.* FROM "
 				+ "(SELECT c.manuname name, IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b, smanu c"
-				+ " WHERE a.buyid = b.buyid AND b.manuid = c.manuid AND a.buydate >= '"
+				+ " WHERE a.buyid = b.buyid AND b.manuid = c.manuid AND a.btype = 'CGD' AND a.buydate >= '"
 				+ dateFrom + "' AND a.buydate <= '" + dateTo + "' GROUP BY c.manuname) m ORDER BY m.sum " + sort
 				+ " LIMIT " + limitFrom + "," + limitNum;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
@@ -442,17 +443,19 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		dataStr.append(sum);
 		
 		// 采购统计
-		sql = "SELECT IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid"
+		sql = "SELECT IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.btype = 'CGD'"
 				+ " AND a.buydate >= '" + dateFrom + "' AND a.buydate <= '" + dateTo + "'";
 		sum = dbUtils.execQuerySQL(sql);
 		dataStr.append(",");
 		dataStr.append(sum);
-		/*
+
 		// 简易采购统计
-		sum = dbUtils.execQuerySQL(sql + " AND a.btype = 'FKD' AND a.relateno LIKE 'JYD%'");
+		sql = "SELECT IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.btype = 'JYD'"
+				+ " AND a.buydate >= '" + dateFrom + "' AND a.buydate <= '" + dateTo + "'";
+		sum = dbUtils.execQuerySQL(sql);
 		dataStr.append(",");
 		dataStr.append(sum);
-		*/
+
 		// 工资统计
 		String salarySql = "SELECT IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b WHERE a.payid = b.payid"
 				+ " AND a.currflow = '结束' AND a.paydate >= '" + dateFrom.substring(0, 7) + "' AND a.paydate <= '"
@@ -466,7 +469,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		dataStr.append(",");
 		dataStr.append(sum);
 		*/
-		request.setAttribute("types", "'发货统计', '采购统计', '工资统计'");
+		request.setAttribute("types", "'发货统计', '采购统计', '简易采购统计', '工资统计'");
 		request.setAttribute("dataStr", dataStr.toString());
 	}
 }

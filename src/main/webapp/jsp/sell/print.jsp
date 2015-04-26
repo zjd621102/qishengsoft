@@ -10,8 +10,6 @@
 		setTimeout(function() {
 			setAllSum('boxnum', 'allboxnum');
 			$("#allboxnumSpan").html($("[name='map[allboxnum]']").val());
-			setAllSum('realsum', 'allrealsum');
-			$("#allrealsumSpan").html($("[name='map[allrealsum]']").val());
 		}, 100);
 	});
 </script>
@@ -117,8 +115,7 @@
 					本批待付
 				</td>
 				<td>
-					<span id="allrealsumSpan">${form.map.allrealsum}</span>
-					<input type="hidden" name="map[allrealsum]" />
+					<span id="allrealsumSpan">${currToPaysum}</span>
 				</td>
 				<td></td>
 			</tr>
