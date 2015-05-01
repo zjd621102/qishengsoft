@@ -252,7 +252,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		form.setValue("limitNum", limitNum);
 		
 		sql = "SELECT * FROM (SELECT CONCAT(a.materialno, '-', a.materialname) name,"
-				+ " (SELECT IFNULL(SUM(c.sum), 0) FROM bbuy b, bbuyrow c WHERE b.buyid = c.buyid AND b.currflow = '结束' AND a.btype = 'CGD'"
+				+ " (SELECT IFNULL(SUM(c.sum), 0) FROM bbuy b, bbuyrow c WHERE b.buyid = c.buyid AND b.currflow = '结束' AND b.btype = 'CGD'"
 				+ " AND c.materialid = a.materialid"
 				+ " AND b.buydate >= '" + dateFrom + "' AND b.buydate <= '" + dateTo + "') sum FROM smaterial a) m ORDER BY m.sum " + sort
 				+ " LIMIT " + limitFrom + "," + limitNum;
@@ -291,17 +291,25 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		String sort = StrUtils.nullToStr(form.getValue("sort"), "DESC");// 排序
 		String limitFrom = StrUtils.nullToStr(form.getValue("limitFrom"), "0");
 		String limitNum = StrUtils.nullToStr(form.getValue("limitNum"), "10");
+		String manuName = StrUtils.nullToStr(form.getValue("manuName"));
 		form.setValue("dateFrom", dateFrom);
 		form.setValue("dateTo", dateTo);
 		form.setValue("sort", sort);
 		form.setValue("limitFrom", limitFrom);
 		form.setValue("limitNum", limitNum);
+		form.setValue("manuName", manuName);
+		
+		String cond = "";
+		if(!manuName.equals("")) {
+			cond += " AND EXISTS (SELECT 1 FROM smanu sm WHERE sm.manuid = b.manuid AND sm.manuname LIKE '%"
+					+ manuName + "%')";
+		}
 		
 		sql = "SELECT * FROM (SELECT CONCAT(a.productno, '-', a.productname) name,"
 				+ " (SELECT IFNULL(SUM(c.realsum), 0) FROM bsell b, bsellrow c WHERE b.sellid = c.sellid AND b.currflow = '结束' AND c.productid = a.productid"
-				+ " AND b.selldate >= '" + dateFrom + "' AND b.selldate <= '" + dateTo + "') sum,"
+				+ " AND b.selldate >= '" + dateFrom + "' AND b.selldate <= '" + dateTo + "'" + cond + ") sum,"
 				+ " (SELECT IFNULL(SUM(c.profit*c.num), 0) FROM bsell b, bsellrow c WHERE b.sellid = c.sellid AND b.currflow = '结束' AND c.productid = a.productid"
-				+ " AND b.selldate >= '" + dateFrom + "' AND b.selldate <= '" + dateTo + "') profit FROM sproduct a) m ORDER BY m.sum " + sort
+				+ " AND b.selldate >= '" + dateFrom + "' AND b.selldate <= '" + dateTo + "'" + cond + ") profit FROM sproduct a) m ORDER BY m.sum " + sort
 				+ " LIMIT " + limitFrom + "," + limitNum;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		int len = list.size();

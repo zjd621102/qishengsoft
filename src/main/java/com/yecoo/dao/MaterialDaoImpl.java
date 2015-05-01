@@ -45,7 +45,7 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 				+" FROM smaterial t LEFT JOIN smanu sm on t.manuid = sm.manuid WHERE 1 = 1";
 		String cond = getMaterialListCondition(form);
 		sql  += cond;
-		sql += " ORDER BY materialid";
+		sql += " ORDER BY t.materialsort ASC, t.materialid ASC";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;

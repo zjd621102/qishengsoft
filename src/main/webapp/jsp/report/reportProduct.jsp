@@ -78,22 +78,20 @@
 				<tr>
 					<td>日期从：<input type="text" class="date" readonly="readonly"
 						name="map[dateFrom]" value="${form.map.dateFrom}" style="width: 100px;" />
-					</td>
-					<td>至：<input type="text" class="date" readonly="readonly"
-						name="map[dateTo]" value="${form.map.dateTo}" style="width: 100px;" />
-					</td>
-					<td>
+						至：<input type="text" class="date" readonly="readonly"
+							name="map[dateTo]" value="${form.map.dateTo}" style="width: 100px;" />
 						排序：
 						<select name="map[sort]" style="width: 100px;">
 							<option value="ASC" ${form.map.sort=="ASC"?"selected":""}>升序</option>
 							<option value="DESC" ${form.map.sort=="DESC"?"selected":""}>降序</option>
 						</select>
-					</td>
-					<td>
-						数量从：<input type="text" name="map[limitFrom]" value="${form.map.limitFrom}" style="width: 100px;" />开始
-					</td>
-					<td>
+						从：<input type="text" name="map[limitFrom]" value="${form.map.limitFrom}" style="width: 100px;" />
+						开始&nbsp;&nbsp;
 						获取数量：<input type="text" name="map[limitNum]" value="${form.map.limitNum}" style="width: 100px;" />
+						客户名称
+						<input type="text" maxlength="8" name="map[manuName]"
+							value="${form.map.manuName}" style="width: 100px;" />
+						
 					</td>
 				</tr>
 			</table>

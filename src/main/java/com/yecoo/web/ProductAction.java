@@ -185,7 +185,7 @@ public class ProductAction {
     @ResponseBody
     public List<CodeTableForm> getSelectByKeyword(String keyword) {
 		String sql = "SELECT * FROM sproduct t WHERE (t.productno LIKE '%"
-				+ keyword + "%' OR t.productname LIKE '%" + keyword + "%')";
+				+ keyword + "%' OR t.productname LIKE '%" + keyword + "%') ORDER BY t.productsort ASC, t.productno ASC";
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
         return list;
     }

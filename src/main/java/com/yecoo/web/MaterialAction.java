@@ -196,7 +196,8 @@ public class MaterialAction {
     public List<CodeTableForm> getMaterialsByKeyword(String keyword) {
 		String sql = "SELECT a.*, b.manuname FROM smaterial a LEFT JOIN smanu b ON a.manuid = b.manuid"
 				+ " WHERE (a.materialno LIKE '%"
-				+ keyword + "%' OR a.materialname LIKE '%" + keyword + "%')";
+				+ keyword + "%' OR a.materialname LIKE '%" + keyword + "%')"
+				+ " ORDER BY a.materialsort ASC, a.materialid ASC";
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
         return list;
     }

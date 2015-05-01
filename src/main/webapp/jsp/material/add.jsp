@@ -82,6 +82,17 @@
 				</dd>
 			</dl>
 			<dl>
+				<dt>排序：</dt>
+				<dd>
+					<input type="text" name="map[materialsort]" class="digits" size="25" maxlength="99"
+						value="50"/>
+				</dd>
+			</dl>
+			<dl>
+				<dt></dt>
+				<dd></dd>
+			</dl>
+			<dl>
 				<dt>备注：</dt>
 				<dd>
 					<textarea name="map[remark]" cols="90" rows="5" maxlength="256"></textarea>
