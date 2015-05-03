@@ -12,7 +12,7 @@
 		action="<%=path%>/staff/list" method="post" rel="pagerForm" id="fid">
 		<input type="hidden" name="act" value="${act}" />
 		<div class="searchBar">
-			<table class="searchContent" style="width: 80%">
+			<table class="searchContent">
 				<tr>
 					<td>
 						员工名称：<input type="text" name="map[staffname]" style="width: 80px" value="${form.map.staffname}"/>
@@ -71,7 +71,7 @@
 			</shiro:hasPermission>
 			<li>
 				<a class="edit" href="<%=path%>/staff/edi_work/{s_staffid}?map[workmonth]=${form.map.month}" target="dialog" rel="staff_work" mask="true"
-					width="1200" height="500">
+					width="800" height="500">
 					<span>考勤情况</span>
 				</a>
 			</li>

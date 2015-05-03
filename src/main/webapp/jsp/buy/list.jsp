@@ -8,13 +8,29 @@
 				<tr>
 					<td style="width: 25%;">
 						采购单编号：
-						<input type="text" name="map[buyno]" size="14" maxlength="16"
+						<input type="text" name="map[buyno]" style="width: 110px;" maxlength="16"
 							value="${form.map.buyno}"/>
 					</td>
 					<td style="width: 25%;">
 						当前流程：
 						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
 						 expStr="style='width: 116px;'" />
+					</td>
+					<td style="width: 25%;">
+						采购日期：<input type="text" name="map[buydateFrom]" style="width: 113px;" value="${form.map.buydateFrom}" class="date"/>
+					</td>
+					<td>
+						至：<input type="text" name="map[buydateTo]"  style="width: 113px;" value="${form.map.buydateTo}" class="date"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						供应商名称：
+						<input type="text" name="map[manuname]" style="width: 110px;" value="${form.map.manuname}"/>
+					</td>
+					<td>
+						物资编码：
+						<input type="text" name="map[materialno]" style="width: 110px;" value="${form.map.materialno}"/>
 					</td>
 					<td style="width: 25%;">
 						单据类型：
@@ -29,23 +45,6 @@
 							</c:forEach>
 						</select>
 					</td>
-					<td style="width: 25%;">
-						采购日期从：<input type="text" name="map[buydateFrom]" size="8" value="${form.map.buydateFrom}" class="date"/>
-					</td>
-					<td>
-						至：<input type="text" name="map[buydateTo]" size="8" value="${form.map.buydateTo}" class="date"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						供应商名称：
-						<input type="text" name="map[manuname]" size="14" value="${form.map.manuname}"/>
-					</td>
-					<td>
-						物资编码：
-						<input type="text" name="map[materialno]" size="14" value="${form.map.materialno}"/>
-					</td>
-					<td></td>
 					<td></td>
 				</tr>
 			</table>

@@ -35,20 +35,20 @@
 
 	<h1 class="margin10px"></h1>
 	<div class="searchBar">
-		<table class="searchContent" style="width: 80%">
+		<table class="searchContent">
 			<tr>
 				<td>
 					员工名称：
-					<input type="text" name="map[staffname]" value="${form.map.staffname}" size="30" readonly="readonly"/>
+					<input type="text" name="map[staffname]" value="${form.map.staffname}" size="12" readonly="readonly"/>
 				</td>
 				<td>
 					月份：
-					<input type="text" name="map[workmonth]" class="required date" dateFmt="yyyy-MM" size="30"
+					<input type="text" name="map[workmonth]" class="required date" dateFmt="yyyy-MM" size="12"
 						value="${form.map.workmonth}" readonly="readonly" />
 				</td>
 				<td>
 					工资：
-					<input type="text" id="salary" size="30" value="${form.map.salary}" readonly="readonly"/>
+					<input type="text" id="salary" size="12" value="${form.map.salary}"/>
 				</td>
 			</tr>
 		</table>
@@ -92,12 +92,12 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
-				<th width="3%">序号</th>
-				<th width="8%">考勤日期</th>
-				<th width="8%">上班时间</th>
-				<th width="8%">下班时间</th>
-				<th width="8%">考勤状态</th>
-				<th width="8%">工资</th>
+				<th width="30px">序号</th>
+				<th width="80px">考勤日期</th>
+				<th width="60px">上班时间</th>
+				<th width="60px">下班时间</th>
+				<th width="80px">考勤状态</th>
+				<th width="60px">工资</th>
 				<th>备注</th>
 			</tr>
 		</thead>
@@ -111,7 +111,7 @@
 					合计：
 				</td>
 				<td>
-					<input type="text" name="map[allsalary]" style="width: 93%" class="number"
+					<input type="text" name="map[allsalary]" style="width: 47px" class="number"
 						value="" readonly="readonly"/>
 				</td>
 				<td></td>
@@ -121,27 +121,28 @@
 			   		<td>${vs.index+1}</td>
 			   		<td>
 						<input type="hidden" name="map[workrowid]" value="${bean.map.workrowid}"/>
-						<input type="text" name="map[workdate]" style="width: 93%" maxlength="10"
+						<input type="text" name="map[workdate]" style="width: 65px" maxlength="10"
 							value="${bean.map.workdate}"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[starttime]" class="date" dateFmt="HH:mm" style="width: 93%"
+						<input type="text" name="map[starttime]" class="date" dateFmt="HH:mm" style="width: 48px"
 							value="${bean.map.starttime}" readonly="readonly"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[endtime]" class="date" dateFmt="HH:mm" style="width: 93%"
+						<input type="text" name="map[endtime]" class="date" dateFmt="HH:mm" style="width: 46px"
 							value="${bean.map.endtime}" readonly="readonly"/>
 			   		</td>
 			   		<td>
-			   			<st:select dictType="考勤状态" name="map[workstatus]" value="${bean.map.workstatus}" expStr="style='width: 100%;'" />
+			   			<st:select dictType="考勤状态" name="map[workstatus]" value="${bean.map.workstatus}"
+			   			 expStr="style='width: 71px;'" />
 			   		</td>
 			   		<td>
-						<input type="text" name="map[salary]" style="width: 93%" maxlength="12"
+						<input type="text" name="map[salary]" style="width: 47px" maxlength="12"
 							class="number" value="${bean.map.salary}"
 							onchange="setAllSum('salary', 'allsalary');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remark]" style="width: 99%" maxlength="256"
+						<input type="text" name="map[remark]" style="width: 380px" maxlength="256"
 							value="${bean.map.remark}"/>
 			   		</td>
 			   	</tr>
