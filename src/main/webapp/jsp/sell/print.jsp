@@ -79,7 +79,8 @@
 						<span style="${bean.map.materialtype == '1' ? 'color:red' : ''}">${bean.map.productno}</span>
 			   		</td>
 			   		<td style="width: 125px;">
-						<span style="${bean.map.materialtype == '1' ? 'color:red' : ''}">${bean.map.productname}</span>
+						<span style="${bean.map.materialtype == '1' ? 'color:red' : ''}"
+							>${bean.map.productname2 == '' ? bean.map.productname : bean.map.productname2}</span>
 			   		</td>
 			   		<td style="width: 45px;">
 						<span style="${bean.map.materialtype == '1' ? 'color:red' : ''}">${bean.map.boxnum}</span>

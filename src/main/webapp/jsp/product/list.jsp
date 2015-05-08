@@ -11,6 +11,11 @@
 			<table class="searchContent">
 				<tr>
 					<td>
+						产品编码：
+						<input type="text" name="map[productno]" style="width: 100px;"
+							value="${form.map.productno}"/>
+					</td>
+					<td>
 						产品名称：
 						<input type="text" name="map[productname]" value="${form.map.productname}"
 							style="width: 100px;"/>
@@ -71,10 +76,11 @@
 				<th width="30px">序号</th>
 				<th width="70px">产品编码</th>
 				<th width="160px">产品名称</th>
-				<th width="70px">产品类型</th>
+				<th width="60px">产品类型</th>
 				<th width="60px">计量单位</th>
 				<th width="60px">产品单价</th>
 				<th width="60px">一件数量</th>
+				<th width="110px">买家</th>
 				<th width="40px">排序</th>
 				<th>新增日期</th>
 			</tr>
@@ -99,6 +105,7 @@
 			   		<td>${bean.map.unitname}</td>
 			   		<td>${bean.map.realprice}</td>
 			   		<td>${bean.map.numofonebox}</td>
+			   		<td>${bean.map.buyers}</td>
 			   		<td>${bean.map.productsort}</td>
 			   		<td>${bean.map.createdate}</td>
 			   	</tr>

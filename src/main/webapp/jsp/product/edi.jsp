@@ -219,8 +219,11 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt></dt>
-			<dd></dd>
+			<dt>买家：</dt>
+			<dd>
+				<input type="text" name="map[buyers]" size="25" maxlength="128"
+					value="${form.map.buyers}"/>
+			</dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>

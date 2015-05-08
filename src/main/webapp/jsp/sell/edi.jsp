@@ -124,6 +124,22 @@
 			validateCallback($(".pageForm")[0], dialogAjaxDone);
 		}
 	}
+	
+	// 重新生成编码
+	function newNo() {
+		$.post(
+			"<%=path%>/sell/newNo",
+			{sellid: ${form.map.sellid}},
+			function(data) {
+				if(data == "true") {// 成功
+					$.pdialog.reload("<%=path%>/sell/edi/${form.map.sellid}",
+							{data:{}, dialogId:"sell_edi", callback:null});
+				} else {// 失败
+					
+				}
+			}
+		);
+	}
 </script>
 
 <form method="post" action="<%=path%>/sell/edi" class="required-validate pageForm"
@@ -134,8 +150,13 @@
 		<dl>
 			<dt>销售编号：</dt>
 			<dd>
-				<input type="text" name="map[sellno]" class="required" size="25" maxlength="16"
+				<input type="text" name="map[sellno]" class="required" size="24" maxlength="16"
 					 value="${form.map.sellno}" readonly="readonly"/>
+				<div class="button" style="margin-left: 5px; float: left;">
+					<div class="buttonContent">
+						<button type="button" onclick="newNo();">新编</button>
+					</div>
+				</div>
 			</dd>
 		</dl>
 		<dl>
@@ -377,6 +398,7 @@
 	
 	<div class="formBar">
 		<ul>
+			<!-- 
 			<li>
 				<div class="buttonActive">
 					<div class="buttonContent">
@@ -384,6 +406,7 @@
 					</div>
 				</div>
 			</li>
+			-->
 			<c:if test="${form.map.currflow != '结束'}">
 			<shiro:hasPermission name="Sell:edi">
 			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>

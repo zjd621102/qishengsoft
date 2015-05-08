@@ -154,8 +154,17 @@ public class SellDaoImpl extends BaseDaoImpl {
 				+ " FROM bsell a WHERE a.sellid = '" + sellid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
-		sql = "SELECT a.*, b.productno, func_getDictName('计量单位', a.unit) unitname, substr(b.productno, 3, 1) materialtype"
-				+ " FROM bsellrow a LEFT JOIN sproduct b ON a.productid = b.productid WHERE a.sellid = '"
+		sql = "SELECT a.*, b.productno, func_getDictName('计量单位', a.unit) unitname,"
+				+ " substr(b.productno, 3, 1) materialtype,";
+				
+		String hidePrint = new ParameterDaoImpl().getParameterName("是否打印隐藏");
+		if(hidePrint.equals("Y")) {// 打印隐藏
+			sql += " SUBSTRING(a.productname, 1, LOCATE('(', a.productname)-1) productname2";
+		} else {
+			sql += " '' productname2";
+		}
+		
+		sql += " FROM bsellrow a LEFT JOIN sproduct b ON a.productid = b.productid WHERE a.sellid = '"
 				+ sellid + "' ORDER BY a.sort, b.productno";
 		List<CodeTableForm> sellrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("sellrowList", sellrowList);

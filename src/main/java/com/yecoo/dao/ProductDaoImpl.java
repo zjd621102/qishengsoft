@@ -65,10 +65,14 @@ public class ProductDaoImpl extends BaseDaoImpl {
 	public String getProductListCondition(CodeTableForm form) {
 		
 		StringBuffer cond = new StringBuffer("");
+		String productno = StrUtils.nullToStr(form.getValue("productno"));
 		String productname = StrUtils.nullToStr(form.getValue("productname"));
 		String producttype = StrUtils.nullToStr(form.getValue("producttype"));
 		String materialtypeno = StrUtils.nullToStr(form.getValue("materialtypeno"));
-		
+
+		if(!productno.equals("")) {
+			cond.append(" AND t.productno like '%").append(productno).append("%'");
+		}
 		if(!productname.equals("")) {
 			cond.append(" AND t.productname like '%").append(productname).append("%'");
 		}

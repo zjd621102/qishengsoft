@@ -94,7 +94,7 @@ public class SellAction {
 		return ajaxObject.toString();
 	}
 
-	@RequestMapping(value="/edi/{sellid}", method=RequestMethod.GET)
+	@RequestMapping(value="/edi/{sellid}")
 	public String toEdi(@PathVariable("sellid") int sellid, HttpServletRequest request) {
 		
 		CodeTableForm form = null;
@@ -185,6 +185,29 @@ public class SellAction {
 			}
 		}
 		return ajaxObject.toString();
+	}
+	
+    /**
+     * 重新生成编码
+     * @param request
+     * @return
+     */
+	@RequestMapping(value="/newNo")
+	public @ResponseBody String newNo(HttpServletRequest request) {
+		
+		String result = "false";
+		
+		String sellid = StrUtils.nullToStr(request.getParameter("sellid"));
+		String sellno = StrUtils.getNewNO("XSD","sellno","bsell");
+		
+		String sql = "UPDATE bsell SET sellno = '" + sellno + "' WHERE sellid = '" + sellid + "'";
+		
+		int iReturn = dbUtils.executeSQL(sql);
+		if (iReturn >= 0) {
+			result = "true";
+		}
+		
+		return result;
 	}
 	
 	/**

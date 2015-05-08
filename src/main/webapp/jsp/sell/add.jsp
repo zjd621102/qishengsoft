@@ -279,6 +279,7 @@
 	
 	<div class="formBar">
 		<ul>
+			<!-- 
 			<li>
 				<div class="buttonActive">
 					<div class="buttonContent">
@@ -286,6 +287,7 @@
 					</div>
 				</div>
 			</li>
+			-->
 			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
 		</ul>
