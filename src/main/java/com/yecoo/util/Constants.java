@@ -31,7 +31,8 @@ public class Constants {
 
 	public static String dbName = "";// 数据库名
 	
-	public final static String PATH_FILE = "\\resources\\file\\";
+	public final static String PATH_FILE = System.getProperty("file.separator") + "resources"
+			+ System.getProperty("file.separator") + "file" + System.getProperty("file.separator");
 	
 	static {
 		InputStream in = null;
