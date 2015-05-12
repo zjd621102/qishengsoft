@@ -73,6 +73,7 @@
 				<th width="120px">物资类型</th>
 				<th width="60px">计量单位</th>
 				<th width="120px">供应商</th>
+				<th width="40px">排序</th>
 				<th>新增时间</th>
 			</tr>
 		</thead>
@@ -98,6 +99,7 @@
 			   		<td>${bean.map.materialtypename}</td>
 			   		<td>${bean.map.unitname}</td>
 			   		<td>${bean.map.manuname}</td>
+			   		<td>${bean.map.materialsort}</td>
 			   		<td>${bean.map.createdate}</td>
 			   	</tr>
 		   	</c:forEach>

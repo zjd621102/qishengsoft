@@ -226,6 +226,17 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>打印名：</dt>
+			<dd>
+				<input type="text" name="map[printname]" size="25" maxlength="32"
+					value="${form.map.printname}"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt></dt>
+			<dd></dd>
+		</dl>
+		<dl>
 			<dt>备注：</dt>
 			<dd>
 				<input type="text" name="map[remark]" size="88" maxlength="256"
@@ -251,6 +262,52 @@
 					<div class="button" style="margin-left: 5px;">
 						<div class="buttonContent">
 							<button type="button" onclick="copyDetail();">复制</button>
+						</div>
+					</div>
+				</td>
+				<td>
+					<div class="button" style="margin-left: 4px;">
+						<input id="fileInput" type="file" name="image" 
+							uploaderOption="{
+								height: 20,
+								width: 65,
+								swf:'<%=path%>/js/uploadify/scripts/uploadify.swf',
+								uploader:'<%=path%>/file/uploadFile',
+								formData:{pid:${form.map.productid}, btype: 'product'},
+								buttonText:'上传附件',
+								fileSizeLimit:'10240KB',
+								auto:true,
+								multi:false,
+								onUploadSuccess:uploadifySuccess,
+								onQueueComplete:uploadifyQueueComplete
+							}"
+						/>
+					</div>
+				</td>
+				<td>
+					<div class="button" style="margin-left: 4px;">
+						<input id="fileInput2" type="file" name="image" 
+							uploaderOption="{
+								height: 20,
+								width: 65,
+								swf:'<%=path%>/js/uploadify/scripts/uploadify.swf',
+								uploader:'<%=path%>/file/uploadFile',
+								formData:{pid:${form.map.productid}, btype: 'product_cover'},
+								buttonText:'上传封面',
+								fileSizeLimit:'10240KB',
+								auto:true,
+								multi:false,
+								onUploadSuccess:uploadifySuccess,
+								onQueueComplete:uploadifyQueueComplete
+							}"
+						/>
+					</div>
+				</td>
+				<td>
+					<div class="button" style="margin-left: 5px;">
+						<div class="buttonContent">
+							<button type="button"
+							 onclick="window.open('<%=path%>/product/edi/${form.map.productid}?act=print');">打印</button>
 						</div>
 					</div>
 				</td>
@@ -383,32 +440,6 @@
 	
 	<div class="formBar">
 		<ul>
-			<li>
-				<div class="buttonActive">
-					<div class="buttonContent">
-						<button type="button" class="btnAdd addRow">新增</button>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="button">
-					<input id="fileInput" type="file" name="image" 
-						uploaderOption="{
-							height: 20,
-							width: 40,
-							swf:'<%=path%>/js/uploadify/scripts/uploadify.swf',
-							uploader:'<%=path%>/file/uploadFile',
-							formData:{pid:${form.map.productid}, btype: 'product'},
-							buttonText:'上传',
-							fileSizeLimit:'10240KB',
-							auto:true,
-							multi:false,
-							onUploadSuccess:uploadifySuccess,
-							onQueueComplete:uploadifyQueueComplete
-						}"
-					/>
-				</div>
-			</li>
 			<li><div class="button"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
 		</ul>

@@ -15,7 +15,7 @@ MaterialDaoImpl materialDaoImpl = new MaterialDaoImpl();
 		<div class="tabsContent">
 			<div>
 				<div layoutH="10"
-					style="float: left; display: block; overflow: auto; width: 240px; border: solid 1px #CCC;
+					style="float: left; display: block; overflow: auto; width: 190px; border: solid 1px #CCC;
 					line-height: 21px; background: #fff">
 					<ul class="tree treeFolder expand">
 						<li>
@@ -27,7 +27,7 @@ MaterialDaoImpl materialDaoImpl = new MaterialDaoImpl();
 						</li>
 					</ul>
 				</div>
-				<div id="jbsxBox2material<%=curTime%>" class="unitBox" style="margin-left: 246px;"></div>
+				<div id="jbsxBox2material<%=curTime%>" class="unitBox" style="margin-left: 196px;"></div>
 			</div>
 		</div>
 	</div>

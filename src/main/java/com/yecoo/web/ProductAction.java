@@ -1,6 +1,8 @@
 package com.yecoo.web;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -131,12 +133,30 @@ public class ProductAction {
 		form = productDaoImpl.getProductById(productid, request);
 		
 		FileDaoImpl fileDaoImpl = new FileDaoImpl();
-		List<CodeTableForm> fileList = fileDaoImpl.getFileList(productid, "'product'");// 附件列表
+		List<CodeTableForm> fileList = fileDaoImpl.getFileList(productid, "'product', 'product_cover'");// 附件列表
 		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// List的时间
 		
 		request.setAttribute("form", form);
 		request.setAttribute("fileList", fileList);
 		request.setAttribute("curTime", curTime);
+		
+		String act = StrUtils.nullToStr(request.getParameter("act"));
+		if(act.equals("print")) {
+			String productno = StrUtils.nullToStr(form.getValue("productno"));
+			Pattern p = Pattern.compile("^[A-Z]+1");// 铜
+			Matcher m = p.matcher(productno);
+			if(m.find()) {
+				form.setValue("materialtype", "铜");
+			}
+			
+			String sql = "SELECT CONCAT(t.fileid, '.', t.suffix) FROM sfile t WHERE t.pid = '" + productid
+					+ "' AND t.btype = 'product_cover'";
+			String picPath = dbUtils.execQuerySQL(sql);
+			form.setValue("picPath", picPath);
+			
+			return "product/print_pic"; // 打印
+		}
+		
 		return "product/edi";
 	}
 

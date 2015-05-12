@@ -155,7 +155,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
 		sql = "SELECT a.*, b.productno, func_getDictName('计量单位', a.unit) unitname,"
-				+ " substr(b.productno, 3, 1) materialtype,";
+				+ " b.productno REGEXP '[A-Z]+1' iscu,";
 				
 		String hidePrint = new ParameterDaoImpl().getParameterName("是否打印隐藏");
 		if(hidePrint.equals("Y")) {// 打印隐藏

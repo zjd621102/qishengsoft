@@ -2,6 +2,7 @@
 
 <c:if test="${not empty fileList}">
 <table class="table" style="width: 100%;">
+	<!--
 	<thead>
 		<tr>
 			<th style="font-weight: bold;">
@@ -9,6 +10,7 @@
 			</th>
 		</tr>
 	</thead>
+	-->
 	<c:forEach items="${fileList}" var="file" varStatus="status">
 	<tr id="tr_file_${file.map.fileid}">
 		<td>

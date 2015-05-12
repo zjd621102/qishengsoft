@@ -15,6 +15,7 @@ import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.SellDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
+import com.yecoo.util.DateUtils;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
@@ -199,8 +200,10 @@ public class SellAction {
 		
 		String sellid = StrUtils.nullToStr(request.getParameter("sellid"));
 		String sellno = StrUtils.getNewNO("XSD","sellno","bsell");
+		String selldate = DateUtils.getNowDateTime("yyyy-MM-dd");
 		
-		String sql = "UPDATE bsell SET sellno = '" + sellno + "' WHERE sellid = '" + sellid + "'";
+		String sql = "UPDATE bsell SET sellno = '" + sellno + "', selldate = '" + selldate
+				+ "' WHERE sellid = '" + sellid + "'";
 		
 		int iReturn = dbUtils.executeSQL(sql);
 		if (iReturn >= 0) {
