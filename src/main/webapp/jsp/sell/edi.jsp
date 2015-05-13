@@ -181,7 +181,7 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 184px;' class='required'" />
+				<st:select dictType="销售状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>

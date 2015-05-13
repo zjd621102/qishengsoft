@@ -35,7 +35,7 @@ public class BuyAction {
 
 		String first = StrUtils.nullToStr(request.getParameter("first")); // 查询初始化
 		if(first.equals("true")) {
-			form.setValue("currflow", "申请");
+			form.setValue("currflow", "待付");
 		}
 		
 		buyDaoImpl.initAction(request);
@@ -65,6 +65,7 @@ public class BuyAction {
 		
 		String buyname = StrUtils.getSysdate("yyyy.MM.dd") + "采购"; //采购名称
 		form.setValue("buyname", buyname);
+		form.setValue("currflow", "申请");
 		
 		request.setAttribute("form", form);
 		

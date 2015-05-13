@@ -18,7 +18,7 @@
 					</td>
 					<td style="width: 25%;">
 						当前流程：
-						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
+						<st:select dictType="销售状态" name="map[currflow]" value="${form.map.currflow}"
 						 expStr="style='width: 114px;'" />
 					</td>
 					<td style="width: 25%;">

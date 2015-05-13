@@ -123,7 +123,7 @@
 				</td>
 				<td></td>
 			</tr>
-			<c:if test="${form.map.currflow == '申请'}">
+			<c:if test="${form.map.currflow == '发货'}">
 				<tr>
 					<td colspan="6"></td>
 					<td>

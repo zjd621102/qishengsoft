@@ -13,7 +13,7 @@
 					</td>
 					<td style="width: 25%;">
 						当前流程：
-						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
+						<st:select dictType="采购状态" name="map[currflow]" value="${form.map.currflow}"
 						 expStr="style='width: 116px;'" />
 					</td>
 					<td style="width: 25%;">
@@ -114,7 +114,7 @@
 				<th width="120px">采购单名称</th>
 				<th width="125px">采购编号</th>
 				<th width="80px">采购日期</th>
-				<th width="130px">采购金额（${totalSum}）</th>
+				<th width="135px">采购金额（${totalSum}）</th>
 				<th width="60px">当前流程</th>
 				<th width="60px">制单人</th>
 				<th>创建时间</th>
@@ -124,7 +124,7 @@
 			<c:forEach items="${buyList}" var="bean" varStatus="vs">
 			   	<tr target="s_buyid" rel="${bean.map.buyid}">
 		   			<td>
-			   			<c:if test="${bean.map.currflow=='申请'}">
+			   			<c:if test="${bean.map.currflow == '申请' || bean.map.currflow == '待付'}">
 		   				<input name="ids" value="${bean.map.buyid}" type="checkbox">
 		   				</c:if>
 		   			</td>

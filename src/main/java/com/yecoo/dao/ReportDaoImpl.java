@@ -252,7 +252,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		form.setValue("limitNum", limitNum);
 		
 		sql = "SELECT * FROM (SELECT CONCAT(a.materialno, '-', a.materialname) name,"
-				+ " (SELECT IFNULL(SUM(c.sum), 0) FROM bbuy b, bbuyrow c WHERE b.buyid = c.buyid AND b.currflow = '结束' AND b.btype = 'CGD'"
+				+ " (SELECT IFNULL(SUM(c.sum), 0) FROM bbuy b, bbuyrow c WHERE b.buyid = c.buyid AND b.currflow <> '申请' AND b.btype = 'CGD'"
 				+ " AND c.materialid = a.materialid"
 				+ " AND b.buydate >= '" + dateFrom + "' AND b.buydate <= '" + dateTo + "') sum FROM smaterial a) m ORDER BY m.sum " + sort
 				+ " LIMIT " + limitFrom + "," + limitNum;
@@ -306,9 +306,9 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		}
 		
 		sql = "SELECT * FROM (SELECT CONCAT(a.productno, '-', a.productname) name,"
-				+ " (SELECT IFNULL(SUM(c.realsum), 0) FROM bsell b, bsellrow c WHERE b.sellid = c.sellid AND b.currflow = '结束' AND c.productid = a.productid"
+				+ " (SELECT IFNULL(SUM(c.realsum), 0) FROM bsell b, bsellrow c WHERE b.sellid = c.sellid AND b.currflow <> '申请' AND c.productid = a.productid"
 				+ " AND b.selldate >= '" + dateFrom + "' AND b.selldate <= '" + dateTo + "'" + cond + ") sum,"
-				+ " (SELECT IFNULL(SUM(c.profit*c.num), 0) FROM bsell b, bsellrow c WHERE b.sellid = c.sellid AND b.currflow = '结束' AND c.productid = a.productid"
+				+ " (SELECT IFNULL(SUM(c.profit*c.num), 0) FROM bsell b, bsellrow c WHERE b.sellid = c.sellid AND b.currflow <> '申请' AND c.productid = a.productid"
 				+ " AND b.selldate >= '" + dateFrom + "' AND b.selldate <= '" + dateTo + "'" + cond + ") profit FROM sproduct a) m ORDER BY m.sum " + sort
 				+ " LIMIT " + limitFrom + "," + limitNum;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);

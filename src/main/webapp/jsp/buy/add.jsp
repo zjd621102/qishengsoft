@@ -110,8 +110,8 @@
 		<dl>
 			<dt>当前流程：</dt>
 			<dd>
-				<input type="text" name="map[currflow]" class="readonly" size="25"
-					value="申请" readonly="readonly" />
+				<st:select dictType="采购状态" name="map[currflow]" value="${form.map.currflow}"
+				 expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>

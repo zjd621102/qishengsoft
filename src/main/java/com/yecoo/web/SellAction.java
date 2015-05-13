@@ -36,7 +36,7 @@ public class SellAction {
 
 		String first = StrUtils.nullToStr(request.getParameter("first")); //查询初始化
 		if(first.equals("true")) {
-			form.setValue("currflow", "申请");
+			form.setValue("currflow", "发货");
 		}
 		sellDaoImpl.initAction(request);
 		
@@ -106,14 +106,14 @@ public class SellAction {
 		String act = StrUtils.nullToStr(request.getParameter("act"));
 		if(act.equals("print")) {
 			String currflow = StrUtils.nullToStr(form.getValue("currflow"));
-			if(currflow.equals("申请")) {
+			if(currflow.equals("发货")) {
 				String manuid = StrUtils.nullToStr(form.getValue("manuid"));
 				String sql = "SELECT SUM(m.realsum) FROM ("
 						+ "SELECT IFNULL(SUM(b.plansum - b.realsum), 0) realsum FROM bpay a, bpayrow b WHERE a.payid = b.payid"
 						+ " AND a.currflow = '申请' AND a.manuid = '" + manuid + "'"
 						+ " UNION ALL"
 						+ " SELECT IFNULL(SUM(b.realsum), 0) realsum FROM bsell a, bsellrow b WHERE a.sellid = b.sellid"
-						+ " AND a.currflow = '申请' AND a.manuid = '" + manuid + "'"
+						+ " AND a.currflow = '发货' AND a.manuid = '" + manuid + "'"
 						+ ") m";
 				double allToPaysum = Double.parseDouble(dbUtils.execQuerySQL(sql));// 所有待付款
 				sql = "SELECT IFNULL(SUM(b.realsum), 0) realsum FROM bsellrow b WHERE b.sellid = '" + sellid + "'";

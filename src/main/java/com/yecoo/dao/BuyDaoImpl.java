@@ -351,7 +351,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 	 */
 	public int getToPayCount(CodeTableForm form) {
 		
-		String sql = "SELECT COUNT(1) FROM (SELECT 1 FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.currflow = '申请'";
+		String sql = "SELECT COUNT(1) FROM (SELECT 1 FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.currflow = '待付'";
 		String cond = getToPayCondition(form);
 		sql  += cond;
 		sql += " GROUP BY b.manuid) k";
@@ -369,7 +369,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 	public List<CodeTableForm> getToPayList(CodeTableForm form) {
 		
 		String sql = "SELECT o.*, k.sum FROM (SELECT b.manuid, SUM(b.sum) sum"
-				+ " FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.currflow = '申请'";
+				+ " FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.currflow = '待付'";
 		String cond = getToPayCondition(form);
 		sql  += cond;
 		sql += " GROUP BY b.manuid ORDER BY SUM(b.sum) DESC) k, smanu o WHERE k.manuid = o.manuid";
