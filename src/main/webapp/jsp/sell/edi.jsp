@@ -25,13 +25,10 @@
 		setTimeout(function() {
 			$(obj).autocomplete({
 				source : function(request, response) {
-					$.ajax({
-						url : "<%=path%>/product/getSelectByKeyword",
-						dataType : "json",
-						data : {
-							keyword : request.term
-						},
-						success : function(data) {
+					$.post(
+						"<%=path%>/product/getSelectByKeyword",
+						{keyword : request.term},
+						function(data) {
 							response($.map(data, function(item) {
 			                    return {
 			                        label: item.map.productno + "　" + item.map.productname,
@@ -44,8 +41,9 @@
 			                        numofonebox: item.map.numofonebox
 			                    }
 			                }));
-						}
-					});
+						},
+						"json"
+					);
 				},
 				minLength : 1,
 				select : function(event, ui) {

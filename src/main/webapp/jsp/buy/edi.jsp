@@ -18,13 +18,10 @@
 		setTimeout(function() {
 			$(obj).autocomplete({
 				source : function(request, response) {
-					$.ajax({
-						url : "<%=path%>/material/getSelectByKeyword",
-						dataType : "json",
-						data : {
-							keyword : request.term
-						},
-						success : function(data) {
+					$.post(
+						"<%=path%>/material/getSelectByKeyword",
+						{keyword : request.term},
+						function(data) {
 							response($.map(data, function(item) {
 			                    return {
 			                        label: item.map.materialno + "　" + item.map.materialname,
@@ -39,8 +36,9 @@
 			                        manutel: item.map.manutel
 			                    }
 			                }));
-						}
-					});
+						},
+						"json"
+					);
 				},
 				minLength : 1,
 				select : function(event, ui) {
