@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>打印图标</title>
 <style type="text/css">
 
@@ -23,7 +23,6 @@ td {
 
 .bjtd {
 	width: 33%;
-	height: 14.286%;
 	background-image:url('<%=path%>/images/print_bj.png');
 }
 
@@ -44,7 +43,12 @@ td {
 }
 
 .wordTab {
+	<c:if test="${not empty form.map.picPath}">/* 有图片 */
 	width: 55%;
+	</c:if>
+	<c:if test="${empty form.map.picPath}">/* 无图片 */
+	width: 100%;
+	</c:if>
 	height: 100%;
 	font-weight: bolder;
 	text-align: center;
@@ -69,6 +73,9 @@ td {
 		<%
 		for(int i = 0; i <= 6; i++) {
 		%>
+		<tr style="height: 9px;">
+			<td colspan="3" style=""></td>
+		</tr>
 		<tr>
 			<%
 			for(int j = 0; j <= 2; j++) {
@@ -77,16 +84,17 @@ td {
 				<table class="secTab">
 					<tr>
 						<td style="width: 100%; height: 100%;">
+							<c:if test="${not empty form.map.picPath}"><!-- 有图片 -->
 							<table class="picTab">
 								<tr>
-									<td
-										<c:if test="${not empty form.map.picPath}">
-										style="background-position: 50% 46%; background-image:url('<%=path%>/resources/file/${form.map.picPath}'); background-repeat:no-repeat;"
-										</c:if>
+									<td style="background-position: 50% 46%;
+										 background-image:url('<%=path%>/resources/file/${form.map.picPath}');
+										 background-repeat:no-repeat;"	
 									>
 									</td>
 								</tr>
 							</table>
+							</c:if>
 							<table class="wordTab">
 								<tr>
 									<td>
