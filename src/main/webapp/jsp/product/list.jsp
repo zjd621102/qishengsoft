@@ -77,10 +77,12 @@
 				<th width="70px">产品编码</th>
 				<th width="160px">产品名称</th>
 				<th width="60px">产品类型</th>
+				<!-- 
 				<th width="60px">计量单位</th>
+				-->
 				<th width="60px">产品单价</th>
 				<th width="60px">一件数量</th>
-				<th width="110px">买家</th>
+				<th width="200px">买家</th>
 				<th width="40px">排序</th>
 				<th>新增日期</th>
 			</tr>
@@ -102,7 +104,9 @@
 			   		<td>${bean.map.productno}</td>
 			   		<td>${bean.map.productname}</td>
 			   		<td>${bean.map.producttypename}</td>
+			   		<!-- 
 			   		<td>${bean.map.unitname}</td>
+			   		-->
 			   		<td>${bean.map.realprice}</td>
 			   		<td>${bean.map.numofonebox}</td>
 			   		<td>${bean.map.buyers}</td>
