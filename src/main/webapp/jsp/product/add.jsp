@@ -62,6 +62,8 @@
 					row.find("[name='map[materialid]']").val(ui.item.materialid);
 					row.find("[name='map[materialprice]']").val(ui.item.price);
 					row.find("[name='map[manuname]']").val(ui.item.manuname);
+					
+					changeValue();// 重新计算
 				},
 				open : function() {
 					$(this).removeClass("ui-corner-all").addClass(

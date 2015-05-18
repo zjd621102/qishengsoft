@@ -39,8 +39,6 @@
 			                        costprice: item.map.costprice,
 			                        realprice: item.map.realprice,
 			                        numofonebox: item.map.numofonebox
-			    					
-			    					changeNum(row.find("[name='map[productname]']"));// 重新计算数量、价格
 			                    }
 			                }));
 						},
@@ -57,6 +55,8 @@
 					row.find("[name='map[planprice]']").val(ui.item.realprice);
 					row.find("[name='map[realprice]']").val(ui.item.realprice);
 					row.find("[name='map[numofonebox]']").val(ui.item.numofonebox);
+					
+					changeNum(row.find("[name='map[productname]']"));// 重新计算数量、价格
 				},
 				open : function() {
 					$(this).removeClass("ui-corner-all").addClass(
