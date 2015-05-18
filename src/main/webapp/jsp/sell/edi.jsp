@@ -39,6 +39,8 @@
 			                        costprice: item.map.costprice,
 			                        realprice: item.map.realprice,
 			                        numofonebox: item.map.numofonebox
+			    					
+			    					changeNum(row.find("[name='map[productname]']"));// 重新计算数量、价格
 			                    }
 			                }));
 						},
@@ -215,7 +217,7 @@
 						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="30px">序号</th>
-					<th width="150px">产品编码</th>
+					<th width="130px">产品编码</th>
 					<th width="150px">产品名称</th>
 <!-- 					<th width="60px">计量单位</th> -->
 					<th width="60px">产品单价</th>
@@ -267,9 +269,11 @@
 			   		<td></td>
 			   		<td>
 				   		<input type="hidden" name="map[productid]" value="" />
-						<input type="text" name="map[productno]" style="width: 90px;" maxlength="13"
+						<input type="text" name="map[productno]" style="width: 90px; margin-right: 5px;" maxlength="13"
 							suggestFields="productid,productno,productname,unit,costprice,planprice,realprice" />
+						<!-- 
 						<a class="btnLook" href="<%=path%>/product/tree" lookupGroup="lookup" width="1200"></a>
+						-->
 						<a href="javascript:void(0);" class="btnClear"
 							suggestFields="productid,productno,productname,unit,costprice,planprice,realprice,num,boxnum,numofonebox,realsum"></a>
 			   		</td>
@@ -331,10 +335,12 @@
 				   		<td>${vs.index+1}</td>
 				   		<td>
 				   			<input type="hidden" name="map[productid]" value="${bean.map.productid}" />
-							<input type="text" name="map[productno]" style="width: 90px;" maxlength="13"
+							<input type="text" name="map[productno]" style="width: 90px; margin-right: 5px;" maxlength="13"
 								suggestFields="productid,productno,productname,unit,costprice,planprice,realprice"
 								value="${bean.map.productno}" />
+							<!-- 
 							<a class="btnLook" href="<%=path%>/product/tree" lookupGroup="lookup" width="1200"></a>
+							-->
 							<a href="javascript:void(0);" class="btnClear"
 								suggestFields="productid,productno,productname,unit,costprice,planprice,realprice,num,boxnum,numofonebox,realsum"></a>
 				   		</td>

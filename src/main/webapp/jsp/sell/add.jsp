@@ -50,6 +50,8 @@
 					row.find("[name='map[planprice]']").val(ui.item.realprice);
 					row.find("[name='map[realprice]']").val(ui.item.realprice);
 					row.find("[name='map[numofonebox]']").val(ui.item.numofonebox);
+					
+					changeNum(row.find("[name='map[productname]']"));// 重新计算数量、价格
 				},
 				open : function() {
 					$(this).removeClass("ui-corner-all").addClass(
@@ -164,7 +166,7 @@
 						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="30px">序号</th>
-					<th width="150px">产品编码</th>
+					<th width="130px">产品编码</th>
 					<th width="150px">产品名称</th>
 <!-- 					<th width="60px">计量单位</th> -->
 					<th width="60px">产品单价</th>
@@ -216,9 +218,11 @@
 			   		<td></td>
 			   		<td>
 				   		<input type="hidden" name="map[productid]" value="" />
-						<input type="text" name="map[productno]" style="width: 90px;" maxlength="13"
+						<input type="text" name="map[productno]" style="width: 90px; margin-right: 5px;" maxlength="13"
 							suggestFields="productid,productno,productname,unit,costprice,planprice,realprice,num,boxnum,numofonebox,realsum"/>
+						<!-- 
 						<a class="btnLook" href="<%=path%>/product/tree" lookupGroup="lookup" width="1200"></a>
+						-->
 						<a href="javascript:void(0);" class="btnClear"
 							suggestFields="productid,productno,productname,unit,costprice,planprice,realprice"></a>
 			   		</td>
