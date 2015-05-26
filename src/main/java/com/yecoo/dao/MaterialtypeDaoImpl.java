@@ -139,7 +139,7 @@ public class MaterialtypeDaoImpl extends BaseDaoImpl {
 	public CodeTableForm getMaterialtypeById(int materialtype) {
 		
 		String sql = "SELECT t.*, func_getMaterialtypeName(t.parent) parentname FROM smaterialtype t WHERE t.materialtype = '"
-				+ materialtype + "'";
+				+ materialtype + "' ORDER BY priority, t.materialtype";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		codeTableForm.setValue("childrenList", getChildrenList(codeTableForm));
 		return codeTableForm;
