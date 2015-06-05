@@ -33,6 +33,12 @@
 		autoCom("[name='map[materialno]']:visible");
 	}
 	
+	// 重新计算成本、利润
+	function delRowOther() {
+		setAllSum('materialsum', 'costprice');
+		setReduction('realprice', 'costprice', 'profit');
+	}
+	
 	function autoCom(obj) {
 		setTimeout(function() {
 			$(obj).autocomplete({

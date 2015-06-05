@@ -109,6 +109,12 @@
 		allprofit = Math.round(allprofit * 100) / 100;
 		$("[name*='map[allprofit]']").val(allprofit);
 	}
+	
+	// 重新计算金额
+	function delRowOther() {
+		setAllSum('realsum', 'allrealsum');
+		setAllSum('boxnum', 'allnum');
+	}
 </script>
 
 <form method="post" action="<%=path%>/sell/add" class="required-validate pageForm"

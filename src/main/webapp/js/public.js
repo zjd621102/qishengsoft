@@ -14,6 +14,8 @@ $(function(){
 	$(".delRow").live("click",function(event){ //删除行
 		var row = $(event.target).parents("tr:first");
 		$(row).remove();
+		
+		delRowOther(); //其他操作
 	});
 	$(".btnClear").live("click",function(event){ //清除字段
 		var field = $(event.target).attr("suggestFields");
@@ -27,9 +29,15 @@ $(function(){
 		}
 	});
 });
+
 function addRowOther() {
 	
 }
+
+function delRowOther() {
+	
+}
+
 /**
  * 乘
  * @param dou1

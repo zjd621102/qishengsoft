@@ -115,6 +115,12 @@
 		$("[name*='map[allprofit]']").val(allprofit);
 	}
 	
+	// 重新计算金额
+	function delRowOther() {
+		setAllSum('realsum', 'allrealsum');
+		setAllSum('boxnum', 'allnum');
+	}
+	
 	/**
 	 * 生成采购单
 	 */

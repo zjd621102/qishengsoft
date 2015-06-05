@@ -115,7 +115,7 @@
 			   		<td></td>
 			   		<td>
 						<input type="hidden" name="map[staffid]"/>
-						<input type="text" name="map[staffname]" style="width: 82%" maxlength="13"
+						<input type="text" name="map[staffname]" style="width: 140px;" maxlength="13"
 							suggestFields="staffid,staffname,planmoney" readonly="readonly"/>
 						<a class="btnLook" href="<%=path%>/staff/list?first=true&act=backselect&map[month]=${form.map.salarydate}" lookupGroup="staffLookup" width="1200"></a>
 						<a href="javascript:void(0);" class="btnClear" suggestFields="staffid,staffname,planmoney"></a>
@@ -137,7 +137,7 @@
 				   		<td>${vs.index+1}</td>
 				   		<td>
 							<input type="hidden" name="map[staffid]" value="${bean.map.staffid}"/>
-							<input type="text" name="map[staffname]" style="width: 82%" maxlength="13"
+							<input type="text" name="map[staffname]" style="width: 140px;" maxlength="13"
 								suggestFields="staffid,staffname,planmoney" value="${bean.map.staffname}" readonly="readonly"/>
 							<a class="btnLook" href="<%=path%>/staff/list?first=true&act=backselect&map[month]=${form.map.salarydate}" lookupGroup="staffLookup" width="1200"></a>
 							<a href="javascript:void(0);" class="btnClear" suggestFields="staffid,staffname,planmoney"></a>

@@ -14,6 +14,11 @@
 		autoCom("[name='map[materialno]']:last");
 	}
 	
+	// 重新计算金额
+	function delRowOther() {
+		setAllSum('sum', 'allsum');
+	}
+	
 	function autoCom(obj) {
 		setTimeout(function() {
 			$(obj).autocomplete({
