@@ -158,11 +158,13 @@
 			<dd>
 				<input type="text" name="map[sellno]" class="required" size="24" maxlength="16"
 					 value="${form.map.sellno}" readonly="readonly"/>
+				<c:if test="${form.map.currflow == '申请'}"><!-- 申请状态才能修改编码 -->
 				<div class="button" style="margin-left: 5px; float: left;">
 					<div class="buttonContent">
 						<button type="button" onclick="newNo();">新编</button>
 					</div>
 				</div>
+				</c:if>
 			</dd>
 		</dl>
 		<dl>
