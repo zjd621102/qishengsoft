@@ -227,7 +227,7 @@
 												<a href="<%=path%>/pay/edi/${pay.map.payid}" target="dialog"
 													rel="pay_edi" mask="true" width="1200" height="500"
 													style="font-size: 13px;">
-													${pay.map.btypename}【${pay.map.paydate}】</a>
+													${pay.map.manuname}【${pay.map.paydate}】</a>
 											</div>
 										</li>
 									</c:forEach>

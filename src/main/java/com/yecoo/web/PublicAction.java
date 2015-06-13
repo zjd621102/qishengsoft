@@ -170,13 +170,15 @@ public class PublicAction {
 		boolean bMaterial = SecurityUtils.getSubject().isPermitted("Material:edi");
 		
 		if(bBuy) {
-			sql = "SELECT t.buyid, t.buyname, t.buydate FROM bbuy t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+			sql = "SELECT t.buyid, t.buyname, t.buydate FROM bbuy t WHERE t.currflow = '申请'"
+				+ " ORDER BY t.createtime LIMIT 0,8";
 			buyList = dbUtils.getListBySql(sql); //采购待办列表
 			toDoNum += buyList.size();
 		}
 
 		if(bSell) {
-			sql = "SELECT t.sellid, func_getManuName(t.manuid) manuname, t.selldate FROM bsell t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+			sql = "SELECT t.sellid, func_getManuName(t.manuid) manuname, t.selldate FROM bsell t"
+				+ " WHERE t.currflow <> '结束' ORDER BY t.createtime LIMIT 0,8";
 			sellList = dbUtils.getListBySql(sql); //销售待办列表
 			toDoNum += sellList.size();
 		}
@@ -188,13 +190,15 @@ public class PublicAction {
 		}
 
 		if(bPay) {
-			sql = "SELECT t.payid, func_getDictName('单据类型', t.btype) btypename, t.paydate FROM bpay t WHERE t.currflow <> '结束' ORDER BY t.createtime";
+			sql = "SELECT t.payid, func_getDictName('单据类型', t.btype) btypename, t.paydate, b.manuname FROM bpay t, smanu b"
+				+ " WHERE t.manuid = b.manuid AND t.currflow <> '结束' ORDER BY t.createtime" + " LIMIT 0,8";
 			payList = dbUtils.getListBySql(sql); //单据待办列表
 			toDoNum += payList.size();
 		}
 
 		if(bMaterial) {
-			sql = "SELECT a.materialid, a.materialno, a.materialname, a.stock FROM smaterial a WHERE a.stock < a.alarmnum AND a.usestock = '1'";
+			sql = "SELECT a.materialid, a.materialno, a.materialname, a.stock FROM smaterial a"
+				+ " WHERE a.stock < a.alarmnum AND a.usestock = '1'";
 			alarmStockList = dbUtils.getListBySql(sql); //库存报警列表
 			toDoNum += alarmStockList.size();
 		}
