@@ -25,6 +25,10 @@
 						<input type="text" name="map[materialtypeno]" value="${form.map.materialtypeno}"
 							style="width: 100px;"/>
 					</td>
+					<td>
+						买家：
+						<input type="text" name="map[buyers]" value="${form.map.buyers}" style="width: 100px;"/>
+					</td>
 				</tr>
 			</table>
 			<div class="subBar">

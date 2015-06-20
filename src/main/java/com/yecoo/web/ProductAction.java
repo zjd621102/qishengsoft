@@ -50,6 +50,19 @@ public class ProductAction {
 		
 		form.setValue("producttype", producttype);
 		productDaoImpl.initAction(request);
+		
+		// 设置买家到session
+		Object obuyers = form.getValue("buyers");
+		if(obuyers != null) {
+			String buyers = StrUtils.nullToStr(obuyers);
+			request.getSession().setAttribute("buyers", buyers);
+		}
+		
+		// 从session获取买家
+		String buyers = StrUtils.nullToStr(request.getSession().getAttribute("buyers"));
+		if(!buyers.equals("")) {
+			form.setValue("buyers", buyers);
+		}
 
 		int totalCount = productDaoImpl.getProductCount(form);
 		List<CodeTableForm> productList = productDaoImpl.getProductList(form);

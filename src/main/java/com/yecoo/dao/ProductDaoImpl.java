@@ -69,6 +69,7 @@ public class ProductDaoImpl extends BaseDaoImpl {
 		String productname = StrUtils.nullToStr(form.getValue("productname"));
 		String producttype = StrUtils.nullToStr(form.getValue("producttype"));
 		String materialtypeno = StrUtils.nullToStr(form.getValue("materialtypeno"));
+		String buyers = StrUtils.nullToStr(form.getValue("buyers"));
 
 		if(!productno.equals("")) {
 			cond.append(" AND t.productno like '%").append(productno).append("%'");
@@ -82,6 +83,9 @@ public class ProductDaoImpl extends BaseDaoImpl {
 		if(!materialtypeno.equals("")) {
 			cond.append(" AND EXISTS (SELECT 1 FROM sproductrow n WHERE n.productid = t.productid AND n.materialno = '")
 				.append(materialtypeno).append("')");
+		}
+		if(!buyers.equals("")) {
+			cond.append(" AND t.buyers like '%").append(buyers).append("%'");
 		}
 		
 		return cond.toString();
