@@ -26,6 +26,14 @@
 		batchSet('salary', 'map[salary]');
 		setAllSum('salary', 'allsalary');
 	}
+	
+	// 清空
+	function clearClick(obj) {
+		var tr = $(obj).parent().parent().parent();
+		$(tr).find("[name='map[workstatus]']").val("");// 考勤状态
+		$(tr).find("[name='map[salary]']").val("0");// 工资
+		setAllSum('salary', 'allsalary');
+	}
 </script>
 
 <form method="post" action="<%=path%>/staff/edi_work/${form.map.staffid}" class="required-validate pageForm"
@@ -93,6 +101,7 @@
 		<thead>
 			<tr>
 				<th width="30px">序号</th>
+				<th width="40px">操作</th>
 				<th width="80px">考勤日期</th>
 				<th width="60px">上班时间</th>
 				<th width="60px">下班时间</th>
@@ -103,6 +112,7 @@
 		</thead>
 		<tbody>
 			<tr>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -119,6 +129,9 @@
 			<c:forEach items="${workrowList}" var="bean" varStatus="vs">
 			   	<tr>
 			   		<td>${vs.index+1}</td>
+			   		<td align="center">
+			   			<a href="javascript:void(0);" class="btnClear" onclick="clearClick(this);"></a>
+			   		</td>
 			   		<td>
 						<input type="hidden" name="map[workrowid]" value="${bean.map.workrowid}"/>
 						<input type="text" name="map[workdate]" style="width: 65px" maxlength="10"
