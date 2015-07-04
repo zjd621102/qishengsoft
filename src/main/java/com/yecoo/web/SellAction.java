@@ -126,6 +126,8 @@ public class SellAction {
 			}
 			
 			return "sell/print"; // 打印
+		} else if(act.equals("printBuy")) {
+			return "sell/print_buy"; // 打印
 		}
 		
 		return "sell/edi";

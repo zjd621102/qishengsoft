@@ -423,6 +423,13 @@
 			<shiro:hasPermission name="Sell:edi">
 			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
 			<li><div class="button"><div class="buttonContent"><button type="button" onclick="addBuy()">生成采购单</button></div></div></li>
+			<li>
+				<div class="button">
+					<div class="buttonContent">
+						<button type="button" onclick="window.open('<%=path%>/sell/edi/${form.map.sellid}?act=printBuy');">打印采购单</button>
+					</div>
+				</div>
+			</li>
 			</shiro:hasPermission>
 			</c:if>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>

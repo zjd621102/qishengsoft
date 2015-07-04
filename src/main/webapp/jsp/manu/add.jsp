@@ -84,7 +84,7 @@
 		<dl>
 			<dt>是否生成采购单</dt>
 			<dd>
-				<st:select dictType="是否" name="map[istobuy]" value="1"
+				<st:select dictType="是否" name="map[istobuy]" value="0"
 				 expStr="style='width: 184px;'" />
 			</dd>
 		</dl>
