@@ -274,7 +274,7 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[sort]" style="width: 35px;" maxlength="4" class="number"
-							value="9"/>
+							value="5"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 155px;" maxlength="256"/>

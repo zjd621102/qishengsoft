@@ -129,8 +129,11 @@
 				</dd>
 			</dl>
 			<dl>
-				<dt></dt>
-				<dd></dd>
+				<dt>是否生成采购单</dt>
+				<dd>
+					<st:select dictType="是否" name="map[istobuy]" value="${form.map.istobuy}"
+					 expStr="style='width: 184px;'" />
+				</dd>
 			</dl>
 			<dl>
 				<dt>备注：</dt>

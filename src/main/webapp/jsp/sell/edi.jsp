@@ -227,11 +227,15 @@
 					<th width="30px">序号</th>
 					<th width="130px">产品编码</th>
 					<th width="150px">产品名称</th>
-<!-- 					<th width="60px">计量单位</th> -->
+					<!--
+ 					<th width="60px">计量单位</th>
+ 					-->
 					<th width="60px">产品单价</th>
 					<th width="60px">实付单价</th>
+					<!--
 					<th width="60px" style="display: ${showProfit};">成本单价</th>
 					<th width="60px" style="display: ${showProfit};">利润</th>
+					-->
 					<th width="60px">数量</th>
 					<th width="60px">件数</th>
 					<th width="60px">一件数量</th>
@@ -246,14 +250,18 @@
 					<td></td>
 					<td></td>
 					<td></td>
-<!-- 					<td></td> -->
+					<!--
+ 					<td></td>
+ 					-->
 					<td></td>
 					<td></td>
+					<!--
 					<td style="display: ${showProfit};"></td>
 					<td style="display: ${showProfit};">
 						<input type="text" name="map[allprofit]" style="width: 65px;" class="number"
 							value="0.00" readonly="readonly"/>
 					</td>
+					-->
 					<td style="font-size: 13px; font-weight: bold; color: red;">
 						合计：
 					</td>
@@ -289,11 +297,11 @@
 						<input type="text" name="map[productname]" style="width: 130px;" maxlength="32"
 							class="required"/>
 			   		</td>
-			   		<%-- 
+			   		<!--
 			   		<td>
 			   			<st:select dictType="计量单位" name="map[unit]" expStr="style='width: 100%;'" />
 			   		</td>
-			   		--%>
+			   		-->
 			   		<td>
 						<input type="text" name="map[planprice]" style="width: 45px;" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
@@ -302,6 +310,7 @@
 						<input type="text" name="map[realprice]" style="width: 45px;" maxlength="12"
 							class="number required" value="0.00" onchange="changeValue();"/>
 			   		</td>
+			   		<!--
 			   		<td style="display: ${showProfit};">
 						<input type="text" name="map[costprice]" style="width: 45px;" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
@@ -310,6 +319,7 @@
 						<input type="text" name="map[profit]" style="width: 45px;" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
+			   		-->
 			   		<td>
 						<input type="text" name="map[num]" style="width: 45px;" maxlength="12"
 							class="digits required" value="0" onchange="changeValue();"/>
@@ -328,7 +338,7 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[sort]" style="width: 35px;" maxlength="4" class="number"
-							value="9"/>
+							value="5"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 155px;" maxlength="256"/>
@@ -356,11 +366,11 @@
 							<input type="text" name="map[productname]" style="width: 130px;" maxlength="32"
 								value="${bean.map.productname}" class="required"/>
 				   		</td>
-				   		<%-- 
+				   		<!--
 				   		<td>
 				   			<st:select dictType="计量单位" name="map[unit]" value="${bean.map.unit}" expStr="style='width: 100%;'" />
 				   		</td>
-				   		--%>
+				   		-->
 				   		<td>
 							<input type="text" name="map[planprice]" style="width: 45px;" maxlength="12"
 								class="number" value="${bean.map.planprice}" readonly="readonly"/>
@@ -369,6 +379,7 @@
 							<input type="text" name="map[realprice]" style="width: 45px;" maxlength="12"
 								class="number required" value="${bean.map.realprice}" onchange="changeValue();"/>
 				   		</td>
+				   		<!--
 				   		<td style="display: ${showProfit};">
 							<input type="text" name="map[costprice]" style="width: 45px;" maxlength="12"
 								class="number" value="${bean.map.costprice}" readonly="readonly"/>
@@ -377,6 +388,7 @@
 							<input type="text" name="map[profit]" style="width: 45px;" maxlength="12"
 								class="number" value="${bean.map.profit}" readonly="readonly"/>
 				   		</td>
+				   		-->
 				   		<td>
 							<input type="text" name="map[num]" style="width: 45px;" maxlength="12"
 								class="digits required" value="${bean.map.num}" onchange="changeValue();"/>
@@ -426,7 +438,14 @@
 			<li>
 				<div class="button">
 					<div class="buttonContent">
-						<button type="button" onclick="window.open('<%=path%>/sell/edi/${form.map.sellid}?act=printBuy');">打印采购单</button>
+						<button type="button" onclick="window.open('<%=path%>/sell/edi/${form.map.sellid}?act=printBuy');">采购单</button>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="button">
+					<div class="buttonContent">
+						<button type="button" onclick="window.open('<%=path%>/sell/edi/${form.map.sellid}?act=printDo');">生产单</button>
 					</div>
 				</div>
 			</li>
