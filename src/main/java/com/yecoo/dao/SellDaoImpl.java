@@ -299,7 +299,8 @@ public class SellDaoImpl extends BaseDaoImpl {
 				+ "SELECT a.materialid, SUM(b.materialnum * c.num) num"
 				+ " FROM smaterial a, sproductrow b, bsellrow c WHERE a.materialid = b.materialid"
 				+ " AND b.productid = c.productid AND c.sellid = '" + form.getValue("sellid") + "' GROUP BY a.materialid"
-				+ ") m, smaterial n, smanu o WHERE m.materialid = n.materialid AND n.manuid = o.manuid AND o.istobuy = '1'";
+				+ ") m, smaterial n, smanu o WHERE m.materialid = n.materialid AND n.manuid = o.manuid"
+				+ " AND (o.istobuy = '1' OR n.istobuy = '1')";
 			iReturn = dbUtils.executeSQL(sql);
 			if(iReturn == -1) { //保存失败，删除主表
 				sql = "DELETE FROM bbuy WHERE buyid = '" + buyid + "'";
