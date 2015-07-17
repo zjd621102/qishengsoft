@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yecoo.dao.FileDaoImpl;
 import com.yecoo.dao.LogDaoImpl;
+import com.yecoo.dao.ParameterDaoImpl;
 import com.yecoo.dao.ProductDaoImpl;
 import com.yecoo.dao.ProducttypeDaoImpl;
 import com.yecoo.model.CodeTableForm;
@@ -212,12 +213,26 @@ public class ProductAction {
 	/**
 	 * 查询产品
 	 * @param keyword
+	 * @param manuid
 	 * @return
 	 */
     @RequestMapping(value = "/getSelectByKeyword")
     @ResponseBody
-    public List<CodeTableForm> getSelectByKeyword(String keyword) {
-		String sql = "SELECT * FROM sproduct t WHERE (t.productno LIKE '%"
+    public List<CodeTableForm> getSelectByKeyword(String keyword, String manuid) {
+    	
+		
+		String field = "";
+
+		if(manuid != null && !manuid.equals("")) {
+			String priceMemory = new ParameterDaoImpl().getParameterName("是否价格记忆");
+			if(priceMemory.equals("Y")) {// 打印隐藏
+				field += " (SELECT b.realprice FROM bsell a, bsellrow b WHERE a.sellid = b.sellid"
+					+ " AND b.productid = t.productid AND a.manuid = '" + manuid
+					+ "' ORDER BY b.sellid DESC LIMIT 0, 1) historyprice,";
+			}
+		}
+    	
+		String sql = "SELECT " + field + "t.* FROM sproduct t WHERE (t.productno LIKE '%"
 				+ keyword + "%' OR t.productname LIKE '%" + keyword + "%') ORDER BY t.productsort ASC, t.productno ASC";
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
         return list;

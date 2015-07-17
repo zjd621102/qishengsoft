@@ -9,6 +9,7 @@
 <script>
 	$(function() {
 		autoCom("[name='map[productno]']:visible");
+		autoComManu("[name='map[manuname]']");
 	});
 	
 	function addRowOther() {
@@ -22,7 +23,7 @@
 				source : function(request, response) {
 					$.post(
 						"<%=path%>/product/getSelectByKeyword",
-						{keyword : request.term},
+						{keyword : request.term, manuid : $("[name='map[manuid]']").val()},
 						function(data) {
 							response($.map(data, function(item) {
 			                    return {
@@ -33,6 +34,7 @@
 			                        unit: item.map.unit,
 			                        costprice: item.map.costprice,
 			                        realprice: item.map.realprice,
+			                        historyprice: item.map.historyprice,
 			                        numofonebox: item.map.numofonebox
 			                    }
 			                }));
@@ -48,10 +50,47 @@
 					row.find("[name='map[unit]']").val(ui.item.unit);
 					row.find("[name='map[costprice]']").val(ui.item.costprice);
 					row.find("[name='map[planprice]']").val(ui.item.realprice);
-					row.find("[name='map[realprice]']").val(ui.item.realprice);
+					row.find("[name='map[realprice]']").val(ui.item.historyprice == null ? ui.item.realprice : ui.item.historyprice);
 					row.find("[name='map[numofonebox]']").val(ui.item.numofonebox);
 					
 					changeNum(row.find("[name='map[productname]']"));// 重新计算数量、价格
+				},
+				open : function() {
+					$(this).removeClass("ui-corner-all").addClass(
+							"ui-corner-top");
+				},
+				close : function() {
+					$(this).removeClass("ui-corner-top").addClass(
+							"ui-corner-all");
+				}
+			});
+		}, 100);
+	}
+	
+	// 查询客户
+	function autoComManu(obj) {
+		setTimeout(function() {
+			$(obj).autocomplete({
+				source : function(request, response) {
+					$.post(
+						"<%=path%>/manu/getSelectByKeyword",
+						{keyword : request.term, manutypeid : '2'},
+						function(data) {
+							response($.map(data, function(item) {
+			                    return {
+			                        label: item.map.manuname,
+			                        value: item.map.manuname,
+			                        manuid: item.map.manuid
+			                    }
+			                }));
+						},
+						"json"
+					);
+				},
+				minLength : 1,
+				select : function(event, ui) {
+					$("[name='map[manuid]']").val(ui.item.manuid);
+					$("[name='map[manuname]']").val(ui.item.manuname);
 				},
 				open : function() {
 					$(this).removeClass("ui-corner-all").addClass(
@@ -131,9 +170,9 @@
 		<dl>
 			<dt>客户名称：</dt>
 			<dd>
-				<input type="hidden" name="map[manuid]" value="${form.map.manuid}"/>
+				<input type="hidden" name="map[manuid]" class="required" value="${form.map.manuid}"/>
 				<input type="text" class="required" name="map[manuname]" value="${form.map.manuname}"
-					size="25" suggestFields="manuid,manuname" readonly="readonly"/>
+					size="25" suggestFields="manuid,manuname"/>
 				
 				<!-- 客户无值才须显示 -->
 				<c:if test="${empty form.map.manuid}">

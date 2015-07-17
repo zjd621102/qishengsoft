@@ -13,55 +13,61 @@
  	<input type="hidden" name="map[manuid]" value="${form.map.manuid}" />
 	<div class="pageFormContent" layoutH="52">
 		<dl>
-			<dt>供应商名称：</dt>
+			<dt>供应商名称</dt>
 			<dd>
 				<input type="text" name="map[manuname]" class="required" size="25" maxlength="32"
 					 value="${form.map.manuname}"/>
 			</dd>
 		</dl>
 		<dl>
-			<dt>供应商类别：</dt>
+			<dt>名称首字母</dt>
+			<dd>
+				<input type="text" name="map[manunamepy]" size="25" maxlength="16" value="${form.map.manunamepy}"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>供应商类别</dt>
 			<dd>
 				<st:select dictType="供应商类别" name="map[manutypeid]" value="${form.map.manutypeid}"
 				 expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
-			<dt>供应商状态：</dt>
+			<dt>供应商状态</dt>
 			<dd>
 				<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
 				 expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
 		<dl>
-			<dt>联系人：</dt>
+			<dt>联系人</dt>
 			<dd>
 				<input type="text" name="map[manucontact]" size="25" maxlength="32"
 					 value="${form.map.manucontact}"/>
 			</dd>
 		</dl>
 		<dl>
-			<dt>手机号码：</dt>
+			<dt>手机号码</dt>
 			<dd>
 				<input type="text" name="map[manuphone]" size="25" maxlength="11"
 					 value="${form.map.manuphone}"/>
 			</dd>
 		</dl>
 		<dl>
-			<dt>座机电话：</dt>
+			<dt>座机电话</dt>
 			<dd>
 				<input type="text" name="map[manutel]" size="25" maxlength="32"
 					 value="${form.map.manutel}"/>
 			</dd>
 		</dl>
 		<dl>
-			<dt>EMAIL：</dt>
+			<dt>EMAIL</dt>
 			<dd>
 				<input type="text" name="map[manuemail]" size="25" maxlength="64" value="${form.map.manuemail}"/>
 			</dd>
 		</dl>
 		<dl>
-			<dt>创建时间：</dt>
+			<dt>创建时间</dt>
 			<dd>
 				<input type="text" name="map[createdate]" size="25" maxlength="19"
 					value="${form.map.createdate}" readonly/>
@@ -93,7 +99,11 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>地址：</dt>
+			<dt></dt>
+			<dd></dd>
+		</dl>
+		<dl>
+			<dt>地址</dt>
 			<dd>
 				<input type="text" name="map[address]" size="88" maxlength="128" value="${form.map.address}" />
 			</dd>
@@ -103,7 +113,7 @@
 			<dd></dd>
 		</dl>
 		<dl>
-			<dt>备注：</dt>
+			<dt>备注</dt>
 			<dd>
 				<input type="text" name="map[remark]" size="88" maxlength="512" value="${form.map.remark}" />
 			</dd>

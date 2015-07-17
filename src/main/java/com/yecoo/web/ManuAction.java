@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.ManuDaoImpl;
 import com.yecoo.model.CodeTableForm;
+import com.yecoo.util.DbUtils;
+import com.yecoo.util.GB2Alpha;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
@@ -59,7 +61,15 @@ public class ManuAction {
 	@RequiresPermissions("Manu:add")
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public @ResponseBody String add(CodeTableForm form, HttpServletRequest request) {
-		
+
+		String manunamepy =  StrUtils.nullToStr(form.getValue("manunamepy"));
+		if(manunamepy.equals("")) {
+			String manuname = StrUtils.nullToStr(form.getValue("manuname"));
+			GB2Alpha gb2Alpha = new GB2Alpha();
+			manunamepy = gb2Alpha.string2Alpha(manuname);
+			form.setValue("manunamepy", manunamepy);
+		}
+			
 		AjaxObject ajaxObject = null;
 		String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss"); //当前日期
 		form.setValue("createdate", createdate);
@@ -89,6 +99,14 @@ public class ManuAction {
 	@RequestMapping(value="/edi", method=RequestMethod.POST)
 	public @ResponseBody String edi(CodeTableForm form, HttpServletRequest request) {
 		
+		String manunamepy =  StrUtils.nullToStr(form.getValue("manunamepy"));
+			if(manunamepy.equals("")) {
+			String manuname = StrUtils.nullToStr(form.getValue("manuname"));
+			GB2Alpha gb2Alpha = new GB2Alpha();
+			manunamepy = gb2Alpha.string2Alpha(manuname);
+			form.setValue("manunamepy", manunamepy);
+		}
+		
 		AjaxObject ajaxObject = null;
 		int iReturn = manuDaoImpl.ediManu(form, request);
 		if (iReturn >= 0) {
@@ -117,4 +135,28 @@ public class ManuAction {
 		}
 		return ajaxObject.toString();
 	}
+	
+	/**
+	 * 查询客户
+	 * @param keyword
+	 * @param manutypeid
+	 * @return
+	 */
+    @RequestMapping(value = "/getSelectByKeyword")
+    @ResponseBody
+    public List<CodeTableForm> getSelectByKeyword(String keyword, String manutypeid) {
+    	
+
+    	DbUtils dbUtils = new DbUtils();
+    	
+		String sql = "SELECT t.* FROM smanu t WHERE statusid = '1' AND (t.manunamepy LIKE '%"
+				+ keyword.toUpperCase() + "%' OR t.manuname LIKE '%" + keyword + "%')";
+		
+		if(manutypeid != null && !manutypeid.equals("")) {
+			sql += " AND manutypeid = '" + manutypeid + "'";
+		}
+		
+		List<CodeTableForm> list = dbUtils.getListBySql(sql);
+        return list;
+    }
 }
