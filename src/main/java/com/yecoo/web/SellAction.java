@@ -1,5 +1,6 @@
 package com.yecoo.web;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -119,7 +120,11 @@ public class SellAction {
 				double allToPaysum = Double.parseDouble(dbUtils.execQuerySQL(sql));// 所有待付款
 				sql = "SELECT IFNULL(SUM(b.realsum), 0) realsum FROM bsellrow b WHERE b.sellid = '" + sellid + "'";
 				double currToPaysum = Double.parseDouble(dbUtils.execQuerySQL(sql));// 当前待付款
-				double historyToPaysum = allToPaysum - currToPaysum;
+				
+				// 处理double相减精度问题
+				BigDecimal bd1 = new BigDecimal(Double.toString(allToPaysum)); 
+		        BigDecimal bd2 = new BigDecimal(Double.toString(currToPaysum)); 
+		        double historyToPaysum = bd1.subtract(bd2).doubleValue(); 
 
 				request.setAttribute("currToPaysum", currToPaysum);
 				request.setAttribute("historyToPaysum", historyToPaysum);
