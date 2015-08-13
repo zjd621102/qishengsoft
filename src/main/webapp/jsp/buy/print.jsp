@@ -64,11 +64,11 @@
 			<tr>
 				<td width="35px">序号</td>
 				<td width="70px">物资编码</td>
-				<td width="150px">物资名称</td>
-				<td width="70px">单价</td>
-				<td width="70px">数量</td>
-				<td width="80px">金额</td>
 				<td width="120px">供应商名称</td>
+				<td width="150px">物资名称</td>
+				<td width="70px">数量</td>
+				<td width="70px">单价</td>
+				<td width="80px">金额</td>
 				<td>备注</td>
 			</tr>
 		</thead>
@@ -92,21 +92,21 @@
 			   		<td width="70px">
 						<span>${bean.map.materialno}</span>
 			   		</td>
+			   		<td width="100px">
+						<span>${bean.map.manuname}</span>
+			   		</td>
 			   		<td width="150px">
 						<span>${bean.map.materialname}</span>
-			   		</td>
-			   		<td width="60px">
-			   			<span>${bean.map.price}</span>
 			   		</td>
 			   		<td width="60px">
 						<span>${bean.map.num}</span>
 			   		</td>
 			   		<td width="60px">
+			   			<span>${bean.map.price}</span>
+			   		</td>
+			   		<td width="60px">
 						<span>${bean.map.sum}</span>
 						<input type="hidden" name="map[sum]" value="${bean.map.sum}" />
-			   		</td>
-			   		<td width="100px">
-						<span>${bean.map.manuname}</span>
 			   		</td>
 			   		<td>
 						<span>${bean.map.remarkrow}</span>
