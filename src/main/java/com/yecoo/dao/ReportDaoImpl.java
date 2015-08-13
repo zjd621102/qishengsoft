@@ -242,19 +242,27 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		
 		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), DateUtils.getFristDayOfCurYear());
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
+		String manuname = StrUtils.nullToStr(form.getValue("manuname"));// 供应商
 		String sort = StrUtils.nullToStr(form.getValue("sort"), "DESC");// 排序
 		String limitFrom = StrUtils.nullToStr(form.getValue("limitFrom"), "0");
 		String limitNum = StrUtils.nullToStr(form.getValue("limitNum"), "12");
 		form.setValue("dateFrom", dateFrom);
 		form.setValue("dateTo", dateTo);
+		form.setValue("manuname", manuname);
 		form.setValue("sort", sort);
 		form.setValue("limitFrom", limitFrom);
 		form.setValue("limitNum", limitNum);
 		
+		String cond = "";
+		if(!manuname.equals("")) {
+			cond += " AND EXISTS (SELECT 1 FROM smanu s WHERE s.manuid = a.manuid AND s.manuname LIKE '%" + manuname + "%')";
+		}
+		
 		sql = "SELECT * FROM (SELECT CONCAT(a.materialno, '-', a.materialname) name,"
 				+ " (SELECT IFNULL(SUM(c.sum), 0) FROM bbuy b, bbuyrow c WHERE b.buyid = c.buyid AND b.currflow <> '申请' AND b.btype = 'CGD'"
 				+ " AND c.materialid = a.materialid"
-				+ " AND b.buydate >= '" + dateFrom + "' AND b.buydate <= '" + dateTo + "') sum FROM smaterial a) m ORDER BY m.sum " + sort
+				+ " AND b.buydate >= '" + dateFrom + "' AND b.buydate <= '" + dateTo + "') sum FROM smaterial a WHERE 1 = 1 "
+				+ cond + ") m ORDER BY m.sum " + sort
 				+ " LIMIT " + limitFrom + "," + limitNum;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		int len = list.size();
