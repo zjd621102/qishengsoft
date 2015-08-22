@@ -148,7 +148,7 @@ public class SellAction {
 		AjaxObject ajaxObject = null;
 		int iReturn = sellDaoImpl.ediSell(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("修改成功！", "sell_list", "closeCurrent");
+			ajaxObject = new AjaxObject("修改成功！", "sell_list", "");// closeCurrent
 
 			StrUtils.saveLog(request, "修改销售单", form);
 			

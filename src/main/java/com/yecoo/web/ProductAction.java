@@ -183,7 +183,7 @@ public class ProductAction {
 		AjaxObject ajaxObject = null;
 		int iReturn = productDaoImpl.ediProduct(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject(200, "修改成功！", "", "", "jbsxBox2product" + curTime, "closeCurrent");
+			ajaxObject = new AjaxObject(200, "修改成功！", "", "", "jbsxBox2product" + curTime, "");// closeCurrent
 
 			StrUtils.saveLog(request, "修改产品", form);
 		} else {
