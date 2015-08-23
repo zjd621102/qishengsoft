@@ -91,7 +91,7 @@ public class BuyAction {
 		form.setValue("maker", maker);
 		int iReturn = buyDaoImpl.addBuy(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("新增成功！", "buy_list", "closeCurrent");
+			ajaxObject = new AjaxObject("新增成功！", "buy_list", "");// closeCurrent
 
 			StrUtils.saveLog(request, "新增采购单", form);
 		} else {
@@ -126,7 +126,7 @@ public class BuyAction {
 		AjaxObject ajaxObject = null;
 		int iReturn = buyDaoImpl.ediBuy(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("修改成功！", "buy_list", "closeCurrent");
+			ajaxObject = new AjaxObject("修改成功！", "buy_list", "");// closeCurrent
 
 			StrUtils.saveLog(request, "修改采购单", form);
 		} else {
