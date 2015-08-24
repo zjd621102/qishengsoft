@@ -404,7 +404,8 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		sql = "SELECT m.* FROM "
 				+ "(SELECT c.manuname, IFNULL(SUM(b.realsum), 0) sum FROM bsell a, bsellrow b, smanu c"
 				+ " WHERE a.sellid = b.sellid AND a.manuid = c.manuid AND a.selldate >= '"
-				+ dateFrom + "' AND a.selldate <= '" + dateTo + "' GROUP BY c.manuname) m ORDER BY m.sum DESC";
+				+ dateFrom + "' AND a.selldate <= '" + dateTo + "' AND b.productid IS NOT NULL"
+				+ " AND a.currflow != '申请' GROUP BY c.manuname) m ORDER BY m.sum DESC";
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		int i = 0;
 		for(CodeTableForm codeTableForm : list) {
@@ -442,7 +443,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		
 		// 发货统计
 		sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bsell a, bsellrow b WHERE a.sellid = b.sellid"
-				+ " AND b.productid IS NOT NULL" + " AND a.selldate >= '" + dateFrom
+				+ " AND b.productid IS NOT NULL AND a.currflow != '申请'" + " AND a.selldate >= '" + dateFrom
 				+ "' AND a.selldate <= '" + dateTo + "'";
 		
 		if(!producttype.equals("")) {
