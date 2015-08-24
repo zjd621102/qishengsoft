@@ -26,8 +26,10 @@
 							style="width: 100px;"/>
 					</td>
 					<td>
-						买家：
-						<input type="text" name="map[buyers]" value="${form.map.buyers}" style="width: 100px;"/>
+						<c:if test="${userSessionInfo.map.ismanu != '1'}">
+							买家：
+							<input type="text" name="map[buyers]" value="${form.map.buyers}" style="width: 100px;"/>
+						</c:if>
 					</td>
 				</tr>
 			</table>
@@ -86,7 +88,9 @@
 				-->
 				<th width="60px">产品单价</th>
 				<th width="60px">一件数量</th>
+				<c:if test="${userSessionInfo.map.ismanu != '1'}">
 				<th width="200px">买家</th>
+				</c:if>
 				<th width="40px">排序</th>
 				<th>新增日期</th>
 			</tr>
@@ -113,7 +117,9 @@
 			   		-->
 			   		<td>${bean.map.realprice}</td>
 			   		<td>${bean.map.numofonebox}</td>
+					<c:if test="${userSessionInfo.map.ismanu != '1'}">
 			   		<td>${bean.map.buyers}</td>
+			   		</c:if>
 			   		<td>${bean.map.productsort}</td>
 			   		<td>${bean.map.createdate}</td>
 			   	</tr>

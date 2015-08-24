@@ -230,11 +230,13 @@ public class SellAction {
 	 */
 	private void initManu(CodeTableForm form, HttpServletRequest request) {
 		CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
-		CodeTableForm manu = dbUtils.getFormByColumn("smanu", "relateuserid",
-				String.valueOf(user.getValue("userid")));
-		if(manu != null) {
-			form.setValue("manuid", manu.getValue("manuid"));
-			form.setValue("manuname", manu.getValue("manuname"));
+		if("1".equals(user.getValue("ismanu"))) {// 是客户
+			CodeTableForm manu = dbUtils.getFormByColumn("smanu", "relateuserid",
+					String.valueOf(user.getValue("userid")));
+			if(manu != null) {
+				form.setValue("manuid", manu.getValue("manuid"));
+				form.setValue("manuname", manu.getValue("manuname"));
+			}
 		}
 	}
 }

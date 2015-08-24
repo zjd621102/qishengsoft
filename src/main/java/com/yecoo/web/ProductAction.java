@@ -19,6 +19,7 @@ import com.yecoo.dao.ParameterDaoImpl;
 import com.yecoo.dao.ProductDaoImpl;
 import com.yecoo.dao.ProducttypeDaoImpl;
 import com.yecoo.model.CodeTableForm;
+import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
@@ -57,6 +58,11 @@ public class ProductAction {
 		if(obuyers != null) {
 			String buyers = StrUtils.nullToStr(obuyers);
 			request.getSession().setAttribute("buyers", buyers);
+		} else {// 客户
+			CodeTableForm userForm = (CodeTableForm) request.getSession().getAttribute(Constants.USER_INFO_SESSION); //用户信息
+			if(userForm != null && "1".equals(userForm.getValue("ismanu"))) {// 是客户
+				request.getSession().setAttribute("buyers", userForm.getValue("username"));
+			}
 		}
 		
 		// 从session获取买家

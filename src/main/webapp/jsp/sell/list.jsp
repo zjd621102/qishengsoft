@@ -34,14 +34,16 @@
 				</tr>
 				<tr>
 					<td>
-						客户名称：
-						<input type="text" name="map[manuname]" style="width: 110px;"
-						 value="${form.map.manuname}" ${changeManuname}/>
-					</td>
-					<td>
 						产品编码：
 						<input type="text" name="map[productno]" style="width: 110px;"
 						 value="${form.map.productno}"/>
+					</td>
+					<td>
+					<c:if test="${userSessionInfo.map.ismanu != '1'}">
+						客户名称：
+						<input type="text" name="map[manuname]" style="width: 110px;"
+						 value="${form.map.manuname}" ${changeManuname}/>
+					</c:if>
 					</td>
 					<td></td>
 					<td></td>
@@ -72,13 +74,21 @@
 				</a>
 			</li>
 			</shiro:hasPermission>
-			<!-- 编辑权限在编辑页面控制 -->
+			<shiro:hasPermission name="Sell:edi">
 			<li>
 				<a class="edit" href="<%=path%>/sell/edi/{s_sellid}" target="dialog" rel="sell_edi" mask="true"
 					width="1000" height="500">
 					<span>修改销售单</span>
 				</a>
 			</li>
+			</shiro:hasPermission>
+			<li>
+				<a class="edit" href="<%=path%>/sell/edi/{s_sellid}?act=print" target="openwin">
+					<span>查看销售单</span>
+				</a>
+			</li>
+			<shiro:hasPermission name="Sell:other">
+			</shiro:hasPermission>
 			<shiro:hasPermission name="Sell:delete">
 			<li>
 				<a class="delete" href="<%=path%>/sell/delete/{s_sellid}" target="ajaxTodo" title="确定要删除吗?">
