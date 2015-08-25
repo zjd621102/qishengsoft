@@ -72,7 +72,7 @@
 				<a class="logo" href="<%=path%>/index">标志</a>
 				<ul class="nav">
 					<li>
-						<a href="<%=path%>/index">主页</a>
+						<span style="color: yellow;">${userSessionInfo.map.username}</span>
 					</li>
 					<li>
 						<a href="<%=path%>/user/changePasswd" target="dialog" width="600">修改密码</a>

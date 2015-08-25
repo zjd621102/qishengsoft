@@ -39,11 +39,9 @@
 						 value="${form.map.productno}"/>
 					</td>
 					<td>
-					<c:if test="${userSessionInfo.map.ismanu != '1'}">
 						客户名称：
 						<input type="text" name="map[manuname]" style="width: 110px;"
 						 value="${form.map.manuname}" ${changeManuname}/>
-					</c:if>
 					</td>
 					<td></td>
 					<td></td>
