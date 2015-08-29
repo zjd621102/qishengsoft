@@ -11,13 +11,13 @@
 					<td>
 						物资类型名称：
 						<input type="text" name="map[materialtypename]" value="${form.map.materialtypename}"
-							style="width: 120px;" />
+							style="width: 80px;" />
 						物资类型编码：
 						<input type="text" name="map[materialtypeno]" value="${form.map.materialtypeno}"
-							style="width: 120px;" />
+							style="width: 80px;" />
 						使用状态：
 						<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
-						 expStr="style='width: 100px; margin-right: 15px;'" />
+						 expStr="style='width: 80px; margin-right: 15px;'" />
 					</td>
 				</tr>
 			</table>
