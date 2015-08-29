@@ -89,7 +89,7 @@ public class ProductDaoImpl extends BaseDaoImpl {
 			cond.append(" AND t.buyers like '%").append(buyers).append("%'");
 		}
 		if(!statusid.equals("")) {
-			cond.append(" AND t.statusid = '").append(buyers).append("'");
+			cond.append(" AND t.statusid = '").append(statusid).append("'");
 		}
 		
 		return cond.toString();
