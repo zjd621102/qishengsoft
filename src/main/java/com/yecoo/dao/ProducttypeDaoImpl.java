@@ -58,7 +58,7 @@ public class ProducttypeDaoImpl extends BaseDaoImpl {
 	    List<CodeTableForm> producttypeList = new ArrayList<CodeTableForm>();
 	    CodeTableForm codeTableForm = null;
 		String sql = "SELECT t.*, func_getProducttypeName(t.parent) parentname FROM sproducttype t WHERE t.parent = '"
-				+ form.getValue("producttype") + "' ORDER BY t.priority, t.producttype";
+				+ form.getValue("producttype") + "' AND statusid = '1' ORDER BY t.priority, t.producttype";
 	    try {
 	    	myConn = dbUtils.dbConnection();
 	    	pStmt = myConn.prepareStatement(sql);
@@ -118,6 +118,7 @@ public class ProducttypeDaoImpl extends BaseDaoImpl {
 		StringBuffer cond = new StringBuffer("");
 		String producttypename = StrUtils.nullToStr(form.getValue("producttypename"));
 		String producttypeno = StrUtils.nullToStr(form.getValue("producttypeno"));
+		String statusid = StrUtils.nullToStr(form.getValue("statusid"));
 		String parent = StrUtils.nullToStr(form.getValue("parent"));
 		
 		if(!producttypename.equals("")) {
@@ -125,6 +126,9 @@ public class ProducttypeDaoImpl extends BaseDaoImpl {
 		}
 		if(!producttypeno.equals("")) {
 			cond.append(" AND t.producttypeno like '%").append(producttypeno).append("%'");
+		}
+		if(!statusid.equals("")) {
+			cond.append(" AND t.statusid = '").append(statusid).append("'");
 		}
 		if(!parent.equals("")) {
 			cond.append(" AND t.parent = '").append(parent).append("'");

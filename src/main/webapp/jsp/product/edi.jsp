@@ -239,8 +239,11 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt></dt>
-			<dd></dd>
+			<dt>使用状态</dt>
+			<dd>
+				<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
+				 expStr="style='width: 184px;'" />
+			</dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>

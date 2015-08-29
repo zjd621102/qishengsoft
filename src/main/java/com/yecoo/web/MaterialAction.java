@@ -48,8 +48,13 @@ public class MaterialAction {
 	public String list(@PathVariable("materialtype") int materialtype, CodeTableForm form, HttpServletRequest request) {
 
 		String curTime = StrUtils.nullToStr(request.getParameter("curTime"));// 来自tree.jsp
+		String first = StrUtils.nullToStr(request.getParameter("first"));// 来自tree.jsp
 		
 		form.setValue("materialtype", materialtype); //物资类型
+		if(first.equals("true")) {// 第一次加载
+			form.setValue("statusid", "1"); //使用状态
+		}
+		
 		materialDaoImpl.initAction(request);
 
 		int totalCount = materialDaoImpl.getMaterialCount(form);

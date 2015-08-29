@@ -53,6 +53,11 @@ public class ProductAction {
 		form.setValue("producttype", producttype);
 		productDaoImpl.initAction(request);
 		
+		String first = StrUtils.nullToStr(request.getParameter("first"));// 来自tree.jsp
+		if(first.equals("true")) {// 第一次加载
+			form.setValue("statusid", "1"); //使用状态
+		}
+		
 		// 设置买家到session
 		Object obuyers = form.getValue("buyers");
 		if(obuyers != null) {

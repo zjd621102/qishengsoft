@@ -33,6 +33,11 @@ public class ProducttypeAction {
 
 		form.setValue("parent", parent);
 		producttypeDaoImpl.initAction(request);
+		
+		String first = StrUtils.nullToStr(request.getParameter("first"));// 来自tree.jsp
+		if(first.equals("true")) {// 第一次加载
+			form.setValue("statusid", "1"); //使用状态
+		}
 
 		int totalCount = producttypeDaoImpl.getProducttypeCount(form);
 		List<CodeTableForm> producttypeList = producttypeDaoImpl.getProducttypeList(form);

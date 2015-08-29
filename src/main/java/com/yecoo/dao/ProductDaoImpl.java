@@ -70,6 +70,7 @@ public class ProductDaoImpl extends BaseDaoImpl {
 		String producttype = StrUtils.nullToStr(form.getValue("producttype"));
 		String materialtypeno = StrUtils.nullToStr(form.getValue("materialtypeno"));
 		String buyers = StrUtils.nullToStr(form.getValue("buyers"));
+		String statusid = StrUtils.nullToStr(form.getValue("statusid"));
 
 		if(!productno.equals("")) {
 			cond.append(" AND t.productno like '%").append(productno).append("%'");
@@ -86,6 +87,9 @@ public class ProductDaoImpl extends BaseDaoImpl {
 		}
 		if(!buyers.equals("")) {
 			cond.append(" AND t.buyers like '%").append(buyers).append("%'");
+		}
+		if(!statusid.equals("")) {
+			cond.append(" AND t.statusid = '").append(buyers).append("'");
 		}
 		
 		return cond.toString();
@@ -247,7 +251,7 @@ public class ProductDaoImpl extends BaseDaoImpl {
 			CodeTableForm o = (CodeTableForm) obj;
 			buffer.append("<li><a href=\"" + path + "/product/list/"
 					+ o.getValue("producttype")
-					+ "?curTime=" + curTime + "\" target=\"ajax\" rel=\"jbsxBox2product" + curTime + "\">"
+					+ "?curTime=" + curTime + "&first=true\" target=\"ajax\" rel=\"jbsxBox2product" + curTime + "\">"
 					+ o.getValue("producttypename") + "</a>" + "\n");
 			buffer.append(tree(o, path, curTime));
 			buffer.append("</li>" + "\n");

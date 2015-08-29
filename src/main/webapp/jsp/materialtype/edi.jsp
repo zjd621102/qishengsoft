@@ -31,6 +31,13 @@
 				</dd>
 			</dl>
 			<dl>
+				<dt>使用状态：</dt>
+				<dd style="width: 65%">
+					<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
+					 expStr="style='width: 184px;'" />
+				</dd>
+			</dl>
+			<dl>
 				<dt>备注：</dt>
 				<dd>
 					<textarea name="map[remark]" cols="27" rows="8" maxlength="256">${form.map.remark}</textarea>

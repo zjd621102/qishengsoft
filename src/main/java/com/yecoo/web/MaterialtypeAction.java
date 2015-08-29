@@ -33,6 +33,11 @@ public class MaterialtypeAction {
 
 		form.setValue("parent", parent);
 		materialtypeDaoImpl.initAction(request);
+		
+		String first = StrUtils.nullToStr(request.getParameter("first"));// 来自tree.jsp
+		if(first.equals("true")) {// 第一次加载
+			form.setValue("statusid", "1"); //使用状态
+		}
 
 		int totalCount = materialtypeDaoImpl.getMaterialtypeCount(form);
 		List<CodeTableForm> materialtypeList = materialtypeDaoImpl.getMaterialtypeList(form);

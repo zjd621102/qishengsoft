@@ -13,7 +13,7 @@ public String tree(CodeTableForm form, String path) {
 		CodeTableForm o = (CodeTableForm) obj;
 		buffer.append("<li><a href=\"" + path + "/materialtype/list/"
 				+ o.getValue("materialtype")
-				+ "\" target=\"ajax\" rel=\"jbsxBox2materialtype\">"
+				+ "?first=true\" target=\"ajax\" rel=\"jbsxBox2materialtype\">"
 				+ o.getValue("materialtypename") + "</a>" + "\n");
 		buffer.append(tree(o, path));
 		buffer.append("</li>" + "\n");
@@ -33,7 +33,7 @@ CodeTableForm form2 = (CodeTableForm) request.getAttribute("form");
 					style="float: left; display: block; overflow: auto; width: 240px; border: solid 1px #CCC; line-height: 21px; background: #fff">
 					<ul class="tree treeFolder expand">
 						<li>
-							<a href="<%=path%>/materialtype/list/${form.map.materialtype}"
+							<a href="<%=path%>/materialtype/list/${form.map.materialtype}?first=true"
 								target="ajax" rel="jbsxBox2materialtype">
 								${form.map.materialtypename}
 							</a>

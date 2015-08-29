@@ -57,7 +57,7 @@ public class MaterialtypeDaoImpl extends BaseDaoImpl {
 	    List<CodeTableForm> materialtypeList = new ArrayList<CodeTableForm>();
 	    CodeTableForm codeTableForm = null;
 		String sql = "SELECT t.*, func_getMaterialtypeName(t.parent) parentname FROM smaterialtype t WHERE t.parent = '"
-				+ form.getValue("materialtype") + "' ORDER BY t.priority, t.materialtype";
+				+ form.getValue("materialtype") + "' AND statusid = '1' ORDER BY t.priority, t.materialtype";
 	    try {
 	    	myConn = dbUtils.dbConnection();
 	    	pStmt = myConn.prepareStatement(sql);
@@ -117,6 +117,7 @@ public class MaterialtypeDaoImpl extends BaseDaoImpl {
 		StringBuffer cond = new StringBuffer("");
 		String materialtypename = StrUtils.nullToStr(form.getValue("materialtypename"));
 		String materialtypeno = StrUtils.nullToStr(form.getValue("materialtypeno"));
+		String statusid = StrUtils.nullToStr(form.getValue("statusid"));
 		String parent = StrUtils.nullToStr(form.getValue("parent"));
 		
 		if(!materialtypename.equals("")) {
@@ -124,6 +125,9 @@ public class MaterialtypeDaoImpl extends BaseDaoImpl {
 		}
 		if(!materialtypeno.equals("")) {
 			cond.append(" AND t.materialtypeno like '%").append(materialtypeno).append("%'");
+		}
+		if(!statusid.equals("")) {
+			cond.append(" AND t.statusid = '").append(statusid).append("'");
 		}
 		if(!parent.equals("")) {
 			cond.append(" AND t.parent = '").append(parent).append("'");

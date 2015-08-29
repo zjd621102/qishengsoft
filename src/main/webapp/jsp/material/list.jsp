@@ -17,6 +17,9 @@
 						物资名称：
 						<input type="text" name="map[materialname]" value="${form.map.materialname}"
 							style="width: 100px;"/>
+						使用状态：
+						<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
+						 expStr="style='width: 100px; margin-right: 15px;'" />
 					</td>
 				</tr>
 			</table>
@@ -40,7 +43,7 @@
 			<shiro:hasPermission name="Material:add">
 			<li>
 				<a class="add" href="<%=path%>/material/add/${form.map.materialtype}?curTime=${curTime}"
-					target="dialog" rel="material_add" mask="true" width="890" height="390">
+					target="dialog" rel="material_add" mask="true" width="890" height="418">
 					<span>新增物资</span>
 				</a>
 			</li>
@@ -48,7 +51,7 @@
 			<shiro:hasPermission name="Material:edi">
 			<li>
 				<a class="edit" href="<%=path%>/material/edi/{s_materialid}?curTime=${curTime}" target="dialog"
-					rel="material_edi" mask="true" width="890" height="390">
+					rel="material_edi" mask="true" width="890" height="418">
 					<span>修改物资</span>
 				</a>
 			</li>

@@ -14,22 +14,19 @@
 						产品编码：
 						<input type="text" name="map[productno]" style="width: 100px;"
 							value="${form.map.productno}"/>
-					</td>
-					<td>
 						产品名称：
 						<input type="text" name="map[productname]" value="${form.map.productname}"
 							style="width: 100px;"/>
-					</td>
-					<td>
 						物资编码：
 						<input type="text" name="map[materialtypeno]" value="${form.map.materialtypeno}"
 							style="width: 100px;"/>
-					</td>
-					<td>
 						<c:if test="${userSessionInfo.map.ismanu != '1'}">
 							买家：
 							<input type="text" name="map[buyers]" value="${form.map.buyers}" style="width: 100px;"/>
 						</c:if>
+						使用状态：
+						<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
+						 expStr="style='width: 100px; margin-right: 15px;'" />
 					</td>
 				</tr>
 			</table>

@@ -22,6 +22,13 @@
 				</dd>
 			</dl>
 			<dl>
+				<dt>单价：</dt>
+				<dd>
+					<input type="text" name="map[price]" class="required number" size="25" maxlength="12"
+						value="${form.map.price}"/>
+				</dd>
+			</dl>
+			<dl>
 				<dt>物资类型：</dt>
 				<dd>
 					<input type="hidden" name="map[materialtype]" value="${form.map.materialtype}"/>
@@ -34,13 +41,6 @@
 				<dd>
 					<st:select dictType="计量单位" id="map[unit]" name="map[unit]" value="${form.map.unit}"
 					 expStr="style='width: 184px;' class='required number'" />
-				</dd>
-			</dl>
-			<dl>
-				<dt>单价：</dt>
-				<dd>
-					<input type="text" name="map[price]" class="required number" size="25" maxlength="12"
-						value="${form.map.price}"/>
 				</dd>
 			</dl>
 			<dl>
@@ -93,6 +93,17 @@
 				<dd>
 					<st:select dictType="是否" name="map[istobuy]" expStr="style='width: 184px;'" />
 				</dd>
+			</dl>
+			<dl>
+				<dt>使用状态</dt>
+				<dd>
+					<st:select dictType="状态" name="map[statusid]" value="1"
+					 expStr="style='width: 184px;' class='required'" />
+				</dd>
+			</dl>
+			<dl>
+				<dt></dt>
+				<dd></dd>
 			</dl>
 			<dl>
 				<dt>备注：</dt>

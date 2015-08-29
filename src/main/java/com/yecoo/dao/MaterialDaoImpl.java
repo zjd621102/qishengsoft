@@ -61,6 +61,7 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 		String materialno = StrUtils.nullToStr(form.getValue("materialno"));
 		String materialname = StrUtils.nullToStr(form.getValue("materialname"));
 		String materialtype = StrUtils.nullToStr(form.getValue("materialtype"));
+		String statusid = StrUtils.nullToStr(form.getValue("statusid"));
 
 		if(!materialno.equals("")) {
 			cond.append(" AND t.materialno like '%").append(materialno).append("%'");
@@ -70,6 +71,9 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 		}
 		if(!materialtype.equals("")) {
 			cond.append(" AND EXISTS (SELECT 1 FROM smaterialtype m WHERE m.materialtype = t.materialtype AND CONCAT('-', m.materialtypeall, '-') LIKE '%-").append(materialtype).append("-%')");
+		}
+		if(!statusid.equals("")) {
+			cond.append(" AND t.statusid = '").append(statusid).append("'");
 		}
 		
 		return cond.toString();
@@ -136,7 +140,7 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 			CodeTableForm o = (CodeTableForm) obj;
 			buffer.append("<li><a href=\"" + path + "/material/list/"
 					+ o.getValue("materialtype")
-					+ "?curTime=" + curTime + "\" target=\"ajax\" rel=\"jbsxBox2material" + curTime + "\">"
+					+ "?curTime=" + curTime + "&first=true\" target=\"ajax\" rel=\"jbsxBox2material" + curTime + "\">"
 					+ o.getValue("materialtypename") + "</a>" + "\n");
 			buffer.append(tree(o, path, curTime));
 			buffer.append("</li>" + "\n");

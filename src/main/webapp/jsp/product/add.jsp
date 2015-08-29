@@ -171,6 +171,17 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>使用状态</dt>
+			<dd>
+				<st:select dictType="状态" name="map[statusid]" value="1"
+				 expStr="style='width: 184px;'" />
+			</dd>
+		</dl>
+		<dl>
+			<dt></dt>
+			<dd></dd>
+		</dl>
+		<dl>
 			<dt>备注：</dt>
 			<dd>
 				<input type="text" name="map[remark]" size="89" maxlength="256"
