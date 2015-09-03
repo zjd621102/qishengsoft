@@ -20,6 +20,8 @@
 						使用状态：
 						<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
 						 expStr="style='width: 80px; margin-right: 15px;'" />
+						标志：
+						<input type="text" name="map[mark]" value="${form.map.mark}" style="width: 80px;"/>
 					</td>
 				</tr>
 			</table>

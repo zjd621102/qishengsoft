@@ -143,8 +143,11 @@
 				</dd>
 			</dl>
 			<dl>
-				<dt></dt>
-				<dd></dd>
+				<dt>标志</dt>
+				<dd>
+					<input type="text" name="map[mark]" size="25" maxlength="16"
+						value="${form.map.mark}"/>
+				</dd>
 			</dl>
 			<dl>
 				<dt>备注：</dt>

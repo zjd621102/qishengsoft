@@ -20,7 +20,7 @@
 						采购日期：<input type="text" name="map[buydateFrom]" style="width: 113px;" value="${form.map.buydateFrom}" class="date"/>
 					</td>
 					<td>
-						至：<input type="text" name="map[buydateTo]"  style="width: 113px;" value="${form.map.buydateTo}" class="date"/>
+						采购日期至：<input type="text" name="map[buydateTo]"  style="width: 113px;" value="${form.map.buydateTo}" class="date"/>
 					</td>
 				</tr>
 				<tr>
@@ -45,7 +45,10 @@
 							</c:forEach>
 						</select>
 					</td>
-					<td></td>
+					<td>
+						采购单名称：
+						<input type="text" name="map[buyname]" style="width: 110px;" value="${form.map.buyname}"/>
+					</td>
 				</tr>
 			</table>
 			<div class="subBar">

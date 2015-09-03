@@ -434,6 +434,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		
 		String dateFrom = StrUtils.nullToStr(form.getValue("dateFrom"), DateUtils.getFristDayOfCurYear());
 		String dateTo = StrUtils.nullToStr(form.getValue("dateTo"), DateUtils.getNowDate());
+		String materialtype = StrUtils.nullToStr(form.getValue("materialtype"));
 		String producttype = StrUtils.nullToStr(form.getValue("producttype"));
 		String manuName = StrUtils.nullToStr(form.getValue("manuName"));
 		form.setValue("dateFrom", dateFrom);
@@ -445,10 +446,15 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bsell a, bsellrow b WHERE a.sellid = b.sellid"
 				+ " AND b.productid IS NOT NULL AND a.currflow != '申请'" + " AND a.selldate >= '" + dateFrom
 				+ "' AND a.selldate <= '" + dateTo + "'";
+
+		if(!materialtype.equals("")) {
+			sql += " AND EXISTS (SELECT 1 FROM sproduct c WHERE c.productid = b.productid"
+					+ " AND c.productno REGEXP '[A-Z]+" + materialtype + "_*')";
+		}
 		
 		if(!producttype.equals("")) {
 			sql += " AND EXISTS (SELECT 1 FROM sproduct c WHERE c.productid = b.productid"
-					+ " AND c.productno LIKE '___" + producttype + "%')";
+					+ " AND c.productno REGEXP '[A-Z]+[0-9]{1}" + producttype + "_*')";
 		}
 		
 		if(!manuName.equals("")) {

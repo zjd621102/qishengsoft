@@ -8,12 +8,12 @@
 		<div class="pageFormContent" layoutH="54">
 			<p>
 				<label>用户账号：</label>
-				<input type="text" class="required alphanumeric" minlength="4" maxlength="32"
+				<input type="text" class="required alphanumeric" minlength="1" maxlength="32"
 				 name="username" style="width: 150px;"/>
 			</p>
 			<p>
 				<label>用户密码：</label>
-				<input type="password" class="required" minlength="4" maxlength="32"
+				<input type="password" class="required" minlength="1" maxlength="32"
 				 name="password" style="width: 150px;" />
 			</p>
 		</div>

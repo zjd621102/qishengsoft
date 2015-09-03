@@ -52,6 +52,12 @@
 					row.find("[name='map[manuname]']").val(ui.item.manuname);
 					row.find("[name='map[manucontact]']").val(ui.item.manucontact);
 					row.find("[name='map[manutel]']").val(ui.item.manutel);
+					
+					// 修改采购单名称
+					var buyname = $("#buyname").val();
+					if(/采购/.test(buyname)) {
+						$("#buyname").val(buyname.replace("采购", ui.item.manuname))
+					}
 				},
 				open : function() {
 					$(this).removeClass("ui-corner-all").addClass(
@@ -98,7 +104,7 @@
 		<dl>
 			<dt>采购单名称：</dt>
 			<dd>
-				<input type="text" name="map[buyname]" class="required" size="25" maxlength="32"
+				<input type="text" name="map[buyname]" id="buyname" class="required" size="25" maxlength="32"
 					 value="${form.map.buyname}"/>
 			</dd>
 		</dl>

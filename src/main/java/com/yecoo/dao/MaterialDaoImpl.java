@@ -62,6 +62,7 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 		String materialname = StrUtils.nullToStr(form.getValue("materialname"));
 		String materialtype = StrUtils.nullToStr(form.getValue("materialtype"));
 		String statusid = StrUtils.nullToStr(form.getValue("statusid"));
+		String mark = StrUtils.nullToStr(form.getValue("mark"));
 
 		if(!materialno.equals("")) {
 			cond.append(" AND t.materialno like '%").append(materialno).append("%'");
@@ -74,6 +75,9 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 		}
 		if(!statusid.equals("")) {
 			cond.append(" AND t.statusid = '").append(statusid).append("'");
+		}
+		if(!mark.equals("")) {
+			cond.append(" AND t.mark = '").append(mark).append("'");
 		}
 		
 		return cond.toString();

@@ -100,6 +100,9 @@
 						至：
 						<input type="text" class="date" readonly="readonly" name="map[dateTo]"
 						 value="${form.map.dateTo}" style="width: 100px;" />
+						材料类型：
+						<st:select dictType="产品材料类型" name="map[materialtype]" value="${form.map.materialtype}"
+						 expStr="style='width: 100px;'" />
 						产品类型：
 						<st:select dictType="产品类型" name="map[producttype]" value="${form.map.producttype}"
 						 expStr="style='width: 100px;'" />
