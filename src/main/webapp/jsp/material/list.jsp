@@ -75,9 +75,10 @@
 				<th width="60px">物资编码</th>
 				<th width="150px">物资名称</th>
 				<th width="60px">单价</th>
-				<th width="120px">物资类型</th>
+				<th width="80px">物资类型</th>
+				<th width="50px">标志</th>
 				<th width="60px">计量单位</th>
-				<th width="120px">供应商</th>
+				<th width="100px">供应商</th>
 				<th width="40px">排序</th>
 				<th>新增时间</th>
 			</tr>
@@ -102,6 +103,7 @@
 			   		<td>${bean.map.materialname}</td>
 			   		<td>${bean.map.price}</td>
 			   		<td>${bean.map.materialtypename}</td>
+			   		<td>${bean.map.mark}</td>
 			   		<td>${bean.map.unitname}</td>
 			   		<td>${bean.map.manuname}</td>
 			   		<td>${bean.map.materialsort}</td>
