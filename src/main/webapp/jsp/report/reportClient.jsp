@@ -52,6 +52,7 @@
 						&nbsp;&nbsp;至&nbsp;&nbsp;
 						<input type="text" class="date" readonly="readonly"
 						 name="map[dateTo]" value="${form.map.dateTo}" style="width: 100px;" />
+						<input type="hidden" name="map[manuName]" value="${form.map.manuName}" />
 					</td>
 				</tr>
 			</table>

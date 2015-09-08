@@ -39,7 +39,13 @@ public class ProductAction {
 	@RequestMapping(value="/tree")
 	public String tree(HttpServletRequest request) {
 		
-		CodeTableForm form = producttypeDaoImpl.getProducttypeById(1);
+		String manuname = null;
+		CodeTableForm userForm = (CodeTableForm) request.getSession().getAttribute(Constants.USER_INFO_SESSION); //用户信息
+		if(userForm != null && "1".equals(userForm.getValue("ismanu"))) {// 是客户
+			manuname = StrUtils.nullToStr(userForm.getValue("username"));
+		}
+		
+		CodeTableForm form = producttypeDaoImpl.getProducttypeById(1, manuname);
 		request.setAttribute("form", form);
 		return "product/tree";
 	}

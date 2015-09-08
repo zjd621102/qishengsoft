@@ -38,8 +38,10 @@
 				</dd>
 			</dl>
 			<dl>
-				<dt></dt>
-				<dd></dd>
+				<dt>所属客户</dt>
+				<dd>
+					<input type="text" name="map[manuname]" size="25" maxlength="32" />
+				</dd>
 			</dl>
 			<dl>
 				<dt>备注：</dt>

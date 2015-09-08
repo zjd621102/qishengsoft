@@ -45,6 +45,7 @@ public class ProducttypeDaoImpl extends BaseDaoImpl {
 		
 		return producttypeList;
 	}
+	
 	/**
 	 * 获取子产品类别列表
 	 * @param form
@@ -52,13 +53,32 @@ public class ProducttypeDaoImpl extends BaseDaoImpl {
 	 */
 	private List<CodeTableForm> getChildrenList(CodeTableForm form) {
 		
+		return getChildrenList(form, null);
+	}
+	
+	/**
+	 * 获取子产品类别列表
+	 * @param form
+	 * @param manuname	所属客户，无为null
+	 * @return
+	 */
+	private List<CodeTableForm> getChildrenList(CodeTableForm form, String manuname) {
+		
 	    Connection myConn = null;
 	    PreparedStatement pStmt = null;
 	    ResultSet rs = null;
 	    List<CodeTableForm> producttypeList = new ArrayList<CodeTableForm>();
 	    CodeTableForm codeTableForm = null;
+
+	    String cond = "";
+		if(manuname != null) {
+			cond += " AND (t.manuname IS NULL OR t.manuname LIKE '%" + manuname + "%')";
+		}
+	    
 		String sql = "SELECT t.*, func_getProducttypeName(t.parent) parentname FROM sproducttype t WHERE t.parent = '"
-				+ form.getValue("producttype") + "' AND statusid = '1' ORDER BY t.priority, t.producttype";
+				+ form.getValue("producttype") + "' AND statusid = '1'" + cond + " ORDER BY t.priority, t.producttype";
+		
+		
 	    try {
 	    	myConn = dbUtils.dbConnection();
 	    	pStmt = myConn.prepareStatement(sql);
@@ -136,6 +156,7 @@ public class ProducttypeDaoImpl extends BaseDaoImpl {
 		
 		return cond.toString();
 	}
+	
 	/**
 	 * 通过ID获取产品类别
 	 * @param producttype
@@ -143,10 +164,21 @@ public class ProducttypeDaoImpl extends BaseDaoImpl {
 	 */
 	public CodeTableForm getProducttypeById(int producttype) {
 		
+		return getProducttypeById(producttype, null);
+	}
+	
+	/**
+	 * 通过ID获取产品类别
+	 * @param producttype
+	 * @param manuname	所属客户
+	 * @return
+	 */
+	public CodeTableForm getProducttypeById(int producttype, String manuname) {
+		
 		String sql = "SELECT t.*, func_getProducttypeName(t.parent) parentname FROM sproducttype t WHERE t.producttype = '"
 				+ producttype + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
-		codeTableForm.setValue("childrenList", getChildrenList(codeTableForm));
+		codeTableForm.setValue("childrenList", getChildrenList(codeTableForm, manuname));
 		return codeTableForm;
 	}
 

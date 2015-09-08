@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.yecoo.model.CodeTableForm;
+import com.yecoo.util.Constants;
 import com.yecoo.util.DateUtils;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
@@ -401,11 +402,18 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		form.setValue("dateFrom", dateFrom);
 		form.setValue("dateTo", dateTo);
 		
+		String manuCond = "";
+		CodeTableForm userForm = (CodeTableForm) request.getSession().getAttribute(Constants.USER_INFO_SESSION); //用户信息
+		if(userForm != null && "1".equals(userForm.getValue("ismanu"))) {// 是客户
+			form.setValue("manuName", userForm.getValue("username"));
+			manuCond += " AND c.manuname = '" + userForm.getValue("username") + "'";
+		}
+		
 		sql = "SELECT m.* FROM "
 				+ "(SELECT c.manuname, IFNULL(SUM(b.realsum), 0) sum FROM bsell a, bsellrow b, smanu c"
 				+ " WHERE a.sellid = b.sellid AND a.manuid = c.manuid AND a.selldate >= '"
 				+ dateFrom + "' AND a.selldate <= '" + dateTo + "' AND b.productid IS NOT NULL"
-				+ " AND a.currflow != '申请' GROUP BY c.manuname) m ORDER BY m.sum DESC";
+				+ " AND a.currflow != '申请'" + manuCond + " GROUP BY c.manuname) m ORDER BY m.sum DESC";
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		int i = 0;
 		for(CodeTableForm codeTableForm : list) {
