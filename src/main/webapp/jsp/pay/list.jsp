@@ -1,6 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<!-- 客户不可修改客户名称 -->
+<c:if test="${userSessionInfo.map.ismanu == '1'}">
+	<c:set var="changeManuname" value="readonly" scope="page" />
+</c:if>
+
 <div class="pageHeader">
 	<form onsubmit="return navTabSearch(this);" action="<%=path%>/pay/list" method="post" rel="pagerForm" id="fid"
 		 class="required-validate">
@@ -26,7 +31,8 @@
 						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
 						 expStr="style='width: 100px;'" />
 						供应商：
-						<input type="text" name="map[manuname]" value="${form.map.manuname}" style="width: 100px;"/>
+						<input type="text" name="map[manuname]" value="${form.map.manuname}" 
+							style="width: 100px;" ${changeManuname}/>
 					</td>
 				</tr>
 			</table>
@@ -83,8 +89,9 @@
 				<th width="100px">应付(${totalPlanSum})</th>
 				<th width="100px">实付(${totalRealSum})</th>
 				<th width="100px">待付(${unPaySum})</th>
-				<th width="100px">供应商</th>
+				<th width="60px">供应商</th>
 				<th width="60px">当前流程</th>
+				<th width="100px">备注</th>
 				<th>创建时间</th>
 			</tr>
 		</thead>
@@ -101,6 +108,7 @@
 			   		<td>${bean.map.unpaysum}</td>
 			   		<td>${bean.map.manuname}</td>
 			   		<td>${bean.map.currflow}</td>
+			   		<td>${bean.map.remark}</td>
 			   		<td>${bean.map.createtime}</td>
 			   	</tr>
 		   	</c:forEach>

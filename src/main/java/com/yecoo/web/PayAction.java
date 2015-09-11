@@ -39,6 +39,12 @@ public class PayAction {
 			form.setValue("currflow", "申请");
 		}
 		payDaoImpl.initAction(request);
+		
+		// 自动初始化客户
+		CodeTableForm userForm = (CodeTableForm) request.getSession().getAttribute(Constants.USER_INFO_SESSION); //用户信息
+		if(userForm != null && "1".equals(userForm.getValue("ismanu"))) {// 是客户
+			form.setValue("manuname", userForm.getValue("username"));
+		}
 
 		int totalCount = payDaoImpl.getPayCount(form);
 		List<CodeTableForm> payList = payDaoImpl.getPayList(form);

@@ -1,6 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<!-- 客户不可修改客户名称 -->
+<c:if test="${userSessionInfo.map.ismanu == '1'}">
+	<c:set var="changeManuname" value="readonly" scope="page" />
+</c:if>
+
 <div class="pageHeader">
 	<form onsubmit="return divSearch(this, 'jbsxBox2product${curTime}');"
 		action="<%=path%>/product/list/${form.map.producttype}" method="post"
@@ -20,10 +25,9 @@
 						物资编码：
 						<input type="text" name="map[materialtypeno]" value="${form.map.materialtypeno}"
 							style="width: 80px;"/>
-						<c:if test="${userSessionInfo.map.ismanu != '1'}">
-							买家：
-							<input type="text" name="map[buyers]" value="${form.map.buyers}" style="width: 80px;"/>
-						</c:if>
+						买家：
+						<input type="text" name="map[buyers]" value="${form.map.buyers}" style="width: 80px;"
+							${changeManuname}/>
 						使用状态：
 						<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
 						 expStr="style='width: 80px; margin-right: 15px;'" />

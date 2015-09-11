@@ -1,10 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
-<!-- 有“销售:编辑”权限，才可修改客户名称 -->
-<shiro:lacksPermission name="Sell:edi">
+<!-- 客户不可修改客户名称 -->
+<c:if test="${userSessionInfo.map.ismanu == '1'}">
 	<c:set var="changeManuname" value="readonly" scope="page" />
-</shiro:lacksPermission>
+</c:if>
 
 <div class="pageHeader">
 	<form onsubmit="return navTabSearch(this);" action="<%=path%>/sell/list" method="post" rel="pagerForm" id="fid">
