@@ -35,7 +35,9 @@ public class OtherTag extends SimpleTagSupport {
 		StringBuffer buffer = new StringBuffer();
 		
 		if(btype.equals("tobuy")) {
-			String sql = "SELECT substring(c.manuname,1,4) manuname, b.materialname, b.price FROM sproductrow a, smaterial b, smanu c"
+			String sql = "SELECT substring(c.manuname,1,4) manuname,"
+					+ " CONCAT(b.materialname, CASE WHEN a.remarkshow IS NULL THEN '' ELSE CONCAT('(', a.remarkshow, ')') END) AS materialname,"
+					+ " b.price FROM sproductrow a, smaterial b, smanu c"
 					+ " WHERE a.materialid = b.materialid AND b.manuid = c.manuid AND a.productid = '" + id
 					+ "' AND (c.istobuy = '1' OR b.istobuy = '1') ORDER BY a.sort LIMIT 0,10";
 			List<CodeTableForm> list = dbUtils.getListBySql(sql);

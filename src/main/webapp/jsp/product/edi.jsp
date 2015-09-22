@@ -337,11 +337,13 @@
 					<th width="70px">物资总价</th>
 					<th width="120px">供应商</th>
 					<th width="50px">排序</th>
+					<th width="60px">显示备注</th>
 					<th>备注</th>
 				</tr>
 			</thead>
 			<tbody id="productRowTbody">
 				<tr>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -391,6 +393,9 @@
 							value="9"/>
 			   		</td>
 			   		<td>
+						<input type="text" name="map[remarkshow]" style="width: 84%" maxlength="256"/>
+			   		</td>
+			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 98%" maxlength="256"/>
 			   		</td>
 			   	</tr>
@@ -435,6 +440,10 @@
 				   		<td>
 							<input type="text" name="map[sort]" style="width: 84%" maxlength="2"
 								class="number" value="${bean.map.sort}"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[remarkshow]" style="width: 84%" maxlength="256"
+								value="${bean.map.remarkshow}"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[remarkrow]" style="width: 98%" maxlength="256"

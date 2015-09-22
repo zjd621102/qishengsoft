@@ -207,11 +207,13 @@
 					<th width="70px">物资总价</th>
 					<th width="120px">供应商</th>
 					<th width="50px">排序</th>
+					<th width="60px">显示备注</th>
 					<th>备注</th>
 				</tr>
 			</thead>
 			<tbody id="productRowTbody">
 				<tr>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -260,54 +262,13 @@
 						<input type="text" name="map[sort]" style="width: 84%" maxlength="2" class="number"
 							value="9"/>
 			   		</td>
+				   	<td>
+						<input type="text" name="map[remarkshow]" style="width: 84%" maxlength="256"/>
+				   	</td>
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 98%" maxlength="256"/>
 			   		</td>
 			   	</tr>
-				<c:forEach items="${productrowList}" var="bean" varStatus="vs">
-				   	<tr>
-						<td>
-							<input type="hidden" name="map[productrowid]" value="${bean.map.productrowid}"/>
-							<a href="#" class="btnDel delRow" onclick="changeValue();"></a>
-						</td>
-				   		<td>${vs.index+1}</td>
-				   		<td>
-				   			<input type="hidden" name="map[materialid]" value="${bean.map.materialid}"/>
-							<input type="text" name="map[materialno]" style="width: 75%" maxlength="13"
-								suggestFields="materialid,materialno,materialname,materialprice"
-								value="${bean.map.materialno}" readonly="readonly"/>
-							<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
-							<a href="javascript:void(0);" class="btnClear"
-								suggestFields="materialid,materialno,materialname,materialprice"></a>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[materialname]" style="width: 96%" maxlength="32"
-								value="${bean.map.materialname}"/>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[materialprice]" style="width: 93%" maxlength="12"
-								class="number" value="${bean.map.materialprice}"
-								onblur="changeValue();"/>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[materialnum]" style="width: 93%" maxlength="9"
-								class="number" value="${bean.map.materialnum}"
-								onblur="changeValue();"/>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[materialsum]" style="width: 92%" maxlength="12"
-								class="number" value="${bean.map.materialsum}" readonly="readonly"/>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[sort]" style="width: 88%" maxlength="2"
-								class="number" value="${bean.map.sort}"/>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[remarkrow]" style="width: 96%" maxlength="256"
-								value="${bean.map.remarkrow}"/>
-				   		</td>
-				   	</tr>
-			   	</c:forEach>
 			   	<tr id="IDEndRow"></tr>
 		   	</tbody>
 		</table>
