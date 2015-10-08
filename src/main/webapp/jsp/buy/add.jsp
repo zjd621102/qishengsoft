@@ -4,6 +4,8 @@
 <script>
 	$(function() {
 		autoCom("[name='map[materialno]']:visible");
+		
+		$('.addRow').trigger("click");// 自动触发新增一行事件
 	});
 	
 	function addRowOther() {

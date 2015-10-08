@@ -171,7 +171,7 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>使用状态</dt>
+			<dt>使用状态：</dt>
 			<dd>
 				<st:select dictType="状态" name="map[statusid]" value="1"
 				 expStr="style='width: 184px;'" />
