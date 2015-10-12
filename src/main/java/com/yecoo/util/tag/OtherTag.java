@@ -35,7 +35,7 @@ public class OtherTag extends SimpleTagSupport {
 		StringBuffer buffer = new StringBuffer();
 		
 		if(btype.equals("tobuy")) {
-			String sql = "SELECT substring(c.manuname,1,4) manuname,"
+			String sql = "SELECT substring(c.manuname,1,4) manuname, b.mark,"
 					+ " CONCAT(b.materialname, CASE WHEN a.remarkshow IS NULL THEN '' ELSE CONCAT('(', a.remarkshow, ')') END) AS materialname,"
 					+ " b.price FROM sproductrow a, smaterial b, smanu c"
 					+ " WHERE a.materialid = b.materialid AND b.manuid = c.manuid AND a.productid = '" + id
@@ -46,7 +46,9 @@ public class OtherTag extends SimpleTagSupport {
 				buffer.append("<div style='float: left; color: blue;'>").append(form.getValue("manuname"))
 					.append("</div>")
 					.append("<div style='vertical-align: top; font-size: 6; float: left; color: red;'>")
-					.append(form.getValue("materialname")).append(":").append(form.getValue("price"))
+					.append(form.getValue("materialname"))
+					.append(form.getValue("mark"))
+					.append(":").append(form.getValue("price"))
 					.append("</div>");
 			}
 		}
