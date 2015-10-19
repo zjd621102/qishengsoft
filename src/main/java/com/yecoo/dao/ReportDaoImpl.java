@@ -170,7 +170,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		// 采购统计
 		dataStr.delete(0, dataStr.length());
 		for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
-			sql = "SELECT IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.btype = 'CGD' AND a.buydate LIKE '"
+			sql = "SELECT IFNULL(SUM(b.sum), 0) sum FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.currflow <> '申请' AND a.buydate LIKE '"
 					+ monthList.get(monthIndex) + "%'";
 			sum = dbUtils.execQuerySQL(sql);
 			if(monthIndex >= 1) {
