@@ -41,7 +41,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 				+ " func_getSum(t.sellid, 'XSD') allrealsum FROM bsell t WHERE 1 = 1";
 		String cond = getSellListCondition(form);
 		sql  += cond;
-		sql += " ORDER BY t.selldate DESC, createtime DESC";
+		sql += " ORDER BY t.currflow DESC, createtime DESC";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;

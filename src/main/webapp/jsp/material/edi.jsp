@@ -77,6 +77,20 @@
 				</dd>
 			</dl>
 			<dl>
+				<dt>属性</dt>
+				<dd>
+					<input type="text" name="map[property]" size="25" maxlength="32"
+						value="${form.map.property}"/>
+				</dd>
+			</dl>
+			<dl>
+				<dt>标志</dt>
+				<dd>
+					<input type="text" name="map[mark]" size="25" maxlength="16"
+						value="${form.map.mark}"/>
+				</dd>
+			</dl>
+			<dl>
 				<dt>计量单位：</dt>
 				<dd>
 					<st:select dictType="计量单位" name="map[unit]" value="${form.map.unit}"
@@ -92,26 +106,6 @@
 					<a class="btnLook" href="<%=path%>/manu/list?act=backselect&map[manutypeid]=1" lookupGroup="manuLookup"
 						width="1000" height="500">查找带回</a>
 					<a href="javascript:void(0);" class="btnClear" suggestFields="manuid,manuname"></a>
-				</dd>
-			</dl>
-			<dl>
-				<dt>启用库存：</dt>
-				<dd>
-					<st:select dictType="是否" name="map[usestock]" value="${form.map.usestock}" expStr="style='width: 184px;'" />
-				</dd>
-			</dl>
-			<dl>
-				<dt>库存量：</dt>
-				<dd>
-					<input type="text" name="map[stock]" class="required number" size="25" maxlength="12"
-						value="${form.map.stock}"/>
-				</dd>
-			</dl>
-			<dl>
-				<dt>报警量：</dt>
-				<dd>
-					<input type="text" name="map[alarmnum]" class="required number" size="25" maxlength="12"
-						value="${form.map.alarmnum}"/>
 				</dd>
 			</dl>
 			<dl>
@@ -142,13 +136,32 @@
 					 expStr="style='width: 184px;' class='required'" />
 				</dd>
 			</dl>
+			<!-- 
 			<dl>
-				<dt>标志</dt>
+				<dt>启用库存：</dt>
 				<dd>
-					<input type="text" name="map[mark]" size="25" maxlength="16"
-						value="${form.map.mark}"/>
+					<st:select dictType="是否" name="map[usestock]" value="${form.map.usestock}" expStr="style='width: 184px;'" />
 				</dd>
 			</dl>
+			<dl>
+				<dt>库存量：</dt>
+				<dd>
+					<input type="text" name="map[stock]" class="required number" size="25" maxlength="12"
+						value="${form.map.stock}"/>
+				</dd>
+			</dl>
+			<dl>
+				<dt>报警量：</dt>
+				<dd>
+					<input type="text" name="map[alarmnum]" class="required number" size="25" maxlength="12"
+						value="${form.map.alarmnum}"/>
+				</dd>
+			</dl>
+			<dl>
+				<dt></dt>
+				<dd></dd>
+			</dl>
+			-->
 			<dl>
 				<dt>备注：</dt>
 				<dd>

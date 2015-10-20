@@ -7,8 +7,10 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+import com.yecoo.dao.ParameterDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
+import com.yecoo.util.StrUtils;
 /**
  * 自定义标签
  * @author zhoujd
@@ -35,7 +37,7 @@ public class OtherTag extends SimpleTagSupport {
 		StringBuffer buffer = new StringBuffer();
 		
 		if(btype.equals("tobuy")) {
-			String sql = "SELECT substring(c.manuname,1,4) manuname, b.mark,"
+			String sql = "SELECT substring(c.manuname,1,4) manuname, b.mark, b.property,"
 					+ " CONCAT(b.materialname, CASE WHEN a.remarkshow IS NULL THEN '' ELSE CONCAT('(', a.remarkshow, ')') END) AS materialname,"
 					+ " b.price FROM sproductrow a, smaterial b, smanu c"
 					+ " WHERE a.materialid = b.materialid AND b.manuid = c.manuid AND a.productid = '" + id
@@ -46,9 +48,24 @@ public class OtherTag extends SimpleTagSupport {
 				buffer.append("<div style='float: left; color: blue;'>").append(form.getValue("manuname"))
 					.append("</div>")
 					.append("<div style='vertical-align: top; font-size: 6; float: left; color: red;'>")
-					.append(form.getValue("materialname"))
-					.append(form.getValue("mark"))
-					.append(":").append(form.getValue("price"))
+					.append(form.getValue("materialname"));
+				
+				String showFeatures = new ParameterDaoImpl().getParameterName("采购单显示物资特性");
+				
+				if(showFeatures.equals("Y")) {// 采购单显示物资特性
+					
+					String prop = StrUtils.nullToStr(form.getValue("property"))
+							+ StrUtils.nullToStr(form.getValue("mark"));
+					
+					if(!prop.equals("")) {// 属性、标记不为空
+						buffer.append("【")
+							.append(StrUtils.nullToStr(form.getValue("property")))
+							.append(StrUtils.nullToStr(form.getValue("mark")))
+							.append("】");
+					}
+				}
+				
+				buffer.append(":").append(form.getValue("price"))
 					.append("</div>");
 			}
 		}
