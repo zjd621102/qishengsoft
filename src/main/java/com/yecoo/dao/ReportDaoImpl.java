@@ -158,7 +158,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
 			sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bsell a, bsellrow b"
 					+ " WHERE a.sellid = b.sellid AND b.productid IS NOT NULL AND a.selldate LIKE '"
-					+ monthList.get(monthIndex) + "%'";
+					+ monthList.get(monthIndex) + "%' AND a.currflow <> '申请'";
 			sum = dbUtils.execQuerySQL(sql);
 			if(monthIndex >= 1) {
 				dataStr.append(",");
