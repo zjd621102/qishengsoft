@@ -57,7 +57,8 @@
 				<td style="width: 45px;">件数</td>
 				<td style="width: 70px;">一件数量</td>
 				<td style="width: 50px;">数量</td>
-				<td>备注</td>
+				<td>生产备注</td>
+				<!-- <td>备注</td> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -84,8 +85,13 @@
 						<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${bean.map.num}</span>
 			   		</td>
 			   		<td>
+			   			<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${bean.map.productionshow}</span>
+			   		</td>
+			   		<!-- 
+			   		<td>
 			   			<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${bean.map.remarkrow}</span>
 			   		</td>
+			   		-->
 			   	</tr>
 		   	</c:forEach>
 			<tr>
@@ -97,7 +103,7 @@
 					<span id="allboxnumSpan">${form.map.allboxnum}</span>
 					<input type="hidden" name="map[allboxnum]" />
 				</td>
-				<td colspan="3"></td>
+				<td colspan="4"></td>
 			</tr>
 	   	</tbody>
 	</table>

@@ -207,12 +207,14 @@
 					<th width="70px">物资总价</th>
 					<th width="120px">供应商</th>
 					<th width="50px">排序</th>
-					<th width="60px">显示备注</th>
+					<th width="70px">采购备注</th>
+					<th width="70px">生产备注</th>
 					<th>备注</th>
 				</tr>
 			</thead>
 			<tbody id="productRowTbody">
 				<tr>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -264,6 +266,9 @@
 			   		</td>
 				   	<td>
 						<input type="text" name="map[remarkshow]" style="width: 84%" maxlength="256"/>
+				   	</td>
+				   	<td>
+						<input type="text" name="map[productionshow]" style="width: 84%" maxlength="256"/>
 				   	</td>
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 98%" maxlength="256"/>
