@@ -96,7 +96,7 @@
 			</shiro:hasPermission>
 		</ul>
 	</div>
-	<table class="table" style="width: 100%;" layoutH="138">
+	<table class="table" style="width: 100%;" layoutH="158">
 		<thead>
 			<tr>
 				<th width="30px">序号</th>

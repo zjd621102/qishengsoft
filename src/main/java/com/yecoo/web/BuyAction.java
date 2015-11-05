@@ -29,8 +29,14 @@ public class BuyAction {
 	DbUtils dbUtils = new DbUtils();
 	private BuyDaoImpl buyDaoImpl = new BuyDaoImpl();
 
+	/**
+	 * 首次加载用
+	 * @param form
+	 * @param request
+	 * @return
+	 */
 	@RequiresPermissions("Buy:view")
-	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/list", method={RequestMethod.GET})
 	public String list(CodeTableForm form, HttpServletRequest request) {
 
 		String first = StrUtils.nullToStr(request.getParameter("first")); // 查询初始化
@@ -38,6 +44,13 @@ public class BuyAction {
 			form.setValue("currflow", "申请");
 		}
 		
+		return list2(form, request);
+	}
+	
+	@RequiresPermissions("Buy:view")
+	@RequestMapping(value="/list", method={RequestMethod.POST})
+	public String list2(CodeTableForm form, HttpServletRequest request) {
+
 		buyDaoImpl.initAction(request);
 
 		int totalCount = buyDaoImpl.getBuyCount(form);

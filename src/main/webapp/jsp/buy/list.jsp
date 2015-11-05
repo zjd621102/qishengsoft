@@ -106,7 +106,7 @@
 			</shiro:hasPermission>
 		</ul>
 	</div>
-	<table class="table" style="width: 100%;" layoutH="138">
+	<table class="table" style="width: 100%;" layoutH="158">
 		<thead>
 			<tr>
 				<th width="30px;">
@@ -117,7 +117,7 @@
 				<th width="120px">采购单名称</th>
 				<th width="125px">采购编号</th>
 				<th width="80px">采购日期</th>
-				<th width="135px">采购金额（${totalSum}）</th>
+				<th width="155px">采购金额（${totalSum}）</th>
 				<th width="60px">当前流程</th>
 				<th width="60px">制单人</th>
 				<th>创建时间</th>
