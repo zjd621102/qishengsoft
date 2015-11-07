@@ -56,6 +56,8 @@
 					row.find("[name='map[manuname]']").val(ui.item.manuname);
 					row.find("[name='map[manucontact]']").val(ui.item.manucontact);
 					row.find("[name='map[manutel]']").val(ui.item.manutel);
+					
+					changeValue();// 重新计算价格
 				},
 				open : function() {
 					$(this).removeClass("ui-corner-all").addClass(
@@ -75,9 +77,16 @@
 	 */
 	function doBeforeSubmit() {
 
+		changeValue();
+		return true;
+	}
+	 
+	/**
+	 * 计算价格
+	 */
+	function changeValue() {
 		setMultiply('price', 'num', 'sum');
 		setAllSum('sum', 'allsum');
-		return true;
 	}
 </script>
 

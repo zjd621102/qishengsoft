@@ -60,6 +60,8 @@
 					if(/采购/.test(buyname)) {
 						$("#buyname").val(buyname.replace("采购", ui.item.manuname))
 					}
+
+					changeValue();
 				},
 				open : function() {
 					$(this).removeClass("ui-corner-all").addClass(
@@ -79,9 +81,16 @@
 	 */
 	function doBeforeSubmit() {
 
+		changeValue();
+		return true;
+	}
+	 
+	/**
+	 * 计算价格
+	 */
+	function changeValue() {
 		setMultiply('price', 'num', 'sum');
 		setAllSum('sum', 'allsum');
-		return true;
 	}
 </script>
 
