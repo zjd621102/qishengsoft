@@ -37,9 +37,8 @@ public class OtherTag extends SimpleTagSupport {
 		StringBuffer buffer = new StringBuffer();
 		
 		if(btype.equals("tobuy")) {
-			String sql = "SELECT substring(c.manuname,1,4) manuname, b.mark, b.property,"
-					+ " CONCAT(b.materialname, CASE WHEN a.remarkshow IS NULL THEN '' ELSE CONCAT('(', a.remarkshow, ')') END) AS materialname,"
-					+ " b.price FROM sproductrow a, smaterial b, smanu c"
+			String sql = "SELECT substring(c.manuname,1,4) manuname, b.mark, b.property, b.materialname,"
+					+ " a.remarkshow, b.price FROM sproductrow a, smaterial b, smanu c"
 					+ " WHERE a.materialid = b.materialid AND b.manuid = c.manuid AND a.productid = '" + id
 					+ "' AND (c.istobuy = '1' OR b.istobuy = '1') ORDER BY a.sort LIMIT 0,10";
 			List<CodeTableForm> list = dbUtils.getListBySql(sql);
@@ -50,6 +49,13 @@ public class OtherTag extends SimpleTagSupport {
 					.append("<div style='vertical-align: top; font-size: 6; float: left; color: red;'>")
 					.append(form.getValue("materialname"));
 				
+				String remarkshow = StrUtils.nullToStr(form.getValue("remarkshow"));
+				if(!remarkshow.equals("")) {// 采购备注不为空
+					buffer.append("<span style='color: green;'>【")
+						.append(StrUtils.nullToStr(form.getValue("remarkshow")))
+						.append("】</span>");
+				}
+				
 				String showFeatures = new ParameterDaoImpl().getParameterName("采购单显示物资特性");
 				
 				if(showFeatures.equals("Y")) {// 采购单显示物资特性
@@ -58,10 +64,10 @@ public class OtherTag extends SimpleTagSupport {
 							+ StrUtils.nullToStr(form.getValue("mark"));
 					
 					if(!prop.equals("")) {// 属性、标记不为空
-						buffer.append("【")
+						buffer.append("<span style='color: orange;'>〖")
 							.append(StrUtils.nullToStr(form.getValue("property")))
 							.append(StrUtils.nullToStr(form.getValue("mark")))
-							.append("】");
+							.append("〗</span>");
 					}
 				}
 				
