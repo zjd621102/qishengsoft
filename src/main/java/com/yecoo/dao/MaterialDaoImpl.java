@@ -77,7 +77,7 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 			cond.append(" AND t.statusid = '").append(statusid).append("'");
 		}
 		if(!mark.equals("")) {
-			cond.append(" AND t.mark = '").append(mark).append("'");
+			cond.append(" AND t.mark LIKE '%").append(mark).append("%'");
 		}
 		
 		return cond.toString();
