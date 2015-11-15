@@ -22,7 +22,7 @@
 						 expStr="style='width: 114px;'" />
 					</td>
 					<td style="width: 25%;">
-						发货日期从：
+						发货日期：
 						<input type="text" name="map[selldateFrom]" style="width: 110px;"
 						 value="${form.map.selldateFrom}" class="date"/>
 					</td>
@@ -39,11 +39,15 @@
 						 value="${form.map.productno}"/>
 					</td>
 					<td>
+						产品名称：
+						<input type="text" name="map[productname]" style="width: 110px;"
+						 value="${form.map.productname}"/>
+					</td>
+					<td>
 						客户名称：
 						<input type="text" name="map[manuname]" style="width: 110px;"
 						 value="${form.map.manuname}" ${changeManuname}/>
 					</td>
-					<td></td>
 					<td></td>
 				</tr>
 			</table>
