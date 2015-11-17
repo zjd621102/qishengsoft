@@ -6,11 +6,13 @@
 		<div class="searchBar">
 			<table class="searchContent">
 				<tr>
+					<!-- 
 					<td style="width: 25%;">
 						采购单编号：
 						<input type="text" name="map[buyno]" style="width: 110px;" maxlength="16"
 							value="${form.map.buyno}"/>
 					</td>
+					-->
 					<td style="width: 25%;">
 						当前流程：
 						<st:select dictType="采购状态" name="map[currflow]" value="${form.map.currflow}"
@@ -20,13 +22,18 @@
 						采购日期：<input type="text" name="map[buydateFrom]" style="width: 113px;" value="${form.map.buydateFrom}" class="date"/>
 					</td>
 					<td>
-						采购日期至：<input type="text" name="map[buydateTo]"  style="width: 113px;" value="${form.map.buydateTo}" class="date"/>
+						&#12288;&#12288;&#12288;至：<input type="text" name="map[buydateTo]"  style="width: 113px;" value="${form.map.buydateTo}" class="date"/>
 					</td>
-				</tr>
-				<tr>
 					<td>
 						供应商名称：
 						<input type="text" name="map[manuname]" style="width: 110px;" value="${form.map.manuname}"/>
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 25%;">
+						物资名称：
+						<input type="text" name="map[materialname]" style="width: 110px;" maxlength="16"
+							value="${form.map.materialname}"/>
 					</td>
 					<td>
 						物资编码：

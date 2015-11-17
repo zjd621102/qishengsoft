@@ -74,6 +74,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		String buydateTo = StrUtils.nullToStr(form.getValue("buydateTo"));
 		String manuname = StrUtils.nullToStr(form.getValue("manuname"));
 		String materialno = StrUtils.nullToStr(form.getValue("materialno"));
+		String materialname = StrUtils.nullToStr(form.getValue("materialname"));
 		
 		if(!buyname.equals("")) {
 			cond.append(" AND t.buyname like '%").append(buyname).append("%'");
@@ -101,6 +102,10 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		if(!materialno.equals("")) {
 			cond.append(" AND EXISTS (SELECT 1 FROM smaterial m, bbuyrow n WHERE m.materialid = n.materialid")
 				.append(" AND n.buyid = t.buyid AND m.materialno LIKE '%").append(materialno).append("%')");
+		}
+		if(!materialname.equals("")) {
+			cond.append(" AND EXISTS (SELECT 1 FROM bbuyrow n WHERE n.buyid = t.buyid AND n.materialname LIKE '%")
+				.append(materialname).append("%')");
 		}
 		
 		return cond.toString();
