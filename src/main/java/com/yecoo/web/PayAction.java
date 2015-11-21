@@ -171,7 +171,7 @@ public class PayAction {
 	private void getSelects(HttpServletRequest request) {
 
 		String sql = "SELECT a.dictname, a.dictvalue FROM cdictrow a, cdict b"
-				+ " WHERE a.dictid = b.dictid AND b.dicttype = '单据类型' AND a.dictvalue in ('FKD','SKD','YFD','GZD')";
+				+ " WHERE a.dictid = b.dictid AND b.dicttype = '单据类型' AND a.dictvalue in ('SKD')";// 'FKD','YFD','GZD'
 		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); //单据类型
 		sql = "SELECT * FROM sbankcard WHERE status = '1'";
 		List<CodeTableForm> bankcardList = dbUtils.getListBySql(sql); //银行卡

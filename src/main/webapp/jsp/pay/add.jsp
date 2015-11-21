@@ -49,6 +49,7 @@
 				<st:select dictType="流程状态" name="map[currflow]" value="申请" expStr="style='width: 184px;' class='required'" />
 			</dd>
 		</dl>
+		<!--
 		<dl>
 			<dt>银行卡卡号</dt>
 			<dd>
@@ -62,6 +63,7 @@
 				</select>
 			</dd>
 		</dl>
+		-->
 		<dl>
 			<dt>供应商</dt>
 			<dd>
@@ -73,6 +75,10 @@
 				<a href="javascript:void(0);" class="btnClear"
 					suggestFields="manuid,manuname"></a>
 			</dd>
+		</dl>
+		<dl>
+			<dt></dt>
+			<dd></dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>
