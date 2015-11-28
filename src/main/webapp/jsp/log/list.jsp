@@ -66,7 +66,7 @@
 			<ul class="toolBar">
 				<shiro:hasPermission name="Log:edi">
 				<li>
-					<a class="edit" href="<%=path%>/log/edi/{s_logid}" target="dialog" rel="log_edi">
+					<a class="edit" href="<%=path%>/log/edi/{s_logid}" target="dialog" rel="log_edi" height="330">
 						<span>查看日志</span>
 					</a>
 				</li>
@@ -89,10 +89,11 @@
 						<input type="checkbox" group="ids" class="checkboxCtrl">
 					</th>
 				</c:if>
-				<th width="3%">序号</th>
-				<th width="8%">操作类型</th>
-				<th width="8%">操作人</th>
-				<th width="13%">操作时间</th>
+				<th width="30px">序号</th>
+				<th width="80px">操作类型</th>
+				<th width="80px">操作人</th>
+				<th width="80px">IP</th>
+				<th width="150px">操作时间</th>
 				<th>备注</th>
 			</tr>
 		</thead>
@@ -111,6 +112,7 @@
 			   			</c:if>
 			   		</td>
 			   		<td>${bean.map.operatername}</td> 
+			   		<td>${bean.map.ip}</td>
 			   		<td>${bean.map.operatetime}</td>
 			   		<td>${bean.map.remark}</td>
 			   	</tr>

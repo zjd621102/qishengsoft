@@ -14,6 +14,10 @@
 				<input type="text" readonly="readonly" size="30" name="map[operatername]" value="${form.map.operatername}" />
 			</p>
 			<p>
+				<label>IP：</label>
+				<input type="text" readonly="readonly" size="30" name="map[ip]" value="${form.map.ip}" />
+			</p>
+			<p>
 				<label>操作时间：</label>
 				<input type="text" readonly="readonly" size="30" name="map[operatetime]" value="${form.map.operatetime}" />
 			</p>

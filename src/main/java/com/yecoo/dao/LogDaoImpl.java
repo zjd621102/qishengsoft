@@ -90,10 +90,14 @@ public class LogDaoImpl extends BaseDaoImpl {
 		try {
 			DbUtils dbUtils = new DbUtils();
 			CodeTableForm user = (CodeTableForm) request.getSession().getAttribute(Constants.USER_INFO_SESSION);
+			
+			String ip = StrUtils.getIp(request);// 客户端IP
+			
 			CodeTableForm log = new CodeTableForm();
 			log.setValue("logtype", logtype);
 			log.setValue("operater", user.getValue("userid"));
 			log.setValue("operatetime", DateUtils.getNowDateTime());
+			log.setValue("ip", ip);
 			log.setValue("remark", remark);
 			dbUtils.setInsert(log, "slog");
 		} catch(Exception e) {
