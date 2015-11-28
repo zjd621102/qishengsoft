@@ -52,6 +52,7 @@
 		<thead>
 			<tr>
 				<td style="width: 35px;">序号</td>
+				<td style="width: 80px;">品牌名称</td>
 				<td style="width: 80px;">产品编码</td>
 				<td style="width: 135px;">产品名称</td>
 				<td style="width: 45px;">件数</td>
@@ -66,6 +67,9 @@
 			   	<tr>
 			   		<td style="width: 35px;">
 			   			<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${vs.index+1}</span>
+			   		</td>
+			   		<td style="width: 80px;">
+						<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${bean.map.producttypename}</span>
 			   		</td>
 			   		<td style="width: 80px;">
 						<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${bean.map.productno}</span>

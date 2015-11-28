@@ -175,6 +175,12 @@ public class SellDaoImpl extends BaseDaoImpl {
 			sql += " '' productname2";
 		}
 		
+		String act = StrUtils.nullToStr(request.getParameter("act"));
+		if(act.equals("printDo")) {// 生产单
+			sql += ", (SELECT producttypename FROM sproducttype"
+				+ " WHERE producttypeno = substring_index(substring_index(productno,'1','1'), '2', '1')) producttypename";
+		}
+		
 		sql += " FROM bsellrow a LEFT JOIN sproduct b ON a.productid = b.productid WHERE a.sellid = '"
 				+ sellid + "' ORDER BY a.sort, b.productno";
 		List<CodeTableForm> sellrowList = dbUtils.getListBySql(sql);
