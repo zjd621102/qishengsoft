@@ -90,9 +90,9 @@
 					</th>
 				</c:if>
 				<th width="30px">序号</th>
-				<th width="80px">操作类型</th>
+				<th width="100px">操作类型</th>
 				<th width="80px">操作人</th>
-				<th width="80px">IP</th>
+				<th width="100px">IP</th>
 				<th width="150px">操作时间</th>
 				<th>备注</th>
 			</tr>
