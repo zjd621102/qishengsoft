@@ -104,6 +104,31 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>一盒数量：</dt>
+			<dd>
+				<input type="text" name="map[numofcase]" class="required digits" size="25" maxlength="999"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>一件数量：</dt>
+			<dd>
+				<input type="text" name="map[numofonebox]" class="required digits" size="25" maxlength="999"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>排序：</dt>
+			<dd>
+				<input type="text" name="map[productsort]" class="digits" size="25" maxlength="99"
+					value="50"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>买家：</dt>
+			<dd>
+				<input type="text" name="map[buyers]" size="25" maxlength="128" value=""/>
+			</dd>
+		</dl>
+		<dl>
 			<dt>产品类型：</dt>
 			<dd>
 				<input type="hidden" name="map[producttype]" value="${form.map.producttype}"/>
@@ -143,31 +168,6 @@
 			<dd>
 				<input type="text" name="map[createdate]" size="25" maxlength="19"
 					value="${form.map.createdate}" readonly="readonly"/>
-			</dd>
-		</dl>
-		<dl>
-			<dt>一盒数量：</dt>
-			<dd>
-				<input type="text" name="map[numofcase]" class="required digits" size="25" maxlength="999"/>
-			</dd>
-		</dl>
-		<dl>
-			<dt>一件数量：</dt>
-			<dd>
-				<input type="text" name="map[numofonebox]" class="required digits" size="25" maxlength="999"/>
-			</dd>
-		</dl>
-		<dl>
-			<dt>排序：</dt>
-			<dd>
-				<input type="text" name="map[productsort]" class="digits" size="25" maxlength="99"
-					value="50"/>
-			</dd>
-		</dl>
-		<dl>
-			<dt>买家：</dt>
-			<dd>
-				<input type="text" name="map[buyers]" size="25" maxlength="128" value=""/>
 			</dd>
 		</dl>
 		<dl>

@@ -176,6 +176,7 @@
 		
 		<div class="formBar">
 			<ul>
+				<!-- 
 				<li>
 					<div class="button">
 						<input id="fileInput" type="file" name="image" 
@@ -195,6 +196,7 @@
 						/>
 					</div>
 				</li>
+				-->
 				<li><div class="button"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
 				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
 			</ul>

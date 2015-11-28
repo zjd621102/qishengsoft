@@ -61,12 +61,16 @@ public class ManuDaoImpl extends BaseDaoImpl {
 		
 		StringBuffer cond = new StringBuffer("");
 		String manuname = StrUtils.nullToStr(form.getValue("manuname"));
+		String manunamepy = StrUtils.nullToStr(form.getValue("manunamepy")).toUpperCase();
 		String manutypeid = StrUtils.nullToStr(form.getValue("manutypeid"));
 		String statusid = StrUtils.nullToStr(form.getValue("statusid"));
 		String referee = StrUtils.nullToStr(form.getValue("referee"));
 		
 		if(!manuname.equals("")) {
 			cond.append(" AND t.manuname like '%").append(manuname).append("%'");
+		}
+		if(!manunamepy.equals("")) {
+			cond.append(" AND t.manunamepy like '%").append(manunamepy).append("%'");
 		}
 		if(!manutypeid.equals("")) {
 			cond.append(" AND t.manutypeid = '").append(manutypeid).append("'");

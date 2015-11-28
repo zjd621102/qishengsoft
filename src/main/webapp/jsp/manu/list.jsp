@@ -16,16 +16,19 @@
 				<tr>
 					<td>
 						供应商名称：
-						<input type="text" name="map[manuname]" style="width: 100px; margin-right: 15px;"
+						<input type="text" name="map[manuname]" style="width: 80px; margin-right: 15px;"
 						 maxlength="32" value="${form.map.manuname}" />
+						供应商拼音：
+						<input type="text" name="map[manunamepy]" style="width: 80px; margin-right: 15px;"
+						 maxlength="32" value="${form.map.manunamepy}" />
 						供应商类别：
 						<st:select dictType="供应商类别" name="map[manutypeid]" value="${form.map.manutypeid}"
-						 expStr="style='width: 100px; margin-right: 15px;'" />
+						 expStr="style='width: 100px; margin-right: 12px;'" />
 						供应商状态：
 						<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
-						 expStr="style='width: 100px; margin-right: 15px;'" />
+						 expStr="style='width: 100px; margin-right: 12px;'" />
 						推荐人：
-						<input type="text" name="map[referee]" style="width: 100px;" maxlength="16"
+						<input type="text" name="map[referee]" style="width: 80px;" maxlength="16"
 						 value="${form.map.referee}"/>
 					</td>
 				</tr>

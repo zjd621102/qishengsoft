@@ -162,6 +162,34 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>一盒数量：</dt>
+			<dd>
+				<input type="text" name="map[numofcase]" class="required digits" size="25" maxlength="999"
+					value="${form.map.numofcase}"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>一件数量：</dt>
+			<dd>
+				<input type="text" name="map[numofonebox]" class="required digits" size="25" maxlength="999"
+					value="${form.map.numofonebox}"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>排序：</dt>
+			<dd>
+				<input type="text" name="map[productsort]" class="digits" size="25" maxlength="99"
+					value="${form.map.productsort}"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>买家：</dt>
+			<dd>
+				<input type="text" name="map[buyers]" size="25" maxlength="128"
+					value="${form.map.buyers}"/>
+			</dd>
+		</dl>
+		<dl>
 			<dt>产品类型：</dt>
 			<dd>
 				<input type="hidden" name="map[producttype]" value="${form.map.producttype}"/>
@@ -204,33 +232,17 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>一盒数量：</dt>
+			<dt>使用状态：</dt>
 			<dd>
-				<input type="text" name="map[numofcase]" class="required digits" size="25" maxlength="999"
-					value="${form.map.numofcase}"/>
+				<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
+				 expStr="style='width: 184px;'" />
 			</dd>
 		</dl>
 		<dl>
-			<dt>一件数量：</dt>
-			<dd>
-				<input type="text" name="map[numofonebox]" class="required digits" size="25" maxlength="999"
-					value="${form.map.numofonebox}"/>
-			</dd>
+			<dt></dt>
+			<dd></dd>
 		</dl>
-		<dl>
-			<dt>排序：</dt>
-			<dd>
-				<input type="text" name="map[productsort]" class="digits" size="25" maxlength="99"
-					value="${form.map.productsort}"/>
-			</dd>
-		</dl>
-		<dl>
-			<dt>买家：</dt>
-			<dd>
-				<input type="text" name="map[buyers]" size="25" maxlength="128"
-					value="${form.map.buyers}"/>
-			</dd>
-		</dl>
+		<!-- 
 		<dl>
 			<dt>打印名：</dt>
 			<dd>
@@ -238,13 +250,7 @@
 					value="${form.map.printname}"/>
 			</dd>
 		</dl>
-		<dl>
-			<dt>使用状态：</dt>
-			<dd>
-				<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
-				 expStr="style='width: 184px;'" />
-			</dd>
-		</dl>
+		-->
 		<dl>
 			<dt>备注：</dt>
 			<dd>
@@ -274,6 +280,7 @@
 						</div>
 					</div>
 				</td>
+				<!--
 				<td>
 					<div class="button" style="margin-left: 4px;">
 						<input id="fileInput" type="file" name="image" 
@@ -320,6 +327,7 @@
 						</div>
 					</div>
 				</td>
+				-->
 			</tr>
 		</table>
 
