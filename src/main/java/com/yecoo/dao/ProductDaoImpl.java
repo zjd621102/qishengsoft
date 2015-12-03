@@ -271,8 +271,9 @@ public class ProductDaoImpl extends BaseDaoImpl {
 		String[] sqls = new String[1];
 //		sqls[0] = "DELETE FROM sproductrow WHERE productid = '" + productid + "'";
 		sqls[0] = "INSERT INTO sproductrow (productid, materialid, materialno, materialname, materialprice,"
-				+ " materialnum, materialsum, sort, remarkrow) SELECT " + productid + ", materialid, materialno,"
-				+ " materialname, materialprice, materialnum, materialsum, sort, remarkrow"
+				+ " materialnum, materialsum, sort, remarkrow, remarkshow, productionshow) SELECT "
+				+ productid + ", materialid, materialno,"
+				+ " materialname, materialprice, materialnum, materialsum, sort, remarkrow, remarkshow, productionshow"
 				+ " FROM sproductrow a, sproduct b WHERE a.productid = b.productid AND b.productno = '"
 				+ copyproductno + "'";
 		int iReturn = dbUtils.executeSQLs(sqls);
