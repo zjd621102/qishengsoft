@@ -58,7 +58,7 @@ public class BuyAction {
 		String totalSum = buyDaoImpl.getBuySum(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
 		request.setAttribute("buyList", buyList); // 采购单列表
-		request.setAttribute("totalSum", totalSum); // 销售额
+		request.setAttribute("totalSum", totalSum); // 采购额
 		request.setAttribute("sn", "buy"); // 授权名称
 		request.setAttribute("form", form);
 		
@@ -247,6 +247,10 @@ public class BuyAction {
 		request.setAttribute("buyList", buyList); // 采购单列表
 		request.setAttribute("sn", "buy"); // 授权名称
 		request.setAttribute("form", form);
+		
+		form.setValue("currflow", "待付");
+		String totalSum = buyDaoImpl.getBuySum(form);
+		request.setAttribute("totalSum", totalSum); // 待付款
 		
 		return "buy/toPay";
 	}

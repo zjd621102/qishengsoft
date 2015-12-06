@@ -75,7 +75,7 @@
 				<th width="80px">联系人</th>
 				<th width="100px">手机号码</th>
 				<th width="100px">电话</th>
-				<th width="80px;">待付金额</th>
+				<th width="150px;">待付金额（${totalSum}）</th>
 				<th>&nbsp;</th>
 			</tr>
 		</thead>
