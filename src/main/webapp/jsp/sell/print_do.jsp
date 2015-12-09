@@ -99,7 +99,7 @@
 			   	</tr>
 		   	</c:forEach>
 			<tr>
-				<td colspan="2"></td>
+				<td colspan="3"></td>
 				<td>
 					合计
 				</td>
