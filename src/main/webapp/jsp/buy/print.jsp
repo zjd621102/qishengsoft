@@ -23,13 +23,13 @@
 	<h2>采购单</h2>
 	<table style="width: 100%;">
 		<tr>
-			<td>单据类型：
+			<td>类&#12288;&#12288;型：
 				<span>${form.map.btypename}</span>
 			</td>
-			<td>采购单名称：
+			<td>名&#12288;&#12288;称：
 				<span>${form.map.buyname}</span>
 			</td>
-			<td>采购编号：
+			<td>编号：
 				<span>${form.map.buyno}</span>
 			</td>
 		</tr>
@@ -45,13 +45,13 @@
 			</td>
 		</tr>
 		<tr>
-			<td>制&nbsp;单&nbsp;人：
+			<td>制&#8194;单&#8194;人：
 				<span>${form.map.makername}</span>
 			</td>
 			<td>创建日期：
 				<span>${form.map.createtime}</span>
 			</td>
-			<td>备&nbsp;&nbsp;&nbsp;&nbsp;注：
+			<td>备&#12288;&#12288;注：
 				<span>${form.map.remark}</span>
 			</td>
 		</tr>
