@@ -184,7 +184,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 		sql += " FROM bsellrow a LEFT JOIN sproduct b ON a.productid = b.productid"
 				+ " LEFT JOIN sproducttype c ON c.producttypeno = substring_index(substring_index(productno,'1','1'), '2', '1')"
 				+ " WHERE a.sellid = '"
-				+ sellid + "' ORDER BY c.priority, a.sort, b.productno";
+				+ sellid + "' ORDER BY a.sort, c.priority, b.productno";
 		List<CodeTableForm> sellrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("sellrowList", sellrowList);
 		
