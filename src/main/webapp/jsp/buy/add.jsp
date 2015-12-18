@@ -228,7 +228,7 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[numofonebox]" style="width: 75px;" maxlength="12"
-							class="number" value="0.00" readonly="readonly" />
+							value="" readonly="readonly" />
 			   		</td>
 			   		<td>
 						<input type="hidden" name="map[manuid]"/>

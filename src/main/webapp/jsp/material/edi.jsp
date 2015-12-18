@@ -165,7 +165,7 @@
 			<dl>
 				<dt>一件数量：</dt>
 				<dd>
-					<input type="text" name="map[numofonebox]" class="required number" size="25" maxlength="12"
+					<input type="text" name="map[numofonebox]" size="25" maxlength="12"
 						value="${form.map.numofonebox}"/>
 				</dd>
 			</dl>
