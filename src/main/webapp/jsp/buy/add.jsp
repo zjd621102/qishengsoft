@@ -91,7 +91,7 @@
 	 * 计算价格
 	 */
 	function changeValue() {
-		setMultiply('price', 'num', 'sum');
+		setMultiply_buy('price', 'num', 'sum');
 		setAllSum('sum', 'allsum');
 	}
 	
@@ -102,7 +102,7 @@
 	 * @param name3 赋值字段
 	 * @param obj 	所在行的对象
 	 */
-	function setMultiply(name1, name2, name3) {
+	function setMultiply_buy(name1, name2, name3) {
 		$("input[name*='map[" + name1 + "]']").each(function() {
 			var row = $(this).parents("tr:first");
 			var realprice = row.find("[name*='map[" + name1 + "]']").val();
@@ -119,7 +119,7 @@
 	function changeDiscount() {
 		var changeDiscount = $("#changediscount").val();
 		$("[name*='map[discount]']").val(changeDiscount);
-		setMultiply('price', 'num', 'sum');
+		setMultiply_buy('price', 'num', 'sum');
 		setAllSum('sum', 'allsum');
 	}
 </script>
@@ -247,17 +247,17 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[price]" style="width: 60px" maxlength="12"
-							class="number required" value="0.00" onchange="setMultiply('price', 'num', 'sum');
+							class="number required" value="0.00" onchange="setMultiply_buy('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[num]" style="width: 60px" maxlength="12"
-							class="number required" value="0.00" onchange="setMultiply('price', 'num', 'sum');
+							class="number required" value="0.00" onchange="setMultiply_buy('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[discount]" style="width: 60px" maxlength="12"
-							class="number required" value="1" onchange="setMultiply('price', 'num', 'sum');
+							class="number required" value="1" onchange="setMultiply_buy('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
