@@ -90,6 +90,34 @@
 		setMultiply('price', 'num', 'sum');
 		setAllSum('sum', 'allsum');
 	}
+	
+	/**
+	 * 重写方法 - 赋值相乘的值
+	 * @param name1 相乘字段
+	 * @param name2 相乘字段
+	 * @param name3 赋值字段
+	 * @param obj 	所在行的对象
+	 */
+	function setMultiply(name1, name2, name3) {
+		$("input[name*='map[" + name1 + "]']").each(function() {
+			var row = $(this).parents("tr:first");
+			var realprice = row.find("[name*='map[" + name1 + "]']").val();
+			var num = row.find("[name*='map[" + name2 + "]']").val();
+			var discount = row.find("[name*='map[discount]']").val();
+			var realsum = (multiply(realprice, num)*discount).toFixed(2);// 四舍五入为2位小数
+			row.find("[name*='map[" + name3 + "]']").val(realsum);
+		});
+	}
+
+	/**
+	 * 修改折扣
+	 */
+	function changeDiscount() {
+		var changeDiscount = $("#alldiscount").val();
+		$("[name*='map[discount]']").val(changeDiscount);
+		setMultiply('price', 'num', 'sum');
+		setAllSum('sum', 'allsum');
+	}
 </script>
 
 <form method="post" action="<%=path%>/buy/edi" class="required-validate pageForm"
@@ -171,11 +199,12 @@
 						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="30px">序号</th>
-					<th width="110px">物资编码</th>
-					<th width="150px">物资名称</th>
+					<th width="70px">物资编码</th>
+					<th width="120px">物资名称</th>
 					<th width="60px">计量单位</th>
 					<th width="75px">单价</th>
 					<th width="75px">数量</th>
+					<th width="75px">折扣</th>
 					<th width="85px">总价</th>
 					<th width="90px">一件数量</th>
 					<th width="120px">供应商名称</th>
@@ -194,14 +223,16 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td style="font-size: 13px; font-weight: bold; color: red;">
-						合计：
-					</td>
 					<td></td>
+					<td>
+						<input type="text" id="alldiscount" name="map[alldiscount]" style="width: 70px" class="number"
+							value="${form.map.alldiscount}" onchange="changeDiscount();"/>
+					</td>
 					<td>
 						<input type="text" name="map[allsum]" style="width: 70px;" class="number"
 							value="" readonly="readonly"/>
 					</td>
+					<td></td>
 					<td></td>
 					<!-- 
 					<td></td>
@@ -219,12 +250,14 @@
 						<input type="hidden" name="map[materialid]"/>
 						<input type="text" name="map[materialno]" style="width: 50px; margin-right: 5px;" maxlength="13"
 							suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel" />
+						<!-- 
 						<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
 						<a href="javascript:void(0);" class="btnClear"
 							suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel,num,sum"></a>
+			   		 	-->
 			   		</td>
 			   		<td>
-						<input type="text" name="map[materialname]" style="width: 96%" maxlength="32" class="required"/>
+						<input type="text" name="map[materialname]" style="width: 100px;" maxlength="32" class="required"/>
 			   		</td>
 			   		<td>
 			   			<st:select dictType="计量单位" name="map[unit]" expStr="style='width: 100%;'" />
@@ -237,6 +270,11 @@
 			   		<td>
 						<input type="text" name="map[num]" style="width: 60px" maxlength="12"
 							class="number required" value="0.00" onchange="setMultiply('price', 'num', 'sum');
+							setAllSum('sum', 'allsum');"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[discount]" style="width: 60px" maxlength="12"
+							class="number required" value="1" onchange="setMultiply('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
@@ -275,12 +313,14 @@
 							<input type="text" name="map[materialno]" style="width: 50px; margin-right: 5px;" maxlength="13"
 								suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel"
 								value="${bean.map.materialno}"/>
+							<!-- 
 							<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
 							<a href="javascript:void(0);" class="btnClear"
 								suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel,num,sum"></a>
+				   			-->
 				   		</td>
 				   		<td>
-							<input type="text" name="map[materialname]" style="width: 96%" maxlength="32"
+							<input type="text" name="map[materialname]" style="width: 100px;" maxlength="32"
 								value="${bean.map.materialname}" class="required"/>
 				   		</td>
 				   		<td>
@@ -295,6 +335,12 @@
 				   		<td>
 							<input type="text" name="map[num]" style="width: 60px;" maxlength="12"
 								class="number required" value="${bean.map.num}"
+								onchange="setMultiply('price', 'num', 'sum');
+								setAllSum('sum', 'allsum');"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[discount]" style="width: 60px" maxlength="12"
+								class="number required" value="${bean.map.discount}"
 								onchange="setMultiply('price', 'num', 'sum');
 								setAllSum('sum', 'allsum');"/>
 				   		</td>
