@@ -36,7 +36,8 @@
 			                 		manuid: item.map.manuid,
 			                 		manuname: item.map.manuname,
 			                        manucontact: item.map.manucontact,
-			                        manutel: item.map.manutel
+			                        manutel: item.map.manutel,
+			                        numofonebox: item.map.numofonebox
 			                    }
 			                }));
 						},
@@ -54,6 +55,7 @@
 					row.find("[name='map[manuname]']").val(ui.item.manuname);
 					row.find("[name='map[manucontact]']").val(ui.item.manucontact);
 					row.find("[name='map[manutel]']").val(ui.item.manutel);
+					row.find("[name='map[numofonebox]']").val(ui.item.numofonebox);
 					
 					// 修改采购单名称
 					var buyname = $("#buyname").val();
@@ -158,6 +160,7 @@
 					<th width="75px">单价</th>
 					<th width="75px">数量</th>
 					<th width="85px">总价</th>
+					<th width="90px">一件数量</th>
 					<th width="120px">供应商名称</th>
 				   	<!--
 					<th width="7%">联系人</th>
@@ -181,6 +184,7 @@
 						<input type="text" name="map[allsum]" style="width: 70px" class="number"
 							value="" readonly="readonly"/>
 					</td>
+					<td></td>
 					<td></td>
 				   	<!--
 					<td></td>
@@ -221,6 +225,10 @@
 			   		<td>
 						<input type="text" name="map[sum]" style="width: 70px" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[numofonebox]" style="width: 75px;" maxlength="12"
+							class="number" value="0.00" readonly="readonly" />
 			   		</td>
 			   		<td>
 						<input type="hidden" name="map[manuid]"/>

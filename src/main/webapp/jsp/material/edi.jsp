@@ -163,6 +163,17 @@
 			</dl>
 			-->
 			<dl>
+				<dt>一件数量：</dt>
+				<dd>
+					<input type="text" name="map[numofonebox]" class="required number" size="25" maxlength="12"
+						value="${form.map.numofonebox}"/>
+				</dd>
+			</dl>
+			<dl>
+				<dt></dt>
+				<dd></dd>
+			</dl>
+			<dl>
 				<dt>备注：</dt>
 				<dd>
 					<textarea name="map[remark]" cols="90" rows="5" maxlength="256">${form.map.remark}</textarea>
