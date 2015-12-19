@@ -208,7 +208,7 @@
 					<td></td>
 					<td></td>
 					<td>
-						<input type="text" id="changediscount" style="width: 70px" class="number" value="1"
+						<input type="text" id="changediscount" style="width: 70px" class="number required" value="1"
 							onchange="changeDiscount();"/>
 					</td>
 					<td>
