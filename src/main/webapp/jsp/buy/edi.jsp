@@ -225,7 +225,7 @@
 					<td></td>
 					<td></td>
 					<td>
-						<input type="text" id="alldiscount" name="map[alldiscount]" style="width: 70px"
+						<input type="text" id="alldiscount" name="map[alldiscount]" style="width: 60px"
 							class="number required" value="${form.map.alldiscount}" onchange="changeDiscount();"/>
 					</td>
 					<td>

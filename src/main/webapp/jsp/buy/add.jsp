@@ -208,8 +208,8 @@
 					<td></td>
 					<td></td>
 					<td>
-						<input type="text" id="changediscount" style="width: 70px" class="number required" value="1"
-							onchange="changeDiscount();"/>
+						<input type="text" id="changediscount" name="map[alldiscount]" style="width: 60px"
+							class="number required" value="1" onchange="changeDiscount();"/>
 					</td>
 					<td>
 						<input type="text" name="map[allsum]" style="width: 70px" class="number"
