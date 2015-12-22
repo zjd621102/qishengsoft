@@ -37,13 +37,13 @@
 				</dd>
 			</dl>
 			<dl>
-				<dt>属性</dt>
+				<dt>属性：</dt>
 				<dd>
 					<input type="text" name="map[property]" size="25" maxlength="32" />
 				</dd>
 			</dl>
 			<dl>
-				<dt>标志</dt>
+				<dt>标志：</dt>
 				<dd>
 					<input type="text" name="map[mark]" size="25" maxlength="16" />
 				</dd>
@@ -81,13 +81,13 @@
 				</dd>
 			</dl>
 			<dl>
-				<dt>是否生成采购单</dt>
+				<dt>是否生成采购单：</dt>
 				<dd>
 					<st:select dictType="是否" name="map[istobuy]" expStr="style='width: 184px;'" />
 				</dd>
 			</dl>
 			<dl>
-				<dt>使用状态</dt>
+				<dt>使用状态：</dt>
 				<dd>
 					<st:select dictType="状态" name="map[statusid]" value="1"
 					 expStr="style='width: 184px;' class='required'" />

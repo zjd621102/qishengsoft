@@ -199,7 +199,7 @@
 						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="30px">序号</th>
-					<th width="70px">物资编码</th>
+					<th width="82px">物资编码</th>
 					<th width="120px">物资名称</th>
 					<th width="60px">计量单位</th>
 					<th width="75px">单价</th>
@@ -252,9 +252,10 @@
 							suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel" />
 						<!-- 
 						<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
+						-->
 						<a href="javascript:void(0);" class="btnClear"
 							suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel,num,sum"></a>
-			   		 	-->
+			   		 	
 			   		</td>
 			   		<td>
 						<input type="text" name="map[materialname]" style="width: 100px;" maxlength="32" class="required"/>
@@ -315,9 +316,10 @@
 								value="${bean.map.materialno}"/>
 							<!-- 
 							<a class="btnLook" href="<%=path%>/material/tree" lookupGroup="lookup" width="1200"></a>
+							-->
 							<a href="javascript:void(0);" class="btnClear"
 								suggestFields="materialid,materialno,materialname,unit,price,manuid,manuname,manucontact,manutel,num,sum"></a>
-				   			-->
+				   			
 				   		</td>
 				   		<td>
 							<input type="text" name="map[materialname]" style="width: 100px;" maxlength="32"

@@ -73,13 +73,13 @@
 			<tr>
 				<th width="30px">序号</th>
 				<th width="60px">物资编码</th>
-				<th width="100px">物资名称</th>
+				<th width="120px">物资名称</th>
 				<th width="60px">单价</th>
 				<th width="60px">属性</th>
 				<th width="50px">标志</th>
 				<th width="70px">一件数量</th>
 				<th width="80px">物资类型</th>
-				<th width="100px">供应商</th>
+				<th width="80px">供应商</th>
 				<th width="40px">排序</th>
 				<th>新增时间</th>
 			</tr>
