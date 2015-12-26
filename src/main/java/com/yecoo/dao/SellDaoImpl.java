@@ -164,8 +164,8 @@ public class SellDaoImpl extends BaseDaoImpl {
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
 		sql = "SELECT a.*, b.productno, func_getDictName('计量单位', a.unit) unitname,"
-				+ " b.productno REGEXP '[A-Z]+1' iscu,"
-				+ "(SELECT group_concat(c.productionshow) FROM sproductrow c"
+				+ " b.productno REGEXP '[A-Z]+1' iscu, b.printname,"
+				+ " (SELECT group_concat(c.productionshow) FROM sproductrow c"
 				+ " WHERE c.productid = b.productid AND c.productionshow IS NOT NULL) productionshow,";
 				
 		String hidePrint = new ParameterDaoImpl().getParameterName("是否打印隐藏");
@@ -176,7 +176,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 		}
 		
 		String act = StrUtils.nullToStr(request.getParameter("act"));
-		if(act.equals("printDo")) {// 生产单
+		if(act.equals("printDo") || act.equals("printBox")) {// 生产单
 			sql += ", (SELECT producttypename FROM sproducttype"
 				+ " WHERE producttypeno = substring_index(substring_index(productno,'1','1'), '2', '1')) producttypename";
 		}

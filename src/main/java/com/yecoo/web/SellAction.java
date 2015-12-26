@@ -1,6 +1,7 @@
 package com.yecoo.web;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -136,6 +137,44 @@ public class SellAction {
 			return "sell/print_buy";
 		} else if(act.equals("printDo")) {// 生产单
 			return "sell/print_do";
+		} else if(act.equals("printBox")) {// 箱子贴纸
+			@SuppressWarnings("unchecked")
+			List<CodeTableForm> sellrowList = (List<CodeTableForm>) request.getAttribute("sellrowList");
+			int boxnum = 0;
+			String iscu = null;
+			List<CodeTableForm> boxList = new ArrayList<CodeTableForm>();
+			CodeTableForm box = null;
+			for(CodeTableForm codeTableForm : sellrowList) {
+				boxnum = Integer.parseInt(codeTableForm.getValue("boxnum").toString());
+				for(int i = 0; i < boxnum*2; i++) {
+					box = new CodeTableForm();
+					
+					
+					box.setValue("producttypename", codeTableForm.getValue("producttypename"));// 产品类型
+					box.setValue("productname", codeTableForm.getValue("productname"));// 产品名称
+					box.setValue("numofonebox", codeTableForm.getValue("numofonebox"));// 一件数量
+					box.setValue("printname", codeTableForm.getValue("printname"));// 打印名
+					
+					
+					if(codeTableForm.getValue("iscu").equals("1")) {
+						iscu = "铜";
+					} else {
+						iscu = "";
+					}
+					box.setValue("iscu", iscu);// 产品材质
+					
+					boxList.add(box);
+				}
+			}
+			
+			int boxsize = boxList.size();
+			int pagenum = (boxsize - 1)/21 + 1;
+
+			request.setAttribute("boxsize", boxsize);// 件数
+			request.setAttribute("pagenum", pagenum);// 页数
+			request.setAttribute("boxList", boxList);// 列表
+			
+			return "sell/print_box";
 		}
 		
 		return "sell/edi";

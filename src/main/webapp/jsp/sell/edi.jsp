@@ -488,6 +488,13 @@
 					</div>
 				</div>
 			</li>
+			<li>
+				<div class="button">
+					<div class="buttonContent">
+						<button type="button" onclick="window.open('<%=path%>/sell/edi/${form.map.sellid}?act=printBox');">箱子</button>
+					</div>
+				</div>
+			</li>
 			</shiro:hasPermission>
 			</c:if>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
