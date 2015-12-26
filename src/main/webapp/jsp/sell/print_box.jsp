@@ -11,6 +11,7 @@
 	td {
 		text-align: center;
 		width: 70mm;
+		height: 42.428mm;
 		font-size: 27;
 		font-weight: bolder;
 		color: blue;
