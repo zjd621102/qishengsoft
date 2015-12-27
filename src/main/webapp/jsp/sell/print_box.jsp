@@ -31,41 +31,13 @@
 	<c:forEach begin="0" end="${pagenum-1}">
 	<table style="width: 210mm; height: 297mm;">
 		<tbody>
+			<c:forEach begin="0" end="${boxRow-1}">
 			<tr>
+				<c:forEach begin="0" end="${boxCol-1}">
 				<td></td>
-				<td></td>
-				<td></td>
+				</c:forEach>
 			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
+			</c:forEach>
 	   	</tbody>
 		</c:forEach>
 	</table>
@@ -74,7 +46,6 @@
 <script type="text/javascript">
 	var tdList = $("td");
 	var i = 0;
-	$(tdList[1]).text(2);
 	<%
 	List<CodeTableForm> boxList = (List<CodeTableForm>) request.getAttribute("boxList");// 列表
 	String htm = null;

@@ -23,6 +23,7 @@ TRUNCATE TABLE sproductrow;
 TRUNCATE TABLE sstaff;
 
 /**删除数据**/
+UPDATE cparameter SET parametervalue = 'N' WHERE parametername = '是否记录日志';
 UPDATE cseq SET seq = 100;
 DELETE FROM smaterialtype WHERE materialtype <> '1';
 DELETE FROM sproducttype WHERE producttype <> '1';

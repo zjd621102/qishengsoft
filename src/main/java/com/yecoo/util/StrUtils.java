@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.yecoo.dao.ParameterDaoImpl;
 import com.yecoo.model.CodeTableForm;
 /**
  * 公用方法
@@ -486,37 +487,47 @@ public class StrUtils {
 	 */
 	public static void saveLog(HttpServletRequest request, String logtype, CodeTableForm form) {
 		try {
-			DbUtils dbUtils = new DbUtils();
-			CodeTableForm user = (CodeTableForm) request.getSession().getAttribute(Constants.USER_INFO_SESSION);
 			
-			String ip = StrUtils.getIp(request);// 客户端IP
-			
-			CodeTableForm log = new CodeTableForm();
-			log.setValue("logtype", logtype);
-			log.setValue("operater", user.getValue("userid"));
-			log.setValue("operatetime", DateUtils.getNowDateTime());
-			log.setValue("ip", ip);
-			
-			if(form != null) {
-				StringBuffer remark = new StringBuffer();
-				Map<String, Object> formMap = form.getMap();
-				Object formArray[] = formMap.keySet().toArray();
-				String formMapValue = null;
-				for(int i = 0; i < formArray.length; i++) {
-					formMapValue = String.valueOf(formMap.get(formArray[i]));
-					
-					if(formMapValue.contains("Ljava.lang.String")) {
-						continue;
-					}
-					
-					if(remark.length() >= 1) {
-						remark.append(",");
-					}
-					remark.append(formArray[i] + ":" + formMapValue);
-				}
-				log.setValue("remark", remark.toString());
+			String isSaveLog = "N";
+			if("登录".equals(logtype)) {// 登录时一定保存日志
+				isSaveLog = "Y";
+			} else {
+				isSaveLog = new ParameterDaoImpl().getParameterName("是否记录日志");
 			}
-			dbUtils.setInsert(log, "slog");
+			
+			if(isSaveLog.equals("Y")) {// 记录日志
+				DbUtils dbUtils = new DbUtils();
+				CodeTableForm user = (CodeTableForm) request.getSession().getAttribute(Constants.USER_INFO_SESSION);
+				
+				String ip = StrUtils.getIp(request);// 客户端IP
+				
+				CodeTableForm log = new CodeTableForm();
+				log.setValue("logtype", logtype);
+				log.setValue("operater", user.getValue("userid"));
+				log.setValue("operatetime", DateUtils.getNowDateTime());
+				log.setValue("ip", ip);
+				
+				if(form != null) {
+					StringBuffer remark = new StringBuffer();
+					Map<String, Object> formMap = form.getMap();
+					Object formArray[] = formMap.keySet().toArray();
+					String formMapValue = null;
+					for(int i = 0; i < formArray.length; i++) {
+						formMapValue = String.valueOf(formMap.get(formArray[i]));
+						
+						if(formMapValue.contains("Ljava.lang.String")) {
+							continue;
+						}
+						
+						if(remark.length() >= 1) {
+							remark.append(",");
+						}
+						remark.append(formArray[i] + ":" + formMapValue);
+					}
+					log.setValue("remark", remark.toString());
+				}
+				dbUtils.setInsert(log, "slog");
+			}
 		} catch(Exception e) {
 			StrUtils.WriteLog("StrUtils.saveLog()", e);
 		}

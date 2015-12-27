@@ -36,6 +36,7 @@ public class ParameterDaoImpl extends BaseDaoImpl {
 		String sql = "SELECT * FROM cparameter t WHERE 1 = 1";
 		String cond = getParameterListCondition(form);
 		sql  += cond;
+		sql += " ORDER BY createtime";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
@@ -67,7 +68,8 @@ public class ParameterDaoImpl extends BaseDaoImpl {
 	 */
 	public CodeTableForm getParameterById(int parameterid) {
 		
-		String sql = "SELECT a.* FROM cparameter a WHERE a.parameterid = upper('" + parameterid + "')";
+		String sql = "SELECT a.* FROM cparameter a WHERE a.parameterid = upper('"
+				+ parameterid + "')";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
 		return codeTableForm;

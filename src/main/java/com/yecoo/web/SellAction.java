@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yecoo.dao.LogDaoImpl;
+import com.yecoo.dao.ParameterDaoImpl;
 import com.yecoo.dao.SellDaoImpl;
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.Constants;
@@ -149,7 +150,6 @@ public class SellAction {
 				for(int i = 0; i < boxnum*2; i++) {
 					box = new CodeTableForm();
 					
-					
 					box.setValue("producttypename", codeTableForm.getValue("producttypename"));// 产品类型
 					box.setValue("productname", codeTableForm.getValue("productname"));// 产品名称
 					box.setValue("numofonebox", codeTableForm.getValue("numofonebox"));// 一件数量
@@ -167,12 +167,17 @@ public class SellAction {
 				}
 			}
 			
+			int boxRow = Integer.parseInt(new ParameterDaoImpl().getParameterName("箱子行数"));
+			int boxCol = Integer.parseInt(new ParameterDaoImpl().getParameterName("箱子列数"));
+			
 			int boxsize = boxList.size();
-			int pagenum = (boxsize - 1)/21 + 1;
+			int pagenum = (boxsize - 1)/(boxRow*boxCol) + 1;
 
 			request.setAttribute("boxsize", boxsize);// 件数
 			request.setAttribute("pagenum", pagenum);// 页数
 			request.setAttribute("boxList", boxList);// 列表
+			request.setAttribute("boxRow", boxRow);// 箱子行数
+			request.setAttribute("boxCol", boxCol);// 箱子列数
 			
 			return "sell/print_box";
 		}
