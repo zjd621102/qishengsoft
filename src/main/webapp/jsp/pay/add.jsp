@@ -70,7 +70,7 @@
 				<input type="hidden" name="map[manuid]"/>
 				<input type="text" name="map[manuname]"
 					suggestFields="manuid,manuname" style="width: 176px;" readonly="readonly"/>
-					<a class="btnLook" href="<%=path%>/manu/list?act=backselect" lookupGroup="manuLookup"
+					<a class="btnLook" href="<%=path%>/manu/list?act=backselect&map[manutypeid]=2" lookupGroup="manuLookup"
 						width="1000" height="500">查找带回</a>
 				<a href="javascript:void(0);" class="btnClear"
 					suggestFields="manuid,manuname"></a>
