@@ -262,7 +262,7 @@ public class BuyAction {
 	private void getSelects(HttpServletRequest request) {
 
 		String sql = "SELECT a.dictname, a.dictvalue FROM cdictrow a, cdict b"
-				+ " WHERE a.dictid = b.dictid AND b.dicttype = '单据类型' AND a.dictvalue in ('CGD','JYD','DGD')";
+				+ " WHERE a.dictid = b.dictid AND b.dicttype = '单据类型' AND a.dictvalue in ('CGD','JYD')";
 		List<CodeTableForm> btypeList = dbUtils.getListBySql(sql); // 单据类型
 		request.setAttribute("btypeList", btypeList);
 	}
