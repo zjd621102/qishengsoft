@@ -311,8 +311,8 @@ public class BuyDaoImpl extends BaseDaoImpl {
 			
 			if(iReturn >= 1) { //保存行项表
 				sql = "INSERT INTO bbuyrow"
-					+ " SELECT NULL, '" + buyid + "', n.materialid, n.materialname, n.unit, n.price, m.num,"
-					+ " n.price * m.num sum, o.manuid, o.manuname, o.manucontact, o.manutel, NULL FROM ("
+					+ " SELECT NULL, '" + buyid + "', n.materialid, n.materialname, n.unit, n.price, m.num, 1,"
+					+ " n.price * m.num sum, o.manuid, o.manuname, o.manucontact, o.manutel, NULL, NULL FROM ("
 					+ "SELECT a.materialid, SUM(a.num) num FROM bbuyrow a WHERE a.buyid IN (" + buyids
 					+ ") GROUP BY a.materialid"
 					+ ") m, smaterial n, smanu o WHERE m.materialid = n.materialid AND n.manuid = o.manuid";
