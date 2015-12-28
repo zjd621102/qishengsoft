@@ -309,7 +309,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 		
 		if(iReturn >= 1) { //保存行项表
 			sql = "INSERT INTO bbuyrow"
-				+ " SELECT NULL, '" + buyid + "', n.materialid, n.materialname, n.unit, n.price, m.num,"
+				+ " SELECT NULL, '" + buyid + "', n.materialid, n.materialname, n.unit, n.price, m.num, 1,"
 				+ " n.price * m.num sum, o.manuid, o.manuname, o.manucontact, o.manutel, NULL FROM ("
 				+ "SELECT a.materialid, SUM(b.materialnum * c.num) num"
 				+ " FROM smaterial a, sproductrow b, bsellrow c WHERE a.materialid = b.materialid"
