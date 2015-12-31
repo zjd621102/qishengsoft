@@ -300,6 +300,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 		buyForm.setValue("buydate", StrUtils.getSysdate());
 		buyForm.setValue("currflow", "申请");
 		buyForm.setValue("maker", maker);
+		buyForm.setValue("alldiscount", "1");
 		buyForm.setValue("createtime", StrUtils.getSysdatetime());
 
 		String buyid = IdSingleton.getInstance().getNewId();
