@@ -1,6 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<style>
+	.unuse td {/***禁用的产品***/
+		background-color: #FFCCFF;
+	}
+</style>
+
 <!-- 客户不可修改客户名称 -->
 <c:if test="${userSessionInfo.map.ismanu == '1'}">
 	<c:set var="changeManuname" value="readonly" scope="page" />
@@ -108,6 +114,10 @@
 					planprice:'${bean.map.realprice}',
 					realprice:'${bean.map.realprice}',
 					numofonebox:'${bean.map.numofonebox}'})"
+					
+					<c:if test="${bean.map.statusid == '0'}">
+						class="unuse"
+					</c:if>
 			   	>
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.productno}</td>
