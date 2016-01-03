@@ -5,7 +5,7 @@
 
 	$().ready(function() {
 		setTimeout(function() {
-			setAllSum('salary', 'allsalary');
+			setAllSum_work();
 		}, 100);
 	});
 
@@ -24,7 +24,8 @@
 	function allSet() {
 		$("[name='map[workstatus]']").val("1");
 		batchSet('salary', 'map[salary]');
-		setAllSum('salary', 'allsalary');
+		$("[name='map[othersalary]']").val("0");
+		setAllSum_work();
 	}
 	
 	// 清空
@@ -32,7 +33,26 @@
 		var tr = $(obj).parent().parent().parent();
 		$(tr).find("[name='map[workstatus]']").val("");// 考勤状态
 		$(tr).find("[name='map[salary]']").val("0");// 工资
-		setAllSum('salary', 'allsalary');
+		setAllSum_work();
+	}
+	
+	/**
+	 * 计算工资
+	 */
+	function setAllSum_work() {
+		var allsum = 0.00;
+		
+		$("input[name*='map[salary]']").each(function(){
+			allsum += $(this).val()*1;
+		});
+		$("input[name*='map[othersalary]']").each(function(){
+			allsum += $(this).val()*1;
+		});
+		
+		allsum = Math.round(allsum * 100) / 100;
+		$("input[name*='map[allsalary]']").val(allsum);
+		
+		return allsum;
 	}
 </script>
 
@@ -103,10 +123,13 @@
 				<th width="30px">序号</th>
 				<th width="40px">操作</th>
 				<th width="80px">考勤日期</th>
+				<!-- 
 				<th width="60px">上班时间</th>
 				<th width="60px">下班时间</th>
 				<th width="80px">考勤状态</th>
+				 -->
 				<th width="60px">工资</th>
+				<th width="60px">其他工资</th>
 				<th>备注</th>
 			</tr>
 		</thead>
@@ -114,9 +137,11 @@
 			<tr>
 				<td></td>
 				<td></td>
+				<!-- 
 				<td></td>
 				<td></td>
 				<td></td>
+				 -->
 				<td style="font-size: 13px; font-weight: bold; color: red;">
 					合计：
 				</td>
@@ -124,6 +149,7 @@
 					<input type="text" name="map[allsalary]" style="width: 47px" class="number"
 						value="" readonly="readonly"/>
 				</td>
+				<td></td>
 				<td></td>
 			</tr>
 			<c:forEach items="${workrowList}" var="bean" varStatus="vs">
@@ -137,6 +163,7 @@
 						<input type="text" name="map[workdate]" style="width: 65px" maxlength="10"
 							value="${bean.map.workdate}"/>
 			   		</td>
+			   		<%-- 
 			   		<td>
 						<input type="text" name="map[starttime]" class="date" dateFmt="HH:mm" style="width: 48px"
 							value="${bean.map.starttime}" readonly="readonly"/>
@@ -149,10 +176,16 @@
 			   			<st:select dictType="考勤状态" name="map[workstatus]" value="${bean.map.workstatus}"
 			   			 expStr="style='width: 71px;'" />
 			   		</td>
+			   		 --%>
 			   		<td>
 						<input type="text" name="map[salary]" style="width: 47px" maxlength="12"
 							class="number" value="${bean.map.salary}"
-							onchange="setAllSum('salary', 'allsalary');"/>
+							onchange="setAllSum_work();"/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[othersalary]" style="width: 47px" maxlength="12"
+							class="number" value="${bean.map.othersalary}"
+							onchange="setAllSum_work();"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[remark]" style="width: 380px" maxlength="256"

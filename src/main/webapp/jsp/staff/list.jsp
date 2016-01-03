@@ -71,7 +71,7 @@
 			</shiro:hasPermission>
 			<li>
 				<a class="edit" href="<%=path%>/staff/edi_work/{s_staffid}?map[workmonth]=${form.map.month}" target="dialog" rel="staff_work" mask="true"
-					width="800" height="500">
+					width="700" height="500">
 					<span>考勤情况</span>
 				</a>
 			</li>

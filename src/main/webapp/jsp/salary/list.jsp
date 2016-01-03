@@ -16,6 +16,9 @@
 						当前流程：
 						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
 						 expStr="style='width: 100px;'" />
+						月份：
+						<input type="text" name="map[salarydate]" style="width: 80px" value="${form.map.salarydate}"
+							class="date" dateFmt="yyyy-MM" readonly="readonly"/>
 					</td>
 				</tr>
 			</table>
@@ -38,8 +41,8 @@
 		<ul class="toolBar">
 			<shiro:hasPermission name="Salary:add">
 			<li>
-				<a class="add" href="<%=path%>/salary/add" target="dialog" rel="salary_add" mask="true"
-					width="1000" height="500">
+				<a class="add" href="<%=path%>/salary/add?salarydate=${form.map.salarydate}" target="dialog"
+					rel="salary_add" mask="true" width="1000" height="500">
 					<span>新增工资单</span>
 				</a>
 			</li>

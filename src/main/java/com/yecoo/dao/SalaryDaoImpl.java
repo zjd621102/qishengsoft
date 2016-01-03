@@ -58,6 +58,7 @@ public class SalaryDaoImpl extends BaseDaoImpl {
 		String salaryname = StrUtils.nullToStr(form.getValue("salaryname"));
 		String salaryno = StrUtils.nullToStr(form.getValue("salaryno"));
 		String currflow = StrUtils.nullToStr(form.getValue("currflow"));
+		String salarydate = StrUtils.nullToStr(form.getValue("salarydate"));
 		
 		if(!salaryname.equals("")) {
 			cond.append(" AND t.salaryname like '%").append(salaryname).append("%'");
@@ -67,6 +68,9 @@ public class SalaryDaoImpl extends BaseDaoImpl {
 		}
 		if(!currflow.equals("")) {
 			cond.append(" AND t.currflow = '").append(currflow).append("'");
+		}
+		if(!salarydate.equals("")) {
+			cond.append(" AND t.salarydate = '").append(salarydate).append("'");
 		}
 		
 		return cond.toString();

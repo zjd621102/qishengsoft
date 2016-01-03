@@ -36,6 +36,13 @@ public class SalaryAction {
 		String first = StrUtils.nullToStr(request.getParameter("first")); // 查询初始化
 		if(first.equals("true")) {
 			form.setValue("currflow", "申请");
+			
+			String salarydate = StrUtils.nullToStr(form.getValue("salarydate"));
+			if(salarydate.equals("")) {
+				salarydate = DateUtils.getAdjustTime(DateUtils.getNowDateTime(), "month", "", 1);// 默认为上个月
+				salarydate = salarydate.substring(0, 7);
+				form.setValue("salarydate", salarydate);
+			}
 		}
 		
 		salaryDaoImpl.initAction(request);
@@ -56,7 +63,10 @@ public class SalaryAction {
 
 		CodeTableForm form = new CodeTableForm();
 		
-		String salarydate = DateUtils.getAdjustTime(DateUtils.getNowDateTime(), "month", "", 1);// 默认为上个月
+		String salarydate = StrUtils.nullToStr(request.getParameter("salarydate"));
+		if(salarydate.equals("")) {
+			salarydate = DateUtils.getAdjustTime(DateUtils.getNowDateTime(), "month", "", 1);// 默认为上个月
+		}
 		salarydate = salarydate.substring(0, 7);
 		
 		form.setValue("salarydate", salarydate);// 工资单日期
