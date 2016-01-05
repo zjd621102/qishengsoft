@@ -301,7 +301,7 @@
 			   		</td>
 			   		<td>
 						<input type="text" name="map[boxnum]" style="width: 45px;" maxlength="12"
-							class="digits" value="0" onchange="changeNum(this);"/>
+							class="number" value="0" onchange="changeNum(this);"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[numofonebox]" style="width: 45px;" maxlength="12"
