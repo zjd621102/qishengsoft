@@ -199,8 +199,8 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		// 工资统计
 		dataStr.delete(0, dataStr.length());
 		for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
-			sql = "SELECT IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b WHERE a.payid = b.payid"
-					+ " AND a.currflow = '结束' AND a.btype = 'GZD' AND a.paydate LIKE '"
+			sql = "SELECT IFNULL(SUM(b.planmoney), 0) sum FROM bsalary a, bsalaryrow b WHERE a.salaryid = b.salaryid"
+					+ " AND a.currflow = '结束' AND a.salarydate LIKE '"
 					+ monthList.get(monthIndex) + "%'";
 			sum = dbUtils.execQuerySQL(sql);
 			if(monthIndex >= 1) {
@@ -491,10 +491,10 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		dataStr.append(sum);
 
 		// 工资统计
-		String salarySql = "SELECT IFNULL(SUM(b.realsum), 0) sum FROM bpay a, bpayrow b WHERE a.payid = b.payid"
-				+ " AND a.currflow = '结束' AND a.paydate >= '" + dateFrom.substring(0, 7) + "' AND a.paydate <= '"
+		String salarySql = "SELECT IFNULL(SUM(b.planmoney), 0) sum FROM bsalary a, bsalaryrow b WHERE a.salaryid = b.salaryid"
+				+ " AND a.currflow = '结束' AND a.salarydate >= '" + dateFrom.substring(0, 7) + "' AND a.salarydate <= '"
 				+ dateTo.substring(0, 7) + "'";
-		sum = dbUtils.execQuerySQL(salarySql + " AND a.btype = 'GZD'");
+		sum = dbUtils.execQuerySQL(salarySql);
 		dataStr.append(",");
 		dataStr.append(sum);
 		/*

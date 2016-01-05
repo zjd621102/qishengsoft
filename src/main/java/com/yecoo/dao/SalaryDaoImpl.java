@@ -156,7 +156,8 @@ public class SalaryDaoImpl extends BaseDaoImpl {
 			if(iReturn >= 1) { //保存行项表
 			  	iReturn = dbUtils.saveRowTable(request, conn, form, "bsalaryrow", "salaryrowid", "salaryid", "", 1);
 			}
-			
+			/*
+			// 加入财务管理
 			String currflow = StrUtils.nullToStr(form.getValue("currflow"));
 			if(iReturn >= 1 && currflow.equals("结束")) { //流程结束
 				CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
@@ -184,7 +185,7 @@ public class SalaryDaoImpl extends BaseDaoImpl {
 					iReturn = dbUtils.executeSQL(conn, sql.toString());
 				}
 			}
-			
+			*/
 			if(iReturn >= 0) {
 				conn.commit();
 			} else {
