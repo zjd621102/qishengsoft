@@ -1,6 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<style>
+	.unuse td {/***禁用的产品***/
+		background-color: #FFCCFF;
+	}
+</style>
+
 <div class="pageHeader">
 	<form onsubmit="return divSearch(this, 'jbsxBox2material${curTime}');"
 		action="<%=path%>/material/list/${form.map.materialtype}?curTime=${curTime}" method="post"
@@ -98,6 +104,10 @@
 					manucontact:'${bean.map.manucontact}',
 					manutel:'${bean.map.manutel}',
 					materialprice:'${bean.map.price}'})"
+					
+					<c:if test="${bean.map.statusid == '0'}">
+						class="unuse"
+					</c:if>
 			   	>
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.materialno}</td>
