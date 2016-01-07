@@ -141,12 +141,12 @@ public class SellAction {
 		} else if(act.equals("printBox")) {// 箱子贴纸
 			@SuppressWarnings("unchecked")
 			List<CodeTableForm> sellrowList = (List<CodeTableForm>) request.getAttribute("sellrowList");
-			int boxnum = 0;
+			double boxnum = 0;
 			String iscu = null;
 			List<CodeTableForm> boxList = new ArrayList<CodeTableForm>();
 			CodeTableForm box = null;
 			for(CodeTableForm codeTableForm : sellrowList) {
-				boxnum = Integer.parseInt(codeTableForm.getValue("boxnum").toString());
+				boxnum = Double.parseDouble(codeTableForm.getValue("boxnum").toString());
 				for(int i = 0; i < boxnum*2; i++) {
 					box = new CodeTableForm();
 					
