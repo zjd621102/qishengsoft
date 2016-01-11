@@ -53,21 +53,10 @@ public class PublicAction {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request) {
 
-		String username = StrUtils.nullToStr(request.getParameter("username")).toUpperCase();
-		String password = StrUtils.nullToStr(request.getParameter("password"));
 		String msg = "";
 		
 		try {
-			UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-			SecurityUtils.getSubject().login(token);
-			CodeTableForm user1 = daoImpl.getUserById(username);
-			request.getSession().setAttribute(Constants.USER_INFO_SESSION, user1); //用户信息
-			
-			String sql = "SELECT * FROM smodule a WHERE EXISTS (SELECT 1 FROM spermission b, suser_role c"
-					+ " WHERE b.roleid = c.roleid and b.permission = concat(a.sn ,':view') and c.userid = '"
-					+ username +"') ORDER BY a.priority, a.parentid, a.moduleid";
-			List<CodeTableForm> menuList = dbUtils.getListBySql(sql); //菜单信息
-			request.getSession().setAttribute(Constants.MENU_INFO_SESSION, menuList);
+			pubLogin(request);
 			
 			setIndex(request);
 
@@ -123,15 +112,10 @@ public class PublicAction {
 	@ResponseBody
 	@RequestMapping(value = "/loginDialog", method = RequestMethod.POST)
 	public String loginDialog(HttpServletRequest request) {
-
-		String username = StrUtils.nullToStr(request.getParameter("username")).toUpperCase();
-		String password = StrUtils.nullToStr(request.getParameter("password"));
 		
 		try {
-			UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-			SecurityUtils.getSubject().login(token);
-			CodeTableForm user1 = daoImpl.getUserById(username);
-			request.getSession().setAttribute(Constants.USER_INFO_SESSION, user1);
+			pubLogin(request);
+			
 			AjaxObject ajaxObject = new AjaxObject("登录成功", "", "closeCurrent");
 			
 			LogDaoImpl.saveLog(request, "登录", "");
@@ -276,5 +260,24 @@ public class PublicAction {
 		}
 		
 		return bRes;
+	}
+	
+	/**
+	 * 登录公共方法，赋值菜单至Session
+	 */
+	private void pubLogin(HttpServletRequest request) {
+		String username = StrUtils.nullToStr(request.getParameter("username")).toUpperCase();
+		String password = StrUtils.nullToStr(request.getParameter("password"));
+		
+		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+		SecurityUtils.getSubject().login(token);
+		CodeTableForm user1 = daoImpl.getUserById(username);
+		request.getSession().setAttribute(Constants.USER_INFO_SESSION, user1); //用户信息
+		
+		String sql = "SELECT * FROM smodule a WHERE EXISTS (SELECT 1 FROM spermission b, suser_role c"
+				+ " WHERE b.roleid = c.roleid and b.permission = concat(a.sn ,':view') and c.userid = '"
+				+ username +"') ORDER BY a.priority, a.parentid, a.moduleid";
+		List<CodeTableForm> menuList = dbUtils.getListBySql(sql); //菜单信息
+		request.getSession().setAttribute(Constants.MENU_INFO_SESSION, menuList);
 	}
 }
