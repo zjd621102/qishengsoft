@@ -326,4 +326,85 @@ public class SellDaoImpl extends BaseDaoImpl {
 		
 		return iReturn;
 	}
+	
+	/**
+	 * 合并销售单
+	 * 价格记忆失效
+	 * @param sellids
+	 * @return
+	 */
+	public int mergeSell(String sellids, String maker) {
+		
+		String sql = null;
+		Connection conn = null;
+		int iReturn = -1;
+		try {
+			conn = dbUtils.dbConnection();
+			conn.setAutoCommit(false); //事务开启
+		
+			sql = "SELECT remark FROM bsell t WHERE t.sellid IN (" + sellids + ")";
+			String remark = dbUtils.getStrJoinBySql(sql, ",");
+			if(remark.equals("")) {
+				remark = "合并销售单";
+			} else {
+				remark = "合并销售单（" + remark + "）";
+			}
+			
+			sql = "SELECT manuid FROM bsell t WHERE t.sellid IN (" + sellids + ")";
+			String manuid = dbUtils.execQuerySQL(sql);
+		
+			CodeTableForm sellForm = new CodeTableForm(); //采购单
+			sellForm.setValue("sellno", StrUtils.getNewNO("XSD", "sellno", "bsell"));
+			sellForm.setValue("selldate", StrUtils.getSysdate());
+			sellForm.setValue("manuid", manuid);
+			sellForm.setValue("currflow", "申请");
+			sellForm.setValue("maker", maker);
+			sellForm.setValue("createtime", StrUtils.getSysdatetime());
+			sellForm.setValue("remark", remark);
+
+			String sellid = IdSingleton.getInstance().getNewId();
+			sellForm.setValue("sellid", sellid);
+			
+			iReturn = dbUtils.setInsert(conn, sellForm, "bsell", ""); //保存主表
+			
+			if(iReturn >= 1) { //保存行项表
+				sql = "INSERT INTO bsellrow"
+					+ " SELECT NULL, '" + sellid + "', n.productid, n.productname, n.unit, n.costprice,"
+					+ " n.realprice, n.realprice, m.num, m.boxnum, n.numofonebox,"
+					+ " n.profit * m.num profit, n.realprice * m.num realsum, '5', NULL FROM ("
+					+ "SELECT a.productid, SUM(a.num) num, SUM(a.boxnum) boxnum"
+					+ " FROM bsellrow a WHERE a.sellid IN (" + sellids + ") GROUP BY a.productid"
+					+ ") m, sproduct n WHERE m.productid = n.productid";
+	
+				String[] sqls = new String[3];
+				sqls[0] = sql;
+				sqls[1] = "DELETE FROM bsell WHERE sellid IN (" + sellids + ")";
+				sqls[2] = "DELETE FROM bsellrow WHERE sellid IN (" + sellids + ")";
+				iReturn = dbUtils.executeSQLs(conn, sqls);
+			}
+			
+			if(iReturn >= 1) {
+				conn.commit();
+			} else {
+				conn.rollback();
+				iReturn = -1;
+			}
+		} catch(Exception e) {
+			iReturn = -1;
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				
+			}
+			StrUtils.WriteLog(this.getClass().getName() + ".mergeSell()", e);
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				
+			}
+		}
+		
+		return iReturn;
+	}
 }

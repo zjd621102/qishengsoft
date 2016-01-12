@@ -338,7 +338,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 			} catch (SQLException e1) {
 				
 			}
-			StrUtils.WriteLog(this.getClass().getName() + ".ediSell()", e);
+			StrUtils.WriteLog(this.getClass().getName() + ".mergeBuy()", e);
 		} finally {
 			try {
 				conn.close();

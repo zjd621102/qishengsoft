@@ -266,6 +266,51 @@ public class SellAction {
 		
 		return result;
 	}
+
+	/**
+	 * 合并销售单
+	 * @param request
+	 * @return
+	 */
+	@RequiresPermissions("Sell:edi")
+	@RequestMapping(value="/merge")
+	public @ResponseBody String merge(HttpServletRequest request) {
+		
+		AjaxObject ajaxObject = null;
+		int iReturn = -1;
+		
+		String[] ids = request.getParameterValues("ids");
+		String sellids = StrUtils.ArrayToStr(ids, "','");
+		sellids = "'" + sellids + "'";
+
+		String sql = "SELECT COUNT(1) FROM bsell t WHERE t.currflow <> '申请' AND t.sellid IN (" + sellids + ")";
+		int icount = dbUtils.getIntBySql(sql);
+		
+		if(icount >= 1) {
+			ajaxObject = new AjaxObject("合并失败（单据不在申请流程）");
+		} else {
+			sql = "SELECT COUNT(1) FROM (SELECT COUNT(1) FROM bsell t WHERE t.sellid IN ("
+				+ sellids + ") GROUP BY t.manuid) a";
+			icount = dbUtils.getIntBySql(sql);
+			
+			if(icount >= 2) {
+				ajaxObject = new AjaxObject("合并失败（供应商不同）");
+			} else {
+				CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
+				String maker = StrUtils.nullToStr(user.getValue("userid"));
+				
+				iReturn = sellDaoImpl.mergeSell(sellids, maker);
+				
+				if (iReturn >= 0) {
+					ajaxObject = new AjaxObject("合并成功！", "sell_list", "");
+				} else {
+					ajaxObject = new AjaxObject("合并失败");
+				}
+			}
+		}
+		
+		return ajaxObject.toString();
+	}
 	
 	/**
 	 * 初始化客户信息

@@ -242,7 +242,7 @@ public class ProductAction {
 
 		if(manuid != null && !manuid.equals("")) {
 			String priceMemory = new ParameterDaoImpl().getParameterName("是否价格记忆");
-			if(priceMemory.equals("Y")) {// 打印隐藏
+			if(priceMemory.equals("Y")) {// 价格记忆
 				field += " (SELECT b.realprice FROM bsell a, bsellrow b WHERE a.sellid = b.sellid"
 					+ " AND b.productid = t.productid AND a.manuid = '" + manuid
 					+ "' ORDER BY b.sellid DESC LIMIT 0, 1) historyprice,";

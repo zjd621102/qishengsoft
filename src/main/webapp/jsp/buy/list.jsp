@@ -134,7 +134,7 @@
 			<c:forEach items="${buyList}" var="bean" varStatus="vs">
 			   	<tr target="s_buyid" rel="${bean.map.buyid}">
 		   			<td>
-			   			<c:if test="${bean.map.currflow == '申请' || bean.map.currflow == '待付'}">
+			   			<c:if test="${bean.map.currflow == '申请'}">
 		   				<input name="ids" value="${bean.map.buyid}" type="checkbox">
 		   				</c:if>
 		   			</td>

@@ -90,6 +90,11 @@
 				</a>
 			</li>
 			<shiro:hasPermission name="Sell:other">
+			<li>
+				<a class="edit" href="<%=path%>/sell/merge" target="selectedTodo" rel="ids" title="确实要合并这些记录吗?">
+					<span>合并销售单</span>
+				</a>
+			</li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="Sell:delete">
 			<li>
@@ -103,6 +108,11 @@
 	<table class="table" style="width: 100%;" layoutH="158">
 		<thead>
 			<tr>
+				<shiro:hasPermission name="Sell:other">
+				<th width="30px;">
+					<input type="checkbox" group="ids" class="checkboxCtrl">
+				</th>
+				</shiro:hasPermission>
 				<th width="30px">序号</th>
 				<th width="130px">销售单编号</th>
 				<th width="80px">发货日期</th>
@@ -116,6 +126,13 @@
 		<tbody>
 			<c:forEach items="${sellList}" var="bean" varStatus="vs">
 			   	<tr target="s_sellid" rel="${bean.map.sellid}">
+					<shiro:hasPermission name="Sell:other">
+		   			<td>
+			   			<c:if test="${bean.map.currflow == '申请'}">
+		   				<input name="ids" value="${bean.map.sellid}" type="checkbox">
+		   				</c:if>
+		   			</td>
+		   			</shiro:hasPermission>
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.sellno}</td>
 			   		<td>${bean.map.selldate}</td>
