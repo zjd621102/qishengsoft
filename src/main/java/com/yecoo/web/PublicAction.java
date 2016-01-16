@@ -62,7 +62,7 @@ public class PublicAction {
 
 			LogDaoImpl.saveLog(request, "登录", "");
 			
-			return "index";
+			return "redirect:/index";// 重定向至首页
 		} catch (UnknownAccountException ex) {
 			msg = "（用户不存在）";
 		} catch (IncorrectCredentialsException ex) {
