@@ -113,7 +113,8 @@ public class SellAction {
 			if(currflow.equals("发货")) {
 				String manuid = StrUtils.nullToStr(form.getValue("manuid"));
 				String sql = "SELECT SUM(m.realsum) FROM ("
-						+ "SELECT IFNULL(SUM(b.plansum - b.realsum), 0) realsum FROM bpay a, bpayrow b WHERE a.payid = b.payid"
+						+ "SELECT IFNULL(SUM(IFNULL(b.plansum, 0) - IFNULL(b.realsum, 0)), 0) realsum"
+						+ " FROM bpay a, bpayrow b WHERE a.payid = b.payid"
 						+ " AND a.currflow = '申请' AND a.manuid = '" + manuid + "'"
 						+ " UNION ALL"
 						+ " SELECT IFNULL(SUM(b.realsum), 0) realsum FROM bsell a, bsellrow b WHERE a.sellid = b.sellid"
