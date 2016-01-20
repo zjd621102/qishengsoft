@@ -34,7 +34,7 @@ public class SessionValidateFilter implements Filter {
 		String serverName = StrUtils.nullToStr(httpServletRequest.getServletPath());
 		if (!serverName.equals("/") && !serverName.equals("/login")
 				&& !serverName.equals("/loginDialog")
-				&& !serverName.equals("/logout")
+				&& !serverName.equals("/index")
 				&& serverName.indexOf("/images/") == -1) {
 			Object obj = httpServletRequest.getSession().getAttribute(Constants.USER_INFO_SESSION);
 			if (obj == null) {
