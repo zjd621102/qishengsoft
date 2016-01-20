@@ -27,5 +27,5 @@ UPDATE cparameter SET parametervalue = 'N' WHERE parametername = '是否记录�
 UPDATE cseq SET seq = 100;
 DELETE FROM smaterialtype WHERE materialtype <> '1';
 DELETE FROM sproducttype WHERE producttype <> '1';
-DELETE FROM suser WHERE userid <> 'ZZ';
-DELETE FROM suser_role WHERE userid <> 'ZZ';
+DELETE FROM suser WHERE userid <> 'ADMIN';
+DELETE FROM suser_role WHERE userid <> 'ADMIN';

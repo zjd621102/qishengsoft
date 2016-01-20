@@ -344,16 +344,14 @@ public class SellDaoImpl extends BaseDaoImpl {
 		
 			sql = "SELECT remark FROM bsell t WHERE t.sellid IN (" + sellids + ")";
 			String remark = dbUtils.getStrJoinBySql(sql, ",");
-			if(remark.equals("")) {
-				remark = "合并销售单";
-			} else {
+			if(!remark.equals("")) {
 				remark = "合并销售单（" + remark + "）";
 			}
 			
 			sql = "SELECT manuid FROM bsell t WHERE t.sellid IN (" + sellids + ")";
 			String manuid = dbUtils.execQuerySQL(sql);
 		
-			CodeTableForm sellForm = new CodeTableForm(); //采购单
+			CodeTableForm sellForm = new CodeTableForm(); //销售单
 			sellForm.setValue("sellno", StrUtils.getNewNO("XSD", "sellno", "bsell"));
 			sellForm.setValue("selldate", StrUtils.getSysdate());
 			sellForm.setValue("manuid", manuid);
@@ -375,11 +373,18 @@ public class SellDaoImpl extends BaseDaoImpl {
 					+ "SELECT a.productid, SUM(a.num) num, SUM(a.boxnum) boxnum"
 					+ " FROM bsellrow a WHERE a.sellid IN (" + sellids + ") GROUP BY a.productid"
 					+ ") m, sproduct n WHERE m.productid = n.productid";
+				
+				// 非系统产品
+				String sql2 = "INSERT INTO bsellrow (sellid, productname, realprice, num, boxnum, numofonebox,"
+					+ " realsum, sort, remarkrow) SELECT " + sellid + ", productname, realprice, num, boxnum, numofonebox,"
+					+ " realsum, sort, remarkrow FROM bsellrow a WHERE a.sellid IN (" + sellids
+					+ ") AND a.productid IS NULL";
 	
-				String[] sqls = new String[3];
+				String[] sqls = new String[4];
 				sqls[0] = sql;
-				sqls[1] = "DELETE FROM bsell WHERE sellid IN (" + sellids + ")";
-				sqls[2] = "DELETE FROM bsellrow WHERE sellid IN (" + sellids + ")";
+				sqls[1] = sql2;
+				sqls[2] = "DELETE FROM bsell WHERE sellid IN (" + sellids + ")";
+				sqls[3] = "DELETE FROM bsellrow WHERE sellid IN (" + sellids + ")";
 				iReturn = dbUtils.executeSQLs(conn, sqls);
 			}
 			

@@ -127,7 +127,7 @@
 				<tr>
 					<td colspan="6"></td>
 					<td>
-						历史待付
+						其他待付
 					</td>
 					<td>
 						<span id="historyToPaysum">${historyToPaysum}</span>
