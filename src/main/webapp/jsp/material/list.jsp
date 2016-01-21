@@ -82,7 +82,7 @@
 				<th width="120px">物资名称</th>
 				<th width="60px">单价</th>
 				<th width="60px">属性</th>
-				<th width="50px">标志</th>
+				<th width="100px">标志</th>
 				<th width="70px">一件数量</th>
 				<th width="80px">物资类型</th>
 				<th width="80px">供应商</th>
