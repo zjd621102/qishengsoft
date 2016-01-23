@@ -188,6 +188,9 @@ public class ProductAction {
 			return "product/print_pic"; // 打印
 		}
 		
+		String profitPoint = new ParameterDaoImpl().getParameterName("利润百分点");
+		request.setAttribute("profitPoint", profitPoint);// 利润百分点
+		
 		return "product/edi";
 	}
 

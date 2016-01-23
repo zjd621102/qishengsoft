@@ -54,6 +54,8 @@
 		setMultiply('materialprice', 'materialnum', 'materialsum');
 		setAllSum('materialsum', 'costprice');
 		setReduction('realprice', 'costprice', 'profit');
+		
+		$("#maybeprice").html(($("[name='map[costprice]']").val()/(1-${profitPoint}/100)).toFixed(2));
 	}
 	
 	// 重写上传成功
@@ -220,8 +222,17 @@
 		<dl>
 			<dt>产品单价：</dt>
 			<dd>
-				<input type="text" name="map[realprice]" class="required number" size="25" maxlength="12"
-					value="${form.map.realprice}" onchange="changeValue();"/>
+				<table>
+					<tr>
+						<td>
+							<input type="text" name="map[realprice]" class="required number" size="19" maxlength="12"
+								value="${form.map.realprice}" onchange="changeValue();"/>
+						</td>
+						<td>
+							<span id="maybeprice" style="margin-left: 5px;"></span>
+						</td>
+					<tr>
+				</table>
 			</dd>
 		</dl>
 		<dl>
