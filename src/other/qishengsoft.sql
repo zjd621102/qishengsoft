@@ -1,27 +1,24 @@
--- MySQL dump 10.13  Distrib 5.1.36, for unknown-linux-gnu (x86_64)
---
--- Host: localhost    Database: qishengsoft
--- ------------------------------------------------------
--- Server version	5.1.36-community
+/*
+Navicat MySQL Data Transfer
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+Source Server         : 测试
+Source Server Version : 50136
+Source Host           : 121.41.5.235:3306
+Source Database       : qishengsoft
 
---
--- Table structure for table `bbuy`
---
+Target Server Type    : MYSQL
+Target Server Version : 50136
+File Encoding         : 65001
 
+Date: 2016-01-31 22:33:48
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `bbuy`
+-- ----------------------------
 DROP TABLE IF EXISTS `bbuy`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bbuy` (
   `buyid` int(9) NOT NULL COMMENT '采购ID',
   `btype` varchar(3) NOT NULL COMMENT '单据类型',
@@ -32,28 +29,20 @@ CREATE TABLE `bbuy` (
   `currflow` varchar(32) DEFAULT NULL COMMENT '当前流程',
   `maker` varchar(32) DEFAULT NULL COMMENT '制单人',
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
+  `alldiscount` double(5,2) DEFAULT NULL COMMENT '折扣',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`buyid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='采购表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `bbuy`
---
+-- ----------------------------
+-- Records of bbuy
+-- ----------------------------
+INSERT INTO `bbuy` VALUES ('107', 'CGD', '2016.01.29采购', 'CGD-20160129-001', 'XSD-20160129-001', '2016-01-29', '申请', 'TEST', '2016-01-29 23:04:26', '1.00', null);
 
-LOCK TABLES `bbuy` WRITE;
-/*!40000 ALTER TABLE `bbuy` DISABLE KEYS */;
-INSERT INTO `bbuy` VALUES (2,'CGD','采购单名称一','CGD-2013-0002',NULL,'2013-03-01','结束','ZHOUJD','2013-03-01 17:03:37','备注二'),(3,'JYD','简易采购单1','JYD-2013-0001',NULL,'2014-05-01','结束','ZHOUJD','2013-03-01 17:05:32',''),(4,'CGD','采购单名称三','CGD-2013-0003',NULL,'2013-03-01','结束','ZHOUJD','2013-03-02 20:44:21','备注三'),(5,'CGD','采购单2','CGD-2014-0001',NULL,'2014-07-04','结束','ZHOUJD','2014-07-04 11:16:49',''),(6,'CGD','采购单3','CGD-2014-0002',NULL,'2014-07-04','结束','ZHOUJD','2014-07-04 11:20:29',''),(7,'CGD','采购单4','CGD-2014-0003',NULL,'2014-06-01','结束','ZHOUJD','2014-07-04 11:31:38',''),(8,'CGD','2014.07.19小周采购','CGD-2014-0004',NULL,'2014-07-19','结束','ZHOUJD','2014-07-19 14:16:29',''),(9,'CGD','2014.08.20采购','CGD-20140820-001',NULL,'2014-08-20','结束','ZHOUJD','2014-08-20 14:55:12',''),(13,'CGD','2014.09.01采购','CGD-20140901-001','XSD-20140828-002','2014-09-01','结束','ZHOUJD','2014-09-01 17:04:22',''),(35,'CGD','2014.10.22采购','CGD-20141022-002','','2014-10-22','结束','ZHOUJD','2014-10-22 18:37:22','合并采购单（XSD-20140925-001）'),(36,'CGD','2014.11.14采购','CGD-20141114-001','XSD-20141114-001','2014-11-14','结束','ZHOUJD','2014-11-14 10:24:02',''),(40,'CGD','2014.11.18采购','CGD-20141118-002','','2014-11-18','结束','ZHOUJD','2014-11-18 15:15:09','合并采购单（XSD-20141118-001）'),(42,'CGD','2014.11.18采购','CGD-20141118-003','XSD-20141118-001','2014-11-18','申请','ZHOUJD','2014-11-18 15:29:13','还未确定'),(118,'CGD','2015.02.28采购','CGD-20150228-001','XSD-20150228-001','2015-02-28','申请','ZHOUJD','2015-02-28 10:33:51',NULL);
-/*!40000 ALTER TABLE `bbuy` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bbuyrow`
---
-
+-- ----------------------------
+-- Table structure for `bbuyrow`
+-- ----------------------------
 DROP TABLE IF EXISTS `bbuyrow`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bbuyrow` (
   `buyrowid` int(7) NOT NULL AUTO_INCREMENT COMMENT '采购行项ID',
   `buyid` int(7) NOT NULL COMMENT '采购单ID',
@@ -62,33 +51,27 @@ CREATE TABLE `bbuyrow` (
   `unit` int(3) DEFAULT NULL COMMENT '计量单位',
   `price` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '预算单价',
   `num` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '采购数量',
+  `discount` double(5,2) DEFAULT NULL COMMENT '折扣',
   `sum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '总价',
   `manuid` int(9) DEFAULT NULL COMMENT '供应商ID',
   `manuname` varchar(64) DEFAULT NULL COMMENT '供应商名称',
   `manucontact` varchar(64) DEFAULT NULL COMMENT '联系人',
   `manutel` varchar(32) DEFAULT NULL COMMENT '联系电话',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
+  `numofonebox` varchar(9) DEFAULT NULL COMMENT '一件数量',
   PRIMARY KEY (`buyrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=425 DEFAULT CHARSET=utf8 COMMENT='采购行项表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='采购行项表';
 
---
--- Dumping data for table `bbuyrow`
---
+-- ----------------------------
+-- Records of bbuyrow
+-- ----------------------------
+INSERT INTO `bbuyrow` VALUES ('1', '107', '1', '赛洛单孔（进）', '1', '13.50', '126.00', '1.00', '1701.00', '101', '顺兴', '罗静萍', '', null, null);
+INSERT INTO `bbuyrow` VALUES ('2', '107', '2', '6号赛诺', '1', '4.20', '126.00', '1.00', '529.20', '102', '圣达手柄', '王仁忠', '86181866', null, null);
 
-LOCK TABLES `bbuyrow` WRITE;
-/*!40000 ALTER TABLE `bbuyrow` DISABLE KEYS */;
-INSERT INTO `bbuyrow` VALUES (118,2,1,'物资名称一1',1,0.22,1.00,0.22,4,'供应商A','周少华','11111111',NULL),(145,4,1,'物资名称一1',1,0.22,3.00,0.66,4,'供应商A','周少华','11111111','备注3'),(146,4,4,'物资三',1,33.30,2.00,66.60,4,'供应商A','周少华','11111111',NULL),(147,4,5,'物资四',2,4444.00,0.00,0.00,8,'供应商B','供应商B联系人','00000',NULL),(148,4,NULL,'物资五',3,3.00,2.00,6.00,NULL,NULL,NULL,NULL,'小卖部采购'),(179,7,1,'物资A11',1,0.22,433.00,95.26,4,'供应商A','周少华','11111111',NULL),(180,7,6,'物资A21',3,43.20,22.00,950.40,8,'供应商B','供应商B','00000',NULL),(181,7,4,'物资B11',1,33.30,44.00,1465.20,4,'供应商A','周少华','11111111',NULL),(182,7,5,'物资B12',2,4444.00,2.00,8888.00,8,'供应商B','供应商B','00000',NULL),(183,6,1,'物资A11',1,0.22,421.00,92.62,4,'供应商A','周少华','11111111',NULL),(184,6,6,'物资A21',3,43.20,22.00,950.40,8,'供应商B','供应商B','00000',NULL),(185,6,5,'物资B12',2,4444.00,1.00,4444.00,8,'供应商B','供应商B','00000',NULL),(186,5,6,'物资A21',3,43.20,22.00,950.40,8,'供应商B','供应商B','00000',NULL),(187,5,5,'物资B12',2,4444.00,1.00,4444.00,8,'供应商B','供应商B','00000',NULL),(188,3,NULL,'简易采购物品1',1,544.00,3.00,1632.00,NULL,NULL,NULL,NULL,NULL),(189,3,NULL,'简易采购物品2',1,342.00,2.00,684.00,NULL,NULL,NULL,NULL,NULL),(190,3,NULL,'简易采购物品3',2,12.00,32.00,384.00,NULL,NULL,NULL,NULL,NULL),(207,8,5,'物资B12',2,44.00,60.00,2640.00,8,'供应商B','供应商B','00000',NULL),(208,8,1,'物资A11',1,0.22,2200.00,484.00,4,'供应商A','周少华','11111111',NULL),(212,9,6,'物资A21',1,43.20,110.00,4752.00,8,'供应商B','供应商B','00000',NULL),(213,9,1,'物资A11',1,0.22,23.00,5.06,4,'供应商A','周少华','11111111',NULL),(214,9,9,'5',1,5.00,43.00,215.00,4,'供应商A','周少华','11111111',NULL),(227,13,1,'物资A11',1,0.22,70.00,15.40,4,'供应商A','周少华','11111111',NULL),(228,13,5,'物资B12',1,44.00,5.00,220.00,8,'供应商B','供应商B','00000',NULL),(229,13,6,'物资A21',1,43.20,6.00,259.20,8,'供应商B','供应商B','00000',NULL),(293,35,1,'物资A11',1,0.22,1017.00,223.74,4,'供应商A','周少华','11111111',NULL),(294,35,4,'物资B11',1,33.30,7.00,233.10,4,'供应商A','周少华','11111111',NULL),(295,35,5,'物资B12',1,44.00,135.00,5940.00,8,'供应商B','供应商B','00000',NULL),(296,35,6,'物资A21',1,43.20,165.00,7128.00,8,'供应商B','供应商B','00000',NULL),(312,36,1,'物资A11',1,0.22,46.00,10.12,4,'供应商A','周少华','11111111',NULL),(313,36,5,'物资B12',1,44.00,3.00,132.00,8,'供应商B','供应商B','00000',NULL),(314,36,6,'物资A21',1,43.20,4.00,172.80,8,'供应商B','供应商B','00000',NULL),(342,40,1,'物资A11',1,0.22,22.00,4.84,4,'供应商A','周少华','11111111',NULL),(343,40,5,'物资B12',1,44.00,3.00,132.00,8,'供应商B','供应商B','00000',NULL),(344,40,6,'物资A21',1,43.20,6.00,259.20,8,'供应商B','供应商B','00000',NULL),(420,42,1,'物资A11',1,0.22,22.00,4.84,4,'供应商A','周少华','11111111',NULL),(421,42,1,'物资A11',1,0.22,0.00,0.00,4,'供应商A','周少华','11111111',NULL),(422,42,5,'物资B12',1,44.00,3.00,132.00,8,'供应商B','供应商B','00000',NULL),(423,42,6,'物资A21',1,43.20,6.00,259.20,8,'供应商B','供应商B','00000',NULL),(424,42,6,'物资A21',1,43.20,0.00,0.00,8,'供应商B','供应商B','00000',NULL);
-/*!40000 ALTER TABLE `bbuyrow` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bpay`
---
-
+-- ----------------------------
+-- Table structure for `bpay`
+-- ----------------------------
 DROP TABLE IF EXISTS `bpay`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bpay` (
   `payid` int(9) NOT NULL COMMENT '单据ID',
   `btype` varchar(16) NOT NULL COMMENT '单据类型',
@@ -100,60 +83,39 @@ CREATE TABLE `bpay` (
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   `operatetime` varchar(19) DEFAULT NULL COMMENT '结束时间',
   `operater` varchar(64) DEFAULT NULL COMMENT '操作人ID',
+  `bankcardno` varchar(32) DEFAULT NULL COMMENT '银行卡卡号',
+  `manuid` int(9) DEFAULT '0' COMMENT '供应商ID',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`payid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='付款单/收款单';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `bpay`
---
+-- ----------------------------
+-- Records of bpay
+-- ----------------------------
 
-LOCK TABLES `bpay` WRITE;
-/*!40000 ALTER TABLE `bpay` DISABLE KEYS */;
-INSERT INTO `bpay` VALUES (24,'SKD','ZHOUJD','2013-03-06','XSD-2013-0001',36.60,'结束','2013-03-06 19:41:56',NULL,NULL,''),(25,'YFD','ZHOUJD','2013-03-06','XSD-2013-0001',36.60,'结束','2013-03-06 19:41:56',NULL,NULL,''),(30,'GZD','ZHOUJD','2013-03-07','GZD-2013-0001',5300.34,'结束','2013-03-11 16:29:47',NULL,NULL,''),(31,'FKD','ZHOUJD','2014-06-01','CGD-2014-0003',11398.86,'结束','2014-07-12 13:58:07',NULL,NULL,''),(32,'SKD','ZHOUJD','2014-03-12','XSD-2014-0006',8170.00,'结束','2014-07-13 16:17:30',NULL,NULL,''),(33,'YFD','ZHOUJD','2014-03-12','XSD-2014-0006',8170.00,'结束','2014-07-13 16:17:30',NULL,NULL,''),(34,'SKD','ZHOUJD','2014-04-02','XSD-2014-0005',10260.00,'结束','2014-07-13 16:17:35',NULL,NULL,''),(35,'YFD','ZHOUJD','2014-04-02','XSD-2014-0005',10260.00,'结束','2014-07-13 16:17:35',NULL,NULL,''),(36,'SKD','ZHOUJD','2014-06-12','XSD-2014-0004',8594.60,'结束','2014-07-13 16:17:40',NULL,NULL,''),(37,'YFD','ZHOUJD','2014-06-12','XSD-2014-0004',8594.60,'结束','2014-07-13 16:17:40',NULL,NULL,''),(38,'SKD','ZHOUJD','2014-06-02','XSD-2014-0003',9440.80,'结束','2014-07-13 16:17:47',NULL,NULL,''),(39,'YFD','ZHOUJD','2014-06-02','XSD-2014-0003',9440.80,'结束','2014-07-13 16:17:47',NULL,NULL,''),(40,'SKD','ZHOUJD','2014-07-01','XSD-2014-0002',24318.80,'结束','2014-07-13 16:17:52',NULL,NULL,''),(41,'YFD','ZHOUJD','2014-07-01','XSD-2014-0002',24318.80,'结束','2014-07-13 16:17:52',NULL,NULL,''),(42,'SKD','ZHOUJD','2014-07-13','XSD-2014-0001',12106.60,'结束','2014-07-13 16:17:58',NULL,NULL,''),(43,'YFD','ZHOUJD','2014-07-13','XSD-2014-0001',12106.60,'结束','2014-07-13 16:17:58',NULL,NULL,''),(44,'GZD','ZHOUJD','2013-02-28','GZD-2013-0002',7000.30,'结束','2014-07-14 20:10:23',NULL,NULL,''),(45,'FKD','ZHOUJD','2014-07-04','CGD-2014-0002',5487.02,'结束','2014-07-14 20:21:22',NULL,NULL,''),(46,'FKD','ZHOUJD','2014-07-04','CGD-2014-0001',5394.40,'结束','2014-07-14 20:21:28',NULL,NULL,''),(47,'FKD','ZHOUJD','2014-05-01','JYD-2013-0001',4511.26,'结束','2014-07-14 20:22:30',NULL,NULL,''),(48,'FKD','ZHOUJD','2014-07-19','CGD-2014-0004',48.84,'结束','2014-07-28 20:49:14',NULL,NULL,''),(49,'SKD','ZHOUJD','2014-07-18','XSD-2014-0007',950.40,'结束','2014-07-28 20:49:54',NULL,NULL,''),(50,'YFD','ZHOUJD','2014-07-18','XSD-2014-0007',950.40,'结束','2014-07-28 20:49:54',NULL,NULL,''),(51,'GZD','ZHOUJD','2014-06','GZD-20140728-001',3480.00,'结束','2014-07-28 21:07:01',NULL,NULL,''),(52,'GZD','ZHOUJD','2014-06','GZD-20140728-002',3248.00,'结束','2014-07-28 22:38:17','2014-07-28 21:21:24',NULL,''),(53,'SKD','ZHOUJD','2014-08-20','XSD-20140820-001',7522.62,'结束','2014-08-20 14:34:44','2014-08-20 08:55:18','ZHOUJD',''),(54,'YFD','ZHOUJD','2014-08-20','XSD-20140820-001',7522.62,'结束','2014-08-20 14:34:44','2014-08-20 08:55:18','ZHOUJD',''),(55,'FKD','ZHOUJD','2014-08-20','CGD-20140820-001',4972.06,'结束','2014-08-20 14:57:59','2014-08-20 08:55:18','ZHOUJD',''),(56,'GZD','ZHOUJD','2014-07','GZD-20140820-001',2250.00,'结束','2014-08-20 15:23:35','2014-08-20 15:05:16','ZHOUJD',''),(57,'GZD','ZHOUJD','2014-07','GZD-20140820-002',3596.00,'结束','2014-08-20 15:34:56','2014-08-20 15:05:16','ZHOUJD',''),(58,'SKD','ZHOUJD','2014-08-28','XSD-20140828-001',1017.00,'结束','2014-08-28 15:33:16','2014-08-28 11:05:14','ZHOUJD',''),(59,'FKD','ZHOUJD','2014-09-01','CGD-20140901-001',494.60,'结束','2014-09-01 17:28:36','2014-09-01 17:29:54','ZHOUJD',''),(60,'SKD','ZHOUJD','2014-08-28','XSD-20140828-002',847.90,'结束','2014-09-01 17:29:22','2014-09-01 17:29:57','ZHOUJD',''),(61,'GZD','ZHOUJD','2014-09','GZD-20141022-001',5730.00,'结束','2014-10-22 18:22:34','2014-10-22 18:23:28','ZHOUJD',''),(62,'SKD','ZHOUJD','2014-09-25','XSD-20140925-001',10984.90,'结束','2014-10-22 18:35:41','2014-10-22 18:37:01','ZHOUJD',''),(63,'FKD','ZHOUJD','2014-10-22','CGD-20141022-002',13524.84,'结束','2014-10-22 18:38:35','2014-10-22 18:38:58','ZHOUJD',''),(64,'FKD','ZHOUJD','2014-11-14','CGD-20141114-001',314.92,'结束','2014-11-14 10:26:48','2014-11-14 10:39:02','ZHOUJD',''),(68,'SKD','ZHOUJD','2014-11-14','XSD-20141114-001',535.20,'结束','2014-11-14 18:01:34','2014-11-14 18:01:46','ZHOUJD',''),(81,'FKD','ZHOUJD','2014-11-18','CGD-20141118-002',396.04,'结束','2014-11-26 10:59:59','2014-11-26 11:01:22','ZHOUJD',''),(82,'SKD','ZHOUJD','2014-11-18','XSD-20141118-001',690.90,'结束','2014-11-26 11:10:25','2014-11-26 11:11:15','ZHOUJD',''),(84,'GZD','ZHOUJD','2014-10','GZD-20141126-001',5740.10,'结束','2014-11-26 11:25:25','2014-11-26 11:28:10','ZHOUJD','');
-/*!40000 ALTER TABLE `bpay` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bpayrow`
---
-
+-- ----------------------------
+-- Table structure for `bpayrow`
+-- ----------------------------
 DROP TABLE IF EXISTS `bpayrow`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bpayrow` (
   `payrowid` int(9) NOT NULL AUTO_INCREMENT COMMENT '行项ID',
   `payid` int(9) NOT NULL COMMENT '单据ID',
   `bankcardno` varchar(32) DEFAULT NULL COMMENT '银行卡卡号',
   `manuid` int(9) DEFAULT NULL COMMENT '供应商ID',
-  `manubankname` varchar(64) DEFAULT NULL COMMENT '供应商开户银行',
-  `manubankcardno` varchar(32) DEFAULT NULL COMMENT '供应商银行卡卡号',
-  `manuaccountname` varchar(64) DEFAULT NULL COMMENT '供应商账户名称',
-  `plansum` double(12,2) DEFAULT '0.00' COMMENT '应付金额',
-  `realsum` double(12,2) DEFAULT '0.00' COMMENT '实付金额',
+  `plansum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '应付金额',
+  `realsum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '实付金额',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`payrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=236 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `bpayrow`
---
+-- ----------------------------
+-- Records of bpayrow
+-- ----------------------------
 
-LOCK TABLES `bpayrow` WRITE;
-/*!40000 ALTER TABLE `bpayrow` DISABLE KEYS */;
-INSERT INTO `bpayrow` VALUES (4,4,'6227001823550093014',4,'建设银行泉州分行','1111111111','周少华',1111.00,11111.00,'111111'),(14,11,'00000',NULL,NULL,NULL,NULL,6.00,6.00,NULL),(15,11,'6227001823550093014',4,'建设银行泉州分行','1111111111','周少华',67.26,67.26,NULL),(16,11,'6227001823550093014',8,'中国农业银行福建支行','444444','供应商B账户名称',0.00,1.00,NULL),(20,15,'00000',5,'中国银行泉州分行','22222222','刘星',36.60,36.60,NULL),(28,20,'00000',NULL,NULL,NULL,NULL,0.00,30.60,'运费'),(72,30,'00000',NULL,'建设银行南安支行','11111111','员工一',2100.12,2100.12,NULL),(73,30,'00000',NULL,'建设银行南安支行','22222222','员工二',2200.22,2200.22,NULL),(74,30,'00000',NULL,'建设银行南安支行','33333333','员工三',1000.00,1000.00,NULL),(80,31,'6227001823550092014',4,'建设银行泉州分行','1111111111','周少华',1560.46,1560.46,NULL),(81,31,'6227001823550092014',8,'中国农业银行福建支行','444444','供应商B账户名称',9838.40,9838.40,NULL),(96,42,'622909116836651310',9,'中国银行泉州分行','2222222','客户B',12106.60,12106.60,NULL),(97,43,'622909116836651310',7,'工商银行泉州分行','33333333','林长城',321.00,321.00,NULL),(98,40,'622909116836651310',5,'中国银行泉州分行','22222222','刘星',24318.80,24318.80,NULL),(100,41,'622909116836651310',10,'建设银行南安支行','66666666','物流B',304.40,304.40,NULL),(101,38,'622909116836651310',5,'中国银行泉州分行','22222222','刘星',9440.80,9440.80,NULL),(102,39,'00000',10,'建设银行南安支行','66666666','物流B',322.00,322.00,NULL),(103,36,'00000',9,NULL,NULL,NULL,8594.60,8594.60,NULL),(104,37,'00000',7,'工商银行泉州分行','33333333','林长城',543.00,543.00,NULL),(105,34,'622909116836651310',5,'中国银行泉州分行','22222222','刘星',10260.00,10260.00,NULL),(106,32,'622909116836651310',9,'中国银行泉州分行','2222222','客户B',8170.00,8170.00,NULL),(107,24,'00000',5,'中国银行泉州分行','22222222','刘星',36.60,36.60,NULL),(108,35,'00000',7,'工商银行泉州分行','33333333','林长城',233.00,233.00,NULL),(109,33,'00000',8,'中国农业银行福建支行','444444','供应商B账户名称',322.00,322.00,NULL),(110,25,'00000',10,'建设银行南安支行','66666666','物流B',32.00,32.00,NULL),(121,44,'622909116836651310',NULL,'建设银行南安支行','11111111','员工一',3000.10,3000.10,NULL),(122,44,'622909116836651310',NULL,'建设银行南安支行','22222222','员工二',4000.20,4000.20,NULL),(124,47,'00000',NULL,NULL,NULL,NULL,2700.00,2700.00,NULL),(125,46,'622909116836651310',8,'中国农业银行福建支行','444444','供应商B账户名称',5394.40,5394.40,NULL),(126,45,'622909116836651310',4,'建设银行泉州分行','1111111111','周少华',92.62,92.62,NULL),(127,45,'622909116836651310',8,'中国农业银行福建支行','444444','供应商B账户名称',5394.40,5394.40,NULL),(136,48,'622909116836651310',4,'建设银行泉州分行','1111111111','周少华',484.00,484.00,NULL),(137,48,'622909116836651310',8,'中国农业银行福建支行','444444','供应商B账户名称',2640.00,2640.00,NULL),(139,49,'622909116836651310',5,'中国银行泉州分行','22222222','刘星',22446.00,22446.00,NULL),(140,50,'622909116836651310',7,'工商银行泉州分行','33333333','林长城',465.00,465.00,NULL),(141,51,'622909116836651310',NULL,'建设银行南安支行','11111111','员工一',1590.00,1590.00,NULL),(142,51,'622909116836651310',NULL,'建设银行南安支行','22222222','员工二',1890.00,1890.00,NULL),(148,52,'622909116836651310',NULL,'建设银行南安支行','11111111','员工一',1484.00,1484.00,NULL),(149,52,'622909116836651310',NULL,'建设银行南安支行','22222222','员工二',1764.00,1764.00,NULL),(154,53,'6227001823550092014',5,'中国银行泉州分行','22222222','刘星',8513.92,8513.92,NULL),(155,54,'00000',7,'工商银行泉州分行','33333333','林长城',323.00,323.00,NULL),(161,55,'00000',4,'建设银行泉州分行','1111111111','周少华',220.06,220.06,NULL),(162,55,'00000',8,'中国农业银行福建支行','444444','供应商B账户名称',4752.00,4752.00,NULL),(164,56,'00000',NULL,NULL,NULL,'员工三',2250.00,2250.00,NULL),(170,57,'00000',NULL,'建设银行南安支行','11111111','员工一',1643.00,1643.01,NULL),(171,57,'00000',NULL,'建设银行南安支行','22222222','员工二',1953.00,1953.03,NULL),(173,58,'6227001823550092014',5,'中国银行泉州分行','22222222','刘星',1017.00,1017.00,NULL),(181,59,'622909116836651310',4,'建设银行泉州分行','1111111111','周少华',15.40,15.40,NULL),(182,59,'622909116836651310',8,'中国农业银行福建支行','444444','供应商B账户名称',479.20,479.20,NULL),(183,60,'6227001823550092014',9,'中国银行泉州分行','2222222','客户B',847.90,847.90,NULL),(187,61,'00000',NULL,'建设银行南安支行','11111111','员工一',1590.00,1590.00,NULL),(188,61,'00000',NULL,'建设银行南安支行','22222222','员工二',1890.00,1890.00,NULL),(189,61,'00000',NULL,NULL,NULL,'员工三',2250.00,2250.00,NULL),(191,62,'622909116836651310',5,'中国银行泉州分行','22222222','刘星',10984.90,10984.90,NULL),(195,63,'622909116836651310',4,'建设银行泉州分行','1111111111','周少华',456.84,456.84,NULL),(196,63,'622909116836651310',8,'中国农业银行福建支行','444444','供应商B账户名称',13068.00,13068.00,NULL),(204,65,NULL,4,'建设银行泉州分行','1111111111','周少华',10.12,10.12,NULL),(205,65,NULL,8,'中国农业银行福建支行','444444','供应商B账户名称',304.80,304.80,NULL),(207,66,NULL,4,'建设银行泉州分行','1111111111','周少华',10.12,10.12,NULL),(208,66,NULL,8,'中国农业银行福建支行','444444','供应商B账户名称',304.80,304.80,NULL),(210,67,NULL,4,'建设银行泉州分行','1111111111','周少华',10.12,10.12,NULL),(211,67,NULL,8,'中国农业银行福建支行','444444','供应商B账户名称',304.80,304.80,NULL),(213,64,'00000',4,'建设银行泉州分行','1111111111','周少华',10.12,10.12,NULL),(214,64,'6227001823550092014',8,'中国农业银行福建支行','444444','供应商B账户名称',304.80,304.80,NULL),(216,68,'6227001823550092014',9,'中国银行泉州分行','2222222','客户B',535.20,535.20,NULL),(222,81,'6227001823550092014',4,'建设银行泉州分行','1111111111','周少华',4.84,4.84,NULL),(223,81,'622909116836651310',8,'中国农业银行福建支行','444444','供应商B账户名称',391.20,391.20,NULL),(226,82,'622909116836651310',5,'中国银行泉州分行','22222222','刘星',690.90,690.10,NULL),(233,84,'6227001823550092014',NULL,'建设银行南安支行','11111111','员工一',1537.00,1537.40,NULL),(234,84,'6227001823550092014',NULL,'建设银行南安支行','22222222','员工二',1953.10,1953.50,NULL),(235,84,'622909116836651310',NULL,'兴业银行仑仓支行','33333333','员工三',2250.00,2250.60,NULL);
-/*!40000 ALTER TABLE `bpayrow` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `breceandpay`
---
-
+-- ----------------------------
+-- Table structure for `breceandpay`
+-- ----------------------------
 DROP TABLE IF EXISTS `breceandpay`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `breceandpay` (
   `receandpay` int(9) NOT NULL COMMENT '其它收支ID',
   `happendate` varchar(10) DEFAULT NULL COMMENT '发生日期',
@@ -164,30 +126,20 @@ CREATE TABLE `breceandpay` (
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`receandpay`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='其它收支表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `breceandpay`
---
+-- ----------------------------
+-- Records of breceandpay
+-- ----------------------------
 
-LOCK TABLES `breceandpay` WRITE;
-/*!40000 ALTER TABLE `breceandpay` DISABLE KEYS */;
-INSERT INTO `breceandpay` VALUES (1,'2013-02-18',2,1,50.50,'今天收入50.5元','2013-02-18 16:28:40'),(2,'2013-02-18',1,2,10.50,'钱包支出10.5','2013-02-18 16:31:01'),(3,'2013-02-18',2,2,50.50,'支出50.5','2013-02-18 16:44:32'),(4,'2013-07-01',2,1,120000.00,'初始资金','2014-07-12 14:01:11'),(5,'2014-10-22',1,2,1.22,'测试','2014-10-22 17:24:02'),(6,'2014-10-22',1,1,1.22,'测试','2014-10-22 17:24:18'),(7,'2014-11-13',1,1,1.00,'1','2014-11-13 18:07:04'),(87,'2014-11-26',2,1,2.12,'测试收入','2014-11-26 12:17:45');
-/*!40000 ALTER TABLE `breceandpay` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bsalary`
---
-
+-- ----------------------------
+-- Table structure for `bsalary`
+-- ----------------------------
 DROP TABLE IF EXISTS `bsalary`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bsalary` (
   `salaryid` int(9) NOT NULL COMMENT 'ID',
   `salarytype` int(1) DEFAULT NULL COMMENT '单据类型',
   `salaryname` varchar(64) DEFAULT NULL COMMENT '工资单名称',
-  `salaryno` varchar(16) NOT NULL COMMENT '工资编号',
+  `salaryno` varchar(16) NOT NULL COMMENT '工资单编号',
   `salarydate` varchar(10) DEFAULT NULL COMMENT '日期',
   `currflow` varchar(32) DEFAULT NULL COMMENT '当前流程',
   `maker` varchar(32) DEFAULT NULL COMMENT '制单人',
@@ -195,25 +147,15 @@ CREATE TABLE `bsalary` (
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`salaryid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `bsalary`
---
+-- ----------------------------
+-- Records of bsalary
+-- ----------------------------
 
-LOCK TABLES `bsalary` WRITE;
-/*!40000 ALTER TABLE `bsalary` DISABLE KEYS */;
-INSERT INTO `bsalary` VALUES (1,1,'2013.02工资','GZD-2013-0001','2013-03','结束','ZHOUJD','2013-03-11 16:04:32','无'),(2,3,'2012年终奖','GZD-2013-0002','2013-02','结束','ZHOUJD','2013-03-11 16:41:27',''),(7,1,'2014年06月份工资单','GZD-20140728-001','2014-06','结束','ZHOUJD','2014-07-28 21:06:51',''),(8,1,'2014年06月份工资单','GZD-20140728-002','2014-06','结束','ZHOUJD','2014-07-28 22:38:07',''),(9,1,'2014年07月份工资单','GZD-20140820-001','2014-07','结束','ZHOUJD','2014-08-20 15:09:27','补发【员工三】工资'),(10,1,'2014年07月份工资单','GZD-20140820-002','2014-07','结束','ZHOUJD','2014-08-20 15:34:49',''),(13,1,'2014年09月份工资单','GZD-20141022-001','2014-09','结束','ZHOUJD','2014-10-22 18:19:57',''),(83,1,'2014年10月份工资单','GZD-20141126-001','2014-10','结束','ZHOUJD','2014-11-26 11:18:14','');
-/*!40000 ALTER TABLE `bsalary` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bsalaryrow`
---
-
+-- ----------------------------
+-- Table structure for `bsalaryrow`
+-- ----------------------------
 DROP TABLE IF EXISTS `bsalaryrow`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bsalaryrow` (
   `salaryrowid` int(9) NOT NULL AUTO_INCREMENT COMMENT '行项ID',
   `salaryid` int(9) DEFAULT NULL COMMENT '主表ID',
@@ -221,30 +163,20 @@ CREATE TABLE `bsalaryrow` (
   `planmoney` double(12,2) DEFAULT NULL COMMENT '应付款',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`salaryrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `bsalaryrow`
---
+-- ----------------------------
+-- Records of bsalaryrow
+-- ----------------------------
 
-LOCK TABLES `bsalaryrow` WRITE;
-/*!40000 ALTER TABLE `bsalaryrow` DISABLE KEYS */;
-INSERT INTO `bsalaryrow` VALUES (28,1,2,2100.12,'员工一工资'),(29,1,3,2200.22,'员工二工资'),(30,1,4,1000.00,'员工三工资'),(40,2,2,3000.10,NULL),(41,2,3,4000.20,NULL),(52,5,2,0.00,NULL),(53,5,3,63.00,NULL),(68,7,2,1590.00,NULL),(69,7,3,1890.00,NULL),(72,8,2,1484.00,NULL),(73,8,3,1764.00,NULL),(75,9,5,2250.00,NULL),(78,10,2,1643.00,NULL),(79,10,3,1953.00,NULL),(92,13,2,1590.00,NULL),(93,13,3,1890.00,NULL),(94,13,5,2250.00,NULL),(101,83,2,1537.00,NULL),(102,83,3,1953.10,NULL),(103,83,5,2250.00,NULL);
-/*!40000 ALTER TABLE `bsalaryrow` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bsell`
---
-
+-- ----------------------------
+-- Table structure for `bsell`
+-- ----------------------------
 DROP TABLE IF EXISTS `bsell`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bsell` (
   `sellid` int(7) NOT NULL COMMENT '销售单ID',
   `sellno` varchar(16) NOT NULL COMMENT '销售单编号',
-  `selldate` varchar(10) DEFAULT NULL COMMENT '定单日期',
+  `selldate` varchar(10) DEFAULT NULL COMMENT '发货日期',
   `manuid` int(9) NOT NULL COMMENT '客户ID',
   `currflow` varchar(32) DEFAULT NULL COMMENT '当前流程',
   `maker` varchar(32) DEFAULT NULL COMMENT '制单人',
@@ -252,59 +184,44 @@ CREATE TABLE `bsell` (
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`sellid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='销售表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `bsell`
---
+-- ----------------------------
+-- Records of bsell
+-- ----------------------------
+INSERT INTO `bsell` VALUES ('106', 'XSD-20160129-001', '2016-01-29', '103', '申请', 'TEST', '2016-01-29 23:00:10', '');
 
-LOCK TABLES `bsell` WRITE;
-/*!40000 ALTER TABLE `bsell` DISABLE KEYS */;
-INSERT INTO `bsell` VALUES (2,'XSD-2013-0001','2013-03-06',5,'结束','ZHOUJD','2013-03-06 17:32:44','备注'),(3,'XSD-2014-0001','2014-07-13',9,'结束','ZHOUJD','2014-07-13 16:13:58',''),(4,'XSD-2014-0002','2014-07-01',5,'结束','ZHOUJD','2014-07-13 16:14:35',''),(5,'XSD-2014-0003','2014-06-02',5,'结束','ZHOUJD','2014-07-13 16:15:17',''),(6,'XSD-2014-0004','2014-06-12',9,'结束','ZHOUJD','2014-07-13 16:16:21',''),(7,'XSD-2014-0005','2014-04-02',5,'结束','ZHOUJD','2014-07-13 16:16:52',''),(8,'XSD-2014-0006','2014-03-12',5,'结束','ZHOUJD','2014-07-13 16:17:13',''),(10,'XSD-2014-0007','2014-07-18',5,'结束','ZHOUJD','2014-07-18 19:08:31',''),(11,'XSD-20140820-001','2014-08-20',5,'结束','ZHOUJD','2014-08-20 11:14:34',''),(12,'XSD-20140828-001','2014-08-28',5,'结束','ZHOUJD','2014-08-28 11:50:07',''),(13,'XSD-20140828-002','2014-08-28',9,'结束','ZHOUJD','2014-08-28 15:53:20',''),(14,'XSD-20140925-001','2014-09-25',5,'结束','ZHOUJD','2014-09-25 16:44:19',''),(15,'XSD-20141114-001','2014-11-14',9,'结束','ZHOUJD','2014-11-14 10:23:17',''),(38,'XSD-20141118-001','2014-11-18',5,'结束','ZHOUJD','2014-11-18 15:14:37',''),(117,'XSD-20150228-001','2015-02-28',9,'申请','LIDL','2015-02-28 10:31:45',''),(121,'XSD-20150228-002','2015-02-28',9,'申请','LIDL','2015-02-28 11:22:06',NULL);
-/*!40000 ALTER TABLE `bsell` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bsellrow`
---
-
+-- ----------------------------
+-- Table structure for `bsellrow`
+-- ----------------------------
 DROP TABLE IF EXISTS `bsellrow`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bsellrow` (
   `sellrowid` int(7) NOT NULL AUTO_INCREMENT COMMENT '销售行项ID',
   `sellid` int(7) NOT NULL COMMENT '销售单ID',
   `productid` int(5) DEFAULT NULL COMMENT '产品编码',
   `productname` varchar(64) NOT NULL COMMENT '产品名称',
   `unit` int(3) DEFAULT NULL COMMENT '计量单位',
-  `costprice` double(12,2) DEFAULT '0.00' COMMENT '成本单价',
-  `planprice` double(12,2) DEFAULT '0.00' COMMENT '预算单价',
+  `costprice` double(12,2) unsigned DEFAULT '0.00' COMMENT '成本单价',
+  `planprice` double(12,2) unsigned DEFAULT '0.00' COMMENT '预算单价',
   `realprice` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '实际单价',
-  `num` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '销售数量',
+  `num` int(5) NOT NULL DEFAULT '0' COMMENT '销售数量',
+  `boxnum` double(5,1) DEFAULT NULL COMMENT '件数',
+  `numofonebox` int(3) DEFAULT NULL COMMENT '1件数量',
   `profit` double(12,2) DEFAULT '0.00' COMMENT '利润',
   `realsum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '实际总价',
+  `sort` float(4,1) DEFAULT NULL COMMENT '排序',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`sellrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=220 DEFAULT CHARSET=utf8 COMMENT='销售行项表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='销售行项表';
 
---
--- Dumping data for table `bsellrow`
---
+-- ----------------------------
+-- Records of bsellrow
+-- ----------------------------
+INSERT INTO `bsellrow` VALUES ('3', '106', '105', '赛洛单孔', null, '0.00', '33.00', '33.00', '126', '3.0', '42', '0.00', '4158.00', '5.0', null);
 
-LOCK TABLES `bsellrow` WRITE;
-/*!40000 ALTER TABLE `bsellrow` DISABLE KEYS */;
-INSERT INTO `bsellrow` VALUES (18,2,1,'产品1',2,113.80,12.20,12.20,1.00,-101.60,12.20,NULL),(19,2,1,'产品1',2,113.80,12.20,12.20,2.00,-101.60,24.40,NULL),(33,8,2,'产品2',1,170.44,190.00,190.00,43.00,19.56,8170.00,NULL),(34,7,2,'产品2',1,170.44,190.00,190.00,54.00,19.56,10260.00,NULL),(35,6,2,'产品2',1,170.44,190.00,190.00,21.00,19.56,3990.00,NULL),(36,6,3,'产品3',1,163.40,200.20,200.20,23.00,36.80,4604.60,NULL),(37,5,1,'产品1',2,113.80,120.00,120.00,53.00,6.20,6360.00,NULL),(38,5,2,'产品2',1,170.44,190.00,190.00,12.00,19.56,2280.00,NULL),(39,5,3,'产品3',1,163.40,200.20,200.20,4.00,36.80,800.80,NULL),(40,4,2,'产品2',1,170.44,190.00,190.00,33.00,19.56,6270.00,NULL),(41,4,3,'产品3',1,163.40,200.20,200.20,44.00,36.80,8808.80,NULL),(42,4,1,'产品1',2,113.80,120.00,120.00,77.00,6.20,9240.00,NULL),(43,3,1,'产品1',2,113.80,120.00,120.00,11.00,6.20,1320.00,NULL),(44,3,2,'产品2',1,170.44,190.00,190.00,22.00,19.56,4180.00,NULL),(45,3,3,'产品3',1,163.40,200.20,200.20,33.00,36.80,6606.60,NULL),(123,10,2,'产品2',1,170.44,190.00,190.00,60.00,19.56,11400.00,NULL),(124,10,3,'产品3',1,163.40,200.20,200.20,30.00,36.80,6006.00,NULL),(125,10,1,'产品1',2,113.80,120.00,120.00,42.00,6.20,5040.00,NULL),(130,11,1,'产品1',1,113.80,123.20,123.21,22.00,9.41,2710.62,NULL),(131,11,2,'产品2',1,170.44,200.50,200.50,24.00,30.06,4812.00,NULL),(132,11,5,'产品8',1,33.30,43.10,43.10,23.00,9.80,991.30,NULL),(147,12,1,'产品1',1,113.80,123.20,123.20,5.00,9.40,616.00,NULL),(148,12,2,'产品2',1,170.44,200.50,200.50,2.00,30.06,401.00,NULL),(161,13,1,'产品1',1,47.64,123.20,123.20,2.00,75.56,246.40,NULL),(162,13,2,'产品2',1,190.24,200.50,200.50,3.00,10.26,601.50,NULL),(178,14,1,'产品1',1,47.64,123.20,123.20,22.00,75.56,2710.40,NULL),(179,14,2,'产品2',1,190.24,200.50,200.50,21.00,10.26,4210.50,NULL),(180,14,3,'产品3',1,163.40,203.20,203.20,20.00,39.80,4064.00,NULL),(185,15,1,'产品1',1,47.64,123.20,124.20,1.00,76.56,124.20,NULL),(186,15,2,'产品2',1,190.24,200.50,205.50,2.00,15.26,411.00,NULL),(208,38,2,'产品2',1,190.24,200.50,200.50,1.00,10.26,200.50,NULL),(209,38,3,'产品3',1,163.40,203.20,203.20,2.00,39.80,406.40,NULL),(210,38,80,'树叶淋浴',1,32.00,42.00,42.00,2.00,10.00,84.00,NULL),(216,121,96,'镀金问号管',1,0.00,450.00,450.00,2.00,450.00,900.00,NULL),(217,121,97,'镀金葫芦问号管',1,0.00,560.00,560.00,3.00,560.00,1680.00,NULL),(218,117,96,'镀金问号管',1,0.00,450.00,450.00,12.00,450.00,5400.00,NULL),(219,117,97,'镀金葫芦问号管',1,0.00,560.00,560.00,23.00,560.00,12880.00,NULL);
-/*!40000 ALTER TABLE `bsellrow` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `btransferaccount`
---
-
+-- ----------------------------
+-- Table structure for `btransferaccount`
+-- ----------------------------
 DROP TABLE IF EXISTS `btransferaccount`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `btransferaccount` (
   `transferaccountid` int(9) NOT NULL COMMENT '内部转账ID',
   `bankcardid` int(9) DEFAULT NULL COMMENT '银行卡ID',
@@ -314,50 +231,30 @@ CREATE TABLE `btransferaccount` (
   `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`transferaccountid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='内部转账表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `btransferaccount`
---
+-- ----------------------------
+-- Records of btransferaccount
+-- ----------------------------
 
-LOCK TABLES `btransferaccount` WRITE;
-/*!40000 ALTER TABLE `btransferaccount` DISABLE KEYS */;
-INSERT INTO `btransferaccount` VALUES (6,2,1,20.50,'转入钱包','2013-02-17 16:19:44'),(7,2,1,21.50,NULL,'2013-02-17 17:00:39'),(8,2,1,8.00,'转入钱包','2013-02-17 17:02:56'),(9,2,1,50000.00,'转到现金','2014-08-20 14:59:00'),(10,1,2,1.00,'测试','2014-10-22 17:21:47'),(11,1,2,1.00,'测试','2014-10-22 17:22:11'),(12,1,2,2.00,'测试用','2014-11-17 21:25:15'),(85,2,3,1.23,'测试转入','2014-11-26 11:47:39');
-/*!40000 ALTER TABLE `btransferaccount` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bwork`
---
-
+-- ----------------------------
+-- Table structure for `bwork`
+-- ----------------------------
 DROP TABLE IF EXISTS `bwork`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bwork` (
   `workid` int(9) NOT NULL AUTO_INCREMENT,
   `workmonth` varchar(7) NOT NULL COMMENT '月份',
   `staffid` int(9) DEFAULT NULL COMMENT '员工ID',
   PRIMARY KEY (`workid`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `bwork`
---
+-- ----------------------------
+-- Records of bwork
+-- ----------------------------
 
-LOCK TABLES `bwork` WRITE;
-/*!40000 ALTER TABLE `bwork` DISABLE KEYS */;
-INSERT INTO `bwork` VALUES (1,'2014-07',2),(2,'2014-07',3),(3,'2014-06',2),(4,'2014-06',3),(5,'2014-08',2),(6,'2014-08',3),(7,'2014-08',5),(8,'2014-07',5),(9,'2014-10',2),(10,'2014-10',3),(11,'2014-10',5),(12,'2014-09',2),(13,'2014-09',3),(14,'2014-09',5),(15,'2014-11',2),(16,'2014-11',3),(17,'2014-11',5),(18,'2014-12',2),(19,'2014-12',3),(20,'2014-12',5);
-/*!40000 ALTER TABLE `bwork` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bworkrow`
---
-
+-- ----------------------------
+-- Table structure for `bworkrow`
+-- ----------------------------
 DROP TABLE IF EXISTS `bworkrow`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bworkrow` (
   `workrowid` int(9) NOT NULL AUTO_INCREMENT COMMENT '考勤从表ID',
   `workid` int(9) NOT NULL COMMENT '考勤主表ID',
@@ -365,29 +262,20 @@ CREATE TABLE `bworkrow` (
   `starttime` varchar(19) DEFAULT NULL COMMENT '上班时间',
   `endtime` varchar(19) DEFAULT NULL COMMENT '下班时间',
   `workstatus` int(2) DEFAULT NULL COMMENT '考勤状态',
-  `salary` double(12,2) DEFAULT NULL COMMENT '增减工资',
+  `salary` double(12,2) DEFAULT NULL COMMENT '工资',
+  `othersalary` double(12,2) DEFAULT NULL COMMENT '其他工资',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`workrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=76060 DEFAULT CHARSET=utf8 COMMENT='考勤表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='考勤表';
 
---
--- Dumping data for table `bworkrow`
---
+-- ----------------------------
+-- Records of bworkrow
+-- ----------------------------
 
-LOCK TABLES `bworkrow` WRITE;
-/*!40000 ALTER TABLE `bworkrow` DISABLE KEYS */;
-INSERT INTO `bworkrow` VALUES (74988,2,'2014-07-01',NULL,NULL,NULL,63.00,NULL),(74989,2,'2014-07-02',NULL,NULL,NULL,63.00,NULL),(74990,2,'2014-07-03',NULL,NULL,NULL,63.00,NULL),(74991,2,'2014-07-04',NULL,NULL,NULL,63.00,NULL),(74992,2,'2014-07-05',NULL,NULL,NULL,63.00,NULL),(74993,2,'2014-07-06',NULL,NULL,NULL,63.00,NULL),(74994,2,'2014-07-07',NULL,NULL,NULL,63.00,NULL),(74995,2,'2014-07-08',NULL,NULL,NULL,63.00,NULL),(74996,2,'2014-07-09',NULL,NULL,NULL,63.00,NULL),(74997,2,'2014-07-10',NULL,NULL,NULL,63.00,NULL),(74998,2,'2014-07-11',NULL,NULL,NULL,63.00,NULL),(74999,2,'2014-07-12',NULL,NULL,NULL,63.00,NULL),(75000,2,'2014-07-13',NULL,NULL,NULL,63.00,NULL),(75001,2,'2014-07-14',NULL,NULL,NULL,63.00,NULL),(75002,2,'2014-07-15',NULL,NULL,NULL,63.00,NULL),(75003,2,'2014-07-16',NULL,NULL,NULL,63.00,NULL),(75004,2,'2014-07-17',NULL,NULL,NULL,63.00,NULL),(75005,2,'2014-07-18',NULL,NULL,NULL,63.00,NULL),(75006,2,'2014-07-19',NULL,NULL,NULL,63.00,NULL),(75007,2,'2014-07-20',NULL,NULL,NULL,63.00,NULL),(75008,2,'2014-07-21',NULL,NULL,NULL,63.00,NULL),(75009,2,'2014-07-22',NULL,NULL,NULL,63.00,NULL),(75010,2,'2014-07-23',NULL,NULL,NULL,63.00,NULL),(75011,2,'2014-07-24',NULL,NULL,NULL,63.00,NULL),(75012,2,'2014-07-25',NULL,NULL,NULL,63.00,NULL),(75013,2,'2014-07-26',NULL,NULL,NULL,63.00,NULL),(75014,2,'2014-07-27',NULL,NULL,NULL,63.00,NULL),(75015,2,'2014-07-28',NULL,NULL,NULL,63.00,NULL),(75016,2,'2014-07-29',NULL,NULL,NULL,63.00,NULL),(75017,2,'2014-07-30',NULL,NULL,NULL,63.00,NULL),(75018,2,'2014-07-31',NULL,NULL,NULL,63.00,NULL),(75141,3,'2014-06-01',NULL,NULL,NULL,0.00,NULL),(75142,3,'2014-06-02',NULL,NULL,NULL,0.00,NULL),(75143,3,'2014-06-03',NULL,NULL,NULL,53.00,NULL),(75144,3,'2014-06-04',NULL,NULL,NULL,53.00,NULL),(75145,3,'2014-06-05',NULL,NULL,NULL,53.00,NULL),(75146,3,'2014-06-06',NULL,NULL,NULL,53.00,NULL),(75147,3,'2014-06-07',NULL,NULL,NULL,53.00,NULL),(75148,3,'2014-06-08',NULL,NULL,NULL,53.00,NULL),(75149,3,'2014-06-09',NULL,NULL,NULL,53.00,NULL),(75150,3,'2014-06-10',NULL,NULL,NULL,53.00,NULL),(75151,3,'2014-06-11',NULL,NULL,NULL,53.00,NULL),(75152,3,'2014-06-12',NULL,NULL,NULL,53.00,NULL),(75153,3,'2014-06-13',NULL,NULL,NULL,53.00,NULL),(75154,3,'2014-06-14',NULL,NULL,NULL,53.00,NULL),(75155,3,'2014-06-15',NULL,NULL,NULL,53.00,NULL),(75156,3,'2014-06-16',NULL,NULL,NULL,53.00,NULL),(75157,3,'2014-06-17',NULL,NULL,NULL,53.00,NULL),(75158,3,'2014-06-18',NULL,NULL,NULL,53.00,NULL),(75159,3,'2014-06-19',NULL,NULL,NULL,53.00,NULL),(75160,3,'2014-06-20',NULL,NULL,NULL,53.00,NULL),(75161,3,'2014-06-21',NULL,NULL,NULL,53.00,NULL),(75162,3,'2014-06-22',NULL,NULL,NULL,53.00,NULL),(75163,3,'2014-06-23',NULL,NULL,NULL,53.00,NULL),(75164,3,'2014-06-24',NULL,NULL,NULL,53.00,NULL),(75165,3,'2014-06-25',NULL,NULL,NULL,53.00,NULL),(75166,3,'2014-06-26',NULL,NULL,NULL,53.00,NULL),(75167,3,'2014-06-27',NULL,NULL,NULL,53.00,NULL),(75168,3,'2014-06-28',NULL,NULL,NULL,53.00,NULL),(75169,3,'2014-06-29',NULL,NULL,NULL,53.00,NULL),(75170,3,'2014-06-30',NULL,NULL,NULL,53.00,NULL),(75171,4,'2014-06-01',NULL,NULL,NULL,0.00,NULL),(75172,4,'2014-06-02',NULL,NULL,NULL,0.00,NULL),(75173,4,'2014-06-03',NULL,NULL,NULL,63.00,NULL),(75174,4,'2014-06-04',NULL,NULL,NULL,63.00,NULL),(75175,4,'2014-06-05',NULL,NULL,NULL,63.00,NULL),(75176,4,'2014-06-06',NULL,NULL,NULL,63.00,NULL),(75177,4,'2014-06-07',NULL,NULL,NULL,63.00,NULL),(75178,4,'2014-06-08',NULL,NULL,NULL,63.00,NULL),(75179,4,'2014-06-09',NULL,NULL,NULL,63.00,NULL),(75180,4,'2014-06-10',NULL,NULL,NULL,63.00,NULL),(75181,4,'2014-06-11',NULL,NULL,NULL,63.00,NULL),(75182,4,'2014-06-12',NULL,NULL,NULL,63.00,NULL),(75183,4,'2014-06-13',NULL,NULL,NULL,63.00,NULL),(75184,4,'2014-06-14',NULL,NULL,NULL,63.00,NULL),(75185,4,'2014-06-15',NULL,NULL,NULL,63.00,NULL),(75186,4,'2014-06-16',NULL,NULL,NULL,63.00,NULL),(75187,4,'2014-06-17',NULL,NULL,NULL,63.00,NULL),(75188,4,'2014-06-18',NULL,NULL,NULL,63.00,NULL),(75189,4,'2014-06-19',NULL,NULL,NULL,63.00,NULL),(75190,4,'2014-06-20',NULL,NULL,NULL,63.00,NULL),(75191,4,'2014-06-21',NULL,NULL,NULL,63.00,NULL),(75192,4,'2014-06-22',NULL,NULL,NULL,63.00,NULL),(75193,4,'2014-06-23',NULL,NULL,NULL,63.00,NULL),(75194,4,'2014-06-24',NULL,NULL,NULL,63.00,NULL),(75195,4,'2014-06-25',NULL,NULL,NULL,63.00,NULL),(75196,4,'2014-06-26',NULL,NULL,NULL,63.00,NULL),(75197,4,'2014-06-27',NULL,NULL,NULL,63.00,NULL),(75198,4,'2014-06-28',NULL,NULL,NULL,63.00,NULL),(75199,4,'2014-06-29',NULL,NULL,NULL,63.00,NULL),(75200,4,'2014-06-30',NULL,NULL,NULL,63.00,NULL),(75201,1,'2014-07-01',NULL,NULL,NULL,53.00,NULL),(75202,1,'2014-07-02',NULL,NULL,NULL,53.00,NULL),(75203,1,'2014-07-03',NULL,NULL,NULL,53.00,NULL),(75204,1,'2014-07-04',NULL,NULL,NULL,53.00,NULL),(75205,1,'2014-07-05',NULL,NULL,NULL,53.00,NULL),(75206,1,'2014-07-06',NULL,NULL,NULL,53.00,NULL),(75207,1,'2014-07-07',NULL,NULL,NULL,53.00,NULL),(75208,1,'2014-07-08',NULL,NULL,NULL,53.00,NULL),(75209,1,'2014-07-09',NULL,NULL,NULL,53.00,NULL),(75210,1,'2014-07-10',NULL,NULL,NULL,53.00,NULL),(75211,1,'2014-07-11',NULL,NULL,NULL,53.00,NULL),(75212,1,'2014-07-12',NULL,NULL,NULL,53.00,NULL),(75213,1,'2014-07-13',NULL,NULL,NULL,53.00,NULL),(75214,1,'2014-07-14',NULL,NULL,NULL,53.00,NULL),(75215,1,'2014-07-15',NULL,NULL,NULL,53.00,NULL),(75216,1,'2014-07-16',NULL,NULL,NULL,53.00,NULL),(75217,1,'2014-07-17',NULL,NULL,NULL,53.00,NULL),(75218,1,'2014-07-18',NULL,NULL,NULL,53.00,NULL),(75219,1,'2014-07-19',NULL,NULL,NULL,53.00,NULL),(75220,1,'2014-07-20',NULL,NULL,NULL,53.00,NULL),(75221,1,'2014-07-21',NULL,NULL,NULL,53.00,NULL),(75222,1,'2014-07-22',NULL,NULL,NULL,53.00,NULL),(75223,1,'2014-07-23',NULL,NULL,NULL,53.00,NULL),(75224,1,'2014-07-24',NULL,NULL,NULL,53.00,NULL),(75225,1,'2014-07-25',NULL,NULL,NULL,53.00,NULL),(75226,1,'2014-07-26',NULL,NULL,NULL,53.00,NULL),(75227,1,'2014-07-27',NULL,NULL,NULL,53.00,NULL),(75228,1,'2014-07-28',NULL,NULL,NULL,53.00,NULL),(75229,1,'2014-07-29',NULL,NULL,NULL,53.00,NULL),(75230,1,'2014-07-30',NULL,NULL,NULL,53.00,NULL),(75231,1,'2014-07-31',NULL,NULL,NULL,53.00,NULL),(75294,5,'2014-08-01',NULL,NULL,NULL,53.00,NULL),(75295,5,'2014-08-02',NULL,NULL,NULL,53.00,NULL),(75296,5,'2014-08-03',NULL,NULL,NULL,53.00,NULL),(75297,5,'2014-08-04',NULL,NULL,NULL,53.00,NULL),(75298,5,'2014-08-05',NULL,NULL,NULL,NULL,NULL),(75299,5,'2014-08-06',NULL,NULL,NULL,53.00,NULL),(75300,5,'2014-08-07',NULL,NULL,NULL,53.00,NULL),(75301,5,'2014-08-08',NULL,NULL,NULL,53.00,NULL),(75302,5,'2014-08-09',NULL,NULL,NULL,53.00,NULL),(75303,5,'2014-08-10',NULL,NULL,NULL,53.00,NULL),(75304,5,'2014-08-11',NULL,NULL,NULL,53.00,NULL),(75305,5,'2014-08-12',NULL,NULL,NULL,NULL,NULL),(75306,5,'2014-08-13',NULL,NULL,NULL,NULL,NULL),(75307,5,'2014-08-14',NULL,NULL,NULL,NULL,NULL),(75308,5,'2014-08-15',NULL,NULL,NULL,NULL,NULL),(75309,5,'2014-08-16',NULL,NULL,NULL,NULL,NULL),(75310,5,'2014-08-17',NULL,NULL,NULL,NULL,NULL),(75311,5,'2014-08-18',NULL,NULL,NULL,NULL,NULL),(75312,5,'2014-08-19',NULL,NULL,NULL,NULL,NULL),(75313,5,'2014-08-20',NULL,NULL,NULL,NULL,NULL),(75314,5,'2014-08-21',NULL,NULL,NULL,NULL,NULL),(75315,5,'2014-08-22',NULL,NULL,NULL,NULL,NULL),(75316,5,'2014-08-23',NULL,NULL,NULL,NULL,NULL),(75317,5,'2014-08-24',NULL,NULL,NULL,NULL,NULL),(75318,5,'2014-08-25',NULL,NULL,NULL,NULL,NULL),(75319,5,'2014-08-26',NULL,NULL,NULL,NULL,NULL),(75320,5,'2014-08-27',NULL,NULL,NULL,NULL,NULL),(75321,5,'2014-08-28',NULL,NULL,NULL,NULL,NULL),(75322,5,'2014-08-29',NULL,NULL,NULL,NULL,NULL),(75323,5,'2014-08-30',NULL,NULL,NULL,NULL,NULL),(75324,5,'2014-08-31',NULL,NULL,NULL,NULL,NULL),(75325,6,'2014-08-01',NULL,NULL,NULL,63.00,NULL),(75326,6,'2014-08-02',NULL,NULL,NULL,63.00,NULL),(75327,6,'2014-08-03',NULL,NULL,NULL,63.00,NULL),(75328,6,'2014-08-04',NULL,NULL,NULL,63.00,NULL),(75329,6,'2014-08-05',NULL,NULL,NULL,63.00,NULL),(75330,6,'2014-08-06',NULL,NULL,NULL,63.00,NULL),(75331,6,'2014-08-07',NULL,NULL,NULL,63.00,NULL),(75332,6,'2014-08-08',NULL,NULL,NULL,63.00,NULL),(75333,6,'2014-08-09',NULL,NULL,NULL,63.00,NULL),(75334,6,'2014-08-10',NULL,NULL,NULL,63.00,NULL),(75335,6,'2014-08-11',NULL,NULL,NULL,63.00,NULL),(75336,6,'2014-08-12',NULL,NULL,NULL,NULL,NULL),(75337,6,'2014-08-13',NULL,NULL,NULL,NULL,NULL),(75338,6,'2014-08-14',NULL,NULL,NULL,NULL,NULL),(75339,6,'2014-08-15',NULL,NULL,NULL,NULL,NULL),(75340,6,'2014-08-16',NULL,NULL,NULL,NULL,NULL),(75341,6,'2014-08-17',NULL,NULL,NULL,NULL,NULL),(75342,6,'2014-08-18',NULL,NULL,NULL,NULL,NULL),(75343,6,'2014-08-19',NULL,NULL,NULL,NULL,NULL),(75344,6,'2014-08-20',NULL,NULL,NULL,NULL,NULL),(75345,6,'2014-08-21',NULL,NULL,NULL,NULL,NULL),(75346,6,'2014-08-22',NULL,NULL,NULL,NULL,NULL),(75347,6,'2014-08-23',NULL,NULL,NULL,NULL,NULL),(75348,6,'2014-08-24',NULL,NULL,NULL,NULL,NULL),(75349,6,'2014-08-25',NULL,NULL,NULL,NULL,NULL),(75350,6,'2014-08-26',NULL,NULL,NULL,NULL,NULL),(75351,6,'2014-08-27',NULL,NULL,NULL,NULL,NULL),(75352,6,'2014-08-28',NULL,NULL,NULL,NULL,NULL),(75353,6,'2014-08-29',NULL,NULL,NULL,NULL,NULL),(75354,6,'2014-08-30',NULL,NULL,NULL,NULL,NULL),(75355,6,'2014-08-31',NULL,NULL,NULL,NULL,NULL),(75387,7,'2014-08-01',NULL,NULL,NULL,75.00,NULL),(75388,7,'2014-08-02',NULL,NULL,NULL,75.00,NULL),(75389,7,'2014-08-03',NULL,NULL,NULL,75.00,NULL),(75390,7,'2014-08-04',NULL,NULL,NULL,75.00,NULL),(75391,7,'2014-08-05',NULL,NULL,NULL,75.00,NULL),(75392,7,'2014-08-06',NULL,NULL,NULL,75.00,NULL),(75393,7,'2014-08-07',NULL,NULL,NULL,75.00,NULL),(75394,7,'2014-08-08',NULL,NULL,NULL,75.00,NULL),(75395,7,'2014-08-09',NULL,NULL,NULL,75.00,NULL),(75396,7,'2014-08-10',NULL,NULL,NULL,75.00,NULL),(75397,7,'2014-08-11',NULL,NULL,NULL,75.00,NULL),(75398,7,'2014-08-12',NULL,NULL,NULL,75.00,NULL),(75399,7,'2014-08-13',NULL,NULL,NULL,75.00,NULL),(75400,7,'2014-08-14',NULL,NULL,NULL,75.00,NULL),(75401,7,'2014-08-15',NULL,NULL,NULL,75.00,NULL),(75402,7,'2014-08-16',NULL,NULL,NULL,75.00,NULL),(75403,7,'2014-08-17',NULL,NULL,NULL,75.00,NULL),(75404,7,'2014-08-18',NULL,NULL,NULL,75.00,NULL),(75405,7,'2014-08-19',NULL,NULL,NULL,75.00,NULL),(75406,7,'2014-08-20',NULL,NULL,NULL,NULL,NULL),(75407,7,'2014-08-21',NULL,NULL,NULL,NULL,NULL),(75408,7,'2014-08-22',NULL,NULL,NULL,NULL,NULL),(75409,7,'2014-08-23',NULL,NULL,NULL,NULL,NULL),(75410,7,'2014-08-24',NULL,NULL,NULL,NULL,NULL),(75411,7,'2014-08-25',NULL,NULL,NULL,NULL,NULL),(75412,7,'2014-08-26',NULL,NULL,NULL,NULL,NULL),(75413,7,'2014-08-27',NULL,NULL,NULL,NULL,NULL),(75414,7,'2014-08-28',NULL,NULL,NULL,NULL,NULL),(75415,7,'2014-08-29',NULL,NULL,NULL,NULL,NULL),(75416,7,'2014-08-30',NULL,NULL,NULL,NULL,NULL),(75417,7,'2014-08-31',NULL,NULL,NULL,NULL,NULL),(75449,8,'2014-07-01',NULL,NULL,NULL,75.00,NULL),(75450,8,'2014-07-02',NULL,NULL,NULL,75.00,NULL),(75451,8,'2014-07-03',NULL,NULL,NULL,75.00,NULL),(75452,8,'2014-07-04',NULL,NULL,NULL,75.00,NULL),(75453,8,'2014-07-05',NULL,NULL,NULL,75.00,NULL),(75454,8,'2014-07-06',NULL,NULL,NULL,75.00,NULL),(75455,8,'2014-07-07',NULL,NULL,NULL,75.00,NULL),(75456,8,'2014-07-08',NULL,NULL,NULL,75.00,NULL),(75457,8,'2014-07-09',NULL,NULL,NULL,75.00,NULL),(75458,8,'2014-07-10',NULL,NULL,NULL,75.00,NULL),(75459,8,'2014-07-11',NULL,NULL,NULL,75.00,NULL),(75460,8,'2014-07-12',NULL,NULL,NULL,75.00,NULL),(75461,8,'2014-07-13',NULL,NULL,NULL,75.00,NULL),(75462,8,'2014-07-14',NULL,NULL,NULL,75.00,NULL),(75463,8,'2014-07-15',NULL,NULL,NULL,75.00,NULL),(75464,8,'2014-07-16',NULL,NULL,NULL,75.00,NULL),(75465,8,'2014-07-17',NULL,NULL,NULL,75.00,NULL),(75466,8,'2014-07-18',NULL,NULL,NULL,75.00,NULL),(75467,8,'2014-07-19',NULL,NULL,NULL,75.00,NULL),(75468,8,'2014-07-20',NULL,NULL,NULL,75.00,NULL),(75469,8,'2014-07-21',NULL,NULL,NULL,75.00,NULL),(75470,8,'2014-07-22',NULL,NULL,NULL,75.00,NULL),(75471,8,'2014-07-23',NULL,NULL,NULL,75.00,NULL),(75472,8,'2014-07-24',NULL,NULL,NULL,75.00,NULL),(75473,8,'2014-07-25',NULL,NULL,5,NULL,NULL),(75474,8,'2014-07-26',NULL,NULL,NULL,75.00,NULL),(75475,8,'2014-07-27',NULL,NULL,NULL,75.00,NULL),(75476,8,'2014-07-28',NULL,NULL,NULL,75.00,NULL),(75477,8,'2014-07-29',NULL,NULL,NULL,75.00,NULL),(75478,8,'2014-07-30',NULL,NULL,NULL,75.00,NULL),(75479,8,'2014-07-31',NULL,NULL,NULL,75.00,NULL),(75663,12,'2014-09-01',NULL,NULL,1,53.00,NULL),(75664,12,'2014-09-02',NULL,NULL,1,53.00,NULL),(75665,12,'2014-09-03',NULL,NULL,1,53.00,NULL),(75666,12,'2014-09-04',NULL,NULL,1,53.00,NULL),(75667,12,'2014-09-05',NULL,NULL,1,53.00,NULL),(75668,12,'2014-09-06',NULL,NULL,1,53.00,NULL),(75669,12,'2014-09-07',NULL,NULL,1,53.00,NULL),(75670,12,'2014-09-08',NULL,NULL,1,53.00,NULL),(75671,12,'2014-09-09',NULL,NULL,1,53.00,NULL),(75672,12,'2014-09-10',NULL,NULL,1,53.00,NULL),(75673,12,'2014-09-11',NULL,NULL,1,53.00,NULL),(75674,12,'2014-09-12',NULL,NULL,1,53.00,NULL),(75675,12,'2014-09-13',NULL,NULL,1,53.00,NULL),(75676,12,'2014-09-14',NULL,NULL,1,53.00,NULL),(75677,12,'2014-09-15',NULL,NULL,1,53.00,NULL),(75678,12,'2014-09-16',NULL,NULL,1,53.00,NULL),(75679,12,'2014-09-17',NULL,NULL,1,53.00,NULL),(75680,12,'2014-09-18',NULL,NULL,1,53.00,NULL),(75681,12,'2014-09-19',NULL,NULL,1,53.00,NULL),(75682,12,'2014-09-20',NULL,NULL,1,53.00,NULL),(75683,12,'2014-09-21',NULL,NULL,1,53.00,NULL),(75684,12,'2014-09-22',NULL,NULL,1,53.00,NULL),(75685,12,'2014-09-23',NULL,NULL,1,53.00,NULL),(75686,12,'2014-09-24',NULL,NULL,1,53.00,NULL),(75687,12,'2014-09-25',NULL,NULL,1,53.00,NULL),(75688,12,'2014-09-26',NULL,NULL,1,53.00,NULL),(75689,12,'2014-09-27',NULL,NULL,1,53.00,NULL),(75690,12,'2014-09-28',NULL,NULL,1,53.00,NULL),(75691,12,'2014-09-29',NULL,NULL,1,53.00,NULL),(75692,12,'2014-09-30',NULL,NULL,1,53.00,NULL),(75693,13,'2014-09-01',NULL,NULL,1,63.00,NULL),(75694,13,'2014-09-02',NULL,NULL,1,63.00,NULL),(75695,13,'2014-09-03',NULL,NULL,1,63.00,NULL),(75696,13,'2014-09-04',NULL,NULL,1,63.00,NULL),(75697,13,'2014-09-05',NULL,NULL,1,63.00,NULL),(75698,13,'2014-09-06',NULL,NULL,1,63.00,NULL),(75699,13,'2014-09-07',NULL,NULL,1,63.00,NULL),(75700,13,'2014-09-08',NULL,NULL,1,63.00,NULL),(75701,13,'2014-09-09',NULL,NULL,1,63.00,NULL),(75702,13,'2014-09-10',NULL,NULL,1,63.00,NULL),(75703,13,'2014-09-11',NULL,NULL,1,63.00,NULL),(75704,13,'2014-09-12',NULL,NULL,1,63.00,NULL),(75705,13,'2014-09-13',NULL,NULL,1,63.00,NULL),(75706,13,'2014-09-14',NULL,NULL,1,63.00,NULL),(75707,13,'2014-09-15',NULL,NULL,1,63.00,NULL),(75708,13,'2014-09-16',NULL,NULL,1,63.00,NULL),(75709,13,'2014-09-17',NULL,NULL,1,63.00,NULL),(75710,13,'2014-09-18',NULL,NULL,1,63.00,NULL),(75711,13,'2014-09-19',NULL,NULL,1,63.00,NULL),(75712,13,'2014-09-20',NULL,NULL,1,63.00,NULL),(75713,13,'2014-09-21',NULL,NULL,1,63.00,NULL),(75714,13,'2014-09-22',NULL,NULL,1,63.00,NULL),(75715,13,'2014-09-23',NULL,NULL,1,63.00,NULL),(75716,13,'2014-09-24',NULL,NULL,1,63.00,NULL),(75717,13,'2014-09-25',NULL,NULL,1,63.00,NULL),(75718,13,'2014-09-26',NULL,NULL,1,63.00,NULL),(75719,13,'2014-09-27',NULL,NULL,1,63.00,NULL),(75720,13,'2014-09-28',NULL,NULL,1,63.00,NULL),(75721,13,'2014-09-29',NULL,NULL,1,63.00,NULL),(75722,13,'2014-09-30',NULL,NULL,1,63.00,NULL),(75723,14,'2014-09-01',NULL,NULL,1,75.00,NULL),(75724,14,'2014-09-02',NULL,NULL,1,75.00,NULL),(75725,14,'2014-09-03',NULL,NULL,1,75.00,NULL),(75726,14,'2014-09-04',NULL,NULL,1,75.00,NULL),(75727,14,'2014-09-05',NULL,NULL,1,75.00,NULL),(75728,14,'2014-09-06',NULL,NULL,1,75.00,NULL),(75729,14,'2014-09-07',NULL,NULL,1,75.00,NULL),(75730,14,'2014-09-08',NULL,NULL,1,75.00,NULL),(75731,14,'2014-09-09',NULL,NULL,1,75.00,NULL),(75732,14,'2014-09-10',NULL,NULL,1,75.00,NULL),(75733,14,'2014-09-11',NULL,NULL,1,75.00,NULL),(75734,14,'2014-09-12',NULL,NULL,1,75.00,NULL),(75735,14,'2014-09-13',NULL,NULL,1,75.00,NULL),(75736,14,'2014-09-14',NULL,NULL,1,75.00,NULL),(75737,14,'2014-09-15',NULL,NULL,1,75.00,NULL),(75738,14,'2014-09-16',NULL,NULL,1,75.00,NULL),(75739,14,'2014-09-17',NULL,NULL,1,75.00,NULL),(75740,14,'2014-09-18',NULL,NULL,1,75.00,NULL),(75741,14,'2014-09-19',NULL,NULL,1,75.00,NULL),(75742,14,'2014-09-20',NULL,NULL,1,75.00,NULL),(75743,14,'2014-09-21',NULL,NULL,1,75.00,NULL),(75744,14,'2014-09-22',NULL,NULL,1,75.00,NULL),(75745,14,'2014-09-23',NULL,NULL,1,75.00,NULL),(75746,14,'2014-09-24',NULL,NULL,1,75.00,NULL),(75747,14,'2014-09-25',NULL,NULL,1,75.00,NULL),(75748,14,'2014-09-26',NULL,NULL,1,75.00,NULL),(75749,14,'2014-09-27',NULL,NULL,1,75.00,NULL),(75750,14,'2014-09-28',NULL,NULL,1,75.00,NULL),(75751,14,'2014-09-29',NULL,NULL,1,75.00,NULL),(75752,14,'2014-09-30',NULL,NULL,1,75.00,NULL),(75753,15,'2014-11-01',NULL,NULL,NULL,NULL,NULL),(75754,15,'2014-11-02',NULL,NULL,NULL,NULL,NULL),(75755,15,'2014-11-03',NULL,NULL,NULL,NULL,NULL),(75756,15,'2014-11-04',NULL,NULL,NULL,NULL,NULL),(75757,15,'2014-11-05',NULL,NULL,NULL,NULL,NULL),(75758,15,'2014-11-06',NULL,NULL,NULL,NULL,NULL),(75759,15,'2014-11-07',NULL,NULL,NULL,NULL,NULL),(75760,15,'2014-11-08',NULL,NULL,NULL,NULL,NULL),(75761,15,'2014-11-09',NULL,NULL,NULL,NULL,NULL),(75762,15,'2014-11-10',NULL,NULL,NULL,NULL,NULL),(75763,15,'2014-11-11',NULL,NULL,NULL,NULL,NULL),(75764,15,'2014-11-12',NULL,NULL,NULL,NULL,NULL),(75765,15,'2014-11-13',NULL,NULL,NULL,NULL,NULL),(75766,15,'2014-11-14',NULL,NULL,NULL,NULL,NULL),(75767,15,'2014-11-15',NULL,NULL,NULL,NULL,NULL),(75768,15,'2014-11-16',NULL,NULL,NULL,NULL,NULL),(75769,15,'2014-11-17',NULL,NULL,NULL,NULL,NULL),(75770,15,'2014-11-18',NULL,NULL,NULL,NULL,NULL),(75771,15,'2014-11-19',NULL,NULL,NULL,NULL,NULL),(75772,15,'2014-11-20',NULL,NULL,NULL,NULL,NULL),(75773,15,'2014-11-21',NULL,NULL,NULL,NULL,NULL),(75774,15,'2014-11-22',NULL,NULL,NULL,NULL,NULL),(75775,15,'2014-11-23',NULL,NULL,NULL,NULL,NULL),(75776,15,'2014-11-24',NULL,NULL,NULL,NULL,NULL),(75777,15,'2014-11-25',NULL,NULL,NULL,NULL,NULL),(75778,15,'2014-11-26',NULL,NULL,NULL,NULL,NULL),(75779,15,'2014-11-27',NULL,NULL,NULL,NULL,NULL),(75780,15,'2014-11-28',NULL,NULL,NULL,NULL,NULL),(75781,15,'2014-11-29',NULL,NULL,NULL,NULL,NULL),(75782,15,'2014-11-30',NULL,NULL,NULL,NULL,NULL),(75783,16,'2014-11-01',NULL,NULL,NULL,NULL,NULL),(75784,16,'2014-11-02',NULL,NULL,NULL,NULL,NULL),(75785,16,'2014-11-03',NULL,NULL,NULL,NULL,NULL),(75786,16,'2014-11-04',NULL,NULL,NULL,NULL,NULL),(75787,16,'2014-11-05',NULL,NULL,NULL,NULL,NULL),(75788,16,'2014-11-06',NULL,NULL,NULL,NULL,NULL),(75789,16,'2014-11-07',NULL,NULL,NULL,NULL,NULL),(75790,16,'2014-11-08',NULL,NULL,NULL,NULL,NULL),(75791,16,'2014-11-09',NULL,NULL,NULL,NULL,NULL),(75792,16,'2014-11-10',NULL,NULL,NULL,NULL,NULL),(75793,16,'2014-11-11',NULL,NULL,NULL,NULL,NULL),(75794,16,'2014-11-12',NULL,NULL,NULL,NULL,NULL),(75795,16,'2014-11-13',NULL,NULL,NULL,NULL,NULL),(75796,16,'2014-11-14',NULL,NULL,NULL,NULL,NULL),(75797,16,'2014-11-15',NULL,NULL,NULL,NULL,NULL),(75798,16,'2014-11-16',NULL,NULL,NULL,NULL,NULL),(75799,16,'2014-11-17',NULL,NULL,NULL,NULL,NULL),(75800,16,'2014-11-18',NULL,NULL,NULL,NULL,NULL),(75801,16,'2014-11-19',NULL,NULL,NULL,NULL,NULL),(75802,16,'2014-11-20',NULL,NULL,NULL,NULL,NULL),(75803,16,'2014-11-21',NULL,NULL,NULL,NULL,NULL),(75804,16,'2014-11-22',NULL,NULL,NULL,NULL,NULL),(75805,16,'2014-11-23',NULL,NULL,NULL,NULL,NULL),(75806,16,'2014-11-24',NULL,NULL,NULL,NULL,NULL),(75807,16,'2014-11-25',NULL,NULL,NULL,NULL,NULL),(75808,16,'2014-11-26',NULL,NULL,NULL,NULL,NULL),(75809,16,'2014-11-27',NULL,NULL,NULL,NULL,NULL),(75810,16,'2014-11-28',NULL,NULL,NULL,NULL,NULL),(75811,16,'2014-11-29',NULL,NULL,NULL,NULL,NULL),(75812,16,'2014-11-30',NULL,NULL,NULL,NULL,NULL),(75813,17,'2014-11-01',NULL,NULL,NULL,NULL,NULL),(75814,17,'2014-11-02',NULL,NULL,NULL,NULL,NULL),(75815,17,'2014-11-03',NULL,NULL,NULL,NULL,NULL),(75816,17,'2014-11-04',NULL,NULL,NULL,NULL,NULL),(75817,17,'2014-11-05',NULL,NULL,NULL,NULL,NULL),(75818,17,'2014-11-06',NULL,NULL,NULL,NULL,NULL),(75819,17,'2014-11-07',NULL,NULL,NULL,NULL,NULL),(75820,17,'2014-11-08',NULL,NULL,NULL,NULL,NULL),(75821,17,'2014-11-09',NULL,NULL,NULL,NULL,NULL),(75822,17,'2014-11-10',NULL,NULL,NULL,NULL,NULL),(75823,17,'2014-11-11',NULL,NULL,NULL,NULL,NULL),(75824,17,'2014-11-12',NULL,NULL,NULL,NULL,NULL),(75825,17,'2014-11-13',NULL,NULL,NULL,NULL,NULL),(75826,17,'2014-11-14',NULL,NULL,NULL,NULL,NULL),(75827,17,'2014-11-15',NULL,NULL,NULL,NULL,NULL),(75828,17,'2014-11-16',NULL,NULL,NULL,NULL,NULL),(75829,17,'2014-11-17',NULL,NULL,NULL,NULL,NULL),(75830,17,'2014-11-18',NULL,NULL,NULL,NULL,NULL),(75831,17,'2014-11-19',NULL,NULL,NULL,NULL,NULL),(75832,17,'2014-11-20',NULL,NULL,NULL,NULL,NULL),(75833,17,'2014-11-21',NULL,NULL,NULL,NULL,NULL),(75834,17,'2014-11-22',NULL,NULL,NULL,NULL,NULL),(75835,17,'2014-11-23',NULL,NULL,NULL,NULL,NULL),(75836,17,'2014-11-24',NULL,NULL,NULL,NULL,NULL),(75837,17,'2014-11-25',NULL,NULL,NULL,NULL,NULL),(75838,17,'2014-11-26',NULL,NULL,NULL,NULL,NULL),(75839,17,'2014-11-27',NULL,NULL,NULL,NULL,NULL),(75840,17,'2014-11-28',NULL,NULL,NULL,NULL,NULL),(75841,17,'2014-11-29',NULL,NULL,NULL,NULL,NULL),(75842,17,'2014-11-30',NULL,NULL,NULL,NULL,NULL),(75874,9,'2014-10-01',NULL,NULL,1,53.00,NULL),(75875,9,'2014-10-02',NULL,NULL,1,53.00,NULL),(75876,9,'2014-10-03',NULL,NULL,5,0.00,'请假一天'),(75877,9,'2014-10-04',NULL,NULL,1,53.00,NULL),(75878,9,'2014-10-05',NULL,NULL,1,53.00,NULL),(75879,9,'2014-10-06',NULL,NULL,1,53.00,NULL),(75880,9,'2014-10-07',NULL,NULL,1,53.00,NULL),(75881,9,'2014-10-08',NULL,NULL,1,53.00,NULL),(75882,9,'2014-10-09',NULL,NULL,1,53.00,NULL),(75883,9,'2014-10-10',NULL,NULL,1,53.00,NULL),(75884,9,'2014-10-11',NULL,NULL,1,53.00,NULL),(75885,9,'2014-10-12',NULL,NULL,1,53.00,NULL),(75886,9,'2014-10-13',NULL,NULL,1,53.00,NULL),(75887,9,'2014-10-14',NULL,NULL,1,53.00,NULL),(75888,9,'2014-10-15',NULL,NULL,1,53.00,NULL),(75889,9,'2014-10-16',NULL,NULL,1,53.00,NULL),(75890,9,'2014-10-17',NULL,NULL,1,53.00,NULL),(75891,9,'2014-10-18',NULL,NULL,1,53.00,NULL),(75892,9,'2014-10-19',NULL,NULL,1,53.00,NULL),(75893,9,'2014-10-20',NULL,NULL,1,53.00,NULL),(75894,9,'2014-10-21',NULL,NULL,1,53.00,NULL),(75895,9,'2014-10-22',NULL,NULL,1,53.00,NULL),(75896,9,'2014-10-23',NULL,NULL,1,53.00,NULL),(75897,9,'2014-10-24',NULL,NULL,1,53.00,NULL),(75898,9,'2014-10-25',NULL,NULL,5,0.00,'请假一天'),(75899,9,'2014-10-26',NULL,NULL,1,53.00,NULL),(75900,9,'2014-10-27',NULL,NULL,1,53.00,NULL),(75901,9,'2014-10-28',NULL,NULL,1,53.00,NULL),(75902,9,'2014-10-29',NULL,NULL,1,53.00,NULL),(75903,9,'2014-10-30',NULL,NULL,1,53.00,NULL),(75904,9,'2014-10-31',NULL,NULL,1,53.00,NULL),(75905,10,'2014-10-01',NULL,NULL,1,63.00,NULL),(75906,10,'2014-10-02',NULL,NULL,1,63.00,NULL),(75907,10,'2014-10-03',NULL,NULL,1,63.00,NULL),(75908,10,'2014-10-04',NULL,NULL,1,63.00,NULL),(75909,10,'2014-10-05',NULL,NULL,1,63.00,NULL),(75910,10,'2014-10-06',NULL,NULL,1,63.00,NULL),(75911,10,'2014-10-07',NULL,NULL,1,63.00,NULL),(75912,10,'2014-10-08',NULL,NULL,1,63.00,NULL),(75913,10,'2014-10-09',NULL,NULL,1,63.00,NULL),(75914,10,'2014-10-10',NULL,NULL,1,63.00,NULL),(75915,10,'2014-10-11',NULL,NULL,1,63.00,NULL),(75916,10,'2014-10-12',NULL,NULL,1,63.00,NULL),(75917,10,'2014-10-13',NULL,NULL,1,63.00,NULL),(75918,10,'2014-10-14',NULL,NULL,1,63.00,NULL),(75919,10,'2014-10-15',NULL,NULL,1,63.00,NULL),(75920,10,'2014-10-16',NULL,NULL,1,63.00,NULL),(75921,10,'2014-10-17',NULL,NULL,1,63.00,NULL),(75922,10,'2014-10-18',NULL,NULL,1,63.00,NULL),(75923,10,'2014-10-19',NULL,NULL,1,63.00,NULL),(75924,10,'2014-10-20',NULL,NULL,1,63.00,NULL),(75925,10,'2014-10-21',NULL,NULL,1,63.00,NULL),(75926,10,'2014-10-22',NULL,NULL,1,63.00,NULL),(75927,10,'2014-10-23',NULL,NULL,1,63.00,NULL),(75928,10,'2014-10-24',NULL,NULL,1,63.00,NULL),(75929,10,'2014-10-25',NULL,NULL,1,63.00,NULL),(75930,10,'2014-10-26',NULL,NULL,1,63.00,NULL),(75931,10,'2014-10-27',NULL,NULL,1,63.00,NULL),(75932,10,'2014-10-28',NULL,NULL,1,63.00,NULL),(75933,10,'2014-10-29',NULL,NULL,1,63.00,NULL),(75934,10,'2014-10-30',NULL,NULL,1,63.00,NULL),(75935,10,'2014-10-31',NULL,NULL,1,63.00,NULL),(75936,11,'2014-10-01',NULL,NULL,1,75.00,NULL),(75937,11,'2014-10-02',NULL,NULL,1,75.00,NULL),(75938,11,'2014-10-03',NULL,NULL,1,75.00,NULL),(75939,11,'2014-10-04',NULL,NULL,1,75.00,NULL),(75940,11,'2014-10-05',NULL,NULL,1,75.00,NULL),(75941,11,'2014-10-06',NULL,NULL,1,75.00,NULL),(75942,11,'2014-10-07',NULL,NULL,1,75.00,NULL),(75943,11,'2014-10-08',NULL,NULL,1,75.00,NULL),(75944,11,'2014-10-09',NULL,NULL,1,75.00,NULL),(75945,11,'2014-10-10',NULL,NULL,1,75.00,NULL),(75946,11,'2014-10-11',NULL,NULL,1,75.00,NULL),(75947,11,'2014-10-12',NULL,NULL,1,75.00,NULL),(75948,11,'2014-10-13',NULL,NULL,1,75.00,NULL),(75949,11,'2014-10-14',NULL,NULL,1,75.00,NULL),(75950,11,'2014-10-15',NULL,NULL,1,75.00,NULL),(75951,11,'2014-10-16',NULL,NULL,1,75.00,NULL),(75952,11,'2014-10-17',NULL,NULL,1,75.00,NULL),(75953,11,'2014-10-18',NULL,NULL,1,75.00,NULL),(75954,11,'2014-10-19',NULL,NULL,1,75.00,NULL),(75955,11,'2014-10-20',NULL,NULL,1,75.00,NULL),(75956,11,'2014-10-21',NULL,NULL,1,75.00,NULL),(75957,11,'2014-10-22',NULL,NULL,1,75.00,NULL),(75958,11,'2014-10-23',NULL,NULL,1,75.00,NULL),(75959,11,'2014-10-24',NULL,NULL,1,75.00,NULL),(75960,11,'2014-10-25',NULL,NULL,1,75.00,NULL),(75961,11,'2014-10-26',NULL,NULL,1,75.00,NULL),(75962,11,'2014-10-27',NULL,NULL,1,75.00,NULL),(75963,11,'2014-10-28',NULL,NULL,1,75.00,NULL),(75964,11,'2014-10-29',NULL,NULL,1,75.00,NULL),(75965,11,'2014-10-30',NULL,NULL,1,75.00,NULL),(75966,11,'2014-10-31',NULL,NULL,5,NULL,NULL),(75967,18,'2014-12-01',NULL,NULL,NULL,NULL,NULL),(75968,18,'2014-12-02',NULL,NULL,NULL,NULL,NULL),(75969,18,'2014-12-03',NULL,NULL,NULL,NULL,NULL),(75970,18,'2014-12-04',NULL,NULL,NULL,NULL,NULL),(75971,18,'2014-12-05',NULL,NULL,NULL,NULL,NULL),(75972,18,'2014-12-06',NULL,NULL,NULL,NULL,NULL),(75973,18,'2014-12-07',NULL,NULL,NULL,NULL,NULL),(75974,18,'2014-12-08',NULL,NULL,NULL,NULL,NULL),(75975,18,'2014-12-09',NULL,NULL,NULL,NULL,NULL),(75976,18,'2014-12-10',NULL,NULL,NULL,NULL,NULL),(75977,18,'2014-12-11',NULL,NULL,NULL,NULL,NULL),(75978,18,'2014-12-12',NULL,NULL,NULL,NULL,NULL),(75979,18,'2014-12-13',NULL,NULL,NULL,NULL,NULL),(75980,18,'2014-12-14',NULL,NULL,NULL,NULL,NULL),(75981,18,'2014-12-15',NULL,NULL,NULL,NULL,NULL),(75982,18,'2014-12-16',NULL,NULL,NULL,NULL,NULL),(75983,18,'2014-12-17',NULL,NULL,NULL,NULL,NULL),(75984,18,'2014-12-18',NULL,NULL,NULL,NULL,NULL),(75985,18,'2014-12-19',NULL,NULL,NULL,NULL,NULL),(75986,18,'2014-12-20',NULL,NULL,NULL,NULL,NULL),(75987,18,'2014-12-21',NULL,NULL,NULL,NULL,NULL),(75988,18,'2014-12-22',NULL,NULL,NULL,NULL,NULL),(75989,18,'2014-12-23',NULL,NULL,NULL,NULL,NULL),(75990,18,'2014-12-24',NULL,NULL,NULL,NULL,NULL),(75991,18,'2014-12-25',NULL,NULL,NULL,NULL,NULL),(75992,18,'2014-12-26',NULL,NULL,NULL,NULL,NULL),(75993,18,'2014-12-27',NULL,NULL,NULL,NULL,NULL),(75994,18,'2014-12-28',NULL,NULL,NULL,NULL,NULL),(75995,18,'2014-12-29',NULL,NULL,NULL,NULL,NULL),(75996,18,'2014-12-30',NULL,NULL,NULL,NULL,NULL),(75997,18,'2014-12-31',NULL,NULL,NULL,NULL,NULL),(75998,19,'2014-12-01',NULL,NULL,NULL,NULL,NULL),(75999,19,'2014-12-02',NULL,NULL,NULL,NULL,NULL),(76000,19,'2014-12-03',NULL,NULL,NULL,NULL,NULL),(76001,19,'2014-12-04',NULL,NULL,NULL,NULL,NULL),(76002,19,'2014-12-05',NULL,NULL,NULL,NULL,NULL),(76003,19,'2014-12-06',NULL,NULL,NULL,NULL,NULL),(76004,19,'2014-12-07',NULL,NULL,NULL,NULL,NULL),(76005,19,'2014-12-08',NULL,NULL,NULL,NULL,NULL),(76006,19,'2014-12-09',NULL,NULL,NULL,NULL,NULL),(76007,19,'2014-12-10',NULL,NULL,NULL,NULL,NULL),(76008,19,'2014-12-11',NULL,NULL,NULL,NULL,NULL),(76009,19,'2014-12-12',NULL,NULL,NULL,NULL,NULL),(76010,19,'2014-12-13',NULL,NULL,NULL,NULL,NULL),(76011,19,'2014-12-14',NULL,NULL,NULL,NULL,NULL),(76012,19,'2014-12-15',NULL,NULL,NULL,NULL,NULL),(76013,19,'2014-12-16',NULL,NULL,NULL,NULL,NULL),(76014,19,'2014-12-17',NULL,NULL,NULL,NULL,NULL),(76015,19,'2014-12-18',NULL,NULL,NULL,NULL,NULL),(76016,19,'2014-12-19',NULL,NULL,NULL,NULL,NULL),(76017,19,'2014-12-20',NULL,NULL,NULL,NULL,NULL),(76018,19,'2014-12-21',NULL,NULL,NULL,NULL,NULL),(76019,19,'2014-12-22',NULL,NULL,NULL,NULL,NULL),(76020,19,'2014-12-23',NULL,NULL,NULL,NULL,NULL),(76021,19,'2014-12-24',NULL,NULL,NULL,NULL,NULL),(76022,19,'2014-12-25',NULL,NULL,NULL,NULL,NULL),(76023,19,'2014-12-26',NULL,NULL,NULL,NULL,NULL),(76024,19,'2014-12-27',NULL,NULL,NULL,NULL,NULL),(76025,19,'2014-12-28',NULL,NULL,NULL,NULL,NULL),(76026,19,'2014-12-29',NULL,NULL,NULL,NULL,NULL),(76027,19,'2014-12-30',NULL,NULL,NULL,NULL,NULL),(76028,19,'2014-12-31',NULL,NULL,NULL,NULL,NULL),(76029,20,'2014-12-01',NULL,NULL,NULL,NULL,NULL),(76030,20,'2014-12-02',NULL,NULL,NULL,NULL,NULL),(76031,20,'2014-12-03',NULL,NULL,NULL,NULL,NULL),(76032,20,'2014-12-04',NULL,NULL,NULL,NULL,NULL),(76033,20,'2014-12-05',NULL,NULL,NULL,NULL,NULL),(76034,20,'2014-12-06',NULL,NULL,NULL,NULL,NULL),(76035,20,'2014-12-07',NULL,NULL,NULL,NULL,NULL),(76036,20,'2014-12-08',NULL,NULL,NULL,NULL,NULL),(76037,20,'2014-12-09',NULL,NULL,NULL,NULL,NULL),(76038,20,'2014-12-10',NULL,NULL,NULL,NULL,NULL),(76039,20,'2014-12-11',NULL,NULL,NULL,NULL,NULL),(76040,20,'2014-12-12',NULL,NULL,NULL,NULL,NULL),(76041,20,'2014-12-13',NULL,NULL,NULL,NULL,NULL),(76042,20,'2014-12-14',NULL,NULL,NULL,NULL,NULL),(76043,20,'2014-12-15',NULL,NULL,NULL,NULL,NULL),(76044,20,'2014-12-16',NULL,NULL,NULL,NULL,NULL),(76045,20,'2014-12-17',NULL,NULL,NULL,NULL,NULL),(76046,20,'2014-12-18',NULL,NULL,NULL,NULL,NULL),(76047,20,'2014-12-19',NULL,NULL,NULL,NULL,NULL),(76048,20,'2014-12-20',NULL,NULL,NULL,NULL,NULL),(76049,20,'2014-12-21',NULL,NULL,NULL,NULL,NULL),(76050,20,'2014-12-22',NULL,NULL,NULL,NULL,NULL),(76051,20,'2014-12-23',NULL,NULL,NULL,NULL,NULL),(76052,20,'2014-12-24',NULL,NULL,NULL,NULL,NULL),(76053,20,'2014-12-25',NULL,NULL,NULL,NULL,NULL),(76054,20,'2014-12-26',NULL,NULL,NULL,NULL,NULL),(76055,20,'2014-12-27',NULL,NULL,NULL,NULL,NULL),(76056,20,'2014-12-28',NULL,NULL,NULL,NULL,NULL),(76057,20,'2014-12-29',NULL,NULL,NULL,NULL,NULL),(76058,20,'2014-12-30',NULL,NULL,NULL,NULL,NULL),(76059,20,'2014-12-31',NULL,NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `bworkrow` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `cdict`
---
-
+-- ----------------------------
+-- Table structure for `cdict`
+-- ----------------------------
 DROP TABLE IF EXISTS `cdict`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cdict` (
   `dictid` int(4) NOT NULL COMMENT '字典表ID',
   `dicttype` varchar(64) DEFAULT NULL COMMENT '字典类型',
@@ -395,25 +283,31 @@ CREATE TABLE `cdict` (
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dictid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字典表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `cdict`
---
+-- ----------------------------
+-- Records of cdict
+-- ----------------------------
+INSERT INTO `cdict` VALUES ('10', '计量单位', '2014-08-21 18:24:03', '');
+INSERT INTO `cdict` VALUES ('11', '状态', '2014-08-22 11:02:27', null);
+INSERT INTO `cdict` VALUES ('12', '员工状态', '2014-08-22 11:12:34', null);
+INSERT INTO `cdict` VALUES ('13', '考勤状态', '2014-08-22 11:13:27', null);
+INSERT INTO `cdict` VALUES ('14', '员工类别', '2014-08-22 11:24:42', null);
+INSERT INTO `cdict` VALUES ('15', '工资类型', '2014-08-22 11:28:50', null);
+INSERT INTO `cdict` VALUES ('16', '供应商类别', '2014-08-22 11:32:46', '');
+INSERT INTO `cdict` VALUES ('17', '是否', '2014-08-22 11:37:56', null);
+INSERT INTO `cdict` VALUES ('18', '收支类型', '2014-08-22 11:40:37', null);
+INSERT INTO `cdict` VALUES ('19', '银行类型', '2014-08-22 12:42:18', '');
+INSERT INTO `cdict` VALUES ('20', '流程状态', '2014-08-22 12:52:03', null);
+INSERT INTO `cdict` VALUES ('21', '单据类型', '2014-09-01 14:24:57', '');
+INSERT INTO `cdict` VALUES ('482', '产品类型', '2015-04-05 12:58:45', '');
+INSERT INTO `cdict` VALUES ('765', '采购状态', '2015-05-13 16:26:19', null);
+INSERT INTO `cdict` VALUES ('766', '销售状态', '2015-05-13 16:27:15', null);
+INSERT INTO `cdict` VALUES ('1539', '产品材料类型', '2015-09-03 11:02:25', null);
 
-LOCK TABLES `cdict` WRITE;
-/*!40000 ALTER TABLE `cdict` DISABLE KEYS */;
-INSERT INTO `cdict` VALUES (10,'计量单位','2014-08-21 18:24:03',''),(11,'状态','2014-08-22 11:02:27',NULL),(12,'员工状态','2014-08-22 11:12:34',NULL),(13,'考勤状态','2014-08-22 11:13:27',NULL),(14,'员工类别','2014-08-22 11:24:42',NULL),(15,'工资类型','2014-08-22 11:28:50',NULL),(16,'供应商类别','2014-08-22 11:32:46',''),(17,'是否','2014-08-22 11:37:56',NULL),(18,'收支类型','2014-08-22 11:40:37',NULL),(19,'银行类型','2014-08-22 12:42:18',''),(20,'流程状态','2014-08-22 12:52:03',NULL),(21,'单据类型','2014-09-01 14:24:57','');
-/*!40000 ALTER TABLE `cdict` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `cdictrow`
---
-
+-- ----------------------------
+-- Table structure for `cdictrow`
+-- ----------------------------
 DROP TABLE IF EXISTS `cdictrow`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cdictrow` (
   `dictrowid` int(6) NOT NULL AUTO_INCREMENT COMMENT '字典行项表ID',
   `dictid` int(4) DEFAULT NULL COMMENT '关联字典表ID',
@@ -422,48 +316,125 @@ CREATE TABLE `cdictrow` (
   `sordid` int(3) DEFAULT NULL COMMENT '排序',
   `rowremark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dictrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8 COMMENT='字典行项表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=utf8 COMMENT='字典行项表';
 
---
--- Dumping data for table `cdictrow`
---
+-- ----------------------------
+-- Records of cdictrow
+-- ----------------------------
+INSERT INTO `cdictrow` VALUES ('32', '11', '禁用', '0', '2', null);
+INSERT INTO `cdictrow` VALUES ('33', '11', '可用', '1', '1', null);
+INSERT INTO `cdictrow` VALUES ('34', '12', '在职', '1', '1', null);
+INSERT INTO `cdictrow` VALUES ('35', '12', '离职', '2', '2', null);
+INSERT INTO `cdictrow` VALUES ('36', '13', '正常', '1', '1', null);
+INSERT INTO `cdictrow` VALUES ('37', '13', '迟到', '2', '2', null);
+INSERT INTO `cdictrow` VALUES ('38', '13', '早退', '3', '3', null);
+INSERT INTO `cdictrow` VALUES ('39', '13', '旷工', '4', '4', null);
+INSERT INTO `cdictrow` VALUES ('40', '13', '请假', '5', '5', null);
+INSERT INTO `cdictrow` VALUES ('41', '13', '放假', '6', '6', null);
+INSERT INTO `cdictrow` VALUES ('42', '14', '正式员工', '1', '1', null);
+INSERT INTO `cdictrow` VALUES ('43', '14', '临时员工', '2', '2', null);
+INSERT INTO `cdictrow` VALUES ('44', '15', '工资', '1', '1', null);
+INSERT INTO `cdictrow` VALUES ('45', '15', '过节费', '2', '2', null);
+INSERT INTO `cdictrow` VALUES ('46', '15', '年终奖', '3', '3', null);
+INSERT INTO `cdictrow` VALUES ('50', '16', '供应商', '1', '1', null);
+INSERT INTO `cdictrow` VALUES ('51', '16', '客户', '2', '2', null);
+INSERT INTO `cdictrow` VALUES ('52', '16', '物流', '3', '3', null);
+INSERT INTO `cdictrow` VALUES ('53', '17', '是', '1', '1', null);
+INSERT INTO `cdictrow` VALUES ('54', '17', '否', '0', '2', null);
+INSERT INTO `cdictrow` VALUES ('55', '18', '收入', '1', '1', null);
+INSERT INTO `cdictrow` VALUES ('56', '18', '支出', '2', '2', null);
+INSERT INTO `cdictrow` VALUES ('78', '20', '申请', '申请', '1', null);
+INSERT INTO `cdictrow` VALUES ('79', '20', '结束', '结束', '2', null);
+INSERT INTO `cdictrow` VALUES ('120', '19', '中国建设银行', '1', '1', null);
+INSERT INTO `cdictrow` VALUES ('121', '19', '中国工商银行', '2', '2', null);
+INSERT INTO `cdictrow` VALUES ('122', '19', '中国银行', '3', '3', null);
+INSERT INTO `cdictrow` VALUES ('123', '19', '中国农业银行', '4', '4', null);
+INSERT INTO `cdictrow` VALUES ('124', '19', '招商银行', '5', '5', null);
+INSERT INTO `cdictrow` VALUES ('125', '19', '兴业银行', '6', '6', null);
+INSERT INTO `cdictrow` VALUES ('126', '19', '其它', '9', '9', null);
+INSERT INTO `cdictrow` VALUES ('127', '19', '民生银行', '7', '7', null);
+INSERT INTO `cdictrow` VALUES ('164', '10', '只', '1', '1', null);
+INSERT INTO `cdictrow` VALUES ('165', '10', '盒', '2', '2', null);
+INSERT INTO `cdictrow` VALUES ('166', '10', '个', '3', '3', null);
+INSERT INTO `cdictrow` VALUES ('167', '10', '箱', '4', '4', null);
+INSERT INTO `cdictrow` VALUES ('168', '10', '件', '5', '5', null);
+INSERT INTO `cdictrow` VALUES ('169', '10', '斤', '6', '6', null);
+INSERT INTO `cdictrow` VALUES ('170', '10', '套', '7', '7', null);
+INSERT INTO `cdictrow` VALUES ('171', '10', '支', '8', '8', null);
+INSERT INTO `cdictrow` VALUES ('172', '10', '对', '9', '9', null);
+INSERT INTO `cdictrow` VALUES ('173', '10', '包', '10', '10', null);
+INSERT INTO `cdictrow` VALUES ('174', '765', '申请', '申请', '1', null);
+INSERT INTO `cdictrow` VALUES ('175', '765', '待付', '待付', '2', null);
+INSERT INTO `cdictrow` VALUES ('176', '765', '结束', '结束', '3', null);
+INSERT INTO `cdictrow` VALUES ('177', '766', '申请', '申请', '1', null);
+INSERT INTO `cdictrow` VALUES ('178', '766', '发货', '发货', '2', null);
+INSERT INTO `cdictrow` VALUES ('179', '766', '结束', '结束', '3', null);
+INSERT INTO `cdictrow` VALUES ('180', '1539', '铜', '1', '1', null);
+INSERT INTO `cdictrow` VALUES ('181', '1539', '锌', '2', '2', null);
+INSERT INTO `cdictrow` VALUES ('182', '482', '淋浴', '01', '1', null);
+INSERT INTO `cdictrow` VALUES ('183', '482', '二联', '02', '2', null);
+INSERT INTO `cdictrow` VALUES ('184', '482', '三联', '03', '3', null);
+INSERT INTO `cdictrow` VALUES ('185', '482', '面盆单孔', '04', '4', null);
+INSERT INTO `cdictrow` VALUES ('186', '482', '菜盆单孔', '05', '5', null);
+INSERT INTO `cdictrow` VALUES ('187', '482', '平咀', '06', '6', null);
+INSERT INTO `cdictrow` VALUES ('188', '482', '尖咀', '07', '7', null);
+INSERT INTO `cdictrow` VALUES ('189', '482', '网咀', '08', '8', null);
+INSERT INTO `cdictrow` VALUES ('190', '482', '角阀', '09', '9', null);
+INSERT INTO `cdictrow` VALUES ('191', '482', '面盆单冷', '10', '10', null);
+INSERT INTO `cdictrow` VALUES ('192', '482', '菜盆单冷', '11', '11', null);
+INSERT INTO `cdictrow` VALUES ('193', '482', '顶喷', '12', '12', null);
+INSERT INTO `cdictrow` VALUES ('194', '482', '其他', '19', '19', null);
+INSERT INTO `cdictrow` VALUES ('205', '21', '采购单', 'CGD', '1', null);
+INSERT INTO `cdictrow` VALUES ('206', '21', '产品单', 'CPD', '2', null);
+INSERT INTO `cdictrow` VALUES ('207', '21', '付款单', 'FKD', '3', null);
+INSERT INTO `cdictrow` VALUES ('208', '21', '工资单', 'GZD', '4', null);
+INSERT INTO `cdictrow` VALUES ('209', '21', '简易采购单', 'JYD', '5', null);
+INSERT INTO `cdictrow` VALUES ('210', '21', '收款单', 'SKD', '6', null);
+INSERT INTO `cdictrow` VALUES ('211', '21', '物资单', 'WZD', '7', null);
+INSERT INTO `cdictrow` VALUES ('212', '21', '销售单', 'XSD', '8', null);
+INSERT INTO `cdictrow` VALUES ('213', '21', '运费单', 'YFD', '9', null);
 
-LOCK TABLES `cdictrow` WRITE;
-/*!40000 ALTER TABLE `cdictrow` DISABLE KEYS */;
-INSERT INTO `cdictrow` VALUES (27,10,'只','1',1,NULL),(28,10,'盒','2',2,NULL),(29,10,'个','3',3,NULL),(30,10,'箱','4',4,NULL),(31,10,'件','5',5,NULL),(32,11,'禁用','0',2,NULL),(33,11,'可用','1',1,NULL),(34,12,'在职','1',1,NULL),(35,12,'离职','2',2,NULL),(36,13,'正常','1',1,NULL),(37,13,'迟到','2',2,NULL),(38,13,'早退','3',3,NULL),(39,13,'旷工','4',4,NULL),(40,13,'请假','5',5,NULL),(41,13,'放假','6',6,NULL),(42,14,'正式员工','1',1,NULL),(43,14,'临时员工','2',2,NULL),(44,15,'工资','1',1,NULL),(45,15,'过节费','2',2,NULL),(46,15,'年终奖','3',3,NULL),(50,16,'供应商','1',1,NULL),(51,16,'客户','2',2,NULL),(52,16,'物流','3',3,NULL),(53,17,'是','1',1,NULL),(54,17,'否','0',2,NULL),(55,18,'收入','1',1,NULL),(56,18,'支出','2',2,NULL),(78,20,'申请','申请',1,NULL),(79,20,'结束','结束',2,NULL),(98,19,'中国建设银行','1',1,NULL),(99,19,'中国工商银行','2',2,NULL),(100,19,'中国银行','3',3,NULL),(101,19,'中国农业银行','4',4,NULL),(102,19,'招商银行','5',5,NULL),(103,19,'兴业银行','6',6,NULL),(104,19,'其它','9',9,NULL),(105,21,'采购单','CGD',1,NULL),(106,21,'产品单','CPD',2,NULL),(107,21,'付款单','FKD',3,NULL),(108,21,'工资单','GZD',4,NULL),(109,21,'简易采购单','JYD',5,NULL),(110,21,'收款单','SKD',6,NULL),(111,21,'物资单','WZD',7,NULL),(112,21,'销售单','XSD',8,NULL),(113,21,'运费单','YFD',9,NULL);
-/*!40000 ALTER TABLE `cdictrow` ENABLE KEYS */;
-UNLOCK TABLES;
+-- ----------------------------
+-- Table structure for `cparameter`
+-- ----------------------------
+DROP TABLE IF EXISTS `cparameter`;
+CREATE TABLE `cparameter` (
+  `parameterid` int(4) NOT NULL AUTO_INCREMENT COMMENT '系统参数ID',
+  `parametername` varchar(64) DEFAULT NULL COMMENT '系统参数名',
+  `parametervalue` varchar(64) DEFAULT NULL COMMENT '系统参数值',
+  `createtime` varchar(19) DEFAULT NULL COMMENT '创建时间',
+  `remark` varchar(128) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`parameterid`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
---
--- Table structure for table `cseq`
---
+-- ----------------------------
+-- Records of cparameter
+-- ----------------------------
+INSERT INTO `cparameter` VALUES ('1', '是否打印隐藏', 'N', '2015-05-08 09:32:01', 'Y是，N否');
+INSERT INTO `cparameter` VALUES ('3', '是否价格记忆', 'N', '2015-07-11 15:45:54', 'Y是，N否');
+INSERT INTO `cparameter` VALUES ('7', '箱子行数', '7', '2015-12-27 09:27:48', '');
+INSERT INTO `cparameter` VALUES ('6', '采购单显示物资特性', 'Y', '2015-10-20 20:30:54', '显示重量、标记');
+INSERT INTO `cparameter` VALUES ('8', '箱子列数', '3', '2015-12-27 09:28:03', '');
+INSERT INTO `cparameter` VALUES ('9', '是否记录日志', 'N', '2015-12-27 09:38:05', 'Y是，N否，登录一定保存日志');
+INSERT INTO `cparameter` VALUES ('10', '利润百分点', '12', '2016-01-23 17:03:15', '');
 
+-- ----------------------------
+-- Table structure for `cseq`
+-- ----------------------------
 DROP TABLE IF EXISTS `cseq`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cseq` (
   `seq` int(9) DEFAULT NULL COMMENT '序列值'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='序列';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `cseq`
---
+-- ----------------------------
+-- Records of cseq
+-- ----------------------------
+INSERT INTO `cseq` VALUES ('107');
 
-LOCK TABLES `cseq` WRITE;
-/*!40000 ALTER TABLE `cseq` DISABLE KEYS */;
-INSERT INTO `cseq` VALUES (121);
-/*!40000 ALTER TABLE `cseq` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `sbankcard`
---
-
+-- ----------------------------
+-- Table structure for `sbankcard`
+-- ----------------------------
 DROP TABLE IF EXISTS `sbankcard`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sbankcard` (
   `bankcardid` int(9) NOT NULL AUTO_INCREMENT COMMENT '银行卡ID',
   `bankcardno` varchar(32) NOT NULL COMMENT '银行卡卡号',
@@ -477,44 +448,16 @@ CREATE TABLE `sbankcard` (
   `changetype` varchar(20) DEFAULT NULL COMMENT '更改类型',
   `changeid` int(9) DEFAULT NULL COMMENT '更改相关ID',
   PRIMARY KEY (`bankcardid`,`bankcardno`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='银行卡管理表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='银行卡管理表';
 
---
--- Dumping data for table `sbankcard`
---
+-- ----------------------------
+-- Records of sbankcard
+-- ----------------------------
 
-LOCK TABLES `sbankcard` WRITE;
-/*!40000 ALTER TABLE `sbankcard` DISABLE KEYS */;
-INSERT INTO `sbankcard` VALUES (1,'00000','现金',9,'现金',42695.32,1,1,'此为现金','btransferaccount',11),(2,'6227001823550092014','建设银行福州支行',2,'林珊珊',65851.25,1,2,'','breceandpay',87),(3,'622909116836651310','兴业银行福州支行',6,'王建辉',53133.07,1,3,'','btransferaccount',85);
-/*!40000 ALTER TABLE `sbankcard` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`%`*/ /*!50003 TRIGGER `tri_sbankcard` AFTER UPDATE ON `sbankcard` FOR EACH ROW begin
-	insert into sbankcard_log(bankcardid, oldmoney, newmoney, changemoney, changetime, changetype, changeid)
-		values (new.bankcardid, old.money, new.money, old.money - new.money, now(), new.changetype, new.changeid);
-end */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-
---
--- Table structure for table `sbankcard_log`
---
-
+-- ----------------------------
+-- Table structure for `sbankcard_log`
+-- ----------------------------
 DROP TABLE IF EXISTS `sbankcard_log`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sbankcard_log` (
   `logid` int(9) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `bankcardid` int(9) DEFAULT NULL COMMENT '银行卡ID',
@@ -525,26 +468,16 @@ CREATE TABLE `sbankcard_log` (
   `changetype` varchar(20) DEFAULT NULL COMMENT '更改类型',
   `changeid` int(9) DEFAULT NULL COMMENT '更改相关ID',
   PRIMARY KEY (`logid`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='银行卡更改日志表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='银行卡更改日志表';
 
---
--- Dumping data for table `sbankcard_log`
---
+-- ----------------------------
+-- Records of sbankcard_log
+-- ----------------------------
 
-LOCK TABLES `sbankcard_log` WRITE;
-/*!40000 ALTER TABLE `sbankcard_log` DISABLE KEYS */;
-INSERT INTO `sbankcard_log` VALUES (5,1,42706.44,42707.44,-1.00,'2014-11-13 18:07:04','breceandpay',7),(6,1,42707.44,42697.32,10.12,'2014-11-14 10:39:03','bpayrow',213),(7,2,69113.70,68808.90,304.80,'2014-11-14 10:39:03','bpayrow',214),(8,2,68808.90,69344.10,-535.20,'2014-11-14 18:01:46','bpayrow',216),(9,1,42697.32,42695.32,2.00,'2014-11-17 21:25:15','btransferaccount',12),(10,2,69344.10,69346.10,-2.00,'2014-11-17 21:25:15','btransferaccount',12),(11,2,69346.10,69341.26,4.84,'2014-11-26 11:01:23','bpayrow',222),(12,3,55083.54,54692.34,391.20,'2014-11-26 11:01:23','bpayrow',223),(13,3,54692.34,55382.44,-690.10,'2014-11-26 11:11:15','bpayrow',226),(14,2,69341.26,67803.86,1537.40,'2014-11-26 11:28:11','bpayrow',233),(15,2,67803.86,65850.36,1953.50,'2014-11-26 11:28:11','bpayrow',234),(16,3,55382.44,53131.84,2250.60,'2014-11-26 11:28:11','bpayrow',235),(17,2,65850.36,65849.13,1.23,'2014-11-26 11:47:39','btransferaccount',85),(18,3,53131.84,53133.07,-1.23,'2014-11-26 11:47:39','btransferaccount',85),(19,2,65849.13,65851.25,-2.12,'2014-11-26 12:17:45','breceandpay',87),(20,1,42695.32,42695.32,0.00,'2014-11-26 14:34:39','btransferaccount',11),(21,1,42695.32,42695.32,0.00,'2015-02-13 15:23:16','btransferaccount',11);
-/*!40000 ALTER TABLE `sbankcard_log` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `scompany`
---
-
+-- ----------------------------
+-- Table structure for `scompany`
+-- ----------------------------
 DROP TABLE IF EXISTS `scompany`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `scompany` (
   `companyid` int(2) NOT NULL AUTO_INCREMENT COMMENT '公司编号',
   `companyname` varchar(64) DEFAULT NULL COMMENT '公司名称',
@@ -557,25 +490,16 @@ CREATE TABLE `scompany` (
   `remark` varchar(1024) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`companyid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='公司信息';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `scompany`
---
+-- ----------------------------
+-- Records of scompany
+-- ----------------------------
+INSERT INTO `scompany` VALUES ('1', '岐盛卫浴', '周坚定', '福建省南安市东田镇', '059586211027', '059586211027', '362300', 'zjd621102@163.com', '');
 
-LOCK TABLES `scompany` WRITE;
-/*!40000 ALTER TABLE `scompany` DISABLE KEYS */;
-INSERT INTO `scompany` VALUES (1,'岐盛卫浴','周坚定','福建省南安市东田镇','059586211027','059586211027','362300','zjd621102@163.com','');
-/*!40000 ALTER TABLE `scompany` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `sfile`
---
-
+-- ----------------------------
+-- Table structure for `sfile`
+-- ----------------------------
 DROP TABLE IF EXISTS `sfile`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sfile` (
   `fileid` int(9) NOT NULL COMMENT '文件ID',
   `pid` int(9) DEFAULT NULL COMMENT '关联ID',
@@ -586,55 +510,41 @@ CREATE TABLE `sfile` (
   `createtime` varchar(20) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`fileid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文件表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `sfile`
---
+-- ----------------------------
+-- Records of sfile
+-- ----------------------------
 
-LOCK TABLES `sfile` WRITE;
-/*!40000 ALTER TABLE `sfile` DISABLE KEYS */;
-INSERT INTO `sfile` VALUES (109,98,'product','角阀一.jpg','jpg','ZHOUJD','2015-02-27 11:27:35'),(110,99,'product','角阀二三.jpg','jpg','ZHOUJD','2015-02-27 11:28:33'),(111,100,'product','角阀二三.jpg','jpg','ZHOUJD','2015-02-27 11:28:43'),(112,96,'product','镀金问号管.jpg','jpg','ZHOUJD','2015-02-27 11:29:04'),(113,96,'product','镀金大顶喷.jpg','jpg','ZHOUJD','2015-02-27 11:29:09'),(114,97,'product','镀金葫芦问号管.jpg','jpg','ZHOUJD','2015-02-27 11:29:22'),(115,97,'product','镀金大顶喷.jpg','jpg','ZHOUJD','2015-02-27 11:29:30');
-/*!40000 ALTER TABLE `sfile` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `slog`
---
-
+-- ----------------------------
+-- Table structure for `slog`
+-- ----------------------------
 DROP TABLE IF EXISTS `slog`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `slog` (
   `logid` int(9) NOT NULL AUTO_INCREMENT COMMENT '日志ID',
   `logtype` varchar(20) NOT NULL COMMENT '操作类型',
   `operater` varchar(64) NOT NULL COMMENT '操作人ID',
   `operatetime` varchar(20) NOT NULL COMMENT '操作时间',
+  `ip` varchar(30) DEFAULT NULL COMMENT 'IP',
   `remark` text COMMENT '备注',
   PRIMARY KEY (`logid`)
-) ENGINE=InnoDB AUTO_INCREMENT=669 DEFAULT CHARSET=utf8 COMMENT='日志表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='日志表';
 
---
--- Dumping data for table `slog`
---
+-- ----------------------------
+-- Records of slog
+-- ----------------------------
+INSERT INTO `slog` VALUES ('1', '登录', 'ADMIN', '2016-01-29 22:37:41', '121.207.59.67', '');
+INSERT INTO `slog` VALUES ('2', '登录', 'TEST', '2016-01-29 22:38:25', '121.207.59.67', '');
+INSERT INTO `slog` VALUES ('3', '登录', 'ADMIN', '2016-01-29 22:41:07', '121.207.59.67', '');
+INSERT INTO `slog` VALUES ('4', '登录', 'TEST', '2016-01-29 22:43:11', '121.207.59.67', '');
 
-LOCK TABLES `slog` WRITE;
-/*!40000 ALTER TABLE `slog` DISABLE KEYS */;
-INSERT INTO `slog` VALUES (1,'登录','ZHOUJD','2014-07-29 17:25:37',NULL),(2,'登录','ZHOUJD','2014-07-29 18:58:59',NULL),(3,'登录','LINCC','2014-07-29 18:58:59',NULL),(4,'登录','ZHOUJD','2014-07-29 18:58:59',NULL),(5,'登录','ZH112014','2014-07-29 18:58:59',NULL),(6,'登录','ZHOUJD','2014-07-29 18:58:59',NULL),(7,'登录','ZH112014','2014-07-29 18:58:59',NULL),(8,'登录','ZHOUJD','2014-07-29 18:58:59',NULL),(9,'登录','ZHOUJD','2014-07-30 10:51:09',NULL),(10,'登录','ZHOUJD','2014-07-30 11:42:53',NULL),(11,'登录','ZHOUJD','2014-07-30 12:33:09',NULL),(12,'登录','ZHOUJD','2014-07-31 09:39:46',NULL),(13,'登录','ZHOUJD','2014-07-31 09:39:46',NULL),(14,'登录','ZHOUJD','2014-07-31 09:39:46',NULL),(15,'登录','ZHOUJD','2014-07-31 09:39:46',NULL),(16,'登录','ZHOUJD','2014-08-10 21:15:34',NULL),(17,'登录','ZHOUJD','2014-08-10 21:15:34',NULL),(18,'登录','ZHOUJD','2014-08-11 08:37:20',NULL),(19,'登录','ZHOUJD','2014-08-11 08:37:20',NULL),(20,'登录','ZHOUJD','2014-08-11 14:57:24',NULL),(21,'登录','ZHOUJD','2014-08-11 14:57:24',NULL),(22,'登录','ZHOUJD','2014-08-11 14:57:24',NULL),(23,'登录','ZHOUJD','2014-08-11 14:57:24',NULL),(24,'登录','ZHOUJD','2014-08-11 14:57:24',NULL),(25,'登录','ZHOUJD','2014-08-11 14:57:24',NULL),(26,'登录','ZHOUJD','2014-08-12 14:34:18',NULL),(27,'登录','ZHOUJD','2014-08-12 14:34:18',NULL),(28,'登录','ZHOUJD','2014-08-12 14:34:18',NULL),(29,'登录','ZHOUJD','2014-08-12 14:34:18',NULL),(30,'登录','ZHOUJD','2014-08-12 15:01:00',NULL),(31,'登录','ZHOUJD','2014-08-12 18:08:21',NULL),(32,'登录','ZHOUJD','2014-08-13 15:57:57',NULL),(33,'登录','ZHOUJD','2014-08-13 15:57:57',NULL),(34,'登录','ZHOUJD','2014-08-13 15:57:57',NULL),(35,'登录','ZHOUJD','2014-08-13 17:04:07',NULL),(38,'修改银行卡','ZHOUJD','2014-08-13 17:04:07','bankcardno:00000,accountname:钱包,status:1,remark:此为钱包,bankname:无,priority:1,banktype:99,money:9579.54,bankcardid:1'),(39,'登录','ZHOUJD','2014-08-13 17:35:48',''),(46,'修改产品','ZHOUJD','2014-08-13 17:35:48','realprice:120.00,remark:产品一备注,planprice:116.60,productno:20101001,producttypename:产品类别一1,createdate:2013-03-06,unit:1,productid:1,producttype:14,productname:产品1'),(47,'登录','ZHOUJD','2014-08-17 14:53:31',''),(48,'登录','ZHOUJD','2014-08-19 16:02:29',''),(49,'修改银行卡','ZHOUJD','2014-08-19 16:02:29','bankcardno:00000,accountname:现金,status:1,remark:此为现金,bankname:无,priority:1,banktype:99,money:9579.54,bankcardid:1'),(50,'登录','ZHOUJD','2014-08-19 16:19:59',''),(51,'修改用户','ZHOUJD','2014-08-19 16:19:59','tele:15060066666,birthday:null,username:测试账号,roleid:2,userid:ceshi'),(52,'登录','ZHOUJD','2014-08-19 17:05:16',''),(53,'新增产品','ZHOUJD','2014-08-19 17:05:16','realprice:0.00,remark:null,planprice:8,productno:20101004,producttypename:产品类别一1,createdate:2014-08-19 17:07:21,unit:1,productid:6,producttype:14,productname:22'),(54,'新增产品','ZHOUJD','2014-08-19 17:05:16','realprice:0.00,remark:233,planprice:5,productno:20101004,producttypename:产品类别一1,createdate:2014-08-19 17:09:54,unit:1,productid:7,producttype:14,productname:123'),(55,'登录','ZHOUJD','2014-08-19 17:14:09',''),(56,'新增产品','ZHOUJD','2014-08-19 17:14:09','realprice:0.00,remark:null,planprice:0.00,productno:20101004,producttypename:产品类别一1,createdate:2014-08-19 17:14:25,unit:1,productid:8,producttype:14,productname:11'),(57,'新增产品','ZHOUJD','2014-08-19 17:14:09','realprice:0.00,remark:null,planprice:0.00,productno:20101004,producttypename:产品类别一1,createdate:2014-08-19 17:16:22,unit:1,productid:9,producttype:14,productname:1111'),(58,'新增产品','ZHOUJD','2014-08-19 17:14:09','realprice:0.00,remark:null,planprice:0.00,productno:20101005,producttypename:产品类别一1,createdate:2014-08-19 17:16:27,unit:1,productid:10,producttype:14,productname:2222'),(59,'新增产品','ZHOUJD','2014-08-19 17:14:09','realprice:0.00,remark:null,planprice:0.00,productno:20101006,producttypename:产品类别一1,createdate:2014-08-19 17:16:32,unit:1,productid:11,producttype:14,productname:3333'),(60,'新增产品','ZHOUJD','2014-08-19 17:14:09','realprice:0.00,remark:null,planprice:0.00,productno:20101004,producttypename:产品类别一1,createdate:2014-08-19 17:21:15,unit:1,productid:12,producttype:14,productname:22'),(61,'删除产品','ZHOUJD','2014-08-19 17:14:09','12'),(62,'新增产品','ZHOUJD','2014-08-19 17:14:09','realprice:0.00,remark:null,planprice:0.00,productno:20101004,producttypename:产品类别一1,createdate:2014-08-19 17:24:19,unit:1,productid:13,producttype:14,productname:222'),(63,'删除产品','ZHOUJD','2014-08-19 17:14:09','13'),(64,'新增产品','ZHOUJD','2014-08-19 17:14:09','realprice:0.00,remark:null,planprice:0.00,productno:20101004,producttypename:产品类别一1,createdate:2014-08-19 17:24:45,unit:1,productid:14,producttype:14,productname:2222'),(65,'删除产品','ZHOUJD','2014-08-19 17:14:09','14'),(66,'新增产品','ZHOUJD','2014-08-19 17:14:09','realprice:0.00,remark:null,planprice:0.00,productno:20101004,producttypename:产品类别一1,createdate:2014-08-19 17:25:20,unit:1,productid:15,producttype:14,productname:22'),(67,'删除产品','ZHOUJD','2014-08-19 17:14:09','15'),(68,'删除用户','ZHOUJD','2014-08-19 17:14:09','ceshi'),(69,'新增用户','ZHOUJD','2014-08-19 17:14:09','tele:null,passwd:21218cca77804d2ba1922c33e0151105,birthday:null,username:测试账号,roleid:3,userid:CESHI'),(70,'登录','ZHOUJD','2014-08-19 17:48:22',''),(71,'新增模块','ZHOUJD','2014-08-19 17:48:22','modulename:日志管理,sn:Log,priority:99,description:,parentid:103,rel:log_list,url:/log/list'),(72,'修改模块','ZHOUJD','2014-08-19 17:48:22','modulename:日志管理,sn:Log,priority:1,description:null,moduleid:10132,parentid:103,rel:log_list,url:/log/list'),(73,'登录','ZHOUJD','2014-08-19 17:48:22',''),(74,'登录','ZHOUJD','2014-08-19 17:48:22',''),(75,'登录','ZHOUJD','2014-08-19 17:48:22',''),(76,'登录','ZHOUJD','2014-08-19 18:30:32',''),(77,'修改用户','ZHOUJD','2014-08-19 18:30:32','tele:null,birthday:null,username:测试账号,roleid:3,userid:CESHI'),(78,'登录','ZHOUJD','2014-08-19 18:45:36',''),(79,'登录','ZHOUJD','2014-08-19 18:45:36',''),(80,'登录','ZHOUJD','2014-08-19 18:45:36',''),(81,'登录','ZHOUJD','2014-08-20 08:55:18',''),(82,'登录','ZHOUJD','2014-08-20 08:55:18',''),(83,'修改产品','ZHOUJD','2014-08-20 08:55:18','profit:5.4,realprice:122.00,remark:产品一备注,costprice:116.6,productno:20101001,producttypename:产品类别一1,createdate:2013-03-06,unit:1,productid:1,producttype:14,productname:产品1'),(84,'修改产品','ZHOUJD','2014-08-20 08:55:18','profit:9.06,realprice:200.50,remark:null,costprice:191.44,productno:20101002,producttypename:产品类别一1,createdate:2014-07-12,unit:1,productid:2,producttype:14,productname:产品2'),(85,'修改产品','ZHOUJD','2014-08-20 08:55:18','profit:6.8,realprice:203.20,remark:null,costprice:196.4,productno:20101003,producttypename:产品类别一1,createdate:2014-07-12,unit:1,productid:3,producttype:14,productname:产品3'),(86,'修改产品','ZHOUJD','2014-08-20 08:55:18','profit:9.8,realprice:43.10,remark:null,costprice:33.3,productno:20102001,producttypename:产品类别一2,createdate:2014-08-11,unit:1,productid:5,producttype:15,productname:产品8'),(87,'修改产品','ZHOUJD','2014-08-20 08:55:18','profit:9.4,realprice:123.00,remark:产品一备注,costprice:113.6,productno:20101001,producttypename:产品类别一1,createdate:2013-03-06,unit:1,productid:1,producttype:14,productname:产品1'),(88,'修改产品','ZHOUJD','2014-08-20 08:55:18','profit:30.06,realprice:200.50,remark:null,costprice:170.44,productno:20101002,producttypename:产品类别一1,createdate:2014-07-12,unit:1,productid:2,producttype:14,productname:产品2'),(89,'修改产品','ZHOUJD','2014-08-20 08:55:18','profit:39.8,realprice:203.20,remark:null,costprice:163.4,productno:20101003,producttypename:产品类别一1,createdate:2014-07-12,unit:1,productid:3,producttype:14,productname:产品3'),(90,'修改产品','ZHOUJD','2014-08-20 08:55:18','profit:9.4,realprice:123.00,remark:产品一备注,costprice:113.6,productno:20101001,producttypename:产品类别一1,createdate:2013-03-06,unit:1,productid:1,producttype:14,productname:产品1'),(91,'修改产品','ZHOUJD','2014-08-20 08:55:18','profit:30.06,realprice:200.50,remark:null,costprice:170.44,productno:20101002,producttypename:产品类别一1,createdate:2014-07-12,unit:1,productid:2,producttype:14,productname:产品2'),(92,'修改产品','ZHOUJD','2014-08-20 08:55:18','profit:9.4,realprice:123.20,remark:产品一备注,costprice:113.8,productno:20101001,producttypename:产品类别一1,createdate:2013-03-06,unit:1,productid:1,producttype:14,productname:产品1'),(93,'新增销售单','ZHOUJD','2014-08-20 08:55:18','sellno:XSD-20140820-001,remark:null,maker:ZHOUJD,manuid:5,allrealsum:7399.2,allprofit:918.84,manuname:客户A,createtime:2014-08-20 11:14:34,sellid:11,currflow:申请,selldate:2014-08-20'),(94,'登录','ZHOUJD','2014-08-20 08:55:18',''),(95,'登录','ZHOUJD','2014-08-20 08:55:18',''),(96,'修改销售单','ZHOUJD','2014-08-20 08:55:18','sellno:XSD-20140820-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:7522.62,allprofit:928.46,manuname:客户A,createtime:2014-08-20 11:14:34,sellid:11,currflow:申请,selldate:2014-08-20'),(97,'修改销售单','ZHOUJD','2014-08-20 08:55:18','sellno:XSD-20140820-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:8513.92,allprofit:1153.86,manuname:客户A,createtime:2014-08-20 11:14:34,sellid:11,currflow:结束,selldate:2014-08-20'),(98,'修改银行卡','ZHOUJD','2014-08-20 08:55:18','bankcardno:00000,accountname:现金,status:1,remark:此为现金,bankname:现金,priority:1,banktype:99,money:9579.54,bankcardid:1'),(99,'修改单据','ZHOUJD','2014-08-20 08:55:18','btypename:收款单,operatetime:2014-08-20 08:55:18,remark:null,operater:ZHOUJD,allplansum:8513.92,makername:周坚定,createtime:2014-08-20 14:34:44,relateno:XSD-20140820-001,btype:SKD,maker:ZHOUJD,relatemoney:7522.62,paydate:2014-08-20,payid:53,allrealsum:8513.92,currflow:申请'),(100,'修改单据','ZHOUJD','2014-08-20 08:55:18','btypename:运费单,operatetime:2014-08-20 08:55:18,remark:null,operater:ZHOUJD,allplansum:323,makername:周坚定,createtime:2014-08-20 14:34:44,relateno:XSD-20140820-001,btype:YFD,maker:ZHOUJD,relatemoney:7522.62,paydate:2014-08-20,payid:54,allrealsum:323,currflow:申请'),(101,'修改单据','ZHOUJD','2014-08-20 08:55:18','btypename:收款单,operatetime:2014-08-20 08:55:18,remark:null,operater:ZHOUJD,allplansum:8513.92,makername:周坚定,createtime:2014-08-20 14:34:44,relateno:XSD-20140820-001,btype:SKD,maker:ZHOUJD,relatemoney:7522.62,paydate:2014-08-20,payid:53,allrealsum:8513.92,currflow:结束'),(102,'修改单据','ZHOUJD','2014-08-20 08:55:18','btypename:运费单,operatetime:2014-08-20 08:55:18,remark:null,operater:ZHOUJD,allplansum:323,makername:周坚定,createtime:2014-08-20 14:34:44,relateno:XSD-20140820-001,btype:YFD,maker:ZHOUJD,relatemoney:7522.62,paydate:2014-08-20,payid:54,allrealsum:323,currflow:结束'),(103,'新增采购单','ZHOUJD','2014-08-20 08:55:18','btype:CGD,remark:null,allsum:4972.06,maker:ZHOUJD,buyname:2014.08.20采购,createtime:2014-08-20 14:55:12,buyid:9,currflow:申请,buydate:2014-08-20,buyno:CGD-20140820-001'),(104,'修改采购单','ZHOUJD','2014-08-20 08:55:18','btypename:采购单,btype:CGD,remark:null,allsum:4972.06,maker:ZHOUJD,makername:周坚定,buyname:2014.08.20采购,createtime:2014-08-20 14:55:12,buyid:9,currflow:结束,buydate:2014-08-20,buyno:CGD-20140820-001'),(105,'修改单据','ZHOUJD','2014-08-20 08:55:18','btypename:付款单,operatetime:2014-08-20 08:55:18,remark:null,operater:ZHOUJD,allplansum:4972.06,makername:周坚定,createtime:2014-08-20 14:57:59,relateno:CGD-20140820-001,btype:FKD,maker:ZHOUJD,relatemoney:4972.06,paydate:2014-08-20,payid:55,allrealsum:4972.06,currflow:申请'),(106,'修改单据','ZHOUJD','2014-08-20 08:55:18','btypename:付款单,operatetime:2014-08-20 08:55:18,remark:null,operater:ZHOUJD,allplansum:4972.06,makername:周坚定,createtime:2014-08-20 14:57:59,relateno:CGD-20140820-001,btype:FKD,maker:ZHOUJD,relatemoney:4972.06,paydate:2014-08-20,payid:55,allrealsum:4972.06,currflow:结束'),(107,'登录','ZHOUJD','2014-08-20 15:05:16',''),(108,'新增员工','ZHOUJD','2014-08-20 15:05:16','stafftype:1,accountno:,accountname:,remark:,priority:3,tel:15060000021,staffstatus:1,bank:,salary:75,staffname:员工三'),(109,'新增工资单','ZHOUJD','2014-08-20 15:05:16','remark:null,maker:ZHOUJD,salaryno:GZD-20140820-001,salarytype:1,salaryname:2014年07月份工资单,createtime:2014-08-20 15:09:27,salaryid:9,salarydate:2014-07,allplanmoney:5846,currflow:申请'),(110,'修改工资单','ZHOUJD','2014-08-20 15:05:16','remark:补发【员工三】工资,maker:ZHOUJD,salarytypename:工资,makername:周坚定,salaryno:GZD-20140820-001,salarytype:1,salaryname:2014年07月份工资单,createtime:2014-08-20 15:09:27,salaryid:9,salarydate:2014-07,allplanmoney:2250,currflow:结束'),(111,'修改员工','ZHOUJD','2014-08-20 15:05:16','stafftype:1,accountno:null,accountname:员工三,remark:null,priority:3,tel:15060000021,staffstatus:1,staffid:5,bank:null,salary:75.00,staffname:员工三'),(112,'修改单据','ZHOUJD','2014-08-20 15:05:16','btypename:工资单,operatetime:2014-08-20 15:05:16,remark:null,operater:ZHOUJD,allplansum:2250,makername:周坚定,createtime:2014-08-20 15:23:35,relateno:GZD-20140820-001,btype:GZD,maker:ZHOUJD,relatemoney:2250.00,paydate:2014-07,payid:56,allrealsum:2250,currflow:结束'),(113,'新增工资单','ZHOUJD','2014-08-20 15:05:16','remark:null,maker:ZHOUJD,salaryno:GZD-20140820-002,salarytype:1,salaryname:2014年07月份工资单,createtime:2014-08-20 15:34:49,salaryid:10,salarydate:2014-07,allplanmoney:3596,currflow:申请'),(114,'修改工资单','ZHOUJD','2014-08-20 15:05:16','remark:null,maker:ZHOUJD,salarytypename:工资,makername:周坚定,salaryno:GZD-20140820-002,salarytype:1,salaryname:2014年07月份工资单,createtime:2014-08-20 15:34:49,salaryid:10,salarydate:2014-07,allplanmoney:3596,currflow:结束'),(115,'修改单据','ZHOUJD','2014-08-20 15:05:16','btypename:工资单,operatetime:2014-08-20 15:05:16,remark:null,operater:ZHOUJD,allplansum:3596,makername:周坚定,createtime:2014-08-20 15:34:56,relateno:GZD-20140820-002,btype:GZD,maker:ZHOUJD,relatemoney:3596.00,paydate:2014-07,payid:57,allrealsum:3596.03,currflow:申请'),(116,'修改单据','ZHOUJD','2014-08-20 15:05:16','btypename:工资单,operatetime:2014-08-20 15:05:16,remark:null,operater:ZHOUJD,allplansum:3596,makername:周坚定,createtime:2014-08-20 15:34:56,relateno:GZD-20140820-002,btype:GZD,maker:ZHOUJD,relatemoney:3596.00,paydate:2014-07,payid:57,allrealsum:3596.04,currflow:结束'),(117,'登录','ZHOUJD','2014-08-21 17:22:57',''),(118,'新增模块','ZHOUJD','2014-08-21 17:22:57','modulename:字典管理,sn:Dict,priority:1,description:,parentid:10106,rel:dict_list,url:/dict/list'),(119,'登录','ZHOUJD','2014-08-21 17:22:57',''),(120,'登录','ZHOUJD','2014-08-21 17:22:57',''),(121,'登录','ZHOUJD','2014-08-21 17:22:57',''),(122,'登录','ZHOUJD','2014-08-21 17:43:51',''),(123,'登录','ZHOUJD','2014-08-22 10:09:06',''),(124,'登录','ZHOUJD','2014-08-22 10:09:06',''),(125,'登录','ZHOUJD','2014-08-22 10:21:00',''),(126,'登录','ZHOUJD','2014-08-22 10:30:40',''),(127,'登录','ZHOUJD','2014-08-22 10:32:47',''),(128,'登录','ZHOUJD','2014-08-22 10:50:04',''),(129,'登录','ZHOUJD','2014-08-22 10:52:08',''),(130,'修改物资','ZHOUJD','2014-08-22 10:52:08','unit:1,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,materialid:1'),(131,'修改物资','ZHOUJD','2014-08-22 10:52:08','unit:2,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,materialid:1'),(132,'修改物资','ZHOUJD','2014-08-22 10:52:08','unit:1,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,materialid:1'),(133,'登录','ZHOUJD','2014-08-22 11:23:51',''),(134,'登录','ZHOUJD','2014-08-22 11:23:51',''),(135,'登录','ZHOUJD','2014-08-22 11:23:51',''),(136,'修改用户','ZHOUJD','2014-08-22 11:23:51','tele:18979578121,birthday:2013-01-01,username:林长城,roleid:2,userid:LINCC'),(137,'修改模块','ZHOUJD','2014-08-22 11:23:51','modulename:用户管理,sn:User,priority:1,description:用户管理-描述,moduleid:10101,parentid:101,rel:user_list,url:/user/list'),(138,'修改供应商','ZHOUJD','2014-08-22 11:23:51','manuemail:null,remark:null,manutypeid:2,createdate:2013-02-25,manuid:9,statusid:1,manucontact:无,manuname:客户B,manutel:00000,priority:12'),(139,'修改员工','ZHOUJD','2014-08-22 11:23:51','stafftype:1,accountno:11111111,accountname:员工一,remark:备注1,priority:1,tel:11111111,staffstatus:1,staffid:2,bank:建设银行南安支行,salary:53.00,staffname:员工一'),(140,'修改银行卡','ZHOUJD','2014-08-22 11:23:51','bankcardno:00000,accountname:现金,status:1,remark:此为现金,bankname:现金,priority:1,banktype:9,money:48438.44,bankcardid:1'),(141,'登录','ZHOUJD','2014-08-22 16:41:27',''),(142,'删除模块','ZHOUJD','2014-08-22 16:41:27','10107'),(143,'登录','ZHOUJD','2014-08-22 16:41:27',''),(144,'登录','ZHOUJD','2014-08-22 18:04:48',''),(145,'登录','ZHOUJD','2014-08-24 10:09:44',''),(146,'登录','ZHOUJD','2014-08-24 21:42:51',''),(147,'登录','ZHOUJD','2014-08-25 18:57:25',''),(148,'登录','ZHOUJD','2014-08-25 19:05:32',''),(149,'登录','ZHOUJD','2014-08-25 19:13:36',''),(150,'登录','ZHOUJD','2014-08-28 10:47:19',''),(151,'修改用户','ZHOUJD','2014-08-28 10:47:19','tele:null,birthday:null,username:测试账号,roleid:3,userid:CESHI'),(152,'修改用户','ZHOUJD','2014-08-28 10:47:19','tele:null,birthday:null,username:测试账号2,roleid:3,userid:CESHI'),(153,'修改用户','ZHOUJD','2014-08-28 10:47:19','tele:null,birthday:null,username:测试账号,roleid:3,userid:CESHI'),(154,'修改用户','ZHOUJD','2014-08-28 10:47:19','tele:null,birthday:null,username:测试账号,roleid:3,userid:CESHI'),(155,'登录','ZHOUJD','2014-08-28 11:05:14',''),(156,'登录','ZHOUJD','2014-08-28 11:05:14',''),(157,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:1,stock:545,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:9999,materialid:1'),(158,'新增销售单','ZHOUJD','2014-08-28 11:05:14','sellno:XSD-20140828-001,remark:null,maker:ZHOUJD,manuid:5,allrealsum:1017,allprofit:107.12,manuname:客户A,createtime:2014-08-28 11:50:07,sellid:12,currflow:申请,selldate:2014-08-28'),(159,'登录','ZHOUJD','2014-08-28 11:05:14',''),(160,'修改产品','ZHOUJD','2014-08-28 11:05:14','profit:9.4,realprice:123.20,remark:产品一备注,costprice:113.8,productno:20101001,producttypename:产品类别一1,createdate:2013-03-06,unit:1,productid:1,producttype:14,productname:产品1'),(161,'修改产品','ZHOUJD','2014-08-28 11:05:14','profit:10.26,realprice:200.50,remark:null,costprice:190.24,productno:20101002,producttypename:产品类别一1,createdate:2014-07-12,unit:1,productid:2,producttype:14,productname:产品2'),(162,'修改产品','ZHOUJD','2014-08-28 11:05:14','profit:39.8,realprice:203.20,remark:null,costprice:163.4,productno:20101003,producttypename:产品类别一1,createdate:2014-07-12,unit:1,productid:3,producttype:14,productname:产品3'),(163,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:1,stock:342,price:44.00,remark:null,materialtypename:物资类型B-1,materialname:物资B12,createdate:2013-03-04,manuid:8,materialtype:8,materialno:10201002,manuname:供应商B,alarmnum:100,materialid:5'),(164,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:0,stock:0.00,price:33.30,remark:null,materialtypename:物资类型B-1,materialname:物资B11,createdate:2013-03-04,manuid:4,materialtype:8,materialno:10201001,manuname:供应商A,alarmnum:9999.00,materialid:4'),(165,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:null,stock:null,price:43.20,remark:null,materialtypename:物资类型A-2,materialname:物资A21,createdate:2014-07-04,manuid:8,materialtype:6,materialno:10102001,manuname:供应商B,alarmnum:null,materialid:6'),(166,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:null,stock:null,price:43.20,remark:null,materialtypename:物资类型A-2,materialname:物资A21,createdate:2014-07-04,manuid:8,materialtype:6,materialno:10102001,manuname:供应商B,alarmnum:null,materialid:6'),(167,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:null,stock:null,price:43.20,remark:null,materialtypename:物资类型A-2,materialname:物资A21,createdate:2014-07-04,manuid:8,materialtype:6,materialno:10102001,manuname:供应商B,alarmnum:null,materialid:6'),(168,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:null,stock:null,price:43.20,remark:null,materialtypename:物资类型A-2,materialname:物资A21,createdate:2014-07-04,manuid:8,materialtype:6,materialno:10102001,manuname:供应商B,alarmnum:null,materialid:6'),(169,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:null,stock:null,price:43.20,remark:null,materialtypename:物资类型A-2,materialname:物资A21,createdate:2014-07-04,manuid:8,materialtype:6,materialno:10102001,manuname:供应商B,alarmnum:null,materialid:6'),(170,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:null,stock:null,price:43.20,remark:null,materialtypename:物资类型A-2,materialname:物资A21,createdate:2014-07-04,manuid:8,materialtype:6,materialno:10102001,manuname:供应商B,alarmnum:null,materialid:6'),(171,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:1,stock:501.00,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:9999,materialid:1'),(172,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:0,stock:0.00,price:33.30,remark:null,materialtypename:物资类型B-1,materialname:物资B11,createdate:2013-03-04,manuid:4,materialtype:8,materialno:10201001,manuname:供应商A,alarmnum:0,materialid:4'),(173,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:1,stock:335.00,price:44.00,remark:null,materialtypename:物资类型B-1,materialname:物资B12,createdate:2013-03-04,manuid:8,materialtype:8,materialno:10201002,manuname:供应商B,alarmnum:100.00,materialid:5'),(174,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:0,stock:0.00,price:33.30,remark:null,materialtypename:物资类型B-1,materialname:物资B11,createdate:2013-03-04,manuid:4,materialtype:8,materialno:10201001,manuname:供应商A,alarmnum:0.00,materialid:4'),(175,'修改物资','ZHOUJD','2014-08-28 11:05:14','unit:1,usestock:1,stock:501.00,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:9999.00,materialid:1'),(176,'修改产品','ZHOUJD','2014-08-28 11:05:14','profit:75.56,realprice:123.20,remark:产品一备注,costprice:47.64,productno:20101001,producttypename:产品类别一1,createdate:2013-03-06,unit:1,productid:1,producttype:14,productname:产品1'),(177,'修改产品','ZHOUJD','2014-08-28 11:05:14','profit:10.26,realprice:200.50,remark:null,costprice:190.24,productno:20101002,producttypename:产品类别一1,createdate:2014-07-12,unit:1,productid:2,producttype:14,productname:产品2'),(178,'修改产品','ZHOUJD','2014-08-28 11:05:14','profit:39.8,realprice:203.20,remark:null,costprice:163.4,productno:20101003,producttypename:产品类别一1,createdate:2014-07-12,unit:1,productid:3,producttype:14,productname:产品3'),(179,'修改产品','ZHOUJD','2014-08-28 11:05:14','profit:9.8,realprice:43.10,remark:null,costprice:33.3,productno:20102001,producttypename:产品类别一2,createdate:2014-08-11,unit:1,productid:5,producttype:15,productname:产品8'),(180,'修改销售单','ZHOUJD','2014-08-28 11:05:14','sellno:XSD-20140828-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:1017,allprofit:107.12,manuname:客户A,createtime:2014-08-28 11:50:07,sellid:12,currflow:申请,selldate:2014-08-28'),(181,'登录','ZHOUJD','2014-08-28 11:05:14',''),(182,'修改销售单','ZHOUJD','2014-08-28 11:05:14','sellno:XSD-20140828-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:1017,allprofit:107.12,manuname:客户A,createtime:2014-08-28 11:50:07,sellid:12,currflow:申请,selldate:2014-08-28'),(183,'修改销售单','ZHOUJD','2014-08-28 11:05:14','sellno:XSD-20140828-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:1017,allprofit:107.12,manuname:客户A,createtime:2014-08-28 11:50:07,sellid:12,currflow:申请,selldate:2014-08-28'),(184,'登录','ZHOUJD','2014-08-28 11:05:14',''),(185,'修改销售单','ZHOUJD','2014-08-28 11:05:14','sellno:XSD-20140828-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:1017,allprofit:107.12,manuname:客户A,createtime:2014-08-28 11:50:07,sellid:12,currflow:结束,selldate:2014-08-28'),(186,'修改单据','ZHOUJD','2014-08-28 11:05:14','btypename:收款单,operatetime:2014-08-28 11:05:14,remark:null,operater:ZHOUJD,allplansum:1017,makername:周坚定,createtime:2014-08-28 15:33:16,relateno:XSD-20140828-001,btype:SKD,maker:ZHOUJD,relatemoney:1017.00,paydate:2014-08-28,payid:58,allrealsum:1017,currflow:结束'),(187,'登录','ZHOUJD','2014-08-28 15:42:17',''),(188,'修改产品','ZHOUJD','2014-08-28 15:42:17','profit:75.56,realprice:123.20,remark:产品一备注,costprice:47.64,productno:20101001,producttypename:产品类别一1,createdate:2013-03-06,unit:1,productid:1,producttype:14,productname:产品1'),(189,'修改产品','ZHOUJD','2014-08-28 15:42:17','profit:10.26,realprice:200.50,remark:null,costprice:190.24,productno:20101002,producttypename:产品类别一1,createdate:2014-07-12,unit:1,productid:2,producttype:14,productname:产品2'),(190,'修改产品','ZHOUJD','2014-08-28 15:42:17','profit:39.8,realprice:203.20,remark:null,costprice:163.4,productno:20101003,producttypename:产品类别一1,createdate:2014-07-12,unit:1,productid:3,producttype:14,productname:产品3'),(191,'登录','ZHOUJD','2014-08-28 15:52:35',''),(192,'修改产品','ZHOUJD','2014-08-28 15:52:58','profit:9.8,realprice:43.10,remark:null,costprice:33.3,productno:20102001,producttypename:产品类别一2,createdate:2014-08-11,unit:1,productid:5,producttype:15,productname:产品8'),(193,'新增销售单','ZHOUJD','2014-08-28 15:53:20','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,costprice:0.00,planprice:0.00,productno:,sellrowid:,maker:ZHOUJD,manuid:9,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,productname:'),(194,'登录','ZHOUJD','2014-08-28 15:56:14',''),(195,'登录','ZHOUJD','2014-08-28 16:02:22',''),(196,'修改物资','ZHOUJD','2014-08-28 16:05:58','unit:1,usestock:1,stock:447.00,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:9999.00,materialid:1'),(197,'新增物资','ZHOUJD','2014-08-28 16:09:15','unit:1,usestock:,stock:0,price:3,remark:,materialtypename:物资类型C-1,materialname:222,createdate:2014-08-28 16:09:15,manuid:8,materialtype:10,materialno:10301001,manuname:供应商B,alarmnum:9999'),(198,'删除物资','ZHOUJD','2014-08-28 16:09:32','26'),(199,'登录','ZHOUJD','2014-08-28 16:24:32',''),(200,'登录','ZHOUJD','2014-08-28 16:45:38',''),(201,'修改物资','ZHOUJD','2014-08-28 16:46:08','unit:1,usestock:1,stock:447.00,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:9999.00,materialid:1'),(202,'登录','ZHOUJD','2014-09-01 10:54:19',''),(203,'登录','ZHOUJD','2014-09-01 10:57:31',''),(204,'登录','ZHOUJD','2014-09-01 11:29:31',''),(205,'修改销售单','ZHOUJD','2014-09-01 11:29:40','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(206,'修改销售单','ZHOUJD','2014-09-01 11:29:57','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(207,'修改销售单','ZHOUJD','2014-09-01 11:30:09','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(208,'修改销售单','ZHOUJD','2014-09-01 11:30:49','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(209,'修改销售单','ZHOUJD','2014-09-01 11:31:25','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:,productname:'),(210,'修改销售单','ZHOUJD','2014-09-01 11:31:31','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:,productname:'),(211,'修改销售单','ZHOUJD','2014-09-01 11:31:59','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(212,'修改销售单','ZHOUJD','2014-09-01 11:34:02','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(213,'修改销售单','ZHOUJD','2014-09-01 11:34:13','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(214,'修改销售单','ZHOUJD','2014-09-01 11:34:29','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(215,'登录','ZHOUJD','2014-09-01 11:38:13',''),(216,'修改销售单','ZHOUJD','2014-09-01 11:44:03','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(217,'修改销售单','ZHOUJD','2014-09-01 11:44:25','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(218,'修改销售单','ZHOUJD','2014-09-01 11:44:50','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(219,'修改销售单','ZHOUJD','2014-09-01 11:45:42','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(220,'修改销售单','ZHOUJD','2014-09-01 11:45:46','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(221,'修改销售单','ZHOUJD','2014-09-01 11:45:56','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(222,'修改销售单','ZHOUJD','2014-09-01 11:46:01','sellno:XSD-20140828-002,profit:0,realprice:0.00,remark:null,productno:,costprice:0.00,planprice:0.00,sellrowid:,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:0,allprofit:0,manuname:客户B,realsum:0,createtime:2014-08-28 15:53:20,unit:,num:0.00,productid:,sellid:13,currflow:申请,selldate:2014-08-28,remarkrow:,addBuy:1,productname:'),(223,'登录','ZHOUJD','2014-09-01 14:04:28',''),(224,'登录','ZHOUJD','2014-09-01 15:16:44',''),(225,'登录','ZHOUJD','2014-09-01 15:52:26',''),(226,'修改销售单','ZHOUJD','2014-09-01 15:53:06','sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:申请,selldate:2014-08-28,addBuy:'),(227,'登录','ZHOUJD','2014-09-01 16:43:54',''),(228,'登录','ZHOUJD','2014-09-01 16:43:54',''),(229,'修改销售单','ZHOUJD','2014-09-01 16:46:57','sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:申请,selldate:2014-08-28,addBuy:1'),(230,'修改销售单','ZHOUJD','2014-09-01 16:51:13','sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:申请,selldate:2014-08-28,addBuy:1'),(231,'修改销售单','ZHOUJD','2014-09-01 16:51:57','sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:申请,selldate:2014-08-28,addBuy:1'),(232,'修改销售单','ZHOUJD','2014-09-01 16:53:10','sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:申请,selldate:2014-08-28,addBuy:1'),(233,'删除采购单','ZHOUJD','2014-09-01 17:03:43','12'),(234,'修改销售单','ZHOUJD','2014-09-01 17:04:22','sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:申请,selldate:2014-08-28,addBuy:1'),(235,'修改采购单','ZHOUJD','2014-09-01 17:28:36','btypename:采购单,remark:null,allsum:494.6,makername:周坚定,buyname:2014.09.01采购,createtime:2014-09-01 17:04:22,relateno:XSD-20140828-002,buyno:CGD-20140901-001,btype:CGD,maker:ZHOUJD,buyid:13,currflow:结束,buydate:2014-09-01'),(236,'修改销售单','ZHOUJD','2014-09-01 17:29:22','sellno:XSD-20140828-002,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:847.9,allprofit:181.9,manuname:客户B,createtime:2014-08-28 15:53:20,sellid:13,currflow:结束,selldate:2014-08-28,addBuy:'),(237,'修改单据','ZHOUJD','2014-09-01 17:29:41','btypename:付款单,operatetime:2014-09-01 17:29:41,remark:null,operater:ZHOUJD,allplansum:494.6,makername:周坚定,createtime:2014-09-01 17:28:36,relateno:CGD-20140901-001,btype:FKD,maker:ZHOUJD,relatemoney:494.60,paydate:2014-09-01,payid:59,allrealsum:494.6,currflow:申请'),(238,'修改单据','ZHOUJD','2014-09-01 17:29:46','btypename:收款单,operatetime:2014-09-01 17:29:46,remark:null,operater:ZHOUJD,allplansum:847.9,makername:周坚定,createtime:2014-09-01 17:29:22,relateno:XSD-20140828-002,btype:SKD,maker:ZHOUJD,relatemoney:847.90,paydate:2014-08-28,payid:60,allrealsum:847.9,currflow:申请'),(239,'修改单据','ZHOUJD','2014-09-01 17:29:54','btypename:付款单,operatetime:2014-09-01 17:29:54,remark:null,operater:ZHOUJD,allplansum:494.6,makername:周坚定,createtime:2014-09-01 17:28:36,relateno:CGD-20140901-001,btype:FKD,maker:ZHOUJD,relatemoney:494.60,paydate:2014-09-01,payid:59,allrealsum:494.6,currflow:结束'),(240,'修改单据','ZHOUJD','2014-09-01 17:29:58','btypename:收款单,operatetime:2014-09-01 17:29:57,remark:null,operater:ZHOUJD,allplansum:847.9,makername:周坚定,createtime:2014-09-01 17:29:22,relateno:XSD-20140828-002,btype:SKD,maker:ZHOUJD,relatemoney:847.90,paydate:2014-08-28,payid:60,allrealsum:847.9,currflow:结束'),(241,'修改物资','ZHOUJD','2014-09-01 17:30:19','unit:1,usestock:1,stock:307.00,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:100,materialid:1'),(242,'登录','ZHOUJD','2014-09-01 17:34:08',''),(243,'登录','ZHOUJD','2014-09-02 14:56:37',''),(244,'新增采购单','ZHOUJD','2014-09-02 14:56:57','btype:CGD,remark:null,allsum:,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 14:56:57,buyid:14,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-001'),(245,'新增采购单','ZHOUJD','2014-09-02 14:57:08','btype:CGD,remark:null,allsum:66.6,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 14:57:08,buyid:15,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-002'),(246,'修改采购单','ZHOUJD','2014-09-02 14:57:24','btypename:采购单,remark:null,allsum:0.66,makername:周坚定,buyname:2014.09.02采购,createtime:2014-09-02 14:56:57,relateno:null,buyno:CGD-20140902-001,btype:CGD,maker:ZHOUJD,buyid:14,currflow:申请,buydate:2014-09-02'),(247,'登录','ZHOUJD','2014-09-02 15:43:27',''),(248,'登录','ZHOUJD','2014-09-02 16:21:13',''),(249,'登录','ZHOUJD','2014-09-02 16:22:05',''),(250,'修改采购单','ZHOUJD','2014-09-02 16:26:41','btypename:采购单,remark:合并采购单,allsum:67.26,makername:周坚定,buyname:2014.09.02采购,createtime:2014-09-02 16:24:09,relateno:null,buyno:CGD-20140902-003,btype:CGD,maker:ZHOUJD,buyid:16,currflow:申请,buydate:2014-09-02'),(251,'新增采购单','ZHOUJD','2014-09-02 17:15:47','btype:CGD,remark:null,allsum:275.9,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 17:15:47,buyid:18,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-005'),(252,'新增采购单','ZHOUJD','2014-09-02 17:18:42','btype:CGD,remark:null,allsum:0.44,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 17:18:41,buyid:21,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-008'),(253,'新增采购单','ZHOUJD','2014-09-02 17:39:36','btype:CGD,remark:null,allsum:87.2,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 17:39:35,buyid:23,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-010'),(254,'新增采购单','ZHOUJD','2014-09-02 17:39:56','btype:CGD,remark:null,allsum:88,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 17:39:56,buyid:24,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-011'),(255,'新增采购单','ZHOUJD','2014-09-02 17:44:00','btype:CGD,remark:null,allsum:88,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 17:44:00,buyid:26,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-013'),(256,'新增采购单','ZHOUJD','2014-09-02 17:44:21','btype:CGD,remark:null,allsum:66.6,maker:ZHOUJD,buyname:2014.09.02采购,createtime:2014-09-02 17:44:21,buyid:28,currflow:申请,buydate:2014-09-02,buyno:CGD-20140902-015'),(257,'登录','ZHOUJD','2014-09-10 16:00:02',''),(258,'登录','ZHOUJD','2014-09-10 16:06:41',''),(259,'修改用户','ZHOUJD','2014-09-10 16:06:52','tele:null,birthday:null,username:测试账号,roleid:3,userid:CESHI'),(260,'登录','ZHOUJD','2014-09-10 16:12:39',''),(261,'登录','ZHOUJD','2014-09-10 19:09:51',''),(262,'登录','ZHOUJD','2014-09-10 19:34:49',''),(263,'登录','ZHOUJD','2014-09-11 14:11:24',''),(264,'修改供应商','ZHOUJD','2014-09-11 14:49:33','manuemail:b@yecoo.com,remark:备注B,manutypeid:2,createdate:2013-02-21,manuid:5,statusid:1,manucontact:刘星,manuname:客户A,referee:推荐人,manutel:22222222,priority:11'),(265,'登录','ZHOUJD','2014-09-11 15:20:18',''),(266,'登录','ZHOUJD','2014-09-11 15:30:35',''),(267,'登录','ZHOUJD','2014-09-11 15:34:50',''),(268,'登录','ZHOUJD','2014-09-11 15:38:28',''),(269,'登录','ZHOUJD','2014-09-11 15:42:05',''),(270,'登录','ZHOUJD','2014-09-11 15:49:07',''),(271,'登录','ZHOUJD','2014-09-11 15:49:45',''),(272,'登录','ZHOUJD','2014-09-11 18:58:06',''),(273,'登录','ZHOUJD','2014-09-11 19:05:24',''),(274,'登录','ZHOUJD','2014-09-11 19:38:06',''),(275,'登录','ZHOUJD','2014-09-11 19:38:50',''),(276,'登录','ZHOUJD','2014-09-11 19:39:51',''),(277,'登录','ZHOUJD','2014-09-18 10:48:34',''),(278,'登录','ZHOUJD','2014-09-18 11:42:46',''),(279,'登录','ZHOUJD','2014-09-18 11:44:26',''),(280,'登录','ZHOUJD','2014-09-18 11:46:29',''),(281,'登录','ZHOUJD','2014-09-18 11:47:44',''),(282,'登录','ZHOUJD','2014-09-18 11:49:16',''),(283,'登录','ZHOUJD','2014-09-18 11:50:19',''),(284,'登录','ZHOUJD','2014-09-18 14:15:12',''),(285,'登录','ZHOUJD','2014-09-18 14:18:18',''),(286,'登录','ZHOUJD','2014-09-18 14:18:46',''),(287,'登录','ZHOUJD','2014-09-18 14:19:31',''),(288,'登录','ZHOUJD','2014-09-18 14:20:34',''),(289,'登录','ZHOUJD','2014-09-18 14:24:24',''),(290,'登录','ZHOUJD','2014-09-18 15:20:46',''),(291,'登录','ZHOUJD','2014-09-18 15:32:22',''),(292,'登录','ZHOUJD','2014-09-18 15:34:01',''),(293,'登录','ZHOUJD','2014-09-18 15:42:26',''),(294,'登录','ZHOUJD','2014-09-18 15:45:38',''),(295,'登录','ZHOUJD','2014-09-25 16:32:01',''),(296,'新增销售单','ZHOUJD','2014-09-25 16:44:19','sellno:XSD-20140925-001,remark:null,maker:ZHOUJD,manuid:9,allrealsum:10984.9,allprofit:2673.78,manuname:客户B,createtime:2014-09-25 16:44:19,sellid:14,currflow:申请,selldate:2014-09-25'),(297,'修改销售单','ZHOUJD','2014-09-25 16:52:31','sellno:XSD-20140925-001,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:10984.9,allprofit:2673.78,manuname:客户B,createtime:2014-09-25 16:44:19,sellid:14,currflow:申请,selldate:2014-09-25,addBuy:1'),(298,'修改销售单','ZHOUJD','2014-09-25 16:53:04','sellno:XSD-20140925-001,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:10984.9,allprofit:2673.78,manuname:客户B,createtime:2014-09-25 16:44:19,sellid:14,currflow:申请,selldate:2014-09-25,addBuy:1'),(299,'修改销售单','ZHOUJD','2014-09-25 16:55:52','sellno:XSD-20140925-001,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:10984.9,allprofit:2673.78,manuname:客户B,createtime:2014-09-25 16:44:19,sellid:14,currflow:申请,selldate:2014-09-25,addBuy:1'),(300,'修改销售单','ZHOUJD','2014-09-25 17:09:20','sellno:XSD-20140925-001,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:10984.9,allprofit:2673.78,manuname:客户B,createtime:2014-09-25 16:44:19,sellid:14,currflow:申请,selldate:2014-09-25,addBuy:1'),(301,'登录','ZHOUJD','2014-09-25 17:35:23',''),(302,'登录','ZHOUJD','2014-10-09 17:32:00',''),(303,'登录','ZHOUJD','2014-10-21 16:53:04',''),(304,'登录','ZHOUJD','2014-10-22 16:03:13',''),(305,'修改用户','ZHOUJD','2014-10-22 16:04:03','tele:null,birthday:null,username:测试账号,roleid:3,userid:CESHI'),(306,'登录','ZHOUJD','2014-10-22 16:16:57',''),(307,'修改模块','ZHOUJD','2014-10-22 16:22:53','modulename:用户管理,sn:User,priority:1,description:用户管理-描述,moduleid:10101,parentid:101,rel:user_list,url:/user/list'),(308,'修改供应商','ZHOUJD','2014-10-22 16:31:23','manuemail:b@yecoo.com,remark:备注B,manutypeid:2,createdate:2013-02-21,manuid:5,statusid:1,manucontact:刘星,manuname:客户A,referee:推荐人,manutel:22222222,priority:11'),(309,'登录','ZHOUJD','2014-10-22 16:53:13',''),(310,'修改银行卡','ZHOUJD','2014-10-22 17:19:46','bankcardno:00000,accountname:现金,status:1,remark:此为现金,bankname:现金,priority:1,banktype:9,money:48438.44,bankcardid:1'),(311,'新增工资单','ZHOUJD','2014-10-22 17:29:05','remark:null,maker:ZHOUJD,salaryno:GZD-20141022-001,salarytype:1,salaryname:2014年09月份工资单,createtime:2014-10-22 17:29:05,salaryid:11,salarydate:2014-09,allplanmoney:5730,currflow:结束'),(312,'登录','ZHOUJD','2014-10-22 18:08:23',''),(313,'新增工资单','ZHOUJD','2014-10-22 18:18:35','remark:null,maker:ZHOUJD,salaryno:GZD-20141022-001,currflowname:申请,salarytype:1,salaryname:2014年09月份工资单,createtime:2014-10-22 18:18:35,salaryid:12,salarydate:2014-09,allplanmoney:5730,currflow:1'),(314,'新增工资单','ZHOUJD','2014-10-22 18:19:57','remark:null,maker:ZHOUJD,salaryno:GZD-20141022-001,salarytype:1,salaryname:2014年09月份工资单,createtime:2014-10-22 18:19:57,salaryid:13,salarydate:2014-09,allplanmoney:5730,currflow:申请'),(315,'修改工资单','ZHOUJD','2014-10-22 18:22:27','remark:null,maker:ZHOUJD,salarytypename:工资,makername:周坚定,salaryno:GZD-20141022-001,salarytype:1,salaryname:2014年09月份工资单,createtime:2014-10-22 18:19:57,salaryid:13,salarydate:2014-09,allplanmoney:5730,currflow:申请'),(316,'修改工资单','ZHOUJD','2014-10-22 18:22:34','remark:null,maker:ZHOUJD,salarytypename:工资,makername:周坚定,salaryno:GZD-20141022-001,salarytype:1,salaryname:2014年09月份工资单,createtime:2014-10-22 18:19:57,salaryid:13,salarydate:2014-09,allplanmoney:5730,currflow:结束'),(317,'修改单据','ZHOUJD','2014-10-22 18:23:28','btypename:工资单,operatetime:2014-10-22 18:23:28,remark:null,operater:ZHOUJD,allplansum:5730,makername:周坚定,createtime:2014-10-22 18:22:34,relateno:GZD-20141022-001,btype:GZD,maker:ZHOUJD,relatemoney:5730.00,paydate:2014-09,payid:61,allrealsum:5730,currflow:结束'),(318,'修改物资类型','ZHOUJD','2014-10-22 18:27:10','materialtypeno:10101,remark:物资类型A-1备注,materialtypename:物资类型A-1,priority:1,parent:2,materialtype:5'),(319,'修改物资','ZHOUJD','2014-10-22 18:27:26','unit:1,usestock:1,stock:307.00,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:100.00,materialid:1'),(320,'修改销售单','ZHOUJD','2014-10-22 18:35:41','sellno:XSD-20140925-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:10984.9,allprofit:2673.78,manuname:客户A,createtime:2014-09-25 16:44:19,sellid:14,currflow:结束,selldate:2014-09-25,addBuy:1'),(321,'修改单据','ZHOUJD','2014-10-22 18:37:01','btypename:收款单,operatetime:2014-10-22 18:37:01,remark:null,operater:ZHOUJD,allplansum:10984.9,makername:周坚定,createtime:2014-10-22 18:35:41,relateno:XSD-20140925-001,btype:SKD,maker:ZHOUJD,relatemoney:10984.90,paydate:2014-09-25,payid:62,allrealsum:10984.9,currflow:结束'),(322,'修改采购单','ZHOUJD','2014-10-22 18:38:35','btypename:采购单,remark:合并采购单（XSD-20140925-001）,allsum:13524.84,makername:周坚定,buyname:2014.10.22采购,createtime:2014-10-22 18:37:22,relateno:null,buyno:CGD-20141022-002,btype:CGD,maker:ZHOUJD,buyid:35,currflow:结束,buydate:2014-10-22'),(323,'修改单据','ZHOUJD','2014-10-22 18:38:58','btypename:付款单,operatetime:2014-10-22 18:38:58,remark:null,operater:ZHOUJD,allplansum:13524.84,makername:周坚定,createtime:2014-10-22 18:38:35,relateno:CGD-20141022-002,btype:FKD,maker:ZHOUJD,relatemoney:13524.84,paydate:2014-10-22,payid:63,allrealsum:13524.84,currflow:结束'),(324,'登录','ZHOUJD','2014-10-29 09:11:40',''),(325,'登录','ZHOUJD','2014-10-29 09:33:35',''),(326,'登录','ZHOUJD','2014-10-29 09:38:41',''),(327,'登录','ZHOUJD','2014-10-29 09:44:29',''),(328,'登录','LINCC','2014-10-29 09:44:58',''),(329,'登录','LINCC','2014-10-29 10:19:21',''),(330,'修改物资类型','LINCC','2014-10-29 10:19:41','materialtypeno:101,remark:物资类型A备注,materialtypename:物资类型A,priority:1,parent:1,materialtype:2'),(331,'新增物资类型','LINCC','2014-10-29 10:20:03','materialtypeno:104,remark:,materialtypename:123,priority:99,parent:1'),(332,'修改物资类型','LINCC','2014-10-29 10:20:10','materialtypeno:104,remark:null,materialtypename:123,priority:99,parent:1,materialtype:11'),(333,'修改物资类型','LINCC','2014-10-29 10:20:16','materialtypeno:105,remark:null,materialtypename:123,priority:99,parent:1,materialtype:11'),(334,'登录','ZHOUJD','2014-10-29 10:20:58',''),(335,'删除物资类型','ZHOUJD','2014-10-29 10:21:11','11'),(336,'修改物资类型','ZHOUJD','2014-10-29 10:21:35','materialtypeno:10101,remark:物资类型A-1备注,materialtypename:物资类型A-1,priority:1,parent:2,materialtype:5'),(337,'新增物资类型','ZHOUJD','2014-10-29 10:21:41','materialtypeno:10104,remark:,materialtypename:33,priority:99,parent:2'),(338,'删除物资类型','ZHOUJD','2014-10-29 10:22:41','12'),(339,'新增物资类型','ZHOUJD','2014-10-29 10:22:53','materialtypeno:A,remark:,materialtypename:AA,priority:99,parent:1'),(340,'删除物资类型','ZHOUJD','2014-10-29 10:23:42','13'),(341,'登录','ZHOUJD','2014-10-29 10:28:32',''),(342,'新增产品类型','ZHOUJD','2014-10-29 10:29:43','producttypeno:204,remark:,producttypename:1,priority:99,parent:1'),(343,'修改产品类型','ZHOUJD','2014-10-29 10:29:51','producttypeno:204,remark:null,producttypename:111,priority:99,parent:1,producttypeall:1-20,producttype:20'),(344,'修改产品类型','ZHOUJD','2014-10-29 10:30:21','producttypeno:204,remark:null,producttypename:111,priority:99,parent:1,producttypeall:1-20,producttype:20'),(345,'删除产品类型','ZHOUJD','2014-10-29 10:30:49','20'),(346,'登录','ZHOUJD','2014-10-29 10:41:59',''),(347,'登录','ZHOUJD','2014-10-29 10:42:21',''),(348,'登录','ZHOUJD','2014-10-29 10:42:48',''),(349,'登录','ZHOUJD','2014-10-29 10:45:51',''),(350,'登录','ZHOUJD','2014-10-29 10:46:18',''),(351,'登录','ZHOUJD','2014-10-29 10:46:25',''),(352,'登录','ZHOUJD','2014-10-29 11:14:53',''),(353,'登录','ZHOUJD','2014-10-29 11:14:53',''),(354,'登录','ZHOUJD','2014-11-11 17:03:56',''),(355,'登录','ZHOUJD','2014-11-13 18:05:05',''),(356,'登录','ZHOUJD','2014-11-14 10:21:47',''),(357,'新增销售单','ZHOUJD','2014-11-14 10:23:17','sellno:XSD-20141114-001,remark:null,maker:ZHOUJD,manuid:9,allrealsum:535.2,allprofit:107.08,manuname:客户B,createtime:2014-11-14 10:23:17,sellid:15,currflow:申请,selldate:2014-11-14'),(358,'修改销售单','ZHOUJD','2014-11-14 10:24:02','sellno:XSD-20141114-001,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:535.2,allprofit:107.08,manuname:客户B,createtime:2014-11-14 10:23:17,sellid:15,currflow:申请,selldate:2014-11-14,addBuy:1'),(359,'修改采购单','ZHOUJD','2014-11-14 10:26:48','btypename:采购单,remark:null,allsum:314.92,makername:周坚定,buyname:2014.11.14采购,createtime:2014-11-14 10:24:02,relateno:XSD-20141114-001,buyno:CGD-20141114-001,btype:CGD,maker:ZHOUJD,buyid:36,currflow:结束,buydate:2014-11-14'),(360,'修改单据','ZHOUJD','2014-11-14 10:28:13','btypename:付款单,operatetime:2014-11-14 10:28:12,remark:null,operater:ZHOUJD,allplansum:314.92,makername:周坚定,createtime:2014-11-14 10:26:48,relateno:CGD-20141114-001,btype:FKD,maker:ZHOUJD,relatemoney:314.92,paydate:2014-11-14,payid:64,allrealsum:314.92,currflow:申请'),(361,'修改单据','ZHOUJD','2014-11-14 10:28:20','btypename:付款单,operatetime:2014-11-14 10:28:20,remark:null,operater:ZHOUJD,allplansum:314.92,makername:周坚定,createtime:2014-11-14 10:26:48,relateno:CGD-20141114-001,btype:FKD,maker:ZHOUJD,relatemoney:314.92,paydate:2014-11-14,payid:64,allrealsum:314.92,currflow:结束'),(362,'修改采购单','ZHOUJD','2014-11-14 10:33:40','btypename:采购单,remark:null,allsum:314.92,makername:周坚定,buyname:2014.11.14采购,createtime:2014-11-14 10:24:02,relateno:XSD-20141114-001,buyno:CGD-20141114-001,btype:CGD,maker:ZHOUJD,buyid:36,currflow:申请,buydate:2014-11-14'),(363,'修改采购单','ZHOUJD','2014-11-14 10:35:07','btypename:采购单,remark:null,allsum:314.92,makername:周坚定,buyname:2014.11.14采购,createtime:2014-11-14 10:24:02,relateno:XSD-20141114-001,buyno:CGD-20141114-001,btype:CGD,maker:ZHOUJD,buyid:36,currflow:结束,buydate:2014-11-14'),(364,'修改采购单','ZHOUJD','2014-11-14 10:35:34','btypename:采购单,remark:null,allsum:314.92,makername:周坚定,buyname:2014.11.14采购,createtime:2014-11-14 10:24:02,relateno:XSD-20141114-001,buyno:CGD-20141114-001,btype:CGD,maker:ZHOUJD,buyid:36,currflow:结束,buydate:2014-11-14'),(365,'修改采购单','ZHOUJD','2014-11-14 10:37:23','btypename:采购单,remark:null,allsum:314.92,makername:周坚定,buyname:2014.11.14采购,createtime:2014-11-14 10:24:02,relateno:XSD-20141114-001,buyno:CGD-20141114-001,btype:CGD,maker:ZHOUJD,buyid:36,currflow:结束,buydate:2014-11-14'),(366,'修改单据','ZHOUJD','2014-11-14 10:39:03','btypename:付款单,operatetime:2014-11-14 10:39:02,remark:null,operater:ZHOUJD,allplansum:314.92,makername:周坚定,createtime:2014-11-14 10:26:48,relateno:CGD-20141114-001,btype:FKD,maker:ZHOUJD,relatemoney:314.92,paydate:2014-11-14,payid:64,allrealsum:314.92,currflow:结束'),(367,'登录','ZHOUJD','2014-11-14 17:53:37',''),(368,'修改销售单','ZHOUJD','2014-11-14 18:01:34','sellno:XSD-20141114-001,remark:null,maker:ZHOUJD,manuid:9,makername:周坚定,allrealsum:535.2,allprofit:107.08,manuname:客户B,createtime:2014-11-14 10:23:17,sellid:15,currflow:结束,selldate:2014-11-14,addBuy:'),(369,'修改单据','ZHOUJD','2014-11-14 18:01:46','btypename:收款单,operatetime:2014-11-14 18:01:46,remark:null,operater:ZHOUJD,allplansum:535.2,makername:周坚定,createtime:2014-11-14 18:01:34,relateno:XSD-20141114-001,btype:SKD,maker:ZHOUJD,relatemoney:535.20,paydate:2014-11-14,payid:68,allrealsum:535.2,currflow:结束'),(370,'登录','ZHOUJD','2014-11-17 18:08:30',''),(371,'登录','ZHOUJD','2014-11-17 18:08:42',''),(372,'登录','ZHOUJD','2014-11-17 18:12:16',''),(373,'登录','ZHOUJD','2014-11-17 18:12:22',''),(374,'登录','ZHOUJD','2014-11-17 18:12:27',''),(375,'登录','ZHOUJD','2014-11-17 18:12:44',''),(376,'登录','ZHOUJD','2014-11-17 18:12:50',''),(377,'登录','ZHOUJD','2014-11-17 18:13:05',''),(378,'登录','ZHOUJD','2014-11-17 18:13:46',''),(379,'登录','ZHOUJD','2014-11-17 21:19:39',''),(380,'新增销售单','ZHOUJD','2014-11-17 22:40:16','sellno:XSD-20141117-001,profit:0,realprice:0.00,remark:null,costprice:0.00,planprice:0.00,productno:,sellrowid:,maker:ZHOUJD,manuid:5,allrealsum:0,allprofit:0,manuname:客户A,realsum:0,createtime:2014-11-17 22:40:16,unit:,num:0.00,productid:,sellid:16,currflow:申请,selldate:2014-11-17,remarkrow:,productname:'),(381,'删除销售单','ZHOUJD','2014-11-17 22:40:25','16'),(382,'新增采购单','ZHOUJD','2014-11-17 22:57:56','btype:CGD,remark:null,allsum:,maker:ZHOUJD,buyname:2014.11.17采购,createtime:2014-11-17 22:57:56,buyid:37,currflow:申请,buydate:2014-11-17,buyno:CGD-20141117-001'),(383,'删除采购单','ZHOUJD','2014-11-17 22:58:52','44'),(384,'新增采购单','ZHOUJD','2014-11-17 22:59:49','btype:CGD,remark:null,allsum:,maker:ZHOUJD,buyname:2014.11.17采购,createtime:2014-11-17 22:59:10,buyid:37,currflow:申请,buydate:2014-11-17,buyno:CGD-20141117-001'),(385,'登录','ZHOUJD','2014-11-18 11:29:24',''),(386,'登录','ZHOUJD','2014-11-18 14:35:26',''),(387,'新增采购单','ZHOUJD','2014-11-18 15:08:56','btype:CGD,remark:null,allsum:,maker:ZHOUJD,buyname:2014.11.18采购,createtime:2014-11-18 15:08:56,buyid:37,currflow:申请,buydate:2014-11-18,buyno:CGD-20141118-001'),(388,'删除采购单','ZHOUJD','2014-11-18 15:13:12','37'),(389,'登录','ZHOUJD','2014-11-18 15:14:24',''),(390,'新增销售单','ZHOUJD','2014-11-18 15:14:37','sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18'),(391,'修改销售单','ZHOUJD','2014-11-18 15:14:50','sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:1'),(392,'登录','ZHOUJD','2014-11-18 15:27:29',''),(393,'修改采购单','ZHOUJD','2014-11-18 15:27:39','btypename:采购单,remark:合并采购单（XSD-20141118-001）,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:15:09,relateno:null,buyno:CGD-20141118-002,btype:CGD,maker:ZHOUJD,buyid:40,currflow:申请,buydate:2014-11-18'),(394,'修改销售单','ZHOUJD','2014-11-18 15:27:43','sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:'),(395,'修改销售单','ZHOUJD','2014-11-18 15:27:53','sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:1'),(396,'删除采购单','ZHOUJD','2014-11-18 15:28:38','41'),(397,'修改销售单','ZHOUJD','2014-11-18 15:29:13','sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:1'),(398,'修改销售单','ZHOUJD','2014-11-18 15:29:25','sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:606.9,allprofit:89.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:1'),(399,'登录','ZHOUJD','2014-11-24 09:40:19',''),(400,'登录','ZHOUJD','2014-11-24 10:13:24',''),(401,'登录','ZHOUJD','2014-11-24 10:26:51',''),(402,'登录','ZHOUJD','2014-11-24 11:42:33',''),(403,'登录','ZHOUJD','2014-11-24 14:38:36',''),(404,'登录','ZHOUJD','2014-11-24 15:04:12',''),(405,'新增产品','ZHOUJD','2014-11-24 15:08:23','profit:0,realprice:0.00,remark:null,costprice:0,productno:20101004,producttypename:产品类别一1,createdate:2014-11-24 15:08:23,unit:1,productid:49,producttype:14,productname:abc'),(406,'删除产品','ZHOUJD','2014-11-24 15:09:15','49'),(407,'登录','ZHOUJD','2014-11-24 15:11:01',''),(408,'新增产品','ZHOUJD','2014-11-24 15:11:10','profit:0,realprice:0.00,remark:null,costprice:0,productno:20101004,producttypename:产品类别一1,createdate:2014-11-24 15:11:10,unit:1,productid:52,producttype:14,productname:bb'),(409,'删除产品','ZHOUJD','2014-11-24 15:14:03','52'),(410,'新增产品','ZHOUJD','2014-11-24 15:15:08','profit:0,realprice:0.00,remark:null,costprice:0,productno:20101004,producttypename:产品类别一1,createdate:2014-11-24 15:15:08,unit:1,productid:57,producttype:14,productname:bbb'),(411,'删除产品','ZHOUJD','2014-11-24 15:18:33','57'),(412,'登录','ZHOUJD','2014-11-25 10:29:11',''),(413,'新增产品','ZHOUJD','2014-11-25 10:39:22','profit:0,realprice:0.00,remark:null,costprice:0,productno:20101004,producttypename:产品类别一1,createdate:2014-11-25 10:39:22,unit:1,productid:61,producttype:14,productname:dddd'),(414,'登录','ZHOUJD','2014-11-25 10:41:02',''),(415,'登录','ZHOUJD','2014-11-25 10:47:44',''),(416,'登录','ZHOUJD','2014-11-25 11:12:24',''),(417,'登录','ZHOUJD','2014-11-25 11:23:48',''),(418,'删除产品','ZHOUJD','2014-11-25 11:42:34','61'),(419,'登录','ZHOUJD','2014-11-25 11:49:06',''),(420,'修改产品','ZHOUJD','2014-11-25 11:49:33','profit:75.56,realprice:123.20,remark:产品一备注,costprice:47.64,productno:20101001,producttypename:产品类别一1,createdate:2013-03-06,unit:1,productid:1,producttype:14,productname:产品1'),(421,'登录','ZHOUJD','2014-11-25 14:20:45',''),(422,'新增产品类型','ZHOUJD','2014-11-25 14:29:39','producttypeno:JL04,remark:,producttypename:金龙系列,priority:4,parent:1'),(423,'修改产品类型','ZHOUJD','2014-11-25 14:30:26','producttypeno:JL,remark:null,producttypename:金龙系列,priority:4,parent:1,producttypeall:1-18,producttype:18'),(424,'新增产品类型','ZHOUJD','2014-11-25 14:31:00','producttypeno:JL01,remark:,producttypename:金龙淋浴,priority:1,parent:18'),(425,'新增产品类型','ZHOUJD','2014-11-25 14:31:47','producttypeno:JL02,remark:,producttypename:金龙花洒,priority:2,parent:18'),(426,'新增产品类型','ZHOUJD','2014-11-25 14:33:54','producttypeno:DL,remark:,producttypename:李德林,priority:5,parent:1'),(427,'新增产品类型','ZHOUJD','2014-11-25 14:34:34','producttypeno:DL01,remark:,producttypename:金龙系列,priority:1,parent:21'),(428,'新增产品类型','ZHOUJD','2014-11-25 14:34:58','producttypeno:DL0101,remark:,producttypename:金龙淋浴,priority:1,parent:22'),(429,'新增产品','ZHOUJD','2014-11-25 14:36:30','profit:0,realprice:0.00,remark:null,costprice:0,productno:DL0101001,producttypename:金龙淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴'),(430,'修改产品','ZHOUJD','2014-11-25 14:37:30','profit:-32,realprice:0.00,remark:null,costprice:32,productno:DL0101001,producttypename:金龙淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴'),(431,'修改产品类型','ZHOUJD','2014-11-25 14:39:21','producttypeno:DL01,remark:null,producttypename:真龍系列,priority:1,parent:21,producttypeall:1-21-22,producttype:22'),(432,'修改产品类型','ZHOUJD','2014-11-25 14:39:31','producttypeno:DL0101,remark:null,producttypename:真龍淋浴,priority:1,parent:22,producttypeall:1-21-22-23,producttype:23'),(433,'登录','ZHOUJD','2014-11-25 14:50:07',''),(434,'登录','ZHOUJD','2014-11-25 15:42:26',''),(435,'登录','ZHOUJD','2014-11-25 15:43:27',''),(436,'修改采购单','ZHOUJD','2014-11-25 15:49:34','btypename:采购单,remark:合并采购单（XSD-20141118-001）,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:15:09,relateno:null,buyno:CGD-20141118-002,btype:CGD,maker:ZHOUJD,buyid:40,currflow:申请,buydate:2014-11-18'),(437,'修改用户','ZHOUJD','2014-11-25 15:54:55','tele:null,birthday:null,username:测试账号,roleid:3,userid:CESHI'),(438,'修改模块','ZHOUJD','2014-11-25 15:57:43','modulename:用户管理,sn:User,priority:1,description:用户管理-描述,moduleid:10101,parentid:101,rel:user_list,url:/user/list'),(439,'修改物资','ZHOUJD','2014-11-25 16:02:45','unit:1,usestock:1,stock:956.00,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:100.00,materialid:1'),(440,'修改产品','ZHOUJD','2014-11-25 16:09:12','profit:10,realprice:42,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴'),(441,'修改销售单','ZHOUJD','2014-11-25 16:09:30','sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:690.9,allprofit:109.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:'),(442,'登录','ZHOUJD','2014-11-26 09:17:06',''),(443,'登录','ZHOUJD','2014-11-26 10:50:13',''),(444,'登录','ZHOUJD','2014-11-26 10:52:29',''),(445,'修改采购单','ZHOUJD','2014-11-26 11:00:01','btypename:采购单,remark:合并采购单（XSD-20141118-001）,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:15:09,relateno:null,buyno:CGD-20141118-002,btype:CGD,maker:ZHOUJD,buyid:40,currflow:结束,buydate:2014-11-18'),(446,'修改单据','ZHOUJD','2014-11-26 11:01:12','btypename:付款单,operatetime:2014-11-26 11:01:12,remark:null,operater:ZHOUJD,allplansum:396.04,makername:周坚定,createtime:2014-11-26 10:59:59,relateno:CGD-20141118-002,btype:FKD,maker:ZHOUJD,relatemoney:396.04,paydate:2014-11-18,payid:81,allrealsum:396.04,currflow:申请'),(447,'修改单据','ZHOUJD','2014-11-26 11:01:24','btypename:付款单,operatetime:2014-11-26 11:01:22,remark:null,operater:ZHOUJD,allplansum:396.04,makername:周坚定,createtime:2014-11-26 10:59:59,relateno:CGD-20141118-002,btype:FKD,maker:ZHOUJD,relatemoney:396.04,paydate:2014-11-18,payid:81,allrealsum:396.04,currflow:结束'),(448,'登录','ZHOUJD','2014-11-26 11:03:47',''),(449,'修改销售单','ZHOUJD','2014-11-26 11:04:41','sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:690.9,allprofit:109.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:申请,selldate:2014-11-18,addBuy:'),(450,'修改销售单','ZHOUJD','2014-11-26 11:10:25','sellno:XSD-20141118-001,remark:null,maker:ZHOUJD,manuid:5,makername:周坚定,allrealsum:690.9,allprofit:109.86,manuname:客户A,createtime:2014-11-18 15:14:37,sellid:38,currflow:结束,selldate:2014-11-18,addBuy:'),(451,'修改单据','ZHOUJD','2014-11-26 11:11:10','btypename:收款单,operatetime:2014-11-26 11:11:10,remark:null,operater:ZHOUJD,allplansum:690.9,makername:周坚定,createtime:2014-11-26 11:10:25,relateno:XSD-20141118-001,btype:SKD,maker:ZHOUJD,relatemoney:690.90,paydate:2014-11-18,payid:82,allrealsum:690.1,currflow:申请'),(452,'修改单据','ZHOUJD','2014-11-26 11:11:15','btypename:收款单,operatetime:2014-11-26 11:11:15,remark:null,operater:ZHOUJD,allplansum:690.9,makername:周坚定,createtime:2014-11-26 11:10:25,relateno:XSD-20141118-001,btype:SKD,maker:ZHOUJD,relatemoney:690.90,paydate:2014-11-18,payid:82,allrealsum:690.1,currflow:结束'),(453,'修改员工','ZHOUJD','2014-11-26 11:16:58','stafftype:1,accountno:33333333,accountname:员工三,remark:null,priority:3,tel:15060000021,staffstatus:1,staffid:5,bank:兴业银行仑仓支行,salary:75.00,staffname:员工三'),(454,'新增工资单','ZHOUJD','2014-11-26 11:18:15','remark:null,maker:ZHOUJD,salaryno:GZD-20141126-001,salarytype:1,salaryname:2014年10月份工资单,createtime:2014-11-26 11:18:14,salaryid:83,salarydate:2014-10,allplanmoney:5740,currflow:申请'),(455,'修改工资单','ZHOUJD','2014-11-26 11:25:26','remark:null,maker:ZHOUJD,salarytypename:工资,makername:周坚定,salaryno:GZD-20141126-001,salarytype:1,salaryname:2014年10月份工资单,createtime:2014-11-26 11:18:14,salaryid:83,salarydate:2014-10,allplanmoney:5740.1,currflow:结束'),(456,'修改单据','ZHOUJD','2014-11-26 11:27:46','btypename:工资单,operatetime:2014-11-26 11:27:46,remark:null,operater:ZHOUJD,allplansum:5740.1,makername:周坚定,createtime:2014-11-26 11:25:25,relateno:GZD-20141126-001,btype:GZD,maker:ZHOUJD,relatemoney:5740.10,paydate:2014-10,payid:84,allrealsum:5740.6,currflow:申请'),(457,'修改单据','ZHOUJD','2014-11-26 11:28:11','btypename:工资单,operatetime:2014-11-26 11:28:10,remark:null,operater:ZHOUJD,allplansum:5740.1,makername:周坚定,createtime:2014-11-26 11:25:25,relateno:GZD-20141126-001,btype:GZD,maker:ZHOUJD,relatemoney:5740.10,paydate:2014-10,payid:84,allrealsum:5741.5,currflow:结束'),(458,'登录','ZHOUJD','2014-11-26 14:16:54',''),(459,'修改采购单','ZHOUJD','2014-11-26 14:30:21','btypename:采购单,remark:null,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(460,'修改银行卡','ZHOUJD','2014-11-26 14:34:39','bankcardno:00000,accountname:现金,status:1,remark:此为现金,bankname:现金,priority:1,banktype:9,money:42695.32,bankcardid:1'),(461,'修改物资类型','ZHOUJD','2014-11-26 14:35:01','materialtypeno:10101,remark:物资类型A-1备注,materialtypename:物资类型A-1,priority:1,parent:2,materialtype:5'),(462,'登录','ZHOUJD','2014-11-26 14:37:55',''),(463,'登录','ZHOUJD','2014-11-26 14:38:10',''),(464,'登录','ZHOUJD','2014-12-24 18:05:10',''),(465,'修改采购单','ZHOUJD','2014-12-24 18:05:22','btypename:采购单,remark:null,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(466,'登录','ZHOUJD','2014-12-29 11:34:11',''),(467,'登录','ZHOUJD','2014-12-31 16:26:35',''),(468,'登录','ZHOUJD','2014-12-31 17:42:01',''),(469,'登录','ZHOUJD','2015-01-04 10:52:57',''),(470,'登录','ZHOUJD','2015-01-04 10:53:03',''),(471,'登录','ZHOUJD','2015-01-04 10:53:19',''),(472,'登录','ZHOUJD','2015-01-04 11:01:00',''),(473,'登录','ZHOUJD','2015-01-04 11:01:50',''),(474,'登录','ZHOUJD','2015-01-04 11:02:02',''),(475,'登录','ZHOUJD','2015-01-04 11:02:06',''),(476,'修改采购单','ZHOUJD','2015-01-04 11:02:16','btypename:采购单,remark:null,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(477,'登录','ZHOUJD','2015-01-04 11:04:24',''),(478,'登录','ZHOUJD','2015-01-04 11:04:28',''),(479,'登录','ZHOUJD','2015-01-04 11:06:40',''),(480,'登录','ZHOUJD','2015-01-04 11:06:52',''),(481,'登录','ZHOUJD','2015-01-04 11:07:03',''),(482,'登录','ZHOUJD','2015-02-12 15:44:25',''),(483,'登录','ZHOUJD','2015-02-12 17:59:12',''),(484,'修改产品类型','ZHOUJD','2015-02-12 17:59:25','producttypeno:20101,remark:产品类别一1,producttypename:产品类别一1,priority:1,parent:11,producttypeall:1-11-14,producttype:14'),(485,'修改产品类型','ZHOUJD','2015-02-12 18:01:10','producttypeno:DL0101,remark:null,producttypename:真龍淋浴,priority:1,parent:22,producttypeall:1-21-22-23,producttype:23'),(486,'登录','ZHOUJD','2015-02-12 18:03:10',''),(487,'修改采购单','ZHOUJD','2015-02-12 18:03:21','btypename:采购单,remark:null,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(488,'修改采购单','ZHOUJD','2015-02-12 18:03:42','btypename:采购单,remark:还未确定,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(489,'修改用户','ZHOUJD','2015-02-12 18:04:29','tele:null,birthday:null,username:测试账号,roleid:3,userid:CESHI'),(490,'修改用户','ZHOUJD','2015-02-12 18:04:33','tele:18979578121,birthday:2013-01-01,username:林长城,roleid:2,userid:LINCC'),(491,'修改用户','ZHOUJD','2015-02-12 18:04:49','tele:null,birthday:null,username:测试账号,roleid:3,userid:CESHI'),(492,'修改模块','ZHOUJD','2015-02-12 18:05:22','modulename:用户管理,sn:User,priority:1,description:用户管理-描述,moduleid:10101,parentid:101,rel:user_list,url:/user/list'),(493,'修改采购单','ZHOUJD','2015-02-12 18:07:59','btypename:采购单,remark:还未确定,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(494,'登录','ZHOUJD','2015-02-12 18:23:24',''),(495,'修改采购单','ZHOUJD','2015-02-12 18:23:39','btypename:采购单,remark:还未确定,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(496,'登录','ZHOUJD','2015-02-13 08:20:01',''),(497,'登录','ZHOUJD','2015-02-13 08:57:11',''),(498,'登录','ZHOUJD','2015-02-13 08:58:02',''),(499,'登录','ZHOUJD','2015-02-13 09:13:34',''),(500,'修改采购单','ZHOUJD','2015-02-13 09:13:38','btypename:采购单,remark:还未确定,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(501,'登录','ZHOUJD','2015-02-13 10:09:36',''),(502,'登录','ZHOUJD','2015-02-13 10:20:21',''),(503,'修改采购单','ZHOUJD','2015-02-13 10:20:26','btypename:采购单,remark:还未确定,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(504,'登录','ZHOUJD','2015-02-13 10:26:36',''),(505,'登录','ZHOUJD','2015-02-13 10:38:48',''),(506,'修改用户','ZHOUJD','2015-02-13 10:39:10','tele:null,birthday:null,username:测试账号,roleid:3,userid:CESHI'),(507,'新增用户','ZHOUJD','2015-02-13 10:47:00','tele:null,passwd:21218cca77804d2ba1922c33e0151105,birthday:null,username:张巍巍,roleid:2,userid:ZHANGWW'),(508,'登录','ZHANGWW','2015-02-13 10:47:16',''),(509,'登录','ZHOUJD','2015-02-13 10:48:04',''),(510,'登录','CESHI','2015-02-13 10:48:15',''),(511,'登录','CESHI','2015-02-13 10:57:29',''),(512,'登录','ZHOUJD','2015-02-13 10:58:05',''),(513,'登录','ZHOUJD','2015-02-13 10:59:02',''),(514,'登录','CESHI','2015-02-13 10:59:13',''),(515,'登录','ZHOUJD','2015-02-13 10:59:47',''),(516,'登录','ZHOUJD','2015-02-13 11:13:43',''),(517,'登录','ZHOUJD','2015-02-13 11:16:45',''),(518,'登录','ZHOUJD','2015-02-13 14:52:46',''),(519,'修改采购单','ZHOUJD','2015-02-13 14:52:53','btypename:采购单,remark:还未确定,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(520,'登录','ZHOUJD','2015-02-13 15:22:55',''),(521,'修改采购单','ZHOUJD','2015-02-13 15:22:59','btypename:采购单,remark:还未确定,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(522,'修改银行卡','ZHOUJD','2015-02-13 15:23:16','bankcardno:00000,accountname:现金,status:1,remark:此为现金,bankname:现金,priority:1,banktype:9,money:42695.32,bankcardid:1'),(523,'登录','ZHOUJD','2015-02-13 15:41:05',''),(524,'登录','ZHOUJD','2015-02-13 15:43:02',''),(525,'修改采购单','ZHOUJD','2015-02-13 15:43:16','btypename:采购单,remark:还未确定,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(526,'修改用户','ZHOUJD','2015-02-13 15:47:19','tele:null,birthday:1982-02-01,username:张巍巍,roleid:2,userid:ZHANGWW'),(527,'登录','ZHOUJD','2015-02-13 15:51:58',''),(528,'登录','ZHOUJD','2015-02-13 15:55:38',''),(529,'登录','ZHOUJD','2015-02-13 15:56:27',''),(530,'登录','ZHOUJD','2015-02-13 21:25:55',''),(531,'登录','ZHOUJD','2015-02-13 21:26:31',''),(532,'登录','ZHOUJD','2015-02-14 22:20:45',''),(533,'登录','ZHOUJD','2015-02-15 16:53:59',''),(534,'登录','ZHOUJD','2015-02-15 17:08:20',''),(535,'登录','ZHOUJD','2015-02-15 17:13:04',''),(536,'修改采购单','ZHOUJD','2015-02-15 17:15:39','btypename:采购单,remark:还未确定,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(537,'登录','ZHOUJD','2015-02-15 17:16:34',''),(538,'登录','ZHOUJD','2015-02-15 17:16:37',''),(539,'登录','ZHOUJD','2015-02-15 17:19:30',''),(540,'登录','ZHOUJD','2015-02-15 17:19:35',''),(541,'修改采购单','ZHOUJD','2015-02-15 17:19:40','btypename:采购单,remark:还未确定,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(542,'登录','ZHOUJD','2015-02-15 17:51:25',''),(543,'登录','ZHOUJD','2015-02-16 08:38:48',''),(544,'登录','ZHOUJD','2015-02-16 11:34:51',''),(545,'修改采购单','ZHOUJD','2015-02-16 11:34:55','btypename:采购单,remark:还未确定,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(546,'登录','ZHOUJD','2015-02-16 12:00:53',''),(547,'修改采购单','ZHOUJD','2015-02-16 12:00:56','btypename:采购单,remark:还未确定,allsum:396.04,makername:周坚定,buyname:2014.11.18采购,createtime:2014-11-18 15:29:13,relateno:XSD-20141118-001,buyno:CGD-20141118-003,btype:CGD,maker:ZHOUJD,buyid:42,currflow:申请,buydate:2014-11-18'),(548,'登录','ZHOUJD','2015-02-16 15:23:32',''),(549,'登录','ZHOUJD','2015-02-19 17:47:25',''),(550,'修改产品','ZHOUJD','2015-02-19 17:50:14','profit:75.56,realprice:123.20,remark:产品一备注,costprice:47.64,productno:20101001,producttypename:产品类别一1,createdate:2013-03-06,unit:1,productid:1,producttype:14,productname:产品1'),(551,'登录','ZHOUJD','2015-02-20 13:30:46',''),(552,'登录','ZHOUJD','2015-02-24 11:13:47',''),(553,'登录','ZHOUJD','2015-02-24 22:46:01',''),(554,'新增用户','ZHOUJD','2015-02-24 22:46:55','tele:null,passwd:21218cca77804d2ba1922c33e0151105,birthday:null,username:李德林,roleid:2,userid:LIDL'),(555,'修改用户','ZHOUJD','2015-02-24 22:50:13','tele:null,birthday:null,username:李德林,roleid:3,userid:LIDL'),(556,'登录','LIDL','2015-02-24 22:50:42',''),(557,'登录','ZHOUJD','2015-02-24 22:51:50',''),(558,'登录','LIDL','2015-02-24 22:54:38',''),(559,'登录','ZHANGWW','2015-02-24 23:43:37',''),(560,'登录','ZHOUJD','2015-02-26 11:17:04',''),(561,'登录','LIDL','2015-02-26 11:49:10',''),(562,'登录','ZHANGWW','2015-02-26 11:49:22',''),(563,'登录','ZHOUJD','2015-02-26 11:55:34',''),(564,'登录','ZHOUJD','2015-02-26 17:37:45',''),(565,'修改产品','ZHOUJD','2015-02-26 17:55:17','profit:10,realprice:42.00,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴'),(566,'修改产品','ZHOUJD','2015-02-26 18:11:19','profit:10,realprice:42.00,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴'),(567,'修改产品','ZHOUJD','2015-02-26 18:11:28','profit:10,realprice:42.00,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴'),(568,'新增产品','ZHOUJD','2015-02-26 18:12:50','profit:0,realprice:0.00,remark:null,costprice:0,productno:DL0101002,producttypename:真龍淋浴,createdate:2015-02-26 18:12:49,unit:1,productid:89,producttype:23,productname:1234'),(569,'删除产品','ZHOUJD','2015-02-26 18:13:04','89'),(570,'新增产品','ZHOUJD','2015-02-26 18:13:17','profit:0,realprice:0.00,remark:null,costprice:0,productno:DL0101002,producttypename:真龍淋浴,createdate:2015-02-26 18:13:16,unit:1,productid:90,producttype:23,productname:333'),(571,'删除产品','ZHOUJD','2015-02-26 18:14:14','90'),(572,'修改用户','ZHOUJD','2015-02-26 18:14:23','tele:null,birthday:null,username:李德林3,roleid:3,userid:LIDL'),(573,'修改用户','ZHOUJD','2015-02-26 18:14:28','tele:null,birthday:null,username:李德林,roleid:3,userid:LIDL'),(574,'修改产品','ZHOUJD','2015-02-26 18:14:54','profit:10,realprice:42.00,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴2'),(575,'修改产品','ZHOUJD','2015-02-26 18:14:59','profit:10,realprice:42.00,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴'),(576,'修改产品','ZHOUJD','2015-02-26 18:16:19','profit:10,realprice:42.00,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴2'),(577,'修改产品','ZHOUJD','2015-02-26 18:16:35','profit:10,realprice:42.00,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴'),(578,'修改产品','ZHOUJD','2015-02-26 18:16:48','profit:10,realprice:42.00,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴2'),(579,'修改产品','ZHOUJD','2015-02-26 18:16:56','profit:10,realprice:42.00,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴'),(580,'修改产品','ZHOUJD','2015-02-26 18:25:05','profit:10,realprice:42.00,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,curTime:173824,unit:1,productid:80,producttype:23,productname:树叶淋浴2'),(581,'修改产品','ZHOUJD','2015-02-26 18:25:28','profit:10,realprice:42.00,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,curTime:173824,unit:1,productid:80,producttype:23,productname:树叶淋浴'),(582,'修改产品','ZHOUJD','2015-02-26 18:25:49','profit:10,realprice:42.00,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴2'),(583,'修改产品','ZHOUJD','2015-02-26 18:25:55','profit:10,realprice:42.00,remark:null,costprice:32,productno:DL0101001,producttypename:真龍淋浴,createdate:2014-11-25 14:36:30,unit:1,productid:80,producttype:23,productname:树叶淋浴'),(584,'新增产品','ZHOUJD','2015-02-26 18:27:19','profit:0,realprice:0.00,remark:null,costprice:0,productno:DL0101002,producttypename:真龍淋浴,createdate:2015-02-26 18:27:18,unit:1,productid:91,producttype:23,productname:22'),(585,'删除产品','ZHOUJD','2015-02-26 18:27:46','91'),(586,'新增产品','ZHOUJD','2015-02-26 18:27:53','profit:0,realprice:0.00,remark:null,costprice:0,productno:DL0101002,producttypename:真龍淋浴,createdate:2015-02-26 18:27:52,unit:1,productid:92,producttype:23,productname:22'),(587,'删除产品','ZHOUJD','2015-02-26 18:27:59','92'),(588,'新增产品','ZHOUJD','2015-02-26 18:28:37','profit:0,realprice:0.00,remark:null,costprice:0,productno:DL0101002,producttypename:真龍淋浴,createdate:2015-02-26 18:28:37,unit:1,productid:93,producttype:23,productname:22'),(589,'删除产品','ZHOUJD','2015-02-26 18:28:42','93'),(590,'新增物资','ZHOUJD','2015-02-26 18:32:17','unit:1,usestock:0,stock:0,price:2,remark:,materialtypename:物资类型A-1,materialname:333,createdate:2015-02-26 18:32:17,manuid:8,materialtype:5,materialno:10101002,manuname:供应商B,alarmnum:0'),(591,'修改物资','ZHOUJD','2015-02-26 18:32:23','unit:1,usestock:0,stock:0.00,price:2.00,remark:null,materialtypename:物资类型A-1,materialname:11,createdate:2015-02-26 18:32:17,manuid:8,materialtype:5,materialno:10101002,manuname:供应商B,alarmnum:0.00,materialid:26'),(592,'删除物资','ZHOUJD','2015-02-26 18:32:28','26'),(593,'登录','ZHOUJD','2015-02-27 08:40:22',''),(594,'修改物资','ZHOUJD','2015-02-27 08:40:56','unit:1,usestock:1,stock:956.00,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A112,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:100.00,materialid:1'),(595,'修改物资','ZHOUJD','2015-02-27 08:41:04','unit:1,usestock:1,stock:956.00,price:0.22,remark:null,materialtypename:物资类型A-1,materialname:物资A11,createdate:2013-02-24,manuid:4,materialtype:5,materialno:10101001,manuname:供应商A,alarmnum:100.00,materialid:1'),(596,'登录','ZHOUJD','2015-02-27 08:46:23',''),(597,'修改产品','ZHOUJD','2015-02-27 08:46:44','profit:75.56,realprice:123.20,remark:产品一备注,costprice:47.64,productno:20101001,producttypename:产品类别一1,createdate:2013-03-06,unit:1,productid:1,producttype:14,productname:产品12'),(598,'修改产品','ZHOUJD','2015-02-27 08:46:50','profit:75.56,realprice:123.20,remark:产品一备注,costprice:47.64,productno:20101001,producttypename:产品类别一1,createdate:2013-03-06,unit:1,productid:1,producttype:14,productname:产品1'),(599,'修改供应商','ZHOUJD','2015-02-27 08:55:27','manuemail:null,remark:座机号码：0771-3330325,manutypeid:2,createdate:2013-02-21,manuid:5,statusid:1,manucontact:刘星,manuname:周坚持,referee:null,manutel:13878758825,priority:11'),(600,'修改供应商','ZHOUJD','2015-02-27 08:55:51','manuemail:null,remark:座机号码：0771-3330325,manutypeid:2,createdate:2013-02-21,manuid:5,statusid:1,manucontact:周坚持,manuname:周坚持,referee:null,manutel:13878758825,priority:11'),(601,'登录','ZHOUJD','2015-02-27 08:59:21',''),(602,'修改供应商','ZHOUJD','2015-02-27 08:59:41','manuemail:null,remark:null,manutypeid:2,createdate:2013-02-25,manuid:9,statusid:1,manucontact:李德林,manuname:李德林,referee:null,manutel:00000,priority:12'),(603,'修改供应商','ZHOUJD','2015-02-27 09:00:32','manuemail:null,remark:null,manutypeid:2,createdate:2013-02-25,manuid:9,statusid:1,manucontact:李德林,manuname:李德林,referee:null,manutel:13978321607,priority:12'),(604,'修改供应商','ZHOUJD','2015-02-27 09:00:41','manuemail:null,remark:null,manutypeid:2,createdate:2013-02-25,manuid:9,statusid:1,manucontact:李德林,manuname:李德林,referee:null,manutel:13978321607,priority:12'),(605,'修改供应商','ZHOUJD','2015-02-27 09:00:50','manuemail:null,remark:null,manutypeid:2,createdate:2013-02-25,manuid:9,statusid:1,manucontact:李德林,manuname:李德林,referee:null,manutel:13978321607,priority:12'),(606,'新增供应商','ZHOUJD','2015-02-27 09:01:45','manuemail:null,remark:null,manutypeid:1,createdate:2015-02-27 09:01:45,manuid:94,statusid:1,manucontact:dd,manuname:ss,referee:null,manutel:ss,priority:99'),(607,'删除供应商','ZHOUJD','2015-02-27 09:04:08','94'),(608,'修改供应商','ZHOUJD','2015-02-27 09:09:35','manuemail:null,remark:null,manutypeid:1,createdate:2013-02-05,manuid:4,statusid:1,manucontact:明大角阀,manuname:明大角阀,referee:null,manutel:15059890989,priority:41'),(609,'修改供应商','ZHOUJD','2015-02-27 09:13:37','manuemail:null,remark:QQ：122491783,manutypeid:1,createdate:2013-02-25,manuid:8,statusid:1,manucontact:戴森伟,manuname:逸科洁具,referee:null,manutel:17750516266,priority:42'),(610,'新增供应商','ZHOUJD','2015-02-27 09:15:47','manuemail:44,bankrow:,manuphone:3,remark:null,manutypeid:1,createdate:2015-02-27 09:15:47,manuid:95,statusid:1,manucontact:33,priorityrow:9,manurowid:,manuname:3,accountnorow:,referee:null,accountnamerow:,manutel:null,priority:99,remarkrow:'),(611,'删除供应商','ZHOUJD','2015-02-27 09:15:54','95'),(612,'修改供应商','ZHOUJD','2015-02-27 09:36:01','manuemail:null,manuphone:17750516266,remark:QQ：122491783，经营范围沐浴管、花洒、龙头,manutypeid:1,createdate:2013-02-25,manuid:8,statusid:1,manucontact:戴森伟,manuname:逸科洁具,address:中国水暖城三期5栋150-152号,referee:null,priority:42,manutel:0595-86862690'),(613,'修改供应商','ZHOUJD','2015-02-27 09:45:20','manuemail:null,manuphone:13878758825,remark:座机号码：0771-3330325,manutypeid:2,createdate:2013-02-21,manuid:5,statusid:1,manucontact:周坚持,manuname:周坚持,address:null,referee:null,priority:11,manutel:null'),(614,'修改供应商','ZHOUJD','2015-02-27 09:45:30','manuemail:null,manuphone:13878758825,remark:座机号码：0771-3330325,manutypeid:2,createdate:2013-02-21,manuid:5,statusid:1,manucontact:周坚持,manuname:周坚持,address:null,referee:null,priority:11,manutel:null'),(615,'修改供应商','ZHOUJD','2015-02-27 09:46:01','manuemail:null,manuphone:13878758825,remark:座机号码：0771-3330325,manutypeid:2,createdate:2013-02-21,manuid:5,statusid:1,manucontact:周坚持,manuname:周坚持,address:null,referee:null,priority:11,manutel:null'),(616,'修改供应商','ZHOUJD','2015-02-27 09:47:35','manuemail:null,manuphone:13878758825,remark:座机号码：0771-3330325,manutypeid:2,createdate:2013-02-21,manuid:5,statusid:1,manucontact:周坚持,manuname:周坚持,address:null,referee:null,priority:11,manutel:null'),(617,'修改供应商','ZHOUJD','2015-02-27 09:49:18','manuemail:null,manuphone:13878758825,remark:座机号码：0771-3330325,manutypeid:2,createdate:2013-02-21,manuid:5,statusid:1,manucontact:周坚持,manuname:周坚持,address:null,referee:null,priority:11,manutel:null'),(618,'修改供应商','ZHOUJD','2015-02-27 09:50:04','manuemail:null,manuphone:13878758825,remark:null,manutypeid:2,createdate:2013-02-21,manuid:5,statusid:1,manucontact:周坚持,manuname:周坚持,address:南宁市,referee:null,priority:11,manutel:0771-3330325'),(619,'修改供应商','ZHOUJD','2015-02-27 09:52:21','manuemail:null,manuphone:13978321607,remark:null,manutypeid:2,createdate:2015-02-27 09:50:00,manuid:9,statusid:1,manucontact:李德林,manuname:李德林,address:桂林,referee:null,priority:12,manutel:null'),(620,'修改供应商','ZHOUJD','2015-02-27 09:52:48','manuemail:null,manuphone:15059890989,remark:null,manutypeid:1,createdate:2015-02-27 09:50:00,manuid:4,statusid:1,manucontact:明大角阀,manuname:明大角阀,address:中国水暖城,referee:null,priority:41,manutel:null'),(621,'修改供应商','ZHOUJD','2015-02-27 09:53:14','manuemail:null,manuphone:17750516266,remark:QQ：122491783，经营范围沐浴管、花洒、龙头,manutypeid:1,createdate:2015-02-27 09:50:00,manuid:8,statusid:1,manucontact:戴森伟,manuname:逸科洁具,address:中国水暖城三期5栋150-152号,referee:null,priority:42,manutel:0595-86862690'),(622,'删除供应商','ZHOUJD','2015-02-27 09:53:30','10'),(623,'修改供应商','ZHOUJD','2015-02-27 09:54:34','manuemail:null,manuphone:33333333,remark:null,manutypeid:3,createdate:2015-02-27 09:50:00,manuid:7,statusid:1,manucontact:林长城,manuname:物流A,address:null,referee:null,priority:81,manutel:null'),(624,'新增产品类型','ZHOUJD','2015-02-27 10:04:39','producttypeno:DL02,remark:,producttypename:大顶喷,priority:2,parent:21'),(625,'新增产品','ZHOUJD','2015-02-27 10:16:36','profit:450,sort:9,productrowid:,realprice:450,remark:null,costprice:0,productno:DL02001,producttypename:大顶喷,materialname:,materialprice:0.00,createdate:2015-02-27 10:16:36,materialid:,materialnum:1,unit:1,productid:96,remarkrow:,materialno:,producttype:24,materialsum:0,productname:镀金问号管'),(626,'修改产品','ZHOUJD','2015-02-27 10:17:18','profit:450,sort:9,productrowid:,realprice:450.00,remark:小铃铛,costprice:0,productno:DL02001,producttypename:大顶喷,materialname:,materialprice:0.00,createdate:2015-02-27 10:16:36,materialid:,materialnum:1,unit:1,productid:96,remarkrow:,materialno:,producttype:24,materialsum:0,productname:镀金问号管'),(627,'新增产品','ZHOUJD','2015-02-27 10:18:11','profit:560,sort:9,productrowid:,realprice:560,remark:铃铛大喷,costprice:0,productno:DL02002,producttypename:大顶喷,materialname:,materialprice:0.00,createdate:2015-02-27 10:18:10,materialid:,materialnum:1,unit:1,productid:97,remarkrow:,materialno:,producttype:24,materialsum:0,productname:镀金葫芦问号管'),(628,'登录','ZHOUJD','2015-02-27 11:02:22',''),(629,'新增产品类型','ZHOUJD','2015-02-27 11:02:25','producttypeno:DL03,remark:,producttypename:角阀,priority:3,parent:21'),(630,'新增产品','ZHOUJD','2015-02-27 11:03:07','profit:0,sort:9,productrowid:,realprice:0.00,remark:null,costprice:0,productno:DL03001,producttypename:角阀,materialname:,materialprice:0.00,createdate:2015-02-27 11:03:07,materialid:,materialnum:1,unit:1,productid:98,remarkrow:,materialno:,producttype:25,materialsum:0,productname:角阀一'),(631,'新增产品','ZHOUJD','2015-02-27 11:03:20','profit:0,sort:9,productrowid:,realprice:0.00,remark:null,costprice:0,productno:DL03002,producttypename:角阀,materialname:,materialprice:0.00,createdate:2015-02-27 11:03:20,materialid:,materialnum:1,unit:1,productid:99,remarkrow:,materialno:,producttype:25,materialsum:0,productname:角阀二'),(632,'新增产品','ZHOUJD','2015-02-27 11:03:46','profit:0,sort:9,productrowid:,realprice:0.00,remark:null,costprice:0,productno:DL03003,producttypename:角阀,materialname:,materialprice:0.00,createdate:2015-02-27 11:03:46,materialid:,materialnum:1,unit:1,productid:100,remarkrow:,materialno:,producttype:25,materialsum:0,productname:角阀三'),(633,'修改供应商','ZHOUJD','2015-02-27 11:13:44','manuemail:null,manuphone:17750516266,remark:QQ：122491783。经营范围沐浴管、花洒、龙头。又名“南安市仑苍镇九尘卫浴商行”。,manutypeid:1,createdate:2015-02-27 09:50:00,manuid:8,statusid:1,manucontact:戴森伟,manuname:逸科洁具,address:中国水暖城三期5栋150-152号,referee:null,priority:42,manutel:0595-86862690'),(634,'登录','ZHOUJD','2015-02-27 11:19:36',''),(635,'登录','ZHOUJD','2015-02-27 11:19:44',''),(636,'登录','ZHOUJD','2015-02-27 17:22:04',''),(637,'登录','ZHOUJD','2015-02-28 08:59:06',''),(638,'登录','LIDL','2015-02-28 09:25:48',''),(639,'登录','ZHOUJD','2015-02-28 09:26:32',''),(640,'登录','LIDL','2015-02-28 09:28:48',''),(641,'登录','LIDL','2015-02-28 09:36:36',''),(642,'登录','ZHOUJD','2015-02-28 09:37:05',''),(643,'登录','LIDL','2015-02-28 09:37:33',''),(644,'登录','ZHOUJD','2015-02-28 09:51:53',''),(645,'删除用户','ZHOUJD','2015-02-28 09:53:36','CESHI'),(646,'删除用户','ZHOUJD','2015-02-28 09:53:46','LINCC\',\'ZH112014\',\'ZH112208\',\'ZHANGWW\',\'ZHD103272\',\'ZHD105069\',\'ZHF103099\',\'ZHJ301206\',\'ZHM103839\',\'ZHM110447\',\'ZHQ110244\',\'ZHS103676\',\'ZHS104149'),(647,'删除用户','ZHOUJD','2015-02-28 09:53:54','ZHS112987\',\'ZW113015\',\'ZWB103784\',\'ZWD123117\',\'ZWF103071\',\'ZWJ110683\',\'ZWP103093\',\'ZWQ105325\',\'ZWQ112737\',\'ZWZ111693\',\'ZX100099'),(648,'修改用户','ZHOUJD','2015-02-28 09:54:08','tele:15060066759,birthday:1986-09-19,username:周坚定,roleid:1,userid:ZHOUJD'),(649,'修改用户','ZHOUJD','2015-02-28 09:54:45','tele:13978321607,birthday:null,username:李德林,roleid:3,userid:LIDL'),(650,'修改供应商','ZHOUJD','2015-02-28 10:23:06','manuemail:null,manuphone:13978321607,remark:null,manutypeid:2,createdate:2015-02-27 09:50:00,manuid:9,statusid:1,manucontact:李德林,manuname:李德林,address:桂林,referee:null,priority:12,manutel:null,relateuserid:LIDL'),(651,'登录','ZHOUJD','2015-02-28 10:30:27',''),(652,'登录','LIDL','2015-02-28 10:30:45',''),(653,'新增销售单','LIDL','2015-02-28 10:31:46','sellno:XSD-20150228-001,remark:null,maker:LIDL,manuid:9,allrealsum:18280,allprofit:18280,manuname:李德林,createtime:2015-02-28 10:31:45,sellid:117,currflow:申请,selldate:2015-02-28'),(654,'修改销售单','ZHOUJD','2015-02-28 10:33:51','sellno:XSD-20150228-001,remark:null,maker:LIDL,manuid:9,makername:李德林,allrealsum:18280,allprofit:18280,manuname:李德林,createtime:2015-02-28 10:31:45,sellid:117,currflow:申请,selldate:2015-02-28,addBuy:1'),(655,'登录','ZHOUJD','2015-02-28 10:34:20',''),(656,'登录','ZHOUJD','2015-02-28 10:37:33',''),(657,'登录','LIDL','2015-02-28 10:41:44',''),(658,'登录','LIDL','2015-02-28 10:49:45',''),(659,'登录','LIDL','2015-02-28 11:06:26',''),(660,'登录','ZHOUJD','2015-02-28 11:09:37',''),(661,'登录','LIDL','2015-02-28 11:13:14',''),(662,'登录','ZHOUJD','2015-02-28 11:19:00',''),(663,'登录','LIDL','2015-02-28 11:20:03',''),(664,'新增销售单','LIDL','2015-02-28 11:22:06','sellno:XSD-20150228-002,remark:null,maker:LIDL,manuid:9,allrealsum:2580,allprofit:2580,manuname:李德林,createtime:2015-02-28 11:22:06,sellid:121,currflow:申请,selldate:2015-02-28'),(665,'登录','ZHOUJD','2015-02-28 11:25:11',''),(666,'登录','ZHOUJD','2015-02-28 11:25:27',''),(667,'登录','ZHOUJD','2015-02-28 13:54:29',''),(668,'修改销售单','ZHOUJD','2015-02-28 13:54:39','sellno:XSD-20150228-001,remark:null,makername:李德林,manuname:李德林,createtime:2015-02-28 10:31:45,selldate:2015-02-28,maker:LIDL,manuid:9,allrealsum:18280,allprofit:18280,sellid:117,currflow:申请,addBuy:1');
-/*!40000 ALTER TABLE `slog` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `smanu`
---
-
+-- ----------------------------
+-- Table structure for `smanu`
+-- ----------------------------
 DROP TABLE IF EXISTS `smanu`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `smanu` (
   `manuid` int(4) NOT NULL COMMENT '供应商ID',
   `manuname` varchar(64) DEFAULT NULL COMMENT '供应商名称',
+  `manunamepy` varchar(16) DEFAULT NULL COMMENT '供应商名称拼音首字母',
   `manutypeid` int(2) DEFAULT NULL COMMENT '供应商类别',
   `statusid` int(1) DEFAULT NULL COMMENT '供应商状态',
   `createdate` varchar(20) DEFAULT NULL COMMENT '创建日期',
@@ -645,29 +555,24 @@ CREATE TABLE `smanu` (
   `priority` int(3) DEFAULT '0' COMMENT '优先级',
   `referee` varchar(32) DEFAULT NULL COMMENT '推荐人',
   `relateuserid` varchar(64) DEFAULT NULL COMMENT '关联登录用户ID',
-  `address` varchar(256) NOT NULL COMMENT '地址',
+  `address` varchar(256) DEFAULT NULL COMMENT '地址',
+  `istobuy` varchar(1) DEFAULT '0' COMMENT '是否加入采购单',
   `remark` varchar(1024) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`manuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应商表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `smanu`
---
+-- ----------------------------
+-- Records of smanu
+-- ----------------------------
+INSERT INTO `smanu` VALUES ('101', '顺兴', 'SX', '1', '1', '2016-01-29 22:45:06', '罗静萍', '13805964080', '', '', '99', '', '', '水暖城2期20栋14号', '1', '');
+INSERT INTO `smanu` VALUES ('102', '圣达手柄', 'SDSB', '1', '1', '2016-01-29 22:47:36', '王仁忠', '13599798998', '86181866', null, '99', null, null, '水暖城二期1幢16号', '1', null);
+INSERT INTO `smanu` VALUES ('103', '张三', 'ZS', '2', '1', '2016-01-29 22:48:14', '张三', '', '', '', '1', '', '', '', '0', '');
+INSERT INTO `smanu` VALUES ('104', '李四', 'LS', '2', '1', '2016-01-29 22:48:33', '李四', '', '', '', '2', '', '', '', '0', '');
 
-LOCK TABLES `smanu` WRITE;
-/*!40000 ALTER TABLE `smanu` DISABLE KEYS */;
-INSERT INTO `smanu` VALUES (4,'明大角阀',1,1,'2015-02-27 09:50:00','明大角阀','15059890989','','',41,'',NULL,'中国水暖城',''),(5,'周坚持',2,1,'2015-02-27 09:50:00','周坚持','13878758825','0771-3330325','',11,'',NULL,'南宁市',''),(7,'物流A',3,1,'2015-02-27 09:50:00','林长城','33333333','','',81,'',NULL,'',''),(8,'逸科洁具',1,1,'2015-02-27 09:50:00','戴森伟','17750516266','0595-86862690','',42,'',NULL,'中国水暖城三期5栋150-152号','QQ：122491783。经营范围沐浴管、花洒、龙头。又名“南安市仑苍镇九尘卫浴商行”。'),(9,'李德林',2,1,'2015-02-27 09:50:00','李德林','13978321607','','',12,'','LIDL','桂林','');
-/*!40000 ALTER TABLE `smanu` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `smanurow`
---
-
+-- ----------------------------
+-- Table structure for `smanurow`
+-- ----------------------------
 DROP TABLE IF EXISTS `smanurow`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `smanurow` (
   `manurowid` int(4) NOT NULL AUTO_INCREMENT COMMENT '供应商账号ID',
   `manuid` int(4) NOT NULL COMMENT '供应商ID',
@@ -677,61 +582,49 @@ CREATE TABLE `smanurow` (
   `priorityrow` int(2) DEFAULT '0' COMMENT '优先级',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`manurowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=231 DEFAULT CHARSET=utf8 COMMENT='供应商账号表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应商账号表';
 
---
--- Dumping data for table `smanurow`
---
+-- ----------------------------
+-- Records of smanurow
+-- ----------------------------
 
-LOCK TABLES `smanurow` WRITE;
-/*!40000 ALTER TABLE `smanurow` DISABLE KEYS */;
-INSERT INTO `smanurow` VALUES (224,5,'1','22222222','周坚持',1,NULL),(226,4,'1','1111111111','明大角阀',1,'南安'),(228,7,'1','33333333','林长城',1,NULL),(229,8,'1','444444','戴森伟',1,'南安'),(230,9,'1','2222222','李德林',1,'桂林');
-/*!40000 ALTER TABLE `smanurow` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `smaterial`
---
-
+-- ----------------------------
+-- Table structure for `smaterial`
+-- ----------------------------
 DROP TABLE IF EXISTS `smaterial`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `smaterial` (
   `materialid` int(5) NOT NULL AUTO_INCREMENT COMMENT '物资ID',
   `materialno` varchar(11) NOT NULL COMMENT '物资编码',
   `materialname` varchar(64) DEFAULT NULL COMMENT '物资名称',
   `materialtype` int(5) NOT NULL COMMENT '物资类型',
   `unit` int(3) DEFAULT NULL COMMENT '计量单位',
-  `price` double(12,2) DEFAULT NULL COMMENT '单价',
+  `price` double(12,3) DEFAULT NULL COMMENT '单价',
   `manuid` int(9) DEFAULT NULL COMMENT '供应商',
+  `numofonebox` varchar(9) DEFAULT NULL COMMENT '一件数量',
   `usestock` varchar(1) DEFAULT NULL COMMENT '是否启用库存',
   `stock` double(12,2) DEFAULT NULL COMMENT '库存量',
   `alarmnum` double(12,2) DEFAULT NULL COMMENT '报警量',
   `createdate` varchar(19) DEFAULT NULL COMMENT '新增时间',
+  `materialsort` int(2) DEFAULT NULL COMMENT '排序',
+  `istobuy` varchar(1) DEFAULT '0' COMMENT '是否加入采购单',
+  `statusid` int(1) DEFAULT NULL COMMENT '使用状态',
+  `mark` varchar(16) DEFAULT NULL COMMENT '标志',
+  `property` varchar(32) DEFAULT NULL COMMENT '属性',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`materialid`),
   UNIQUE KEY `uni_smaterial_no` (`materialno`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `smaterial`
---
+-- ----------------------------
+-- Records of smaterial
+-- ----------------------------
+INSERT INTO `smaterial` VALUES ('1', '1001001', '赛洛单孔（进）', '159', '1', '13.500', '101', '48', null, null, null, '2016-01-29 22:46:16', '50', '', '1', '进', '390g', '');
+INSERT INTO `smaterial` VALUES ('2', '1002001', '6号赛诺', '160', '1', '4.200', '102', '', null, null, null, '2016-01-29 22:50:13', '50', '', '1', '', '', '');
 
-LOCK TABLES `smaterial` WRITE;
-/*!40000 ALTER TABLE `smaterial` DISABLE KEYS */;
-INSERT INTO `smaterial` VALUES (1,'10101001','物资A11',5,1,0.22,4,'1',956.00,100.00,'2013-02-24',''),(4,'10201001','物资B11',8,1,33.30,4,'0',0.00,0.00,'2013-03-04',''),(5,'10201002','物资B12',8,1,44.00,8,'1',399.00,100.00,'2013-03-04',''),(6,'10102001','物资A21',6,1,43.20,8,NULL,NULL,NULL,'2014-07-04',''),(8,'10103001','4',7,1,4.00,4,NULL,NULL,NULL,'2014-08-12 15:51:04',''),(9,'10103002','5',7,1,5.00,4,NULL,NULL,NULL,'2014-08-12 15:51:13',''),(10,'10103003','6',7,1,6.00,8,NULL,NULL,NULL,'2014-08-12 15:51:22',''),(11,'10103004','7',7,1,7.00,8,NULL,NULL,NULL,'2014-08-12 15:51:30',''),(12,'10103005','8',7,1,8.00,4,NULL,NULL,NULL,'2014-08-12 15:52:12',''),(13,'10103006','9',7,1,9.00,4,NULL,NULL,NULL,'2014-08-12 15:52:24',''),(14,'10103007','10',7,1,10.00,4,NULL,NULL,NULL,'2014-08-12 15:52:35',''),(15,'10103008','11',7,1,11.00,8,NULL,NULL,NULL,'2014-08-12 15:52:43',''),(16,'10103009','12',7,1,12.00,4,NULL,NULL,NULL,'2014-08-12 15:53:14',''),(17,'10103010','13',7,1,13.00,4,NULL,NULL,NULL,'2014-08-12 15:54:33',''),(18,'10103011','14',7,1,14.00,4,NULL,NULL,NULL,'2014-08-12 15:54:42',''),(19,'10103012','15',7,1,15.00,8,NULL,NULL,NULL,'2014-08-12 15:54:51',''),(20,'10103013','16',7,1,16.00,4,NULL,NULL,NULL,'2014-08-12 15:55:12',''),(21,'10103014','17',7,1,17.00,4,NULL,NULL,NULL,'2014-08-12 15:55:20',''),(22,'10103015','18',7,1,18.00,4,NULL,NULL,NULL,'2014-08-12 15:55:27',''),(23,'10103016','19',7,1,19.00,8,NULL,NULL,NULL,'2014-08-12 15:55:42',''),(24,'10103017','20',7,1,20.00,8,NULL,NULL,NULL,'2014-08-12 15:55:50',''),(25,'10103018','21',7,1,21.00,8,NULL,NULL,NULL,'2014-08-12 15:56:23','');
-/*!40000 ALTER TABLE `smaterial` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `smaterialtype`
---
-
+-- ----------------------------
+-- Table structure for `smaterialtype`
+-- ----------------------------
 DROP TABLE IF EXISTS `smaterialtype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `smaterialtype` (
   `materialtype` int(5) NOT NULL AUTO_INCREMENT COMMENT '物资类型主键',
   `materialtypeno` varchar(9) DEFAULT NULL COMMENT '物资类型编码',
@@ -739,29 +632,23 @@ CREATE TABLE `smaterialtype` (
   `priority` int(3) DEFAULT NULL COMMENT '优先级',
   `parent` varchar(8) DEFAULT NULL COMMENT '父级编号',
   `materialtypeall` varchar(64) DEFAULT NULL,
+  `statusid` int(1) DEFAULT NULL COMMENT '使用状态',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`materialtype`),
   UNIQUE KEY `u_smaterialtype_no` (`materialtypeno`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `smaterialtype`
---
+-- ----------------------------
+-- Records of smaterialtype
+-- ----------------------------
+INSERT INTO `smaterialtype` VALUES ('1', '1', '根节点', '99', null, '1', '1', null);
+INSERT INTO `smaterialtype` VALUES ('159', '1001', '顺兴', '99', '1', '1-159', '1', '');
+INSERT INTO `smaterialtype` VALUES ('160', '1002', '圣达手柄', '99', '1', '1-160', '1', '');
 
-LOCK TABLES `smaterialtype` WRITE;
-/*!40000 ALTER TABLE `smaterialtype` DISABLE KEYS */;
-INSERT INTO `smaterialtype` VALUES (1,'1','根节点',1,NULL,'1',NULL),(2,'101','物资类型A',1,'1','1-2','物资类型A备注'),(3,'102','物资类型B',2,'1','1-3','物资类型B备注'),(4,'103','物资类型C',99,'1','1-4',''),(5,'10101','物资类型A-1',1,'2','1-2-5','物资类型A-1备注'),(6,'10102','物资类型A-2',2,'2','1-2-6',''),(7,'10103','物资类型A-3',99,'2','1-2-7',''),(8,'10201','物资类型B-1',1,'3','1-3-8',''),(9,'10202','物资类型B-2',99,'3','1-3-9',''),(10,'10301','物资类型C-1',99,'4','1-4-10','');
-/*!40000 ALTER TABLE `smaterialtype` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `smodule`
---
-
+-- ----------------------------
+-- Table structure for `smodule`
+-- ----------------------------
 DROP TABLE IF EXISTS `smodule`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `smodule` (
   `moduleid` int(10) NOT NULL AUTO_INCREMENT COMMENT '模块ID',
   `modulename` varchar(64) NOT NULL COMMENT '模块名称',
@@ -772,49 +659,217 @@ CREATE TABLE `smodule` (
   `sn` varchar(32) DEFAULT NULL COMMENT '授权名称',
   `rel` varchar(32) DEFAULT NULL COMMENT '页面标识',
   PRIMARY KEY (`moduleid`)
-) ENGINE=InnoDB AUTO_INCREMENT=10134 DEFAULT CHARSET=utf8 COMMENT='模块表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=10137 DEFAULT CHARSET=utf8 COMMENT='模块表';
 
---
--- Dumping data for table `smodule`
---
+-- ----------------------------
+-- Records of smodule
+-- ----------------------------
+INSERT INTO `smodule` VALUES ('1', '根模块', '所有模块的根节点，不能删除', '1', '#', null, null, null);
+INSERT INTO `smodule` VALUES ('101', '系统管理', '', '2', '', '1', 'Configs', '');
+INSERT INTO `smodule` VALUES ('103', '其它管理', '其它管理-描述', '99', '', '1', 'Others', '');
+INSERT INTO `smodule` VALUES ('10101', '用户管理', '用户管理-描述', '3', '/user/list', '101', 'User', 'user_list');
+INSERT INTO `smodule` VALUES ('10102', '角色管理', '角色管理-描述', '2', '/role/list', '101', 'Role', 'role_list');
+INSERT INTO `smodule` VALUES ('10105', '模块管理', '模块管理-描述', '1', '/module/tree', '101', 'Module', 'module_tree');
+INSERT INTO `smodule` VALUES ('10106', '资料管理', '资料管理-描述', '3', '', '1', 'Datas', '');
+INSERT INTO `smodule` VALUES ('10108', '公司信息管理', '公司信息管理', '5', '/company/edi/1', '10106', 'Company', 'company_edi');
+INSERT INTO `smodule` VALUES ('10109', '供应商管理', '供应商管理', '3', '/manu/list?first=true', '10106', 'Manu', 'manu_list');
+INSERT INTO `smodule` VALUES ('10110', '员工管理', '员工管理', '4', '/staff/list?first=true', '10106', 'Staff', 'staff_list');
+INSERT INTO `smodule` VALUES ('10111', '财务管理', '财务管理', '4', '', '1', 'Finances', '');
+INSERT INTO `smodule` VALUES ('10112', '银行卡管理', '银行卡管理', '99', '/bankcard/list?first=true', '10111', 'Bankcard', 'bankcard_list');
+INSERT INTO `smodule` VALUES ('10113', '单据管理', '', '99', '/pay/list?first=true', '10111', 'Pay', 'pay_list');
+INSERT INTO `smodule` VALUES ('10114', '物资管理', '', '5', '', '1', 'Materials', '');
+INSERT INTO `smodule` VALUES ('10115', '物资类型管理', '', '1', '/materialtype/tree', '10114', 'Materialtype', 'materialtype_tree');
+INSERT INTO `smodule` VALUES ('10116', '物资管理', '', '2', '/material/tree', '10114', 'Material', 'material_tree');
+INSERT INTO `smodule` VALUES ('10117', '采购管理', '', '3', '/buy/list?first=true', '10114', 'Buy', 'buy_list');
+INSERT INTO `smodule` VALUES ('10118', '产品管理', '', '6', '', '1', 'Products', '');
+INSERT INTO `smodule` VALUES ('10119', '产品类别管理', '', '1', '/producttype/tree', '10118', 'Producttype', 'producttype_tree');
+INSERT INTO `smodule` VALUES ('10120', '产品管理', '', '2', '/product/tree', '10118', 'Product', 'product_tree');
+INSERT INTO `smodule` VALUES ('10121', '销售管理', '', '3', '/sell/list?first=true', '10118', 'Sell', 'sell_list');
+INSERT INTO `smodule` VALUES ('10122', '工资管理', '', '99', '/salary/list?first=true', '10111', 'Salary', 'salary_list');
+INSERT INTO `smodule` VALUES ('10123', '报表管理', '', '7', '', '1', 'Reports', '');
+INSERT INTO `smodule` VALUES ('10124', '月度供应商报表', '', '1', '/report/reportBuy', '10123', 'ReportBuy', 'buy_report');
+INSERT INTO `smodule` VALUES ('10125', '月度客户报表', '', '2', '/report/reportSell', '10123', 'ReportSell', 'sell_report');
+INSERT INTO `smodule` VALUES ('10126', '月度综合报表', '', '3', '/report/reportColligate', '10123', 'ReportColligate', 'colligate_report');
+INSERT INTO `smodule` VALUES ('10127', '综合统计报表', '', '8', '/report/reportStatistics', '10123', 'ReportStatistics', 'statistics_report');
+INSERT INTO `smodule` VALUES ('10128', '综合产品报表', '', '5', '/report/reportProduct', '10123', 'ReportProduct', 'product_report');
+INSERT INTO `smodule` VALUES ('10129', '综合物资报表', '', '4', '/report/reportMaterial', '10123', 'ReportMaterial', 'material_report');
+INSERT INTO `smodule` VALUES ('10130', '综合供应商报表', '', '6', '/report/reportManu', '10123', 'ReportManu', 'manu_report');
+INSERT INTO `smodule` VALUES ('10131', '综合客户报表', '', '7', '/report/reportClient', '10123', 'ReportClient', 'client_report');
+INSERT INTO `smodule` VALUES ('10132', '日志管理', '', '1', '/log/list', '103', 'Log', 'log_list');
+INSERT INTO `smodule` VALUES ('10133', '字典管理', '', '1', '/dict/list', '10106', 'Dict', 'dict_list');
+INSERT INTO `smodule` VALUES ('10134', '待付列表', '', '4', '/buy/toPay', '10114', 'Buy', 'buy_toPay');
+INSERT INTO `smodule` VALUES ('10135', '系统参数', '', '2', '/parameter/list', '10106', 'Parameter', 'parameter_list');
+INSERT INTO `smodule` VALUES ('10136', '配置管理', '', '2', '/manage/list', '103', 'Manage', 'manage_list');
 
-LOCK TABLES `smodule` WRITE;
-/*!40000 ALTER TABLE `smodule` DISABLE KEYS */;
-INSERT INTO `smodule` VALUES (1,'根模块','所有模块的根节点，不能删除',1,'#',NULL,NULL,NULL),(101,'系统管理','系统管理-描述',2,'',1,'Configs',''),(103,'其它管理','其它管理-描述',99,'',1,'Others',''),(10101,'用户管理','用户管理-描述',1,'/user/list',101,'User','user_list'),(10102,'角色管理','角色管理-描述',2,'/role/list',101,'Role','role_list'),(10105,'模块管理','模块管理-描述',3,'/module/tree',101,'Module','module_tree'),(10106,'资料管理','资料管理-描述',3,'',1,'Datas',''),(10108,'公司信息管理','公司信息管理',99,'/company/edi/1',10106,'Company','company_edi'),(10109,'供应商管理','供应商管理',99,'/manu/list?first=true',10106,'Manu','manu_list'),(10110,'员工管理','员工管理',99,'/staff/list?first=true',10106,'Staff','staff_list'),(10111,'财务管理','财务管理',4,'',1,'Finances',''),(10112,'银行卡管理','银行卡管理',99,'/bankcard/list?first=true',10111,'Bankcard','bankcard_list'),(10113,'单据管理','',99,'/pay/list?first=true',10111,'Pay','pay_list'),(10114,'物资管理','',5,'',1,'Materials',''),(10115,'物资类型管理','',1,'/materialtype/tree',10114,'Materialtype','materialtype_tree'),(10116,'物资管理','',2,'/material/tree',10114,'Material','material_tree'),(10117,'采购管理','',99,'/buy/list?first=true',10114,'Buy','buy_list'),(10118,'产品管理','',6,'',1,'Products',''),(10119,'产品类别管理','',1,'/producttype/tree',10118,'Producttype','producttype_tree'),(10120,'产品管理','',2,'/product/tree',10118,'Product','product_tree'),(10121,'销售管理','',3,'/sell/list?first=true',10118,'Sell','sell_list'),(10122,'工资管理','',99,'/salary/list?first=true',10111,'Salary','salary_list'),(10123,'报表管理','',7,'',1,'Reports',''),(10124,'月度供应商报表','',1,'/report/reportBuy',10123,'ReportBuy','buy_report'),(10125,'月度客户报表','',2,'/report/reportSell',10123,'ReportSell','sell_report'),(10126,'月度综合报表','',3,'/report/reportColligate',10123,'ReportColligate','colligate_report'),(10127,'综合统计报表','',8,'/report/reportStatistics',10123,'ReportStatistics','statistics_report'),(10128,'综合产品报表','',5,'/report/reportProduct',10123,'ReportProduct','product_report'),(10129,'综合物资报表','',4,'/report/reportMaterial',10123,'ReportMaterial','material_report'),(10130,'综合供应商报表','',6,'/report/reportManu',10123,'ReportManu','manu_report'),(10131,'综合客户报表','',7,'/report/reportClient',10123,'ReportClient','client_report'),(10132,'日志管理','',1,'/log/list',103,'Log','log_list'),(10133,'字典管理','',1,'/dict/list',10106,'Dict','dict_list');
-/*!40000 ALTER TABLE `smodule` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `spermission`
---
-
+-- ----------------------------
+-- Table structure for `spermission`
+-- ----------------------------
 DROP TABLE IF EXISTS `spermission`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `spermission` (
   `roleid` int(10) NOT NULL COMMENT '角色ID',
   `permission` varchar(255) NOT NULL COMMENT '资源代码'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='权限表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `spermission`
---
+-- ----------------------------
+-- Records of spermission
+-- ----------------------------
+INSERT INTO `spermission` VALUES ('3', 'Finances:view');
+INSERT INTO `spermission` VALUES ('3', 'Pay:view');
+INSERT INTO `spermission` VALUES ('3', 'Products:view');
+INSERT INTO `spermission` VALUES ('3', 'Product:view');
+INSERT INTO `spermission` VALUES ('3', 'Sell:view');
+INSERT INTO `spermission` VALUES ('3', 'Sell:add');
+INSERT INTO `spermission` VALUES ('3', 'ReportClient:view');
+INSERT INTO `spermission` VALUES ('2631', 'Configs:view');
+INSERT INTO `spermission` VALUES ('2631', 'User:view');
+INSERT INTO `spermission` VALUES ('2631', 'User:add');
+INSERT INTO `spermission` VALUES ('2631', 'User:edi');
+INSERT INTO `spermission` VALUES ('2631', 'User:delete');
+INSERT INTO `spermission` VALUES ('2631', 'Role:view');
+INSERT INTO `spermission` VALUES ('2631', 'Role:add');
+INSERT INTO `spermission` VALUES ('2631', 'Role:edi');
+INSERT INTO `spermission` VALUES ('2631', 'Role:delete');
+INSERT INTO `spermission` VALUES ('2631', 'Module:view');
+INSERT INTO `spermission` VALUES ('2631', 'Module:add');
+INSERT INTO `spermission` VALUES ('2631', 'Module:edi');
+INSERT INTO `spermission` VALUES ('2631', 'Module:delete');
+INSERT INTO `spermission` VALUES ('2631', 'Datas:view');
+INSERT INTO `spermission` VALUES ('2631', 'Dict:view');
+INSERT INTO `spermission` VALUES ('2631', 'Dict:add');
+INSERT INTO `spermission` VALUES ('2631', 'Dict:edi');
+INSERT INTO `spermission` VALUES ('2631', 'Dict:delete');
+INSERT INTO `spermission` VALUES ('2631', 'Parameter:view');
+INSERT INTO `spermission` VALUES ('2631', 'Parameter:add');
+INSERT INTO `spermission` VALUES ('2631', 'Parameter:edi');
+INSERT INTO `spermission` VALUES ('2631', 'Parameter:delete');
+INSERT INTO `spermission` VALUES ('2631', 'Others:view');
+INSERT INTO `spermission` VALUES ('2631', 'Log:view');
+INSERT INTO `spermission` VALUES ('2631', 'Log:edi');
+INSERT INTO `spermission` VALUES ('1', 'Configs:view');
+INSERT INTO `spermission` VALUES ('1', 'User:view');
+INSERT INTO `spermission` VALUES ('1', 'User:add');
+INSERT INTO `spermission` VALUES ('1', 'User:edi');
+INSERT INTO `spermission` VALUES ('1', 'User:delete');
+INSERT INTO `spermission` VALUES ('1', 'Role:view');
+INSERT INTO `spermission` VALUES ('1', 'Role:add');
+INSERT INTO `spermission` VALUES ('1', 'Role:edi');
+INSERT INTO `spermission` VALUES ('1', 'Role:delete');
+INSERT INTO `spermission` VALUES ('1', 'Module:view');
+INSERT INTO `spermission` VALUES ('1', 'Module:add');
+INSERT INTO `spermission` VALUES ('1', 'Module:edi');
+INSERT INTO `spermission` VALUES ('1', 'Module:delete');
+INSERT INTO `spermission` VALUES ('1', 'Datas:view');
+INSERT INTO `spermission` VALUES ('1', 'Dict:view');
+INSERT INTO `spermission` VALUES ('1', 'Dict:add');
+INSERT INTO `spermission` VALUES ('1', 'Dict:edi');
+INSERT INTO `spermission` VALUES ('1', 'Dict:delete');
+INSERT INTO `spermission` VALUES ('1', 'Parameter:view');
+INSERT INTO `spermission` VALUES ('1', 'Parameter:add');
+INSERT INTO `spermission` VALUES ('1', 'Parameter:edi');
+INSERT INTO `spermission` VALUES ('1', 'Parameter:delete');
+INSERT INTO `spermission` VALUES ('1', 'Manu:view');
+INSERT INTO `spermission` VALUES ('1', 'Manu:add');
+INSERT INTO `spermission` VALUES ('1', 'Manu:edi');
+INSERT INTO `spermission` VALUES ('1', 'Manu:delete');
+INSERT INTO `spermission` VALUES ('1', 'Staff:view');
+INSERT INTO `spermission` VALUES ('1', 'Staff:add');
+INSERT INTO `spermission` VALUES ('1', 'Staff:edi');
+INSERT INTO `spermission` VALUES ('1', 'Staff:delete');
+INSERT INTO `spermission` VALUES ('1', 'Company:view');
+INSERT INTO `spermission` VALUES ('1', 'Company:add');
+INSERT INTO `spermission` VALUES ('1', 'Company:edi');
+INSERT INTO `spermission` VALUES ('1', 'Company:delete');
+INSERT INTO `spermission` VALUES ('1', 'Finances:view');
+INSERT INTO `spermission` VALUES ('1', 'Bankcard:view');
+INSERT INTO `spermission` VALUES ('1', 'Bankcard:add');
+INSERT INTO `spermission` VALUES ('1', 'Bankcard:edi');
+INSERT INTO `spermission` VALUES ('1', 'Pay:view');
+INSERT INTO `spermission` VALUES ('1', 'Pay:add');
+INSERT INTO `spermission` VALUES ('1', 'Pay:edi');
+INSERT INTO `spermission` VALUES ('1', 'Pay:delete');
+INSERT INTO `spermission` VALUES ('1', 'Pay:other');
+INSERT INTO `spermission` VALUES ('1', 'Salary:view');
+INSERT INTO `spermission` VALUES ('1', 'Salary:add');
+INSERT INTO `spermission` VALUES ('1', 'Salary:edi');
+INSERT INTO `spermission` VALUES ('1', 'Salary:delete');
+INSERT INTO `spermission` VALUES ('1', 'Materials:view');
+INSERT INTO `spermission` VALUES ('1', 'Materialtype:view');
+INSERT INTO `spermission` VALUES ('1', 'Materialtype:add');
+INSERT INTO `spermission` VALUES ('1', 'Materialtype:edi');
+INSERT INTO `spermission` VALUES ('1', 'Materialtype:delete');
+INSERT INTO `spermission` VALUES ('1', 'Material:view');
+INSERT INTO `spermission` VALUES ('1', 'Material:add');
+INSERT INTO `spermission` VALUES ('1', 'Material:edi');
+INSERT INTO `spermission` VALUES ('1', 'Material:delete');
+INSERT INTO `spermission` VALUES ('1', 'Buy:view');
+INSERT INTO `spermission` VALUES ('1', 'Buy:add');
+INSERT INTO `spermission` VALUES ('1', 'Buy:edi');
+INSERT INTO `spermission` VALUES ('1', 'Buy:delete');
+INSERT INTO `spermission` VALUES ('1', 'Buy:view');
+INSERT INTO `spermission` VALUES ('1', 'Buy:add');
+INSERT INTO `spermission` VALUES ('1', 'Buy:edi');
+INSERT INTO `spermission` VALUES ('1', 'Buy:delete');
+INSERT INTO `spermission` VALUES ('1', 'Products:view');
+INSERT INTO `spermission` VALUES ('1', 'Producttype:view');
+INSERT INTO `spermission` VALUES ('1', 'Producttype:add');
+INSERT INTO `spermission` VALUES ('1', 'Producttype:edi');
+INSERT INTO `spermission` VALUES ('1', 'Producttype:delete');
+INSERT INTO `spermission` VALUES ('1', 'Product:view');
+INSERT INTO `spermission` VALUES ('1', 'Product:add');
+INSERT INTO `spermission` VALUES ('1', 'Product:edi');
+INSERT INTO `spermission` VALUES ('1', 'Product:delete');
+INSERT INTO `spermission` VALUES ('1', 'Sell:view');
+INSERT INTO `spermission` VALUES ('1', 'Sell:add');
+INSERT INTO `spermission` VALUES ('1', 'Sell:edi');
+INSERT INTO `spermission` VALUES ('1', 'Sell:delete');
+INSERT INTO `spermission` VALUES ('1', 'Reports:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportBuy:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportSell:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportColligate:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportMaterial:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportProduct:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportManu:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportClient:view');
+INSERT INTO `spermission` VALUES ('1', 'ReportStatistics:view');
+INSERT INTO `spermission` VALUES ('1', 'Others:view');
+INSERT INTO `spermission` VALUES ('1', 'Log:view');
+INSERT INTO `spermission` VALUES ('1', 'Log:edi');
+INSERT INTO `spermission` VALUES ('1', 'Manage:view');
+INSERT INTO `spermission` VALUES ('2', 'Datas:view');
+INSERT INTO `spermission` VALUES ('2', 'Manu:view');
+INSERT INTO `spermission` VALUES ('2', 'Manu:add');
+INSERT INTO `spermission` VALUES ('2', 'Manu:edi');
+INSERT INTO `spermission` VALUES ('2', 'Materials:view');
+INSERT INTO `spermission` VALUES ('2', 'Materialtype:view');
+INSERT INTO `spermission` VALUES ('2', 'Materialtype:add');
+INSERT INTO `spermission` VALUES ('2', 'Materialtype:edi');
+INSERT INTO `spermission` VALUES ('2', 'Material:view');
+INSERT INTO `spermission` VALUES ('2', 'Material:add');
+INSERT INTO `spermission` VALUES ('2', 'Material:edi');
+INSERT INTO `spermission` VALUES ('2', 'Buy:view');
+INSERT INTO `spermission` VALUES ('2', 'Buy:add');
+INSERT INTO `spermission` VALUES ('2', 'Buy:edi');
+INSERT INTO `spermission` VALUES ('2', 'Products:view');
+INSERT INTO `spermission` VALUES ('2', 'Producttype:view');
+INSERT INTO `spermission` VALUES ('2', 'Producttype:add');
+INSERT INTO `spermission` VALUES ('2', 'Producttype:edi');
+INSERT INTO `spermission` VALUES ('2', 'Product:view');
+INSERT INTO `spermission` VALUES ('2', 'Product:add');
+INSERT INTO `spermission` VALUES ('2', 'Product:edi');
+INSERT INTO `spermission` VALUES ('2', 'Sell:view');
+INSERT INTO `spermission` VALUES ('2', 'Sell:add');
+INSERT INTO `spermission` VALUES ('2', 'Sell:edi');
+INSERT INTO `spermission` VALUES ('2', 'Reports:view');
+INSERT INTO `spermission` VALUES ('2', 'ReportMaterial:view');
+INSERT INTO `spermission` VALUES ('2', 'ReportProduct:view');
+INSERT INTO `spermission` VALUES ('2', 'ReportManu:view');
+INSERT INTO `spermission` VALUES ('2', 'ReportClient:view');
+INSERT INTO `spermission` VALUES ('2', 'ReportStatistics:view');
 
-LOCK TABLES `spermission` WRITE;
-/*!40000 ALTER TABLE `spermission` DISABLE KEYS */;
-INSERT INTO `spermission` VALUES (1,'Configs:view'),(1,'User:view'),(1,'User:add'),(1,'User:edi'),(1,'User:delete'),(1,'Role:view'),(1,'Role:add'),(1,'Role:edi'),(1,'Role:delete'),(1,'Module:view'),(1,'Module:add'),(1,'Module:edi'),(1,'Module:delete'),(1,'Datas:view'),(1,'Dict:view'),(1,'Dict:add'),(1,'Dict:edi'),(1,'Dict:delete'),(1,'Company:view'),(1,'Company:add'),(1,'Company:edi'),(1,'Company:delete'),(1,'Manu:view'),(1,'Manu:add'),(1,'Manu:edi'),(1,'Manu:delete'),(1,'Staff:view'),(1,'Staff:add'),(1,'Staff:edi'),(1,'Staff:delete'),(1,'Finances:view'),(1,'Bankcard:view'),(1,'Bankcard:add'),(1,'Bankcard:edi'),(1,'Bankcard:other'),(1,'Pay:view'),(1,'Pay:add'),(1,'Pay:edi'),(1,'Pay:delete'),(1,'Pay:other'),(1,'Salary:view'),(1,'Salary:add'),(1,'Salary:edi'),(1,'Salary:delete'),(1,'Materials:view'),(1,'Materialtype:view'),(1,'Materialtype:add'),(1,'Materialtype:edi'),(1,'Materialtype:delete'),(1,'Material:view'),(1,'Material:add'),(1,'Material:edi'),(1,'Material:delete'),(1,'Buy:view'),(1,'Buy:add'),(1,'Buy:edi'),(1,'Buy:delete'),(1,'Products:view'),(1,'Producttype:view'),(1,'Producttype:add'),(1,'Producttype:edi'),(1,'Producttype:delete'),(1,'Product:view'),(1,'Product:add'),(1,'Product:edi'),(1,'Product:delete'),(1,'Sell:view'),(1,'Sell:add'),(1,'Sell:edi'),(1,'Sell:delete'),(1,'Sell:other'),(1,'Reports:view'),(1,'ReportBuy:view'),(1,'ReportSell:view'),(1,'ReportColligate:view'),(1,'ReportMaterial:view'),(1,'ReportProduct:view'),(1,'ReportManu:view'),(1,'ReportClient:view'),(1,'ReportStatistics:view'),(1,'Others:view'),(1,'Log:view'),(1,'Log:edi'),(2,'Datas:view'),(2,'Manu:view'),(2,'Manu:add'),(2,'Manu:edi'),(2,'Staff:view'),(2,'Staff:add'),(2,'Staff:edi'),(2,'Finances:view'),(2,'Pay:view'),(2,'Pay:add'),(2,'Pay:edi'),(2,'Salary:view'),(2,'Salary:add'),(2,'Salary:edi'),(2,'Materials:view'),(2,'Materialtype:view'),(2,'Materialtype:add'),(2,'Materialtype:edi'),(2,'Material:view'),(2,'Material:add'),(2,'Material:edi'),(2,'Buy:view'),(2,'Buy:add'),(2,'Buy:edi'),(2,'Products:view'),(2,'Producttype:view'),(2,'Producttype:add'),(2,'Producttype:edi'),(2,'Product:view'),(2,'Product:add'),(2,'Product:edi'),(2,'Sell:view'),(2,'Sell:add'),(2,'Sell:edi'),(3,'Products:view'),(3,'Product:view'),(3,'Sell:view'),(3,'Sell:add');
-/*!40000 ALTER TABLE `spermission` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `sproduct`
---
-
+-- ----------------------------
+-- Table structure for `sproduct`
+-- ----------------------------
 DROP TABLE IF EXISTS `sproduct`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sproduct` (
   `productid` int(9) NOT NULL COMMENT '产品ID',
   `productno` varchar(11) NOT NULL COMMENT '产品编码',
@@ -824,29 +879,26 @@ CREATE TABLE `sproduct` (
   `costprice` double(12,2) DEFAULT NULL COMMENT '成本',
   `profit` double(12,2) DEFAULT NULL COMMENT '利润',
   `realprice` double(12,2) NOT NULL COMMENT '产品单价',
+  `numofcase` int(3) DEFAULT '0' COMMENT '一盒数量',
+  `numofonebox` int(3) DEFAULT '0' COMMENT '一箱数量',
   `createdate` varchar(19) DEFAULT NULL COMMENT '新增日期',
+  `productsort` int(2) DEFAULT NULL COMMENT '排序',
+  `buyers` varchar(256) DEFAULT NULL COMMENT '买家',
+  `printname` varchar(64) DEFAULT NULL COMMENT '打印名',
+  `statusid` int(1) DEFAULT NULL COMMENT '使用状态',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`productid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='产品表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `sproduct`
---
+-- ----------------------------
+-- Records of sproduct
+-- ----------------------------
+INSERT INTO `sproduct` VALUES ('105', 'BM20401', '赛洛单孔', '198', '1', '29.00', '4.00', '33.00', '2', '42', '2016-01-29 22:58:45', '50', '张三', '', '1', '');
 
-LOCK TABLES `sproduct` WRITE;
-/*!40000 ALTER TABLE `sproduct` DISABLE KEYS */;
-INSERT INTO `sproduct` VALUES (1,'20101001','产品1',14,1,47.64,75.56,123.20,'2013-03-06','产品一备注'),(2,'20101002','产品2',14,1,190.24,10.26,200.50,'2014-07-12',''),(3,'20101003','产品3',14,1,163.40,39.80,203.20,'2014-07-12',''),(5,'20102001','产品8',15,1,33.30,9.80,43.10,'2014-08-11',''),(80,'DL0101001','树叶淋浴',23,1,32.00,10.00,42.00,'2014-11-25 14:36:30',''),(96,'DL02001','镀金问号管',24,1,0.00,450.00,450.00,'2015-02-27 10:16:36','小铃铛'),(97,'DL02002','镀金葫芦问号管',24,1,0.00,560.00,560.00,'2015-02-27 10:18:10','铃铛大喷'),(98,'DL03001','角阀一',25,1,0.00,0.00,0.00,'2015-02-27 11:03:07',NULL),(99,'DL03002','角阀二',25,1,0.00,0.00,0.00,'2015-02-27 11:03:20',NULL),(100,'DL03003','角阀三',25,1,0.00,0.00,0.00,'2015-02-27 11:03:46',NULL);
-/*!40000 ALTER TABLE `sproduct` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `sproductrow`
---
-
+-- ----------------------------
+-- Table structure for `sproductrow`
+-- ----------------------------
 DROP TABLE IF EXISTS `sproductrow`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sproductrow` (
   `productrowid` int(9) NOT NULL AUTO_INCREMENT COMMENT '行项ID',
   `productid` int(9) DEFAULT NULL COMMENT '产品ID',
@@ -858,27 +910,34 @@ CREATE TABLE `sproductrow` (
   `materialsum` double(12,2) NOT NULL DEFAULT '0.00' COMMENT '物资总价',
   `sort` int(2) DEFAULT NULL COMMENT '排序',
   `remarkrow` varchar(512) DEFAULT NULL COMMENT '备注',
+  `remarkshow` varchar(32) DEFAULT NULL COMMENT '采购备注',
+  `productionshow` varchar(32) DEFAULT NULL COMMENT '生产备注',
   PRIMARY KEY (`productrowid`)
-) ENGINE=InnoDB AUTO_INCREMENT=329 DEFAULT CHARSET=utf8 COMMENT='产品行项表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8 COMMENT='产品行项表';
 
---
--- Dumping data for table `sproductrow`
---
+-- ----------------------------
+-- Records of sproductrow
+-- ----------------------------
+INSERT INTO `sproductrow` VALUES ('61', '105', '2', '1002001', '6号赛诺', '4.20', '1.00', '4.20', '1', null, '采购备注', null);
+INSERT INTO `sproductrow` VALUES ('62', '105', '1', '1001001', '赛洛单孔（进）', '13.50', '1.00', '13.50', '2', null, null, null);
+INSERT INTO `sproductrow` VALUES ('63', '105', null, null, '阀芯', '2.10', '1.00', '2.10', '3', null, null, null);
+INSERT INTO `sproductrow` VALUES ('64', '105', null, null, '钢压盖', '0.25', '1.00', '0.25', '4', null, null, null);
+INSERT INTO `sproductrow` VALUES ('65', '105', null, null, '装饰盖', '0.20', '1.00', '0.20', '5', null, null, null);
+INSERT INTO `sproductrow` VALUES ('66', '105', null, null, '网咀', '0.30', '1.00', '0.30', '6', null, null, null);
+INSERT INTO `sproductrow` VALUES ('67', '105', null, null, '高脚', '1.00', '1.00', '1.00', '7', null, null, null);
+INSERT INTO `sproductrow` VALUES ('68', '105', null, null, '高脚帽', '1.20', '1.00', '1.20', '8', null, null, null);
+INSERT INTO `sproductrow` VALUES ('69', '105', null, null, '高脚垫', '0.05', '1.00', '0.05', '9', null, null, null);
+INSERT INTO `sproductrow` VALUES ('70', '105', null, null, '软管', '3.00', '1.00', '3.00', '10', null, null, '1号钢丝管');
+INSERT INTO `sproductrow` VALUES ('71', '105', null, null, '内袋', '0.10', '1.00', '0.10', '11', null, null, null);
+INSERT INTO `sproductrow` VALUES ('72', '105', null, null, '外袋', '0.20', '1.00', '0.20', '12', null, null, null);
+INSERT INTO `sproductrow` VALUES ('73', '105', null, null, '盒子', '1.00', '1.00', '1.00', '13', null, null, null);
+INSERT INTO `sproductrow` VALUES ('74', '105', null, null, '箱子', '0.20', '1.00', '0.20', '14', null, null, null);
+INSERT INTO `sproductrow` VALUES ('75', '105', null, null, '其他费用', '1.70', '1.00', '1.70', '15', null, null, null);
 
-LOCK TABLES `sproductrow` WRITE;
-/*!40000 ALTER TABLE `sproductrow` DISABLE KEYS */;
-INSERT INTO `sproductrow` VALUES (232,2,1,'10101001','物资A11',0.22,22.00,4.84,NULL,NULL),(233,2,6,'10102001','物资A21',43.20,2.00,86.40,NULL,NULL),(234,2,5,'10201002','物资B12',44.00,1.00,44.00,NULL,NULL),(235,2,NULL,NULL,'其他成本',22.00,1.00,22.00,NULL,NULL),(236,2,NULL,NULL,'人力成本',33.00,1.00,33.00,NULL,NULL),(237,3,6,'10102001','物资A21',43.20,2.00,86.40,NULL,NULL),(238,3,5,'10201002','物资B12',44.00,1.00,44.00,NULL,NULL),(239,3,NULL,NULL,'其他成本',11.00,1.00,11.00,NULL,NULL),(240,3,NULL,NULL,'人力成本',22.00,1.00,22.00,NULL,NULL),(241,5,4,'10201001','物资B11',33.30,1.00,33.30,NULL,NULL),(312,80,NULL,NULL,'手把',23.00,1.00,23.00,1,NULL),(313,80,NULL,NULL,'人力成本',4.00,1.00,4.00,2,NULL),(314,80,NULL,NULL,'其他成本',5.00,1.00,5.00,3,NULL),(325,1,5,'10201002','物资B12',44.00,1.00,44.00,NULL,NULL),(326,1,1,'10101001','物资A11',0.22,2.00,0.44,NULL,NULL),(327,1,NULL,NULL,'其他成本',1.20,1.00,1.20,NULL,NULL),(328,1,NULL,NULL,'人力成本',2.00,1.00,2.00,NULL,NULL);
-/*!40000 ALTER TABLE `sproductrow` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `sproducttype`
---
-
+-- ----------------------------
+-- Table structure for `sproducttype`
+-- ----------------------------
 DROP TABLE IF EXISTS `sproducttype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sproducttype` (
   `producttype` int(5) NOT NULL AUTO_INCREMENT COMMENT '产品类别主键',
   `producttypeno` varchar(9) DEFAULT NULL COMMENT '产品类别编号',
@@ -886,54 +945,55 @@ CREATE TABLE `sproducttype` (
   `priority` int(3) DEFAULT NULL COMMENT '优先级',
   `parent` varchar(8) DEFAULT NULL COMMENT '父级编号',
   `producttypeall` varchar(64) DEFAULT NULL,
+  `statusid` int(1) DEFAULT NULL COMMENT '使用状态',
+  `manuname` varchar(64) DEFAULT NULL COMMENT '所属客户',
   `remark` varchar(512) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`producttype`),
   UNIQUE KEY `u_sproducttype_no` (`producttypeno`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=206 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `sproducttype`
---
+-- ----------------------------
+-- Records of sproducttype
+-- ----------------------------
+INSERT INTO `sproducttype` VALUES ('1', '2', '根节点', '1', null, '1', '1', null, null);
+INSERT INTO `sproducttype` VALUES ('192', 'BM', '八牧', '1', '1', '1-192', '1', '', '');
+INSERT INTO `sproducttype` VALUES ('193', 'BM1', '铜', '1', '192', '1-192-193', '1', '', '');
+INSERT INTO `sproducttype` VALUES ('194', 'BM2', '锌', '2', '192', '1-192-194', '1', '', '');
+INSERT INTO `sproducttype` VALUES ('195', 'BM201', '淋浴', '1', '194', '1-192-194-195', '1', '', '');
+INSERT INTO `sproducttype` VALUES ('196', 'BM202', '二联', '2', '194', '1-192-194-196', '1', '', '');
+INSERT INTO `sproducttype` VALUES ('197', 'BM203', '三联', '3', '194', '1-192-194-197', '1', '', '');
+INSERT INTO `sproducttype` VALUES ('198', 'BM204', '面盆单孔', '4', '194', '1-192-194-198', '1', '', '');
+INSERT INTO `sproducttype` VALUES ('199', 'BM205', '菜盆单孔', '5', '194', '1-192-194-199', '1', '', '');
+INSERT INTO `sproducttype` VALUES ('200', 'BM206', '平咀', '6', '194', '1-192-194-200', '1', '', '');
+INSERT INTO `sproducttype` VALUES ('201', 'BM207', '尖咀', '7', '194', '1-192-194-201', '1', '', '');
+INSERT INTO `sproducttype` VALUES ('202', 'BM208', '网咀', '8', '194', '1-192-194-202', '1', '', '');
+INSERT INTO `sproducttype` VALUES ('203', 'BM209', '角阀', '9', '194', '1-192-194-203', '1', '', '');
+INSERT INTO `sproducttype` VALUES ('204', 'BM210', '面盆单冷', '10', '194', '1-192-194-204', '1', '', '');
+INSERT INTO `sproducttype` VALUES ('205', 'BM211', '菜盆单冷', '11', '194', '1-192-194-205', '1', '', '');
 
-LOCK TABLES `sproducttype` WRITE;
-/*!40000 ALTER TABLE `sproducttype` DISABLE KEYS */;
-INSERT INTO `sproducttype` VALUES (1,'2','根节点',1,NULL,'1',NULL),(11,'201','产品类别一',1,'1','1-11',''),(12,'202','产品类别二',2,'1','1-12','产品类别二'),(13,'203','产品类别三',3,'1','1-13','产品类别三'),(14,'20101','产品类别一1',1,'11','1-11-14','产品类别一1'),(15,'20102','产品类别一2',2,'11','1-11-15','产品类别一2'),(16,'20201','产品类别二1',1,'12','1-12-16','产品类别二1'),(17,'20202','产品类别二2',2,'12','1-12-17',''),(18,'JL','金龙系列',4,'1','1-18',''),(19,'JL01','金龙淋浴',1,'18','1-18-19',''),(20,'JL02','金龙花洒',2,'18','1-18-20',''),(21,'DL','李德林',5,'1','1-21',''),(22,'DL01','真龍系列',1,'21','1-21-22',''),(23,'DL0101','真龍淋浴',1,'22','1-21-22-23',''),(24,'DL02','大顶喷',2,'21','1-21-24',''),(25,'DL03','角阀',3,'21','1-21-25','');
-/*!40000 ALTER TABLE `sproducttype` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `srole`
---
-
+-- ----------------------------
+-- Table structure for `srole`
+-- ----------------------------
 DROP TABLE IF EXISTS `srole`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `srole` (
   `roleid` int(10) NOT NULL COMMENT '角色编号',
   `rolename` varchar(128) NOT NULL COMMENT '角色名称',
   `priority` int(4) DEFAULT '99' COMMENT '优先级（数据越小，优先级越高）',
   PRIMARY KEY (`roleid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `srole`
---
+-- ----------------------------
+-- Records of srole
+-- ----------------------------
+INSERT INTO `srole` VALUES ('1', '最高管理员', '1');
+INSERT INTO `srole` VALUES ('2', '普通用户', '3');
+INSERT INTO `srole` VALUES ('3', '客户', '4');
+INSERT INTO `srole` VALUES ('2631', '管理员', '2');
 
-LOCK TABLES `srole` WRITE;
-/*!40000 ALTER TABLE `srole` DISABLE KEYS */;
-INSERT INTO `srole` VALUES (1,'管理员',2),(2,'普通用户',3),(3,'客户',4);
-/*!40000 ALTER TABLE `srole` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `sstaff`
---
-
+-- ----------------------------
+-- Table structure for `sstaff`
+-- ----------------------------
 DROP TABLE IF EXISTS `sstaff`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sstaff` (
   `staffid` int(11) NOT NULL AUTO_INCREMENT COMMENT '员工编号',
   `staffname` varchar(32) DEFAULT NULL COMMENT '员工姓名',
@@ -948,77 +1008,282 @@ CREATE TABLE `sstaff` (
   `priority` int(2) DEFAULT '0' COMMENT '优先级',
   `photo` varchar(64) DEFAULT NULL COMMENT '照片路径',
   PRIMARY KEY (`staffid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='员工表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='员工表';
 
---
--- Dumping data for table `sstaff`
---
+-- ----------------------------
+-- Records of sstaff
+-- ----------------------------
 
-LOCK TABLES `sstaff` WRITE;
-/*!40000 ALTER TABLE `sstaff` DISABLE KEYS */;
-INSERT INTO `sstaff` VALUES (2,'员工一',1,1,'11111111','建设银行南安支行','11111111','员工一','备注1',53.00,1,NULL),(3,'员工二',1,1,'22222222','建设银行南安支行','22222222','员工二','备注2',63.00,2,NULL),(4,'员工三',1,2,'33333333','建设银行南安支行','33333333','员工三','',NULL,0,NULL),(5,'员工三',1,1,'15060000021','兴业银行仑仓支行','33333333','员工三','',75.00,3,NULL);
-/*!40000 ALTER TABLE `sstaff` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `suser`
---
-
+-- ----------------------------
+-- Table structure for `suser`
+-- ----------------------------
 DROP TABLE IF EXISTS `suser`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `suser` (
   `userid` varchar(64) NOT NULL COMMENT '用户账号',
   `username` varchar(128) NOT NULL COMMENT '用户名称',
   `passwd` varchar(128) NOT NULL COMMENT '用户密码',
   `tele` varchar(32) DEFAULT NULL COMMENT '手机号码',
   `valid` varchar(1) DEFAULT '1' COMMENT '是否有效（1：是，其它：否）',
-  `birthday` varchar(10) DEFAULT NULL COMMENT '出生日期',
+  `ismanu` varchar(1) DEFAULT NULL COMMENT '是否客户：1是，其他否',
   PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `suser`
---
+-- ----------------------------
+-- Records of suser
+-- ----------------------------
+INSERT INTO `suser` VALUES ('ADMIN', '最高管理员', 'c84258e9c39059a89ab77d846ddab909', null, '1', null);
+INSERT INTO `suser` VALUES ('TEST', '测试', '098f6bcd4621d373cade4e832627b4f6', null, '1', null);
 
-LOCK TABLES `suser` WRITE;
-/*!40000 ALTER TABLE `suser` DISABLE KEYS */;
-INSERT INTO `suser` VALUES ('LIDL','李德林','21218cca77804d2ba1922c33e0151105','13978321607','1',''),('ZHOUJD','周坚定','fd0fe7eac50f4b33977ef457a45ce852','15060066759','1','1986-09-19');
-/*!40000 ALTER TABLE `suser` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `suser_role`
---
-
+-- ----------------------------
+-- Table structure for `suser_role`
+-- ----------------------------
 DROP TABLE IF EXISTS `suser_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `suser_role` (
   `userid` varchar(64) NOT NULL DEFAULT '' COMMENT '用户账号',
   `roleid` int(10) NOT NULL COMMENT '角色编号'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `suser_role`
---
+-- ----------------------------
+-- Records of suser_role
+-- ----------------------------
+INSERT INTO `suser_role` VALUES ('ADMIN', '2631');
+INSERT INTO `suser_role` VALUES ('TEST', '2');
 
-LOCK TABLES `suser_role` WRITE;
-/*!40000 ALTER TABLE `suser_role` DISABLE KEYS */;
-INSERT INTO `suser_role` VALUES ('ZHOUJD',1),('LIDL',3);
-/*!40000 ALTER TABLE `suser_role` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+-- ----------------------------
+-- Procedure structure for `proc_dbinit`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `proc_dbinit`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_dbinit`()
+    COMMENT '数据库初始化'
+BEGIN
+	TRUNCATE TABLE bbuy;
+	TRUNCATE TABLE bbuyrow;
+	TRUNCATE TABLE bpay;
+	TRUNCATE TABLE bpayrow;
+	TRUNCATE TABLE breceandpay;
+	TRUNCATE TABLE bsalary;
+	TRUNCATE TABLE bsalaryrow;
+	TRUNCATE TABLE bsell;
+	TRUNCATE TABLE bsellrow;
+	TRUNCATE TABLE btransferaccount;
+	TRUNCATE TABLE bwork;
+	TRUNCATE TABLE bworkrow;
+	TRUNCATE TABLE sbankcard;
+	TRUNCATE TABLE slog;
+	TRUNCATE TABLE smanu;
+	TRUNCATE TABLE smanurow;
+	TRUNCATE TABLE smaterial;
+	TRUNCATE TABLE sproduct;
+	TRUNCATE TABLE sproductrow;
+	TRUNCATE TABLE sstaff;
+END
+;;
+DELIMITER ;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+-- ----------------------------
+-- Function structure for `func_getBankcardno`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getBankcardno`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getBankcardno`(ibankcardid int) RETURNS varchar(255) CHARSET utf8
+BEGIN
+    DECLARE vbankcardno VARCHAR(255);
 
--- Dump completed on 2015-02-28 14:00:01
+    SELECT bankcardno INTO vbankcardno FROM sbankcard WHERE bankcardid = ibankcardid;
+
+		return vbankcardno;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `func_getDictName`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getDictName`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getDictName`(vdicttype varchar(32), vdictvalue varchar(32)) RETURNS varchar(255) CHARSET utf8
+BEGIN
+    DECLARE vdictname VARCHAR(255);
+
+    SELECT dictname INTO vdictname FROM cdictrow a WHERE dictvalue = vdictvalue AND EXISTS (SELECT 1 FROM cdict b WHERE b.dictid = a.dictid AND b.dicttype = vdicttype);
+
+		return vdictname;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `func_getManuName`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getManuName`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getManuName`(imanuid int) RETURNS varchar(255) CHARSET utf8
+BEGIN
+    DECLARE vmanuname VARCHAR(255);
+
+    SELECT manuname INTO vmanuname FROM smanu WHERE manuid = imanuid;
+
+		return vmanuname;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `func_getMaterialtypeName`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getMaterialtypeName`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getMaterialtypeName`(imaterialtype int) RETURNS varchar(255) CHARSET utf8
+BEGIN
+    DECLARE vmaterialtypename VARCHAR(255);
+
+    SELECT materialtypename INTO vmaterialtypename FROM smaterialtype WHERE materialtype = imaterialtype;
+
+		return vmaterialtypename;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `func_getModuleName`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getModuleName`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getModuleName`(`imoduleid` int) RETURNS varchar(255) CHARSET utf8
+BEGIN
+    DECLARE vmodulename VARCHAR(255);
+
+    SELECT modulename INTO vmodulename FROM smodule WHERE moduleid = imoduleid;
+
+		return vmodulename;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `func_getProducttypeName`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getProducttypeName`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getProducttypeName`(iproducttype int) RETURNS varchar(255) CHARSET utf8
+BEGIN
+    DECLARE vproducttypename VARCHAR(255);
+
+    SELECT producttypename INTO vproducttypename FROM sproducttype WHERE producttype = iproducttype;
+
+		return vproducttypename;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `func_getSalaryByMonth`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getSalaryByMonth`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getSalaryByMonth`(istaffid int, vworkmonth varchar(7)) RETURNS double(12,2)
+BEGIN
+		DECLARE isum DOUBLE(12,2);
+		SET isum = 0.00;
+		
+		SELECT (IFNULL(SUM(a.salary), 0) + IFNULL(SUM(a.othersalary), 0)) INTO isum FROM bworkrow a, bwork b WHERE a.workid = b.workid AND b.staffid = istaffid AND b.workmonth = vworkmonth;
+
+		return isum;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `func_getStaffName`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getStaffName`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getStaffName`(istaffid int) RETURNS varchar(255) CHARSET utf8
+BEGIN
+    DECLARE vstaffname VARCHAR(255);
+
+    SELECT staffname INTO vstaffname FROM sstaff WHERE staffid = istaffid;
+
+		return vstaffname;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `func_getSum`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getSum`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getSum`(iid int, vbtype varchar(3)) RETURNS double(12,2)
+BEGIN
+		DECLARE isum DOUBLE(12,2);
+		SET isum = 0.00;
+		
+		CASE
+			WHEN(SELECT 'CGD' LIKE vbtype)=1 THEN
+				SELECT SUM(sum) INTO isum FROM bbuyrow WHERE buyid = iid;
+			WHEN(SELECT 'CPD' LIKE vbtype)=1 THEN
+				SELECT SUM(materialsum) INTO isum FROM sproductrow WHERE productid = iid;
+			WHEN(SELECT 'XSD' LIKE vbtype)=1 THEN
+				SELECT SUM(realsum) INTO isum FROM bsellrow WHERE sellid = iid;
+			WHEN(SELECT 'GZD' LIKE vbtype)=1 THEN
+				SELECT SUM(planmoney) INTO isum FROM bsalaryrow WHERE salaryid = iid;
+	
+		END CASE;
+
+
+		return isum;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `func_getUrlByNo`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getUrlByNo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getUrlByNo`(billno varchar(32)) RETURNS varchar(128) CHARSET utf8
+BEGIN
+		DECLARE _url VARCHAR(128);
+		SET _url = '';
+		
+		CASE
+
+			WHEN (SELECT billno LIKE 'CGD%')=1 OR (SELECT billno LIKE 'JYD%')=1 THEN
+				SELECT CONCAT('/buy/edi/', buyid) INTO _url FROM bbuy WHERE buyno = billno;
+			WHEN (SELECT billno LIKE 'XSD%')=1 THEN
+				SELECT CONCAT('/sell/edi/', sellid) INTO _url FROM bsell WHERE sellno = billno;
+			WHEN (SELECT billno LIKE 'GZD%')=1 THEN
+				SELECT CONCAT('/salary/edi/', salaryid) INTO _url FROM bsalary WHERE salaryno = billno;
+	
+		END CASE;
+
+		RETURN _url;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `func_getUserName`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_getUserName`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_getUserName`(vuser varchar(32)) RETURNS varchar(255) CHARSET utf8
+BEGIN
+    DECLARE vusername VARCHAR(255);
+
+    SELECT username INTO vusername FROM suser WHERE userid = vuser;
+
+		return vusername;
+END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tri_sbankcard`;
+DELIMITER ;;
+CREATE TRIGGER `tri_sbankcard` AFTER UPDATE ON `sbankcard` FOR EACH ROW begin
+	insert into sbankcard_log(bankcardid, oldmoney, newmoney, changemoney, changetime, changetype, changeid)
+		values (new.bankcardid, old.money, new.money, old.money - new.money, now(), new.changetype, new.changeid);
+end
+;;
+DELIMITER ;

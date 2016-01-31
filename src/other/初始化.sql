@@ -20,6 +20,8 @@ TRUNCATE TABLE smanu;
 TRUNCATE TABLE smanurow;
 TRUNCATE TABLE sproduct;
 TRUNCATE TABLE sproductrow;
+TRUNCATE TABLE smaterial;
+TRUNCATE TABLE smaterialrow;
 TRUNCATE TABLE sstaff;
 
 /**删除数据**/
