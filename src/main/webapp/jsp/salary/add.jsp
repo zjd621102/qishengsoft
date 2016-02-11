@@ -14,6 +14,11 @@
 	function changeValue() {
 		setAllSum('planmoney', 'allplanmoney');
 	}
+	
+	// 重新计算金额
+	function delRowOther() {
+		changeValue();
+	}
 </script>
 
 <form method="post" action="<%=path%>/salary/add" class="required-validate pageForm"
