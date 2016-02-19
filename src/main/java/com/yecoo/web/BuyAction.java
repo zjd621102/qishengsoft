@@ -139,7 +139,7 @@ public class BuyAction {
 		AjaxObject ajaxObject = null;
 		int iReturn = buyDaoImpl.ediBuy(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("修改成功！", "buy_list", "closeCurrent");
+			ajaxObject = new AjaxObject("修改成功！", "buy_list", "");
 
 			StrUtils.saveLog(request, "修改采购单", form);
 		} else {
