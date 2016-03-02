@@ -48,7 +48,7 @@ public class ManageAction {
 		String result = "false";
 		
 		String sql = "UPDATE sproductrow b, smaterial c SET b.materialname = c.materialname, b.materialprice = c.price"
-				+ " WHERE b.materialid = c.materialid AND b.materialprice <> c.price";
+				+ " WHERE b.materialid = c.materialid";
 		
 		int iReturn = dbUtils.executeSQL(sql);
 		if (iReturn >= 0) {

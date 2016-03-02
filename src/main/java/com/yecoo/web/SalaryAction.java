@@ -74,7 +74,7 @@ public class SalaryAction {
 		request.setAttribute("form", form);
 		
 		String sql = "SELECT t.staffid, staffname, func_getSalaryByMonth(t.staffid, '"
-				+ salarydate + "') planmoney FROM sstaff t WHERE t.staffstatus = '1'";
+				+ salarydate + "') planmoney FROM sstaff t WHERE t.staffstatus = '1' ORDER BY t.priority";
 		List<CodeTableForm> salaryrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("salaryrowList", salaryrowList);
 		

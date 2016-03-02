@@ -50,6 +50,7 @@ public class StaffDaoImpl extends BaseDaoImpl {
 		
 		String cond = getStaffListCondition(form);
 		sql += cond;
+		sql += " ORDER BY t.priority";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;

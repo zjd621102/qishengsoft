@@ -170,7 +170,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
 		sql = "SELECT a.*, b.materialno FROM bbuyrow a LEFT JOIN smaterial b ON a.materialid = b.materialid"
-				+ " WHERE a.buyid = '" + buyid + "' ORDER BY a.manuid";
+				+ " WHERE a.buyid = '" + buyid + "' ORDER BY a.manuid, b.materialid";
 		List<CodeTableForm> buyrowList = dbUtils.getListBySql(sql);
 		request.setAttribute("buyrowList", buyrowList);
 		
