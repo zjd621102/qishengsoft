@@ -16,6 +16,7 @@
 						单据ID：
 						<input type="text" name="map[payid]" value="${form.map.payid}"
 						 class="number" style="width: 100px;"/>
+						<!-- 
 						单据类型：
 						<select name="map[btype]" style="width: 100px;">
 							<option value=""></option>
@@ -27,6 +28,7 @@
 								</option>
 							</c:forEach>
 						</select>
+						-->
 						当前流程：
 						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
 						 expStr="style='width: 100px;'" />
