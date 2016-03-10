@@ -24,7 +24,7 @@
 	function allSet() {
 		$("[name='map[workstatus]']").val("1");
 		batchSet('salary', 'map[salary]');
-		$("[name='map[othersalary]']").val("0");
+		$("[name='map[othersalary]'][value='']").val("0");
 		setAllSum_work();
 	}
 	
