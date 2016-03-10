@@ -23,7 +23,10 @@
 	// 批量设置
 	function allSet() {
 		$("[name='map[workstatus]']").val("1");
-		batchSet('salary', 'map[salary]');
+		
+// 		batchSet('salary', 'map[salary]');
+		$("[name='map[salary]'][value='']").val($("#salary").val());
+		
 		$("[name='map[othersalary]'][value='']").val("0");
 		setAllSum_work();
 	}
