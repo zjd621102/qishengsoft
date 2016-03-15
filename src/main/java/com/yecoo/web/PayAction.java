@@ -1,5 +1,6 @@
 package com.yecoo.web;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,9 +55,11 @@ public class PayAction {
 		request.setAttribute("payList", payList); // 单据列表
 		request.setAttribute("totalPlanSum", totalPlanSum); // 应付金额
 		request.setAttribute("totalRealSum", totalRealSum); // 实付金额
-		request.setAttribute("unPaySum", Float.parseFloat(totalPlanSum) - Float.parseFloat(totalRealSum)); // 待付金额
+		request.setAttribute("unPaySum", new BigDecimal(totalPlanSum).subtract(new BigDecimal(totalRealSum))); // 待付金额
 		request.setAttribute("sn", "pay"); //授权名称
 		request.setAttribute("form", form);
+		
+//		BigDecimal  add/subtract/multiply/divide  加/减/乘/除
 		
 		this.getSelects(request);
 		
