@@ -369,7 +369,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 				sql = "INSERT INTO bsellrow"
 					+ " SELECT NULL, '" + sellid + "', n.productid, n.productname, n.unit, n.costprice,"
 					+ " n.realprice, n.realprice, m.num, m.boxnum, n.numofonebox,"
-					+ " n.profit * m.num profit, n.realprice * m.num realsum, '5', NULL, NULL FROM ("
+					+ " n.profit * m.num profit, n.realprice * m.num realsum, '5', NULL FROM ("
 					+ "SELECT a.productid, SUM(a.num) num, SUM(a.boxnum) boxnum"
 					+ " FROM bsellrow a WHERE a.sellid IN (" + sellids + ") GROUP BY a.productid"
 					+ ") m, sproduct n WHERE m.productid = n.productid";
