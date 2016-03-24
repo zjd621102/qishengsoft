@@ -103,7 +103,7 @@
 															<table style="width: 100%;height: 143px;border: 0;" id="table212">
 																<tr>
 																	<td width="10%" height="38" class="top_hui_text">
-																		<span class="login_txt">管理员：&nbsp;&nbsp; </span>
+																		<span class="login_txt">用户名：&nbsp;&nbsp; </span>
 																	</td>
 																	<td height="38" colspan="2" class="top_hui_text">
 																		<input id="userid" name="username" type="text" class="editbox4" value="" size="20" />

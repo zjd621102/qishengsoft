@@ -311,7 +311,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 		if(iReturn >= 1) { //保存行项表
 			sql = "INSERT INTO bbuyrow"
 				+ " SELECT NULL, '" + buyid + "', n.materialid, n.materialname, n.unit, n.price, m.num, 1,"
-				+ " n.price * m.num sum, o.manuid, o.manuname, o.manucontact, o.manutel, NULL, n.numofonebox FROM ("
+				+ " n.price * m.num sum, o.manuid, o.manuname, o.manucontact, o.manutel, NULL, n.numofonebox, NULL FROM ("
 				+ "SELECT a.materialid, SUM(b.materialnum * c.num) num"
 				+ " FROM smaterial a, sproductrow b, bsellrow c WHERE a.materialid = b.materialid"
 				+ " AND b.productid = c.productid AND c.sellid = '" + form.getValue("sellid") + "' GROUP BY a.materialid"
@@ -369,7 +369,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 				sql = "INSERT INTO bsellrow"
 					+ " SELECT NULL, '" + sellid + "', n.productid, n.productname, n.unit, n.costprice,"
 					+ " n.realprice, n.realprice, m.num, m.boxnum, n.numofonebox,"
-					+ " n.profit * m.num profit, n.realprice * m.num realsum, '5', NULL FROM ("
+					+ " n.profit * m.num profit, n.realprice * m.num realsum, '5', NULL, NULL FROM ("
 					+ "SELECT a.productid, SUM(a.num) num, SUM(a.boxnum) boxnum"
 					+ " FROM bsellrow a WHERE a.sellid IN (" + sellids + ") GROUP BY a.productid"
 					+ ") m, sproduct n WHERE m.productid = n.productid";

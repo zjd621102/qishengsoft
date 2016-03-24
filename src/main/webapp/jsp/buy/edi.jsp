@@ -212,6 +212,7 @@
 					<th width="7%">联系人</th>
 					<th width="8%">联系电话</th>
 					-->
+					<th width="50px">排序</th>
 					<th>备注</th>
 				</tr>
 			</thead>
@@ -229,7 +230,7 @@
 							class="number required" value="${form.map.alldiscount}" onchange="changeDiscount();"/>
 					</td>
 					<td>
-						<input type="text" name="map[allsum]" style="width: 70px;" class="number"
+						<input type="text" name="map[allsum]" style="width: 69px;" class="number"
 							value="" readonly="readonly"/>
 					</td>
 					<td></td>
@@ -238,6 +239,7 @@
 					<td></td>
 					<td></td>
 					-->
+					<td></td>
 					<td></td>
 				</tr>
 			   	<tr id="IDCopyRow" style="display:none">
@@ -279,16 +281,16 @@
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[sum]" style="width: 70px" maxlength="12"
+						<input type="text" name="map[sum]" style="width: 69px" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[numofonebox]" style="width: 75px;" maxlength="12"
+						<input type="text" name="map[numofonebox]" style="width: 74px;" maxlength="12"
 							value="" readonly="readonly" />
 			   		</td>
 			   		<td>
 						<input type="hidden" name="map[manuid]"/>
-						<input type="text" name="map[manuname]" style="width: 104px;" readonly="readonly"/>
+						<input type="text" name="map[manuname]" style="width: 101px;" readonly="readonly"/>
 			   		</td>
 			   		<!-- 
 			   		<td>
@@ -299,7 +301,11 @@
 			   		</td>
 			   		-->
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 97%" maxlength="256"/>
+						<input type="text" name="map[sort]" style="width: 37px;" maxlength="2" class="number"
+							value=""/>
+			   		</td>
+			   		<td>
+						<input type="text" name="map[remarkrow]" style="width: 71px;" maxlength="256"/>
 			   		</td>
 			   	</tr>
 				<c:forEach items="${buyrowList}" var="bean" varStatus="vs">
@@ -347,17 +353,17 @@
 								setAllSum('sum', 'allsum');"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[sum]" style="width: 70px;" maxlength="12"
+							<input type="text" name="map[sum]" style="width: 69px;" maxlength="12"
 								class="number" value="${bean.map.sum}" readonly="readonly"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[numofonebox]" style="width: 75px;" maxlength="12"
+							<input type="text" name="map[numofonebox]" style="width: 74px;" maxlength="12"
 								value="${bean.map.numofonebox}" readonly="readonly" />
 				   		</td>
 				   		<td>
 							<input type="hidden" name="map[manuid]" value="${bean.map.manuid}"/>
 							<input type="text" name="map[manuname]" value="${bean.map.manuname}"
-								style="width: 104px;" readonly="readonly"/>
+								style="width: 101px;" readonly="readonly"/>
 				   		</td>
 				   		<!--
 				   		<td>
@@ -370,7 +376,11 @@
 				   		</td>
 				   		-->
 				   		<td>
-							<input type="text" name="map[remarkrow]" style="width: 97%" maxlength="256"
+							<input type="text" name="map[sort]" style="width: 37px;" maxlength="2"
+								class="number" value="${bean.map.sort}"/>
+				   		</td>
+				   		<td>
+							<input type="text" name="map[remarkrow]" style="width: 71px;" maxlength="256"
 								value="${bean.map.remarkrow}"/>
 				   		</td>
 				   	</tr>
