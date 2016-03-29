@@ -91,6 +91,11 @@
 				</a>
 			</li>
 			<li>
+				<a class="edit" href="<%=path%>/buy/edi/{s_buyid}?act=print" target="openwin">
+					<span>查看销售单</span>
+				</a>
+			</li>
+			<li>
 				<a class="edit" href="<%=path%>/buy/merge" target="selectedTodo" rel="ids" title="确实要合并这些记录吗?">
 					<span>合并采购单</span>
 				</a>
