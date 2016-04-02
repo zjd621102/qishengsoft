@@ -305,7 +305,7 @@
 						合计：
 					</td>
 					<td>
-						<input type="text" name="map[allnum]" style="width: 65px;" class="digits"
+						<input type="text" name="map[allnum]" style="width: 45px;" class="digits"
 							value="0" readonly="readonly"/>
 					</td>
 					<td></td>
