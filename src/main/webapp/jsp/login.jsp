@@ -4,6 +4,7 @@
 %>
 <html>
 	<head>
+	<link rel="shortcut icon" href="<%=path%>/images/favicon.ico" type="image/x-icon" />
 	<title>网站管理员登陆</title>
 	<link href="<%=path%>/images/skin.css" rel="stylesheet" type="text/css" />
 	<style type="text/css">
@@ -24,7 +25,6 @@
 	</style>
 	</head>
 	<body>
-		<form action="<%=path%>/login" method="post">
 			<table style="width: 100%;height: 166px;border: 0">
 				<tr>
 					<td height="42" valign="top">
@@ -100,6 +100,7 @@
 												<table style="width: 100%;height: 328px;border: 0;" id="table211">
 													<tr>
 														<td colspan="2" style="height: 164px;">
+														<form action="<%=path%>/login" method="post">
 															<table style="width: 100%;height: 143px;border: 0;" id="table212">
 																<tr>
 																	<td width="10%" height="38" class="top_hui_text">
@@ -135,6 +136,7 @@
 																	</td>
 																</tr>
 															</table>
+															</form>
 															<br>
 														</td>
 													</tr>
@@ -165,6 +167,5 @@
 					</td>
 				</tr>
 			</table>
-		</form>
 	</body>
 </html>

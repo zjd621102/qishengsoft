@@ -157,8 +157,8 @@
 </script>
 
 <form method="post" action="<%=path%>/sell/add" class="required-validate pageForm"
- onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="52">
+ onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
+	<div class="pageFormContent" layoutH="42">
 		<dl>
 			<dt>发货日期：</dt>
 			<dd>

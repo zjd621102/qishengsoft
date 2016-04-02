@@ -9,9 +9,9 @@
 </script>
 
 <form method="post" action="<%=path%>/dict/edi" class="required-validate pageForm"
- onsubmit="return validateCallback(this, dialogAjaxDone);">
+ onsubmit="return validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
 	<input type="hidden" name="map[dictid]" value="${form.map.dictid}" />
-	<div class="pageFormContent" layoutH="52">
+	<div class="pageFormContent" layoutH="42">
 		<dl>
 			<dt>字典类型：</dt>
 			<dd>

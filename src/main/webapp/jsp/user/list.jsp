@@ -54,14 +54,14 @@
 			<ul class="toolBar">
 				<shiro:hasPermission name="User:add">
 				<li>
-					<a class="add" href="<%=path%>/user/add" target="dialog" rel="user_add">
+					<a class="add" href="<%=path%>/user/add" target="dialog" rel="user_add" width="500">
 						<span>新增用户</span>
 					</a>
 				</li>
 				</shiro:hasPermission>
 				<shiro:hasPermission name="User:edi">
 				<li>
-					<a class="edit" href="<%=path%>/user/edi/{s_userid}" target="dialog" rel="user_edi">
+					<a class="edit" href="<%=path%>/user/edi/{s_userid}" target="dialog" rel="user_edi" width="500">
 						<span>修改用户</span>
 					</a>
 				</li>

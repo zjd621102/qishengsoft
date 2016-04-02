@@ -1,5 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
+
+<style>
+.pageContent label {
+	width: 80px;
+}
+</style>
+
 <div class="pageContent">
 	<form method="post" action="<%=path%>/user/add" class="pageForm required-validate"
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">
@@ -24,7 +31,7 @@
 			</p>
 			<p>
 				<label>是否客户：</label>
-				<st:select dictType="是否" name="map[ismanu]" expStr="style='width: 184px;'" />
+				<st:select dictType="是否" name="map[ismanu]" expStr="style='width: 212px;'" />
 			</p>
 			<p>
 				<label>角&nbsp;&nbsp;&nbsp;&nbsp;色：</label>

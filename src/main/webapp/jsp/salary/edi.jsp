@@ -22,9 +22,9 @@
 </script>
 
 <form method="post" action="<%=path%>/salary/edi" class="required-validate pageForm"
- onsubmit="return validateCallback(this, dialogAjaxDone);">
+ onsubmit="return validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
  	<input type="hidden" name="map[salaryid]" value="${form.map.salaryid}" />
-	<div class="pageFormContent" layoutH="52">
+	<div class="pageFormContent" layoutH="42">
 		<dl>
 			<dt>工资单类型：</dt>
 			<dd>

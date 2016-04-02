@@ -85,9 +85,9 @@
 </script>
 
 <form method="post" action="<%=path%>/product/add" class="required-validate pageForm"
- onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
+ onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
 	<input type="hidden" name="curTime" value="${curTime}"/>
-	<div class="pageFormContent" layoutH="52">
+	<div class="pageFormContent" layoutH="42">
 		<dl>
 			<dt>产品编码：</dt>
 			<dd>

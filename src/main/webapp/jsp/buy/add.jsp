@@ -125,8 +125,8 @@
 </script>
 
 <form method="post" action="<%=path%>/buy/add" class="required-validate pageForm"
- onsubmit="return validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="52">
+ onsubmit="return validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
+	<div class="pageFormContent" layoutH="42">
 		<dl>
 			<dt>单据类型：</dt>
 			<dd>

@@ -30,9 +30,7 @@ $.extend($.fn, {
 		}
 
 		// Add novalidate tag if HTML5.
-		if (typeof (Worker) !== "undefined") {
-			this.attr( "novalidate", "novalidate" );
-		}
+		this.attr( "novalidate", "novalidate" );
 
 		validator = new $.validator( options, this[0] );
 		$.data( this[0], "validator", validator );
@@ -996,12 +994,6 @@ $.extend($.validator, {
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/required
 		required: function( value, element, param ) {
-			//zhoujd修改Begin
-			//复制行不校验
-			if($(element).parents("tr:first").is("[id^='IDCopyRow']")) {
-				return true;
-			}
-			//zhoujd修改End
 			// check if dependency is met
 			if ( !this.depend(param, element) ) {
 				return "dependency-mismatch";

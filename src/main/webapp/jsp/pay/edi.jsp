@@ -18,8 +18,8 @@
 </script>
 
 <form method="post" action="<%=path%>/pay/edi" class="required-validate pageForm"
-	onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
-	<div class="pageFormContent" layoutH="52">
+	onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
+	<div class="pageFormContent" layoutH="42">
 		<dl>
 			<dt>单据ID：</dt>
 			<dd>

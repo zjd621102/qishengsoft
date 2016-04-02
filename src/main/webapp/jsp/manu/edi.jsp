@@ -9,9 +9,9 @@
 </script>
 
 <form method="post" action="<%=path%>/manu/edi" class="required-validate pageForm"
- onsubmit="return validateCallback(this, dialogAjaxDone);">
+ onsubmit="return validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
  	<input type="hidden" name="map[manuid]" value="${form.map.manuid}" />
-	<div class="pageFormContent" layoutH="52">
+	<div class="pageFormContent" layoutH="42">
 		<dl>
 			<dt>供应商名称</dt>
 			<dd>

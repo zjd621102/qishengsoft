@@ -145,10 +145,10 @@
 
 <form id="downloadForm" method="post"></form>
 <form method="post" action="<%=path%>/product/edi" class="required-validate pageForm"
- onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
+ onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
 	<input type="hidden" name="map[productid]" value="${form.map.productid}"/>
 	<input type="hidden" name="curTime" value="${curTime}"/>
-	<div class="pageFormContent" layoutH="52">
+	<div class="pageFormContent" layoutH="42">
 		<dl>
 			<dt>产品编码：</dt>
 			<dd>

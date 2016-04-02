@@ -1,5 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
+
+<style>
+.pageContent label {
+	width: 80px;
+}
+</style>
+
 <div class="pageContent">
 	<form method="post" action="<%=path%>/user/edi" class="pageForm required-validate"
 	 onsubmit="return validateCallback(this, dialogAjaxDone);">
@@ -22,7 +29,7 @@
 			<p>
 				<label>是否客户：</label>
 				<st:select dictType="是否" name="map[ismanu]" value="${form.map.ismanu}"
-				 expStr="style='width: 184px;'" />
+				 expStr="style='width: 212px;'" />
 			</p>
 			
 			<p>

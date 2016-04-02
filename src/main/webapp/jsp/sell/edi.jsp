@@ -188,10 +188,10 @@
 </script>
 
 <form method="post" action="<%=path%>/sell/edi" class="required-validate pageForm"
- onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);">
+ onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
  	<input type="hidden" name="map[sellid]" value="${form.map.sellid}" />
  	<input type="hidden" name="map[addBuy]" value="" />
-	<div class="pageFormContent" layoutH="52">
+	<div class="pageFormContent" layoutH="42">
 		<dl>
 			<dt>销售编号：</dt>
 			<dd>
