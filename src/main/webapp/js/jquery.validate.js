@@ -994,6 +994,14 @@ $.extend($.validator, {
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/required
 		required: function( value, element, param ) {
+			
+			//zhoujd修改Begin
+			//复制行不校验
+			if($(element).parents("tr:first").is("[id^='IDCopyRow']")) {
+				return true;
+			}
+			//zhoujd修改End
+			
 			// check if dependency is met
 			if ( !this.depend(param, element) ) {
 				return "dependency-mismatch";
