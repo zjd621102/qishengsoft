@@ -151,7 +151,11 @@ public class SellAction {
 				for(int i = 0; i < boxnum*2; i++) {
 					box = new CodeTableForm();
 					
-					box.setValue("producttypename", codeTableForm.getValue("producttypename"));// 产品类型
+					box.setValue(
+							"producttypename",
+							StrUtils.nullToStr(codeTableForm.getValue("ptprintname")).equals("") ? codeTableForm
+									.getValue("producttypename") : codeTableForm
+									.getValue("ptprintname"));// 产品类型
 					box.setValue("productname", codeTableForm.getValue("productname"));// 产品名称
 					box.setValue("numofonebox", codeTableForm.getValue("numofonebox"));// 一件数量
 					box.setValue("printname", codeTableForm.getValue("printname"));// 打印名

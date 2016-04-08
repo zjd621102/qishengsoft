@@ -44,6 +44,12 @@
 				</dd>
 			</dl>
 			<dl>
+				<dt>别名</dt>
+				<dd>
+					<input type="text" name="map[ptprintname]" size="25" maxlength="16" />
+				</dd>
+			</dl>
+			<dl>
 				<dt>备注：</dt>
 				<dd>
 					<textarea name="map[remark]" cols="27" rows="8" maxlength="256">${form.map.remark}</textarea>

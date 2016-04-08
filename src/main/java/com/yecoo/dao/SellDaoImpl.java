@@ -176,8 +176,8 @@ public class SellDaoImpl extends BaseDaoImpl {
 		}
 		
 		String act = StrUtils.nullToStr(request.getParameter("act"));
-		if(act.equals("printDo") || act.equals("printBox")) {// 生产单
-			sql += ", (SELECT producttypename FROM sproducttype"
+		if(act.equals("printDo") || act.equals("printBox")) {// 生产单、打印箱子
+			sql += ", c. ptprintname, (SELECT producttypename FROM sproducttype"
 				+ " WHERE producttypeno = substring_index(substring_index(productno,'1','1'), '2', '1')) producttypename";
 		}
 		
