@@ -107,9 +107,7 @@
 			   		</c:if>
 			   		<td>${vs.index+1}</td>
 			   		<td>
-			   			<c:if test="${act!='excel'}"><!-- 会乱码 -->
-			   				${bean.map.logtype}
-			   			</c:if>
+			   			${bean.map.logtype}
 			   		</td>
 			   		<td>${bean.map.operatername}</td> 
 			   		<td>${bean.map.ip}</td>
