@@ -1,6 +1,8 @@
 
 
-
+/**2016.04.22**/
+ALTER TABLE `sstaff`
+CHANGE COLUMN `photo` `overtimepay`  double(12,2) NULL DEFAULT NULL COMMENT '照片路径' AFTER `salary`;
 
 /**2016.04.08**/
 ALTER TABLE `sproducttype`

@@ -1,6 +1,40 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/jsp/pub/include.jsp"%>
 
+<script type="text/javascript">
+	// 自动考勤
+	function autowork() {
+		var overtimepay = $('input[name="overtimepay"]:checked').val();
+		var workdate = $('#workdate').val();
+		
+		var ids = "";
+		$("input[name='ids']:checkbox").each(function() {
+            if($(this).attr("checked")){
+            	if(ids != "") {
+            		ids += "','";
+            	}
+            	ids += $(this).val();
+            }
+        });
+		if(ids == "") {
+			return;
+		}
+		ids = ("'" + ids + "'");
+		
+		$.post(
+				"<%=path%>/staff/autoWork",
+				{overtimepay: overtimepay, workdate: workdate, ids: ids},
+				function(data) {
+					if(data == "true") {// 成功
+						
+					} else {// 失败
+						
+					}
+				}
+			);
+	}
+</script>
+
 <div class="pageHeader">
 	<form
 		<c:if test="${act=='backselect'}">
@@ -26,6 +60,20 @@
 						月份：
 						<input type="text" name="map[month]" style="width: 80px" value="${form.map.month}" class="date"
 							dateFmt="yyyy-MM" readonly="readonly"/>
+					</td>
+					<td>
+						<table style="margin-left: 100px;">
+							<tr>
+								<td>
+									<input type="text" id="workdate" style="width: 80px"
+										value="${form.map.workdate}" class="date"
+										dateFmt="yyyy-MM-dd" readonly="readonly"/>
+								</td>
+								<td><input type="radio" name="overtimepay" value="1">加班</td>
+								<td><input type="radio" name="overtimepay" value="0" checked="checked">无加班</td>
+								<td><button type="button" onclick="autowork();">考勤</button></td>
+							</tr>
+						</table>
 					</td>
 				</tr>
 			</table>
@@ -80,6 +128,9 @@
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
 			<tr>
+				<th width="30px;">
+					<input type="checkbox" group="ids" class="checkboxCtrl">
+				</th>
 				<th width="30px">序号</th>
 				<th width="80px">员工名称</th>
 				<th width="60px">员工类别</th>
@@ -100,6 +151,11 @@
 					staffname:'${bean.map.staffname}',
 					planmoney:'${bean.map.monthsalary}'})"
 			   	>
+		   			<td>
+			   			<c:if test="${bean.map.staffstatus == '1'}">
+		   				<input name="ids" value="${bean.map.staffid}" type="checkbox">
+		   				</c:if>
+		   			</td>
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.staffname}</td>
 			   		<td>${bean.map.stafftypename}</td>

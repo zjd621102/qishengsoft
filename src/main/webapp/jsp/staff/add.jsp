@@ -57,6 +57,14 @@
 					<span style="color: red;">（单位：元/天）</span>
 				</dd>
 			</dl>
+			<dl style="width: 100%;">
+				<dt>加班工资：</dt>
+				<dd style="width: 70%;">
+					<input type="text" name="map[overtimepay]" class="required number" size="25" maxlength="12"
+						value="0.00"/>
+					<span style="color: red;">（单位：元/天）</span>
+				</dd>
+			</dl>
 			<dl>
 				<dt>优先级</dt>
 				<dd>

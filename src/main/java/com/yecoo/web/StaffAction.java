@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.dao.StaffDaoImpl;
 import com.yecoo.model.CodeTableForm;
+import com.yecoo.util.DateUtils;
+import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 import com.yecoo.util.dwz.AjaxObject;
 /**
@@ -160,5 +162,41 @@ public class StaffAction {
 			ajaxObject = new AjaxObject("修改失败");
 		}
 		return ajaxObject.toString();
+	}
+	
+    /**
+     * 自动考勤
+     * @param request
+     * @return
+     */
+	@RequestMapping(value="/autoWork")
+	public @ResponseBody String autoWork(HttpServletRequest request) {
+		
+		String result = "false";
+		
+		String overtimepay = StrUtils.nullToStr(request.getParameter("overtimepay"));
+		String workdate = StrUtils.nullToStr(request.getParameter("workdate"));
+		if(workdate.equals("")) {
+			workdate = DateUtils.getNowDateTime("yyyy-MM-dd");
+		}
+		String ids = StrUtils.nullToStr(request.getParameter("ids"));
+		
+		String othersalarySQL = "";
+		
+		if(overtimepay.equals("1")) {
+			othersalarySQL += ", t.othersalary = IFNULL(a.overtimepay, 0)";
+		}
+		
+		String sql = "UPDATE bworkrow t, sstaff a, bwork b SET t.salary = a.salary" + othersalarySQL
+			+ " WHERE a.staffid = b.staffid AND b.workid = t.workid"
+			+ " AND t.workdate = '2016-04-22' AND a.staffid IN (" + ids + ")";
+
+		DbUtils dbUtils = new DbUtils();
+		int iReturn = dbUtils.executeSQL(sql);
+		if (iReturn >= 0) {
+			result = "true";
+		}
+		
+		return result;
 	}
 }
