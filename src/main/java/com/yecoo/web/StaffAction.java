@@ -181,15 +181,17 @@ public class StaffAction {
 		}
 		String ids = StrUtils.nullToStr(request.getParameter("ids"));
 		
-		String othersalarySQL = "";
+		String othersalarySQL = ", t.othersalary = ";
 		
 		if(overtimepay.equals("1")) {
-			othersalarySQL += ", t.othersalary = IFNULL(a.overtimepay, 0)";
+			othersalarySQL += "IFNULL(a.overtimepay, 0)";
+		} else {
+			othersalarySQL += "0";
 		}
 		
 		String sql = "UPDATE bworkrow t, sstaff a, bwork b SET t.salary = a.salary" + othersalarySQL
 			+ " WHERE a.staffid = b.staffid AND b.workid = t.workid"
-			+ " AND t.workdate = '2016-04-22' AND a.staffid IN (" + ids + ")";
+			+ " AND t.workdate = '" + workdate + "' AND a.staffid IN (" + ids + ")";
 
 		DbUtils dbUtils = new DbUtils();
 		int iReturn = dbUtils.executeSQL(sql);
