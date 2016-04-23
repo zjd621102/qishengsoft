@@ -285,7 +285,9 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		try {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false); //事务开启
-		
+
+			String remark = "";
+			/*			
 			sql = "SELECT relateno FROM bbuy t WHERE t.buyid IN (" + buyids + ")";
 			String remark = dbUtils.getStrJoinBySql(sql, ",");
 			if(remark.equals("")) {
@@ -293,7 +295,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 			} else {
 				remark = "合并采购单（" + remark + "）";
 			}
-	
+			 */
 			CodeTableForm buyForm = new CodeTableForm(); //采购单
 			buyForm.setValue("btype", "CGD");
 			buyForm.setValue("buyname", StrUtils.getSysdate("yyyy.MM.dd") + "采购");
