@@ -253,7 +253,9 @@ public class ProductAction {
 		}
     	
 		String sql = "SELECT " + field + "t.* FROM sproduct t WHERE (t.productno LIKE '%"
-				+ keyword + "%' OR t.productname LIKE '%" + keyword + "%') ORDER BY t.productsort ASC, t.productno ASC";
+				+ keyword + "%' OR t.productname LIKE '%" + keyword + "%')"
+				+ " AND t.statusid = '1'"
+				+ " ORDER BY t.productsort ASC, t.productno ASC";
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
         return list;
     }

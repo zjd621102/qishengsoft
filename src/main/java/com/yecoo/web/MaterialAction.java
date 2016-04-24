@@ -186,7 +186,7 @@ public class MaterialAction {
     public List<CodeTableForm> getSelectByKeyword(String keyword) {
 		String sql = "SELECT t.*, b.manuid, b.manuname, b.manucontact, b.manutel"
 				+ " FROM smaterial t LEFT JOIN smanu b ON t.manuid = b.manuid"
-				+ " WHERE (t.materialno LIKE '%"
+				+ " WHERE t.statusid = '1' AND b.statusid = '1' AND (t.materialno LIKE '%"
 				+ keyword + "%' OR t.materialname LIKE '%" + keyword + "%')";
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
         return list;
@@ -201,7 +201,7 @@ public class MaterialAction {
     @ResponseBody
     public List<CodeTableForm> getMaterialsByKeyword(String keyword) {
 		String sql = "SELECT a.*, b.manuname FROM smaterial a LEFT JOIN smanu b ON a.manuid = b.manuid"
-				+ " WHERE (a.materialno LIKE '%"
+				+ " WHERE a.statusid = '1' AND b.statusid = '1' AND (a.materialno LIKE '%"
 				+ keyword + "%' OR a.materialname LIKE '%" + keyword + "%')"
 				+ " ORDER BY a.materialsort ASC, a.materialid ASC";
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
