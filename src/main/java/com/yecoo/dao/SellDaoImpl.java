@@ -342,11 +342,14 @@ public class SellDaoImpl extends BaseDaoImpl {
 			conn = dbUtils.dbConnection();
 			conn.setAutoCommit(false); //事务开启
 		
+			String remark = "";
+			/*
 			sql = "SELECT remark FROM bsell t WHERE t.sellid IN (" + sellids + ")";
 			String remark = dbUtils.getStrJoinBySql(sql, ",");
 			if(!remark.equals("")) {
 				remark = "合并销售单（" + remark + "）";
 			}
+			*/
 			
 			sql = "SELECT manuid FROM bsell t WHERE t.sellid IN (" + sellids + ")";
 			String manuid = dbUtils.execQuerySQL(sql);
