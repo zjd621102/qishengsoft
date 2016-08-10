@@ -62,9 +62,9 @@
 	<table class="rowtable">
 		<thead>
 			<tr>
+				<td width="120px">供应商名称</td>
 				<td width="35px">序号</td>
 				<td width="70px">物资编码</td>
-				<td width="120px">供应商名称</td>
 				<td width="150px">物资名称</td>
 				<td width="70px">数量</td>
 				<td width="70px">单价</td>
@@ -84,16 +84,22 @@
 				</td>
 				<td colspan="4"></td>
 			</tr>
+			<c:set var="var" value="0"></c:set>
 			<c:forEach items="${buyrowList}" var="bean" varStatus="vs">
 			   	<tr>
+			   		<c:if test="${vs.index==var}">
+				   		<td width="70px" rowspan="${bean.map.manucou}">
+							<span style="color: red;">${bean.map.manuname}</span>
+							<span style="color: orange;">${bean.map.manusum}</span>
+							
+				   		</td>
+			   			<c:set var="var" value="${var+bean.map.manucou}"></c:set>
+			   		</c:if>
 			   		<td width="35px">
 			   			<span>${vs.index+1}</span>
 			   		</td>
-			   		<td width="70px">
-						<span>${bean.map.materialno}</span>
-			   		</td>
 			   		<td width="100px">
-						<span>${bean.map.manuname}</span>
+						<span>${bean.map.materialno}</span>
 			   		</td>
 			   		<td width="150px">
 						<span>${bean.map.materialname}</span>

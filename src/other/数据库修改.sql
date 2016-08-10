@@ -1,4 +1,22 @@
 
+/**2016.07.31**/
+CREATE TABLE `sfixings` (
+  `fixingsid` int(6) NOT NULL AUTO_INCREMENT,
+  `fixingsname` varchar(128) DEFAULT NULL COMMENT '配件名称',
+  `description` varchar(512) DEFAULT NULL COMMENT '描述',
+  `priority` int(3) DEFAULT NULL COMMENT '优先级',
+  `parentid` int(10) DEFAULT NULL COMMENT '父级ID',
+  `materialno` varchar(11) NOT NULL DEFAULT '0' COMMENT '物资编码',
+  PRIMARY KEY (`fixingsId`)
+);
+
+BEGIN
+    DECLARE vfixingsname VARCHAR(255);
+
+    SELECT fixingsname INTO vfixingsname FROM sfixings WHERE fixingsid = ifixingsid;
+
+		return vfixingsname;
+END;
 
 /**2016.04.22**/
 ALTER TABLE `sstaff`
