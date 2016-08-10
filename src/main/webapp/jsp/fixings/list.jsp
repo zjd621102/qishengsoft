@@ -58,11 +58,6 @@
 				</a>
 			</li>
 			</shiro:hasPermission>
-			<li>
-				<a class="edit" href="<%=path%>/fixings/fixingsList" target="openwin">
-					<span>查看配件</span>
-				</a>
-			</li>
 		</ul>
 	</div>
 	<table class="table" style="width: 100%;" layoutH="144">

@@ -48,4 +48,7 @@ function refreshProductMaterial() {
 		旧物资编码：<input type="text" id="materialno_old" size="10"/>
 		新物资编码：<input type="text" id="materialno_new" size="10" />
 	</div>
+	<div style="margin-top: 10px;">
+		<button type="button" onclick="window.open('<%=path%>/fixings/fixingsList');">配件列表</button>
+	</div>
 </div>

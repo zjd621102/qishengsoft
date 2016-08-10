@@ -20,7 +20,7 @@
 		<tbody>
 			<c:forEach items="${list}" var="bean" varStatus="vs">
 			   	<tr>
-			   		<td width="80px" style="text-align: center; font-size: 20px; font-weight: bolder; color: blue;">
+			   		<td width="80px" style="text-align: center; font-weight: bolder; color: blue;">
 			   			<span>${bean.parentname}</span>
 			   		</td>
 			   		<td style="border-width: 0; color: black;">
@@ -30,7 +30,7 @@
 						 ">
 							<c:forEach items="${bean.childList}" var="form">
 							<tr>
-								<td width="80px">${form.map.fixingsname}</td>
+								<td width="90px">${form.map.fixingsname}</td>
 								<td width="100px">${form.map.manuname}</td>
 								<td width="200px">${form.map.materialname}</td>
 								<td width="60px" style="text-align: center;">${form.map.price}</td>
