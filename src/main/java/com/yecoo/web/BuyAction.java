@@ -127,6 +127,8 @@ public class BuyAction {
 		String act = StrUtils.nullToStr(request.getParameter("act"));
 		if(act.equals("print")) {
 			return "buy/print"; // 打印
+		} else if(act.equals("print_barter")) {
+			return "buy/print_barter"; // 换货模式
 		}
 		
 		return "buy/edi";

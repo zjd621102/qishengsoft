@@ -169,11 +169,12 @@ public class BuyDaoImpl extends BaseDaoImpl {
 				+ " FROM bbuy a WHERE a.buyid = '" + buyid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 
-		sql = "SELECT a.*, b.materialno, c.manucou, truncate(c.manusum, 1) manusum"
+		sql = "SELECT a.*, b.materialno, c.manucou, truncate(c.manusum, 1) manusum, e.address"
 				+ " FROM bbuyrow a LEFT JOIN smaterial b ON a.materialid = b.materialid"
 				+ " LEFT JOIN (SELECT DISTINCT d.manuid, COUNT(1) manucou, SUM(d.sum) manusum FROM bbuyrow d "
 				+ " WHERE d.buyid = '" + buyid
 				+ "' GROUP BY d.manuid) c ON a.manuid = c.manuid "
+				+ " LEFT JOIN smanu e ON b.manuid = e.manuid"
 				+ " WHERE a.buyid = '" + buyid
 				+ "' ORDER BY a.sort, a.manuid, b.materialid";
 		

@@ -209,7 +209,7 @@ public class FixingsDaoImpl extends BaseDaoImpl {
 		List<CodeTableForm> childList = null;
 		
 		for (CodeTableForm parentForm : ParentList) {
-			sql = "SELECT a.fixingsname, c.manuname, b.materialname, b.price, a.description"
+			sql = "SELECT a.fixingsname, c.manuname, b.materialname, b.price, a.description, b.numofonebox"
 				+ " FROM sfixings a LEFT JOIN smaterial b ON a.materialno = b.materialno"
 				+ " LEFT JOIN smanu c ON b.manuid = c.manuid WHERE a.parentid = '"
 				+ parentForm.getValue("fixingsid") + "' ORDER BY a.priority";

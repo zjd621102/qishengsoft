@@ -98,7 +98,7 @@
 			   		<td width="35px">
 			   			<span>${vs.index+1}</span>
 			   		</td>
-			   		<td width="100px">
+			   		<td width="70px">
 						<span>${bean.map.materialno}</span>
 			   		</td>
 			   		<td width="150px">

@@ -87,24 +87,29 @@
 			<li>
 				<a class="edit" href="<%=path%>/buy/edi/{s_buyid}" target="dialog" rel="buy_edi" mask="true"
 					width="1000" height="500">
-					<span>修改采购单</span>
+					<span>修改</span>
 				</a>
 			</li>
 			<li>
 				<a class="edit" href="<%=path%>/buy/edi/{s_buyid}?act=print" target="openwin">
-					<span>查看销售单</span>
+					<span>查看</span>
+				</a>
+			</li>
+			<li>
+				<a class="edit" href="<%=path%>/buy/edi/{s_buyid}?act=print_barter" target="openwin">
+					<span>换货模式</span>
 				</a>
 			</li>
 			<li>
 				<a class="edit" href="<%=path%>/buy/merge" target="selectedTodo" rel="ids" title="确实要合并这些记录吗?">
-					<span>合并采购单</span>
+					<span>合并</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="Buy:delete">
 			<li>
 				<a class="delete" href="<%=path%>/buy/delete/{s_buyid}" target="ajaxTodo" title="确定要删除吗?">
-					<span>删除采购单</span>
+					<span>删除</span>
 				</a>
 			</li>
 			</shiro:hasPermission>
