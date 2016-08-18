@@ -22,7 +22,7 @@
 				<td width="35px">序号</td>
 				<td width="70px">物资编码</td>
 				<td width="150px">物资名称</td>
-				<td width="200px">供应商地址</td>
+				<td width="150px">供应商地址</td>
 				<td>备注</td>
 			</tr>
 		</thead>
@@ -45,7 +45,7 @@
 			   		<td width="150px">
 						<span>${bean.map.materialname}</span>
 			   		</td>
-			   		<td width="200px">
+			   		<td width="150px">
 						<span>${bean.map.address}</span>
 			   		</td>
 			   		<td>
