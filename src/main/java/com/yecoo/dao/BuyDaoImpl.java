@@ -173,7 +173,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 				+ " FROM bbuyrow a LEFT JOIN smaterial b ON a.materialid = b.materialid"
 				+ " LEFT JOIN (SELECT DISTINCT d.manuid, COUNT(1) manucou, SUM(d.sum) manusum FROM bbuyrow d "
 				+ " WHERE d.buyid = '" + buyid
-				+ "' GROUP BY d.manuid) c ON a.manuid = c.manuid "
+				+ "' GROUP BY d.manuid) c ON (a.manuid = c.manuid OR (a.manuid IS NULL AND c.manuid IS NULL))"
 				+ " LEFT JOIN smanu e ON b.manuid = e.manuid"
 				+ " WHERE a.buyid = '" + buyid
 				+ "' ORDER BY a.sort, a.manuid, b.materialid";
