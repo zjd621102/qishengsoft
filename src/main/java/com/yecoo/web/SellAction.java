@@ -197,7 +197,13 @@ public class SellAction {
 		AjaxObject ajaxObject = null;
 		int iReturn = sellDaoImpl.ediSell(form, request);
 		if (iReturn >= 0) {
-			ajaxObject = new AjaxObject("修改成功！", "sell_list", "");// closeCurrent
+			
+			String currflow = StrUtils.nullToStr(form.getValue("currflow"));
+			String allbackType = "";
+			if(currflow.equals("结束")) {// 单据结束，则关闭窗口
+				allbackType = "closeCurrent";
+			}
+			ajaxObject = new AjaxObject("修改成功！", "sell_list", allbackType);// closeCurrent
 
 			StrUtils.saveLog(request, "修改销售单", form);
 			
