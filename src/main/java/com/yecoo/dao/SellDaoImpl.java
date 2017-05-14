@@ -164,7 +164,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
 		sql = "SELECT a.*, b.productno, func_getDictName('计量单位', a.unit) unitname,"
-				+ " b.productno REGEXP '[A-Z]+1' iscu, b.printname,"
+				+ " if(b.productno REGEXP '[A-Z]+1', '1', (if(b.productno REGEXP '[A-Z]+2', '2', '3'))) iscu, b.printname,"
 				+ " (SELECT group_concat(c.productionshow) FROM sproductrow c"
 				+ " WHERE c.productid = b.productid AND c.productionshow IS NOT NULL) productionshow,";
 				
@@ -178,11 +178,13 @@ public class SellDaoImpl extends BaseDaoImpl {
 		String act = StrUtils.nullToStr(request.getParameter("act"));
 		if(act.equals("printDo") || act.equals("printBox")) {// 生产单、打印箱子
 			sql += ", c. ptprintname, (SELECT producttypename FROM sproducttype"
-				+ " WHERE producttypeno = substring_index(substring_index(productno,'1','1'), '2', '1')) producttypename";
+				+ " WHERE producttypeno = "
+				+ "substring_index(substring_index(substring_index(productno,'1','1'), '2', '1'), '3', '1')) producttypename";
 		}
 		
 		sql += " FROM bsellrow a LEFT JOIN sproduct b ON a.productid = b.productid"
-				+ " LEFT JOIN sproducttype c ON c.producttypeno = substring_index(substring_index(productno,'1','1'), '2', '1')"
+				+ " LEFT JOIN sproducttype c ON c.producttypeno = "
+				+ "substring_index(substring_index(substring_index(productno,'1','1'), '2', '1'), '3', '1')"
 				+ " WHERE a.sellid = '"
 				+ sellid + "' ORDER BY a.sort, c.priority, b.productno";
 		List<CodeTableForm> sellrowList = dbUtils.getListBySql(sql);

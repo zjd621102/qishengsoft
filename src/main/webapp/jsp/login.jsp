@@ -160,7 +160,7 @@
 						<table style="width: 100%;border: 0;" class="login-buttom-bg">
 							<tr>
 								<td align="center">
-									<span class="login-buttom-txt">Copyright&copy;2012-2014 www.xxxx.com</span>
+									<span class="login-buttom-txt">闽ICP备17007004号-1 http://www.zhoujd.top</span>
 								</td>
 							</tr>
 						</table>

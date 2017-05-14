@@ -53,7 +53,7 @@
 		</tr>
 	</table>
 
-	<h2>销售清单（铜为红色显示；5天内未收到货请来电）</h2>
+	<h2>销售清单（5天内未收到货请来电）</h2>
 
 	<table class="rowtable">
 		<thead>
@@ -73,34 +73,34 @@
 			<c:forEach items="${sellrowList}" var="bean" varStatus="vs">
 			   	<tr>
 			   		<td style="width: 35px;">
-			   			<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${vs.index+1}</span>
+			   			<span style="${bean.map.iscu == '1' ? 'color:red' : (bean.map.iscu == '2' ? '' : 'color:green')}">${vs.index+1}</span>
 			   		</td>
 			   		<td style="width: 80px;">
-						<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${bean.map.productno}</span>
+						<span style="${bean.map.iscu == '1' ? 'color:red' : (bean.map.iscu == '2' ? '' : 'color:green')}">${bean.map.productno}</span>
 			   		</td>
 			   		<td style="width: 125px;">
-						<span style="${bean.map.iscu == '1' ? 'color:red' : ''}"
+						<span style="${bean.map.iscu == '1' ? 'color:red' : (bean.map.iscu == '2' ? '' : 'color:green')}"
 							>${bean.map.productname2 == '' ? bean.map.productname : bean.map.productname2}</span>
 			   		</td>
 			   		<td style="width: 45px;">
-						<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${bean.map.boxnum}</span>
+						<span style="${bean.map.iscu == '1' ? 'color:red' : (bean.map.iscu == '2' ? '' : 'color:green')}">${bean.map.boxnum}</span>
 						<input type="hidden" name="map[boxnum]" value="${bean.map.boxnum}" />
 			   		</td>
 			   		<td style="width: 70px;">
-						<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${bean.map.numofonebox}</span>
+						<span style="${bean.map.iscu == '1' ? 'color:red' : (bean.map.iscu == '2' ? '' : 'color:green')}">${bean.map.numofonebox}</span>
 			   		</td>
 			   		<td style="width: 50px;">
-						<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${bean.map.num}</span>
+						<span style="${bean.map.iscu == '1' ? 'color:red' : (bean.map.iscu == '2' ? '' : 'color:green')}">${bean.map.num}</span>
 			   		</td>
 			   		<td style="width: 70px;">
-						<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${bean.map.realprice}</span>
+						<span style="${bean.map.iscu == '1' ? 'color:red' : (bean.map.iscu == '2' ? '' : 'color:green')}">${bean.map.realprice}</span>
 			   		</td>
 			   		<td style="width: 75px;">
 						<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${bean.map.realsum}</span>
 						<input type="hidden" name="map[realsum]" value="${bean.map.realsum}" />
 			   		</td>
 			   		<td>
-			   			<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${bean.map.remarkrow}</span>
+			   			<span style="${bean.map.iscu == '1' ? 'color:red' : (bean.map.iscu == '2' ? '' : 'color:green')}">${bean.map.remarkrow}</span>
 			   		</td>
 			   	</tr>
 		   	</c:forEach>

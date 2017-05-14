@@ -259,9 +259,9 @@
 		</div>
 	</div>
 	<div id="footer">
-		Copyright &copy; 2014
+		闽ICP备17007004号-1
 		也棵呀小柏杨
-		Tel：15060066759
+		Tel:15060066759
 	</div>
 </body>
 </html>
