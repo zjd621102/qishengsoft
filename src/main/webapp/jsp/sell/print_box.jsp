@@ -10,12 +10,12 @@
 
 <style>
 	#martop {
-		height: 4mm;/*****距页面顶部高*****/
+		height: 15.1mm;/*****距页面顶部高*****/
 	}
 	
 	#maintab {
-		width: 203.7mm;/*****主界面宽*****/
-		height: 289.5mm;/*****主界面高*****/
+		width: 196.9mm;/*****主界面宽*****/
+		height: 266.7mm;/*****主界面高*****/
 		margin: auto;
 	}
 	
@@ -25,14 +25,14 @@
 	}
 	
 	.padtr {
-		height: 3mm;/**小格上下间距**/
+		height: 0mm;/**小格上下间距**/
 		/**background-color: yellow;**/
 	}
 
 	.maintd {
 		text-align: center;
-		width: 66.567mm;/*****小格宽*****/
-		height: 39.272mm;/*****小格高*****/
+		width: 63.5mm;/*****小格宽*****/
+		height: 38.1mm;/*****小格高*****/
 		font-size: 21;
 		font-weight: bolder;
 		color: blue;

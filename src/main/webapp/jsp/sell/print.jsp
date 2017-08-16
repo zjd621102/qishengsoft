@@ -96,7 +96,7 @@
 						<span style="${bean.map.iscu == '1' ? 'color:red' : (bean.map.iscu == '2' ? '' : 'color:green')}">${bean.map.realprice}</span>
 			   		</td>
 			   		<td style="width: 75px;">
-						<span style="${bean.map.iscu == '1' ? 'color:red' : ''}">${bean.map.realsum}</span>
+						<span style="${bean.map.iscu == '1' ? 'color:red' : (bean.map.iscu == '2' ? '' : 'color:green')}">${bean.map.realsum}</span>
 						<input type="hidden" name="map[realsum]" value="${bean.map.realsum}" />
 			   		</td>
 			   		<td>
