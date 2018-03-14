@@ -50,8 +50,11 @@
 					row.find("[name='map[unit]']").val(ui.item.unit);
 					row.find("[name='map[costprice]']").val(ui.item.costprice);
 					row.find("[name='map[planprice]']").val(ui.item.realprice);
-					row.find("[name='map[realprice]']").val(ui.item.historyprice == null ? ui.item.realprice : ui.item.historyprice);
+					row.find("[name='map[realprice]']").val(ui.item.realprice);
 					row.find("[name='map[numofonebox]']").val(ui.item.numofonebox);
+					if(ui.item.historyprice && (ui.item.realprice != ui.item.historyprice)) {
+						row.find("[name='map[remarkrow]']").val("上批次价格：" + ui.item.historyprice);
+					}
 					
 					changeNum(row.find("[name='map[productname]']"));// 重新计算数量、价格
 				},
