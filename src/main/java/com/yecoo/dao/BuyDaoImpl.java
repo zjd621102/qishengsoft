@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.yecoo.model.CodeTableForm;
+import com.yecoo.util.Constants;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.IdSingleton;
 import com.yecoo.util.StrUtils;
@@ -209,7 +210,6 @@ public class BuyDaoImpl extends BaseDaoImpl {
 					.append(form.getValue("buyid")).append("'");
 				iReturn = dbUtils.executeSQL(conn, sql.toString());
 				
-				/**
 				if(iReturn >= 1) {// 生成付款单
 					CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
 					String maker = StrUtils.nullToStr(user.getValue("userid")); //当前登录用户
@@ -228,18 +228,14 @@ public class BuyDaoImpl extends BaseDaoImpl {
 					
 					if(iReturn >= 0) {
 						sql.delete(0,sql.length());
-						sql.append("INSERT INTO bpayrow(payid, manuid, manubankname, manubankcardno, manuaccountname, plansum, realsum)")
+						sql.append("INSERT INTO bpayrow(payid, manuid, plansum, realsum)")
 							.append(" SELECT ").append(payid).append(", t.manuid,")
-							.append(" (SELECT sm.bankrow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
-							.append(" (SELECT sm.accountnorow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
-							.append(" (SELECT sm.accountnamerow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
-							.append(" t.sum, t.sum")
+							.append(" t.sum, 0")
 							.append(" FROM (SELECT manuid, SUM(sum) sum FROM bbuyrow WHERE buyid = '").append(buyid)
 							.append("' GROUP BY manuid) t");
 						iReturn = dbUtils.executeSQL(conn, sql.toString());
 					}
 				}
-				*/
 			}
 			
 			if(iReturn >= 0) {

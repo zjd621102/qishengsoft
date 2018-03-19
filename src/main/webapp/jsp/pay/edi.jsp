@@ -3,11 +3,51 @@
 
 <script type="text/javascript">
 	$().ready(function() {
+		
+		autoComManu("[name='map[manuname]']");
+		
 		setTimeout(function() {
 			changeValue();
 		}, 100);
 	});
 	 
+	// 查询供应商
+	function autoComManu(obj) {
+		setTimeout(function() {
+			$(obj).autocomplete({
+				source : function(request, response) {
+					$.post(
+						"<%=path%>/manu/getSelectByKeyword",
+						{keyword : request.term, manutypeid : ''},
+						function(data) {
+							response($.map(data, function(item) {
+			                    return {
+			                        label: item.map.manuname,
+			                        value: item.map.manuname,
+			                        manuid: item.map.manuid
+			                    }
+			                }));
+						},
+						"json"
+					);
+				},
+				minLength : 1,
+				select : function(event, ui) {
+					$("[name='map[manuid]']").val(ui.item.manuid);
+					$("[name='map[manuname]']").val(ui.item.manuname);
+				},
+				open : function() {
+					$(this).removeClass("ui-corner-all").addClass(
+							"ui-corner-top");
+				},
+				close : function() {
+					$(this).removeClass("ui-corner-top").addClass(
+							"ui-corner-all");
+				}
+			});
+		}, 100);
+	}
+	
 	/**
 	 * 修改值
 	 */
@@ -95,10 +135,10 @@
 		<dl>
 			<dt>供应商</dt>
 			<dd>
-				<input type="hidden" name="map[manuid]" value="${form.map.manuid}"/>
-				<input type="text" name="map[manuname]" value="${form.map.manuname}"
-					suggestFields="manuid,manuname" style="width: 176px;" readonly="readonly"/>
-					<a class="btnLook" href="<%=path%>/manu/list?act=backselect&map[manutypeid]=2" lookupGroup="manuLookup"
+				<input type="hidden" name="map[manuid]" class="required" value="${form.map.manuid}"/>
+				<input type="text" class="required" name="map[manuname]" value="${form.map.manuname}"
+					size="25" suggestFields="manuid,manuname" style="width: 176px;"/>
+					<a class="btnLook" href="<%=path%>/manu/list?act=backselect" lookupGroup="manuLookup"
 						width="1000" height="500">查找带回</a>
 				<a href="javascript:void(0);" class="btnClear"
 					suggestFields="manuid,manuname"></a>
