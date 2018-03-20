@@ -216,14 +216,16 @@
 					<th width="30px">序号</th>
 					<th width="130px">产品编码</th>
 					<th width="150px">产品名称</th>
-<!-- 					<th width="60px">计量单位</th> -->
+					<!--
+ 					<th width="60px">计量单位</th>
+ 					-->
 					<th width="60px">产品单价</th>
 					<th width="60px">实付单价</th>
 					<th width="60px" style="display: ${showProfit};">成本单价</th>
 					<th width="60px" style="display: ${showProfit};">利润</th>
 					<th width="60px">数量</th>
-					<th width="60px">件数</th>
-					<th width="60px">一件数量</th>
+					<th width="60px" style="display: none;">件数</th>
+					<th width="60px" style="display: none;">一件数量</th>
 					<th width="80px">实付总价</th>
 					<th width="50px">排序</th>
 					<th>备注</th>
@@ -235,20 +237,22 @@
 					<td></td>
 					<td></td>
 					<td></td>
-<!-- 					<td></td> -->
+					<!--
 					<td></td>
-					<td></td>
+					-->
+					<td style="display: none;"></td>
+					<td style="display: none;"></td>
 					<td style="display: ${showProfit};"></td>
 					<td style="display: ${showProfit};">
 						<input type="text" name="map[allprofit]" style="width: 65px;" class="number"
 							value="0.00" readonly="readonly"/>
 					</td>
-					<td style="font-size: 13px; font-weight: bold; color: red;">
-						合计：
-					</td>
+					<td></td>
 					<td>
+						<!-- 
 						<input type="text" name="map[allnum]" style="width: 45px;" class="digits"
 							value="0" readonly="readonly"/>
+						-->
 					</td>
 					<td></td>
 					<td>
@@ -277,11 +281,11 @@
 			   		<td>
 						<input type="text" name="map[productname]" style="width: 130px;" maxlength="32" class="required"/>
 			   		</td>
-			   		<%-- 
+			   		<!--
 			   		<td>
 			   			<st:select dictType="计量单位" name="map[unit]" expStr="style='width: 100%;'" />
 			   		</td>
-			   		--%>
+			   		-->
 			   		<td>
 						<input type="text" name="map[planprice]" style="width: 45px;" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
@@ -302,11 +306,11 @@
 						<input type="text" name="map[num]" style="width: 45px;" maxlength="12"
 							class="digits required" value="0" onchange="changeValue();"/>
 			   		</td>
-			   		<td>
+			   		<td style="display: none;">
 						<input type="text" name="map[boxnum]" style="width: 45px;" maxlength="12"
 							class="number" value="0" onchange="changeNum(this);"/>
 			   		</td>
-			   		<td>
+			   		<td style="display: none;">
 						<input type="text" name="map[numofonebox]" style="width: 45px;" maxlength="12"
 							class="digits" value="0" onchange="changeNum(this);"/>
 			   		</td>
@@ -329,15 +333,6 @@
 	
 	<div class="formBar">
 		<ul>
-			<!-- 
-			<li>
-				<div class="buttonActive">
-					<div class="buttonContent">
-						<button type="button" class="btnAdd addRow">新增</button>
-					</div>
-				</div>
-			</li>
-			-->
 			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
 		</ul>

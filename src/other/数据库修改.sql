@@ -1,4 +1,8 @@
 
+
+/**2018.03.20**/
+ALTER TABLE `bsell` ADD COLUMN `isupstock`  int(1) NULL AFTER `remark`;
+
 /**2016.07.31**/
 CREATE TABLE `sfixings` (
   `fixingsid` int(6) NOT NULL AUTO_INCREMENT,

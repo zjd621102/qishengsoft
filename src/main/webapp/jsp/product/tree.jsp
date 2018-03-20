@@ -10,6 +10,16 @@ CodeTableForm form2 = (CodeTableForm) request.getAttribute("form");
 
 ProductDaoImpl productDaoImpl = new ProductDaoImpl();
 %>
+<script type="text/javascript">
+
+/** 展开第一个节点 **/
+$(function() {
+	
+	setTimeout(function() {
+		
+	}, 100);
+});
+</script>
 <div class="pageContent">
 	<div class="tabs">
 		<div class="tabsContent">
@@ -17,7 +27,7 @@ ProductDaoImpl productDaoImpl = new ProductDaoImpl();
 				<div layoutH="10"
 					style="float: left; display: block; overflow: auto; width: 200px; border: solid 1px #CCC;
 					line-height: 21px; background: #fff">
-					<ul class="tree treeFolder expand">
+					<ul id="firstTree" class="tree treeFolder collapse">
 						<li>
 							<a href="<%=path%>/product/list/${form.map.producttype}?curTime=<%=curTime%>&first=true"
 								target="ajax" rel="jbsxBox2product<%=curTime%>">

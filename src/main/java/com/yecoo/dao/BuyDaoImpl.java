@@ -215,25 +215,36 @@ public class BuyDaoImpl extends BaseDaoImpl {
 					String maker = StrUtils.nullToStr(user.getValue("userid")); //当前登录用户
 					String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss");
 					String buyid = StrUtils.nullToStr(form.getValue("buyid"));
-					
-					String payid = IdSingleton.getInstance().getNewId();
-					
+
 					sql.delete(0, sql.length());
-					sql.append("INSERT INTO bpay(payid, btype, maker, paydate, relateno, relatemoney,")
-						.append(" currflow, createtime)	SELECT '").append(payid).append("', 'FKD', '").append(maker)
-						.append("', buydate, buyno, func_getSum(buyid, 'CGD'), '申请', '").append(createdate)
-						.append("' FROM bbuy WHERE buyid = '").append(buyid).append("'");
-	
-					iReturn = dbUtils.executeSQL(conn, sql.toString()); //直接保存，用于下面获取payid
+					sql.append("SELECT b.manuid FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.buyid = '")
+						.append(buyid).append("' GROUP BY b.manuid");
+					List<CodeTableForm> manuidList = dbUtils.getListBySql(sql.toString());
+					// 根据供应商新增付款单
+					for(CodeTableForm manuid2Form : manuidList) {
 					
-					if(iReturn >= 0) {
-						sql.delete(0,sql.length());
-						sql.append("INSERT INTO bpayrow(payid, manuid, plansum, realsum)")
-							.append(" SELECT ").append(payid).append(", t.manuid,")
-							.append(" t.sum, 0")
-							.append(" FROM (SELECT manuid, SUM(sum) sum FROM bbuyrow WHERE buyid = '").append(buyid)
-							.append("' GROUP BY manuid) t");
-						iReturn = dbUtils.executeSQL(conn, sql.toString());
+						String payid = IdSingleton.getInstance().getNewId();
+						
+						sql.delete(0, sql.length());
+						sql.append("INSERT INTO bpay(manuid, payid, btype, maker, paydate, relateno, relatemoney,")
+							.append(" currflow, createtime)	SELECT b.manuid, '").append(payid).append("', 'FKD', '").append(maker)
+							.append("', a.buydate, a.buyno, SUM(b.sum), '申请', '").append(createdate)
+							.append("' FROM bbuy a, bbuyrow b WHERE a.buyid = b.buyid AND a.buyid = '")
+							.append(buyid).append("' AND b.manuid = '" + manuid2Form.getValue("manuid") + "'");
+		
+						iReturn = dbUtils.executeSQL(conn, sql.toString()); //直接保存，用于下面获取payid
+						
+						if(iReturn >= 0) {
+							sql.delete(0,sql.length());
+							sql.append("INSERT INTO bpayrow(payid, manuid, plansum, realsum)")
+								.append(" SELECT ").append(payid).append(", t.manuid,")
+								.append(" t.sum, 0")
+								.append(" FROM (SELECT manuid, SUM(sum) sum FROM bbuyrow WHERE buyid = '").append(buyid)
+								.append("' AND manuid = '" + manuid2Form.getValue("manuid") + "') t");
+							iReturn = dbUtils.executeSQL(conn, sql.toString());
+						} else {
+							break;
+						}
 					}
 				}
 			}

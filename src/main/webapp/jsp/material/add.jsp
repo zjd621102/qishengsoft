@@ -37,6 +37,46 @@
 				</dd>
 			</dl>
 			<dl>
+				<dt>一件数量：</dt>
+				<dd>
+					<input type="text" name="map[numofonebox]" size="25" maxlength="12" />
+				</dd>
+			</dl>
+			<dl>
+				<dt>排序：</dt>
+				<dd>
+					<input type="text" name="map[materialsort]" class="digits" size="25" maxlength="99"
+						value="50"/>
+				</dd>
+			</dl>
+			<dl>
+				<dt>使用状态：</dt>
+				<dd>
+					<st:select dictType="状态" name="map[statusid]" value="1"
+					 expStr="style='width: 184px;' class='required'" />
+				</dd>
+			</dl>
+			<dl>
+				<dt>启用库存：</dt>
+				<dd>
+					<st:select dictType="是否" name="map[usestock]" value="0" expStr="style='width: 184px;'" />
+				</dd>
+			</dl>
+			<dl>
+				<dt>库存量：</dt>
+				<dd>
+					<input type="text" name="map[stock]" class="required number" size="25" maxlength="12"
+						value="0"/>
+				</dd>
+			</dl>
+			<dl>
+				<dt>报警量：</dt>
+				<dd>
+					<input type="text" name="map[alarmnum]" class="required number" size="25" maxlength="12"
+						value="0"/>
+				</dd>
+			</dl>
+			<dl>
 				<dt>属性：</dt>
 				<dd>
 					<input type="text" name="map[property]" size="25" maxlength="32" />
@@ -71,58 +111,6 @@
 				<dd>
 					<input type="text" name="map[createdate]" size="25" maxlength="19"
 						value="${form.map.createdate}" readonly="readonly"/>
-				</dd>
-			</dl>
-			<dl>
-				<dt>排序：</dt>
-				<dd>
-					<input type="text" name="map[materialsort]" class="digits" size="25" maxlength="99"
-						value="50"/>
-				</dd>
-			</dl>
-			<dl>
-				<dt>是否生成采购单：</dt>
-				<dd>
-					<st:select dictType="是否" name="map[istobuy]" expStr="style='width: 184px;'" />
-				</dd>
-			</dl>
-			<dl>
-				<dt>使用状态：</dt>
-				<dd>
-					<st:select dictType="状态" name="map[statusid]" value="1"
-					 expStr="style='width: 184px;' class='required'" />
-				</dd>
-			</dl>
-			<!-- 
-			<dl>
-				<dt>启用库存：</dt>
-				<dd>
-					<st:select dictType="是否" name="map[usestock]" value="0" expStr="style='width: 184px;'" />
-				</dd>
-			</dl>
-			<dl>
-				<dt>库存量：</dt>
-				<dd>
-					<input type="text" name="map[stock]" class="required number" size="25" maxlength="12"
-						value="0"/>
-				</dd>
-			</dl>
-			<dl>
-				<dt>报警量：</dt>
-				<dd>
-					<input type="text" name="map[alarmnum]" class="required number" size="25" maxlength="12"
-						value="0"/>
-				</dd>
-			</dl>
-			<dl>
-				<dt></dt>
-				<dd></dd>
-			</dl>
-			-->
-			<dl>
-				<dt>一件数量：</dt>
-				<dd>
-					<input type="text" name="map[numofonebox]" size="25" maxlength="12" />
 				</dd>
 			</dl>
 			<dl>

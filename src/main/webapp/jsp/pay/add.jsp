@@ -75,6 +75,7 @@
 						</option>
 					</c:forEach>
 				</select>
+				<span class="_required">✽</span>
 			</dd>
 		</dl>
 		<dl>
@@ -89,23 +90,9 @@
 			<dt>当前流程：</dt>
 			<dd>
 				<st:select dictType="流程状态" name="map[currflow]" value="申请" expStr="style='width: 184px;' class='required'" />
+				<span class="_required">✽</span>
 			</dd>
 		</dl>
-		<!--
-		<dl>
-			<dt>银行卡卡号</dt>
-			<dd>
-				<select name="map[bankcardno]" style="width: 184px;">
-					<option value=""></option>
-					<c:forEach items="${bankcardList}" var="bankcard">
-						<option value="${bankcard.map.bankcardno}">
-							${bankcard.map.bankcardno}|${bankcard.map.bankname}
-						</option>
-					</c:forEach>
-				</select>
-			</dd>
-		</dl>
-		-->
 		<dl>
 			<dt>供应商</dt>
 			<dd>
@@ -141,8 +128,8 @@
 						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="30px">序号</th>
-					<th width="100px"><span class="red">*</span>应付金额</th>
-					<th width="100px"><span class="red">*</span>实付金额</th>
+					<th width="100px"><span class="_required" style="margin-top: 5px;">✽</span>应付金额</th>
+					<th width="100px"><span class="_required" style="margin-top: 5px;">✽</span>实付金额</th>
 					<th>备注</th>
 				</tr>
 			</thead>

@@ -185,10 +185,10 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>买家：</dt>
+			<dt>使用状态：</dt>
 			<dd>
-				<input type="text" name="map[buyers]" size="25" maxlength="128"
-					value="${form.map.buyers}"/>
+				<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
+				 expStr="style='width: 184px;'" />
 			</dd>
 		</dl>
 		<dl>
@@ -243,20 +243,6 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>使用状态：</dt>
-			<dd>
-				<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
-				 expStr="style='width: 184px;'" />
-			</dd>
-		</dl>
-		<dl>
-			<dt>打印名：</dt>
-			<dd>
-				<input type="text" name="map[printname]" size="25" maxlength="32"
-					value="${form.map.printname}"/>
-			</dd>
-		</dl>
-		<dl>
 			<dt>备注：</dt>
 			<dd>
 				<input type="text" name="map[remark]" size="88" maxlength="256"
@@ -285,54 +271,6 @@
 						</div>
 					</div>
 				</td>
-				<!--
-				<td>
-					<div class="button" style="margin-left: 4px;">
-						<input id="fileInput" type="file" name="image" 
-							uploaderOption="{
-								height: 20,
-								width: 65,
-								swf:'<%=path%>/js/uploadify/scripts/uploadify.swf',
-								uploader:'<%=path%>/file/uploadFile',
-								formData:{pid:${form.map.productid}, btype: 'product'},
-								buttonText:'上传附件',
-								fileSizeLimit:'10240KB',
-								auto:true,
-								multi:false,
-								onUploadSuccess:uploadifySuccess,
-								onQueueComplete:uploadifyQueueComplete
-							}"
-						/>
-					</div>
-				</td>
-				<td>
-					<div class="button" style="margin-left: 4px;">
-						<input id="fileInput2" type="file" name="image" 
-							uploaderOption="{
-								height: 20,
-								width: 65,
-								swf:'<%=path%>/js/uploadify/scripts/uploadify.swf',
-								uploader:'<%=path%>/file/uploadFile',
-								formData:{pid:${form.map.productid}, btype: 'product_cover'},
-								buttonText:'上传封面',
-								fileSizeLimit:'10240KB',
-								auto:true,
-								multi:false,
-								onUploadSuccess:uploadifySuccess,
-								onQueueComplete:uploadifyQueueComplete
-							}"
-						/>
-					</div>
-				</td>
-				<td>
-					<div class="button" style="margin-left: 5px;">
-						<div class="buttonContent">
-							<button type="button"
-							 onclick="window.open('<%=path%>/product/edi/${form.map.productid}?act=print');">打印</button>
-						</div>
-					</div>
-				</td>
-				-->
 			</tr>
 		</table>
 
@@ -350,15 +288,11 @@
 					<th width="70px">物资总价</th>
 					<th width="120px">供应商</th>
 					<th width="50px">排序</th>
-					<th width="70px">采购备注</th>
-					<th width="70px">生产备注</th>
 					<th>备注</th>
 				</tr>
 			</thead>
 			<tbody id="productRowTbody">
 				<tr>
-					<td></td>
-					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -408,13 +342,7 @@
 							value="9"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkshow]" style="width: 84%" maxlength="256"/>
-			   		</td>
-			   		<td>
-						<input type="text" name="map[productionshow]" style="width: 84%" maxlength="256"/>
-			   		</td>
-			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 98%" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" style="width: 96%" maxlength="256"/>
 			   		</td>
 			   	</tr>
 				<c:forEach items="${productrowList}" var="bean" varStatus="vs">
@@ -460,15 +388,7 @@
 								class="number" value="${bean.map.sort}"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[remarkshow]" style="width: 84%" maxlength="256"
-								value="${bean.map.remarkshow}"/>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[productionshow]" style="width: 84%" maxlength="256"
-								value="${bean.map.productionshow}"/>
-				   		</td>
-				   		<td>
-							<input type="text" name="map[remarkrow]" style="width: 98%" maxlength="256"
+							<input type="text" name="map[remarkrow]" style="width: 96%" maxlength="256"
 								value="${bean.map.remarkrow}"/>
 				   		</td>
 				   	</tr>

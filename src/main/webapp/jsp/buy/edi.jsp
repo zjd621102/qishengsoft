@@ -201,7 +201,9 @@
 					<th width="30px">序号</th>
 					<th width="82px">物资编码</th>
 					<th width="120px">物资名称</th>
+					<!--
 					<th width="60px">计量单位</th>
+					-->
 					<th width="75px">单价</th>
 					<th width="75px">数量</th>
 					<th width="75px">折扣</th>
@@ -222,7 +224,9 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<!--
 					<td></td>
+					-->
 					<td></td>
 					<td></td>
 					<td>
@@ -262,9 +266,11 @@
 			   		<td>
 						<input type="text" name="map[materialname]" style="width: 100px;" maxlength="32" class="required"/>
 			   		</td>
+			   		<!--
 			   		<td>
 			   			<st:select dictType="计量单位" name="map[unit]" expStr="style='width: 100%;'" />
 			   		</td>
+			   		-->
 			   		<td>
 						<input type="text" name="map[price]" style="width: 60px" maxlength="12"
 							class="number required" value="0.00" onchange="setMultiply_buy('price', 'num', 'sum');
@@ -305,7 +311,7 @@
 							value=""/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 71px;" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" maxlength="256"/>
 			   		</td>
 			   	</tr>
 				<c:forEach items="${buyrowList}" var="bean" varStatus="vs">
@@ -331,9 +337,11 @@
 							<input type="text" name="map[materialname]" style="width: 100px;" maxlength="32"
 								value="${bean.map.materialname}" class="required"/>
 				   		</td>
+				   		<!--
 				   		<td>
 							<st:select dictType="计量单位" name="map[unit]" value="${bean.map.unit}" expStr="style='width: 100%;'" />
 				   		</td>
+				   		-->
 				   		<td>
 							<input type="text" name="map[price]" style="width: 60px;" maxlength="12"
 								class="number required" value="${bean.map.price}"
@@ -380,7 +388,7 @@
 								class="number" value="${bean.map.sort}"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[remarkrow]" style="width: 71px;" maxlength="256"
+							<input type="text" name="map[remarkrow]" maxlength="256"
 								value="${bean.map.remarkrow}"/>
 				   		</td>
 				   	</tr>

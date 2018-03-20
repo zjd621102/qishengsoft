@@ -31,9 +31,6 @@
 						物资编码：
 						<input type="text" name="map[materialtypeno]" value="${form.map.materialtypeno}"
 							style="width: 80px;"/>
-						买家：
-						<input type="text" name="map[buyers]" value="${form.map.buyers}" style="width: 80px;"
-							${changeManuname}/>
 						使用状态：
 						<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
 						 expStr="style='width: 80px; margin-right: 15px;'" />
@@ -90,14 +87,8 @@
 				<th width="70px">产品编码</th>
 				<th width="160px">产品名称</th>
 				<th width="60px">产品类型</th>
-				<!-- 
-				<th width="60px">计量单位</th>
-				-->
 				<th width="60px">产品单价</th>
 				<th width="60px">一件数量</th>
-				<c:if test="${userSessionInfo.map.ismanu != '1'}">
-				<th width="200px">买家</th>
-				</c:if>
 				<th width="40px">排序</th>
 				<th>新增日期</th>
 			</tr>
@@ -123,14 +114,8 @@
 			   		<td>${bean.map.productno}</td>
 			   		<td>${bean.map.productname}</td>
 			   		<td>${bean.map.producttypename}</td>
-			   		<!-- 
-			   		<td>${bean.map.unitname}</td>
-			   		-->
 			   		<td>${bean.map.realprice}</td>
 			   		<td>${bean.map.numofonebox}</td>
-					<c:if test="${userSessionInfo.map.ismanu != '1'}">
-			   		<td>${bean.map.buyers}</td>
-			   		</c:if>
 			   		<td>${bean.map.productsort}</td>
 			   		<td>${bean.map.createdate}</td>
 			   	</tr>

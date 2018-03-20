@@ -16,32 +16,32 @@
 					<td style="width: 25%;">
 						当前流程：
 						<st:select dictType="采购状态" name="map[currflow]" value="${form.map.currflow}"
-						 expStr="style='width: 116px;'" />
+						 expStr="style='width: 86px;'" />
 					</td>
 					<td style="width: 25%;">
-						采购日期：<input type="text" name="map[buydateFrom]" style="width: 113px;" value="${form.map.buydateFrom}" class="date"/>
+						采购日期：<input type="text" name="map[buydateFrom]" style="width: 83px;" value="${form.map.buydateFrom}" class="date"/>
 					</td>
 					<td>
-						&#12288;&#12288;&#12288;至：<input type="text" name="map[buydateTo]"  style="width: 113px;" value="${form.map.buydateTo}" class="date"/>
+						&#12288;&#12288;&#12288;至：<input type="text" name="map[buydateTo]"  style="width: 80px;" value="${form.map.buydateTo}" class="date"/>
 					</td>
 					<td>
 						供应商名称：
-						<input type="text" name="map[manuname]" style="width: 110px;" value="${form.map.manuname}"/>
+						<input type="text" name="map[manuname]" style="width: 80px;" value="${form.map.manuname}"/>
 					</td>
 				</tr>
 				<tr>
 					<td style="width: 25%;">
 						物资名称：
-						<input type="text" name="map[materialname]" style="width: 110px;" maxlength="16"
+						<input type="text" name="map[materialname]" style="width: 80px;" maxlength="16"
 							value="${form.map.materialname}"/>
 					</td>
 					<td>
 						物资编码：
-						<input type="text" name="map[materialno]" style="width: 110px;" value="${form.map.materialno}"/>
+						<input type="text" name="map[materialno]" style="width: 80px;" value="${form.map.materialno}"/>
 					</td>
 					<td style="width: 25%;">
 						单据类型：
-						<select name="map[btype]" style="width: 116px;">
+						<select name="map[btype]" style="width: 82px;">
 							<option value=""></option>
 							<c:forEach items="${btypeList}" var="btype">
 								<option value="${btype.map.dictvalue}"
@@ -54,7 +54,7 @@
 					</td>
 					<td>
 						采购单名称：
-						<input type="text" name="map[buyname]" style="width: 110px;" value="${form.map.buyname}"/>
+						<input type="text" name="map[buyname]" style="width: 80px;" value="${form.map.buyname}"/>
 					</td>
 				</tr>
 			</table>
@@ -136,7 +136,9 @@
 				<th width="80px">采购日期</th>
 				<th width="155px">采购金额（${totalSum}）</th>
 				<th width="60px">当前流程</th>
+				<!-- 
 				<th width="60px">制单人</th>
+				-->
 				<th>创建时间</th>
 			</tr>
 		</thead>
@@ -155,7 +157,9 @@
 			   		<td>${bean.map.buydate}</td>
 			   		<td>${bean.map.allsum}</td>
 			   		<td>${bean.map.currflow}</td>
+			   		<!-- 
 			   		<td>${bean.map.makername}</td>
+			   		-->
 			   		<td>${bean.map.createtime}</td>
 			   	</tr>
 		   	</c:forEach>

@@ -15,10 +15,9 @@
 					<td>
 						单据ID：
 						<input type="text" name="map[payid]" value="${form.map.payid}"
-						 class="number" style="width: 100px;"/>
-						<!-- 
+						 class="number" style="width: 70px;"/>
 						单据类型：
-						<select name="map[btype]" style="width: 100px;">
+						<select name="map[btype]" style="width: 70px;">
 							<option value=""></option>
 							<c:forEach items="${btypeList}" var="btype">
 								<option value="${btype.map.dictvalue}"
@@ -28,13 +27,12 @@
 								</option>
 							</c:forEach>
 						</select>
-						-->
 						当前流程：
 						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
-						 expStr="style='width: 100px;'" />
+						 expStr="style='width: 70px;'" />
 						供应商：
 						<input type="text" name="map[manuname]" value="${form.map.manuname}" 
-							style="width: 100px;" ${changeManuname}/>
+							style="width: 70px;" ${changeManuname}/>
 					</td>
 				</tr>
 			</table>
@@ -87,14 +85,11 @@
 				<th width="50px">单据ID</th>
 				<th width="60px">单据类型</th>
 				<th width="80px">单据日期</th>
-				<th width="120px">关联单号</th>
 				<th width="100px">应付(${totalPlanSum})</th>
 				<th width="100px">实付(${totalRealSum})</th>
 				<th width="100px">待付(${unPaySum})</th>
-				<th width="60px">供应商</th>
 				<th width="60px">当前流程</th>
-				<th width="100px">备注</th>
-				<th>创建时间</th>
+				<th>供应商</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -104,14 +99,11 @@
 			   		<td>${bean.map.payid}</td>
 			   		<td>${bean.map.btypename}</td>
 			   		<td>${bean.map.paydate}</td>
-			   		<td>${bean.map.relateno}</td>
 			   		<td>${bean.map.allplansum}</td>
 			   		<td>${bean.map.allrealsum}</td>
 			   		<td>${bean.map.unpaysum}</td>
-			   		<td>${bean.map.manuname}</td>
 			   		<td>${bean.map.currflow}</td>
-			   		<td>${bean.map.remark}</td>
-			   		<td>${bean.map.createtime}</td>
+			   		<td>${bean.map.manuname}</td>
 			   	</tr>
 		   	</c:forEach>
 	   	</tbody>

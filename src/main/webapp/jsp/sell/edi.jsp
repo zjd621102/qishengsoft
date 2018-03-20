@@ -279,8 +279,8 @@
 					<th width="60px" style="display: ${showProfit};">利润</th>
 					-->
 					<th width="60px">数量</th>
-					<th width="60px">件数</th>
-					<th width="60px">一件数量</th>
+					<th width="60px" style="display: none;">件数</th>
+					<th width="60px" style="display: none;">一件数量</th>
 					<th width="80px">实付总价</th>
 					<th width="50px">排序</th>
 					<th>备注</th>
@@ -295,8 +295,8 @@
 					<!--
  					<td></td>
  					-->
-					<td></td>
-					<td></td>
+					<td style="display: none;"></td>
+					<td style="display: none;"></td>
 					<!--
 					<td style="display: ${showProfit};"></td>
 					<td style="display: ${showProfit};">
@@ -304,13 +304,8 @@
 							value="0.00" readonly="readonly"/>
 					</td>
 					-->
-					<td style="font-size: 13px; font-weight: bold; color: red;">
-						合计：
-					</td>
-					<td>
-						<input type="text" name="map[allnum]" style="width: 45px;" class="digits"
-							value="0" readonly="readonly"/>
-					</td>
+					<td></td>
+					<td></td>
 					<td></td>
 					<td>
 						<input type="text" name="map[allrealsum]" style="width: 65px;" class="number"
@@ -366,11 +361,11 @@
 						<input type="text" name="map[num]" style="width: 45px;" maxlength="12"
 							class="digits required" value="0" onchange="changeValue();"/>
 			   		</td>
-			   		<td>
+			   		<td style="display: none;">
 						<input type="text" name="map[boxnum]" style="width: 45px;" maxlength="12"
 							class="number" value="0" onchange="changeNum(this);"/>
 			   		</td>
-			   		<td>
+			   		<td style="display: none;">
 						<input type="text" name="map[numofonebox]" style="width: 45px;" maxlength="12"
 							class="digits" value="0" onchange="changeNum(this);"/>
 			   		</td>
@@ -435,11 +430,11 @@
 							<input type="text" name="map[num]" style="width: 45px;" maxlength="12"
 								class="digits required" value="${bean.map.num}" onchange="changeValue();"/>
 				   		</td>
-				   		<td>
+				   		<td style="display: none;">
 							<input type="text" name="map[boxnum]" style="width: 45px;" maxlength="12"
 								class="number" value="${bean.map.boxnum}" onchange="changeNum(this);"/>
 				   		</td>
-				   		<td>
+				   		<td style="display: none;">
 							<input type="text" name="map[numofonebox]" style="width: 45px;" maxlength="12"
 								class="digits" value="${bean.map.numofonebox}" onchange="changeNum(this);"/>
 				   		</td>
@@ -464,40 +459,9 @@
 	
 	<div class="formBar">
 		<ul>
-			<!-- 
-			<li>
-				<div class="buttonActive">
-					<div class="buttonContent">
-						<button type="button" class="btnAdd addRow">新增</button>
-					</div>
-				</div>
-			</li>
-			-->
 			<c:if test="${form.map.currflow != '结束'}">
 			<shiro:hasPermission name="Sell:edi">
 			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
-			<li><div class="button"><div class="buttonContent"><button type="button" onclick="addBuy()">生成采购单</button></div></div></li>
-			<li>
-				<div class="button">
-					<div class="buttonContent">
-						<button type="button" onclick="window.open('<%=path%>/sell/edi/${form.map.sellid}?act=printBuy');">采购单</button>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="button">
-					<div class="buttonContent">
-						<button type="button" onclick="window.open('<%=path%>/sell/edi/${form.map.sellid}?act=printDo');">生产单</button>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="button">
-					<div class="buttonContent">
-						<button type="button" onclick="window.open('<%=path%>/sell/edi/${form.map.sellid}?act=printBox');">箱子</button>
-					</div>
-				</div>
-			</li>
 			</shiro:hasPermission>
 			</c:if>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>

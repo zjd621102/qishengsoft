@@ -51,7 +51,7 @@
 			<shiro:hasPermission name="Material:add">
 			<li>
 				<a class="add" href="<%=path%>/material/add/${form.map.materialtype}?curTime=${curTime}"
-					target="dialog" rel="material_add" mask="true" width="890" height="418">
+					target="dialog" rel="material_add" mask="true" width="890" height="450">
 					<span>新增物资</span>
 				</a>
 			</li>
@@ -59,7 +59,7 @@
 			<shiro:hasPermission name="Material:edi">
 			<li>
 				<a class="edit" href="<%=path%>/material/edi/{s_materialid}?curTime=${curTime}" target="dialog"
-					rel="material_edi" mask="true" width="890" height="418">
+					rel="material_edi" mask="true" width="890" height="450">
 					<span>修改物资</span>
 				</a>
 			</li>
@@ -81,13 +81,17 @@
 				<th width="60px">物资编码</th>
 				<th width="120px">物资名称</th>
 				<th width="60px">单价</th>
+				<!-- 
 				<th width="60px">属性</th>
 				<th width="100px">标志</th>
+				-->
 				<th width="70px">一件数量</th>
 				<th width="80px">物资类型</th>
 				<th width="80px">供应商</th>
 				<th width="40px">排序</th>
+				<!--
 				<th>新增时间</th>
+				-->
 			</tr>
 		</thead>
 		<tbody>
@@ -113,13 +117,17 @@
 			   		<td>${bean.map.materialno}</td>
 			   		<td>${bean.map.materialname}</td>
 			   		<td>${bean.map.price}</td>
+			   		<!-- 
 			   		<td>${bean.map.property}</td>
 			   		<td>${bean.map.mark}</td>
+			   		-->
 			   		<td>${bean.map.numofonebox}</td>
 			   		<td>${bean.map.materialtypename}</td>
 			   		<td>${bean.map.manuname}</td>
 			   		<td>${bean.map.materialsort}</td>
+			   		<!-- 
 			   		<td>${bean.map.createdate}</td>
+			   		-->
 			   	</tr>
 		   	</c:forEach>
 	   	</tbody>

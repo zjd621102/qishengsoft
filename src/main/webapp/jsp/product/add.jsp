@@ -123,9 +123,10 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>买家：</dt>
+			<dt>使用状态：</dt>
 			<dd>
-				<input type="text" name="map[buyers]" size="25" maxlength="128" value=""/>
+				<st:select dictType="状态" name="map[statusid]" value="1"
+				 expStr="style='width: 184px;'" />
 			</dd>
 		</dl>
 		<dl>
@@ -171,19 +172,6 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>使用状态：</dt>
-			<dd>
-				<st:select dictType="状态" name="map[statusid]" value="1"
-				 expStr="style='width: 184px;'" />
-			</dd>
-		</dl>
-		<dl>
-			<dt>打印名：</dt>
-			<dd>
-				<input type="text" name="map[printname]" size="25" maxlength="32" />
-			</dd>
-		</dl>
-		<dl>
 			<dt>备注：</dt>
 			<dd>
 				<input type="text" name="map[remark]" size="89" maxlength="256"
@@ -209,15 +197,11 @@
 					<th width="70px">物资总价</th>
 					<th width="120px">供应商</th>
 					<th width="50px">排序</th>
-					<th width="70px">采购备注</th>
-					<th width="70px">生产备注</th>
 					<th>备注</th>
 				</tr>
 			</thead>
 			<tbody id="productRowTbody">
 				<tr>
-					<td></td>
-					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -266,14 +250,8 @@
 						<input type="text" name="map[sort]" style="width: 84%" maxlength="2" class="number"
 							value="9"/>
 			   		</td>
-				   	<td>
-						<input type="text" name="map[remarkshow]" style="width: 84%" maxlength="256"/>
-				   	</td>
-				   	<td>
-						<input type="text" name="map[productionshow]" style="width: 84%" maxlength="256"/>
-				   	</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 98%" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" style="width: 96%" maxlength="256"/>
 			   		</td>
 			   	</tr>
 			   	<tr id="IDEndRow"></tr>

@@ -163,7 +163,7 @@ function openBillByNo(path, billNo) {
 			url = path +　url;
 			var dlgId = "_blank";
 			var title = " ";
-			var options = {width:1300,height:500,mask:true};
+			var options = {width:1000,height:500,mask:true};
 			
 			$.pdialog.open(url, dlgId, title, options);
 		}

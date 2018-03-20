@@ -25,13 +25,13 @@
 				<label>手机号码：</label>
 				<input type="text" class="phone" size="30" name="map[tele]" value="${form.map.tele}" />
 			</p>
-			
+			<!--
 			<p>
 				<label>是否客户：</label>
 				<st:select dictType="是否" name="map[ismanu]" value="${form.map.ismanu}"
 				 expStr="style='width: 212px;'" />
 			</p>
-			
+			-->
 			<p>
 				<label>角&nbsp;&nbsp;&nbsp;&nbsp;色：</label>
 				<c:forEach items="${roleList}" var="role">

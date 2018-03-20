@@ -42,7 +42,7 @@
 			<li>
 				<a class="add"
 					href="<%=path%>/producttype/add/${form.map.parent}" target="dialog"
-					rel="producttype_add" mask="true" width="500" height="500">
+					rel="producttype_add" mask="true" width="500" height="370">
 					<span>新增产品类别</span>
 				</a>
 			</li>
@@ -50,7 +50,7 @@
 			<shiro:hasPermission name="Producttype:edi">
 			<li>
 				<a class="edit" href="<%=path%>/producttype/edi/{s_producttype}"
-					target="dialog" rel="producttype_edi" mask="true" width="500"
+					target="dialog" rel="producttype_edi" mask="true" width="370"
 					height="500">
 					<span>修改产品类别</span>
 				</a>

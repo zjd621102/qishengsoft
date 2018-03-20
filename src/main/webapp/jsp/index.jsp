@@ -244,7 +244,7 @@
 										<li>
 											<div class="unit">
 												<a href="<%=path%>/material/edi/${material.map.materialid}" target="dialog"
-													rel="pay_edi" mask="true" width="500" height="550"
+													rel="pay_edi" mask="true" width="890" height="450"
 													style="font-size: 13px;">
 													【${material.map.materialno}】【${material.map.materialname}】【${material.map.stock}】</a>
 											</div>

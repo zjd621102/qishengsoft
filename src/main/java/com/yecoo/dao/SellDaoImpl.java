@@ -211,7 +211,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 			}
 			
 			String currflow = StrUtils.nullToStr(form.getValue("currflow"));
-			if(iReturn >= 1 && currflow.equals("发货")) { //流程结束
+			if(iReturn >= 1 && currflow.equals("结束")) { //流程结束
 				
 				//计算库存
 				StringBuffer sql = new StringBuffer("UPDATE smaterial m, (")
