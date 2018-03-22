@@ -11,13 +11,13 @@
 					<td>
 						产品类别名称：
 						<input type="text" name="map[producttypename]" value="${form.map.producttypename}"
-							style="width: 100px;" />
+							style="width: 80px;" />
 						产品类别编码：
 						<input type="text" name="map[producttypeno]" value="${form.map.producttypeno}"
-							style="width: 100px;" />
+							style="width: 80px;" />
 						使用状态：
 						<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
-						 expStr="style='width: 100px; margin-right: 15px;'" />
+						 expStr="style='width: 80px; margin-right: 15px;'" />
 					</td>
 				</tr>
 			</table>

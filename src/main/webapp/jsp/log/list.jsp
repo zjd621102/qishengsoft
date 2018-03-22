@@ -27,21 +27,21 @@
 				<table class="searchContent" style="width: 80%">
 					<tr>
 						<td>
-							操作类型：<input type="text" name="map[logtype]" value="${form.map.logtype}" size="10"/>
+							操作类型：<input type="text" name="map[logtype]" value="${form.map.logtype}" size="8"/>
 						</td>
 						<td>
-							操作人：<input type="text" name="map[operatername]" value="${form.map.operatername}" size="10"/>
+							操作人：<input type="text" name="map[operatername]" value="${form.map.operatername}" size="8"/>
 						</td>
 						<td>
 							操作时间从：<input type="text" class="date" readonly="readonly" name="map[fromTime]"
-								dateFmt="yyyy-MM-dd HH:mm:ss" value="${form.map.fromTime}" size="15" />
+								dateFmt="yyyy-MM-dd HH:mm:ss" value="${form.map.fromTime}" size="8" />
 						</td>
 						<td>
 							至：<input type="text" class="date" readonly="readonly" name="map[toTime]"
-								dateFmt="yyyy-MM-dd HH:mm:ss" value="${form.map.toTime}" size="15" />
+								dateFmt="yyyy-MM-dd HH:mm:ss" value="${form.map.toTime}" size="8" />
 						</td>
 						<td>
-							备注：<input type="text" name="map[remark]" value="${form.map.remark}"/>
+							备注：<input type="text" name="map[remark]" value="${form.map.remark}" size="8"/>
 						</td>
 					</tr>
 				</table>
@@ -83,17 +83,17 @@
 	</c:if>
 	<table class="table" style="width: 100%;" layoutH="138">
 		<thead>
-			<tr style="width: 1000px;">
+			<tr>
 				<c:if test="${act!='excel'}">
-					<th width="3%">
+					<th width="30px">
 						<input type="checkbox" group="ids" class="checkboxCtrl">
 					</th>
 				</c:if>
 				<th width="30px">序号</th>
-				<th width="100px">操作类型</th>
-				<th width="80px">操作人</th>
+				<th width="80px">操作类型</th>
+				<th width="60px">操作人</th>
 				<th width="100px">IP</th>
-				<th width="150px">操作时间</th>
+				<th width="130px">操作时间</th>
 				<th>备注</th>
 			</tr>
 		</thead>
@@ -112,7 +112,7 @@
 			   		<td>${bean.map.operatername}</td> 
 			   		<td>${bean.map.ip}</td>
 			   		<td>${bean.map.operatetime}</td>
-			   		<td>${bean.map.remark}</td>
+			   		<td><div style="width: 500px;">${bean.map.remark}</div></td>
 			   	</tr>
 		   	</c:forEach>
 	   	</tbody>

@@ -9,7 +9,7 @@
 					<td>
 						角色名称：
 						<input type="text" name="map[rolename]" value="${form.map.rolename}"
-						 style="width: 100px;"/>
+						 style="width: 80px;"/>
 					</td>
 				</tr>
 			</table>
