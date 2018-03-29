@@ -41,7 +41,8 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 	public List<CodeTableForm> getMaterialList(CodeTableForm form) {
 		
 		String sql = "SELECT t.*, func_getMaterialtypeName(t.materialtype) materialtypename,"
-				+ " func_getDictName('计量单位', t.unit) unitname, sm.manuname, sm.manucontact, sm.manutel"
+				+ " func_getDictName('计量单位', t.unit) unitname, sm.manuname, sm.manucontact, sm.manutel,"
+				+ " t.stock*t.price totalprice"
 				+" FROM smaterial t LEFT JOIN smanu sm on t.manuid = sm.manuid WHERE 1 = 1";
 		String cond = getMaterialListCondition(form);
 		sql  += cond;

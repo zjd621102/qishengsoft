@@ -87,6 +87,7 @@
 				-->
 				<th width="70px">一件数量</th>
 				<th width="70px">库存量</th>
+				<th width="80px">库存价值</th>
 				<th width="80px">物资类型</th>
 				<th width="80px">供应商</th>
 				<th>排序</th>
@@ -124,6 +125,7 @@
 			   		-->
 			   		<td>${bean.map.numofonebox}</td>
 			   		<td>${bean.map.stock}</td>
+			   		<td>${bean.map.totalprice}</td>
 			   		<td>${bean.map.materialtypename}</td>
 			   		<td>${bean.map.manuname}</td>
 			   		<td>${bean.map.materialsort}</td>

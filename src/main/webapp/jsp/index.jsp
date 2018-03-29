@@ -161,7 +161,6 @@
 						<div class="accountInfo">
 							<div class="right">
 								<p>待办工作<span style="color: red;">${toDoNum}</span>项</p>
-<!-- 									<p>07月12日，星期二</p> -->
 							</div>
 							<p>
 								<span>欢迎登录岐盛软件管理系统！</span>
