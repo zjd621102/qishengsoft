@@ -9,12 +9,12 @@
 				<tr>
 					<td>
 						系统参数名称：
-						<input type="text" name="map[parametername]" style="width: 100px;" maxlength="32"
+						<input type="text" name="map[parametername]" style="width: 70px;" maxlength="32"
 							value="${form.map.parametername}"/>
 					</td>
 					<td>
 						系统参数值：
-						<input type="text" name="map[parametervalue]" style="width: 100px;" maxlength="32"
+						<input type="text" name="map[parametervalue]" style="width: 70px;" maxlength="32"
 							value="${form.map.parametervalue}"/>
 					</td>
 				</tr>

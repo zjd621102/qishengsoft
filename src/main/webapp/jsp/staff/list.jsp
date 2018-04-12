@@ -49,23 +49,23 @@
 			<table class="searchContent">
 				<tr>
 					<td>
-						员工名称：<input type="text" name="map[staffname]" style="width: 80px" value="${form.map.staffname}"/>
+						员工名称：<input type="text" name="map[staffname]" style="width: 70px" value="${form.map.staffname}"/>
 					</td>
 					<td>
 						员工状态：
 						<st:select dictType="员工状态" name="map[staffstatus]" value="${form.map.staffstatus}"
-							expStr="style='width: 80px;'" />
+							expStr="style='width: 70px;'" />
 					</td>
 					<td>
 						月份：
-						<input type="text" name="map[month]" style="width: 80px" value="${form.map.month}" class="date"
+						<input type="text" name="map[month]" style="width: 70px" value="${form.map.month}" class="date"
 							dateFmt="yyyy-MM" readonly="readonly"/>
 					</td>
 					<td>
 						<table style="margin-left: 100px;">
 							<tr>
 								<td>
-									<input type="text" id="workdate" style="width: 80px"
+									<input type="text" id="workdate" style="width: 70px"
 										value="${form.map.workdate}" class="date"
 										dateFmt="yyyy-MM-dd" readonly="readonly"/>
 								</td>

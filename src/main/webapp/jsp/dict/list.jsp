@@ -9,7 +9,7 @@
 				<tr>
 					<td>
 						字典类型：
-						<input type="text" name="map[dicttype]" style="width: 120px;" maxlength="32"
+						<input type="text" name="map[dicttype]" style="width: 70px;" maxlength="32"
 							value="${form.map.dicttype}"/>
 					</td>
 				</tr>
