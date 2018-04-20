@@ -78,7 +78,7 @@
 			<shiro:hasPermission name="Buy:add">
 			<li>
 				<a class="add" href="<%=path%>/buy/add" target="dialog" rel="buy_add" mask="true"
-					width="1000" height="500">
+					width="850" height="500">
 					<span>新增采购单</span>
 				</a>
 			</li>
@@ -86,18 +86,13 @@
 			<shiro:hasPermission name="Buy:edi">
 			<li>
 				<a class="edit" href="<%=path%>/buy/edi/{s_buyid}" target="dialog" rel="buy_edi" mask="true"
-					width="1000" height="500">
+					width="850" height="500">
 					<span>修改</span>
 				</a>
 			</li>
 			<li>
 				<a class="edit" href="<%=path%>/buy/edi/{s_buyid}?act=print" target="openwin">
 					<span>查看</span>
-				</a>
-			</li>
-			<li>
-				<a class="edit" href="<%=path%>/buy/edi/{s_buyid}?act=print_barter" target="openwin">
-					<span>换货模式</span>
 				</a>
 			</li>
 			<li>
