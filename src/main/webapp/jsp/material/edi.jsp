@@ -136,7 +136,7 @@
 					 expStr="style='width: 184px;' class='required'" />
 				</dd>
 			</dl>
-			<!-- -->
+			<!-- 
 			<dl>
 				<dt>启用库存：</dt>
 				<dd>
@@ -161,7 +161,7 @@
 				<dt></dt>
 				<dd></dd>
 			</dl>
-			<!-- -->
+			-->
 			<dl>
 				<dt>一件数量：</dt>
 				<dd>
