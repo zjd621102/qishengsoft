@@ -133,9 +133,7 @@
 				<select name="map[btype]" style="width: 184px;" class="required">
 					<option value=""></option>
 					<c:forEach items="${btypeList}" var="btype">
-						<option value="${btype.map.dictvalue}"
-							${btype.map.dictvalue=="CGD"?"selected":""}
-						>
+						<option value="${btype.map.dictvalue}">
 							${btype.map.dictname}
 						</option>
 					</c:forEach>
@@ -279,7 +277,7 @@
 			   		</td>
 			   		<td>
 						<input type="hidden" name="map[manuid]"/>
-						<input type="text" name="map[manuname]" style="width: 61px" readonly="readonly"/>
+						<input type="text" name="map[manuname]" style="width: 85px" readonly="readonly"/>
 			   		</td>
 			   		<!-- 
 			   		<td>

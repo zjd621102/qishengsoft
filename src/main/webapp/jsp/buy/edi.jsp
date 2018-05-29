@@ -296,7 +296,7 @@
 			   		</td>
 			   		<td>
 						<input type="hidden" name="map[manuid]"/>
-						<input type="text" name="map[manuname]" style="width: 61px;" readonly="readonly"/>
+						<input type="text" name="map[manuname]" style="width: 85px;" readonly="readonly"/>
 			   		</td>
 			   		<!-- 
 			   		<td>
@@ -371,7 +371,7 @@
 				   		<td>
 							<input type="hidden" name="map[manuid]" value="${bean.map.manuid}"/>
 							<input type="text" name="map[manuname]" value="${bean.map.manuname}"
-								style="width: 61px;" readonly="readonly"/>
+								style="width: 85px;" readonly="readonly"/>
 				   		</td>
 				   		<!--
 				   		<td>

@@ -251,9 +251,11 @@
 				<input type="hidden" name="map[manuid]" class="required" value="${form.map.manuid}"/>
 				<input type="text" class="required" name="map[manuname]" value="${form.map.manuname}"
 					size="25" suggestFields="manuid,manuname"/>
+				<!-- 
 				<a class="btnLook" href="<%=path%>/manu/list?act=backselect&map[manutypeid]=2" lookupGroup="manuLookup"
 					width="1000" height="500">查找带回</a>
 				<a href="javascript:void(0);" class="btnClear" suggestFields="manuid,manuname"></a>
+				-->
 			</dd>
 		</dl>
 		<dl>
