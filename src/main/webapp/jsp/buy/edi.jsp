@@ -129,6 +129,7 @@
 			<dd>
 				<input type="hidden" name="map[btype]" value="${form.map.btype}" />
 				<input type="text" name="map[btypename]" size="25" value="${form.map.btypename}" readonly="readonly"/>
+				<span class="_required">✽</span>
 			</dd>
 		</dl>
 		<dl>

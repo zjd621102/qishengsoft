@@ -138,6 +138,7 @@
 						</option>
 					</c:forEach>
 				</select>
+				<span class="_required">✽</span>
 			</dd>
 		</dl>
 		<dl>
