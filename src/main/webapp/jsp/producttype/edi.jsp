@@ -38,6 +38,7 @@
 					 expStr="style='width: 184px;'" />
 				</dd>
 			</dl>
+			<!--
 			<dl>
 				<dt>所属客户</dt>
 				<dd>
@@ -50,6 +51,7 @@
 					<input type="text" name="map[ptprintname]" size="25" maxlength="16" value="${form.map.ptprintname}" />
 				</dd>
 			</dl>
+			-->
 			<dl>
 				<dt>备注：</dt>
 				<dd>

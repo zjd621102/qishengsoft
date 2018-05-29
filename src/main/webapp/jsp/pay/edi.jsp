@@ -3,11 +3,51 @@
 
 <script type="text/javascript">
 	$().ready(function() {
+		
+		autoComManu("[name='map[manuname]']");
+		
 		setTimeout(function() {
 			changeValue();
 		}, 100);
 	});
 	 
+	// 查询供应商
+	function autoComManu(obj) {
+		setTimeout(function() {
+			$(obj).autocomplete({
+				source : function(request, response) {
+					$.post(
+						"<%=path%>/manu/getSelectByKeyword",
+						{keyword : request.term, manutypeid : ''},
+						function(data) {
+							response($.map(data, function(item) {
+			                    return {
+			                        label: item.map.manuname,
+			                        value: item.map.manuname,
+			                        manuid: item.map.manuid
+			                    }
+			                }));
+						},
+						"json"
+					);
+				},
+				minLength : 1,
+				select : function(event, ui) {
+					$("[name='map[manuid]']").val(ui.item.manuid);
+					$("[name='map[manuname]']").val(ui.item.manuname);
+				},
+				open : function() {
+					$(this).removeClass("ui-corner-all").addClass(
+							"ui-corner-top");
+				},
+				close : function() {
+					$(this).removeClass("ui-corner-top").addClass(
+							"ui-corner-all");
+				}
+			});
+		}, 100);
+	}
+	
 	/**
 	 * 修改值
 	 */
@@ -31,6 +71,7 @@
 			<dd>
 				<input type="hidden" name="map[btype]" value="${form.map.btype}" />
 				<input type="text" name="map[btypename]" size="25" value="${form.map.btypename}" readonly="readonly"/>
+				<span class="_required">✽</span>
 			</dd>
 		</dl>
 		<dl>
@@ -67,6 +108,7 @@
 			<dt>当前流程：</dt>
 			<dd>
 				<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}" expStr="style='width: 184px;' class='required'" />
+				<span class="_required">✽</span>
 			</dd>
 		</dl>
 		<dl>
@@ -76,32 +118,12 @@
 					value="${form.map.createtime}" readonly="readonly"/>
 			</dd>
 		</dl>
-		<!-- 
-		<dl>
-			<dt>银行卡卡号</dt>
-			<dd>
-				<select name="map[bankcardno]" style="width: 184px;">
-					<option value=""></option>
-					<c:forEach items="${bankcardList}" var="bankcard">
-						<option value="${bankcard.map.bankcardno}"
-						 ${bankcard.map.bankcardno==form.map.bankcardno?"selected":""}>
-							${bankcard.map.bankcardno}|${bankcard.map.bankname}
-						</option>
-					</c:forEach>
-				</select>
-			</dd>
-		</dl>
-		-->
 		<dl>
 			<dt>供应商</dt>
 			<dd>
-				<input type="hidden" name="map[manuid]" value="${form.map.manuid}"/>
-				<input type="text" name="map[manuname]" value="${form.map.manuname}"
-					suggestFields="manuid,manuname" style="width: 176px;" readonly="readonly"/>
-					<a class="btnLook" href="<%=path%>/manu/list?act=backselect&map[manutypeid]=2" lookupGroup="manuLookup"
-						width="1000" height="500">查找带回</a>
-				<a href="javascript:void(0);" class="btnClear"
-					suggestFields="manuid,manuname"></a>
+				<input type="hidden" name="map[manuid]" class="required" value="${form.map.manuid}"/>
+				<input type="text" class="required" name="map[manuname]" value="${form.map.manuname}"
+					size="25" style="width: 176px;" readonly="readonly"/>
 			</dd>
 		</dl>
 		<dl>
@@ -127,8 +149,8 @@
 						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="30px">序号</th>
-					<th width="100px"><span class="red">*</span>应付金额</th>
-					<th width="100px"><span class="red">*</span>实付金额</th>
+					<th width="100px"><span class="_required" style="margin-top: 5px;">✽</span>应付金额</th>
+					<th width="100px"><span class="_required" style="margin-top: 5px;">✽</span>实付金额</th>
 					<th>备注</th>
 				</tr>
 			</thead>

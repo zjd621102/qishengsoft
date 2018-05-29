@@ -205,13 +205,12 @@
 				<input type="text" class="required" name="map[manuname]" value="${form.map.manuname}"
 					size="25" suggestFields="manuid,manuname"/>
 				
-				<!-- 客户无值才须显示
+				<!-- 客户无值才须显示 -->
 				<c:if test="${empty form.map.manuid}">
 					<a class="btnLook" href="<%=path%>/manu/list?act=backselect&map[manutypeid]=2" lookupGroup="manuLookup"
 						width="1000" height="500">查找带回</a>
 					<a href="javascript:void(0);" class="btnClear" suggestFields="manuid,manuname"></a>
 				</c:if>
-				-->
 			</dd>
 		</dl>
 		<dl>

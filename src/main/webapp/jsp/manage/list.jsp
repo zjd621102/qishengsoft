@@ -43,6 +43,7 @@ function refreshProductMaterial() {
 	<div>
 		<button type="button" onclick="refreshProductList();">刷新产品列表</button>
 	</div>
+	<!-- 
 	<div style="margin-top: 10px;">
 		<button type="button" onclick="refreshProductMaterial();">刷新产品物资</button>
 		旧物资编码：<input type="text" id="materialno_old" size="10"/>
@@ -51,4 +52,5 @@ function refreshProductMaterial() {
 	<div style="margin-top: 10px;">
 		<button type="button" onclick="window.open('<%=path%>/fixings/fixingsList');">配件列表</button>
 	</div>
+	-->
 </div>

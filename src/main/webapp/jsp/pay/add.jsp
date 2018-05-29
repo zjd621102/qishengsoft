@@ -2,6 +2,48 @@
 <%@ include file="/jsp/pub/include.jsp"%>
 
 <script type="text/javascript">
+
+	$().ready(function() {
+		autoComManu("[name='map[manuname]']");
+	});
+
+	// 查询供应商
+	function autoComManu(obj) {
+		setTimeout(function() {
+			$(obj).autocomplete({
+				source : function(request, response) {
+					$.post(
+						"<%=path%>/manu/getSelectByKeyword",
+						{keyword : request.term, manutypeid : ''},
+						function(data) {
+							response($.map(data, function(item) {
+			                    return {
+			                        label: item.map.manuname,
+			                        value: item.map.manuname,
+			                        manuid: item.map.manuid
+			                    }
+			                }));
+						},
+						"json"
+					);
+				},
+				minLength : 1,
+				select : function(event, ui) {
+					$("[name='map[manuid]']").val(ui.item.manuid);
+					$("[name='map[manuname]']").val(ui.item.manuname);
+				},
+				open : function() {
+					$(this).removeClass("ui-corner-all").addClass(
+							"ui-corner-top");
+				},
+				close : function() {
+					$(this).removeClass("ui-corner-top").addClass(
+							"ui-corner-all");
+				}
+			});
+		}, 100);
+	}
+	
 	/**
 	 * 修改值
 	 */
@@ -33,6 +75,7 @@
 						</option>
 					</c:forEach>
 				</select>
+				<span class="_required">✽</span>
 			</dd>
 		</dl>
 		<dl>
@@ -47,30 +90,16 @@
 			<dt>当前流程：</dt>
 			<dd>
 				<st:select dictType="流程状态" name="map[currflow]" value="申请" expStr="style='width: 184px;' class='required'" />
+				<span class="_required">✽</span>
 			</dd>
 		</dl>
-		<!--
-		<dl>
-			<dt>银行卡卡号</dt>
-			<dd>
-				<select name="map[bankcardno]" style="width: 184px;">
-					<option value=""></option>
-					<c:forEach items="${bankcardList}" var="bankcard">
-						<option value="${bankcard.map.bankcardno}">
-							${bankcard.map.bankcardno}|${bankcard.map.bankname}
-						</option>
-					</c:forEach>
-				</select>
-			</dd>
-		</dl>
-		-->
 		<dl>
 			<dt>供应商</dt>
 			<dd>
-				<input type="hidden" name="map[manuid]"/>
-				<input type="text" name="map[manuname]"
-					suggestFields="manuid,manuname" style="width: 176px;" readonly="readonly"/>
-					<a class="btnLook" href="<%=path%>/manu/list?act=backselect&map[manutypeid]=2" lookupGroup="manuLookup"
+				<input type="hidden" name="map[manuid]" class="required" />
+				<input type="text" name="map[manuname]" class="required" 
+					size="25" suggestFields="manuid,manuname" style="width: 176px;"/>
+					<a class="btnLook" href="<%=path%>/manu/list?act=backselect" lookupGroup="manuLookup"
 						width="1000" height="500">查找带回</a>
 				<a href="javascript:void(0);" class="btnClear"
 					suggestFields="manuid,manuname"></a>
@@ -99,8 +128,8 @@
 						<a href="#" class="btnAdd addRow"></a>
 					</th>
 					<th width="30px">序号</th>
-					<th width="100px"><span class="red">*</span>应付金额</th>
-					<th width="100px"><span class="red">*</span>实付金额</th>
+					<th width="100px"><span class="_required" style="margin-top: 5px;">✽</span>应付金额</th>
+					<th width="100px"><span class="_required" style="margin-top: 5px;">✽</span>实付金额</th>
 					<th>备注</th>
 				</tr>
 			</thead>

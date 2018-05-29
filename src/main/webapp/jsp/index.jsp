@@ -161,7 +161,6 @@
 						<div class="accountInfo">
 							<div class="right">
 								<p>待办工作<span style="color: red;">${toDoNum}</span>项</p>
-<!-- 									<p>07月12日，星期二</p> -->
 							</div>
 							<p>
 								<span>欢迎登录岐盛软件管理系统！</span>
@@ -202,23 +201,6 @@
 								</c:if>
 							</shiro:hasPermission>
 							
-							<shiro:hasPermission name="Salary:edi">
-								<c:if test="${not empty salaryList}">
-									<div class="divider"></div>
-									<h2 style="font-size: 15px; margin: 9px 0 5px 0;">工资单待办列表</h2>
-									<c:forEach var="salary" items="${salaryList}">
-										<li>
-											<div class="unit">
-												<a href="<%=path%>/salary/edi/${salary.map.salaryid}" target="dialog"
-													rel="salary_edi" mask="true" width="1200" height="500"
-													style="font-size: 13px;">
-													${salary.map.salaryname}</a>
-											</div>
-										</li>
-									</c:forEach>
-								</c:if>
-							</shiro:hasPermission>
-							
 							<shiro:hasPermission name="Pay:edi">
 								<c:if test="${not empty payList}">
 									<div class="divider"></div>
@@ -227,7 +209,7 @@
 										<li>
 											<div class="unit">
 												<a href="<%=path%>/pay/edi/${pay.map.payid}" target="dialog"
-													rel="pay_edi" mask="true" width="1200" height="500"
+													rel="pay_edi" mask="true" width="1000" height="500"
 													style="font-size: 13px;">
 													${pay.map.manuname}【${pay.map.paydate}】</a>
 											</div>
@@ -244,7 +226,7 @@
 										<li>
 											<div class="unit">
 												<a href="<%=path%>/material/edi/${material.map.materialid}" target="dialog"
-													rel="pay_edi" mask="true" width="500" height="550"
+													rel="pay_edi" mask="true" width="850" height="450"
 													style="font-size: 13px;">
 													【${material.map.materialno}】【${material.map.materialname}】【${material.map.stock}】</a>
 											</div>

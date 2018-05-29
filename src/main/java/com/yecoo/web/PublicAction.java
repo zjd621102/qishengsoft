@@ -175,14 +175,14 @@ public class PublicAction {
 
 		if(bPay) {
 			sql = "SELECT t.payid, func_getDictName('单据类型', t.btype) btypename, t.paydate, b.manuname FROM bpay t, smanu b"
-				+ " WHERE t.manuid = b.manuid AND t.currflow <> '结束' ORDER BY t.createtime" + " LIMIT 0,8";
+				+ " WHERE t.manuid = b.manuid AND t.currflow <> '结束' ORDER BY t.createtime LIMIT 0,8";
 			payList = dbUtils.getListBySql(sql); //单据待办列表
 			toDoNum += payList.size();
 		}
 
 		if(bMaterial) {
 			sql = "SELECT a.materialid, a.materialno, a.materialname, a.stock FROM smaterial a"
-				+ " WHERE a.stock < a.alarmnum AND a.usestock = '1'";
+				+ " WHERE a.stock < a.alarmnum AND a.usestock = '1' LIMIT 0,8";
 			alarmStockList = dbUtils.getListBySql(sql); //库存报警列表
 			toDoNum += alarmStockList.size();
 		}

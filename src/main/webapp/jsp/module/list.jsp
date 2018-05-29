@@ -11,7 +11,7 @@
 					<td>
 						模块名称：
 						<input type="text" name="map[modulename]" value="${form.map.modulename}"
-						 style="width: 100px;" />
+						 style="width: 80px;" />
 					</td>
 				</tr>
 			</table>
