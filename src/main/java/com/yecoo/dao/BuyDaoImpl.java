@@ -204,10 +204,8 @@ public class BuyDaoImpl extends BaseDaoImpl {
 			String currflow = StrUtils.nullToStr(form.getValue("currflow"));
 			if(iReturn >= 1 && currflow.equals("结束")) { //流程结束
 				//计算库存
-				StringBuffer sql = new StringBuffer("UPDATE smaterial m, bbuyrow n SET m.stock = (m.stock + n.num)")
-					.append(" WHERE m.materialid = n.materialid AND m.usestock = '1' AND n.buyid = '")
-					.append(form.getValue("buyid")).append("'");
-				iReturn = dbUtils.executeSQL(conn, sql.toString());
+				String sql = changeStockSQL(String.valueOf(form.getValue("buyid")));
+				iReturn = dbUtils.executeSQL(conn, sql);
 				
 				/**
 				if(iReturn >= 1) {// 生成付款单
@@ -416,5 +414,17 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		}
 		
 		return cond.toString();
+	}
+
+	/**
+	 * 获取修改库存SQL
+	 * @param buyids
+	 * @return
+	 */
+	public String changeStockSQL(String buyids) {
+		StringBuffer sql = new StringBuffer("UPDATE smaterial m, bbuyrow n SET m.stock = (m.stock + n.num)")
+		.append(" WHERE m.materialid = n.materialid AND m.usestock = '1' AND n.buyid IN (" + buyids + ")");
+		
+		return sql.toString();
 	}
 }

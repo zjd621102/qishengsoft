@@ -34,8 +34,7 @@
 			                        unit: item.map.unit,
 			                        costprice: item.map.costprice,
 			                        realprice: item.map.realprice,
-			                        historyprice: item.map.historyprice,
-			                        numofonebox: item.map.numofonebox
+			                        historyprice: item.map.historyprice
 			                    }
 			                }));
 						},
@@ -51,12 +50,11 @@
 					row.find("[name='map[costprice]']").val(ui.item.costprice);
 					row.find("[name='map[planprice]']").val(ui.item.realprice);
 					row.find("[name='map[realprice]']").val(ui.item.realprice);
-					row.find("[name='map[numofonebox]']").val(ui.item.numofonebox);
 					if(ui.item.historyprice && (ui.item.realprice != ui.item.historyprice)) {
 						row.find("[name='map[remarkrow]']").val("上批次价格：" + ui.item.historyprice);
 					}
 					
-					changeNum(row.find("[name='map[productname]']"));// 重新计算数量、价格
+					changeValue();// 重新计算数量、价格
 				},
 				open : function() {
 					$(this).removeClass("ui-corner-all").addClass(
@@ -117,15 +115,6 @@
 	}
 	 
 	/**
-	 * 修改数量
-	 */
-	function changeNum(obj) {
-		setAllSum('boxnum', 'allnum');
-		setMultiply_sell('boxnum', 'numofonebox', 'num', obj);
-		changeValue();
-	}
-	 
-	/**
 	 * 修改值
 	 */
 	function changeValue() {
@@ -155,7 +144,6 @@
 	// 重新计算金额
 	function delRowOther() {
 		setAllSum('realsum', 'allrealsum');
-		setAllSum('boxnum', 'allnum');
 	}
 
 	/**
@@ -206,11 +194,13 @@
 					size="25" suggestFields="manuid,manuname"/>
 				
 				<!-- 客户无值才须显示 -->
+				<!-- 
 				<c:if test="${empty form.map.manuid}">
 					<a class="btnLook" href="<%=path%>/manu/list?act=backselect&map[manutypeid]=2" lookupGroup="manuLookup"
 						width="1000" height="500">查找带回</a>
 					<a href="javascript:void(0);" class="btnClear" suggestFields="manuid,manuname"></a>
 				</c:if>
+				-->
 			</dd>
 		</dl>
 		<dl>
@@ -304,7 +294,7 @@
 			   		<td>
 				   		<input type="hidden" name="map[productid]" value="" />
 						<input type="text" name="map[productno]" style="width: 90px; margin-right: 5px;" maxlength="13"
-							suggestFields="productid,productno,productname,unit,costprice,planprice,realprice,num,boxnum,numofonebox,realsum"/>
+							suggestFields="productid,productno,productname,unit,costprice,planprice,realprice,num,realsum"/>
 						<!-- 
 						<a class="btnLook" href="<%=path%>/product/tree" lookupGroup="lookup" width="1200"></a>
 						-->
@@ -343,14 +333,6 @@
 						<input type="text" name="map[discount]" style="width: 45px" maxlength="12"
 							class="number required" value="1" onchange="setMultiply_sell('realprice', 'num', 'realsum');
 							setAllSum('realsum', 'allrealsum');"/>
-			   		</td>
-			   		<td style="display: none;">
-						<input type="text" name="map[boxnum]" style="width: 45px;" maxlength="12"
-							class="number" value="0" onchange="changeNum(this);"/>
-			   		</td>
-			   		<td style="display: none;">
-						<input type="text" name="map[numofonebox]" style="width: 45px;" maxlength="12"
-							class="digits" value="0" onchange="changeNum(this);"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realsum]" style="width: 65px;" maxlength="12"

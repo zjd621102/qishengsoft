@@ -189,7 +189,12 @@ public class BuyAction {
 		String buyids = StrUtils.ArrayToStr(ids, "','");
 		
 		String sql = "UPDATE bbuy t SET t.currflow = '结束' WHERE t.buyid IN ('" + buyids + "')";
-		int iReturn = dbUtils.executeSQL(sql);
+		String changeStockSQL = new BuyDaoImpl().changeStockSQL(buyids);
+		String[] sqls = new String[2];
+		sqls[0] = sql;
+		sqls[1] = changeStockSQL;
+		
+		int iReturn = dbUtils.executeSQLs(sqls);
 
 		if (iReturn >= 0) {
 			ajaxObject = new AjaxObject("结束成功！", "buy_list", "");
