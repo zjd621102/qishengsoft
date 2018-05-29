@@ -1,4 +1,9 @@
 
+
+/**2018.05.29**/
+ALTER TABLE `bsell` ADD COLUMN `alldiscount`  double(5,2) NULL COMMENT '折扣' AFTER `createtime`;
+ALTER TABLE `bsellrow` ADD COLUMN `discount`  double(5,2) NULL COMMENT '折扣' AFTER `num`;
+
 /**2016.07.31**/
 CREATE TABLE `sfixings` (
   `fixingsid` int(6) NOT NULL AUTO_INCREMENT,

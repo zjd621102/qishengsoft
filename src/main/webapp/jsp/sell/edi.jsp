@@ -126,7 +126,7 @@
 	 */
 	function changeNum(obj) {
 		setAllSum('boxnum', 'allnum');
-		setMultiply('boxnum', 'numofonebox', 'num', obj);
+		setMultiply_sell('boxnum', 'numofonebox', 'num', obj);
 		changeValue();
 	}
 	 
@@ -134,7 +134,7 @@
 	 * 修改值
 	 */
 	function changeValue() {
-		setMultiply('realprice', 'num', 'realsum');
+		setMultiply_sell('realprice', 'num', 'realsum');
 		setAllSum('realsum', 'allrealsum');
 		
 		$("input[name*='map[realprice]']").each(function() {
@@ -187,6 +187,34 @@
 				}
 			}
 		);
+	}
+
+	/**
+	 * 重写方法 - 赋值相乘的值
+	 * @param name1 相乘字段
+	 * @param name2 相乘字段
+	 * @param name3 赋值字段
+	 * @param obj 	所在行的对象
+	 */
+	function setMultiply_sell(name1, name2, name3) {
+		$("input[name*='map[" + name1 + "]']").each(function() {
+			var row = $(this).parents("tr:first");
+			var realprice = row.find("[name*='map[" + name1 + "]']").val();
+			var num = row.find("[name*='map[" + name2 + "]']").val();
+			var discount = row.find("[name*='map[discount]']").val();
+			var realsum = (multiply(realprice, num)*discount).toFixed(2);// 四舍五入为2位小数
+			row.find("[name*='map[" + name3 + "]']").val(realsum);
+		});
+	}
+	
+	/**
+	 * 修改折扣
+	 */
+	function changeDiscount() {
+		var changeDiscount = $("#alldiscount").val();
+		$("[name*='map[discount]']").val(changeDiscount);
+		setMultiply_sell('realprice', 'num', 'realsum');
+		setAllSum('realsum', 'allrealsum');
 	}
 </script>
 
@@ -279,8 +307,9 @@
 					<th width="60px" style="display: ${showProfit};">利润</th>
 					-->
 					<th width="60px">数量</th>
-					<th width="60px">件数</th>
-					<th width="60px">一件数量</th>
+					<th width="60px">折扣</th>
+					<th width="60px" style="display: none;">件数</th>
+					<th width="60px" style="display: none;">一件数量</th>
 					<th width="80px">实付总价</th>
 					<th width="50px">排序</th>
 					<th>备注</th>
@@ -295,8 +324,8 @@
 					<!--
  					<td></td>
  					-->
-					<td></td>
-					<td></td>
+					<td style="display: none;"></td>
+					<td style="display: none;"></td>
 					<!--
 					<td style="display: ${showProfit};"></td>
 					<td style="display: ${showProfit};">
@@ -304,14 +333,13 @@
 							value="0.00" readonly="readonly"/>
 					</td>
 					-->
-					<td style="font-size: 13px; font-weight: bold; color: red;">
-						合计：
-					</td>
-					<td>
-						<input type="text" name="map[allnum]" style="width: 45px;" class="digits"
-							value="0" readonly="readonly"/>
-					</td>
 					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<input type="text" id="alldiscount" name="map[alldiscount]" style="width: 45px"
+							class="number required" value="${form.map.alldiscount}" onchange="changeDiscount();"/>
+					</td>
 					<td>
 						<input type="text" name="map[allrealsum]" style="width: 65px;" class="number"
 							value="0.00" readonly="readonly"/>
@@ -367,10 +395,15 @@
 							class="digits required" value="0" onchange="changeValue();"/>
 			   		</td>
 			   		<td>
+						<input type="text" name="map[discount]" style="width: 45px" maxlength="12"
+							class="number required" value="1" onchange="setMultiply_sell('realprice', 'num', 'realsum');
+							setAllSum('realsum', 'allrealsum');"/>
+			   		</td>
+			   		<td style="display: none;">
 						<input type="text" name="map[boxnum]" style="width: 45px;" maxlength="12"
 							class="number" value="0" onchange="changeNum(this);"/>
 			   		</td>
-			   		<td>
+			   		<td style="display: none;">
 						<input type="text" name="map[numofonebox]" style="width: 45px;" maxlength="12"
 							class="digits" value="0" onchange="changeNum(this);"/>
 			   		</td>
@@ -436,10 +469,16 @@
 								class="digits required" value="${bean.map.num}" onchange="changeValue();"/>
 				   		</td>
 				   		<td>
+							<input type="text" name="map[discount]" style="width: 45px" maxlength="12"
+								class="number required" value="${bean.map.discount}"
+								onchange="setMultiply_sell('realprice', 'num', 'realsum');
+								setAllSum('realsum', 'allrealsum');"/>
+				   		</td>
+				   		<td style="display: none;">
 							<input type="text" name="map[boxnum]" style="width: 45px;" maxlength="12"
 								class="number" value="${bean.map.boxnum}" onchange="changeNum(this);"/>
 				   		</td>
-				   		<td>
+				   		<td style="display: none;">
 							<input type="text" name="map[numofonebox]" style="width: 45px;" maxlength="12"
 								class="digits" value="${bean.map.numofonebox}" onchange="changeNum(this);"/>
 				   		</td>
@@ -464,40 +503,9 @@
 	
 	<div class="formBar">
 		<ul>
-			<!-- 
-			<li>
-				<div class="buttonActive">
-					<div class="buttonContent">
-						<button type="button" class="btnAdd addRow">新增</button>
-					</div>
-				</div>
-			</li>
-			-->
 			<c:if test="${form.map.currflow != '结束'}">
 			<shiro:hasPermission name="Sell:edi">
 			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
-			<li><div class="button"><div class="buttonContent"><button type="button" onclick="addBuy()">生成采购单</button></div></div></li>
-			<li>
-				<div class="button">
-					<div class="buttonContent">
-						<button type="button" onclick="window.open('<%=path%>/sell/edi/${form.map.sellid}?act=printBuy');">采购单</button>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="button">
-					<div class="buttonContent">
-						<button type="button" onclick="window.open('<%=path%>/sell/edi/${form.map.sellid}?act=printDo');">生产单</button>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="button">
-					<div class="buttonContent">
-						<button type="button" onclick="window.open('<%=path%>/sell/edi/${form.map.sellid}?act=printBox');">箱子</button>
-					</div>
-				</div>
-			</li>
 			</shiro:hasPermission>
 			</c:if>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>

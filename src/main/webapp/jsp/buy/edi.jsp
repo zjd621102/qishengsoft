@@ -200,19 +200,21 @@
 					</th>
 					<th width="30px">序号</th>
 					<th width="82px">物资编码</th>
-					<th width="120px">物资名称</th>
+					<th width="200px">物资名称</th>
+					<!--
 					<th width="60px">计量单位</th>
-					<th width="75px">单价</th>
-					<th width="75px">数量</th>
-					<th width="75px">折扣</th>
-					<th width="85px">总价</th>
-					<th width="90px">一件数量</th>
-					<th width="120px">供应商名称</th>
+					-->
+					<th width="65px">单价</th>
+					<th width="65px">数量</th>
+					<th width="60px">折扣</th>
+					<th width="75px">总价</th>
+					<th width="55px">一件数量</th>
+					<th width="100px">供应商名称</th>
 					<!-- 
 					<th width="7%">联系人</th>
 					<th width="8%">联系电话</th>
 					-->
-					<th width="50px">排序</th>
+					<th width="40px">排序</th>
 					<th>备注</th>
 				</tr>
 			</thead>
@@ -222,15 +224,17 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<!--
 					<td></td>
+					-->
 					<td></td>
 					<td></td>
 					<td>
-						<input type="text" id="alldiscount" name="map[alldiscount]" style="width: 60px"
+						<input type="text" id="alldiscount" name="map[alldiscount]" style="width: 45px"
 							class="number required" value="${form.map.alldiscount}" onchange="changeDiscount();"/>
 					</td>
 					<td>
-						<input type="text" name="map[allsum]" style="width: 69px;" class="number"
+						<input type="text" name="map[allsum]" style="width: 59px;" class="number"
 							value="" readonly="readonly"/>
 					</td>
 					<td></td>
@@ -260,37 +264,39 @@
 			   		 	
 			   		</td>
 			   		<td>
-						<input type="text" name="map[materialname]" style="width: 100px;" maxlength="32" class="required"/>
+						<input type="text" name="map[materialname]" style="width: 175px;" maxlength="32" class="required"/>
 			   		</td>
+			   		<!--
 			   		<td>
 			   			<st:select dictType="计量单位" name="map[unit]" expStr="style='width: 100%;'" />
 			   		</td>
+			   		-->
 			   		<td>
-						<input type="text" name="map[price]" style="width: 60px" maxlength="12"
+						<input type="text" name="map[price]" style="width: 50px" maxlength="12"
 							class="number required" value="0.00" onchange="setMultiply_buy('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[num]" style="width: 60px" maxlength="12"
+						<input type="text" name="map[num]" style="width: 50px" maxlength="12"
 							class="number required" value="0.00" onchange="setMultiply_buy('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[discount]" style="width: 60px" maxlength="12"
+						<input type="text" name="map[discount]" style="width: 45px" maxlength="12"
 							class="number required" value="1" onchange="setMultiply_buy('price', 'num', 'sum');
 							setAllSum('sum', 'allsum');"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[sum]" style="width: 69px" maxlength="12"
+						<input type="text" name="map[sum]" style="width: 59px" maxlength="12"
 							class="number" value="0.00" readonly="readonly"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[numofonebox]" style="width: 74px;" maxlength="12"
+						<input type="text" name="map[numofonebox]" style="width: 40px;" maxlength="12"
 							value="" readonly="readonly" />
 			   		</td>
 			   		<td>
 						<input type="hidden" name="map[manuid]"/>
-						<input type="text" name="map[manuname]" style="width: 101px;" readonly="readonly"/>
+						<input type="text" name="map[manuname]" style="width: 61px;" readonly="readonly"/>
 			   		</td>
 			   		<!-- 
 			   		<td>
@@ -301,11 +307,11 @@
 			   		</td>
 			   		-->
 			   		<td>
-						<input type="text" name="map[sort]" style="width: 37px;" maxlength="2" class="number"
+						<input type="text" name="map[sort]" style="width: 27px;" maxlength="2" class="number"
 							value=""/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 71px;" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" style="width: 95%" maxlength="256"/>
 			   		</td>
 			   	</tr>
 				<c:forEach items="${buyrowList}" var="bean" varStatus="vs">
@@ -328,42 +334,44 @@
 				   			
 				   		</td>
 				   		<td>
-							<input type="text" name="map[materialname]" style="width: 100px;" maxlength="32"
+							<input type="text" name="map[materialname]" style="width: 175px;" maxlength="32"
 								value="${bean.map.materialname}" class="required"/>
 				   		</td>
+				   		<!--
 				   		<td>
 							<st:select dictType="计量单位" name="map[unit]" value="${bean.map.unit}" expStr="style='width: 100%;'" />
 				   		</td>
+				   		-->
 				   		<td>
-							<input type="text" name="map[price]" style="width: 60px;" maxlength="12"
+							<input type="text" name="map[price]" style="width: 50px;" maxlength="12"
 								class="number required" value="${bean.map.price}"
 								onchange="setMultiply_buy('price', 'num', 'sum');
 								setAllSum('sum', 'allsum');"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[num]" style="width: 60px;" maxlength="12"
+							<input type="text" name="map[num]" style="width: 50px;" maxlength="12"
 								class="number required" value="${bean.map.num}"
 								onchange="setMultiply_buy('price', 'num', 'sum');
 								setAllSum('sum', 'allsum');"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[discount]" style="width: 60px" maxlength="12"
+							<input type="text" name="map[discount]" style="width: 45px" maxlength="12"
 								class="number required" value="${bean.map.discount}"
 								onchange="setMultiply_buy('price', 'num', 'sum');
 								setAllSum('sum', 'allsum');"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[sum]" style="width: 69px;" maxlength="12"
+							<input type="text" name="map[sum]" style="width: 59px;" maxlength="12"
 								class="number" value="${bean.map.sum}" readonly="readonly"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[numofonebox]" style="width: 74px;" maxlength="12"
+							<input type="text" name="map[numofonebox]" style="width: 40px;" maxlength="12"
 								value="${bean.map.numofonebox}" readonly="readonly" />
 				   		</td>
 				   		<td>
 							<input type="hidden" name="map[manuid]" value="${bean.map.manuid}"/>
 							<input type="text" name="map[manuname]" value="${bean.map.manuname}"
-								style="width: 101px;" readonly="readonly"/>
+								style="width: 61px;" readonly="readonly"/>
 				   		</td>
 				   		<!--
 				   		<td>
@@ -376,11 +384,11 @@
 				   		</td>
 				   		-->
 				   		<td>
-							<input type="text" name="map[sort]" style="width: 37px;" maxlength="2"
+							<input type="text" name="map[sort]" style="width: 27px;" maxlength="2"
 								class="number" value="${bean.map.sort}"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[remarkrow]" style="width: 71px;" maxlength="256"
+							<input type="text" name="map[remarkrow]" style="width: 95%" maxlength="256"
 								value="${bean.map.remarkrow}"/>
 				   		</td>
 				   	</tr>

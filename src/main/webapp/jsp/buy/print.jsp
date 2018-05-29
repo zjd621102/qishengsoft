@@ -65,16 +65,17 @@
 				<td width="120px">供应商名称</td>
 				<td width="35px">序号</td>
 				<td width="70px">物资编码</td>
-				<td width="150px">物资名称</td>
+				<td width="230px">物资名称</td>
 				<td width="70px">数量</td>
 				<td width="70px">单价</td>
+				<th width="60px">折扣</th>
 				<td width="80px">金额</td>
 				<td>备注</td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td colspan="4"></td>
+				<td colspan="6"></td>
 				<td>
 					合计
 				</td>
@@ -109,6 +110,9 @@
 			   		</td>
 			   		<td width="60px">
 			   			<span>${bean.map.price}</span>
+			   		</td>
+			   		<td width="60px">
+			   			<span>${bean.map.discount}</span>
 			   		</td>
 			   		<td width="60px">
 						<span>${bean.map.sum}</span>
