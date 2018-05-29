@@ -416,7 +416,7 @@
 							value="5"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 155px;" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" style="width: 240px;" maxlength="256"/>
 			   		</td>
 			   	</tr>
 				<c:forEach items="${sellrowList}" var="bean" varStatus="vs">
@@ -491,7 +491,7 @@
 								class="number" value="${bean.map.sort}"/>
 				   		</td>
 				   		<td>
-							<input type="text" name="map[remarkrow]" style="width: 155px;" maxlength="256"
+							<input type="text" name="map[remarkrow]" style="width: 240px;" maxlength="256"
 								value="${bean.map.remarkrow}"/>
 				   		</td>
 				   	</tr>

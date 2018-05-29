@@ -1,3 +1,7 @@
+li {
+	list-style:none;
+}
+
 .margin10px {
 	margin: 10px;
 }
@@ -22,4 +26,14 @@ a.btnClear {
 .ui-autocomplete-loading {
 	background: white url("../images/ui-anim_basic_16x16.gif") right center
 		no-repeat;
+}
+
+/** ±ØÌî×Ö¶Î±ê¼Ç **/
+._required {
+	display: block;
+	font-size: 6px;
+	font-weight: bold;
+	color: red;
+	margin-top: 3px;
+	float: left;
 }

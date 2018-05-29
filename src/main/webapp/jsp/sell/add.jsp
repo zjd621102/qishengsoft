@@ -361,7 +361,7 @@
 							value="5"/>
 			   		</td>
 			   		<td>
-						<input type="text" name="map[remarkrow]" style="width: 155px;" maxlength="256"/>
+						<input type="text" name="map[remarkrow]" style="width: 240px;" maxlength="256"/>
 			   		</td>
 			   	</tr>
 			   	<tr id="IDEndRow"></tr>
