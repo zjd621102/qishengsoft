@@ -423,7 +423,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 	 */
 	public String changeStockSQL(String buyids) {
 		StringBuffer sql = new StringBuffer("UPDATE smaterial m, bbuyrow n SET m.stock = (m.stock + n.num)")
-		.append(" WHERE m.materialid = n.materialid AND m.usestock = '1' AND n.buyid IN (" + buyids + ")");
+		.append(" WHERE m.materialid = n.materialid AND m.usestock = '1' AND n.buyid IN ('" + buyids + "')");
 		
 		return sql.toString();
 	}
