@@ -109,6 +109,13 @@ public class SellAction {
 		
 		String act = StrUtils.nullToStr(request.getParameter("act"));
 		if(act.equals("print")) {
+			
+			ParameterDaoImpl parameterDaoImpl = new ParameterDaoImpl();
+			String storeAddress = parameterDaoImpl.getParameterName("店面地址");
+			String storePhone = parameterDaoImpl.getParameterName("店面电话");
+			form.setValue("storeAddress", storeAddress);
+			form.setValue("storePhone", storePhone);
+			
 			String currflow = StrUtils.nullToStr(form.getValue("currflow"));
 			if(currflow.equals("发货")) {
 				String manuid = StrUtils.nullToStr(form.getValue("manuid"));

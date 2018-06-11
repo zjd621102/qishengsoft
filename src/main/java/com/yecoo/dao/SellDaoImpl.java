@@ -159,8 +159,9 @@ public class SellDaoImpl extends BaseDaoImpl {
 	 */
 	public CodeTableForm getSellById(int sellid, HttpServletRequest request) {
 		
-		String sql = "SELECT a.*, func_getUserName(a.maker) makername, func_getManuName(a.manuid) manuname"
-				+ " FROM bsell a WHERE a.sellid = '" + sellid + "'";
+		String sql = "SELECT a.*, func_getUserName(a.maker) makername, func_getManuName(a.manuid) manuname,"
+				+ " b.address, b.manuphone FROM bsell a, smanu b WHERE a.manuid = b.manuid AND a.sellid = '"
+				+ sellid + "'";
 		CodeTableForm codeTableForm = dbUtils.getFormBySql(sql);
 		
 		sql = "SELECT a.*, b.productno, func_getDictName('计量单位', a.unit) unitname,"

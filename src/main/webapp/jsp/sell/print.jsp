@@ -5,6 +5,26 @@
 <script type="text/javascript" src="<%=path%>/js/jquery.jqprint-0.3.js"></script>
 <script type="text/javascript" src="<%=path%>/js/print.js"></script>
 <script type="text/javascript" src="<%=path%>/js/public.js"></script>
+<style>
+	body {
+		color: black;
+	}
+	
+	table span {
+		color: black;
+	}
+	
+	table,table td,table th {
+		border: 0;
+	}
+	.rowtable table, .rowtable td, .rowtable table th {
+		border: 1px solid black;
+	}
+	
+	thead td {
+		background-color: Gainsboro;
+	}
+</style>
 <script type="text/javascript">
 	$().ready(function() {
 		setTimeout(function() {
@@ -22,38 +42,37 @@
 <br /><br />
  -->
 <div id="printdiv">
-	<h2>销售单</h2>
-	<table style="width: 100%;">
+	<h1 style="text-align:center;">牧野（福建）集成卫浴发展有限公司</h1>
+	<h2 style="text-align:center;">销售清单</h2>
+	<table style="width: 100%; border: 0 solid black;">
 		<tr>
-			<td>销售编号：
-				<span>${form.map.sellno}</span>
-			</td>
-			<td>发货日期：
-				<span>${form.map.selldate}</span>
-			</td>
-			<td>客户名称：
-				<span>${form.map.manuname}</span>
-			</td>
-		</tr>
-		<tr>
-			<td>当前流程：
-				<span>${form.map.currflow}</span>
-			</td>
 			<td>制&#8194;单&#8194;人：
 				<span>${form.map.makername}</span>
 			</td>
-			<td>创建日期：
-				<span>${form.map.createtime}</span>
+			<td>下单日期：
+				<span>${form.map.selldate}</span>
+			</td>
+			<td>单据编号：
+				<span>${form.map.sellno}</span>
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3">备&nbsp;&nbsp;注：
+			<td>客&#12288;&#12288;户：
+				<span>${form.map.manuname}</span>
+			</td>
+			<td>客户地址：
+				<span>${form.map.address}</span>
+			</td>
+			<td>客户手机：
+				<span>${form.map.manuphone}</span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">备&#12288;&#12288;注：
 				<span>${form.map.remark}</span>
 			</td>
 		</tr>
 	</table>
-
-	<h2>销售清单（5天内未收到货请来电）</h2>
 
 	<table class="rowtable">
 		<thead>
@@ -115,7 +134,7 @@
 			<tr>
 				<td colspan="5"></td>
 				<td style="width: 75px;">
-					本批合计
+					合计
 				</td>
 				<td>
 					<span id="allrealsumSpan">${form.map.allrealsum}</span>
@@ -146,5 +165,17 @@
 				</tr>
 			</c:if>
 	   	</tbody>
+	</table>
+	<table>
+		<tr>
+			<td colspan="8" style="border: 0 solid black; text-align: left;">
+				地址：${form.map.storeAddress}
+			</td>
+		</tr>
+		<tr>
+			<td colspan="8" style="border: 0 solid black; text-align: left;">
+				手机：${form.map.storePhone}
+			</td>
+		</tr>
 	</table>
 </div>

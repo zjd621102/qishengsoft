@@ -227,7 +227,7 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>发货日期：</dt>
+			<dt>下单日期：</dt>
 			<dd>
 				<input type="text" name="map[selldate]" class="required date" size="25"
 					value="${form.map.selldate}" readonly="readonly"/>

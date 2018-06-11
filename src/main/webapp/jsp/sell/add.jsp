@@ -179,7 +179,7 @@
  onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
 	<div class="pageFormContent" layoutH="42">
 		<dl>
-			<dt>发货日期：</dt>
+			<dt>下单日期：</dt>
 			<dd>
 				<input type="text" name="map[selldate]" class="required date" size="25"
 					value="${form.map.selldate}" readonly="readonly"/>
