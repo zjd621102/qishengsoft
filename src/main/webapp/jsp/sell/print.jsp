@@ -87,6 +87,7 @@
 				<td style="width: 50px;">数量</td>
 				<td style="width: 70px;">单价</td>
 				<td style="width: 75px;">折扣</td>
+				<td style="width: 70px;">折后单价</td>
 				<td style="width: 75px;">金额</td>
 				<td>备注</td>
 			</tr>
@@ -117,10 +118,13 @@
 						<span>${bean.map.num}</span>
 			   		</td>
 			   		<td style="width: 70px;">
-						<span>${bean.map.realprice}</span>
+						<span>${bean.map.planprice}</span>
 			   		</td>
 			   		<td style="width: 75px;">
 						<span>${bean.map.discount}</span>
+			   		</td>
+			   		<td style="width: 70px;">
+						<span>${bean.map.realprice}</span>
 			   		</td>
 			   		<td style="width: 75px;">
 						<span>${bean.map.realsum}</span>
@@ -132,7 +136,7 @@
 			   	</tr>
 		   	</c:forEach>
 			<tr>
-				<td colspan="5"></td>
+				<td colspan="6"></td>
 				<td style="width: 75px;">
 					合计
 				</td>
@@ -144,7 +148,7 @@
 			</tr>
 			<c:if test="${form.map.currflow == '结束' && historyToPaysum != 0.0}">
 				<tr>
-					<td colspan="5"></td>
+					<td colspan="6"></td>
 					<td>
 						其他待付
 					</td>
@@ -154,7 +158,7 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td colspan="5"></td>
+					<td colspan="6"></td>
 					<td>
 						总计待付
 					</td>

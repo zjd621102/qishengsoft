@@ -188,10 +188,15 @@
 	function setMultiply_sell(name1, name2, name3) {
 		$("input[name*='map[" + name1 + "]']").each(function() {
 			var row = $(this).parents("tr:first");
-			var realprice = row.find("[name*='map[" + name1 + "]']").val();
-			var num = row.find("[name*='map[" + name2 + "]']").val();
+			
+			var planprice = row.find("[name*='map[planprice]']").val();
 			var discount = row.find("[name*='map[discount]']").val();
-			var realsum = (multiply(realprice, num)*discount).toFixed(2);// 四舍五入为2位小数
+
+			var realprice = planprice*discount;
+			row.find("[name*='map[" + name1 + "]']").val(realprice);
+			
+			var num = row.find("[name*='map[" + name2 + "]']").val();
+			var realsum = (multiply(realprice, num)).toFixed(2);// 四舍五入为2位小数
 			row.find("[name*='map[" + name3 + "]']").val(realsum);
 		});
 	}
