@@ -87,7 +87,7 @@
 				<td style="width: 50px;">数量</td>
 				<td style="width: 70px;">单价</td>
 				<td style="width: 75px;">折扣</td>
-				<td style="width: 70px;">折后单价</td>
+				<td style="width: 70px;">实付单价</td>
 				<td style="width: 75px;">金额</td>
 				<td>备注</td>
 			</tr>
