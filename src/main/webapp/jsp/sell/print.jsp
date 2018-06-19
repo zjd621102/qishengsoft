@@ -42,7 +42,7 @@
 <br /><br />
  -->
 <div id="printdiv">
-	<h1 style="text-align:center;">牧野（福建）集成卫浴发展有限公司</h1>
+	<h1 style="text-align:center;">${form.map.companyName}</h1>
 	<h2 style="text-align:center;">销售清单</h2>
 	<table style="width: 100%; border: 0 solid black;">
 		<tr>

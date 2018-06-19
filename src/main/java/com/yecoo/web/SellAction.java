@@ -111,8 +111,10 @@ public class SellAction {
 		if(act.equals("print")) {
 			
 			ParameterDaoImpl parameterDaoImpl = new ParameterDaoImpl();
+			String companyName = parameterDaoImpl.getParameterName("公司名称");
 			String storeAddress = parameterDaoImpl.getParameterName("店面地址");
 			String storePhone = parameterDaoImpl.getParameterName("店面电话");
+			form.setValue("companyName", companyName);
 			form.setValue("storeAddress", storeAddress);
 			form.setValue("storePhone", storePhone);
 			
