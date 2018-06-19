@@ -147,7 +147,7 @@
 		$("[name*='map[allprofit]']").val(allprofit);
 	}
 	
-	// 重新计算金额
+	// 删除行
 	function delRowOther() {
 		setAllSum('realsum', 'allrealsum');
 	}
@@ -192,7 +192,7 @@
 			var planprice = row.find("[name*='map[planprice]']").val();
 			var discount = row.find("[name*='map[discount]']").val();
 
-			var realprice = planprice*discount;
+			var realprice = Math.round(planprice * discount * 100) / 100;
 			row.find("[name*='map[" + name1 + "]']").val(realprice);
 			
 			var num = row.find("[name*='map[" + name2 + "]']").val();
