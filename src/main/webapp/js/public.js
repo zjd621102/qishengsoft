@@ -76,9 +76,14 @@ function setMultiply(name1, name2, name3, obj) {
  * @param name1 相加的字段
  * @param name2 赋值字段
  */
-function setAllSum(name1, name2) {
+function setAllSum(name1, name2, name3) {
+	
+	var nameid = "";
+	if(typeof(name3) != "undefined") {
+		nameid = "#" +　name3 + " ";
+	}
 	var allsum = 0.00;
-	$("input[name*='map[" + name1 + "]']").each(function(){
+	$(nameid + "input[name*='map[" + name1 + "]']").each(function(){
 		allsum += $(this).val()*1;
 	});
 	allsum = Math.round(allsum * 100) / 100;

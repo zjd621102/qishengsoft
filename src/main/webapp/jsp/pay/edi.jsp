@@ -57,7 +57,7 @@
 	}
 </script>
 
-<form method="post" action="<%=path%>/pay/edi" class="required-validate pageForm"
+<form method="post" action="<%=path%>/pay/edi" class="required-validate pageForm" id="payJspFormId"
 	onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
 	<div class="pageFormContent" layoutH="42">
 		<dl>

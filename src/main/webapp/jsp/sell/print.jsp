@@ -28,9 +28,9 @@
 <script type="text/javascript">
 	$().ready(function() {
 		setTimeout(function() {
-			setAllSum('boxnum', 'allboxnum');
+			setAllSum('boxnum', 'allboxnum', 'sellPrintTabId');
 			$("#allboxnumSpan").html($("[name='map[allboxnum]']").val());
-			setAllSum('realsum', 'allrealsum');
+			setAllSum('realsum', 'allrealsum', 'sellPrintTabId');
 			$("#allrealsumSpan").html($("[name='map[allrealsum]']").val());
 		}, 100);
 	});
@@ -74,7 +74,7 @@
 		</tr>
 	</table>
 
-	<table class="rowtable">
+	<table class="rowtable" id="sellPrintTabId">
 		<thead>
 			<tr>
 				<td style="width: 35px;">序号</td>
@@ -146,6 +146,7 @@
 				</td>
 				<td></td>
 			</tr>
+			<!-- 
 			<c:if test="${form.map.currflow == '结束' && historyToPaysum != 0.0}">
 				<tr>
 					<td colspan="6"></td>
@@ -168,6 +169,7 @@
 					<td></td>
 				</tr>
 			</c:if>
+			-->
 	   	</tbody>
 	</table>
 	<table>

@@ -8,8 +8,8 @@
 <script type="text/javascript">
 	$().ready(function() {
 		setTimeout(function() {
-			setAllSum('plansum', 'allplansum');
-			setAllSum('realsum', 'allrealsum');
+			setAllSum('plansum', 'allplansum', 'payPrintTabId');
+			setAllSum('realsum', 'allrealsum', 'payPrintTabId');
 			$("#allplansumSpan").html($("[name='map[allplansum]']").val());
 			$("#allrealsumSpan").html($("[name='map[allrealsum]']").val());
 		}, 100);
@@ -58,7 +58,7 @@
 
 	<h2>发票清单</h2>
 
-	<table class="rowtable">
+	<table class="rowtable" id="payPrintTabId">
 		<thead>
 			<tr>
 				<td width="50px">序号</td>

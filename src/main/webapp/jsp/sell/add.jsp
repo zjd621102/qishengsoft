@@ -119,7 +119,7 @@
 	 */
 	function changeValue() {
 		setMultiply_sell('realprice', 'num', 'realsum');
-		setAllSum('realsum', 'allrealsum');
+		setAllSum('realsum', 'allrealsum', 'sellJspFormId');
 		
 		$("input[name*='map[realprice]']").each(function() {
 			var row = $(this).parents("tr:first");
@@ -143,7 +143,7 @@
 	
 	// 删除行
 	function delRowOther() {
-		setAllSum('realsum', 'allrealsum');
+		setAllSum('realsum', 'allrealsum', 'sellJspFormId');
 	}
 
 	/**
@@ -176,11 +176,11 @@
 		var changeDiscount = $("#alldiscount").val();
 		$("[name*='map[discount]']").val(changeDiscount);
 		setMultiply_sell('realprice', 'num', 'realsum');
-		setAllSum('realsum', 'allrealsum');
+		setAllSum('realsum', 'allrealsum', 'sellJspFormId');
 	}
 </script>
 
-<form method="post" action="<%=path%>/sell/add" class="required-validate pageForm"
+<form id="sellJspFormId" method="post" action="<%=path%>/sell/add" class="required-validate pageForm"
  onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
 	<div class="pageFormContent" layoutH="42">
 		<dl>
@@ -337,7 +337,7 @@
 			   		<td>
 						<input type="text" name="map[discount]" style="width: 45px" maxlength="12"
 							class="number required" value="1" onchange="setMultiply_sell('realprice', 'num', 'realsum');
-							setAllSum('realsum', 'allrealsum');"/>
+							setAllSum('realsum', 'allrealsum', 'sellJspFormId');"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realsum]" style="width: 65px;" maxlength="12"
