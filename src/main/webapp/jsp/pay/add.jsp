@@ -48,12 +48,12 @@
 	 * 修改值
 	 */
 	function changeValue() {
-		setAllSum('plansum', 'allplansum');
-		setAllSum('realsum', 'allrealsum');
+		setAllSum('plansum', 'allplansum', 'payJspFormId');
+		setAllSum('realsum', 'allrealsum', 'payJspFormId');
 	}
 </script>
 
-<form method="post" action="<%=path%>/pay/add" class="required-validate pageForm"
+<form method="post" action="<%=path%>/pay/add" class="required-validate pageForm" id="payJspFormId"
  onsubmit="return checkFormSubmit() && validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
 	<div class="pageFormContent" layoutH="42">
 		<dl>
@@ -158,12 +158,12 @@
 			   		<td>
 						<input type="text" name="map[plansum]" style="width: 85px" maxlength="12"
 							class="number" value="0.00"
-							onchange="setAllSum('plansum', 'allplansum');"/>
+							onchange="changeValue();"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realsum]" style="width: 85px" maxlength="12"
 							class="number" value="0.00"
-							onchange="setAllSum('realsum', 'allrealsum');"/>
+							onchange="changeValue();"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[remarkrow]" style="width: 478px" maxlength="256"/>

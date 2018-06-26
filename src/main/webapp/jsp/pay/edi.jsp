@@ -52,8 +52,8 @@
 	 * 修改值
 	 */
 	function changeValue() {
-		setAllSum('plansum', 'allplansum');
-		setAllSum('realsum', 'allrealsum');
+		setAllSum('plansum', 'allplansum', 'payJspFormId');
+		setAllSum('realsum', 'allrealsum', 'payJspFormId');
 	}
 </script>
 
