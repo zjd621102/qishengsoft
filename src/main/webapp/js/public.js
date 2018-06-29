@@ -75,6 +75,7 @@ function setMultiply(name1, name2, name3, obj) {
  * 相加所有值
  * @param name1 相加的字段
  * @param name2 赋值字段
+ * @param name3 范围ID
  */
 function setAllSum(name1, name2, name3) {
 	
@@ -88,7 +89,7 @@ function setAllSum(name1, name2, name3) {
 	});
 	allsum = Math.round(allsum * 100) / 100;
 	if(name2) {
-		$("input[name*='map[" + name2 + "]']").val(allsum);
+		$(nameid + "input[name*='map[" + name2 + "]']").val(allsum);
 	}
 	return allsum;
 }

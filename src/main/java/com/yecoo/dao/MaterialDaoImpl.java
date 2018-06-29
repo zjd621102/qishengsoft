@@ -78,9 +78,9 @@ public class MaterialDaoImpl extends BaseDaoImpl {
 			cond.append(" AND t.statusid = '").append(statusid).append("'");
 		}
 		if(stockalarm.equals("1")) {// 库存报警 - 是
-			cond.append(" AND (t.usestock = '1' AND t.stock < t.alarmnum)");
+			cond.append(" AND (t.usestock = '1' AND t.stock <= t.alarmnum)");
 		} else if(stockalarm.equals("0")) {// 库存报警 - 否
-			cond.append(" AND (t.usestock <> '1' OR t.stock >= t.alarmnum)");
+			cond.append(" AND (t.usestock <> '1' OR t.stock > t.alarmnum)");
 		}
 		if(!mark.equals("")) {
 			cond.append(" AND t.mark LIKE '%").append(mark).append("%'");

@@ -182,7 +182,7 @@ public class PublicAction {
 
 		if(bMaterial) {
 			sql = "SELECT a.materialid, a.materialno, a.materialname, a.stock FROM smaterial a"
-				+ " WHERE a.stock < a.alarmnum AND a.usestock = '1' LIMIT 0,8";
+				+ " WHERE a.stock <= a.alarmnum AND a.usestock = '1' LIMIT 0,8";
 			alarmStockList = dbUtils.getListBySql(sql); //库存报警列表
 			toDoNum += alarmStockList.size();
 		}
