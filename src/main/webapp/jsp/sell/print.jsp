@@ -10,6 +10,11 @@
 		color: black;
 	}
 	
+	table {
+		table-layout: fixed;
+		word-break: break-all;
+	}
+	
 	table span {
 		color: black;
 	}
@@ -77,31 +82,33 @@
 	<table class="rowtable" id="sellPrintTabId">
 		<thead>
 			<tr>
-				<td style="width: 35px;">序号</td>
+				<td style="width: 50px;">序号</td>
 				<td style="width: 80px;">产品编码</td>
-				<td style="width: 135px;">产品名称</td>
+				<td style="width: 200px;">产品名称</td>
 				<!--
 				<td style="width: 45px;">件数</td>
 				<td style="width: 70px;">一件数量</td>
 				-->
 				<td style="width: 50px;">数量</td>
+				<!--
 				<td style="width: 70px;">单价</td>
 				<td style="width: 75px;">折扣</td>
-				<td style="width: 70px;">实付单价</td>
-				<td style="width: 75px;">金额</td>
+				-->
+				<td style="width: 80px;">实付单价</td>
+				<td style="width: 80px;">金额</td>
 				<td>备注</td>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${sellrowList}" var="bean" varStatus="vs">
 			   	<tr>
-			   		<td style="width: 35px;">
+			   		<td>
 			   			<span>${vs.index+1}</span>
 			   		</td>
-			   		<td style="width: 80px;">
+			   		<td>
 						<span>${bean.map.productno}</span>
 			   		</td>
-			   		<td style="width: 125px;">
+			   		<td>
 						<span
 							>${bean.map.productname2 == '' ? bean.map.productname : bean.map.productname2}</span>
 			   		</td>
@@ -114,19 +121,21 @@
 						<span>${bean.map.numofonebox}</span>
 			   		</td>
 			   		-->
-			   		<td style="width: 50px;">
+			   		<td>
 						<span>${bean.map.num}</span>
 			   		</td>
+			   		<!--
 			   		<td style="width: 70px;">
 						<span>${bean.map.planprice}</span>
 			   		</td>
 			   		<td style="width: 75px;">
 						<span>${bean.map.discount}</span>
 			   		</td>
-			   		<td style="width: 70px;">
+			   		-->
+			   		<td>
 						<span>${bean.map.realprice}</span>
 			   		</td>
-			   		<td style="width: 75px;">
+			   		<td>
 						<span>${bean.map.realsum}</span>
 						<input type="hidden" name="map[realsum]" value="${bean.map.realsum}" />
 			   		</td>
@@ -136,8 +145,8 @@
 			   	</tr>
 		   	</c:forEach>
 			<tr>
-				<td colspan="6"></td>
-				<td style="width: 75px;">
+				<td colspan="4"></td>
+				<td>
 					合计
 				</td>
 				<td>
