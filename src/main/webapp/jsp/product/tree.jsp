@@ -27,7 +27,7 @@ $(function() {
 				<div layoutH="10"
 					style="float: left; display: block; overflow: auto; width: 200px; border: solid 1px #CCC;
 					line-height: 21px; background: #fff">
-					<ul id="firstTree" class="tree treeFolder collapse">
+					<ul id="firstTree" class="tree treeFolder expand">
 						<li>
 							<a href="<%=path%>/product/list/${form.map.producttype}?curTime=<%=curTime%>&first=true"
 								target="ajax" rel="jbsxBox2product<%=curTime%>">
