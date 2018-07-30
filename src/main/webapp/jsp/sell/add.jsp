@@ -6,6 +6,11 @@
 	<c:set var="showProfit" value="none" scope="page" />
 <%-- </shiro:lacksPermission> --%>
 
+<!-- 有“销售:其它”权限，可修改“产品单价”权限 -->
+<shiro:lacksPermission name="Sell:other">
+	<c:set var="planpriceReadonly" value="readonly" scope="page" />
+</shiro:lacksPermission>
+
 <script>
 	$(function() {
 		autoCom("[name='map[productno]']:visible");
@@ -316,7 +321,7 @@
 			   		-->
 			   		<td>
 						<input type="text" name="map[planprice]" style="width: 45px;" maxlength="12"
-							class="number" value="0.00" readonly="readonly"/>
+							class="number" value="0.00" ${planpriceReadonly} onchange="changeValue();"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realprice]" style="width: 45px;" maxlength="12"
