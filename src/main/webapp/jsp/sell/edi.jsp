@@ -393,7 +393,7 @@
 			   		-->
 			   		<td>
 						<input type="text" name="map[num]" style="width: 45px;" maxlength="12"
-							class="digits required" value="0" onchange="changeValue();"/>
+							class="number required" value="0.00" onchange="changeValue();"/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[discount]" style="width: 45px" maxlength="12"
@@ -461,7 +461,7 @@
 				   		-->
 				   		<td>
 							<input type="text" name="map[num]" style="width: 45px;" maxlength="12"
-								class="digits required" value="${bean.map.num}" onchange="changeValue();"/>
+								class="number required" value="${bean.map.num}" onchange="changeValue();"/>
 				   		</td>
 				   		<td>
 							<input type="text" name="map[discount]" style="width: 45px" maxlength="12"

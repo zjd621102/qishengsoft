@@ -1,5 +1,9 @@
 
 
+/**2018.08.01**/
+ALTER TABLE `bsellrow`
+MODIFY COLUMN `num`  double(5,2) NOT NULL DEFAULT 0 COMMENT '销售数量' AFTER `realprice`;
+
 /**2018.05.29**/
 ALTER TABLE `bsell` ADD COLUMN `alldiscount`  double(5,2) NULL COMMENT '折扣' AFTER `createtime`;
 ALTER TABLE `bsellrow` ADD COLUMN `discount`  double(5,2) NULL COMMENT '折扣' AFTER `num`;
