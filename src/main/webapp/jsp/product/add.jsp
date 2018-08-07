@@ -172,6 +172,17 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>折扣：</dt>
+			<dd>
+				<input type="text" name="map[productdiscount]" class="required number" size="25" maxlength="12"
+					value="1"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt></dt>
+			<dd></dd>
+		</dl>
+		<dl>
 			<dt>备注：</dt>
 			<dd>
 				<input type="text" name="map[remark]" size="89" maxlength="256"

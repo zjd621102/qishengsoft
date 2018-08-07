@@ -1,4 +1,7 @@
 
+/**2018.08.07**/
+ALTER TABLE `sproduct`
+ADD COLUMN `productdiscount`  double(3,2) NOT NULL DEFAULT 1 AFTER `remark`;
 
 /**2018.08.01**/
 ALTER TABLE `bsellrow`

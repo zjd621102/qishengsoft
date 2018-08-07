@@ -9,6 +9,7 @@
 <!-- 有“销售:其它”权限，可修改“产品单价”权限 -->
 <shiro:lacksPermission name="Sell:other">
 	<c:set var="planpriceReadonly" value="readonly" scope="page" />
+	<c:set var="discountReadonly" value="readonly" scope="page" />
 </shiro:lacksPermission>
 
 <script>
@@ -39,7 +40,8 @@
 			                        unit: item.map.unit,
 			                        costprice: item.map.costprice,
 			                        realprice: item.map.realprice,
-			                        historyprice: item.map.historyprice
+			                        historyprice: item.map.historyprice,
+			                        productdiscount: item.map.productdiscount
 			                    }
 			                }));
 						},
@@ -58,6 +60,7 @@
 					if(ui.item.historyprice && (ui.item.realprice != ui.item.historyprice)) {
 						row.find("[name='map[remarkrow]']").val("上批次价格：" + ui.item.historyprice);
 					}
+					row.find("[name='map[discount]']").val(ui.item.productdiscount);
 					
 					changeValue();// 重新计算数量、价格
 				},
@@ -285,8 +288,10 @@
 					</td>
 					<td></td>
 					<td>
+						<!-- 
 						<input type="text" id="alldiscount" name="map[alldiscount]" style="width: 45px"
-							class="number required" value="1" onchange="changeDiscount();"/>
+							class="number required" value="1" onchange="changeDiscount();" ${discountReadonly}/>
+						-->
 					</td>
 					<td>
 						<input type="text" name="map[allrealsum]" style="width: 65px;" class="number"
@@ -342,7 +347,7 @@
 			   		<td>
 						<input type="text" name="map[discount]" style="width: 45px" maxlength="12"
 							class="number required" value="1" onchange="setMultiply_sell('realprice', 'num', 'realsum');
-							setAllSum('realsum', 'allrealsum', 'sellJspFormId');"/>
+							setAllSum('realsum', 'allrealsum', 'sellJspFormId');" ${discountReadonly}/>
 			   		</td>
 			   		<td>
 						<input type="text" name="map[realsum]" style="width: 65px;" maxlength="12"
