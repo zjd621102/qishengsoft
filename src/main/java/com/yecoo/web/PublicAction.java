@@ -181,8 +181,17 @@ public class PublicAction {
 		}
 
 		if(bMaterial) {
-			sql = "SELECT a.materialid, a.materialno, a.materialname, a.stock FROM smaterial a"
-				+ " WHERE a.stock <= a.alarmnum AND a.usestock = '1' LIMIT 0,8";
+			/**
+			 * 扣除还未发货的订单物资
+			 */
+			String sqlA = "(m.stock - (SELECT SUM(b.num * d.materialnum)"
+				+ " FROM bsell a, bsellrow b, sproduct c, sproductrow d, smaterial e"
+				+ " WHERE a.sellid = b.sellid AND b.productid = c.productid AND c.productid = d.productid"
+				+ " AND d.materialid = e.materialid AND a.currflow = '申请' AND e.materialid = m.materialid))";
+			
+			sql = "SELECT m.materialid, m.materialno, m.materialname, "
+				+ sqlA + " stock FROM smaterial m" + " WHERE " + sqlA + " <= m.alarmnum AND m.usestock = '1' LIMIT 0,8";
+			
 			alarmStockList = dbUtils.getListBySql(sql); //库存报警列表
 			toDoNum += alarmStockList.size();
 		}
