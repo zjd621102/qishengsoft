@@ -54,7 +54,7 @@
 			<td>制&#8194;单&#8194;人：
 				<span>${form.map.makername}</span>
 			</td>
-			<td>下单日期：
+			<td>发货日期：
 				<span>${form.map.selldate}</span>
 			</td>
 			<td>单据编号：
