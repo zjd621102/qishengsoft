@@ -184,7 +184,7 @@ public class PublicAction {
 			/**
 			 * 扣除还未发货的订单物资
 			 */
-			String sqlA = "(m.stock - (SELECT SUM(b.num * d.materialnum)"
+			String sqlA = "(m.stock - (SELECT IFNULL(SUM(b.num * d.materialnum), 0)"
 				+ " FROM bsell a, bsellrow b, sproduct c, sproductrow d, smaterial e"
 				+ " WHERE a.sellid = b.sellid AND b.productid = c.productid AND c.productid = d.productid"
 				+ " AND d.materialid = e.materialid AND a.currflow = '申请' AND e.materialid = m.materialid))";
