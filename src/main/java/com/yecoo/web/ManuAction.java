@@ -66,7 +66,7 @@ public class ManuAction {
 		if(manunamepy.equals("")) {
 			String manuname = StrUtils.nullToStr(form.getValue("manuname"));
 			GB2Alpha gb2Alpha = new GB2Alpha();
-			manunamepy = gb2Alpha.string2Alpha(manuname);
+			manunamepy = gb2Alpha.getAllFirstLetter(manuname);
 			form.setValue("manunamepy", manunamepy);
 		}
 			
@@ -103,7 +103,7 @@ public class ManuAction {
 			if(manunamepy.equals("")) {
 			String manuname = StrUtils.nullToStr(form.getValue("manuname"));
 			GB2Alpha gb2Alpha = new GB2Alpha();
-			manunamepy = gb2Alpha.string2Alpha(manuname);
+			manunamepy = gb2Alpha.getAllFirstLetter(manuname);
 			form.setValue("manunamepy", manunamepy);
 		}
 		
