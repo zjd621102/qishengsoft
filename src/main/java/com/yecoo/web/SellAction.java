@@ -114,9 +114,11 @@ public class SellAction {
 			String companyName = parameterDaoImpl.getParameterName("公司名称");
 			String storeAddress = parameterDaoImpl.getParameterName("店面地址");
 			String storePhone = parameterDaoImpl.getParameterName("店面电话");
+			String showDiscount = parameterDaoImpl.getParameterName("是否显示原价折扣");
 			form.setValue("companyName", companyName);
 			form.setValue("storeAddress", storeAddress);
 			form.setValue("storePhone", storePhone);
+			form.setValue("showDiscount", showDiscount);
 			
 			String currflow = StrUtils.nullToStr(form.getValue("currflow"));
 			if(currflow.equals("发货")) {

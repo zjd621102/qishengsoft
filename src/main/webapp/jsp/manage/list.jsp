@@ -18,6 +18,27 @@ function refreshProductList() {
 	);
 }
 
+//查询利润
+function queryProfit() {
+
+	var sellno = $("#sellno").val();
+	var currflow = $("#currflow").val();
+	var selldateFrom = $("#selldateFrom").val();
+	var selldateTo = $("#selldateTo").val();
+	
+	$.post(
+		"<%=path%>/manage/queryProfit",
+		{sellno : sellno, currflow : currflow, selldateFrom : selldateFrom, selldateTo : selldateTo},
+		function(data) {
+			if(data != null && data != "") {// 成功
+				$("#profit").val(data);
+			} else {// 失败
+				$("#profit").val("查无结果");
+			}
+		}
+	);
+}
+
 //刷新产品物资
 function refreshProductMaterial() {
 
@@ -42,6 +63,16 @@ function refreshProductMaterial() {
 <div style="margin: 30px 0 0 30px;">
 	<div>
 		<button type="button" onclick="refreshProductList();">刷新产品列表</button>
+	</div>
+	<br/>
+	<br/>
+	<div>
+		<button type="button" onclick="queryProfit();">我要查询利润</button>
+		单据编号：<input type="text" id="sellno" maxlength="16" style="width: 110px;" />
+		当前流程：<st:select dictType="销售状态" id="currflow" expStr="style='width: 84px;'" />
+		发货日期从<input type="text" id="selldateFrom" style="width: 80px;" class="date" />	
+		至<input type="text" id="selldateTo" style="width: 80px;" value="" class="date" />
+		利润<input type="text" id="profit" style="width: 80px;" readonly="readonly" />
 	</div>
 	<!-- 
 	<div style="margin-top: 10px;">

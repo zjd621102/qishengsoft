@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yecoo.model.CodeTableForm;
-import com.yecoo.util.DateUtils;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.StrUtils;
 /**
@@ -56,6 +55,43 @@ public class ManageAction {
 		}
 		
 		return result;
+	}
+	
+    /**
+     * 查询利润
+     * @param request
+     * @return
+     */
+	@RequestMapping(value="/queryProfit")
+	public @ResponseBody String queryProfit(HttpServletRequest request) {
+		
+		String dSQL = "";
+
+		String sellno = StrUtils.nullToStr(request.getParameter("sellno"));
+		String currflow = StrUtils.nullToStr(request.getParameter("currflow"));
+		String selldateFrom = StrUtils.nullToStr(request.getParameter("selldateFrom"));
+		String selldateTo = StrUtils.nullToStr(request.getParameter("selldateTo"));
+		if(!sellno.equals("")) {
+			dSQL += " AND a.sellno = '" + sellno + "'";
+		}
+		if(!currflow.equals("")) {
+			dSQL += " AND a.currflow = '" + currflow + "'";
+		}
+		if(!selldateFrom.equals("")) {
+			dSQL += " AND a.selldate >= '" + selldateFrom + "'";
+		}
+		if(!selldateTo.equals("")) {
+			dSQL += " AND a.selldate <= '" + selldateTo + "'";
+		}
+		
+		String sql = "SELECT SUM(b.num * (b.realprice - IFNULL(c.costprice, 0)))"
+				+ " FROM bsell a INNER JOIN bsellrow b ON a.sellid = b.sellid"
+				+ " LEFT JOIN sproduct c ON b.productid = c.productid"
+				+ " WHERE 1 = 1" + dSQL;
+		
+		String iReturn = dbUtils.execQuerySQL(sql);
+		
+		return iReturn;
 	}
 	
     /**

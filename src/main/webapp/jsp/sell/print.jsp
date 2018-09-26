@@ -90,10 +90,10 @@
 				<td style="width: 70px;">一件数量</td>
 				-->
 				<td style="width: 50px;">数量</td>
-				<!--
-				<td style="width: 70px;">单价</td>
-				<td style="width: 75px;">折扣</td>
-				-->
+				<c:if test="${form.map.showDiscount == 'Y'}">
+					<td style="width: 80px;">单价</td>
+					<td style="width: 50px;">折扣</td>
+				</c:if>
 				<td style="width: 80px;">实付单价</td>
 				<td style="width: 80px;">金额</td>
 				<td>备注</td>
@@ -124,14 +124,14 @@
 			   		<td>
 						<span>${bean.map.num}</span>
 			   		</td>
-			   		<!--
-			   		<td style="width: 70px;">
-						<span>${bean.map.planprice}</span>
-			   		</td>
-			   		<td style="width: 75px;">
-						<span>${bean.map.discount}</span>
-			   		</td>
-			   		-->
+			   		<c:if test="${form.map.showDiscount == 'Y'}">
+				   		<td style="width: 80px;">
+							<span>${bean.map.planprice}</span>
+				   		</td>
+				   		<td style="width: 50px;">
+							<span>${bean.map.discount}</span>
+				   		</td>
+			   		</c:if>
 			   		<td>
 						<span>${bean.map.realprice}</span>
 			   		</td>
@@ -145,7 +145,7 @@
 			   	</tr>
 		   	</c:forEach>
 			<tr>
-				<td colspan="4"></td>
+				<td colspan="${form.map.showDiscount == 'Y' ? 6 : 4}"></td>
 				<td>
 					合计
 				</td>
