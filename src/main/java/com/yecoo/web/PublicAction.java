@@ -190,7 +190,7 @@ public class PublicAction {
 				+ " AND d.materialid = e.materialid AND a.currflow = '申请' AND e.materialid = m.materialid))";
 			
 			sql = "SELECT m.materialid, m.materialno, m.materialname, "
-				+ sqlA + " stock FROM smaterial m" + " WHERE " + sqlA + " <= m.alarmnum AND m.usestock = '1' LIMIT 0,8";
+				+ sqlA + " stock FROM smaterial m" + " WHERE " + sqlA + " <= m.alarmnum AND m.usestock = '1'";
 			
 			alarmStockList = dbUtils.getListBySql(sql); //库存报警列表
 			toDoNum += alarmStockList.size();
