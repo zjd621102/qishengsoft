@@ -72,9 +72,7 @@ public class ManageAction {
 		String selldateFrom = StrUtils.nullToStr(request.getParameter("selldateFrom"));
 		String selldateTo = StrUtils.nullToStr(request.getParameter("selldateTo"));
 		
-		String sql = manageDaoImpl.getProfit(sellno, currflow, selldateFrom, selldateTo, "");
-		
-		String iReturn = dbUtils.execQuerySQL(sql);
+		String iReturn = manageDaoImpl.getProfit(sellno, currflow, selldateFrom, selldateTo, "");
 		
 		return iReturn;
 	}
