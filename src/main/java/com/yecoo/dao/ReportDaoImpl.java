@@ -196,6 +196,21 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		dataArray.append(",");
 		dataArray.append("{name:'简易采购统计', data:[").append(dataStr).append("]}");
 		*/
+		
+		// 利润统计
+		ManageDaoImpl manageDaoImpl = new ManageDaoImpl();
+		dataStr.delete(0, dataStr.length());
+		for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
+			sum = manageDaoImpl.getProfit("", "结束", "", "", monthList.get(monthIndex));
+			if(monthIndex >= 1) {
+				dataStr.append(",");
+			}
+			dataStr.append(sum);
+		}
+		dataArray.append(",");
+		dataArray.append("{name:'利润统计', data:[").append(dataStr).append("]}");
+		
+		/*
 		// 工资统计
 		dataStr.delete(0, dataStr.length());
 		for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
@@ -210,6 +225,8 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		}
 		dataArray.append(",");
 		dataArray.append("{name:'工资统计', data:[").append(dataStr).append("]}");
+		*/
+		
 		/*
 		// 运费统计
 		dataStr.delete(0, dataStr.length());
