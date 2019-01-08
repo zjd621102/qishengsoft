@@ -34,7 +34,7 @@ public class ManageDaoImpl extends BaseDaoImpl {
 			dSQL += " AND a.selldate LIKE '" + sellDate + "%'";
 		}
 		
-		String sql = "SELECT SUM(b.num * (b.realprice - IFNULL(c.costprice, 0))) profit"
+		String sql = "SELECT IFNULL(SUM(b.num * (b.realprice - IFNULL(c.costprice, 0))), 0) profit"
 				+ " FROM bsell a INNER JOIN bsellrow b ON a.sellid = b.sellid"
 				+ " LEFT JOIN sproduct c ON b.productid = c.productid"
 				+ " WHERE 1 = 1" + dSQL;
