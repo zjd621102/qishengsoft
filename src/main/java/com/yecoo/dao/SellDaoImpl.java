@@ -75,6 +75,8 @@ public class SellDaoImpl extends BaseDaoImpl {
 		String productno = StrUtils.nullToStr(form.getValue("productno"));
 		String productname = StrUtils.nullToStr(form.getValue("productname"));
 		String first = StrUtils.nullToStr(form.getValue("first"));
+		String allrealsumFrom = StrUtils.nullToStr(form.getValue("allrealsumFrom"));// 定单金额从
+		String allrealsumTo = StrUtils.nullToStr(form.getValue("allrealsumTo"));// 定单金额至
 		
 		if(!sellno.equals("")) {
 			cond.append(" AND t.sellno like '%").append(sellno).append("%'");
@@ -102,6 +104,12 @@ public class SellDaoImpl extends BaseDaoImpl {
 		}
 		if(first.equals("true")) {// 首次显示列表
 			cond.append(" AND t.currflow IN ('申请', '发货')");
+		}
+		if(!allrealsumFrom.equals("")) {
+			cond.append(" AND func_getSum(t.sellid, 'XSD') >= '").append(allrealsumFrom).append("'");
+		}
+		if(!allrealsumTo.equals("")) {
+			cond.append(" AND func_getSum(t.sellid, 'XSD') <= '").append(allrealsumTo).append("'");
 		}
 		
 		return cond.toString();

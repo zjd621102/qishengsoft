@@ -11,25 +11,30 @@
 		<div class="searchBar">
 			<table class="searchContent">
 				<tr>
-					<td style="width: 25%;">
+					<td style="width: 20%;">
 						单据编号：
 						<input type="text" name="map[sellno]" maxlength="16" style="width: 80px;"
 							value="${form.map.sellno}"/>
 					</td>
-					<td style="width: 25%;">
+					<td style="width: 20%;">
 						当前流程：
 						<st:select dictType="销售状态" name="map[currflow]" value="${form.map.currflow}"
 						 expStr="style='width: 84px;'" />
 					</td>
-					<td style="width: 25%;">
+					<td style="width: 20%;">
 						发货日期：
 						<input type="text" name="map[selldateFrom]" style="width: 80px;"
 						 value="${form.map.selldateFrom}" class="date"/>
 					</td>
-					<td>
+					<td style="width: 20%;">
 						至：
 						<input type="text" name="map[selldateTo]" style="width: 80px;"
 						 value="${form.map.selldateTo}" class="date"/>
+					</td>
+					<td style="width: 20%;">
+						客户名称：
+						<input type="text" name="map[manuname]" style="width: 80px;"
+						 value="${form.map.manuname}" ${changeManuname}/>
 					</td>
 				</tr>
 				<tr>
@@ -44,9 +49,14 @@
 						 value="${form.map.productname}"/>
 					</td>
 					<td>
-						客户名称：
-						<input type="text" name="map[manuname]" style="width: 80px;"
-						 value="${form.map.manuname}" ${changeManuname}/>
+						定单金额：
+						<input type="text" name="map[allrealsumFrom]" style="width: 80px;"
+						 value="${form.map.allrealsumFrom}"/>
+					</td>
+					<td>
+						至：
+						<input type="text" name="map[allrealsumTo]" style="width: 80px;"
+						 value="${form.map.allrealsumTo}"/>
 					</td>
 					<td></td>
 				</tr>
