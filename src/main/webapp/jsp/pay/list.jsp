@@ -12,27 +12,30 @@
 		<div class="searchBar">
 			<table class="searchContent" style="width: 80%">
 				<tr>
-					<td>
+					<td style="width: 20%;">
 						单据ID：
 						<input type="text" name="map[payid]" value="${form.map.payid}"
 						 class="number" style="width: 70px;"/>
-						单据类型：
-						<select name="map[btype]" style="width: 70px;">
-							<option value=""></option>
-							<c:forEach items="${btypeList}" var="btype">
-								<option value="${btype.map.dictvalue}"
-									${btype.map.dictvalue==form.map.btype?"selected":""}
-								>
-									${btype.map.dictname}
-								</option>
-							</c:forEach>
-						</select>
+					</td>
+					<td style="width: 20%;">
 						当前流程：
 						<st:select dictType="流程状态" name="map[currflow]" value="${form.map.currflow}"
 						 expStr="style='width: 70px;'" />
+					</td>
+					<td style="width: 20%;">
 						供应商：
 						<input type="text" name="map[manuname]" value="${form.map.manuname}" 
 							style="width: 70px;" ${changeManuname}/>
+					</td>
+					<td style="width: 20%;">
+						单据日期：
+						<input type="text" name="map[paydateFrom]" style="width: 80px;"
+						 value="${form.map.paydateFrom}" class="date"/>
+					</td>
+					<td style="width: 20%;">
+						至：
+						<input type="text" name="map[paydateTo]" style="width: 80px;"
+						 value="${form.map.paydateTo}" class="date"/>
 					</td>
 				</tr>
 			</table>

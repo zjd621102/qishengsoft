@@ -153,8 +153,10 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			monthStr.append("'").append(monthList.get(i)).append("'");
 		}
 		
-		// 发货统计
+		// 进账统计
 		dataStr.delete(0, dataStr.length());
+		/**
+		 * 统计销售
 		for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
 			sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bsell a, bsellrow b"
 					+ " WHERE a.sellid = b.sellid AND b.productid IS NOT NULL AND a.selldate LIKE '"
@@ -165,7 +167,19 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			}
 			dataStr.append(sum);
 		}
-		dataArray.append("{name:'发货统计', data:[").append(dataStr).append("]}");
+		*/
+		
+		for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
+			sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bpay a, bpayrow b"
+					+ " WHERE a.payid = b.payid AND a.paydate LIKE '"
+					+ monthList.get(monthIndex) + "%' AND a.currflow = '结束'";
+			sum = dbUtils.execQuerySQL(sql);
+			if(monthIndex >= 1) {
+				dataStr.append(",");
+			}
+			dataStr.append(sum);
+		}
+		dataArray.append("{name:'进账统计', data:[").append(dataStr).append("]}");
 		
 		// 采购统计
 		dataStr.delete(0, dataStr.length());
@@ -208,7 +222,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			dataStr.append(sum);
 		}
 		dataArray.append(",");
-		dataArray.append("{name:'利润统计', data:[").append(dataStr).append("]}");
+		dataArray.append("{name:'利润统计', data:[").append(dataStr).append("], visible:false}");
 		
 		/*
 		// 工资统计
@@ -470,10 +484,10 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		form.setValue("producttype", producttype);
 		form.setValue("manuName", manuName);
 		
-		// 发货统计
-		sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bsell a, bsellrow b WHERE a.sellid = b.sellid"
-				+ " AND b.productid IS NOT NULL AND a.currflow != '申请'" + " AND a.selldate >= '" + dateFrom
-				+ "' AND a.selldate <= '" + dateTo + "'";
+		// 进账统计
+		sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bpay a, bpayrow b WHERE a.payid = b.payid"
+				+ " AND a.currflow = '结束' AND a.paydate >= '" + dateFrom
+				+ "' AND a.paydate <= '" + dateTo + "'";
 
 		if(!materialtype.equals("")) {
 			sql += " AND EXISTS (SELECT 1 FROM sproduct c WHERE c.productid = b.productid"
@@ -507,6 +521,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		dataStr.append(",");
 		dataStr.append(sum);
 
+		/*
 		// 工资统计
 		String salarySql = "SELECT IFNULL(SUM(b.planmoney), 0) sum FROM bsalary a, bsalaryrow b WHERE a.salaryid = b.salaryid"
 				+ " AND a.currflow = '结束' AND a.salarydate >= '" + dateFrom.substring(0, 7) + "' AND a.salarydate <= '"
@@ -514,6 +529,8 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		sum = dbUtils.execQuerySQL(salarySql);
 		dataStr.append(",");
 		dataStr.append(sum);
+		*/
+		
 		/*
 		// 运费统计
 		sum = dbUtils.execQuerySQL(sql + " AND a.btype = 'YFD'");

@@ -87,6 +87,8 @@ public class PayDaoImpl extends BaseDaoImpl {
 		String btype = StrUtils.nullToStr(form.getValue("btype"));
 		String currflow = StrUtils.nullToStr(form.getValue("currflow"));
 		String manuname = StrUtils.nullToStr(form.getValue("manuname"));
+		String paydateFrom = StrUtils.nullToStr(form.getValue("paydateFrom"));
+		String paydateTo = StrUtils.nullToStr(form.getValue("paydateTo"));
 		
 		if(!payid.equals("")) {
 			cond.append(" AND t.payid = '").append(payid).append("'");
@@ -100,6 +102,12 @@ public class PayDaoImpl extends BaseDaoImpl {
 		if(!manuname.equals("")) {
 			cond.append(" AND EXISTS (SELECT 1 FROM smanu m WHERE m.manuid = t.manuid AND m.manuname LIKE '%")
 				.append(manuname).append("%')");
+		}
+		if(!paydateFrom.equals("")) {
+			cond.append(" AND t.paydate >= '").append(paydateFrom).append("'");
+		}
+		if(!paydateTo.equals("")) {
+			cond.append(" AND t.paydate <= '").append(paydateTo).append("'");
 		}
 		
 		return cond.toString();
