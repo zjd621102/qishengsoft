@@ -537,7 +537,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		dataStr.append(",");
 		dataStr.append(sum);
 		*/
-		request.setAttribute("types", "'发货统计', '采购统计', '简易采购统计', '工资统计'");
+		request.setAttribute("types", "'进账统计', '采购统计', '简易采购统计', '工资统计'");
 		request.setAttribute("dataStr", dataStr.toString());
 	}
 }
