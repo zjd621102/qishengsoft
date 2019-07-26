@@ -65,6 +65,7 @@ public class ManuDaoImpl extends BaseDaoImpl {
 		String manutypeid = StrUtils.nullToStr(form.getValue("manutypeid"));
 		String statusid = StrUtils.nullToStr(form.getValue("statusid"));
 		String referee = StrUtils.nullToStr(form.getValue("referee"));
+		String manuphone = StrUtils.nullToStr(form.getValue("manuphone"));
 		
 		if(!manuname.equals("")) {
 			cond.append(" AND t.manuname like '%").append(manuname).append("%'");
@@ -80,6 +81,9 @@ public class ManuDaoImpl extends BaseDaoImpl {
 		}
 		if(!referee.equals("")) {
 			cond.append(" AND t.referee like '%").append(referee).append("%'");
+		}
+		if(!manuphone.equals("")) {
+			cond.append(" AND t.manuphone like '%").append(manuphone).append("%'");
 		}
 		
 		return cond.toString();

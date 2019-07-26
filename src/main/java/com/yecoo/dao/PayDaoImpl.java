@@ -221,27 +221,27 @@ public class PayDaoImpl extends BaseDaoImpl {
 						dbUtils.executeSQL(sql);
 					}
 				} else {
-					/**
 					// 修改银行卡的金额
+
 					sql = "SELECT a.payrowid, a.bankcardno, a.realsum FROM bpayrow a WHERE a.payid = '"
 						+ payid + "'";
 					List<CodeTableForm> list = dbUtils.getListBySql(sql);
+					
+					Double changeRealsum = 0.00;
+					
 					for(CodeTableForm codeTableForm : list) {
-						String payrowid = StrUtils.nullToStr(codeTableForm.getValue("payrowid"));
-						String bankcardno = StrUtils.nullToStr(codeTableForm.getValue("bankcardno"));
 						String realsum = StrUtils.nullToStr(codeTableForm.getValue("realsum"), "0");
-						sql = "UPDATE sbankcard t SET t.money = (t.money " + sing
-							+ realsum + "), t.changetype = 'bpayrow', t.changeid = '" + payrowid + "'"
-							+ " WHERE t.bankcardno = '" + bankcardno + "'";
-						
-						iReturn =  dbUtils.executeSQL(conn, sql);
-						if(iReturn == -1) {
-							break;
-						}
+						changeRealsum += Double.parseDouble(realsum);
 					}
-					*/
+					
+					sql = "UPDATE cparameter SET parametervalue = (parametervalue "
+						+ sing + changeRealsum + ") WHERE parametername = '账户金额'";
+
+					iReturn =  dbUtils.executeSQL(conn, sql);
 					
 					if(iReturn >= 0) {
+						//新增“账户收入”日志
+						StrUtils.saveLog(request, "账户收入", form);
 						conn.commit();
 					} else {// 保存失败，回滚
 						conn.rollback();

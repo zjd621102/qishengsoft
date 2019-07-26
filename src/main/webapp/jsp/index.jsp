@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <!-- 20160423 -->
-<link rel="shortcut icon" href="<%=path%>/images/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="<%=path%>/images/favicon.ico"/>
 <title>首页</title>
 
 <link href="<%=path%>/themes/default/style.css" rel="stylesheet" type="text/css" media="screen" />

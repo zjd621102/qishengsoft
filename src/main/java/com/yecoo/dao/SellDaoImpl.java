@@ -77,6 +77,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 		String first = StrUtils.nullToStr(form.getValue("first"));
 		String allrealsumFrom = StrUtils.nullToStr(form.getValue("allrealsumFrom"));// 定单金额从
 		String allrealsumTo = StrUtils.nullToStr(form.getValue("allrealsumTo"));// 定单金额至
+		String manuphone = StrUtils.nullToStr(form.getValue("manuphone"));// 客户手机号码
 		
 		if(!sellno.equals("")) {
 			cond.append(" AND t.sellno like '%").append(sellno).append("%'");
@@ -110,6 +111,10 @@ public class SellDaoImpl extends BaseDaoImpl {
 		}
 		if(!allrealsumTo.equals("")) {
 			cond.append(" AND func_getSum(t.sellid, 'XSD') <= '").append(allrealsumTo).append("'");
+		}
+		if(!manuphone.equals("")) {
+			cond.append(" AND EXISTS (SELECT 1 FROM smanu n WHERE n.manuid = t.manuid AND n.manuphone LIKE '%")
+			.append(manuphone).append("%')");
 		}
 		
 		return cond.toString();

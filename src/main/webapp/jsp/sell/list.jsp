@@ -58,7 +58,11 @@
 						<input type="text" name="map[allrealsumTo]" style="width: 80px;"
 						 value="${form.map.allrealsumTo}"/>
 					</td>
-					<td></td>
+					<td>
+						手机号码：
+						<input type="text" name="map[manuphone]" style="width: 80px;" maxlength="11"
+						 value="${form.map.manuphone}"/>
+					</td>
 				</tr>
 			</table>
 			<div class="subBar">

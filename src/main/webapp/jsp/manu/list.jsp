@@ -27,6 +27,9 @@
 						供应商状态：
 						<st:select dictType="状态" name="map[statusid]" value="${form.map.statusid}"
 						 expStr="style='width: 70px; margin-right: 12px;'" />
+						手机号码：
+						<input type="text" name="map[manuphone]" style="width: 70px; margin-right: 15px;"
+						 maxlength="11" value="${form.map.manuphone}" />
 					</td>
 				</tr>
 			</table>

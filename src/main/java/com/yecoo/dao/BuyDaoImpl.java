@@ -207,37 +207,19 @@ public class BuyDaoImpl extends BaseDaoImpl {
 				String sql = changeStockSQL(String.valueOf(form.getValue("buyid")));
 				iReturn = dbUtils.executeSQL(conn, sql);
 				
-				/**
-				if(iReturn >= 1) {// 生成付款单
-					CodeTableForm user = (CodeTableForm)request.getSession().getAttribute(Constants.USER_INFO_SESSION);
-					String maker = StrUtils.nullToStr(user.getValue("userid")); //当前登录用户
-					String createdate = StrUtils.getSysdate("yyyy-MM-dd HH:mm:ss");
-					String buyid = StrUtils.nullToStr(form.getValue("buyid"));
+				if(iReturn >= 0) {// 修改
+					sql = "SELECT SUM(sum) FROM bbuyrow WHERE buyrowid = '" + form.getValue("buyrowid") + "'";
+					String changeRealsum = dbUtils.execQuerySQL(sql);
+							
+					sql = "UPDATE cparameter SET parametervalue = (parametervalue -"
+						+ changeRealsum + ") WHERE parametername = '账户金额'";
+
+					iReturn =  dbUtils.executeSQL(conn, sql);
 					
-					String payid = IdSingleton.getInstance().getNewId();
-					
-					sql.delete(0, sql.length());
-					sql.append("INSERT INTO bpay(payid, btype, maker, paydate, relateno, relatemoney,")
-						.append(" currflow, createtime)	SELECT '").append(payid).append("', 'FKD', '").append(maker)
-						.append("', buydate, buyno, func_getSum(buyid, 'CGD'), '申请', '").append(createdate)
-						.append("' FROM bbuy WHERE buyid = '").append(buyid).append("'");
-	
-					iReturn = dbUtils.executeSQL(conn, sql.toString()); //直接保存，用于下面获取payid
-					
-					if(iReturn >= 0) {
-						sql.delete(0,sql.length());
-						sql.append("INSERT INTO bpayrow(payid, manuid, manubankname, manubankcardno, manuaccountname, plansum, realsum)")
-							.append(" SELECT ").append(payid).append(", t.manuid,")
-							.append(" (SELECT sm.bankrow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
-							.append(" (SELECT sm.accountnorow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
-							.append(" (SELECT sm.accountnamerow FROM smanurow sm WHERE sm.manuid = t.manuid ORDER BY priorityrow LIMIT 0,1),")
-							.append(" t.sum, t.sum")
-							.append(" FROM (SELECT manuid, SUM(sum) sum FROM bbuyrow WHERE buyid = '").append(buyid)
-							.append("' GROUP BY manuid) t");
-						iReturn = dbUtils.executeSQL(conn, sql.toString());
+					if(iReturn >= 0) { //新增“账户支出”日志
+						StrUtils.saveLog(request, "账户支出", form);
 					}
 				}
-				*/
 			}
 			
 			if(iReturn >= 0) {
