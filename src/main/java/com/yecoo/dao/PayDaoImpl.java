@@ -241,7 +241,7 @@ public class PayDaoImpl extends BaseDaoImpl {
 					
 					if(iReturn >= 0) {
 						//新增“账户收入”日志
-						StrUtils.saveLog(request, "账户收入", form);
+						LogDaoImpl.saveLog(request, "账户收入：", changeRealsum);
 						conn.commit();
 					} else {// 保存失败，回滚
 						conn.rollback();
