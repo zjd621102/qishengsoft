@@ -184,12 +184,13 @@ public class BuyAction {
 	public @ResponseBody String end(HttpServletRequest request) {
 		
 		AjaxObject ajaxObject = null;
+		BuyDaoImpl buyDaoImpl = new BuyDaoImpl();
 
 		String[] ids = request.getParameterValues("ids");
 		String buyids = StrUtils.ArrayToStr(ids, "','");
 		
 		String sql = "UPDATE bbuy t SET t.currflow = '结束' WHERE t.buyid IN ('" + buyids + "')";
-		String changeStockSQL = new BuyDaoImpl().changeStockSQL(buyids);
+		String changeStockSQL = buyDaoImpl.changeStockSQL(buyids);
 		String[] sqls = new String[2];
 		sqls[0] = sql;
 		sqls[1] = changeStockSQL;
@@ -197,6 +198,8 @@ public class BuyAction {
 		int iReturn = dbUtils.executeSQLs(sqls);
 
 		if (iReturn >= 0) {
+			buyDaoImpl.changeRealsum(request, buyids);
+			
 			ajaxObject = new AjaxObject("结束成功！", "buy_list", "");
 
 			LogDaoImpl.saveLog(request, "结束采购单", buyids);

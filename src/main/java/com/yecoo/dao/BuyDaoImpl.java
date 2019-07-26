@@ -208,17 +208,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 				iReturn = dbUtils.executeSQL(conn, sql);
 				
 				if(iReturn >= 0) {// 修改
-					sql = "SELECT SUM(sum) FROM bbuyrow WHERE buyrowid = '" + form.getValue("buyrowid") + "'";
-					String changeRealsum = dbUtils.execQuerySQL(sql);
-							
-					sql = "UPDATE cparameter SET parametervalue = (parametervalue -"
-						+ changeRealsum + ") WHERE parametername = '账户金额'";
-
-					iReturn =  dbUtils.executeSQL(conn, sql);
-					
-					if(iReturn >= 0) { //新增“账户支出”日志
-						StrUtils.saveLog(request, "账户支出", form);
-					}
+					iReturn =  changeRealsum(request, String.valueOf(form.getValue("buyid")));
 				}
 			}
 			
@@ -410,5 +400,22 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		.append(" WHERE m.materialid = n.materialid AND m.usestock = '1' AND n.buyid IN ('" + buyids + "')");
 		
 		return sql.toString();
+	}
+	
+	// 修改账户金额及账户日志
+	public int changeRealsum(HttpServletRequest request, String buyids) {
+		String sql = "SELECT IFNULL(SUM(sum), 0) FROM bbuyrow WHERE buyid in ('" + buyids + "')";
+		String changeRealsum = dbUtils.execQuerySQL(sql);
+				
+		sql = "UPDATE cparameter SET parametervalue = (parametervalue -"
+			+ changeRealsum + ") WHERE parametername = '账户金额'";
+
+		int iReturn = dbUtils.executeSQL(sql);
+		
+		if(iReturn >= 0) { //新增“账户支出”日志
+			LogDaoImpl.saveLog(request, "账户支出", String.valueOf("支出金额：" + changeRealsum));
+		}
+		
+		return iReturn;
 	}
 }
