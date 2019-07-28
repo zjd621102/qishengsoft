@@ -282,6 +282,17 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>已付款：</dt>
+			<dd>
+				<input type="text" name="map[paymentmade]" class="required number" size="25" maxlength="12"
+				 value="${form.map.paymentmade}"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt></dt>
+			<dd></dd>
+		</dl>
+		<dl>
 			<dt>备注：</dt>
 			<dd>
 				<input type="text" name="map[remark]" style="width: 556px;" maxlength="256" value="${form.map.remark}" />

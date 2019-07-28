@@ -224,8 +224,10 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt></dt>
-			<dd></dd>
+			<dt>已付款：</dt>
+			<dd>
+				<input type="text" name="map[paymentmade]" class="required number" size="25" maxlength="12" value="0.00"/>
+			</dd>
 		</dl>
 		<dl>
 			<dt>备注：</dt>

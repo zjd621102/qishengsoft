@@ -49,9 +49,11 @@ public class SellAction {
 		int totalCount = sellDaoImpl.getSellCount(form);
 		List<CodeTableForm> sellList = sellDaoImpl.getSellList(form);
 		String totalSum = sellDaoImpl.getSellSum(form);
+		String totalPaymentmade = sellDaoImpl.getPaymentmadeSum(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
 		request.setAttribute("sellList", sellList); // 销售单列表
 		request.setAttribute("totalSum", totalSum); // 销售额
+		request.setAttribute("totalPaymentmade", totalPaymentmade); // 已付款
 		request.setAttribute("sn", "sell"); //授权名称
 		request.setAttribute("form", form);
 		

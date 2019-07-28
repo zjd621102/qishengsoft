@@ -95,11 +95,13 @@
 					<span>查看</span>
 				</a>
 			</li>
+			<!-- 
 			<li>
 				<a class="edit" href="<%=path%>/buy/merge" target="selectedTodo" rel="ids" title="确实要合并这些记录吗?">
 					<span>合并</span>
 				</a>
 			</li>
+			-->
 			</shiro:hasPermission>
 			<shiro:hasPermission name="Buy:delete">
 			<li>
@@ -108,6 +110,7 @@
 				</a>
 			</li>
 			</shiro:hasPermission>
+			<!-- 
 			<shiro:hasPermission name="Buy:edi">
 				<li>
 					<a class="delete" href="<%=path%>/buy/end" target="selectedTodo" rel="ids"
@@ -116,6 +119,7 @@
 				 	</a>
 				</li>
 			</shiro:hasPermission>
+			-->
 		</ul>
 	</div>
 	<table class="table" style="width: 100%;" layoutH="158">
@@ -127,13 +131,11 @@
 				<th width="30px;">序号</th>
 				<th width="70px">单据类型</th>
 				<th width="140px">采购单名称</th>
-				<th width="125px">采购编号</th>
 				<th width="80px">采购日期</th>
-				<th width="155px">采购金额（${totalSum}）</th>
+				<th width="145px">采购金额【${totalSum}】</th>
 				<th width="60px">当前流程</th>
-				<!-- 
-				<th width="60px">制单人</th>
-				-->
+				<th width="145px">已付款【${totalPaymentmade}】</th>
+				<th width="125px">采购编号</th>
 				<th>创建时间</th>
 			</tr>
 		</thead>
@@ -148,13 +150,11 @@
 			   		<td>${vs.index+1}</td>
 			   		<td>${bean.map.btypename}</td>
 			   		<td>${bean.map.buyname}</td>
-			   		<td>${bean.map.buyno}</td>
 			   		<td>${bean.map.buydate}</td>
 			   		<td>${bean.map.allsum}</td>
 			   		<td>${bean.map.currflow}</td>
-			   		<!-- 
-			   		<td>${bean.map.makername}</td>
-			   		-->
+			   		<td>${bean.map.paymentmade}</td>
+			   		<td>${bean.map.buyno}</td>
 			   		<td>${bean.map.createtime}</td>
 			   	</tr>
 		   	</c:forEach>

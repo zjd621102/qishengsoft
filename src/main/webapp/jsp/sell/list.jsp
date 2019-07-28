@@ -128,14 +128,12 @@
 				</th>
 				</shiro:hasPermission>
 				<th width="30px">序号</th>
-				<th width="130px">销售单编号</th>
 				<th width="80px">发货日期</th>
-				<th width="70px">客户名称</th>
+				<th width="130px">客户名称</th>
 				<th width="60px">当前流程</th>
-				<!-- 
-				<th width="60px">制单人</th>
-				-->
-				<th width="145px">销售金额（${totalSum}）</th>
+				<th width="145px">销售金额【${totalSum}】</th>
+				<th width="145px">已付款【${totalPaymentmade}】</th>
+				<th width="130px">销售单编号</th>
 				<th>创建时间</th>
 			</tr>
 		</thead>
@@ -150,14 +148,12 @@
 		   			</td>
 		   			</shiro:hasPermission>
 			   		<td>${vs.index+1}</td>
-			   		<td>${bean.map.sellno}</td>
 			   		<td>${bean.map.selldate}</td>
 			   		<td>${bean.map.manuname}</td>
 			   		<td>${bean.map.currflow}</td>
-			   		<!--
-			   		<td>${bean.map.makername}</td>
-			   		-->
 			   		<td>${bean.map.allrealsum}</td>
+			   		<td>${bean.map.paymentmade}</td>
+			   		<td>${bean.map.sellno}</td>
 			   		<td>${bean.map.createtime}</td>
 			   	</tr>
 		   	</c:forEach>

@@ -41,7 +41,7 @@ public class SellDaoImpl extends BaseDaoImpl {
 				+ " func_getSum(t.sellid, 'XSD') allrealsum FROM bsell t WHERE 1 = 1";
 		String cond = getSellListCondition(form);
 		sql  += cond;
-		sql += " ORDER BY t.currflow DESC, selldate DESC, createtime DESC";
+		sql += " ORDER BY t.currflow, selldate DESC, createtime DESC";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
@@ -54,6 +54,19 @@ public class SellDaoImpl extends BaseDaoImpl {
 	public String getSellSum(CodeTableForm form) {
 		
 		String sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bsell t, bsellrow b WHERE 1 = 1 AND t.sellid = b.sellid";
+		String cond = getSellListCondition(form);
+		sql  += cond;
+		String sum = dbUtils.execQuerySQL(sql);
+		return sum;
+	}
+	/**
+	 * 获取已付款
+	 * @param form
+	 * @return
+	 */
+	public String getPaymentmadeSum(CodeTableForm form) {
+		
+		String sql = "SELECT IFNULL(SUM(t.paymentmade), 0) FROM bsell t WHERE 1 = 1";
 		String cond = getSellListCondition(form);
 		sql  += cond;
 		String sum = dbUtils.execQuerySQL(sql);

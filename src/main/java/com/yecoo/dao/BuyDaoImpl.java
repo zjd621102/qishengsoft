@@ -40,7 +40,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 				+ " func_getSum(t.buyid, 'CGD') allsum FROM bbuy t WHERE 1 = 1";
 		String cond = getBuyListCondition(form);
 		sql  += cond;
-		sql += " ORDER BY t.buydate DESC, t.buyid DESC";
+		sql += " ORDER BY t.currflow, t.buydate DESC, t.buyid DESC";
 		sql += " LIMIT " + (pageNum-1)*numPerPage + "," + numPerPage;
 		List<CodeTableForm> list = dbUtils.getListBySql(sql);
 		return list;
@@ -53,6 +53,19 @@ public class BuyDaoImpl extends BaseDaoImpl {
 	public String getBuySum(CodeTableForm form) {
 		
 		String sql = "SELECT IFNULL(SUM(b.sum), 0) FROM bbuy t, bbuyrow b WHERE 1 = 1 AND t.buyid = b.buyid";
+		String cond = getBuyListCondition(form);
+		sql  += cond;
+		String sum = dbUtils.execQuerySQL(sql);
+		return sum;
+	}
+	/**
+	 * 获取已付款
+	 * @param form
+	 * @return
+	 */
+	public String getPaymentmadeSum(CodeTableForm form) {
+		
+		String sql = "SELECT IFNULL(SUM(t.paymentmade), 0) FROM bbuy t WHERE 1 = 1";
 		String cond = getBuyListCondition(form);
 		sql  += cond;
 		String sum = dbUtils.execQuerySQL(sql);
@@ -404,7 +417,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 	
 	// 修改账户金额及账户日志
 	public int changeRealsum(HttpServletRequest request, String buyids) {
-		String sql = "SELECT IFNULL(SUM(sum), 0) FROM bbuyrow WHERE buyid in ('" + buyids + "')";
+		String sql = "SELECT IFNULL(SUM(paymentmade), 0) FROM bbuy WHERE buyid in ('" + buyids + "')";
 		String changeRealsum = dbUtils.execQuerySQL(sql);
 				
 		sql = "UPDATE cparameter SET parametervalue = (parametervalue -"

@@ -29,13 +29,13 @@
 			<td>名&#12288;&#12288;称：
 				<span>${form.map.buyname}</span>
 			</td>
-			<td>编号：
+			<td>编&#8194;&#8194;&#8194;&#8194;号：
 				<span>${form.map.buyno}</span>
 			</td>
 		</tr>
 		<tr>
-			<td>关联编号：
-				<span>${form.map.relateno}</span>
+			<td>已&#8194;付&#8194;款：
+				<span>${form.map.paymentmade}</span>
 			</td>
 			<td>采购日期：
 				<span>${form.map.buydate}</span>

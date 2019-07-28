@@ -1,4 +1,10 @@
 
+/**2019.07.28**/
+ALTER TABLE `bsell`
+ADD COLUMN `paymentmade`  double(10,2) NOT NULL COMMENT '已付款' AFTER `alldiscount`;
+ALTER TABLE `bbuy`
+ADD COLUMN `paymentmade`  double(10,2) NOT NULL COMMENT '已付款' AFTER `alldiscount`;
+
 /**2018.08.07**/
 ALTER TABLE `sproduct`
 ADD COLUMN `productdiscount`  double(3,2) NOT NULL DEFAULT 1 AFTER `remark`;

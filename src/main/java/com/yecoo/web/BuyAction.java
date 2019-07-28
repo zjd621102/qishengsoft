@@ -56,9 +56,11 @@ public class BuyAction {
 		int totalCount = buyDaoImpl.getBuyCount(form);
 		List<CodeTableForm> buyList = buyDaoImpl.getBuyList(form);
 		String totalSum = buyDaoImpl.getBuySum(form);
+		String totalPaymentmade = buyDaoImpl.getPaymentmadeSum(form);
 		request.setAttribute("totalCount", totalCount); // 列表总数量
 		request.setAttribute("buyList", buyList); // 采购单列表
 		request.setAttribute("totalSum", totalSum); // 采购额
+		request.setAttribute("totalPaymentmade", totalPaymentmade); // 已付款
 		request.setAttribute("sn", "buy"); // 授权名称
 		request.setAttribute("form", form);
 		

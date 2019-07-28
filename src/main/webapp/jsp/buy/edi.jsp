@@ -147,10 +147,10 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>关联编号：</dt>
+			<dt>已付款：</dt>
 			<dd>
-				<input type="text" name="map[relateno]" size="25" maxlength="16"
-					 value="${form.map.relateno}" readonly="readonly"/>
+				<input type="text" name="map[paymentmade]" class="required number" size="25" maxlength="12"
+				 value="${form.map.paymentmade}"/>
 			</dd>
 		</dl>
 		<dl>

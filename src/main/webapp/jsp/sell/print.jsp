@@ -73,7 +73,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3">备&#12288;&#12288;注：
+			<td>已付款：
+				<span>${form.map.paymentmade}</span>
+			</td>
+			<td colspan="2">备&#12288;&#12288;注：
 				<span>${form.map.remark}</span>
 			</td>
 		</tr>

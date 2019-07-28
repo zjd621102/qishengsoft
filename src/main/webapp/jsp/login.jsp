@@ -50,7 +50,7 @@
 													</tr>
 													<tr>
 														<td height="80" align="right" valign="top">
-															<img src="<%=path%>/images/logo.png" width="279" height="68">
+															<img src="<%=path%>/images/logo.png" width="279" height="68" />
 														</td>
 													</tr>
 													<tr>

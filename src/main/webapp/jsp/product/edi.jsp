@@ -163,20 +163,22 @@
 					value="${form.map.productname}"/>
 			</dd>
 		</dl>
+		<!-- 
 		<dl>
 			<dt>一盒数量：</dt>
 			<dd>
-				<input type="text" name="map[numofcase]" class="required digits" size="25" maxlength="999"
+				<input type="text" name="map[numofcase]" class="digits" size="25" maxlength="999"
 					value="${form.map.numofcase}"/>
 			</dd>
 		</dl>
 		<dl>
 			<dt>一件数量：</dt>
 			<dd>
-				<input type="text" name="map[numofonebox]" class="required digits" size="25" maxlength="999"
+				<input type="text" name="map[numofonebox]" class="digits" size="25" maxlength="999"
 					value="${form.map.numofonebox}"/>
 			</dd>
 		</dl>
+		-->
 		<dl>
 			<dt>排序：</dt>
 			<dd>
