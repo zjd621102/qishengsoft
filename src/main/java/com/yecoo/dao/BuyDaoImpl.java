@@ -420,8 +420,10 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		
 		String sql = "";
 		String changeRealsum = "";
+		String buyno = "";
 		if(form != null) {
 			changeRealsum = StrUtils.nullToStr(form.getValue("paymentmade"));
+			buyno = StrUtils.nullToStr(form.getValue("buyno"));
 		} else {
 			sql = "SELECT IFNULL(SUM(paymentmade), 0) FROM bbuy WHERE buyid in ('" + buyids + "')";
 			changeRealsum = dbUtils.execQuerySQL(sql);
@@ -433,7 +435,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		int iReturn = dbUtils.executeSQL(sql);
 		
 		if(iReturn >= 0) { //新增“账户支出”日志
-			LogDaoImpl.saveLog(request, "账户支出", String.valueOf("支出金额：" + changeRealsum));
+			LogDaoImpl.saveLog(request, "账户支出", String.valueOf(buyno + "支出金额：" + changeRealsum));
 		}
 		
 		return iReturn;

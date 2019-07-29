@@ -3,7 +3,9 @@ package com.yecoo.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import com.yecoo.model.CodeTableForm;
 import com.yecoo.util.DbUtils;
 import com.yecoo.util.IdSingleton;
@@ -240,8 +242,11 @@ public class PayDaoImpl extends BaseDaoImpl {
 					iReturn =  dbUtils.executeSQL(conn, sql);
 					
 					if(iReturn >= 0) {
+						
+						String relateno = StrUtils.nullToStr(form.getValue("relateno"));
+						
 						//新增“账户收入”日志
-						LogDaoImpl.saveLog(request, "账户收入：", changeRealsum);
+						LogDaoImpl.saveLog(request, "账户收入", relateno + "收入金额：" + changeRealsum);
 						conn.commit();
 					} else {// 保存失败，回滚
 						conn.rollback();
