@@ -221,7 +221,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 				iReturn = dbUtils.executeSQL(conn, sql);
 				
 				if(iReturn >= 0) {// 修改
-					iReturn =  changeRealsum(request, String.valueOf(form.getValue("buyid")));
+					iReturn =  changeRealsum(form, request, String.valueOf(form.getValue("buyid")));
 				}
 			}
 			
@@ -416,10 +416,17 @@ public class BuyDaoImpl extends BaseDaoImpl {
 	}
 	
 	// 修改账户金额及账户日志
-	public int changeRealsum(HttpServletRequest request, String buyids) {
-		String sql = "SELECT IFNULL(SUM(paymentmade), 0) FROM bbuy WHERE buyid in ('" + buyids + "')";
-		String changeRealsum = dbUtils.execQuerySQL(sql);
-				
+	public int changeRealsum(CodeTableForm form, HttpServletRequest request, String buyids) {
+		
+		String sql = "";
+		String changeRealsum = "";
+		if(form != null) {
+			changeRealsum = StrUtils.nullToStr(form.getValue("paymentmade"));
+		} else {
+			sql = "SELECT IFNULL(SUM(paymentmade), 0) FROM bbuy WHERE buyid in ('" + buyids + "')";
+			changeRealsum = dbUtils.execQuerySQL(sql);
+		}
+		
 		sql = "UPDATE cparameter SET parametervalue = (parametervalue -"
 			+ changeRealsum + ") WHERE parametername = '账户金额'";
 

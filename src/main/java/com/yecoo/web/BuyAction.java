@@ -200,7 +200,7 @@ public class BuyAction {
 		int iReturn = dbUtils.executeSQLs(sqls);
 
 		if (iReturn >= 0) {
-			buyDaoImpl.changeRealsum(request, buyids);
+			buyDaoImpl.changeRealsum(null, request, buyids);
 			
 			ajaxObject = new AjaxObject("结束成功！", "buy_list", "");
 
