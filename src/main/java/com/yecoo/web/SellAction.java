@@ -39,8 +39,8 @@ public class SellAction {
 
 		String first = StrUtils.nullToStr(request.getParameter("first")); //查询初始化
 		if(first.equals("true")) {
-//			form.setValue("currflow", "发货");
-			form.setValue("first", "true");
+			form.setValue("currflow", "发货");
+//			form.setValue("first", "true");
 		}
 		sellDaoImpl.initAction(request);
 		
