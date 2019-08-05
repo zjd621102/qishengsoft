@@ -34,11 +34,11 @@
 						</td>
 						<td>
 							操作时间从：<input type="text" class="date" readonly="readonly" name="map[fromTime]"
-								dateFmt="yyyy-MM-dd HH:mm:ss" value="${form.map.fromTime}" size="8" />
+								value="${form.map.fromTime}" size="8" />
 						</td>
 						<td>
 							至：<input type="text" class="date" readonly="readonly" name="map[toTime]"
-								dateFmt="yyyy-MM-dd HH:mm:ss" value="${form.map.toTime}" size="8" />
+								value="${form.map.toTime}" size="8" />
 						</td>
 						<td>
 							备注：<input type="text" name="map[remark]" value="${form.map.remark}" size="8"/>

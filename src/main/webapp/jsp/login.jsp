@@ -4,7 +4,9 @@
 %>
 <html>
 	<head>
+	<!-- 
 	<link rel="shortcut icon" href="<%=path%>/images/favicon.ico" type="image/x-icon" />
+	-->
 	<title>网站管理员登陆</title>
 	<link href="<%=path%>/images/skin.css" rel="stylesheet" type="text/css" />
 	<style type="text/css">

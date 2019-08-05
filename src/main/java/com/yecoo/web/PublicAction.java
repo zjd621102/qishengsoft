@@ -162,7 +162,7 @@ public class PublicAction {
 
 		if(bSell) {
 			sql = "SELECT t.sellid, func_getManuName(t.manuid) manuname, t.selldate FROM bsell t"
-				+ " WHERE t.currflow <> '结束' ORDER BY t.createtime LIMIT 0,8";
+				+ " WHERE t.currflow = '发货' ORDER BY t.createtime LIMIT 0,8";
 			sellList = dbUtils.getListBySql(sql); //销售待办列表
 			toDoNum += sellList.size();
 		}

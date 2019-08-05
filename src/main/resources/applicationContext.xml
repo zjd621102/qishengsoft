@@ -40,6 +40,7 @@
 				/login = anon
 				/loginDialog = anon
 				/logout = anon
+				/themes/** = anon
 				/index = authc
 		    	/** = user
 			</value>

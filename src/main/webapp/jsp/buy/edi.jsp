@@ -118,9 +118,33 @@
 		setMultiply_buy('price', 'num', 'sum');
 		setAllSum('sum', 'allsum');
 	}
+	
+	/**
+	 * 校验“已付款”后提交表单
+	 */
+	function checkPaymentmade() {
+		
+		var currflow = $("#buyEdiForm").find("[name='map[currflow]']").val();
+		if(currflow == "结束") {
+			var paymentmade = $("[name='map[paymentmade]']").val();
+			var allsum = $("[name='map[allsum]']").val();
+			if((paymentmade - allsum) != 0) {
+				alertMsg.confirm("【已付款】异常，请选择确认或取消！", {
+					okCall: function(){
+						$("#buyEdiForm").submit();
+					},
+					cancelCall : function() {}
+				});
+			} else {
+				$("#buyEdiForm").submit();
+			}
+		} else {
+			$("#buyEdiForm").submit();
+		}
+	}
 </script>
 
-<form method="post" action="<%=path%>/buy/edi" class="required-validate pageForm"
+<form id="buyEdiForm" method="post" action="<%=path%>/buy/edi" class="required-validate pageForm"
  onsubmit="return validateCallback(this, dialogAjaxDone);" style="margin-top: -10px;">
  	<input type="hidden" name="map[buyid]" value="${form.map.buyid}" />
 	<div class="pageFormContent" layoutH="42">
@@ -402,7 +426,8 @@
 	<div class="formBar">
 		<ul>
 			<c:if test="${form.map.currflow != '结束'}">
-			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+			<li><div class="buttonActive"><div class="buttonContent"><button type="button"
+				onclick="checkPaymentmade()">确定</button></div></div></li>
 			</c:if>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
 			<li><div class="button"><div class="buttonContent"><button type="button"
