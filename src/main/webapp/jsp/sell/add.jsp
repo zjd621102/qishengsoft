@@ -220,7 +220,7 @@
 			<dt>当前流程：</dt>
 			<dd>
 				<input type="text" name="map[currflow]" class="readonly" size="25"
-					value="申请" readonly="readonly" />
+					value="发货" readonly="readonly" />
 			</dd>
 		</dl>
 		<dl>

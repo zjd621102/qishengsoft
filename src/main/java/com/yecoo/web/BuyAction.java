@@ -80,7 +80,7 @@ public class BuyAction {
 		
 		String buyname = StrUtils.getSysdate("yyyy.MM.dd") + "采购"; //采购名称
 		form.setValue("buyname", buyname);
-		form.setValue("currflow", "发货");
+		form.setValue("currflow", "申请");
 		
 		request.setAttribute("form", form);
 		
