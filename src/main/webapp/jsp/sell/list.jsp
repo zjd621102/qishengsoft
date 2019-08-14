@@ -103,6 +103,7 @@
 					<span>查看销售单</span>
 				</a>
 			</li>
+			<!-- 
 			<shiro:hasPermission name="Sell:other">
 			<li>
 				<a class="edit" href="<%=path%>/sell/merge" target="selectedTodo" rel="ids" title="确实要合并这些记录吗?">
@@ -110,6 +111,7 @@
 				</a>
 			</li>
 			</shiro:hasPermission>
+			-->
 			<shiro:hasPermission name="Sell:delete">
 			<li>
 				<a class="delete" href="<%=path%>/sell/delete/{s_sellid}" target="ajaxTodo" title="确定要删除吗?">

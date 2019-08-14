@@ -245,8 +245,11 @@ public class PayDaoImpl extends BaseDaoImpl {
 						
 						String relateno = StrUtils.nullToStr(form.getValue("relateno"));
 						
+						sql = "SELECT parametervalue FROM cparameter WHERE parametername = '账户金额'";
+						String accountAmount = dbUtils.execQuerySQL(sql);
+						
 						//新增“账户收入”日志
-						LogDaoImpl.saveLog(request, "账户收入", relateno + "收入金额：" + changeRealsum);
+						LogDaoImpl.saveLog(request, "账户收入", relateno + "收入金额：" + changeRealsum + "，结余：" + accountAmount);
 						conn.commit();
 					} else {// 保存失败，回滚
 						conn.rollback();

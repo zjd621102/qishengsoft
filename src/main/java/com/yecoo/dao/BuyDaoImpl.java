@@ -435,7 +435,10 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		int iReturn = dbUtils.executeSQL(sql);
 		
 		if(iReturn >= 0) { //新增“账户支出”日志
-			LogDaoImpl.saveLog(request, "账户支出", String.valueOf(buyno + "支出金额：" + changeRealsum));
+			sql = "SELECT parametervalue FROM cparameter WHERE parametername = '账户金额'";
+			String accountAmount = dbUtils.execQuerySQL(sql);
+			
+			LogDaoImpl.saveLog(request, "账户支出", String.valueOf(buyno + "支出金额：" + changeRealsum) + "，结余：" + accountAmount);
 		}
 		
 		return iReturn;

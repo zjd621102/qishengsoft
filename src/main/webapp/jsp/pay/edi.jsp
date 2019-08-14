@@ -55,6 +55,30 @@
 		setAllSum('plansum', 'allplansum', 'payJspFormId');
 		setAllSum('realsum', 'allrealsum', 'payJspFormId');
 	}
+	
+	/**
+	 * 校验“已收款金额”后提交表单
+	 */
+	function checkReceivables() {
+		
+		var currflow = $("#payJspFormId").find("[name='map[currflow]']").val();
+		if(currflow == "结束") {
+			var allplansum = $("[name='map[allplansum]']").val();
+			var allrealsum = $("[name='map[allrealsum]']").val();
+			if((allplansum - allrealsum) != 0) {
+				alertMsg.confirm("【收款金额】异常，请选择确认或取消！", {
+					okCall: function(){
+						$("#payJspFormId").submit();
+					},
+					cancelCall : function() {}
+				});
+			} else {
+				$("#payJspFormId").submit();
+			}
+		} else {
+			$("#payJspFormId").submit();
+		}
+	}
 </script>
 
 <form method="post" action="<%=path%>/pay/edi" class="required-validate pageForm" id="payJspFormId"
@@ -221,7 +245,8 @@
 	<div class="formBar">
 		<ul>
 			<c:if test="${form.map.currflow != '结束'}">
-			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+			<li><div class="buttonActive"><div class="buttonContent"><button type="button"
+				onclick="checkReceivables()">确定</button></div></div></li>
 			</c:if>
 			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
 			<li><div class="button"><div class="buttonContent"><button type="button"
