@@ -429,7 +429,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 			changeRealsum = dbUtils.execQuerySQL(sql);
 		}
 		
-		sql = "UPDATE cparameter SET parametervalue = (parametervalue -"
+		sql = "UPDATE cparameter SET parametervalue = (CAST(parametervalue AS DECIMAL(18,2)) -"
 			+ changeRealsum + ") WHERE parametername = '账户金额'";
 
 		int iReturn = dbUtils.executeSQL(sql);

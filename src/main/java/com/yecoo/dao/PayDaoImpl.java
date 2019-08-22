@@ -236,7 +236,7 @@ public class PayDaoImpl extends BaseDaoImpl {
 						changeRealsum += Double.parseDouble(realsum);
 					}
 					
-					sql = "UPDATE cparameter SET parametervalue = (parametervalue "
+					sql = "UPDATE cparameter SET parametervalue = (CAST(parametervalue AS DECIMAL(18,2)) "
 						+ sing + changeRealsum + ") WHERE parametername = '账户金额'";
 
 					iReturn =  dbUtils.executeSQL(conn, sql);
