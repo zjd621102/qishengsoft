@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yecoo.dao.LogDaoImpl;
 import com.yecoo.model.CodeTableForm;
+import com.yecoo.util.StrUtils;
 /**
  * 日志管理
  * @author zhoujd
@@ -35,6 +36,11 @@ public class LogAction {
 	@RequestMapping(value = "/list")
 	public String list(CodeTableForm form, HttpServletRequest request) {
 
+		String first = StrUtils.nullToStr(request.getParameter("first")); //查询初始化
+		if(first.equals("true")) {
+			form.setValue("logtype", "账户");
+		}
+		
 		logDaoImpl.initAction(request);
 
 		int totalCount = logDaoImpl.getLogCount(form);
