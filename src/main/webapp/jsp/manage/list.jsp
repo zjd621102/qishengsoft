@@ -72,7 +72,16 @@ function refreshProductMaterial() {
 		当前流程：<st:select dictType="销售状态" id="currflow" expStr="style='width: 84px;'" />
 		发货日期从<input type="text" id="selldateFrom" style="width: 80px;" class="date" />	
 		至<input type="text" id="selldateTo" style="width: 80px;" value="" class="date" />
-		利润<input type="text" id="profit" style="width: 80px;" readonly="readonly" />
+		利润：<input type="text" id="profit" style="width: 80px;" readonly="readonly" />
+	</div>
+	<br/>
+	<br/>
+	<div>
+		账户金额：<input type="text" style="width: 80px;" value="${zhje}" readonly="readonly" />
+		单据已收款：<input type="text" style="width: 80px;" value="${djysk}" readonly="readonly" />
+		销售已收款：<input type="text" style="width: 80px;" value="${xsysk}" readonly="readonly" />
+		采购已付款：<input type="text" style="width: 80px;" value="${cgysk}" readonly="readonly" />
+		合计：<input type="text" style="width: 80px;" value="${hj}" readonly="readonly" />
 	</div>
 	<!-- 
 	<div style="margin-top: 10px;">
