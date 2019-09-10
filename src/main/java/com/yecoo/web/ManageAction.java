@@ -1,5 +1,7 @@
 package com.yecoo.web;
 
+import java.text.DecimalFormat;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -50,13 +52,14 @@ public class ManageAction {
 		sql = "SELECT IFNULL(SUM(t.paymentmade), 0) FROM bbuy t WHERE 1 = 1 AND t.currflow = '申请'";
 		double cgysk = Double.valueOf(dbUtils.execQuerySQL(sql));
 		// 合计
+		DecimalFormat df = new DecimalFormat("0.00");
 		double hj = zhje + djysk + xsysk - cgysk;
 		
 		request.setAttribute("zhje", zhje);
 		request.setAttribute("djysk", djysk);
 		request.setAttribute("xsysk", xsysk);
 		request.setAttribute("cgysk", cgysk);
-		request.setAttribute("hj", hj);
+		request.setAttribute("hj", df.format(hj));
 		
 		return "manage/list";
 	}
