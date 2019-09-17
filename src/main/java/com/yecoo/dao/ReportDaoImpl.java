@@ -222,7 +222,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			dataStr.append(sum);
 		}
 		dataArray.append(",");
-		dataArray.append("{name:'利润统计', data:[").append(dataStr).append("], visible:false}");
+		dataArray.append("{name:'结单利润统计', data:[").append(dataStr).append("], visible:false}");
 		
 		/*
 		// 工资统计
@@ -257,6 +257,35 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		dataArray.append(",");
 		dataArray.append("{name:'运费统计', data:[").append(dataStr).append("]}");
 		*/
+		
+		// 进账统计
+		dataStr.delete(0, dataStr.length());
+		
+		for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
+			sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bsell a, bsellrow b"
+					+ " WHERE a.sellid = b.sellid AND a.createtime LIKE '"
+					+ monthList.get(monthIndex) + "%' AND a.currflow <> '申请'";
+			sum = dbUtils.execQuerySQL(sql);
+			if(monthIndex >= 1) {
+				dataStr.append(",");
+			}
+			dataStr.append(sum);
+		}
+		dataArray.append(",");
+		dataArray.append("{name:'开单统计', data:[").append(dataStr).append("], visible:false}");
+		
+		// 开单利润统计
+		dataStr.delete(0, dataStr.length());
+		for(int monthIndex = 0, len = monthList.size(); monthIndex <= len-1; monthIndex++) {
+			sum = getProfit(monthList.get(monthIndex));
+			if(monthIndex >= 1) {
+				dataStr.append(",");
+			}
+			dataStr.append(sum);
+		}
+		dataArray.append(",");
+		dataArray.append("{name:'开单利润统计', data:[").append(dataStr).append("], visible:false}");
+		
 		request.setAttribute("monthStr", monthStr.toString());
 		request.setAttribute("dataArray", dataArray.toString());
 	}
@@ -539,5 +568,28 @@ public class ReportDaoImpl extends BaseDaoImpl {
 		*/
 		request.setAttribute("types", "'进账统计', '采购统计', '简易采购统计', '工资统计'");
 		request.setAttribute("dataStr", dataStr.toString());
+	}
+	
+	/**
+	 * 获取利润
+	 * @param form
+	 * @param request
+	 */
+	private String getProfit(String createtime) {
+
+		String dSQL = "";
+		
+		if(!createtime.equals("")) {
+			dSQL += " AND a.createtime LIKE '" + createtime + "%'";
+		}
+		
+		String sql = "SELECT IFNULL(SUM(b.num * (b.realprice - IFNULL(c.costprice, 0))), 0) profit"
+				+ " FROM bsell a INNER JOIN bsellrow b ON a.sellid = b.sellid"
+				+ " LEFT JOIN sproduct c ON b.productid = c.productid"
+				+ " WHERE 1 = 1" + dSQL;
+
+		String iReturn = dbUtils.execQuerySQL(sql);
+		
+		return iReturn;
 	}
 }
