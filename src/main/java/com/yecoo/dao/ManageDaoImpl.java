@@ -43,4 +43,41 @@ public class ManageDaoImpl extends BaseDaoImpl {
 		
 		return iReturn;
 	}
+	
+	// 获取账户金额
+	public double getZhje() {
+		
+		String sql = "SELECT parametervalue FROM cparameter t WHERE parametername = '账户金额'";
+		double zhje = Double.valueOf(dbUtils.execQuerySQL(sql));
+		
+		return zhje;
+	}
+	
+	// 单据已收款
+	public double getDjysk() {
+		
+		String sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bpay t, bpayrow b WHERE 1 = 1 AND t.payid = b.payid AND t.currflow = '申请'";
+		double djysk = Double.valueOf(dbUtils.execQuerySQL(sql));
+		
+		return djysk;
+	}
+	
+	// 销售已收款
+	public double getXsysk() {
+		
+		String sql = "SELECT IFNULL(SUM(t.paymentmade), 0) FROM bsell t WHERE 1 = 1 AND t.currflow = '发货'";
+		double xsysk = Double.valueOf(dbUtils.execQuerySQL(sql));
+		
+		return xsysk;
+	}
+	
+	// 采购已付款
+	public double getCgyfk() {
+		
+		String sql = "SELECT IFNULL(SUM(t.paymentmade), 0) FROM bbuy t WHERE 1 = 1 AND t.currflow = '申请'";
+		double cgyfk = Double.valueOf(dbUtils.execQuerySQL(sql));
+		
+		return cgyfk;
+	}
+	
 }

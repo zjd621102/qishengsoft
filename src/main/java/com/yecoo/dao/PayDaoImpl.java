@@ -2,6 +2,7 @@ package com.yecoo.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -208,6 +209,8 @@ public class PayDaoImpl extends BaseDaoImpl {
 			if(iReturn >= 1 && currflow.equals("结束")) { //流程结束
 				String btype = StrUtils.nullToStr(form.getValue("btype"));
 				payid = StrUtils.nullToStr(form.getValue("payid"));
+				String relateno = StrUtils.nullToStr(form.getValue("relateno"));
+				Double changeRealsum = 0.00;
 				
 				String sing = null;
 				if(btype.equals("FKD") || btype.equals("YFD") || btype.equals("GZD")) {
@@ -229,8 +232,6 @@ public class PayDaoImpl extends BaseDaoImpl {
 						+ payid + "'";
 					List<CodeTableForm> list = dbUtils.getListBySql(sql);
 					
-					Double changeRealsum = 0.00;
-					
 					for(CodeTableForm codeTableForm : list) {
 						String realsum = StrUtils.nullToStr(codeTableForm.getValue("realsum"), "0");
 						changeRealsum += Double.parseDouble(realsum);
@@ -243,13 +244,6 @@ public class PayDaoImpl extends BaseDaoImpl {
 					
 					if(iReturn >= 0) {
 						
-						String relateno = StrUtils.nullToStr(form.getValue("relateno"));
-						
-						sql = "SELECT parametervalue FROM cparameter WHERE parametername = '账户金额'";
-						String accountAmount = dbUtils.execQuerySQL(sql);
-						
-						//新增“账户收入”日志
-						LogDaoImpl.saveLog(request, "账户收入", relateno + "收入金额：" + changeRealsum + "，结余：" + accountAmount);
 						conn.commit();
 					} else {// 保存失败，回滚
 						conn.rollback();
@@ -258,6 +252,28 @@ public class PayDaoImpl extends BaseDaoImpl {
 							dbUtils.executeSQL(sql);
 						}
 					}
+				}
+				
+				if(iReturn >= 0) {
+					
+					ManageDaoImpl manageDaoImpl = new ManageDaoImpl();
+					
+					// 账户金额
+					double zhje = manageDaoImpl.getZhje();
+					// 单据已收款
+					double djysk = manageDaoImpl.getDjysk();
+					// 销售已收款
+					double xsysk = manageDaoImpl.getXsysk();
+					// 采购已付款
+					double cgyfk = manageDaoImpl.getCgyfk();
+					// 合计
+					DecimalFormat df = new DecimalFormat("0.##");
+					double hj = zhje + djysk + xsysk - cgyfk;
+					
+					//新增“账户收入”日志
+					LogDaoImpl.saveLog(request, "账户收入", relateno + "收入金额：" + changeRealsum
+						+ "，结余：" + df.format(hj) + "，账户金额：" + zhje + "，单据已收款：" + djysk
+						+ "，销售已收款：" + xsysk + "，采购已付款：" + cgyfk);
 				}
 			}
 		} catch(Exception e) {

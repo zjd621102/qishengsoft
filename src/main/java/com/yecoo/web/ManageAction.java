@@ -37,28 +37,24 @@ public class ManageAction {
 	@RequestMapping(value = "/list")
 	public String list(CodeTableForm form, HttpServletRequest request) {
 
-		DbUtils dbUtils = new DbUtils();
+		ManageDaoImpl manageDaoImpl = new ManageDaoImpl();
 		
 		// 账户金额
-		String sql = "SELECT parametervalue FROM cparameter t WHERE parametername = '账户金额'";
-		double zhje = Double.valueOf(dbUtils.execQuerySQL(sql));
+		double zhje = manageDaoImpl.getZhje();
 		// 单据已收款
-		sql = "SELECT IFNULL(SUM(b.realsum), 0) FROM bpay t, bpayrow b WHERE 1 = 1 AND t.payid = b.payid AND t.currflow = '申请'";
-		double djysk = Double.valueOf(dbUtils.execQuerySQL(sql));
+		double djysk = manageDaoImpl.getDjysk();
 		// 销售已收款
-		sql = "SELECT IFNULL(SUM(t.paymentmade), 0) FROM bsell t WHERE 1 = 1 AND t.currflow = '发货'";
-		double xsysk = Double.valueOf(dbUtils.execQuerySQL(sql));
+		double xsysk = manageDaoImpl.getXsysk();
 		// 采购已付款
-		sql = "SELECT IFNULL(SUM(t.paymentmade), 0) FROM bbuy t WHERE 1 = 1 AND t.currflow = '申请'";
-		double cgysk = Double.valueOf(dbUtils.execQuerySQL(sql));
+		double cgyfk = manageDaoImpl.getCgyfk();
 		// 合计
 		DecimalFormat df = new DecimalFormat("0.##");
-		double hj = zhje + djysk + xsysk - cgysk;
+		double hj = zhje + djysk + xsysk - cgyfk;
 		
 		request.setAttribute("zhje", zhje);
 		request.setAttribute("djysk", djysk);
 		request.setAttribute("xsysk", xsysk);
-		request.setAttribute("cgysk", cgysk);
+		request.setAttribute("cgyfk", cgyfk);
 		request.setAttribute("hj", df.format(hj));
 		
 		return "manage/list";

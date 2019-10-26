@@ -80,7 +80,7 @@ function refreshProductMaterial() {
 		账户金额：<input type="text" style="width: 80px;" value="${zhje}" readonly="readonly" />
 		单据已收款：<input type="text" style="width: 80px;" value="${djysk}" readonly="readonly" />
 		销售已收款：<input type="text" style="width: 80px;" value="${xsysk}" readonly="readonly" />
-		采购已付款：<input type="text" style="width: 80px;" value="${cgysk}" readonly="readonly" />
+		采购已付款：<input type="text" style="width: 80px;" value="${cgyfk}" readonly="readonly" />
 		合计：<input type="text" style="width: 80px;" value="${hj}" readonly="readonly" />
 	</div>
 	<!-- 

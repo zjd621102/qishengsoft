@@ -2,6 +2,7 @@ package com.yecoo.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -227,6 +228,36 @@ public class BuyDaoImpl extends BaseDaoImpl {
 			
 			if(iReturn >= 0) {
 				conn.commit();
+				
+				// 插入日志
+				if(currflow.equals("结束")) {
+					 //新增“账户支出”日志
+					ManageDaoImpl manageDaoImpl = new ManageDaoImpl();
+					
+					// 账户金额
+					double zhje = manageDaoImpl.getZhje();
+					// 单据已收款
+					double djysk = manageDaoImpl.getDjysk();
+					// 销售已收款
+					double xsysk = manageDaoImpl.getXsysk();
+					// 采购已付款
+					double cgyfk = manageDaoImpl.getCgyfk();
+					// 合计
+					DecimalFormat df = new DecimalFormat("0.##");
+					double hj = zhje + djysk + xsysk - cgyfk;
+					
+					String changeRealsum = "";
+					String buyno = "";
+					if(form != null) {
+						changeRealsum = StrUtils.nullToStr(form.getValue("paymentmade"));
+						buyno = StrUtils.nullToStr(form.getValue("buyno"));
+					}
+					
+					LogDaoImpl.saveLog(request, "账户支出", String.valueOf(buyno + "支出金额：" + changeRealsum)
+							+ "，结余：" + df.format(hj) + "，账户金额：" + zhje + "，单据已收款：" + djysk + "，销售已收款：" + xsysk
+							+ "，采购已付款：" + cgyfk);
+				
+				}
 			} else {
 				conn.rollback();
 			}
@@ -415,15 +446,13 @@ public class BuyDaoImpl extends BaseDaoImpl {
 		return sql.toString();
 	}
 	
-	// 修改账户金额及账户日志
+	// 修改账户金额
 	public int changeRealsum(CodeTableForm form, HttpServletRequest request, String buyids) {
 		
 		String sql = "";
 		String changeRealsum = "";
-		String buyno = "";
 		if(form != null) {
 			changeRealsum = StrUtils.nullToStr(form.getValue("paymentmade"));
-			buyno = StrUtils.nullToStr(form.getValue("buyno"));
 		} else {
 			sql = "SELECT IFNULL(SUM(paymentmade), 0) FROM bbuy WHERE buyid in ('" + buyids + "')";
 			changeRealsum = dbUtils.execQuerySQL(sql);
@@ -433,14 +462,7 @@ public class BuyDaoImpl extends BaseDaoImpl {
 			+ changeRealsum + ") WHERE parametername = '账户金额'";
 
 		int iReturn = dbUtils.executeSQL(sql);
-		
-		if(iReturn >= 0) { //新增“账户支出”日志
-			sql = "SELECT parametervalue FROM cparameter WHERE parametername = '账户金额'";
-			String accountAmount = dbUtils.execQuerySQL(sql);
-			
-			LogDaoImpl.saveLog(request, "账户支出", String.valueOf(buyno + "支出金额：" + changeRealsum) + "，结余：" + accountAmount);
-		}
-		
+				
 		return iReturn;
 	}
 }
