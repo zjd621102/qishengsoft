@@ -179,7 +179,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			}
 			dataStr.append(sum);
 		}
-		dataArray.append("{name:'进账统计', data:[").append(dataStr).append("]}");
+		dataArray.append("{name:'进账统计', data:[").append(dataStr).append("], visible:false}");
 		
 		// 采购统计
 		dataStr.delete(0, dataStr.length());
@@ -193,7 +193,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			dataStr.append(sum);
 		}
 		dataArray.append(",");
-		dataArray.append("{name:'采购统计', data:[").append(dataStr).append("]}");
+		dataArray.append("{name:'采购统计', data:[").append(dataStr).append("], visible:false}");
 		/*
 		// 简易采购统计
 		dataStr.delete(0, dataStr.length());
@@ -272,7 +272,7 @@ public class ReportDaoImpl extends BaseDaoImpl {
 			dataStr.append(sum);
 		}
 		dataArray.append(",");
-		dataArray.append("{name:'开单统计', data:[").append(dataStr).append("], visible:false}");
+		dataArray.append("{name:'开单统计', data:[").append(dataStr).append("], visible:true}");
 		
 		// 开单利润统计
 		dataStr.delete(0, dataStr.length());
