@@ -15,8 +15,6 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 	/**
 	 * 获取所有银行卡
 	 * @param form
-	 * @param pageNum
-	 * @param numPerPage
 	 * @return
 	 */
 	public List<CodeTableForm> getAllBankcardList(CodeTableForm form) {
@@ -46,8 +44,6 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 	/**
 	 * 获取银行卡列表
 	 * @param form
-	 * @param pageNum
-	 * @param numPerPage
 	 * @return
 	 */
 	public List<CodeTableForm> getBankcardList(CodeTableForm form) {
@@ -126,7 +122,7 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 	}
 	/**
 	 * 内部银行卡转账
-	 * @param bankcardid
+	 * @param form
 	 * @return
 	 */
 	public int transferAccount(CodeTableForm form) {
@@ -195,8 +191,6 @@ public class BankcardDaoImpl extends BaseDaoImpl {
 	/**
 	 * 获取转账列表
 	 * @param form
-	 * @param pageNum
-	 * @param numPerPage
 	 * @return
 	 */
 	public List<CodeTableForm> getTransferaccountList(CodeTableForm form) {
